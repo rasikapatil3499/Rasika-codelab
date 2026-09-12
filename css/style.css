@@ -5032,6 +5032,11 @@ main.detail-page > .concept-section {
         var(--bg-primary);
 }
 
+/* PROTECTED PRACTICALS: hide content while the Supabase session is checked */
+body.protected-page:not(.auth-ready) {
+    visibility: hidden;
+}
+
 .auth-back-link {
     color: var(--text-secondary);
     font-size: 13px;

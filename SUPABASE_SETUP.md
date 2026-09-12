@@ -28,6 +28,14 @@ In **Authentication > URL Configuration**, add both local and GitHub Pages URLs.
 ```text
 http://localhost:5500/login.html
 https://YOUR-USERNAME.github.io/YOUR-REPOSITORY/login.html
+https://YOUR-USERNAME.github.io/YOUR-REPOSITORY/login.html*
+```
+
+The final URL with `*` allows the login page to return a user to the practical
+page they originally requested. For this project, add:
+
+```text
+https://rasikapatil3499.github.io/Rasika-codelab/login.html*
 ```
 
 The Google Cloud OAuth client must also allow the Supabase callback URL shown by Supabase in the Google provider settings.

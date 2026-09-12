@@ -11,6 +11,13 @@ const submitButton = document.querySelector("#email-login");
 const status = document.querySelector("#auth-status");
 const title = document.querySelector("#auth-title");
 const passwordInput = document.querySelector("#password");
+const deployedLoginUrl = "https://rasikapatil3499.github.io/Rasika-codelab/login.html";
+const redirectTarget = new URLSearchParams(window.location.search).get("redirect");
+const authRedirectUrl = new URL(deployedLoginUrl);
+
+if (redirectTarget) {
+    authRedirectUrl.searchParams.set("redirect", redirectTarget);
+}
 
 let isSignUpMode = false;
 
@@ -49,7 +56,7 @@ googleButton.addEventListener("click", async () => {
     const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-            redirectTo: window.location.href
+            redirectTo: authRedirectUrl.href
         }
     });
 
@@ -64,7 +71,11 @@ form.addEventListener("submit", async event => {
     const email = formData.get("email");
     const password = formData.get("password");
     const result = isSignUpMode
-        ? await supabase.auth.signUp({ email, password })
+        ? await supabase.auth.signUp({
+            email,
+            password,
+            options: { emailRedirectTo: authRedirectUrl.href }
+        })
         : await supabase.auth.signInWithPassword({ email, password });
 
     if (result.error) {
@@ -78,5 +89,5 @@ form.addEventListener("submit", async event => {
     }
 
     showStatus("Login successful. Redirecting...");
-    window.location.href = "index.html";
+    window.location.href = redirectTarget || "index.html";
 });
