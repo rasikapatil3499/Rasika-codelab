@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Foundation 01 — Introduction to Computer Graphics. Learn concepts, types, applications, raster and vector graphics, and the graphics system.">
+    <title>Foundation 01 | What is Computer Graphics? | Rasika CodeLab</title>
+    <link rel="stylesheet" href="../../css/cgr_style.css">
+</head>
+
+<body>
+
+<header class="site-header">
+    <nav class="navbar">
+        <a href="../index.html" class="logo">
+            <span class="logo-mark">◈</span>
+            Rasika<span class="logo-highlight">CodeLab</span>
+        </a>
+
+        <div class="nav-links">
+            <a href="../index.html">Home</a>
+            <a href="../cgr_foundations.html" class="active">Foundations</a>
+            <a href="../cgr_practicals.html">Practicals</a>
+            <a href="../cgr_algorithms.html">Algorithms</a>
+            <a href="../about.html">About</a>
+        </div>
+
+        <button class="menu-btn" type="button" aria-label="Open menu">☰</button>
+    </nav>
+</header>
+
+<main>
+
+<!-- =====================================================
+     HERO
+     ===================================================== -->
+
+<section class="hero foundation-detail-hero">
+    <div class="hero-content">
+        <span class="eyebrow">FOUNDATION 01</span>
+
+        <h1>
+            What is <span>Computer Graphics?</span>
+        </h1>
+
+        <p class="hero-description">
+            Computer Graphics is the field of computing concerned with
+            creating, representing, manipulating and displaying visual
+            information using a computer.
+        </p>
+
+        <div class="foundation-meta">
+            <span>Concept</span>
+            <span>Types</span>
+            <span>Applications</span>
+            <span>Raster vs Vector</span>
+        </div>
+    </div>
+
+    <div class="hero-visual">
+        <div class="graphics-window foundation-visual-window">
+            <div class="window-header">
+                <div class="window-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <span class="window-title">computer-graphics</span>
+            </div>
+
+            <div class="foundation-diagram">
+                <div class="diagram-node main-node">
+                    <small>COMPUTER</small>
+                    <strong>GRAPHICS</strong>
+                </div>
+
+                <div class="diagram-branch branch-one">
+                    <span>2D</span>
+                </div>
+
+                <div class="diagram-branch branch-two">
+                    <span>3D</span>
+                </div>
+
+                <div class="diagram-branch branch-three">
+                    <span>Raster</span>
+                </div>
+
+                <div class="diagram-branch branch-four">
+                    <span>Vector</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- =====================================================
+     LEARNING OBJECTIVES
+     ===================================================== -->
+
+<section class="section foundation-detail">
+    <div class="section-heading">
+        <span class="eyebrow">LEARNING OBJECTIVES</span>
+        <h2>By the end of this foundation, you should be able to...</h2>
+    </div>
+
+    <div class="foundation-objectives">
+        <div class="objective-card">
+            <span>01</span>
+            <strong>Define Computer Graphics</strong>
+            <p>Explain what computer graphics means and why it is important.</p>
+        </div>
+
+        <div class="objective-card">
+            <span>02</span>
+            <strong>Identify Types</strong>
+            <p>Distinguish between 2D, 3D, raster and vector graphics.</p>
+        </div>
+
+        <div class="objective-card">
+            <span>03</span>
+            <strong>Recognize Applications</strong>
+            <p>Connect graphics concepts with real-world computing applications.</p>
+        </div>
+
+        <div class="objective-card">
+            <span>04</span>
+            <strong>Understand the Pipeline</strong>
+            <p>Recognize the basic journey from graphical data to displayed output.</p>
+        </div>
+    </div>
+</section>
+
+
+<!-- =====================================================
+     CONCEPT
+     ===================================================== -->
+
+<section class="section foundation-detail">
+    <div class="content-card concept-card">
+        <span class="eyebrow">01 · CONCEPT</span>
+        <h2>What is Computer Graphics?</h2>
+
+        <p>
+            Computer Graphics refers to the use of computers to create,
+            store, manipulate and display images, diagrams, animations
+            and other visual information.
+        </p>
+
+        <p>
+            Instead of treating an image only as something to look at,
+            Computer Graphics studies how that visual information is
+            represented mathematically and how a computer generates
+            the final image.
+        </p>
+
+        <div class="definition-box">
+            <strong>Think of it this way:</strong>
+            <p>
+                Computer Graphics connects <b>mathematics + data +
+                algorithms + hardware</b> to produce visual output.
+            </p>
+        </div>
+    </div>
+</section>
+
+
+<!-- =====================================================
+     WHY IT MATTERS
+     ===================================================== -->
+
+<section class="section foundation-detail">
+    <div class="section-heading">
+        <span class="eyebrow">WHY IT MATTERS</span>
+        <h2>Graphics are everywhere.</h2>
+        <p>
+            Computer Graphics is not limited to drawing programs.
+            It is a foundation for many technologies students use every day.
+        </p>
+    </div>
+
+    <div class="application-grid">
+
+        <article class="application-card">
+            <div class="application-icon">01</div>
+            <h3>Games</h3>
+            <p>Real-time rendering, characters, environments, effects and animation.</p>
+        </article>
+
+        <article class="application-card">
+            <div class="application-icon">02</div>
+            <h3>CAD & Engineering</h3>
+            <p>Technical drawings, 2D designs, 3D models and engineering visualization.</p>
+        </article>
+
+        <article class="application-card">
+            <div class="application-icon">03</div>
+            <h3>Animation & Film</h3>
+            <p>Digital characters, scenes, visual effects and computer-generated imagery.</p>
+        </article>
+
+        <article class="application-card">
+            <div class="application-icon">04</div>
+            <h3>Medical Imaging</h3>
+            <p>Visual representation and analysis of medical and scientific information.</p>
+        </article>
+
+        <article class="application-card">
+            <div class="application-icon">05</div>
+            <h3>Data Visualization</h3>
+            <p>Charts, maps, dashboards and visual representations of complex data.</p>
+        </article>
+
+        <article class="application-card">
+            <div class="application-icon">06</div>
+            <h3>AR / VR</h3>
+            <p>Interactive three-dimensional environments and immersive experiences.</p>
+        </article>
+
+    </div>
+</section>
+
+
+<!-- =====================================================
+     TYPES
+     ===================================================== -->
+
+<section class="section foundation-detail">
+    <div class="section-heading">
+        <span class="eyebrow">02 · TYPES</span>
+        <h2>Different ways to represent graphics.</h2>
+        <p>
+            Two important ways of understanding graphics are by
+            dimensionality and by representation.
+        </p>
+    </div>
+
+    <div class="comparison-grid">
+
+        <div class="content-card">
+            <span class="card-label">DIMENSION</span>
+            <h3>2D Graphics</h3>
+            <p>
+                Graphics represented primarily on a two-dimensional
+                plane using X and Y coordinates.
+            </p>
+
+            <div class="mini-example">
+                <span>Point</span>
+                <strong>P(x, y)</strong>
+            </div>
+
+            <ul>
+                <li>Lines and polygons</li>
+                <li>Images and interfaces</li>
+                <li>Charts and diagrams</li>
+            </ul>
+        </div>
+
+        <div class="content-card">
+            <span class="card-label">DIMENSION</span>
+            <h3>3D Graphics</h3>
+            <p>
+                Graphics that represent objects in three dimensions
+                using X, Y and Z coordinates.
+            </p>
+
+            <div class="mini-example">
+                <span>Point</span>
+                <strong>P(x, y, z)</strong>
+            </div>
+
+            <ul>
+                <li>3D models</li>
+                <li>Games and simulation</li>
+                <li>Virtual environments</li>
+            </ul>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =====================================================
+     RASTER VS VECTOR
+     ===================================================== -->
+
+<section class="section foundation-detail">
+    <div class="section-heading">
+        <span class="eyebrow">03 · REPRESENTATION</span>
+        <h2>Raster or Vector?</h2>
+        <p>
+            This distinction becomes important when studying pixels,
+            image formats and graphics storage.
+        </p>
+    </div>
+
+    <div class="comparison-table-wrap">
+        <table class="graphics-comparison">
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Raster Graphics</th>
+                    <th>Vector Graphics</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>Basic representation</td>
+                    <td>Grid of pixels</td>
+                    <td>Geometric shapes and mathematical paths</td>
+                </tr>
+
+                <tr>
+                    <td>Best suited for</td>
+                    <td>Photographs and detailed images</td>
+                    <td>Logos, diagrams and scalable illustrations</td>
+                </tr>
+
+                <tr>
+                    <td>Scaling</td>
+                    <td>Can lose quality when enlarged</td>
+                    <td>Can scale without the same pixelation</td>
+                </tr>
+
+                <tr>
+                    <td>Examples</td>
+                    <td>JPEG, PNG, BMP, GIF</td>
+                    <td>SVG</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+
+<!-- =====================================================
+     HOW A GRAPHICS SYSTEM WORKS
+     ===================================================== -->
+
+<section class="section foundation-detail">
+    <div class="section-heading">
+        <span class="eyebrow">04 · HOW IT WORKS</span>
+        <h2>From data to visual output.</h2>
+        <p>
+            A simplified view of a graphics system is:
+        </p>
+    </div>
+
+    <div class="graphics-flow">
+
+        <div class="flow-item">
+            <span>01</span>
+            <strong>Object / Data</strong>
+            <small>Shapes, images or models</small>
+        </div>
+
+        <div class="flow-arrow">→</div>
+
+        <div class="flow-item">
+            <span>02</span>
+            <strong>Coordinates</strong>
+            <small>Position and geometry</small>
+        </div>
+
+        <div class="flow-arrow">→</div>
+
+        <div class="flow-item">
+            <span>03</span>
+            <strong>Algorithms</strong>
+            <small>Transform and process</small>
+        </div>
+
+        <div class="flow-arrow">→</div>
+
+        <div class="flow-item">
+            <span>04</span>
+            <strong>Rendering</strong>
+            <small>Generate visual output</small>
+        </div>
+
+        <div class="flow-arrow">→</div>
+
+        <div class="flow-item">
+            <span>05</span>
+            <strong>Display</strong>
+            <small>Pixels on the screen</small>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =====================================================
+     KEY TERMINOLOGY
+     ===================================================== -->
+
+<section class="section foundation-detail">
+    <div class="section-heading">
+        <span class="eyebrow">KEY TERMINOLOGY</span>
+        <h2>Words you should know.</h2>
+    </div>
+
+    <div class="terminology-grid">
+
+        <div class="term-card">
+            <strong>Pixel</strong>
+            <p>The smallest addressable picture element in a raster image.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Resolution</strong>
+            <p>The number of pixels used to represent an image or display.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Raster</strong>
+            <p>A graphics representation based on a grid of pixels.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Vector</strong>
+            <p>A graphics representation based on geometric descriptions.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Rendering</strong>
+            <p>The process of generating a visual image from graphical data.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Frame Buffer</strong>
+            <p>Memory containing data used to produce the displayed image.</p>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =====================================================
+     QUICK CHECK
+     ===================================================== -->
+
+<section class="section foundation-detail">
+    <div class="content-card quick-check">
+        <span class="eyebrow">QUICK CHECK</span>
+        <h2>Can you answer these?</h2>
+
+        <div class="question-list">
+            <div>
+                <span>01</span>
+                <p>What is Computer Graphics?</p>
+            </div>
+
+            <div>
+                <span>02</span>
+                <p>What is the difference between raster and vector graphics?</p>
+            </div>
+
+            <div>
+                <span>03</span>
+                <p>What is the difference between 2D and 3D graphics?</p>
+            </div>
+
+            <div>
+                <span>04</span>
+                <p>Name three real-world applications of Computer Graphics.</p>
+            </div>
+
+            <div>
+                <span>05</span>
+                <p>What does rendering mean in Computer Graphics?</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- =====================================================
+     SUMMARY
+     ===================================================== -->
+
+<section class="section foundation-detail">
+    <div class="summary-box">
+
+        <span class="eyebrow">QUICK SUMMARY</span>
+
+        <h2>Remember these five ideas.</h2>
+
+        <div class="summary-grid">
+
+            <div>
+                <span>01</span>
+                <strong>Graphics = Visual Computing</strong>
+                <p>Computers can create and manipulate visual information.</p>
+            </div>
+
+            <div>
+                <span>02</span>
+                <strong>Graphics need Representation</strong>
+                <p>Images can be represented using pixels or geometric descriptions.</p>
+            </div>
+
+            <div>
+                <span>03</span>
+                <strong>Coordinates Matter</strong>
+                <p>Objects need positions and geometry before they can be drawn.</p>
+            </div>
+
+            <div>
+                <span>04</span>
+                <strong>Algorithms Generate Output</strong>
+                <p>Graphics algorithms determine how visual information is processed.</p>
+            </div>
+
+            <div>
+                <span>05</span>
+                <strong>Pixels Reach the Display</strong>
+                <p>The final visual output is presented through the display system.</p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =====================================================
+     NAVIGATION
+     ===================================================== -->
+
+<section class="section foundation-navigation">
+
+    <a href="../cgr_foundations.html" class="nav-card">
+        <span>←</span>
+        <small>BACK TO</small>
+        <strong>All Foundations</strong>
+    </a>
+
+    <a href="foundation02.html" class="nav-card next">
+        <small>NEXT FOUNDATION</small>
+        <strong>What is a Pixel? →</strong>
+    </a>
+
+</section>
+
+</main>
+
+
+<footer class="site-footer">
+
+    <div class="footer-content">
+
+        <div class="footer-brand">
+            <strong>Rasika<span class="logo-highlight">CodeLab</span></strong>
+            <p>Computer Graphics Practical Learning</p>
+        </div>
+
+        <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="../cgr_foundations.html">Foundations</a>
+            <a href="../cgr_practicals.html">Practicals</a>
+            <a href="../cgr_algorithms.html">Algorithms</a>
+            <a href="../about.html">About</a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2026 Rasika CodeLab · Learn the concept. See the result.
+    </div>
+
+</footer>
+
+</body>
+</html>

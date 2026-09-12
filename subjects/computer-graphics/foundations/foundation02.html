@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Foundation 02 — Understand pixels, resolution, aspect ratio, color depth and frame buffer in Computer Graphics.">
+    <title>Foundation 02 | What is a Pixel? | Rasika CodeLab</title>
+    <link rel="stylesheet" href="../../css/cgr_style.css">
+
+    <style>
+        /* Foundation 02 visualizer — page-specific interactive grid */
+        .pixel-lab {
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 18px;
+            padding: 18px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--surface);
+        }
+
+        .pixel-canvas-wrap {
+            min-width: 0;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: #080b0e;
+        }
+
+        .pixel-canvas {
+            display: block;
+            width: 100%;
+            height: 360px;
+        }
+
+        .pixel-controls {
+            padding: 18px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--surface-2);
+        }
+
+        .pixel-control {
+            margin-bottom: 17px;
+        }
+
+        .pixel-control:last-child {
+            margin-bottom: 0;
+        }
+
+        .pixel-control label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 7px;
+            color: var(--muted);
+            font-size: .7rem;
+            font-weight: 750;
+        }
+
+        .pixel-control output {
+            color: var(--accent);
+            font-family: "SFMono-Regular", Consolas, monospace;
+        }
+
+        .pixel-control input[type="range"] {
+            width: 100%;
+            accent-color: var(--accent);
+        }
+
+        .pixel-readout {
+            margin-top: 18px;
+            padding: 13px;
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            background: #0b0e11;
+        }
+
+        .pixel-readout span {
+            display: block;
+            color: var(--muted);
+            font-size: .65rem;
+        }
+
+        .pixel-readout strong {
+            display: block;
+            margin-top: 4px;
+            color: var(--accent);
+            font-family: "SFMono-Regular", Consolas, monospace;
+            font-size: .78rem;
+        }
+
+        .pixel-equation {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 13px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: #0b0e11;
+            color: var(--accent);
+            font-family: "SFMono-Regular", Consolas, monospace;
+            font-size: .76rem;
+        }
+
+        @media (max-width: 800px) {
+            .pixel-lab {
+                grid-template-columns: 1fr;
+            }
+
+            .pixel-canvas {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="site-header">
+    <nav class="navbar">
+        <a href="../index.html" class="logo">
+            <span class="logo-mark">◈</span>
+            Rasika<span class="logo-highlight">CodeLab</span>
+        </a>
+
+        <div class="nav-links">
+            <a href="../index.html">Home</a>
+            <a href="../cgr_foundations.html" class="active">Foundations</a>
+            <a href="../cgr_practicals.html">Practicals</a>
+            <a href="../cgr_algorithms.html">Algorithms</a>
+            <a href="../about.html">About</a>
+        </div>
+
+        <button class="menu-btn" type="button" aria-label="Open menu">☰</button>
+    </nav>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero foundation-detail-hero">
+    <div class="hero-content">
+        <span class="eyebrow">FOUNDATION 02</span>
+
+        <h1>
+            What is a <span>Pixel?</span>
+        </h1>
+
+        <p class="hero-description">
+            A pixel is a small picture element used to represent an image
+            on a digital display. Understanding pixels is the first step
+            toward understanding resolution, raster graphics and the frame buffer.
+        </p>
+
+        <div class="foundation-meta">
+            <span>Pixel</span>
+            <span>Resolution</span>
+            <span>Aspect Ratio</span>
+            <span>Color Depth</span>
+            <span>Frame Buffer</span>
+        </div>
+    </div>
+
+    <div class="hero-visual">
+        <div class="graphics-window foundation-visual-window">
+            <div class="window-header">
+                <div class="window-dots">
+                    <span></span><span></span><span></span>
+                </div>
+                <span class="window-title">pixel-grid</span>
+            </div>
+
+            <div class="graphics-content">
+                <div class="coordinate-grid">
+                    <span class="grid-axis x-axis"></span>
+                    <span class="grid-axis y-axis"></span>
+                    <span class="point point-a"></span>
+                    <span class="point point-b"></span>
+                    <span class="coord-label label-a">pixel</span>
+                    <span class="coord-label label-b">P(x,y)</span>
+                </div>
+
+                <div class="calculation-box">
+                    <div class="calc-label">IMAGE BASICS</div>
+
+                    <div class="calc-row">
+                        <span>Width</span>
+                        <strong>1920 px</strong>
+                    </div>
+
+                    <div class="calc-row">
+                        <span>Height</span>
+                        <strong>1080 px</strong>
+                    </div>
+
+                    <div class="calc-row">
+                        <span>Total</span>
+                        <strong>2,073,600</strong>
+                    </div>
+
+                    <div class="calc-result">
+                        1920 × 1080
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- LEARNING OBJECTIVES -->
+<section class="section foundation-detail">
+    <div class="section-heading">
+        <span class="eyebrow">LEARNING OBJECTIVES</span>
+        <h2>By the end of this foundation, you should be able to...</h2>
+    </div>
+
+    <div class="foundation-objectives">
+        <div class="objective-card">
+            <span>01</span>
+            <strong>Explain a Pixel</strong>
+            <p>Describe what a pixel represents in a digital image.</p>
+        </div>
+
+        <div class="objective-card">
+            <span>02</span>
+            <strong>Calculate Resolution</strong>
+            <p>Determine total pixels from an image's width and height.</p>
+        </div>
+
+        <div class="objective-card">
+            <span>03</span>
+            <strong>Understand Color Depth</strong>
+            <p>Relate bits per pixel to the number of possible colors.</p>
+        </div>
+
+        <div class="objective-card">
+            <span>04</span>
+            <strong>Understand Frame Buffer</strong>
+            <p>Explain how pixel information is stored for display.</p>
+        </div>
+    </div>
+</section>
+
+
+<!-- CONCEPT -->
+<section class="section foundation-detail">
+    <div class="content-card concept-card">
+        <span class="eyebrow">01 · CONCEPT</span>
+        <h2>What is a Pixel?</h2>
+
+        <p>
+            The word <strong>pixel</strong> comes from “picture element”.
+            In a raster image, an image is represented as a rectangular
+            grid of pixels.
+        </p>
+
+        <p>
+            Each pixel has a position in the image and stores visual
+            information such as color or intensity. When many pixels are
+            arranged together, they form the complete image we see.
+        </p>
+
+        <div class="definition-box">
+            <strong>Think of a pixel as one cell in an image grid.</strong>
+            <p>
+                One pixel alone contains very little visual information.
+                Millions of pixels together can represent a detailed photograph,
+                interface, diagram or rendered scene.
+            </p>
+        </div>
+    </div>
+</section>
+
+
+<!-- PIXEL GRID -->
+<section class="section foundation-detail">
+    <div class="section-heading">
+        <span class="eyebrow">02 · VISUALIZE</span>
+        <h2>Zoom into the pixel grid.</h2>
+        <p>
+            Change the grid size and selected pixel to understand how a
+            raster image is constructed from discrete picture elements.
+        </p>
+    </div>
+
+    <div class="pixel-lab">
+
+        <div class="pixel-canvas-wrap">
+            <canvas id="pixelCanvas" class="pixel-canvas"
+                    aria-label="Interactive pixel grid"></canvas>
+        </div>
+
+        <div class="pixel-controls">
+
+            <div class="pixel-control">
+                <label>
+                    <span>Grid Size</span>
+                    <output id="gridOutput">12 × 8</output>
+                </label>
+                <input id="gridRange" type="range"
+                       min="4" max="24" value="12">
+            </div>
+
+            <div class="pixel-control">
+                <label>
+                    <span>Selected X</span>
+                    <output id="xOutput">6</output>
+                </label>
+                <input id="xRange" type="range"
+                       min="0" max="11" value="6">
+            </div>
+
+            <div class="pixel-control">
+                <label>
+                    <span>Selected Y</span>
+                    <output id="yOutput">4</output>
+                </label>
+                <input id="yRange" type="range"
+                       min="0" max="7" value="4">
+            </div>
+
+            <div class="pixel-readout">
+                <span>Selected pixel</span>
+                <strong id="pixelOutput">P(6, 4)</strong>
+            </div>
+
+            <div class="pixel-equation">
+                Total Pixels = Columns × Rows
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- RESOLUTION -->
+<section class="section foundation-detail">
+    <div class="section-heading">
+        <span class="eyebrow">03 · RESOLUTION</span>
+        <h2>What does resolution mean?</h2>
+        <p>
+            Resolution describes the number of pixels used along the
+            width and height of a raster image or display.
+        </p>
+    </div>
+
+    <div class="comparison-grid">
+
+        <div class="content-card">
+            <span class="card-label">EXAMPLE</span>
+            <h3>1920 × 1080</h3>
+
+            <p>
+                A display with 1920 pixels horizontally and 1080 pixels
+                vertically contains:
+            </p>
+
+            <div class="mini-example">
+                <span>Total Pixels</span>
+                <strong>1920 × 1080 = 2,073,600</strong>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <span class="card-label">IMPORTANT</span>
+            <h3>More pixels ≠ automatically better</h3>
+
+            <p>
+                Higher resolution can provide more image detail, but
+                perceived quality also depends on display size, viewing
+                distance, pixel density, image quality and other factors.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- CALCULATION -->
+<section class="section foundation-detail">
+    <div class="section-heading">
+        <span class="eyebrow">04 · CALCULATE</span>
+        <h2>Calculate the total number of pixels.</h2>
+        <p>For a raster image, multiply its width by its height.</p>
+    </div>
+
+    <div class="content-card">
+
+        <h3>Worked Example</h3>
+
+        <p>
+            Suppose an image has a resolution of
+            <strong>1280 × 720 pixels</strong>.
+        </p>
+
+        <div class="formula-box">
+            Total Pixels = Width × Height
+        </div>
+
+        <div class="calculation-box">
+            Width = 1280 pixels<br>
+            Height = 720 pixels<br><br>
+
+            Total Pixels = 1280 × 720<br>
+            Total Pixels = 921,600
+        </div>
+
+        <div class="definition-box">
+            <strong>Answer</strong>
+            <p>
+                The image contains <strong>921,600 pixels</strong>.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ASPECT RATIO -->
+<section class="section foundation-detail">
+    <div class="section-heading">
+        <span class="eyebrow">05 · ASPECT RATIO</span>
+        <h2>Width and height have a relationship.</h2>
+        <p>
+            Aspect ratio describes the proportional relationship between
+            the width and height of an image or display.
+        </p>
+    </div>
+
+    <div class="comparison-grid">
+
+        <div class="content-card">
+            <span class="card-label">FORMULA</span>
+            <h3>Aspect Ratio</h3>
+
+            <div class="formula-box">
+                Aspect Ratio = Width : Height
+            </div>
+
+            <p style="margin-top:16px;">
+                For 1920 × 1080:
+            </p>
+
+            <div class="calculation-box">
+                1920 : 1080<br>
+                Divide both by 120<br><br>
+                = 16 : 9
+            </div>
+        </div>
+
+        <div class="content-card">
+            <span class="card-label">WHY IT MATTERS</span>
+            <h3>Shape of the image</h3>
+
+            <p>
+                Maintaining the correct aspect ratio prevents an image
+                from appearing stretched or compressed.
+            </p>
+
+            <ul>
+                <li>16:9 — common widescreen format</li>
+                <li>4:3 — older display and video format</li>
+                <li>1:1 — square image</li>
+            </ul>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- COLOR DEPTH -->
+<section class="section foundation-detail">
+    <div class="section-heading">
+        <span class="eyebrow">06 · COLOR DEPTH</span>
+        <h2>How much information can one pixel store?</h2>
+        <p>
+            Color depth describes the number of bits used to represent
+            the color information of a pixel.
+        </p>
+    </div>
+
+    <div class="content-card">
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Bits per Pixel</th>
+                        <th>Possible Values</th>
+                        <th>Typical Meaning</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>1 bit</td>
+                        <td>2</td>
+                        <td>Two possible states</td>
+                    </tr>
+
+                    <tr>
+                        <td>8 bits</td>
+                        <td>256</td>
+                        <td>256 possible values</td>
+                    </tr>
+
+                    <tr>
+                        <td>24 bits</td>
+                        <td>2²⁴ = 16,777,216</td>
+                        <td>True-color RGB representation</td>
+                    </tr>
+
+                    <tr>
+                        <td>32 bits</td>
+                        <td>2³² possible combinations</td>
+                        <td>Often includes an alpha channel</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="formula-box">
+            Number of possible values = 2ⁿ
+        </div>
+
+    </div>
+</section>
+
+
+<!-- FRAME BUFFER -->
+<section class="section foundation-detail">
+    <div class="section-heading">
+        <span class="eyebrow">07 · FRAME BUFFER</span>
+        <h2>Where does the pixel information go?</h2>
+    </div>
+
+    <div class="content-card">
+
+        <p>
+            A <strong>frame buffer</strong> is a region of memory that
+            stores information used to represent the image currently
+            displayed or prepared for display.
+        </p>
+
+        <div class="graphics-flow">
+
+            <div class="flow-item">
+                <span>01</span>
+                <strong>Image Data</strong>
+                <small>Pixel information is generated.</small>
+            </div>
+
+            <div class="flow-arrow">→</div>
+
+            <div class="flow-item">
+                <span>02</span>
+                <strong>Frame Buffer</strong>
+                <small>Pixel values are stored.</small>
+            </div>
+
+            <div class="flow-arrow">→</div>
+
+            <div class="flow-item">
+                <span>03</span>
+                <strong>Display</strong>
+                <small>The visual image appears on screen.</small>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- QUICK CHECK -->
+<section class="section foundation-detail">
+    <div class="content-card quick-check">
+        <span class="eyebrow">QUICK CHECK</span>
+        <h2>Test your understanding.</h2>
+
+        <div class="question-list">
+
+            <div>
+                <span>01</span>
+                <p>What does the term pixel mean?</p>
+            </div>
+
+            <div>
+                <span>02</span>
+                <p>How many pixels are present in a 1920 × 1080 image?</p>
+            </div>
+
+            <div>
+                <span>03</span>
+                <p>What is the aspect ratio of a 1920 × 1080 image?</p>
+            </div>
+
+            <div>
+                <span>04</span>
+                <p>How many possible values can be represented using 8 bits?</p>
+            </div>
+
+            <div>
+                <span>05</span>
+                <p>What is the purpose of a frame buffer?</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- SUMMARY -->
+<section class="section foundation-detail">
+    <div class="summary-box">
+
+        <span class="eyebrow">QUICK SUMMARY</span>
+        <h2>Remember these five ideas.</h2>
+
+        <div class="summary-grid">
+
+            <div>
+                <span>01</span>
+                <strong>Pixel</strong>
+                <p>A basic picture element in a raster image.</p>
+            </div>
+
+            <div>
+                <span>02</span>
+                <strong>Resolution</strong>
+                <p>Width × height gives the number of pixels.</p>
+            </div>
+
+            <div>
+                <span>03</span>
+                <strong>Aspect Ratio</strong>
+                <p>Describes the proportional relationship of width and height.</p>
+            </div>
+
+            <div>
+                <span>04</span>
+                <strong>Color Depth</strong>
+                <p>Defines how much color information can be represented.</p>
+            </div>
+
+            <div>
+                <span>05</span>
+                <strong>Frame Buffer</strong>
+                <p>Stores information used to produce the displayed image.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- NAVIGATION -->
+<section class="section foundation-navigation">
+
+    <a href="foundation01.html" class="nav-card">
+        <span>←</span>
+        <small>PREVIOUS FOUNDATION</small>
+        <strong>What is Computer Graphics?</strong>
+    </a>
+
+    <a href="foundation03.html" class="nav-card next">
+        <small>NEXT FOUNDATION</small>
+        <strong>How Do Coordinates Work? →</strong>
+    </a>
+
+</section>
+
+</main>
+
+
+<footer class="site-footer">
+
+    <div class="footer-content">
+
+        <div class="footer-brand">
+            <strong>Rasika<span class="logo-highlight">CodeLab</span></strong>
+            <p>Computer Graphics Practical Learning</p>
+        </div>
+
+        <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="../cgr_foundations.html">Foundations</a>
+            <a href="../cgr_practicals.html">Practicals</a>
+            <a href="../cgr_algorithms.html">Algorithms</a>
+            <a href="../about.html">About</a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2026 Rasika CodeLab · Learn the concept. See the result.
+    </div>
+
+</footer>
+
+
+<script>
+(function () {
+    const canvas = document.getElementById("pixelCanvas");
+    const gridRange = document.getElementById("gridRange");
+    const xRange = document.getElementById("xRange");
+    const yRange = document.getElementById("yRange");
+
+    const gridOutput = document.getElementById("gridOutput");
+    const xOutput = document.getElementById("xOutput");
+    const yOutput = document.getElementById("yOutput");
+    const pixelOutput = document.getElementById("pixelOutput");
+
+    const ctx = canvas.getContext("2d");
+
+    function resizeCanvas() {
+        const rect = canvas.getBoundingClientRect();
+        const dpr = window.devicePixelRatio || 1;
+
+        canvas.width = rect.width * dpr;
+        canvas.height = rect.height * dpr;
+
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        draw();
+    }
+
+    function updateControls() {
+        const columns = Number(gridRange.value);
+        const rows = Math.max(4, Math.round(columns * 0.67));
+
+        xRange.max = columns - 1;
+        yRange.max = rows - 1;
+
+        if (Number(xRange.value) >= columns) {
+            xRange.value = columns - 1;
+        }
+
+        if (Number(yRange.value) >= rows) {
+            yRange.value = rows - 1;
+        }
+
+        gridOutput.value = columns + " × " + rows;
+        xOutput.value = xRange.value;
+        yOutput.value = yRange.value;
+        pixelOutput.textContent = "P(" + xRange.value + ", " + yRange.value + ")";
+
+        draw();
+    }
+
+    function draw() {
+        const width = canvas.clientWidth;
+        const height = canvas.clientHeight;
+
+        const columns = Number(gridRange.value);
+        const rows = Math.max(4, Math.round(columns * 0.67));
+
+        const cell = Math.min(
+            (width - 40) / columns,
+            (height - 40) / rows
+        );
+
+        const gridWidth = columns * cell;
+        const gridHeight = rows * cell;
+
+        const startX = (width - gridWidth) / 2;
+        const startY = (height - gridHeight) / 2;
+
+        ctx.clearRect(0, 0, width, height);
+
+        ctx.fillStyle = "#080b0e";
+        ctx.fillRect(0, 0, width, height);
+
+        const selectedX = Number(xRange.value);
+        const selectedY = Number(yRange.value);
+
+        for (let y = 0; y < rows; y++) {
+            for (let x = 0; x < columns; x++) {
+                const px = startX + x * cell;
+                const py = startY + y * cell;
+
+                if (x === selectedX && y === selectedY) {
+                    ctx.fillStyle = "rgba(255, 138, 0, 0.85)";
+                    ctx.fillRect(px + 1, py + 1, cell - 2, cell - 2);
+                } else {
+                    ctx.fillStyle = "#11161a";
+                    ctx.fillRect(px + 1, py + 1, cell - 2, cell - 2);
+                }
+
+                ctx.strokeStyle = "rgba(255,255,255,0.10)";
+                ctx.strokeRect(px, py, cell, cell);
+            }
+        }
+
+        const sx = startX + selectedX * cell;
+        const sy = startY + selectedY * cell;
+
+        ctx.strokeStyle = "#ffb45c";
+        ctx.lineWidth = 2;
+        ctx.strokeRect(sx + 2, sy + 2, cell - 4, cell - 4);
+
+        if (cell >= 25) {
+            ctx.fillStyle = "#fff";
+            ctx.font = "11px monospace";
+            ctx.fillText(
+                "(" + selectedX + "," + selectedY + ")",
+                sx + 5,
+                sy + Math.min(cell - 7, 17)
+            );
+        }
+    }
+
+    gridRange.addEventListener("input", updateControls);
+    xRange.addEventListener("input", updateControls);
+    yRange.addEventListener("input", updateControls);
+    window.addEventListener("resize", resizeCanvas);
+
+    updateControls();
+    resizeCanvas();
+})();
+</script>
+
+</body>
+</html>

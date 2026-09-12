@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Rasika CodeLab Computer Graphics practicals with theory, calculations, visualization, animation and experiments.">
+    <title>Rasika CodeLab | Computer Graphics Practicals</title>
+    <link rel="stylesheet" href="../../css/cgr_style.css">
+</head>
+<body>
+
+<header class="site-header">
+    <nav class="navbar">
+        <a href="cgr_index.html" class="logo">◈ RasikaCodeLab</a>
+
+        <div class="nav-links">
+            <a href="cgr_index.html">Home</a>
+            <a href="cgr_foundations.html">Foundations</a>
+            <a href="cgr_practicals.html" class="active">Practicals</a>
+            <a href="cgr_algorithms.html">Algorithms</a>
+                <a href="../../about.html">About</a>
+        </div>
+
+        <button class="menu-btn" type="button" aria-label="Open menu">☰</button>
+    </nav>
+</header>
+
+<main>
+
+    <!-- HERO -->
+    <section class="hero practicals-hero">
+        <div class="hero-content">
+            <span class="eyebrow">COMPUTER GRAPHICS LAB</span>
+            <h1>Learn. Calculate. Visualize.</h1>
+            <p>
+                Computer Graphics practicals designed to connect theory,
+                mathematics, algorithms and visual output.
+            </p>
+
+            <div class="hero-actions">
+                <a href="#practicals" class="btn btn-primary">Start Practicals</a>
+                <a href="cgr_foundations.html" class="btn btn-secondary">Learn Foundations</a>
+            </div>
+        </div>
+
+        <div class="hero-visual">
+            <div class="graphics-window">
+                <div class="window-header">
+                    <span>CG PRACTICAL LAB</span>
+                    <span>● ● ●</span>
+                </div>
+
+                <div class="window-body">
+                    <div class="mini-coordinate-grid">
+                        <span class="axis-x"></span>
+                        <span class="axis-y"></span>
+                        <span class="point p1"></span>
+                        <span class="point p2"></span>
+                        <span class="line-preview"></span>
+                    </div>
+
+                    <div class="calculation-preview">
+                        <strong>DDA Line Drawing</strong>
+                        <span>Δx = x₂ − x₁</span>
+                        <span>Δy = y₂ − y₁</span>
+                        <span>Steps = max(|Δx|, |Δy|)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <!-- INTRO / HOW TO LEARN -->
+<section class="section intro-section">
+
+    <div class="section-heading">
+        <span class="eyebrow">HOW TO LEARN</span>
+        <h2>Every practical has a purpose.</h2>
+        <p>
+            Don't just write the algorithm. Understand the mathematics,
+            observe each step and experiment with the result.
+        </p>
+    </div>
+
+    <div class="learning-model">
+        <div class="learning-step">
+            <span>01</span>
+            <strong>Understand</strong>
+            <p>Learn the concept and terminology.</p>
+        </div>
+
+        <div class="learning-step">
+            <span>02</span>
+            <strong>Calculate</strong>
+            <p>Apply formulas with a worked example.</p>
+        </div>
+
+        <div class="learning-step">
+            <span>03</span>
+            <strong>Implement</strong>
+            <p>Convert the logic into a program.</p>
+        </div>
+
+        <div class="learning-step">
+            <span>04</span>
+            <strong>Visualize</strong>
+            <p>See pixels, shapes and transformations.</p>
+        </div>
+
+        <div class="learning-step">
+            <span>05</span>
+            <strong>Experiment</strong>
+            <p>Change inputs and observe what happens.</p>
+        </div>
+    </div>
+
+</section>
+
+    <!-- PRACTICALS -->
+    <section class="section" id="practicals">
+        <div class="section-heading">
+            <span class="eyebrow">PRACTICAL LIST</span>
+            <h2>Computer Graphics Practicals</h2>
+            <p>Core laboratory exercises from fundamentals to modern interactive graphics.</p>
+        </div>
+
+        <div class="practical-list">
+
+            <article class="practical-card">
+                <div class="practical-number">01</div>
+                <div class="practical-content">
+                    <span class="card-label">FOUNDATION</span>
+                    <h3>Pixel, Resolution & Coordinate System</h3>
+                    <p>Understand pixels, resolution, screen coordinates and coordinate mapping.</p>
+                    <div class="tags">
+                        <span>Coordinate</span><span>Pixel</span><span>Calculation</span>
+                    </div>
+                </div>
+                <a href="cgr_practical01.html" class="card-link">Open Practical →</a>
+            </article>
+
+            <article class="practical-card">
+                <div class="practical-number">02</div>
+                <div class="practical-content">
+                    <span class="card-label">FOUNDATION</span>
+                    <h3>RGB & CMYK Color Visualizer</h3>
+                    <p>Explore RGB, CMYK, grayscale, color depth and digital color representation.</p>
+                    <div class="tags">
+                        <span>RGB</span><span>CMYK</span><span>Color</span>
+                    </div>
+                </div>
+                <a href="cgr_practical02.html" class="card-link">Open Practical →</a>
+            </article>
+
+            <article class="practical-card">
+                <div class="practical-number">03</div>
+                <div class="practical-content">
+                    <span class="card-label">FOUNDATION</span>
+                    <h3>Graphics Primitives & Geometry</h3>
+                    <p>Work with points, lines, circles, rectangles, triangles and polygons.</p>
+                    <div class="tags">
+                        <span>Shapes</span><span>Geometry</span><span>Canvas</span>
+                    </div>
+                </div>
+                <a href="cgr_practical03.html" class="card-link">Open Practical →</a>
+            </article>
+
+            <article class="practical-card">
+                <div class="practical-number">04</div>
+                <div class="practical-content">
+                    <span class="card-label">RASTER SCAN</span>
+                    <h3>DDA Line Drawing Algorithm</h3>
+                    <p>Calculate increments and generate a line pixel-by-pixel using DDA.</p>
+                    <div class="tags">
+                        <span>DDA</span><span>Algorithm</span><span>Animation</span>
+                    </div>
+                </div>
+                <a href="cgr_practical04.html" class="card-link">Open Practical →</a>
+            </article>
+
+            <article class="practical-card">
+                <div class="practical-number">05</div>
+                <div class="practical-content">
+                    <span class="card-label">RASTER SCAN</span>
+                    <h3>Bresenham Line Drawing</h3>
+                    <p>Understand the decision parameter and compare Bresenham with DDA.</p>
+                    <div class="tags">
+                        <span>Bresenham</span><span>Decision</span><span>Pixels</span>
+                    </div>
+                </div>
+                <a href="cgr_practical05.html" class="card-link">Open Practical →</a>
+            </article>
+
+            <article class="practical-card">
+                <div class="practical-number">06</div>
+                <div class="practical-content">
+                    <span class="card-label">RASTER SCAN</span>
+                    <h3>Bresenham Circle Drawing</h3>
+                    <p>Generate a circle using a decision parameter and eight-way symmetry.</p>
+                    <div class="tags">
+                        <span>Circle</span><span>Symmetry</span><span>Animation</span>
+                    </div>
+                </div>
+                <a href="cgr_practical06.html" class="card-link">Open Practical →</a>
+            </article>
+
+            <article class="practical-card">
+                <div class="practical-number">07</div>
+                <div class="practical-content">
+                    <span class="card-label">FILLING</span>
+                    <h3>Flood Fill & Boundary Fill</h3>
+                    <p>Explore seed-based region filling and understand their differences.</p>
+                    <div class="tags">
+                        <span>Flood Fill</span><span>Boundary Fill</span><span>Recursion</span>
+                    </div>
+                </div>
+                <a href="cgr_practical07.html" class="card-link">Open Practical →</a>
+            </article>
+
+            <article class="practical-card">
+                <div class="practical-number">08</div>
+                <div class="practical-content">
+                    <span class="card-label">2D TRANSFORMATION</span>
+                    <h3>2D Translation & Scaling</h3>
+                    <p>Apply translation and scaling using equations, matrices and homogeneous coordinates.</p>
+                    <div class="tags">
+                        <span>Matrix</span><span>Translation</span><span>Scaling</span>
+                    </div>
+                </div>
+                <a href="cgr_practical08.html" class="card-link">Open Practical →</a>
+            </article>
+
+            <article class="practical-card">
+                <div class="practical-number">09</div>
+                <div class="practical-content">
+                    <span class="card-label">2D TRANSFORMATION</span>
+                    <h3>2D Rotation</h3>
+                    <p>Rotate objects around the origin or a selected pivot using transformation matrices.</p>
+                    <div class="tags">
+                        <span>Rotation</span><span>Matrix</span><span>Visualization</span>
+                    </div>
+                </div>
+                <a href="cgr_practical09.html" class="card-link">Open Practical →</a>
+            </article>
+
+            <article class="practical-card">
+                <div class="practical-number">10</div>
+                <div class="practical-content">
+                    <span class="card-label">2D TRANSFORMATION</span>
+                    <h3>Reflection & Shearing</h3>
+                    <p>Study reflection about axes and shearing along the X and Y directions.</p>
+                    <div class="tags">
+                        <span>Reflection</span><span>Shear</span><span>Matrix</span>
+                    </div>
+                </div>
+                <a href="cgr_practical10.html" class="card-link">Open Practical →</a>
+            </article>
+
+            <article class="practical-card">
+                <div class="practical-number">11</div>
+                <div class="practical-content">
+                    <span class="card-label">2D TRANSFORMATION</span>
+                    <h3>Composite 2D Transformation</h3>
+                    <p>Combine multiple transformations and observe why transformation order matters.</p>
+                    <div class="tags">
+                        <span>Composite</span><span>Matrix</span><span>Order</span>
+                    </div>
+                </div>
+                <a href="cgr_practical11.html" class="card-link">Open Practical →</a>
+            </article>
+
+            <article class="practical-card">
+                <div class="practical-number">12</div>
+                <div class="practical-content">
+                    <span class="card-label">3D GRAPHICS</span>
+                    <h3>3D Transformation Visualizer</h3>
+                    <p>Transform 3D vertices using translation, scaling and rotation.</p>
+                    <div class="tags">
+                        <span>3D</span><span>Vertices</span><span>Transformation</span>
+                    </div>
+                </div>
+                <a href="cgr_practical12.html" class="card-link">Open Practical →</a>
+            </article>
+
+            <article class="practical-card">
+                <div class="practical-number">13</div>
+                <div class="practical-content">
+                    <span class="card-label">CLIPPING</span>
+                    <h3>Cohen-Sutherland Line Clipping</h3>
+                    <p>Use region codes to determine visible and invisible portions of a line.</p>
+                    <div class="tags">
+                        <span>Clipping</span><span>Region Code</span><span>Line</span>
+                    </div>
+                </div>
+                <a href="cgr_practical13.html" class="card-link">Open Practical →</a>
+            </article>
+
+            <article class="practical-card">
+                <div class="practical-number">14</div>
+                <div class="practical-content">
+                    <span class="card-label">CLIPPING</span>
+                    <h3>Midpoint Subdivision</h3>
+                    <p>Explore recursive line subdivision and determine the visible segment.</p>
+                    <div class="tags">
+                        <span>Midpoint</span><span>Recursive</span><span>Clipping</span>
+                    </div>
+                </div>
+                <a href="cgr_practical14.html" class="card-link">Open Practical →</a>
+            </article>
+
+            <article class="practical-card">
+                <div class="practical-number">15</div>
+                <div class="practical-content">
+                    <span class="card-label">POLYGON CLIPPING</span>
+                    <h3>Sutherland-Hodgman Polygon Clipping</h3>
+                    <p>Clip a polygon edge-by-edge against a rectangular clipping window.</p>
+                    <div class="tags">
+                        <span>Polygon</span><span>Clipping</span><span>Vertices</span>
+                    </div>
+                </div>
+                <a href="cgr_practical15.html" class="card-link">Open Practical →</a>
+            </article>
+
+            <article class="practical-card">
+                <div class="practical-number">16</div>
+                <div class="practical-content">
+                    <span class="card-label">CURVES</span>
+                    <h3>Bezier Curve Generator</h3>
+                    <p>Generate and visualize Bezier curves using control points and curve equations.</p>
+                    <div class="tags">
+                        <span>Bezier</span><span>Control Points</span><span>Curve</span>
+                    </div>
+                </div>
+                <a href="cgr_practical16.html" class="card-link">Open Practical →</a>
+            </article>
+
+            <article class="practical-card">
+                <div class="practical-number">17</div>
+                <div class="practical-content">
+                    <span class="card-label">CURVES</span>
+                    <h3>B-Spline Curve Visualizer</h3>
+                    <p>Understand control points, basis functions and smooth B-Spline curves.</p>
+                    <div class="tags">
+                        <span>B-Spline</span><span>Control Points</span><span>Visualization</span>
+                    </div>
+                </div>
+                <a href="cgr_practical17.html" class="card-link">Open Practical →</a>
+            </article>
+
+            <article class="practical-card">
+                <div class="practical-number">18</div>
+                <div class="practical-content">
+                    <span class="card-label">MODERN GRAPHICS</span>
+                    <h3>2D Interactive Graphics using HTML Canvas</h3>
+                    <p>Create shapes, respond to user input and build simple graphics animations.</p>
+                    <div class="tags">
+                        <span>Canvas</span><span>JavaScript</span><span>Animation</span>
+                    </div>
+                </div>
+                <a href="cgr_practical18.html" class="card-link">Open Practical →</a>
+            </article>
+
+            <article class="practical-card">
+                <div class="practical-number">19</div>
+                <div class="practical-content">
+                    <span class="card-label">MODERN GRAPHICS</span>
+                    <h3>3D Scene using Three.js</h3>
+                    <p>Build a basic 3D scene with a camera, mesh, materials, lighting and animation.</p>
+                    <div class="tags">
+                        <span>Three.js</span><span>WebGL</span><span>3D</span>
+                    </div>
+                </div>
+                <a href="cgr_practical19.html" class="card-link">Open Practical →</a>
+            </article>
+
+            <article class="practical-card">
+                <div class="practical-number">20</div>
+                <div class="practical-content">
+                    <span class="card-label">MODERN GRAPHICS</span>
+                    <h3>3D Transformation, Lighting & Texture</h3>
+                    <p>Combine transformations, lighting and textures to create a more realistic 3D scene.</p>
+                    <div class="tags">
+                        <span>Lighting</span><span>Texture</span><span>Animation</span>
+                    </div>
+                </div>
+                <a href="cgr_practical20.html" class="card-link">Open Practical →</a>
+            </article>
+
+            <article class="practical-card featured-practical">
+                <div class="practical-number">21</div>
+                <div class="practical-content">
+                    <span class="card-label">MINI PROJECT</span>
+                    <h3>Interactive Graphics Application</h3>
+                    <p>Build a small graphics application combining algorithms, transformations and interaction.</p>
+                    <div class="tags">
+                        <span>Project</span><span>Interaction</span><span>Graphics</span>
+                    </div>
+                </div>
+                <a href="cgr_practical21.html" class="card-link">Open Practical →</a>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- PRACTICAL STRUCTURE -->
+    <section class="section practical-structure">
+        <div class="section-heading">
+            <span class="eyebrow">PRACTICAL FORMAT</span>
+            <h2>What you will find inside</h2>
+            <p>Each practical follows a consistent learning flow.</p>
+        </div>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <span class="feature-icon">01</span>
+                <h3>Aim & Objectives</h3>
+                <p>Know exactly what the practical is designed to teach.</p>
+            </div>
+
+            <div class="feature-card">
+                <span class="feature-icon">02</span>
+                <h3>Theory & Formula</h3>
+                <p>Understand the concept, mathematical model and important equations.</p>
+            </div>
+
+            <div class="feature-card">
+                <span class="feature-icon">03</span>
+                <h3>Worked Calculation</h3>
+                <p>Follow the algorithm through a clear step-by-step numerical example.</p>
+            </div>
+
+            <div class="feature-card">
+                <span class="feature-icon">04</span>
+                <h3>Visualization</h3>
+                <p>Observe pixels, coordinates, shapes, curves and transformations.</p>
+            </div>
+
+            <div class="feature-card">
+                <span class="feature-icon">05</span>
+                <h3>Animation</h3>
+                <p>See algorithmic steps execute one stage at a time.</p>
+            </div>
+
+            <div class="feature-card">
+                <span class="feature-icon">06</span>
+                <h3>Viva & Exercises</h3>
+                <p>Practice questions, common errors and viva preparation.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section practical-cta">
+        <div class="cta-box">
+            <span class="eyebrow">READY TO START?</span>
+            <h2>Begin with the mathematics behind the pixels.</h2>
+            <p>Start with Practical 01 and move from coordinate basics to interactive 3D graphics.</p>
+            <a href="cgr_practical01.html" class="btn btn-primary">Open Practical 01 →</a>
+        </div>
+    </section>
+
+</main>
+
+<footer class="site-footer">
+    <div class="footer-content">
+        <div>
+            <strong>RasikaCodeLab</strong>
+            <p>Computer Graphics Practical Learning</p>
+        </div>
+        <div class="footer-links">
+            <a href="cgr_index.html">Home</a>
+            <a href="cgr_foundations.html">Foundations</a>
+            <a href="cgr_practicals.html">Practicals</a>
+            <a href="../../about.html">About</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        © 2026 Rasika CodeLab · Learn the concept. See the result.
+    </div>
+</footer>
+
+</body>
+</html>
