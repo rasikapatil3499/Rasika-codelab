@@ -1,0 +1,2052 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Practical 4 | Classes & Objects | Rasika CodeLab
+    </title>
+
+    <link rel="stylesheet"
+          href="../css/style.css">
+
+</head>
+
+
+<body class="detail-page">
+
+
+<!-- =====================================================
+     NAVBAR
+     ===================================================== -->
+
+<header class="navbar">
+
+    <div class="nav-container">
+
+        <a href="../index.html"
+           class="logo">
+
+            <span class="logo-icon">
+                &lt;/&gt;
+            </span>
+
+            <span>
+                Rasika<span>CodeLab</span>
+            </span>
+
+        </a>
+
+
+        <button class="menu-btn"
+                aria-label="Toggle menu">
+            ☰
+        </button>
+
+
+        <nav class="nav-links">
+
+            <a href="../index.html">
+                Home
+            </a>
+
+            <a href="../foundations/program.html">
+                Foundations
+            </a>
+
+            <a href="index.html"
+               class="active">
+                Practicals
+            </a>
+
+            <a href="../index.html#about">
+                About
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN
+     ===================================================== -->
+
+<main class="practical-page">
+
+
+    <!-- =================================================
+         HERO
+         ================================================= -->
+
+    <section class="practical-hero">
+
+        <div class="container">
+
+            <span class="section-label">
+                C++ PRACTICAL 04
+            </span>
+
+            <h1>
+                Classes & Objects
+            </h1>
+
+            <p class="practical-subtitle">
+                Implement classes and objects to define
+                functions inside the class.
+            </p>
+
+
+            <div class="practical-meta">
+
+                <span>
+                    💻 C++
+                </span>
+
+                <span>
+                    📘 Practical 4
+                </span>
+
+                <span>
+                    🎯 LLO 4.1
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         AIM
+         ================================================= -->
+
+    <section class="content-section">
+
+        <div class="container">
+
+            <span class="section-label">
+                01 — AIM
+            </span>
+
+
+            <div class="content-card">
+
+                <p>
+                    To implement classes and objects in C++
+                    and define member functions inside the class.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         LEARNING OBJECTIVES
+         ================================================= -->
+
+    <section class="content-section">
+
+        <div class="container">
+
+            <span class="section-label">
+                02 — LEARNING OBJECTIVES
+            </span>
+
+
+            <div class="objective-grid">
+
+                <div class="objective-card">
+
+                    <span>
+                        01
+                    </span>
+
+                    <p>
+                        Understand the concept of classes
+                        and objects in C++.
+                    </p>
+
+                </div>
+
+
+                <div class="objective-card">
+
+                    <span>
+                        02
+                    </span>
+
+                    <p>
+                        Define data members and member
+                        functions inside a class.
+                    </p>
+
+                </div>
+
+
+                <div class="objective-card">
+
+                    <span>
+                        03
+                    </span>
+
+                    <p>
+                        Create and use objects of a class
+                        in a C++ program.
+                    </p>
+
+                </div>
+
+
+                <div class="objective-card">
+
+                    <span>
+                        04
+                    </span>
+
+                    <p>
+                        Implement functions inside a class
+                        to perform different operations.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         TOPIC SECTION
+         ================================================= -->
+
+    <section class="content-section">
+
+        <div class="container">
+
+            <span class="section-label">
+                03 — EXPLORE THE CONCEPT
+            </span>
+
+            <h2>
+                Classes, Objects & Member Functions
+            </h2>
+
+            <p class="section-description">
+                Understand how a class acts as a blueprint
+                and how objects use the data and functions
+                defined inside it.
+            </p>
+
+
+
+            <!-- =================================================
+                 THEORY
+                 ================================================= -->
+
+            <div class="theory-box">
+
+                <h3>
+                    Theory
+                </h3>
+
+                <p>
+                    A <strong>class</strong> is a user-defined
+                    data type that groups data members and
+                    member functions together. It provides a
+                    blueprint for creating objects.
+                </p>
+
+                <p>
+                    An <strong>object</strong> is an instance
+                    of a class. Each object can access the
+                    data members and member functions defined
+                    within the class.
+                </p>
+
+                <p>
+                    In this practical, the member functions
+                    are defined <strong>inside the class</strong>.
+                    This means the function definition is written
+                    within the class body itself.
+                </p>
+
+
+                <div class="casting-rule">
+
+                    <span>
+                        Class
+                    </span>
+
+                    <strong>
+                        →
+                    </strong>
+
+                    <span>
+                        Object
+                    </span>
+
+                    <strong>
+                        →
+                    </strong>
+
+                    <span>
+                        Function Call
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 REAL LIFE EXAMPLE
+                 ================================================= -->
+
+            <div class="real-life-box">
+
+                <div class="real-life-icon">
+                    🌍
+                </div>
+
+                <div>
+
+                    <h3>
+                        Real-Life Example
+                    </h3>
+
+                    <p>
+                        Consider a Student in a college system.
+                        A student has properties such as name,
+                        roll number and marks. A class can represent
+                        the common structure of a student, while
+                        individual students can be represented
+                        using objects.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 WHERE USED
+                 ================================================= -->
+
+            <div class="where-used-box">
+
+                <h3>
+                    Where & How Is It Used?
+                </h3>
+
+
+                <div class="use-grid">
+
+                    <div>
+
+                        <strong>
+                            Student Management
+                        </strong>
+
+                        <p>
+                            A Student class can store student
+                            information and functions can display
+                            or calculate student details.
+                        </p>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            Banking Systems
+                        </strong>
+
+                        <p>
+                            An Account class can contain account
+                            data and functions such as deposit
+                            and withdrawal.
+                        </p>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            Billing Systems
+                        </strong>
+
+                        <p>
+                            A Product class can contain product
+                            information and functions to calculate
+                            prices or totals.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 BASIC STRUCTURE
+                 ================================================= -->
+
+            <div class="content-block practical-class-structure">
+
+                <h4>
+                    Basic Structure of a Class
+                </h4>
+
+
+                <div class="code-window">
+
+<pre><code>class ClassName
+{
+    data members;
+
+    returnType functionName()
+    {
+        // function definition
+    }
+};
+
+int main()
+{
+    ClassName object;
+
+    object.functionName();
+
+    return 0;
+}</code></pre>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 PROBLEM SELECTOR
+                 ================================================= -->
+
+            <div class="problem-mini-selector">
+
+                <button class="mini-problem-tab active"
+                        data-problem="class-problem1">
+
+                    Problem 01
+
+                </button>
+
+
+                <button class="mini-problem-tab"
+                        data-problem="class-problem2">
+
+                    Problem 02
+
+                </button>
+
+
+                <button class="mini-problem-tab"
+                        data-problem="class-problem3">
+
+                    Problem 03
+
+                </button>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 PROBLEM 1
+                 ================================================= -->
+
+            <article class="mini-problem active"
+                     id="class-problem1">
+
+
+                <span class="problem-badge">
+                    PROBLEM 01
+                </span>
+
+
+                <h3>
+                    Student Details
+                </h3>
+
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Problem Statement
+                    </h4>
+
+                    <p>
+                        Write a C++ program to create a class
+                        Student with data members roll number
+                        and name. Define a function inside the
+                        class to accept and display student
+                        details. Create an object of the class
+                        and call the function.
+                    </p>
+
+                </div>
+
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Algorithm
+                    </h4>
+
+                    <ol class="algorithm-list">
+
+                        <li>
+                            Start.
+                        </li>
+
+                        <li>
+                            Define a class named Student.
+                        </li>
+
+                        <li>
+                            Declare roll number and name as
+                            data members.
+                        </li>
+
+                        <li>
+                            Define a function inside the class
+                            to accept student details.
+                        </li>
+
+                        <li>
+                            Define another function inside the
+                            class to display the details.
+                        </li>
+
+                        <li>
+                            Create an object of Student.
+                        </li>
+
+                        <li>
+                            Call the member functions using
+                            the object.
+                        </li>
+
+                        <li>
+                            Stop.
+                        </li>
+
+                    </ol>
+
+                </div>
+
+
+
+                <div class="content-block">
+
+                    <h4>
+                        C++ Program
+                    </h4>
+
+
+                    <div class="code-window">
+
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+class Student
+{
+    int rollNo;
+    string name;
+
+public:
+
+    void accept()
+    {
+        cout &lt;&lt; "Enter roll number: ";
+        cin &gt;&gt; rollNo;
+
+        cout &lt;&lt; "Enter name: ";
+        cin &gt;&gt; name;
+    }
+
+    void display()
+    {
+        cout &lt;&lt; "\nRoll Number = "
+             &lt;&lt; rollNo &lt;&lt; endl;
+
+        cout &lt;&lt; "Name = "
+             &lt;&lt; name;
+    }
+};
+
+int main()
+{
+    Student s;
+
+    s.accept();
+    s.display();
+
+    return 0;
+}</code></pre>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Expected Output
+                    </h4>
+
+
+                    <div class="output-box">
+
+<pre>Enter roll number: 101
+Enter name: Rahul
+
+Roll Number = 101
+Name = Rahul</pre>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- VISUALIZATION -->
+
+                <div class="visualization-section">
+
+                    <div class="visualization-header">
+
+                        <span class="problem-badge">
+                            CLASS & OBJECT VISUALIZATION
+                        </span>
+
+                        <h3>
+                            Class → Object → Function
+                        </h3>
+
+                        <p>
+                            The class defines the structure,
+                            the object represents an instance,
+                            and the object calls the functions.
+                        </p>
+
+                    </div>
+
+
+                    <div class="class-object-visual">
+
+
+                        <div class="class-visual-box">
+
+                            <span>
+                                CLASS
+                            </span>
+
+                            <strong>
+                                Student
+                            </strong>
+
+                            <small>
+                                rollNo
+                            </small>
+
+                            <small>
+                                name
+                            </small>
+
+                        </div>
+
+
+                        <div class="class-visual-arrow">
+                            →
+                        </div>
+
+
+                        <div class="object-visual-box">
+
+                            <span>
+                                OBJECT
+                            </span>
+
+                            <strong>
+                                s
+                            </strong>
+
+                            <small>
+                                rollNo = 101
+                            </small>
+
+                            <small>
+                                name = Rahul
+                            </small>
+
+                        </div>
+
+
+                        <div class="class-visual-arrow">
+                            →
+                        </div>
+
+
+                        <div class="function-visual-box">
+
+                            <span>
+                                FUNCTION
+                            </span>
+
+                            <strong>
+                                display()
+                            </strong>
+
+                            <small>
+                                Displays details
+                            </small>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Program Explanation
+                    </h4>
+
+                    <ul class="key-points">
+
+                        <li>
+                            <code>Student</code> is the class
+                            containing student data and functions.
+                        </li>
+
+                        <li>
+                            <code>s</code> is an object of the
+                            Student class.
+                        </li>
+
+                        <li>
+                            <code>accept()</code> accepts the
+                            student's details.
+                        </li>
+
+                        <li>
+                            <code>display()</code> displays the
+                            stored details.
+                        </li>
+
+                        <li>
+                            Both functions are defined directly
+                            inside the class.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Key Points
+                    </h4>
+
+                    <ul class="key-points">
+
+                        <li>
+                            A class is a blueprint for objects.
+                        </li>
+
+                        <li>
+                            An object is an instance of a class.
+                        </li>
+
+                        <li>
+                            Member functions can be defined
+                            inside the class.
+                        </li>
+
+                        <li>
+                            Functions are accessed using the
+                            object and dot operator.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Common Errors
+                    </h4>
+
+
+                    <div class="error-grid">
+
+                        <div class="error-card">
+
+                            <strong>
+                                Missing Object
+                            </strong>
+
+                            <p>
+                                A member function is generally
+                                called through an object when
+                                working with ordinary class objects.
+                            </p>
+
+                        </div>
+
+
+                        <div class="error-card">
+
+                            <strong>
+                                Wrong Function Call
+                            </strong>
+
+                            <p>
+                                Use the correct syntax such as
+                                <code>s.display()</code>.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 PROBLEM 2
+                 ================================================= -->
+
+            <article class="mini-problem"
+                     id="class-problem2">
+
+
+                <span class="problem-badge">
+                    PROBLEM 02
+                </span>
+
+
+                <h3>
+                    Rectangle Area and Perimeter
+                </h3>
+
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Problem Statement
+                    </h4>
+
+                    <p>
+                        Write a C++ program to create a class
+                        Rectangle with data members length and
+                        breadth. Define functions inside the
+                        class to calculate and display the area
+                        and perimeter of the rectangle.
+                    </p>
+
+                </div>
+
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Formula
+                    </h4>
+
+
+                    <div class="formula-grid">
+
+                        <div class="formula-card">
+
+                            <strong>
+                                Area
+                            </strong>
+
+                            <span>
+                                length × breadth
+                            </span>
+
+                        </div>
+
+
+                        <div class="formula-card">
+
+                            <strong>
+                                Perimeter
+                            </strong>
+
+                            <span>
+                                2 × (length + breadth)
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Algorithm
+                    </h4>
+
+                    <ol class="algorithm-list">
+
+                        <li>
+                            Start.
+                        </li>
+
+                        <li>
+                            Define a class Rectangle.
+                        </li>
+
+                        <li>
+                            Declare length and breadth.
+                        </li>
+
+                        <li>
+                            Define a function to accept dimensions.
+                        </li>
+
+                        <li>
+                            Define a function to calculate area
+                            and perimeter.
+                        </li>
+
+                        <li>
+                            Create an object of Rectangle.
+                        </li>
+
+                        <li>
+                            Call the required functions.
+                        </li>
+
+                        <li>
+                            Display the results.
+                        </li>
+
+                        <li>
+                            Stop.
+                        </li>
+
+                    </ol>
+
+                </div>
+
+
+
+                <div class="content-block">
+
+                    <h4>
+                        C++ Program
+                    </h4>
+
+
+                    <div class="code-window">
+
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+class Rectangle
+{
+    float length;
+    float breadth;
+
+public:
+
+    void accept()
+    {
+        cout &lt;&lt; "Enter length: ";
+        cin &gt;&gt; length;
+
+        cout &lt;&lt; "Enter breadth: ";
+        cin &gt;&gt; breadth;
+    }
+
+    void calculate()
+    {
+        float area = length * breadth;
+
+        float perimeter =
+            2 * (length + breadth);
+
+        cout &lt;&lt; "\nArea = "
+             &lt;&lt; area &lt;&lt; endl;
+
+        cout &lt;&lt; "Perimeter = "
+             &lt;&lt; perimeter;
+    }
+};
+
+int main()
+{
+    Rectangle r;
+
+    r.accept();
+    r.calculate();
+
+    return 0;
+}</code></pre>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Expected Output
+                    </h4>
+
+
+                    <div class="output-box">
+
+<pre>Enter length: 10
+Enter breadth: 5
+
+Area = 50
+Perimeter = 30</pre>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="visualization-section">
+
+                    <div class="visualization-header">
+
+                        <span class="problem-badge">
+                            OBJECT VISUALIZATION
+                        </span>
+
+                        <h3>
+                            Rectangle Object
+                        </h3>
+
+                        <p>
+                            The object stores the dimensions
+                            and its member function performs
+                            the calculations.
+                        </p>
+
+                    </div>
+
+
+                    <div class="rectangle-visual">
+
+                        <div class="rectangle-shape">
+
+                            <span class="rectangle-length">
+                                10
+                            </span>
+
+                            <span class="rectangle-breadth">
+                                5
+                            </span>
+
+                        </div>
+
+
+                        <div class="rectangle-info">
+
+                            <strong>
+                                r
+                            </strong>
+
+                            <span>
+                                length = 10
+                            </span>
+
+                            <span>
+                                breadth = 5
+                            </span>
+
+                            <span>
+                                area = 50
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Program Explanation
+                    </h4>
+
+                    <ul class="key-points">
+
+                        <li>
+                            <code>Rectangle</code> is the class.
+                        </li>
+
+                        <li>
+                            <code>r</code> is the object.
+                        </li>
+
+                        <li>
+                            <code>accept()</code> receives the
+                            rectangle dimensions.
+                        </li>
+
+                        <li>
+                            <code>calculate()</code> calculates
+                            area and perimeter.
+                        </li>
+
+                        <li>
+                            The functions are defined inside
+                            the class.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Real-Life Connection
+                    </h4>
+
+                    <p>
+                        Similar class-based logic can be used in
+                        architectural and engineering software
+                        to represent shapes and calculate their
+                        dimensions.
+                    </p>
+
+                </div>
+
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Key Points
+                    </h4>
+
+                    <ul class="key-points">
+
+                        <li>
+                            Data and operations related to a
+                            rectangle are grouped inside one class.
+                        </li>
+
+                        <li>
+                            Member functions operate on the
+                            object's data.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Common Errors
+                    </h4>
+
+
+                    <div class="error-grid">
+
+                        <div class="error-card">
+
+                            <strong>
+                                Incorrect Formula
+                            </strong>
+
+                            <p>
+                                Check the area and perimeter
+                                formulas carefully.
+                            </p>
+
+                        </div>
+
+
+                        <div class="error-card">
+
+                            <strong>
+                                Wrong Object Name
+                            </strong>
+
+                            <p>
+                                Use the same object name when
+                                calling member functions.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 PROBLEM 3
+                 ================================================= -->
+
+            <article class="mini-problem"
+                     id="class-problem3">
+
+
+                <span class="problem-badge">
+                    PROBLEM 03
+                </span>
+
+
+                <h3>
+                    Employee Salary
+                </h3>
+
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Problem Statement
+                    </h4>
+
+                    <p>
+                        Write a C++ program to create a class
+                        Employee with data members employee ID,
+                        name and basic salary. Define functions
+                        inside the class to accept employee
+                        details and calculate the gross salary.
+                    </p>
+
+                </div>
+
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Concept
+                    </h4>
+
+                    <p>
+                        A class can combine employee information
+                        with the functions that operate on that
+                        information. The object represents one
+                        employee record.
+                    </p>
+
+                </div>
+
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Algorithm
+                    </h4>
+
+                    <ol class="algorithm-list">
+
+                        <li>
+                            Start.
+                        </li>
+
+                        <li>
+                            Define an Employee class.
+                        </li>
+
+                        <li>
+                            Declare employee ID, name and
+                            basic salary.
+                        </li>
+
+                        <li>
+                            Define a function to accept details.
+                        </li>
+
+                        <li>
+                            Define a function to calculate
+                            gross salary.
+                        </li>
+
+                        <li>
+                            Create an Employee object.
+                        </li>
+
+                        <li>
+                            Call the member functions.
+                        </li>
+
+                        <li>
+                            Display employee information and
+                            gross salary.
+                        </li>
+
+                        <li>
+                            Stop.
+                        </li>
+
+                    </ol>
+
+                </div>
+
+
+
+                <div class="content-block">
+
+                    <h4>
+                        C++ Program
+                    </h4>
+
+
+                    <div class="code-window">
+
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+class Employee
+{
+    int empId;
+    string name;
+    float basicSalary;
+
+public:
+
+    void accept()
+    {
+        cout &lt;&lt; "Enter employee ID: ";
+        cin &gt;&gt; empId;
+
+        cout &lt;&lt; "Enter name: ";
+        cin &gt;&gt; name;
+
+        cout &lt;&lt; "Enter basic salary: ";
+        cin &gt;&gt; basicSalary;
+    }
+
+    void display()
+    {
+        float hra = basicSalary * 0.20;
+        float da = basicSalary * 0.10;
+
+        float grossSalary =
+            basicSalary + hra + da;
+
+        cout &lt;&lt; "\nEmployee ID = "
+             &lt;&lt; empId &lt;&lt; endl;
+
+        cout &lt;&lt; "Name = "
+             &lt;&lt; name &lt;&lt; endl;
+
+        cout &lt;&lt; "Basic Salary = "
+             &lt;&lt; basicSalary &lt;&lt; endl;
+
+        cout &lt;&lt; "Gross Salary = "
+             &lt;&lt; grossSalary;
+    }
+};
+
+int main()
+{
+    Employee e;
+
+    e.accept();
+    e.display();
+
+    return 0;
+}</code></pre>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Expected Output
+                    </h4>
+
+
+                    <div class="output-box">
+
+<pre>Enter employee ID: 101
+Enter name: Amit
+Enter basic salary: 30000
+
+Employee ID = 101
+Name = Amit
+Basic Salary = 30000
+Gross Salary = 39000</pre>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="visualization-section">
+
+                    <div class="visualization-header">
+
+                        <span class="problem-badge">
+                            CLASS VISUALIZATION
+                        </span>
+
+                        <h3>
+                            Employee Object
+                        </h3>
+
+                    </div>
+
+
+                    <div class="employee-object-visual">
+
+                        <div class="employee-card">
+
+                            <span>
+                                OBJECT
+                            </span>
+
+                            <strong>
+                                e
+                            </strong>
+
+                            <div class="employee-data">
+
+                                <span>
+                                    ID → 101
+                                </span>
+
+                                <span>
+                                    Name → Amit
+                                </span>
+
+                                <span>
+                                    Salary → ₹30,000
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="class-visual-arrow">
+                            →
+                        </div>
+
+
+                        <div class="employee-function">
+
+                            <span>
+                                MEMBER FUNCTION
+                            </span>
+
+                            <strong>
+                                display()
+                            </strong>
+
+                            <small>
+                                Calculates gross salary
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Program Explanation
+                    </h4>
+
+                    <ul class="key-points">
+
+                        <li>
+                            <code>Employee</code> is the class
+                            containing employee data.
+                        </li>
+
+                        <li>
+                            <code>e</code> is an object of the
+                            Employee class.
+                        </li>
+
+                        <li>
+                            <code>accept()</code> accepts employee
+                            information.
+                        </li>
+
+                        <li>
+                            <code>display()</code> calculates and
+                            displays the gross salary.
+                        </li>
+
+                        <li>
+                            Both member functions are defined
+                            inside the class.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Real-Life Connection
+                    </h4>
+
+                    <p>
+                        Employee classes are commonly used in
+                        payroll systems to store employee details
+                        and perform salary-related calculations.
+                    </p>
+
+                </div>
+
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Key Points
+                    </h4>
+
+                    <ul class="key-points">
+
+                        <li>
+                            Classes combine related data and
+                            functions.
+                        </li>
+
+                        <li>
+                            Different objects can represent
+                            different employees.
+                        </li>
+
+                        <li>
+                            Functions defined inside the class
+                            can directly work with its data members.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Common Errors
+                    </h4>
+
+
+                    <div class="error-grid">
+
+                        <div class="error-card">
+
+                            <strong>
+                                Incorrect Salary Calculation
+                            </strong>
+
+                            <p>
+                                Verify the HRA, DA and gross
+                                salary calculation.
+                            </p>
+
+                        </div>
+
+
+                        <div class="error-card">
+
+                            <strong>
+                                Accessing Private Data
+                            </strong>
+
+                            <p>
+                                Private data members should be
+                                accessed through member functions.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 QUICK SUMMARY
+                 ================================================= -->
+
+            <div class="casting-summary">
+
+                <span class="section-label">
+                    QUICK SUMMARY
+                </span>
+
+                <h3>
+                    Class → Object → Function
+                </h3>
+
+
+                <div class="casting-comparison">
+
+
+                    <div class="comparison-card">
+
+                        <span class="comparison-number">
+                            01
+                        </span>
+
+                        <h4>
+                            Class
+                        </h4>
+
+                        <p>
+                            A class is a blueprint that contains
+                            data members and member functions.
+                        </p>
+
+                        <code>
+                            class Student { };
+                        </code>
+
+                    </div>
+
+
+
+                    <div class="comparison-card">
+
+                        <span class="comparison-number">
+                            02
+                        </span>
+
+                        <h4>
+                            Object
+                        </h4>
+
+                        <p>
+                            An object is an instance of a class
+                            used to access its members.
+                        </p>
+
+                        <code>
+                            Student s;
+                        </code>
+
+                    </div>
+
+
+
+                    <div class="comparison-card">
+
+                        <span class="comparison-number">
+                            03
+                        </span>
+
+                        <h4>
+                            Function Inside Class
+                        </h4>
+
+                        <p>
+                            A member function can be defined
+                            directly inside the class body.
+                        </p>
+
+                        <code>
+                            void display() { }
+                        </code>
+
+                    </div>
+
+
+
+                    <div class="comparison-card">
+
+                        <span class="comparison-number">
+                            04
+                        </span>
+
+                        <h4>
+                            Function Call
+                        </h4>
+
+                        <p>
+                            The object can call the member
+                            function using the dot operator.
+                        </p>
+
+                        <code>
+                            s.display();
+                        </code>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 VIVA
+                 ================================================= -->
+
+            <section class="viva-section">
+
+                <span class="section-label">
+                    04 — VIVA QUESTIONS
+                </span>
+
+                <h2>
+                    Test Your Understanding
+                </h2>
+
+
+
+                <div class="viva-group">
+
+                    <h3>
+                        Classes & Objects
+                    </h3>
+
+
+                    <details>
+
+                        <summary>
+                            What is a class?
+                        </summary>
+
+                        <p>
+                            A class is a user-defined data type
+                            that groups data members and member
+                            functions together.
+                        </p>
+
+                    </details>
+
+
+                    <details>
+
+                        <summary>
+                            What is an object?
+                        </summary>
+
+                        <p>
+                            An object is an instance of a class.
+                        </p>
+
+                    </details>
+
+
+                    <details>
+
+                        <summary>
+                            What is a member function?
+                        </summary>
+
+                        <p>
+                            A member function is a function that
+                            belongs to a class and operates on
+                            its data members.
+                        </p>
+
+                    </details>
+
+
+                    <details>
+
+                        <summary>
+                            How do you create an object?
+                        </summary>
+
+                        <p>
+                            An object can be created using the
+                            class name followed by the object name,
+                            for example
+                            <code>Student s;</code>.
+                        </p>
+
+                    </details>
+
+                </div>
+
+
+
+                <div class="viva-group">
+
+                    <h3>
+                        Functions Inside Class
+                    </h3>
+
+
+                    <details>
+
+                        <summary>
+                            Where is the function defined in this practical?
+                        </summary>
+
+                        <p>
+                            The member function is defined
+                            directly inside the class body.
+                        </p>
+
+                    </details>
+
+
+                    <details>
+
+                        <summary>
+                            How is a member function called?
+                        </summary>
+
+                        <p>
+                            A member function can be called using
+                            an object and the dot operator, such as
+                            <code>s.display()</code>.
+                        </p>
+
+                    </details>
+
+
+                    <details>
+
+                        <summary>
+                            Why are classes useful?
+                        </summary>
+
+                        <p>
+                            Classes allow related data and functions
+                            to be grouped together, making programs
+                            easier to organize and maintain.
+                        </p>
+
+                    </details>
+
+
+                    <details>
+
+                        <summary>
+                            Can multiple objects be created from one class?
+                        </summary>
+
+                        <p>
+                            Yes. Multiple objects can be created
+                            from the same class, and each object
+                            can represent a separate instance.
+                        </p>
+
+                    </details>
+
+                </div>
+
+
+            </section>
+
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+     ===================================================== -->
+
+<footer class="footer">
+
+    <div class="footer-content">
+
+        <div class="footer-brand">
+
+            <div class="footer-logo">
+                &lt;/&gt;
+            </div>
+
+            <div class="footer-brand-text">
+
+                <div class="footer-brand-name">
+                    Rasika <span>CodeLab</span>
+                </div>
+
+                <p class="footer-tagline">
+                    Code • Understand • Visualize
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-copy">
+            © 2026 Rasika CodeLab. Built for practical learning.
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<!-- =====================================================
+     MAIN JS
+     ===================================================== -->
+
+<script src="../js/main.js"></script>
+
+
+
+<!-- =====================================================
+     PRACTICAL 4 JS
+     ===================================================== -->
+
+<script>
+
+    /* =========================================
+       PROBLEM SWITCHING
+       ========================================= */
+
+    const problemTabs =
+        document.querySelectorAll(
+            ".mini-problem-tab"
+        );
+
+
+    const problems =
+        document.querySelectorAll(
+            ".mini-problem"
+        );
+
+
+    problemTabs.forEach(tab => {
+
+        tab.addEventListener("click", () => {
+
+            const target =
+                tab.dataset.problem;
+
+
+            problemTabs.forEach(item => {
+
+                item.classList.remove("active");
+
+            });
+
+
+            problems.forEach(problem => {
+
+                problem.classList.remove("active");
+
+            });
+
+
+            tab.classList.add("active");
+
+
+            const selected =
+                document.getElementById(target);
+
+
+            if (selected) {
+
+                selected.classList.add("active");
+
+            }
+
+        });
+
+    });
+
+</script>
+
+
+</body>
+
+</html>

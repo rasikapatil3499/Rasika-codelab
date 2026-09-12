@@ -1,0 +1,17 @@
+# Local development files
+.env
+.env.*
+!.env.example
+
+# Operating-system and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Local logs and temporary files
+*.log
+*.tmp
+
+# Never commit private credentials
+service-role*.json
+*-service-role*.json

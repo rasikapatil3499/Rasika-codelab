@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C++ Practicals | Rasika CodeLab</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+.practical-index {
+  --bg:#070b16; --card:#101520; --hover:#151b28;
+  --text:#f4f5fb; --secondary:#a5afc2; --orange:#ff6b35;
+  --border:rgba(255,255,255,.09);
+  background:var(--bg); color:var(--text); min-height:100vh;
+}
+.practical-index .hero {
+  padding:78px 0 52px;
+  border-bottom:1px solid var(--border);
+}
+.practical-index .container {
+  width:min(1120px,92%); margin:auto;
+}
+.practical-index .label {
+  color:var(--orange); font-size:.74rem; font-weight:800;
+  letter-spacing:.12em; text-transform:uppercase;
+}
+.practical-index h1 {
+  font-size:clamp(2.3rem,5vw,4rem); line-height:1.05; margin:16px 0 12px;
+}
+.practical-index .subtitle {
+  max-width:820px; color:var(--secondary); line-height:1.75;
+  font-size:1.05rem;
+}
+.practical-index .list { padding:48px 0 90px; }
+.practical-index .list h2 { margin:10px 0; }
+.practical-index .list-intro { color:var(--secondary); line-height:1.7; margin-bottom:24px; }
+.practical-index .practical-list {
+  display:grid; gap:16px;
+}
+.practical-index .practical-card {
+  display:grid; grid-template-columns:70px minmax(0,1fr) 35px;
+  align-items:center; gap:20px;
+  padding:22px 24px; border:1px solid var(--border);
+  border-radius:18px; background:var(--card);
+  color:var(--text); text-decoration:none;
+  transition:transform .2s ease,border-color .2s ease,background .2s ease;
+}
+.practical-index .practical-card:hover {
+  transform:translateY(-2px); background:var(--hover);
+  border-color:rgba(255,107,53,.30);
+}
+.practical-index .number {
+  color:var(--orange); font-size:1.5rem; font-weight:900;
+}
+.practical-index .content > span {
+  color:var(--orange); font-size:.72rem; font-weight:800;
+  letter-spacing:.1em;
+}
+.practical-index .content h2 { margin:6px 0 8px; font-size:1.25rem; }
+.practical-index .content p {
+  margin:0; color:var(--secondary); line-height:1.6;
+}
+.practical-index .topics {
+  display:flex; flex-wrap:wrap; gap:7px; margin-top:12px;
+  color:#ff8052; font-size:.76rem;
+}
+.practical-index .topics {
+  padding:0;
+}
+.practical-index .arrow {
+  color:var(--orange); font-size:1.5rem; text-align:right;
+}
+@media(max-width:700px) {
+  .practical-index .practical-card { grid-template-columns:45px minmax(0,1fr); }
+  .practical-index .arrow { display:none; }
+}
+</style>
+</head>
+<body class="detail-page practical-index">
+<nav class="navbar">
+<div class="container nav-container">
+<a href="index.html" class="logo"><span class="logo-symbol">&lt;/&gt;</span><span>Rasika<span class="logo-accent">CodeLab</span></span></a>
+<button class="menu-btn" aria-label="Open menu">☰</button>
+<div class="nav-links">
+<a href="index.html">Home</a>
+<a href=" foundations/program.html">Foundations</a>
+<a href="practicals.html" class="active">Practicals</a>
+<a href="index.html#about">About</a>
+<a href="login.html">Login</a>
+</div>
+</div>
+</nav>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="container">
+    <div class="label">C++ PRACTICALS</div>
+    <h1>Learn Through Practicals.</h1>
+    <p class="subtitle">
+      A structured C++ practical journey from basic operators and classes
+      to inheritance, polymorphism, pointers, file handling, exception
+      handling, templates and STL.
+    </p>
+  </div>
+</section>
+
+<section class="list">
+  <div class="container">
+    <div class="label">18 PRACTICALS</div>
+    <h2>C++ Programming Practicals</h2>
+    <p class="list-intro">
+      Each practical should follow the same learning pattern:
+      Aim → Learning Objectives → Concept → Real-Life Use → Topics →
+      Problem Statements → Syntax → Algorithm → Program → Output →
+      Visual Explanation → Key Points → Common Errors → Viva.
+    </p>
+    <div class="practical-list">
+      
+<a href="practicals/practical1.html" class="practical-card">
+  <div class="number">01</div>
+  <div class="content">
+    <span>LLO 1.1</span>
+    <h2>Operators & Input / Output</h2>
+    <p>Evaluate expressions using various operators and input/output functions.</p>
+    <div class="topics">Operators • Expressions • cin • cout</div>
+  </div>
+  <div class="arrow">→</div>
+</a>
+<a href="practicals/practical2.html" class="practical-card">
+  <div class="number">02</div>
+  <div class="content">
+    <span>LLO 2.1</span>
+    <h2>Special Type of Operators</h2>
+    <p>Use scope resolution, memory management operators and manipulators.</p>
+    <div class="topics">:: • new/delete • Manipulators</div>
+  </div>
+  <div class="arrow">→</div>
+</a>
+<a href="practicals/practical3.html" class="practical-card">
+  <div class="number">03</div>
+  <div class="content">
+    <span>LLO 3.1</span>
+    <h2>Type Casting</h2>
+    <p>Implement programs using implicit and explicit type casting.</p>
+    <div class="topics">Implicit • Explicit • static_cast</div>
+  </div>
+  <div class="arrow">→</div>
+</a>
+<a href="practicals/practical4.html" class="practical-card">
+  <div class="number">04</div>
+  <div class="content">
+    <span>LLO 4.1</span>
+    <h2>Classes & Objects — Function Inside Class</h2>
+    <p>Define member functions inside a class and work with objects.</p>
+    <div class="topics">Class • Object • Member Function</div>
+  </div>
+  <div class="arrow">→</div>
+</a>
+<a href="practicals/practical5.html" class="practical-card">
+  <div class="number">05</div>
+  <div class="content">
+    <span>LLO 5.1</span>
+    <h2>Classes & Objects — Function Outside Class</h2>
+    <p>Declare member functions inside a class and define them outside using ::.</p>
+    <div class="topics">Declaration • Definition • ::</div>
+  </div>
+  <div class="arrow">→</div>
+</a>
+<a href="practicals/practical6.html" class="practical-card">
+  <div class="number">06</div>
+  <div class="content">
+    <span>LLO 6.1</span>
+    <h2>Inline Functions</h2>
+    <p>Implement programs using inline functions.</p>
+    <div class="topics">inline • Reusability • Small Functions</div>
+  </div>
+  <div class="arrow">→</div>
+</a>
+<a href="practicals/practical7.html" class="practical-card">
+  <div class="number">07</div>
+  <div class="content">
+    <span>LLO 7.1 / 7.2</span>
+    <h2>Friend Function</h2>
+    <p>Implement friend functions using different classes and external functions.</p>
+    <div class="topics">friend • Private Access • External Function</div>
+  </div>
+  <div class="arrow">→</div>
+</a>
+<a href="practicals/practical8.html" class="practical-card">
+  <div class="number">08</div>
+  <div class="content">
+    <span>LLO 8.1 / 8.2</span>
+    <h2>Static Members</h2>
+    <p>Implement static data members and static member functions.</p>
+    <div class="topics">static data • static function • Class Level</div>
+  </div>
+  <div class="arrow">→</div>
+</a>
+<a href="practicals/practical9.html" class="practical-card">
+  <div class="number">09</div>
+  <div class="content">
+    <span>LLO 9.1</span>
+    <h2>Array of Objects</h2>
+    <p>Create and process arrays containing objects.</p>
+    <div class="topics">Objects • Array • Traversal</div>
+  </div>
+  <div class="arrow">→</div>
+</a>
+<a href="practicals/practical10.html" class="practical-card">
+  <div class="number">10</div>
+  <div class="content">
+    <span>LLO 10.1</span>
+    <h2>Constructors</h2>
+    <p>Implement default, parameterized, copy and overloaded constructors.</p>
+    <div class="topics">Default • Parameterized • Copy • Overloading</div>
+  </div>
+  <div class="arrow">→</div>
+</a>
+<a href="practicals/practical11.html" class="practical-card">
+  <div class="number">11</div>
+  <div class="content">
+    <span>LLO 11.1</span>
+    <h2>Destructors</h2>
+    <p>Implement destructors and understand object lifetime and cleanup.</p>
+    <div class="topics">Destructor • Lifetime • Cleanup</div>
+  </div>
+  <div class="arrow">→</div>
+</a>
+<a href="practicals/practical12.html" class="practical-card">
+  <div class="number">12</div>
+  <div class="content">
+    <span>LLO 12.1</span>
+    <h2>Inheritance</h2>
+    <p>Implement single, multilevel, multiple and hierarchical inheritance.</p>
+    <div class="topics">Single • Multilevel • Multiple • Hierarchical</div>
+  </div>
+  <div class="arrow">→</div>
+</a>
+<a href="practicals/practical13.html" class="practical-card">
+  <div class="number">13</div>
+  <div class="content">
+    <span>LLO 13.1</span>
+    <h2>Polymorphism</h2>
+    <p>Implement function overloading, operator overloading, overriding and runtime polymorphism.</p>
+    <div class="topics">Overloading • Overriding • Virtual</div>
+  </div>
+  <div class="arrow">→</div>
+</a>
+<a href="practicals/practical14.html" class="practical-card">
+  <div class="number">14</div>
+  <div class="content">
+    <span>LLO 14.1</span>
+    <h2>Pointers in C++</h2>
+    <p>Implement programs using pointers to objects, arrays and base/derived classes.</p>
+    <div class="topics">Object Pointer • Base Pointer • -></div>
+  </div>
+  <div class="arrow">→</div>
+</a>
+<a href="practicals/practical15.html" class="practical-card">
+  <div class="number">15</div>
+  <div class="content">
+    <span>LLO 15.1</span>
+    <h2>File Handling</h2>
+    <p>Create, read, copy, search and manage file-based records.</p>
+    <div class="topics">ofstream • ifstream • Records</div>
+  </div>
+  <div class="arrow">→</div>
+</a>
+<a href="practicals/practical16.html" class="practical-card">
+  <div class="number">16</div>
+  <div class="content">
+    <span>LLO 16.1</span>
+    <h2>Exception Handling</h2>
+    <p>Implement basic, multiple, user-defined and standard exception handling.</p>
+    <div class="topics">try • throw • catch</div>
+  </div>
+  <div class="arrow">→</div>
+</a>
+<a href="practicals/practical17.html" class="practical-card">
+  <div class="number">17</div>
+  <div class="content">
+    <span>LLO 17.1</span>
+    <h2>Advanced C++ Programming</h2>
+    <p>Use templates, STL containers, algorithms, iterators and advanced file handling.</p>
+    <div class="topics">Templates • STL • Iterators • Files</div>
+  </div>
+  <div class="arrow">→</div>
+</a>
+<a href="practicals/practical18.html" class="practical-card">
+  <div class="number">18</div>
+  <div class="content">
+    <span>LLO 18.1</span>
+    <h2>STL Containers in C++</h2>
+    <p>Use and combine vector, list, stack, queue, map and unordered_map.</p>
+    <div class="topics">vector • list • stack • queue • map</div>
+  </div>
+  <div class="arrow">→</div>
+</a>
+
+
+<a href="practicals/c++_microproject.html" class="practical-card">
+  <div class="number">18</div>
+  <div class="content">
+    <span>Microproject</span>
+    <h2>Learn Through Practicals</h2>
+    <p>A structured collection of 47 C++ micro projects designed to move learners from programming concepts to practical systems. </p>
+    <div class="topics">persistent data and 2030-oriented technology extensions</div>
+  </div>
+  <div class="arrow">→</div>
+</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-brand">
+      <div class="footer-logo">&lt;/&gt;</div>
+      <div class="footer-brand-text">
+        <div class="footer-brand-name">Rasika <span>CodeLab</span></div>
+        <p class="footer-tagline">Code • Understand • Visualize</p>
+      </div>
+    </div>
+    <div class="footer-copy">© 2026 Rasika CodeLab. Built for practical learning.</div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

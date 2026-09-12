@@ -1,0 +1,2506 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Practical 3 | Type Casting | Rasika CodeLab
+    </title>
+
+    <link rel="stylesheet"
+          href="../css/style.css">
+
+</head>
+
+
+<body class="detail-page">
+
+
+<!-- =====================================================
+     NAVBAR
+     ===================================================== -->
+
+<header class="navbar">
+
+    <div class="nav-container">
+
+        <a href="../index.html"
+           class="logo">
+
+            <span class="logo-icon">
+                &lt;/&gt;
+            </span>
+
+            <span>
+                Rasika<span>CodeLab</span>
+            </span>
+
+        </a>
+
+
+        <button class="menu-btn"
+                aria-label="Toggle menu">
+            ☰
+        </button>
+
+
+        <nav class="nav-links">
+
+            <a href="../index.html">
+                Home
+            </a>
+
+            <a href="../foundations/program.html">
+                Foundations
+            </a>
+
+            <a href="index.html"
+               class="active">
+                Practicals
+            </a>
+
+            <a href="../index.html#about">
+                About
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN
+     ===================================================== -->
+
+<main class="practical-page">
+
+
+    <!-- =================================================
+         HERO
+         ================================================= -->
+
+    <section class="practical-hero">
+
+        <div class="container">
+
+            <span class="section-label">
+                C++ PRACTICAL 03
+            </span>
+
+            <h1>
+                Type Casting
+            </h1>
+
+            <p class="practical-subtitle">
+                Develop C++ programs to implement implicit
+                and explicit type casting.
+            </p>
+
+
+            <div class="practical-meta">
+
+                <span>
+                    💻 C++
+                </span>
+
+                <span>
+                    📘 Practical 3
+                </span>
+
+                <span>
+                    🎯 LLO 3.1
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         AIM
+         ================================================= -->
+
+    <section class="content-section">
+
+        <div class="container">
+
+            <span class="section-label">
+                01 — AIM
+            </span>
+
+
+            <div class="content-card">
+
+                <p>
+                    To develop C++ programs to demonstrate
+                    implicit and explicit type casting.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         LEARNING OBJECTIVES
+         ================================================= -->
+
+    <section class="content-section">
+
+        <div class="container">
+
+            <span class="section-label">
+                02 — LEARNING OBJECTIVES
+            </span>
+
+
+            <div class="objective-grid">
+
+                <div class="objective-card">
+
+                    <span>
+                        01
+                    </span>
+
+                    <p>
+                        Understand the concept of type casting
+                        in C++.
+                    </p>
+
+                </div>
+
+
+                <div class="objective-card">
+
+                    <span>
+                        02
+                    </span>
+
+                    <p>
+                        Implement implicit type casting in
+                        C++ programs.
+                    </p>
+
+                </div>
+
+
+                <div class="objective-card">
+
+                    <span>
+                        03
+                    </span>
+
+                    <p>
+                        Implement explicit type casting using
+                        casting syntax.
+                    </p>
+
+                </div>
+
+
+                <div class="objective-card">
+
+                    <span>
+                        04
+                    </span>
+
+                    <p>
+                        Identify suitable situations for
+                        implicit and explicit conversion.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         TOPIC SECTION
+         ================================================= -->
+
+    <section class="content-section">
+
+        <div class="container">
+
+            <span class="section-label">
+                03 — SELECT A TOPIC
+            </span>
+
+            <h2>
+                Explore Type Casting
+            </h2>
+
+            <p class="section-description">
+                Select a topic to understand how values are
+                converted from one data type to another.
+            </p>
+
+
+            <!-- TOPIC SELECTOR -->
+
+            <div class="topic-selector">
+
+
+                <button class="topic-tab active"
+                        data-topic="implicit">
+
+                    <span class="topic-number">
+                        01
+                    </span>
+
+                    <span class="topic-tab-content">
+
+                        <strong>
+                            Implicit Type Casting
+                        </strong>
+
+                        <small>
+                            Automatic conversion
+                        </small>
+
+                    </span>
+
+                </button>
+
+
+
+                <button class="topic-tab"
+                        data-topic="explicit">
+
+                    <span class="topic-number">
+                        02
+                    </span>
+
+                    <span class="topic-tab-content">
+
+                        <strong>
+                            Explicit Type Casting
+                        </strong>
+
+                        <small>
+                            Manual conversion
+                        </small>
+
+                    </span>
+
+                </button>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 TOPIC 1 — IMPLICIT CASTING
+                 ================================================= -->
+
+            <div class="topic-content active"
+                 id="implicit">
+
+
+                <div class="topic-heading">
+
+                    <span class="problem-badge">
+                        TOPIC 01
+                    </span>
+
+                    <h2>
+                        Implicit Type Casting
+                    </h2>
+
+                    <p>
+                        Implicit type casting is the automatic
+                        conversion of one data type into another
+                        by the C++ compiler.
+                    </p>
+
+                </div>
+
+
+
+                <!-- THEORY -->
+
+                <div class="theory-box">
+
+                    <h3>
+                        Theory
+                    </h3>
+
+                    <p>
+                        Type casting is the process of converting
+                        a value from one data type to another.
+                        In implicit type casting, the conversion
+                        is performed automatically by the compiler.
+                    </p>
+
+                    <p>
+                        This commonly occurs when a value of a
+                        smaller or compatible type is assigned to
+                        a variable of another suitable type.
+                        For example, an integer can be converted
+                        automatically to a floating-point value.
+                    </p>
+
+                    <div class="casting-rule">
+
+                        <span>
+                            Smaller / Compatible Type
+                        </span>
+
+                        <strong>
+                            →
+                        </strong>
+
+                        <span>
+                            Larger / Compatible Type
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- REAL LIFE -->
+
+                <div class="real-life-box">
+
+                    <div class="real-life-icon">
+                        🌍
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Real-Life Example
+                        </h3>
+
+                        <p>
+                            Consider a shopping application where
+                            the quantity is stored as an integer,
+                            while the price calculation uses
+                            decimal values. During an expression,
+                            the integer quantity can participate
+                            automatically in a floating-point
+                            calculation.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- WHERE USED -->
+
+                <div class="where-used-box">
+
+                    <h3>
+                        Where & How Is It Used?
+                    </h3>
+
+
+                    <div class="use-grid">
+
+                        <div>
+
+                            <strong>
+                                Calculations
+                            </strong>
+
+                            <p>
+                                Used when values of different
+                                compatible types participate
+                                in an expression.
+                            </p>
+
+                        </div>
+
+
+                        <div>
+
+                            <strong>
+                                Assignments
+                            </strong>
+
+                            <p>
+                                A value can automatically be
+                                converted when assigned to a
+                                compatible data type.
+                            </p>
+
+                        </div>
+
+
+                        <div>
+
+                            <strong>
+                                Mixed Expressions
+                            </strong>
+
+                            <p>
+                                Useful when integer and floating
+                                point values are used together.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PROBLEM SELECTOR -->
+
+                <div class="problem-mini-selector">
+
+                    <button class="mini-problem-tab active"
+                            data-problem="implicit-problem1">
+
+                        Problem 01
+
+                    </button>
+
+
+                    <button class="mini-problem-tab"
+                            data-problem="implicit-problem2">
+
+                        Problem 02
+
+                    </button>
+
+
+                    <button class="mini-problem-tab"
+                            data-problem="implicit-problem3">
+
+                        Problem 03
+
+                    </button>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     IMPLICIT PROBLEM 1
+                     ================================================= -->
+
+                <article class="mini-problem active"
+                         id="implicit-problem1">
+
+
+                    <span class="problem-badge">
+                        PROBLEM 01
+                    </span>
+
+
+                    <h3>
+                        Integer to Float
+                    </h3>
+
+
+
+                    <div class="content-block">
+
+                        <h4>
+                            Problem Statement
+                        </h4>
+
+                        <p>
+                            Write a C++ program to demonstrate
+                            implicit conversion of an integer
+                            value into a floating-point value.
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="content-block">
+
+                        <h4>
+                            Concept
+                        </h4>
+
+                        <p>
+                            When an integer value is assigned to
+                            a floating-point variable, C++ can
+                            automatically convert the integer
+                            into a floating-point value.
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="content-block">
+
+                        <h4>
+                            Algorithm
+                        </h4>
+
+                        <ol class="algorithm-list">
+
+                            <li>
+                                Start.
+                            </li>
+
+                            <li>
+                                Declare an integer variable.
+                            </li>
+
+                            <li>
+                                Assign an integer value.
+                            </li>
+
+                            <li>
+                                Declare a floating-point variable.
+                            </li>
+
+                            <li>
+                                Assign the integer value to the
+                                floating-point variable.
+                            </li>
+
+                            <li>
+                                Display the converted value.
+                            </li>
+
+                            <li>
+                                Stop.
+                            </li>
+
+                        </ol>
+
+                    </div>
+
+
+
+                    <div class="content-block">
+
+                        <h4>
+                            C++ Program
+                        </h4>
+
+
+                        <div class="code-window">
+
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    int number = 25;
+
+    float value = number;
+
+    cout &lt;&lt; "Integer value = "
+         &lt;&lt; number &lt;&lt; endl;
+
+    cout &lt;&lt; "Float value = "
+         &lt;&lt; value;
+
+    return 0;
+}</code></pre>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="content-block">
+
+                        <h4>
+                            Expected Output
+                        </h4>
+
+
+                        <div class="output-box">
+
+<pre>Integer value = 25
+Float value = 25</pre>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- VISUALIZATION -->
+
+                    <div class="visualization-section">
+
+                        <div class="visualization-header">
+
+                            <span class="problem-badge">
+                                TYPE CASTING VISUALIZATION
+                            </span>
+
+                            <h3>
+                                Automatic Conversion
+                            </h3>
+
+                            <p>
+                                The compiler automatically converts
+                                the integer value to a floating-point
+                                value.
+                            </p>
+
+                        </div>
+
+
+                        <div class="casting-visual">
+
+                            <div class="casting-value">
+
+                                <span>
+                                    int
+                                </span>
+
+                                <strong>
+                                    25
+                                </strong>
+
+                            </div>
+
+
+                            <div class="casting-arrow">
+
+                                <span>
+                                    compiler
+                                </span>
+
+                                →
+
+                            </div>
+
+
+                            <div class="casting-value converted">
+
+                                <span>
+                                    float
+                                </span>
+
+                                <strong>
+                                    25.0
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="content-block">
+
+                        <h4>
+                            Real-Life Connection
+                        </h4>
+
+                        <p>
+                            In a billing calculation, an integer
+                            quantity can automatically participate
+                            in a calculation involving a decimal
+                            price.
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="content-block">
+
+                        <h4>
+                            Key Points
+                        </h4>
+
+                        <ul class="key-points">
+
+                            <li>
+                                Conversion is performed
+                                automatically.
+                            </li>
+
+                            <li>
+                                No casting operator is explicitly
+                                written by the programmer.
+                            </li>
+
+                            <li>
+                                The compiler performs the required
+                                compatible conversion.
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+
+                    <div class="content-block">
+
+                        <h4>
+                            Common Errors
+                        </h4>
+
+
+                        <div class="error-grid">
+
+                            <div class="error-card">
+
+                                <strong>
+                                    Unexpected Conversion
+                                </strong>
+
+                                <p>
+                                    Always check the data type of
+                                    the destination variable.
+                                </p>
+
+                            </div>
+
+
+                            <div class="error-card">
+
+                                <strong>
+                                    Data Loss
+                                </strong>
+
+                                <p>
+                                    Not every conversion is
+                                    completely lossless.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- =================================================
+                     IMPLICIT PROBLEM 2
+                     ================================================= -->
+
+                <article class="mini-problem"
+                         id="implicit-problem2">
+
+
+                    <span class="problem-badge">
+                        PROBLEM 02
+                    </span>
+
+
+                    <h3>
+                        Character to Integer
+                    </h3>
+
+
+
+                    <div class="content-block">
+
+                        <h4>
+                            Problem Statement
+                        </h4>
+
+                        <p>
+                            Write a C++ program to demonstrate
+                            implicit conversion of a character
+                            value into its integer representation.
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="content-block">
+
+                        <h4>
+                            Algorithm
+                        </h4>
+
+                        <ol class="algorithm-list">
+
+                            <li>
+                                Start.
+                            </li>
+
+                            <li>
+                                Declare a character variable.
+                            </li>
+
+                            <li>
+                                Assign a character value.
+                            </li>
+
+                            <li>
+                                Assign the character to an integer
+                                variable.
+                            </li>
+
+                            <li>
+                                Display both values.
+                            </li>
+
+                            <li>
+                                Stop.
+                            </li>
+
+                        </ol>
+
+                    </div>
+
+
+
+                    <div class="content-block">
+
+                        <h4>
+                            C++ Program
+                        </h4>
+
+
+                        <div class="code-window">
+
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    char ch = 'A';
+
+    int value = ch;
+
+    cout &lt;&lt; "Character = "
+         &lt;&lt; ch &lt;&lt; endl;
+
+    cout &lt;&lt; "Integer value = "
+         &lt;&lt; value;
+
+    return 0;
+}</code></pre>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="content-block">
+
+                        <h4>
+                            Expected Output
+                        </h4>
+
+
+                        <div class="output-box">
+
+<pre>Character = A
+Integer value = 65</pre>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="visualization-section">
+
+                        <div class="visualization-header">
+
+                            <span class="problem-badge">
+                                VISUALIZATION
+                            </span>
+
+                            <h3>
+                                Character → Integer
+                            </h3>
+
+                        </div>
+
+
+                        <div class="casting-visual">
+
+                            <div class="casting-value">
+
+                                <span>
+                                    char
+                                </span>
+
+                                <strong>
+                                    'A'
+                                </strong>
+
+                            </div>
+
+
+                            <div class="casting-arrow">
+                                →
+                            </div>
+
+
+                            <div class="casting-value converted">
+
+                                <span>
+                                    int
+                                </span>
+
+                                <strong>
+                                    65
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="content-block">
+
+                        <h4>
+                            Key Points
+                        </h4>
+
+                        <ul class="key-points">
+
+                            <li>
+                                Character values are represented
+                                internally by numeric codes.
+                            </li>
+
+                            <li>
+                                Assigning a character to an integer
+                                can produce its corresponding
+                                character code.
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- =================================================
+                     IMPLICIT PROBLEM 3
+                     ================================================= -->
+
+                <article class="mini-problem"
+                         id="implicit-problem3">
+
+
+                    <span class="problem-badge">
+                        PROBLEM 03
+                    </span>
+
+
+                    <h3>
+                        Mixed Arithmetic Expression
+                    </h3>
+
+
+
+                    <div class="content-block">
+
+                        <h4>
+                            Problem Statement
+                        </h4>
+
+                        <p>
+                            Write a C++ program to demonstrate
+                            implicit type conversion when integer
+                            and floating-point values are used
+                            together in an arithmetic expression.
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="content-block">
+
+                        <h4>
+                            Algorithm
+                        </h4>
+
+                        <ol class="algorithm-list">
+
+                            <li>
+                                Start.
+                            </li>
+
+                            <li>
+                                Declare an integer and a
+                                floating-point variable.
+                            </li>
+
+                            <li>
+                                Perform an arithmetic expression
+                                using both values.
+                            </li>
+
+                            <li>
+                                Store the result in a floating-point
+                                variable.
+                            </li>
+
+                            <li>
+                                Display the result.
+                            </li>
+
+                            <li>
+                                Stop.
+                            </li>
+
+                        </ol>
+
+                    </div>
+
+
+
+                    <div class="content-block">
+
+                        <h4>
+                            C++ Program
+                        </h4>
+
+
+                        <div class="code-window">
+
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    int a = 10;
+    float b = 2.5;
+
+    float result = a + b;
+
+    cout &lt;&lt; "Result = "
+         &lt;&lt; result;
+
+    return 0;
+}</code></pre>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="content-block">
+
+                        <h4>
+                            Expected Output
+                        </h4>
+
+
+                        <div class="output-box">
+
+<pre>Result = 12.5</pre>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="visualization-section">
+
+                        <div class="visualization-header">
+
+                            <span class="problem-badge">
+                                EXPRESSION VISUALIZATION
+                            </span>
+
+                            <h3>
+                                Mixed Data Types
+                            </h3>
+
+                        </div>
+
+
+                        <div class="expression-casting">
+
+                            <span class="expression-item">
+                                int 10
+                            </span>
+
+                            <span class="expression-symbol">
+                                +
+                            </span>
+
+                            <span class="expression-item">
+                                float 2.5
+                            </span>
+
+                            <span class="expression-symbol">
+                                →
+                            </span>
+
+                            <span class="expression-item result">
+                                float 12.5
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="content-block">
+
+                        <h4>
+                            Key Points
+                        </h4>
+
+                        <ul class="key-points">
+
+                            <li>
+                                C++ can convert operands to a
+                                compatible type during expressions.
+                            </li>
+
+                            <li>
+                                The resulting type depends on the
+                                types participating in the expression.
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 TOPIC 2 — EXPLICIT CASTING
+                 ================================================= -->
+
+            <div class="topic-content"
+                 id="explicit">
+
+
+                <div class="topic-heading">
+
+                    <span class="problem-badge">
+                        TOPIC 02
+                    </span>
+
+                    <h2>
+                        Explicit Type Casting
+                    </h2>
+
+                    <p>
+                        Explicit type casting is the manual
+                        conversion of a value from one data type
+                        to another by the programmer.
+                    </p>
+
+                </div>
+
+
+
+                <!-- THEORY -->
+
+                <div class="theory-box">
+
+                    <h3>
+                        Theory
+                    </h3>
+
+                    <p>
+                        In explicit type casting, the programmer
+                        specifically instructs the compiler to
+                        convert a value into a particular data type.
+                    </p>
+
+                    <p>
+                        C++ supports different casting mechanisms.
+                        A simple C++ cast can be written using
+                        the target type before the value, such as
+                        <code>(float)</code> or
+                        <code>(int)</code>. C++ also provides
+                        named casts such as
+                        <code>static_cast&lt;type&gt;()</code>.
+                    </p>
+
+
+                    <div class="casting-rule">
+
+                        <span>
+                            Original Type
+                        </span>
+
+                        <strong>
+                            → Explicit Cast → 
+                        </strong>
+
+                        <span>
+                            Required Type
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- REAL LIFE -->
+
+                <div class="real-life-box">
+
+                    <div class="real-life-icon">
+                        🌍
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Real-Life Example
+                        </h3>
+
+                        <p>
+                            Suppose a marksheet stores total marks
+                            and number of subjects as integers.
+                            To calculate an accurate average, the
+                            programmer can explicitly convert one
+                            value to a floating-point type before
+                            performing division.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- WHERE USED -->
+
+                <div class="where-used-box">
+
+                    <h3>
+                        Where & How Is It Used?
+                    </h3>
+
+
+                    <div class="use-grid">
+
+                        <div>
+
+                            <strong>
+                                Average Calculation
+                            </strong>
+
+                            <p>
+                                Convert integer values to floating
+                                point to obtain decimal results.
+                            </p>
+
+                        </div>
+
+
+                        <div>
+
+                            <strong>
+                                Data Conversion
+                            </strong>
+
+                            <p>
+                                Convert a value into a required
+                                data type for a specific operation.
+                            </p>
+
+                        </div>
+
+
+                        <div>
+
+                            <strong>
+                                Controlled Conversion
+                            </strong>
+
+                            <p>
+                                The programmer explicitly decides
+                                when and how conversion occurs.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PROBLEM SELECTOR -->
+
+                <div class="problem-mini-selector">
+
+                    <button class="mini-problem-tab active"
+                            data-problem="explicit-problem1">
+
+                        Problem 01
+
+                    </button>
+
+
+                    <button class="mini-problem-tab"
+                            data-problem="explicit-problem2">
+
+                        Problem 02
+
+                    </button>
+
+
+                    <button class="mini-problem-tab"
+                            data-problem="explicit-problem3">
+
+                        Problem 03
+
+                    </button>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     EXPLICIT PROBLEM 1
+                     ================================================= -->
+
+                <article class="mini-problem active"
+                         id="explicit-problem1">
+
+
+                    <span class="problem-badge">
+                        PROBLEM 01
+                    </span>
+
+
+                    <h3>
+                        Float to Integer
+                    </h3>
+
+
+
+                    <div class="content-block">
+
+                        <h4>
+                            Problem Statement
+                        </h4>
+
+                        <p>
+                            Write a C++ program to demonstrate
+                            explicit conversion of a floating-point
+                            value into an integer value.
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="content-block">
+
+                        <h4>
+                            Syntax
+                        </h4>
+
+                        <div class="syntax-box">
+
+                            <code>
+                                int(value)
+                            </code>
+
+                            <br><br>
+
+                            <code>
+                                static_cast&lt;int&gt;(value)
+                            </code>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="content-block">
+
+                        <h4>
+                            Algorithm
+                        </h4>
+
+                        <ol class="algorithm-list">
+
+                            <li>
+                                Start.
+                            </li>
+
+                            <li>
+                                Declare a floating-point variable.
+                            </li>
+
+                            <li>
+                                Assign a decimal value.
+                            </li>
+
+                            <li>
+                                Explicitly convert the value into
+                                an integer.
+                            </li>
+
+                            <li>
+                                Display the result.
+                            </li>
+
+                            <li>
+                                Stop.
+                            </li>
+
+                        </ol>
+
+                    </div>
+
+
+
+                    <div class="content-block">
+
+                        <h4>
+                            C++ Program
+                        </h4>
+
+
+                        <div class="code-window">
+
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    float value = 25.75;
+
+    int number = static_cast&lt;int&gt;(value);
+
+    cout &lt;&lt; "Original value = "
+         &lt;&lt; value &lt;&lt; endl;
+
+    cout &lt;&lt; "Integer value = "
+         &lt;&lt; number;
+
+    return 0;
+}</code></pre>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="content-block">
+
+                        <h4>
+                            Expected Output
+                        </h4>
+
+
+                        <div class="output-box">
+
+<pre>Original value = 25.75
+Integer value = 25</pre>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="visualization-section">
+
+                        <div class="visualization-header">
+
+                            <span class="problem-badge">
+                                EXPLICIT CASTING
+                            </span>
+
+                            <h3>
+                                Programmer-Controlled Conversion
+                            </h3>
+
+                        </div>
+
+
+                        <div class="casting-visual">
+
+                            <div class="casting-value">
+
+                                <span>
+                                    float
+                                </span>
+
+                                <strong>
+                                    25.75
+                                </strong>
+
+                            </div>
+
+
+                            <div class="casting-arrow">
+
+                                <span>
+                                    static_cast&lt;int&gt;
+                                </span>
+
+                                →
+
+                            </div>
+
+
+                            <div class="casting-value converted">
+
+                                <span>
+                                    int
+                                </span>
+
+                                <strong>
+                                    25
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="content-block">
+
+                        <h4>
+                            Important Note
+                        </h4>
+
+                        <p>
+                            Converting a floating-point value to
+                            an integer discards the fractional
+                            part. Therefore, <code>25.75</code>
+                            becomes <code>25</code>.
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="content-block">
+
+                        <h4>
+                            Key Points
+                        </h4>
+
+                        <ul class="key-points">
+
+                            <li>
+                                Explicit conversion is controlled
+                                by the programmer.
+                            </li>
+
+                            <li>
+                                <code>static_cast</code> is the
+                                preferred C++ style for many
+                                ordinary conversions.
+                            </li>
+
+                            <li>
+                                Fractional information can be lost
+                                when converting float to int.
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- =================================================
+                     EXPLICIT PROBLEM 2
+                     ================================================= -->
+
+                <article class="mini-problem"
+                         id="explicit-problem2">
+
+
+                    <span class="problem-badge">
+                        PROBLEM 02
+                    </span>
+
+
+                    <h3>
+                        Integer to Character
+                    </h3>
+
+
+
+                    <div class="content-block">
+
+                        <h4>
+                            Problem Statement
+                        </h4>
+
+                        <p>
+                            Write a C++ program to demonstrate
+                            explicit conversion of an integer value
+                            into a character using type casting.
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="content-block">
+
+                        <h4>
+                            C++ Program
+                        </h4>
+
+
+                        <div class="code-window">
+
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    int value = 65;
+
+    char ch = static_cast&lt;char&gt;(value);
+
+    cout &lt;&lt; "Integer value = "
+         &lt;&lt; value &lt;&lt; endl;
+
+    cout &lt;&lt; "Character = "
+         &lt;&lt; ch;
+
+    return 0;
+}</code></pre>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="content-block">
+
+                        <h4>
+                            Expected Output
+                        </h4>
+
+
+                        <div class="output-box">
+
+<pre>Integer value = 65
+Character = A</pre>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="visualization-section">
+
+                        <div class="visualization-header">
+
+                            <span class="problem-badge">
+                                VISUALIZATION
+                            </span>
+
+                            <h3>
+                                Integer → Character
+                            </h3>
+
+                        </div>
+
+
+                        <div class="casting-visual">
+
+                            <div class="casting-value">
+
+                                <span>
+                                    int
+                                </span>
+
+                                <strong>
+                                    65
+                                </strong>
+
+                            </div>
+
+
+                            <div class="casting-arrow">
+
+                                <span>
+                                    static_cast
+                                </span>
+
+                                →
+
+                            </div>
+
+
+                            <div class="casting-value converted">
+
+                                <span>
+                                    char
+                                </span>
+
+                                <strong>
+                                    'A'
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="content-block">
+
+                        <h4>
+                            Key Points
+                        </h4>
+
+                        <ul class="key-points">
+
+                            <li>
+                                Explicit casting allows the
+                                programmer to request a specific
+                                target type.
+                            </li>
+
+                            <li>
+                                The resulting character depends
+                                on the character encoding used.
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- =================================================
+                     EXPLICIT PROBLEM 3
+                     ================================================= -->
+
+                <article class="mini-problem"
+                         id="explicit-problem3">
+
+
+                    <span class="problem-badge">
+                        PROBLEM 03
+                    </span>
+
+
+                    <h3>
+                        Average Calculation
+                    </h3>
+
+
+
+                    <div class="content-block">
+
+                        <h4>
+                            Problem Statement
+                        </h4>
+
+                        <p>
+                            Write a C++ program to calculate the
+                            average of integer marks using explicit
+                            type casting to obtain a decimal result.
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="content-block">
+
+                        <h4>
+                            Concept
+                        </h4>
+
+                        <p>
+                            If two integers are divided directly,
+                            integer division may discard the
+                            fractional part. Explicitly converting
+                            one operand to <code>float</code>
+                            allows the calculation to produce
+                            a decimal result.
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="content-block">
+
+                        <h4>
+                            Algorithm
+                        </h4>
+
+                        <ol class="algorithm-list">
+
+                            <li>
+                                Start.
+                            </li>
+
+                            <li>
+                                Declare total marks and number
+                                of subjects.
+                            </li>
+
+                            <li>
+                                Convert total marks into float.
+                            </li>
+
+                            <li>
+                                Divide by the number of subjects.
+                            </li>
+
+                            <li>
+                                Display the average.
+                            </li>
+
+                            <li>
+                                Stop.
+                            </li>
+
+                        </ol>
+
+                    </div>
+
+
+
+                    <div class="content-block">
+
+                        <h4>
+                            C++ Program
+                        </h4>
+
+
+                        <div class="code-window">
+
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    int total = 427;
+    int subjects = 5;
+
+    float average =
+        static_cast&lt;float&gt;(total) / subjects;
+
+    cout &lt;&lt; "Average = "
+         &lt;&lt; average;
+
+    return 0;
+}</code></pre>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="content-block">
+
+                        <h4>
+                            Expected Output
+                        </h4>
+
+
+                        <div class="output-box">
+
+<pre>Average = 85.4</pre>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="visualization-section">
+
+                        <div class="visualization-header">
+
+                            <span class="problem-badge">
+                                CALCULATION VISUALIZATION
+                            </span>
+
+                            <h3>
+                                Avoiding Integer Division
+                            </h3>
+
+                        </div>
+
+
+                        <div class="expression-casting">
+
+                            <span class="expression-item">
+                                int 427
+                            </span>
+
+                            <span class="expression-symbol">
+                                →
+                            </span>
+
+                            <span class="expression-item">
+                                float 427.0
+                            </span>
+
+                            <span class="expression-symbol">
+                                ÷ 5
+                            </span>
+
+                            <span class="expression-item result">
+                                85.4
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="content-block">
+
+                        <h4>
+                            Real-Life Connection
+                        </h4>
+
+                        <p>
+                            This approach is useful in student
+                            marksheets, percentage calculations,
+                            measurements and financial calculations
+                            where decimal precision is required.
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="content-block">
+
+                        <h4>
+                            Key Points
+                        </h4>
+
+                        <ul class="key-points">
+
+                            <li>
+                                Explicit casting can control the
+                                type used in an expression.
+                            </li>
+
+                            <li>
+                                Converting an operand to
+                                <code>float</code> can avoid
+                                unwanted integer division.
+                            </li>
+
+                            <li>
+                                <code>static_cast</code> clearly
+                                communicates the programmer's
+                                intention.
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+
+                    <div class="content-block">
+
+                        <h4>
+                            Common Errors
+                        </h4>
+
+                        <div class="error-grid">
+
+                            <div class="error-card">
+
+                                <strong>
+                                    Integer Division
+                                </strong>
+
+                                <p>
+                                    Dividing two integers can
+                                    produce an integer result.
+                                </p>
+
+                            </div>
+
+
+                            <div class="error-card">
+
+                                <strong>
+                                    Wrong Target Type
+                                </strong>
+
+                                <p>
+                                    Choose the target data type
+                                    according to the required
+                                    result.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 TYPE CASTING SUMMARY
+                 ================================================= -->
+
+            <div class="casting-summary">
+
+                <span class="section-label">
+                    QUICK SUMMARY
+                </span>
+
+                <h3>
+                    Implicit vs Explicit Casting
+                </h3>
+
+
+                <div class="casting-comparison">
+
+                    <div class="comparison-card">
+
+                        <span class="comparison-number">
+                            01
+                        </span>
+
+                        <h4>
+                            Implicit
+                        </h4>
+
+                        <p>
+                            Conversion is performed
+                            automatically by the compiler.
+                        </p>
+
+                        <code>
+                            float x = 10;
+                        </code>
+
+                    </div>
+
+
+                    <div class="comparison-card">
+
+                        <span class="comparison-number">
+                            02
+                        </span>
+
+                        <h4>
+                            Explicit
+                        </h4>
+
+                        <p>
+                            Conversion is requested
+                            explicitly by the programmer.
+                        </p>
+
+                        <code>
+                            int x = static_cast&lt;int&gt;(10.5);
+                        </code>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 VIVA
+                 ================================================= -->
+
+            <section class="viva-section">
+
+                <span class="section-label">
+                    04 — VIVA QUESTIONS
+                </span>
+
+                <h2>
+                    Test Your Understanding
+                </h2>
+
+
+                <!-- IMPLICIT -->
+
+                <div class="viva-group">
+
+                    <h3>
+                        Implicit Type Casting
+                    </h3>
+
+
+                    <details>
+
+                        <summary>
+                            What is implicit type casting?
+                        </summary>
+
+                        <p>
+                            Implicit type casting is the automatic
+                            conversion of one data type into another
+                            by the compiler.
+                        </p>
+
+                    </details>
+
+
+                    <details>
+
+                        <summary>
+                            Who performs implicit type conversion?
+                        </summary>
+
+                        <p>
+                            The C++ compiler performs the conversion
+                            automatically.
+                        </p>
+
+                    </details>
+
+
+                    <details>
+
+                        <summary>
+                            Give an example of implicit casting.
+                        </summary>
+
+                        <p>
+                            Assigning an integer to a floating-point
+                            variable, such as
+                            <code>float x = 10;</code>.
+                        </p>
+
+                    </details>
+
+                </div>
+
+
+
+                <!-- EXPLICIT -->
+
+                <div class="viva-group">
+
+                    <h3>
+                        Explicit Type Casting
+                    </h3>
+
+
+                    <details>
+
+                        <summary>
+                            What is explicit type casting?
+                        </summary>
+
+                        <p>
+                            Explicit type casting is the manual
+                            conversion of a value into another
+                            data type by the programmer.
+                        </p>
+
+                    </details>
+
+
+                    <details>
+
+                        <summary>
+                            What is static_cast?
+                        </summary>
+
+                        <p>
+                            <code>static_cast</code> is a C++ casting
+                            operator used to explicitly convert
+                            compatible types at compile time.
+                        </p>
+
+                    </details>
+
+
+                    <details>
+
+                        <summary>
+                            Why is explicit casting useful?
+                        </summary>
+
+                        <p>
+                            It gives the programmer control over
+                            the required type of a value or
+                            expression.
+                        </p>
+
+                    </details>
+
+
+                    <details>
+
+                        <summary>
+                            What happens when float is converted
+                            to int?
+                        </summary>
+
+                        <p>
+                            The fractional part is discarded.
+                            For example, 25.75 becomes 25.
+                        </p>
+
+                    </details>
+
+                </div>
+
+
+            </section>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+     ===================================================== -->
+
+<footer class="footer">
+
+    <div class="footer-content">
+
+        <div class="footer-brand">
+
+            <div class="footer-logo">
+                &lt;/&gt;
+            </div>
+
+            <div class="footer-brand-text">
+
+                <div class="footer-brand-name">
+                    Rasika <span>CodeLab</span>
+                </div>
+
+                <p class="footer-tagline">
+                    Code • Understand • Visualize
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-copy">
+            © 2026 Rasika CodeLab. Built for practical learning.
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<!-- =====================================================
+     MAIN JS
+     ===================================================== -->
+
+<script src="../js/main.js"></script>
+
+
+
+<!-- =====================================================
+     PRACTICAL 3 JS
+     ===================================================== -->
+
+<script>
+
+    /* =========================================
+       TOPIC SWITCHING
+       ========================================= */
+
+    const topicTabs =
+        document.querySelectorAll(".topic-tab");
+
+    const topicContents =
+        document.querySelectorAll(".topic-content");
+
+
+    topicTabs.forEach(tab => {
+
+        tab.addEventListener("click", () => {
+
+            const target =
+                tab.dataset.topic;
+
+
+            topicTabs.forEach(item => {
+
+                item.classList.remove("active");
+
+            });
+
+
+            topicContents.forEach(content => {
+
+                content.classList.remove("active");
+
+            });
+
+
+            tab.classList.add("active");
+
+
+            const selected =
+                document.getElementById(target);
+
+
+            if (selected) {
+
+                selected.classList.add("active");
+
+            }
+
+        });
+
+    });
+
+
+
+    /* =========================================
+       PROBLEM SWITCHING
+       ========================================= */
+
+    document.querySelectorAll(".topic-content")
+        .forEach(topic => {
+
+            const problemTabs =
+                topic.querySelectorAll(
+                    ".mini-problem-tab"
+                );
+
+
+            const problems =
+                topic.querySelectorAll(
+                    ".mini-problem"
+                );
+
+
+            problemTabs.forEach(tab => {
+
+                tab.addEventListener("click", () => {
+
+                    const target =
+                        tab.dataset.problem;
+
+
+                    problemTabs.forEach(item => {
+
+                        item.classList.remove(
+                            "active"
+                        );
+
+                    });
+
+
+                    problems.forEach(problem => {
+
+                        problem.classList.remove(
+                            "active"
+                        );
+
+                    });
+
+
+                    tab.classList.add("active");
+
+
+                    const selected =
+                        topic.querySelector(
+                            "#" + target
+                        );
+
+
+                    if (selected) {
+
+                        selected.classList.add(
+                            "active"
+                        );
+
+                    }
+
+                });
+
+            });
+
+        });
+
+</script>
+
+
+</body>
+
+</html>

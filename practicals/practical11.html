@@ -1,0 +1,2901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Practical 11 | Destructors | Rasika CodeLab</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+        /* =====================================================
+           PRACTICAL 11 — DESTRUCTOR PAGE
+        ===================================================== */
+
+        .practical-page .container {
+            max-width: 1120px;
+        }
+
+        .practical-hero {
+            padding: 78px 0 58px;
+        }
+
+        .practical-hero h1 {
+            font-size: clamp(2.4rem, 5vw, 4.4rem);
+            line-height: 1.05;
+            max-width: 850px;
+            margin: 12px 0 18px;
+            letter-spacing: -0.04em;
+        }
+
+        .practical-subtitle {
+            max-width: 760px;
+            font-size: 16px;
+            line-height: 1.75;
+        }
+
+        .practical-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 24px;
+        }
+
+        .practical-meta span {
+            padding: 8px 13px;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            background: rgba(255,255,255,.035);
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .content-section {
+            padding: 42px 0;
+        }
+
+        .content-section h2 {
+            margin: 7px 0 22px;
+        }
+
+        .content-card {
+            box-shadow: 0 16px 45px rgba(0,0,0,.12);
+        }
+
+        .content-card + .content-card {
+            margin-top: 16px;
+        }
+
+        .content-block {
+            display: block;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .content-block:last-child {
+            margin-bottom: 0;
+        }
+
+        .content-block h3 {
+            margin-bottom: 12px;
+        }
+
+        /* =====================================================
+           DESTRUCTOR CHARACTERISTICS
+        ===================================================== */
+
+        .destructor-characteristics {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+            margin-top: 20px;
+        }
+
+        .characteristic-card {
+            padding: 22px;
+            background: linear-gradient(
+                145deg,
+                rgba(255,255,255,.045),
+                rgba(255,255,255,.018)
+            );
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            transition: .25s ease;
+        }
+
+        .characteristic-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent);
+        }
+
+        .characteristic-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            margin-bottom: 12px;
+            border-radius: 9px;
+            background: rgba(255,255,255,.05);
+            border: 1px solid var(--border);
+            color: var(--accent);
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .characteristic-card h4 {
+            margin-bottom: 7px;
+            font-size: 16px;
+        }
+
+        .characteristic-card p {
+            margin: 0;
+            color: var(--text-secondary);
+            line-height: 1.65;
+            font-size: 14px;
+        }
+
+        /* =====================================================
+           CONSTRUCTOR VS DESTRUCTOR
+        ===================================================== */
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .comparison-card {
+            padding: 24px;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            background: var(--bg-card);
+        }
+
+        .comparison-card.constructor-card {
+            background: linear-gradient(
+                145deg,
+                rgba(75,130,255,.08),
+                rgba(255,255,255,.018)
+            );
+        }
+
+        .comparison-card.destructor-card {
+            background: linear-gradient(
+                145deg,
+                rgba(150,92,255,.08),
+                rgba(255,255,255,.018)
+            );
+        }
+
+        .comparison-card h4 {
+            margin-bottom: 14px;
+            font-size: 18px;
+        }
+
+        .comparison-card ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .comparison-card li {
+            margin-bottom: 9px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* =====================================================
+           OBJECT LIFECYCLE VISUAL
+        ===================================================== */
+
+        .lifecycle-visual {
+            margin-top: 24px;
+            padding: 28px;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            background:
+                linear-gradient(145deg, rgba(255,255,255,.035), rgba(255,255,255,.012));
+        }
+
+        .lifecycle-flow {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr auto 1fr;
+            gap: 9px;
+            align-items: center;
+            margin-top: 24px;
+        }
+
+        .lifecycle-node {
+            min-height: 92px;
+            padding: 18px 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            transition: .25s ease;
+        }
+
+        .lifecycle-node:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+        }
+
+        .lifecycle-node strong {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 14px;
+        }
+
+        .lifecycle-node small {
+            color: var(--text-secondary);
+            line-height: 1.45;
+        }
+
+        .lifecycle-arrow {
+            color: var(--accent);
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        /* =====================================================
+           PROBLEM TABS
+        ===================================================== */
+
+        .problem-selector {
+            margin: 36px 0 20px;
+            position: sticky;
+            top: 74px;
+            z-index: 20;
+            padding: 12px 0;
+            background: rgba(5,8,18,.92);
+            backdrop-filter: blur(14px);
+        }
+
+        .problem-mini-tabs {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0,1fr));
+            gap: 14px;
+            width: 100%;
+        }
+
+        .mini-problem-tab {
+            width: 100%;
+            min-width: 0;
+            min-height: 68px;
+            padding: 12px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 12px;
+            box-sizing: border-box;
+
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1.3;
+            text-align: left;
+            cursor: pointer;
+
+            transition:
+                background .25s ease,
+                border-color .25s ease,
+                color .25s ease,
+                transform .25s ease,
+                box-shadow .25s ease;
+        }
+
+        .mini-problem-tab > span {
+            flex: 0 0 36px;
+            width: 36px;
+            height: 36px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 10px;
+            background: rgba(255,255,255,.045);
+            border: 1px solid var(--border);
+
+            color: var(--accent);
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .mini-problem-tab:hover {
+            border-color: var(--accent);
+            color: var(--text-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,.16);
+        }
+
+        .mini-problem-tab.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(0,0,0,.22);
+        }
+
+        .mini-problem-tab.active > span {
+            background: rgba(0,0,0,.13);
+            border-color: rgba(255,255,255,.22);
+            color: #fff;
+        }
+
+        /* =====================================================
+           PROBLEM CONTENT
+        ===================================================== */
+
+        .mini-problem {
+            display: none;
+            width: 100%;
+            margin-top: 34px;
+        }
+
+        .mini-problem.active {
+            display: block;
+            animation: practicalFadeIn .35s ease;
+        }
+
+        .problem-heading {
+            padding: 28px 0 20px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 24px;
+        }
+
+        .problem-heading h2 {
+            margin: 8px 0 0;
+            font-size: clamp(1.7rem, 3vw, 2.4rem);
+        }
+
+        .problem-box {
+            padding: 24px;
+            margin-bottom: 18px;
+            background: rgba(255,255,255,.022);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+        }
+
+        .problem-box h3 {
+            margin-bottom: 12px;
+        }
+
+        .syntax-block {
+            border-color: rgba(150,92,255,.30);
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(150,92,255,.065),
+                    rgba(255,255,255,.02)
+                );
+        }
+
+        .syntax-heading {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .syntax-heading h3 {
+            margin: 0;
+        }
+
+        .syntax-heading .section-label {
+            margin: 0;
+        }
+
+        .algorithm-list {
+            padding-left: 22px;
+        }
+
+        .algorithm-list li {
+            margin-bottom: 9px;
+            padding-left: 5px;
+            line-height: 1.6;
+        }
+
+        .code-window {
+            overflow-x: auto;
+            border-radius: 14px;
+        }
+
+        .output-box {
+            border-radius: 14px;
+        }
+
+        /* =====================================================
+           PROBLEM VISUALS
+        ===================================================== */
+
+        .problem-visual {
+            padding: 26px;
+            margin-bottom: 18px;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            background:
+                linear-gradient(145deg, rgba(255,255,255,.035), rgba(255,255,255,.015));
+        }
+
+        .problem-visual h3 {
+            margin: 8px 0 18px;
+        }
+
+        .flow-row {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr auto 1fr;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .flow-card {
+            min-height: 90px;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+        }
+
+        .flow-card strong {
+            margin-bottom: 7px;
+        }
+
+        .flow-card small {
+            color: var(--text-secondary);
+            line-height: 1.45;
+        }
+
+        .flow-arrow {
+            color: var(--accent);
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .memory-flow {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0,1fr));
+            gap: 14px;
+        }
+
+        .memory-card {
+            padding: 22px;
+            text-align: center;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background: var(--bg-card);
+        }
+
+        .memory-card strong {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .memory-card small {
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* =====================================================
+           VIVA
+        ===================================================== */
+
+        .viva-list {
+            display: grid;
+            gap: 12px;
+            max-width: 900px;
+            margin-top: 25px;
+        }
+
+        .viva-item {
+            overflow: hidden;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+        }
+
+        .viva-question {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 20px 22px;
+
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+
+            font-family: inherit;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: left;
+
+            cursor: pointer;
+        }
+
+        .viva-question:hover {
+            background: rgba(255,255,255,.03);
+        }
+
+        .viva-icon {
+            flex: 0 0 auto;
+            width: 32px;
+            height: 32px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            color: var(--accent);
+            font-size: 22px;
+
+            transition: transform .25s ease;
+        }
+
+        .viva-answer {
+            display: none;
+            padding: 0 22px 22px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .viva-item.active .viva-answer {
+            display: block;
+        }
+
+        .viva-item.active .viva-icon {
+            transform: rotate(45deg);
+        }
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 950px) {
+            .problem-mini-tabs {
+                grid-template-columns: repeat(2, minmax(0,1fr));
+            }
+
+            .lifecycle-flow {
+                grid-template-columns: 1fr;
+            }
+
+            .lifecycle-arrow {
+                transform: rotate(90deg);
+                justify-self: center;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .practical-hero {
+                padding: 55px 0 40px;
+            }
+
+            .content-section {
+                padding: 30px 0;
+            }
+
+            .constructor-characteristics,
+            .destructor-characteristics,
+            .comparison-grid,
+            .memory-flow,
+            .problem-mini-tabs,
+            .flow-row {
+                grid-template-columns: 1fr;
+            }
+
+            .problem-selector {
+                position: static;
+                background: transparent;
+                backdrop-filter: none;
+            }
+
+            .problem-box,
+            .problem-visual,
+            .lifecycle-visual {
+                padding: 20px;
+            }
+
+            .flow-arrow {
+                transform: rotate(90deg);
+                justify-self: center;
+            }
+        }
+    
+
+/* =====================================================
+   PRACTICAL 11 — FOUR PROBLEM TABS FINAL CSS
+===================================================== */
+
+.problem-selector {
+    width: 100% !important;
+    margin: 38px 0 24px !important;
+    padding: 12px 0 !important;
+    position: sticky;
+    top: 74px;
+    z-index: 30;
+
+    background: rgba(5, 8, 18, 0.94) !important;
+    backdrop-filter: blur(14px);
+}
+
+.problem-selector .problem-mini-tabs {
+    width: 100% !important;
+    max-width: 1120px;
+    margin: 0 auto !important;
+    padding: 0 !important;
+
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+
+    align-items: stretch !important;
+}
+
+/* Reset any global button positioning/sizing */
+.problem-selector .mini-problem-tab {
+    position: static !important;
+    float: none !important;
+
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+
+    height: 72px !important;
+    min-height: 72px !important;
+
+    margin: 0 !important;
+    padding: 12px 16px !important;
+
+    box-sizing: border-box !important;
+
+    display: grid !important;
+    grid-template-columns: 40px minmax(0, 1fr) !important;
+    align-items: center !important;
+    gap: 12px !important;
+
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 16px !important;
+
+    color: var(--text-secondary) !important;
+    font-family: inherit !important;
+    font-size: 14px !important;
+    font-weight: 650 !important;
+    line-height: 1.3 !important;
+    text-align: left !important;
+
+    white-space: normal !important;
+    overflow: hidden !important;
+
+    cursor: pointer !important;
+
+    transform: none !important;
+    box-shadow: none !important;
+
+    transition:
+        background .22s ease,
+        border-color .22s ease,
+        color .22s ease,
+        transform .22s ease,
+        box-shadow .22s ease !important;
+}
+
+/* Number badge */
+.problem-selector .mini-problem-tab > span {
+    position: static !important;
+
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    box-sizing: border-box !important;
+
+    border-radius: 11px !important;
+    border: 1px solid var(--border) !important;
+
+    background: rgba(255,255,255,.045) !important;
+
+    color: var(--accent) !important;
+    font-size: 12px !important;
+    font-weight: 800 !important;
+    line-height: 1 !important;
+}
+
+/* Hover */
+.problem-selector .mini-problem-tab:hover {
+    background: rgba(255,255,255,.045) !important;
+    border-color: var(--accent) !important;
+    color: var(--text-primary) !important;
+
+    transform: translateY(-2px) !important;
+    box-shadow: 0 9px 25px rgba(0,0,0,.18) !important;
+}
+
+/* Active */
+.problem-selector .mini-problem-tab.active {
+    background: var(--accent) !important;
+    border-color: var(--accent) !important;
+    color: #fff !important;
+
+    transform: translateY(-2px) !important;
+    box-shadow: 0 11px 30px rgba(0,0,0,.24) !important;
+}
+
+.problem-selector .mini-problem-tab.active > span {
+    background: rgba(0,0,0,.13) !important;
+    border-color: rgba(255,255,255,.22) !important;
+    color: #fff !important;
+}
+
+/* Problem content starts cleanly below tabs */
+.problem-selector + .mini-problem {
+    margin-top: 34px !important;
+}
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 900px) {
+
+    .problem-selector .problem-mini-tabs {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    .problem-selector {
+        position: static !important;
+        padding: 8px 0 !important;
+        background: transparent !important;
+        backdrop-filter: none !important;
+    }
+
+    .problem-selector .problem-mini-tabs {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+    }
+
+    .problem-selector .mini-problem-tab {
+        height: 64px !important;
+        min-height: 64px !important;
+    }
+
+}
+
+
+
+/* =====================================================
+   PRACTICAL 11 — PROBLEM TABS / DEFINITIVE LAYOUT FIX
+   This override intentionally uses FLEX instead of GRID
+   to prevent shrink-to-content behavior from global CSS.
+===================================================== */
+
+.problem-selector {
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+
+    margin: 38px 0 24px !important;
+    padding: 12px 0 !important;
+
+    box-sizing: border-box !important;
+    align-self: stretch !important;
+    flex: 0 0 100% !important;
+
+    position: sticky;
+    top: 74px;
+    z-index: 30;
+
+    background: rgba(5, 8, 18, 0.94) !important;
+    backdrop-filter: blur(14px);
+}
+
+.problem-selector .problem-mini-tabs {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    gap: 14px !important;
+    align-items: stretch !important;
+    justify-content: stretch !important;
+
+    box-sizing: border-box !important;
+}
+
+.problem-selector .mini-problem-tab {
+    position: static !important;
+    float: none !important;
+
+    flex: 1 1 0 !important;
+    width: auto !important;
+    max-width: none !important;
+    min-width: 0 !important;
+
+    height: 72px !important;
+    min-height: 72px !important;
+
+    margin: 0 !important;
+    padding: 12px 16px !important;
+
+    box-sizing: border-box !important;
+
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+
+    gap: 12px !important;
+
+    overflow: hidden !important;
+
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 16px !important;
+
+    color: var(--text-secondary) !important;
+    font-family: inherit !important;
+    font-size: 14px !important;
+    font-weight: 650 !important;
+    line-height: 1.3 !important;
+    text-align: left !important;
+
+    white-space: normal !important;
+    cursor: pointer !important;
+
+    transform: none !important;
+    box-shadow: none !important;
+
+    transition:
+        background .22s ease,
+        border-color .22s ease,
+        color .22s ease,
+        transform .22s ease,
+        box-shadow .22s ease !important;
+}
+
+.problem-selector .mini-problem-tab > span:first-child {
+    position: static !important;
+
+    flex: 0 0 40px !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+
+    height: 40px !important;
+    min-height: 40px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    box-sizing: border-box !important;
+
+    border-radius: 11px !important;
+    border: 1px solid var(--border) !important;
+    background: rgba(255,255,255,.045) !important;
+
+    color: var(--accent) !important;
+    font-size: 12px !important;
+    font-weight: 800 !important;
+    line-height: 1 !important;
+}
+
+.problem-selector .problem-tab-label {
+    display: block !important;
+
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    width: auto !important;
+
+    color: inherit !important;
+
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: normal !important;
+
+    line-height: 1.3 !important;
+}
+
+.problem-selector .mini-problem-tab:hover {
+    background: rgba(255,255,255,.045) !important;
+    border-color: var(--accent) !important;
+    color: var(--text-primary) !important;
+
+    transform: translateY(-2px) !important;
+    box-shadow: 0 9px 25px rgba(0,0,0,.18) !important;
+}
+
+.problem-selector .mini-problem-tab.active {
+    background: var(--accent) !important;
+    border-color: var(--accent) !important;
+    color: #fff !important;
+
+    transform: translateY(-2px) !important;
+    box-shadow: 0 11px 30px rgba(0,0,0,.24) !important;
+}
+
+.problem-selector .mini-problem-tab.active > span:first-child {
+    background: rgba(0,0,0,.13) !important;
+    border-color: rgba(255,255,255,.22) !important;
+    color: #fff !important;
+}
+
+.problem-selector + .mini-problem {
+    margin-top: 34px !important;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+    .problem-selector .problem-mini-tabs {
+        flex-wrap: wrap !important;
+    }
+
+    .problem-selector .mini-problem-tab {
+        flex: 1 1 calc(50% - 7px) !important;
+    }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .problem-selector {
+        position: static !important;
+        padding: 8px 0 !important;
+        background: transparent !important;
+        backdrop-filter: none !important;
+    }
+
+    .problem-selector .problem-mini-tabs {
+        flex-direction: column !important;
+        flex-wrap: nowrap !important;
+        gap: 10px !important;
+    }
+
+    .problem-selector .mini-problem-tab {
+        flex: 0 0 64px !important;
+        width: 100% !important;
+        height: 64px !important;
+        min-height: 64px !important;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+    <!-- =====================================================
+         NAVBAR
+    ===================================================== -->
+
+    <nav class="navbar">
+        <div class="container nav-container">
+
+            <a href="../index.html" class="logo">
+                <span class="logo-symbol">&lt;/&gt;</span>
+                <span>Rasika<span class="logo-accent">CodeLab</span></span>
+            </a>
+
+            <button class="menu-btn" aria-label="Open menu">☰</button>
+
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="../foundations/program.html">Foundations</a>
+                <a href="index.html" class="active">Practicals</a>
+                <a href="../index.html#about">About</a>
+            </div>
+
+        </div>
+    </nav>
+
+
+    <main class="practical-page">
+
+        <!-- =====================================================
+             HERO
+        ===================================================== -->
+
+        <section class="practical-hero">
+            <div class="container">
+
+                <span class="section-label">PRACTICAL 11</span>
+
+                <h1>
+                    Destructors in
+                    <span class="gradient-text">C++</span>
+                </h1>
+
+                <p class="practical-subtitle">
+                    Understand how destructors automatically clean up objects,
+                    learn when they are called, and explore object destruction,
+                    multiple objects, dynamic memory and complete object lifecycle.
+                </p>
+
+                <div class="practical-meta">
+                    <span>LLO 11.1</span>
+                    <span>Classes &amp; Objects</span>
+                    <span>Destructors</span>
+                    <span>Memory Management</span>
+                    <span>C++ Programming</span>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- =====================================================
+             AIM
+        ===================================================== -->
+
+        <section class="content-section">
+            <div class="container">
+
+                <span class="section-label">AIM</span>
+                <h2>Aim of the Practical</h2>
+
+                <div class="content-card">
+                    <p>
+                        To implement C++ programs demonstrating the use of
+                        <strong>destructors</strong> and understand how objects
+                        are automatically destroyed and resources are released.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- =====================================================
+             LEARNING OBJECTIVES
+        ===================================================== -->
+
+        <section class="content-section">
+            <div class="container">
+
+                <span class="section-label">LEARNING OBJECTIVES</span>
+                <h2>What You Will Learn</h2>
+
+                <div class="objective-grid">
+
+                    <div class="objective-card">
+                        <strong>01</strong>
+                        <h3>Understand Destructors</h3>
+                        <p>
+                            Understand the purpose and role of a destructor
+                            in a C++ class.
+                        </p>
+                    </div>
+
+                    <div class="objective-card">
+                        <strong>02</strong>
+                        <h3>Learn Object Destruction</h3>
+                        <p>
+                            Understand when a destructor is automatically
+                            called during the object lifecycle.
+                        </p>
+                    </div>
+
+                    <div class="objective-card">
+                        <strong>03</strong>
+                        <h3>Manage Resources</h3>
+                        <p>
+                            Understand how destructors can release dynamically
+                            allocated memory and other resources.
+                        </p>
+                    </div>
+
+                    <div class="objective-card">
+                        <strong>04</strong>
+                        <h3>Trace Object Lifecycle</h3>
+                        <p>
+                            Observe constructor and destructor execution
+                            using multiple objects and scope.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- =====================================================
+             CONCEPT
+        ===================================================== -->
+
+        <section class="content-section">
+            <div class="container">
+
+                <span class="section-label">CONCEPT</span>
+                <h2>Understanding Destructors</h2>
+
+
+                <!-- THEORY -->
+
+                <div class="content-card">
+
+                    <h3>What is a Destructor?</h3>
+
+                    <p>
+                        A <strong>destructor</strong> is a special member function
+                        of a class that is automatically called when an object
+                        is destroyed.
+                    </p>
+
+                    <p>
+                        Its main purpose is to perform cleanup work, such as
+                        releasing dynamically allocated memory or other resources
+                        owned by the object.
+                    </p>
+
+                    <p>
+                        A destructor has the <strong>same name as the class</strong>
+                        preceded by a tilde (<strong>~</strong>) and it does not
+                        have a return type.
+                    </p>
+
+                </div>
+
+
+                <!-- REAL LIFE -->
+
+                <div class="content-card">
+
+                    <h3>Real-Life Example</h3>
+
+                    <p>
+                        Consider a temporary room booking in a hotel system.
+                        When the booking is created, resources are assigned to it.
+                        When the booking ends, those resources can be released.
+                    </p>
+
+                    <p>
+                        A destructor performs a similar cleanup role when an
+                        object reaches the end of its lifetime.
+                    </p>
+
+                </div>
+
+
+                <!-- WHERE & HOW -->
+
+                <div class="content-card">
+
+                    <h3>Where &amp; How Is It Used?</h3>
+
+                    <ul class="key-points">
+
+                        <li>
+                            <strong>Dynamic Memory:</strong>
+                            Release memory allocated using <code>new</code>.
+                        </li>
+
+                        <li>
+                            <strong>File Handling:</strong>
+                            Close resources owned by an object when appropriate.
+                        </li>
+
+                        <li>
+                            <strong>Database / Network Objects:</strong>
+                            Perform object-level cleanup when resources are no longer needed.
+                        </li>
+
+                        <li>
+                            <strong>Game Development:</strong>
+                            Clean up resources associated with temporary game objects.
+                        </li>
+
+                        <li>
+                            <strong>Resource Management:</strong>
+                            Keep object ownership and cleanup organized.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- CHARACTERISTICS -->
+
+                <div class="content-card">
+
+                    <h3>Characteristics of a Destructor</h3>
+
+                    <div class="destructor-characteristics">
+
+                        <div class="characteristic-card">
+                            <span class="characteristic-number">01</span>
+                            <h4>Same Class Name</h4>
+                            <p>
+                                The destructor uses the class name preceded by
+                                the tilde symbol (~).
+                            </p>
+                        </div>
+
+                        <div class="characteristic-card">
+                            <span class="characteristic-number">02</span>
+                            <h4>No Return Type</h4>
+                            <p>
+                                A destructor does not have a return type,
+                                including <strong>void</strong>.
+                            </p>
+                        </div>
+
+                        <div class="characteristic-card">
+                            <span class="characteristic-number">03</span>
+                            <h4>No Parameters</h4>
+                            <p>
+                                A destructor does not accept parameters.
+                            </p>
+                        </div>
+
+                        <div class="characteristic-card">
+                            <span class="characteristic-number">04</span>
+                            <h4>Called Automatically</h4>
+                            <p>
+                                It is automatically invoked when an object
+                                is destroyed.
+                            </p>
+                        </div>
+
+                        <div class="characteristic-card">
+                            <span class="characteristic-number">05</span>
+                            <h4>One Destructor</h4>
+                            <p>
+                                A class can have only one destructor and it
+                                cannot be overloaded.
+                            </p>
+                        </div>
+
+                        <div class="characteristic-card">
+                            <span class="characteristic-number">06</span>
+                            <h4>Cleanup Role</h4>
+                            <p>
+                                It can release resources owned by the object,
+                                such as dynamically allocated memory.
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SYNTAX -->
+
+                <div class="content-card">
+
+                    <div class="syntax-heading">
+                        <span class="section-label">SYNTAX</span>
+                        <h3>Basic Destructor Syntax</h3>
+                    </div>
+
+                    <div class="code-window">
+<pre><code>class ClassName
+{
+public:
+
+    ~ClassName()
+    {
+        // cleanup code
+    }
+};</code></pre>
+                    </div>
+
+                </div>
+
+
+                <!-- WHEN CALLED -->
+
+                <div class="content-card">
+
+                    <h3>When Is a Destructor Called?</h3>
+
+                    <p>
+                        For a local object, the destructor is automatically called
+                        when the object goes out of scope. For an object created
+                        dynamically using <code>new</code>, the destructor is invoked
+                        when the object is destroyed using <code>delete</code>.
+                    </p>
+
+                    <div class="code-window">
+<pre><code>Demo obj;
+
+// Destructor is called automatically
+// when obj goes out of scope.</code></pre>
+                    </div>
+
+                    <div class="code-window">
+<pre><code>Demo *ptr = new Demo();
+
+delete ptr;
+
+// Destructor is invoked as part of
+// destroying the dynamically allocated object.</code></pre>
+                    </div>
+
+                </div>
+
+
+                <!-- CONSTRUCTOR VS DESTRUCTOR -->
+
+                <div class="content-card">
+
+                    <h3>Constructor vs Destructor</h3>
+
+                    <div class="comparison-grid">
+
+                        <div class="comparison-card constructor-card">
+
+                            <h4>Constructor</h4>
+
+                            <ul>
+                                <li>Called when an object is created.</li>
+                                <li>Used mainly for initialization.</li>
+                                <li>Has the class name.</li>
+                                <li>Can be overloaded.</li>
+                                <li>Can accept parameters.</li>
+                            </ul>
+
+                        </div>
+
+                        <div class="comparison-card destructor-card">
+
+                            <h4>Destructor</h4>
+
+                            <ul>
+                                <li>Called when an object is destroyed.</li>
+                                <li>Used mainly for cleanup.</li>
+                                <li>Has ~ followed by the class name.</li>
+                                <li>Cannot be overloaded.</li>
+                                <li>Does not accept parameters.</li>
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- LIFECYCLE VISUALIZATION -->
+
+                <div class="lifecycle-visual">
+
+                    <span class="section-label">VISUAL EXPLANATION</span>
+
+                    <h3>Complete Object Lifecycle</h3>
+
+                    <div class="lifecycle-flow">
+
+                        <div class="lifecycle-node">
+                            <strong>Create Object</strong>
+                            <small>Student s;</small>
+                        </div>
+
+                        <div class="lifecycle-arrow">→</div>
+
+                        <div class="lifecycle-node">
+                            <strong>Constructor</strong>
+                            <small>Object initialized</small>
+                        </div>
+
+                        <div class="lifecycle-arrow">→</div>
+
+                        <div class="lifecycle-node">
+                            <strong>Object Used</strong>
+                            <small>Program operations</small>
+                        </div>
+
+                        <div class="lifecycle-arrow">→</div>
+
+                        <div class="lifecycle-node">
+                            <strong>Scope Ends</strong>
+                            <small>Object lifetime ends</small>
+                        </div>
+
+                        <div class="lifecycle-arrow">→</div>
+
+                        <div class="lifecycle-node">
+                            <strong>Destructor</strong>
+                            <small>Cleanup performed</small>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     PROBLEM SELECTOR
+                ================================================= -->
+
+                <div class="problem-selector">
+
+                    <div class="problem-mini-tabs">
+
+                        <button
+                            type="button"
+                            class="mini-problem-tab active"
+                            data-problem="problem11-1"
+                        >
+                            <span>01</span>
+                            Basic Destructor
+                        </button>
+
+                        <button
+                            type="button"
+                            class="mini-problem-tab"
+                            data-problem="problem11-2"
+                        >
+                            <span>02</span>
+                            Multiple Objects
+                        </button>
+
+                        <button
+                            type="button"
+                            class="mini-problem-tab"
+                            data-problem="problem11-3"
+                        >
+                            <span>03</span>
+                            Dynamic Memory
+                        </button>
+
+                        <button
+                            type="button"
+                            class="mini-problem-tab"
+                            data-problem="problem11-4"
+                        >
+                            <span>04</span>
+                            Object Lifecycle
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     PROBLEM 01
+                ================================================= -->
+
+                <div class="mini-problem active" id="problem11-1">
+
+                    <div class="problem-heading">
+                        <span class="section-label">PROBLEM 01</span>
+                        <h2>Basic Destructor</h2>
+                    </div>
+
+
+                    <div class="problem-box">
+                        <h3>Problem Statement</h3>
+
+                        <p>
+                            Write a C++ program to create a class
+                            <strong>Student</strong> with a constructor and
+                            destructor. Display messages to demonstrate when
+                            the constructor and destructor are called.
+                        </p>
+                    </div>
+
+
+                    <div class="problem-box">
+                        <h3>Theory / Concept</h3>
+
+                        <p>
+                            A destructor is automatically called when the object
+                            is destroyed. In this program, the constructor shows
+                            object creation and the destructor shows object cleanup.
+                        </p>
+                    </div>
+
+
+                    <div class="problem-box syntax-block">
+
+                        <div class="syntax-heading">
+                            <span class="section-label">SYNTAX</span>
+                            <h3>Destructor Syntax</h3>
+                        </div>
+
+                        <div class="code-window">
+<pre><code>~ClassName()
+{
+    // cleanup code
+}</code></pre>
+                        </div>
+
+                        <p>
+                            For the <strong>Student</strong> class:
+                        </p>
+
+                        <div class="code-window">
+<pre><code>~Student()
+{
+    cout &lt;&lt; "Destructor Called";
+}</code></pre>
+                        </div>
+
+                    </div>
+
+
+                    <div class="problem-box">
+                        <h3>Algorithm</h3>
+
+                        <ol class="algorithm-list">
+                            <li>Start the program.</li>
+                            <li>Define the Student class.</li>
+                            <li>Define a constructor that displays a message.</li>
+                            <li>Define a destructor that displays a message.</li>
+                            <li>Create a Student object.</li>
+                            <li>Display a message while the object is being used.</li>
+                            <li>Allow the object to go out of scope.</li>
+                            <li>Observe the destructor message.</li>
+                            <li>Stop the program.</li>
+                        </ol>
+                    </div>
+
+
+                    <div class="problem-box">
+                        <h3>C++ Program</h3>
+
+                        <div class="code-window">
+<pre><code>#include &lt;iostream&gt;
+
+using namespace std;
+
+class Student
+{
+public:
+
+    Student()
+    {
+        cout &lt;&lt; "Constructor Called" &lt;&lt; endl;
+    }
+
+    ~Student()
+    {
+        cout &lt;&lt; "Destructor Called" &lt;&lt; endl;
+    }
+
+    void display()
+    {
+        cout &lt;&lt; "Student Object is in Use" &lt;&lt; endl;
+    }
+};
+
+int main()
+{
+    Student s;
+
+    s.display();
+
+    return 0;
+}</code></pre>
+                        </div>
+                    </div>
+
+
+                    <div class="problem-box">
+                        <h3>Expected Output</h3>
+
+                        <div class="output-box">
+<pre>Constructor Called
+Student Object is in Use
+Destructor Called</pre>
+                        </div>
+                    </div>
+
+
+                    <div class="problem-visual">
+
+                        <span class="section-label">VISUAL EXPLANATION</span>
+                        <h3>Basic Destructor Flow</h3>
+
+                        <div class="flow-row">
+
+                            <div class="flow-card">
+                                <strong>Student s</strong>
+                                <small>Object created</small>
+                            </div>
+
+                            <div class="flow-arrow">→</div>
+
+                            <div class="flow-card">
+                                <strong>Constructor</strong>
+                                <small>Initialization</small>
+                            </div>
+
+                            <div class="flow-arrow">→</div>
+
+                            <div class="flow-card">
+                                <strong>Destructor</strong>
+                                <small>Cleanup when object is destroyed</small>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="problem-box">
+                        <h3>Program Explanation</h3>
+
+                        <ul class="key-points">
+                            <li>The object <strong>s</strong> is created inside main().</li>
+                            <li>The constructor is called automatically during object creation.</li>
+                            <li>The display() function uses the object.</li>
+                            <li>When main() ends, the local object is destroyed.</li>
+                            <li>The destructor is then called automatically.</li>
+                        </ul>
+                    </div>
+
+
+                    <div class="problem-box">
+                        <h3>Real-Life Connection</h3>
+
+                        <p>
+                            A temporary software object may acquire resources
+                            during its lifetime. When that object is no longer
+                            needed, cleanup can be performed automatically as
+                            the object is destroyed.
+                        </p>
+                    </div>
+
+
+                    <div class="problem-box">
+                        <h3>Key Points</h3>
+
+                        <ul class="key-points">
+                            <li>A destructor starts with the tilde (~).</li>
+                            <li>It has the same name as the class.</li>
+                            <li>It has no return type.</li>
+                            <li>It takes no parameters.</li>
+                            <li>It is called automatically when the object is destroyed.</li>
+                        </ul>
+                    </div>
+
+
+                    <div class="problem-box">
+                        <h3>Common Errors</h3>
+
+                        <div class="error-grid">
+
+                            <div class="error-card">
+                                <h4>Missing Tilde</h4>
+                                <p>
+                                    The destructor must use ~ before the class name.
+                                </p>
+                            </div>
+
+                            <div class="error-card">
+                                <h4>Return Type</h4>
+                                <p>
+                                    A destructor must not have a return type.
+                                </p>
+                            </div>
+
+                            <div class="error-card">
+                                <h4>Wrong Name</h4>
+                                <p>
+                                    The destructor name must match the class name.
+                                </p>
+                            </div>
+
+                            <div class="error-card">
+                                <h4>Parameters</h4>
+                                <p>
+                                    A destructor does not accept parameters.
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     PROBLEM 02
+                ================================================= -->
+
+                <div class="mini-problem" id="problem11-2">
+
+                    <div class="problem-heading">
+                        <span class="section-label">PROBLEM 02</span>
+                        <h2>Destructor with Multiple Objects</h2>
+                    </div>
+
+
+                    <div class="problem-box">
+                        <h3>Problem Statement</h3>
+
+                        <p>
+                            Write a C++ program to create three objects of a class
+                            and demonstrate the order in which their constructors
+                            and destructors are called.
+                        </p>
+                    </div>
+
+
+                    <div class="problem-box">
+                        <h3>Theory / Concept</h3>
+
+                        <p>
+                            When multiple local objects are created in the same
+                            scope, their destructors are called in the reverse
+                            order of their construction. This follows a
+                            <strong>Last In, First Out (LIFO)</strong> pattern.
+                        </p>
+                    </div>
+
+
+                    <div class="problem-box syntax-block">
+
+                        <div class="syntax-heading">
+                            <span class="section-label">SYNTAX</span>
+                            <h3>Destructor with Multiple Objects</h3>
+                        </div>
+
+                        <div class="code-window">
+<pre><code>class ClassName
+{
+public:
+
+    ClassName()
+    {
+        // constructor
+    }
+
+    ~ClassName()
+    {
+        // destructor
+    }
+};
+
+ClassName obj1;
+ClassName obj2;
+ClassName obj3;</code></pre>
+                        </div>
+
+                    </div>
+
+
+                    <div class="problem-box">
+                        <h3>Algorithm</h3>
+
+                        <ol class="algorithm-list">
+                            <li>Start the program.</li>
+                            <li>Define a class with a constructor and destructor.</li>
+                            <li>Create three objects in sequence.</li>
+                            <li>Display a message from the constructor.</li>
+                            <li>Display a message from the destructor.</li>
+                            <li>Observe constructor execution order.</li>
+                            <li>Observe destructor execution order.</li>
+                            <li>Stop the program.</li>
+                        </ol>
+                    </div>
+
+
+                    <div class="problem-box">
+                        <h3>C++ Program</h3>
+
+                        <div class="code-window">
+<pre><code>#include &lt;iostream&gt;
+
+using namespace std;
+
+class Demo
+{
+    int id;
+
+public:
+
+    Demo(int n)
+    {
+        id = n;
+        cout &lt;&lt; "Constructor: Object " &lt;&lt; id &lt;&lt; endl;
+    }
+
+    ~Demo()
+    {
+        cout &lt;&lt; "Destructor: Object " &lt;&lt; id &lt;&lt; endl;
+    }
+};
+
+int main()
+{
+    Demo obj1(1);
+    Demo obj2(2);
+    Demo obj3(3);
+
+    cout &lt;&lt; "All objects are in use." &lt;&lt; endl;
+
+    return 0;
+}</code></pre>
+                        </div>
+                    </div>
+
+
+                    <div class="problem-box">
+                        <h3>Expected Output</h3>
+
+                        <div class="output-box">
+<pre>Constructor: Object 1
+Constructor: Object 2
+Constructor: Object 3
+All objects are in use.
+Destructor: Object 3
+Destructor: Object 2
+Destructor: Object 1</pre>
+                        </div>
+                    </div>
+
+
+                    <div class="problem-visual">
+
+                        <span class="section-label">VISUAL EXPLANATION</span>
+                        <h3>Construction vs Destruction Order</h3>
+
+                        <div class="memory-flow">
+
+                            <div class="memory-card">
+                                <strong>Object 1</strong>
+                                <small>Created first<br>Destroyed last</small>
+                            </div>
+
+                            <div class="memory-card">
+                                <strong>Object 2</strong>
+                                <small>Created second<br>Destroyed second</small>
+                            </div>
+
+                            <div class="memory-card">
+                                <strong>Object 3</strong>
+                                <small>Created last<br>Destroyed first</small>
+                            </div>
+
+                        </div>
+
+                        <div class="code-window" style="margin-top:16px;">
+<pre><code>Creation:     1 → 2 → 3
+Destruction:  3 → 2 → 1</code></pre>
+                        </div>
+
+                    </div>
+
+
+                    <div class="problem-box">
+                        <h3>Program Explanation</h3>
+
+                        <ul class="key-points">
+                            <li>Object 1 is created first.</li>
+                            <li>Object 2 is created second.</li>
+                            <li>Object 3 is created last.</li>
+                            <li>The constructors execute in the order 1 → 2 → 3.</li>
+                            <li>The destructors execute in reverse order 3 → 2 → 1.</li>
+                            <li>This demonstrates the LIFO order of destruction for these local objects.</li>
+                        </ul>
+                    </div>
+
+
+                    <div class="problem-box">
+                        <h3>Real-Life Connection</h3>
+
+                        <p>
+                            Think of objects like books placed one above another.
+                            The last book placed on the stack is the first one
+                            removed. Local object destruction follows a similar
+                            reverse-order pattern.
+                        </p>
+                    </div>
+
+
+                    <div class="problem-box">
+                        <h3>Key Points</h3>
+
+                        <ul class="key-points">
+                            <li>Objects are constructed in creation order.</li>
+                            <li>Local objects are destroyed in reverse construction order.</li>
+                            <li>The last-created object is destroyed first.</li>
+                            <li>This is commonly described as LIFO order.</li>
+                        </ul>
+                    </div>
+
+
+                    <div class="problem-box">
+                        <h3>Common Errors</h3>
+
+                        <div class="error-grid">
+
+                            <div class="error-card">
+                                <h4>Wrong Order</h4>
+                                <p>
+                                    Do not assume destructors run in the same order as constructors.
+                                </p>
+                            </div>
+
+                            <div class="error-card">
+                                <h4>Scope Confusion</h4>
+                                <p>
+                                    Object lifetime depends on its storage duration and scope.
+                                </p>
+                            </div>
+
+                            <div class="error-card">
+                                <h4>Missing Destructor</h4>
+                                <p>
+                                    Ensure the destructor is declared inside the class.
+                                </p>
+                            </div>
+
+                            <div class="error-card">
+                                <h4>Wrong Object ID</h4>
+                                <p>
+                                    Initialize and display the correct object identifier.
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     PROBLEM 03
+                ================================================= -->
+
+                <div class="mini-problem" id="problem11-3">
+
+                    <div class="problem-heading">
+                        <span class="section-label">PROBLEM 03</span>
+                        <h2>Destructor with Dynamic Memory</h2>
+                    </div>
+
+
+                    <div class="problem-box">
+                        <h3>Problem Statement</h3>
+
+                        <p>
+                            Write a C++ program to dynamically allocate memory
+                            for an integer using <strong>new</strong> and release
+                            the memory using <strong>delete</strong> through a
+                            destructor.
+                        </p>
+                    </div>
+
+
+                    <div class="problem-box">
+                        <h3>Theory / Concept</h3>
+
+                        <p>
+                            Dynamically allocated memory remains allocated until
+                            it is explicitly released. A destructor can be used
+                            to release resources owned by an object. In this
+                            example, the object owns an integer allocated with
+                            <code>new</code>, and the destructor releases it using
+                            <code>delete</code>.
+                        </p>
+                    </div>
+
+
+                    <div class="problem-box syntax-block">
+
+                        <div class="syntax-heading">
+                            <span class="section-label">SYNTAX</span>
+                            <h3>Destructor with Dynamic Memory</h3>
+                        </div>
+
+                        <div class="code-window">
+<pre><code>class ClassName
+{
+    data_type *ptr;
+
+public:
+
+    ClassName()
+    {
+        ptr = new data_type;
+    }
+
+    ~ClassName()
+    {
+        delete ptr;
+    }
+};</code></pre>
+                        </div>
+
+                        <p><strong>Dynamic Object Creation:</strong></p>
+
+                        <div class="code-window">
+<pre><code>ClassName *obj = new ClassName();
+
+delete obj;</code></pre>
+                        </div>
+
+                    </div>
+
+
+                    <div class="problem-box">
+                        <h3>Algorithm</h3>
+
+                        <ol class="algorithm-list">
+                            <li>Start the program.</li>
+                            <li>Define the Demo class.</li>
+                            <li>Declare an integer pointer.</li>
+                            <li>Allocate memory using new inside the constructor.</li>
+                            <li>Assign a value to the allocated memory.</li>
+                            <li>Display the value.</li>
+                            <li>Define a destructor.</li>
+                            <li>Release the allocated memory using delete.</li>
+                            <li>Destroy the dynamically allocated object.</li>
+                            <li>Stop the program.</li>
+                        </ol>
+                    </div>
+
+
+                    <div class="problem-box">
+                        <h3>C++ Program</h3>
+
+                        <div class="code-window">
+<pre><code>#include &lt;iostream&gt;
+
+using namespace std;
+
+class Demo
+{
+    int *ptr;
+
+public:
+
+    Demo()
+    {
+        ptr = new int;
+        *ptr = 100;
+
+        cout &lt;&lt; "Memory Allocated" &lt;&lt; endl;
+    }
+
+    void display()
+    {
+        cout &lt;&lt; "Value: " &lt;&lt; *ptr &lt;&lt; endl;
+    }
+
+    ~Demo()
+    {
+        delete ptr;
+
+        cout &lt;&lt; "Memory Released" &lt;&lt; endl;
+    }
+};
+
+int main()
+{
+    Demo *obj = new Demo();
+
+    obj-&gt;display();
+
+    delete obj;
+
+    return 0;
+}</code></pre>
+                        </div>
+                    </div>
+
+
+                    <div class="problem-box">
+                        <h3>Expected Output</h3>
+
+                        <div class="output-box">
+<pre>Memory Allocated
+Value: 100
+Memory Released</pre>
+                        </div>
+                    </div>
+
+
+                    <div class="problem-visual">
+
+                        <span class="section-label">VISUAL EXPLANATION</span>
+                        <h3>Dynamic Memory Cleanup</h3>
+
+                        <div class="flow-row">
+
+                            <div class="flow-card">
+                                <strong>new Demo()</strong>
+                                <small>Object created dynamically</small>
+                            </div>
+
+                            <div class="flow-arrow">→</div>
+
+                            <div class="flow-card">
+                                <strong>new int</strong>
+                                <small>Memory allocated for integer</small>
+                            </div>
+
+                            <div class="flow-arrow">→</div>
+
+                            <div class="flow-card">
+                                <strong>delete obj</strong>
+                                <small>Destructor runs and releases memory</small>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="problem-box">
+                        <h3>Program Explanation</h3>
+
+                        <ul class="key-points">
+                            <li>The pointer <strong>ptr</strong> stores the address of dynamically allocated memory.</li>
+                            <li>The constructor allocates memory using <strong>new</strong>.</li>
+                            <li>The value 100 is stored in the allocated memory.</li>
+                            <li>The object is created dynamically using <strong>new Demo()</strong>.</li>
+                            <li><strong>delete obj</strong> destroys the object and invokes its destructor.</li>
+                            <li>The destructor releases the integer memory using <strong>delete ptr</strong>.</li>
+                        </ul>
+                    </div>
+
+
+                    <div class="problem-box">
+                        <h3>Real-Life Connection</h3>
+
+                        <p>
+                            Software objects may temporarily own memory or other
+                            resources. When ownership ends, those resources should
+                            be released so that the application does not keep
+                            unnecessary resources allocated.
+                        </p>
+                    </div>
+
+
+                    <div class="problem-box">
+                        <h3>Key Points</h3>
+
+                        <ul class="key-points">
+                            <li>Use <strong>new</strong> to dynamically allocate memory.</li>
+                            <li>Use <strong>delete</strong> to release a single dynamically allocated object or value.</li>
+                            <li>A destructor is a natural place for object-owned cleanup.</li>
+                            <li>Cleanup should match the allocation strategy.</li>
+                        </ul>
+                    </div>
+
+
+                    <div class="problem-box">
+                        <h3>Common Errors</h3>
+
+                        <div class="error-grid">
+
+                            <div class="error-card">
+                                <h4>Memory Leak</h4>
+                                <p>
+                                    Forgetting to release dynamically allocated memory can cause a memory leak.
+                                </p>
+                            </div>
+
+                            <div class="error-card">
+                                <h4>Wrong Delete</h4>
+                                <p>
+                                    Match delete with memory allocated by new.
+                                </p>
+                            </div>
+
+                            <div class="error-card">
+                                <h4>Null / Invalid Pointer</h4>
+                                <p>
+                                    Do not dereference an invalid or uninitialized pointer.
+                                </p>
+                            </div>
+
+                            <div class="error-card">
+                                <h4>Double Delete</h4>
+                                <p>
+                                    Do not release the same dynamically allocated memory twice.
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     PROBLEM 04
+                ================================================= -->
+
+                <div class="mini-problem" id="problem11-4">
+
+                    <div class="problem-heading">
+                        <span class="section-label">PROBLEM 04</span>
+                        <h2>Complete Object Lifecycle</h2>
+                    </div>
+
+
+                    <div class="problem-box">
+                        <h3>Problem Statement</h3>
+
+                        <p>
+                            Write a C++ program to demonstrate the complete
+                            lifecycle of an object using a constructor,
+                            member function and destructor.
+                        </p>
+                    </div>
+
+
+                    <div class="problem-box">
+                        <h3>Theory / Concept</h3>
+
+                        <p>
+                            An object has a lifetime that begins when it is
+                            constructed and ends when it is destroyed. The
+                            constructor prepares the object, member functions
+                            operate on it, and the destructor performs final
+                            cleanup when its lifetime ends.
+                        </p>
+                    </div>
+
+
+                    <div class="problem-box syntax-block">
+
+                        <div class="syntax-heading">
+                            <span class="section-label">SYNTAX</span>
+                            <h3>Constructor + Destructor</h3>
+                        </div>
+
+                        <div class="code-window">
+<pre><code>class ClassName
+{
+public:
+
+    ClassName()
+    {
+        // initialization
+    }
+
+    void display()
+    {
+        // object operation
+    }
+
+    ~ClassName()
+    {
+        // cleanup
+    }
+};</code></pre>
+                        </div>
+
+                    </div>
+
+
+                    <div class="problem-box">
+                        <h3>Algorithm</h3>
+
+                        <ol class="algorithm-list">
+                            <li>Start the program.</li>
+                            <li>Define the Employee class.</li>
+                            <li>Declare employee data members.</li>
+                            <li>Define a constructor to initialize the object.</li>
+                            <li>Define a member function to display the object details.</li>
+                            <li>Define a destructor to display the cleanup message.</li>
+                            <li>Create an Employee object.</li>
+                            <li>Use the object to display its details.</li>
+                            <li>Allow the object to go out of scope.</li>
+                            <li>Observe the destructor call.</li>
+                            <li>Stop the program.</li>
+                        </ol>
+                    </div>
+
+
+                    <div class="problem-box">
+                        <h3>C++ Program</h3>
+
+                        <div class="code-window">
+<pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+using namespace std;
+
+class Employee
+{
+    int empId;
+    string name;
+
+public:
+
+    Employee()
+    {
+        empId = 101;
+        name = "Riya";
+
+        cout &lt;&lt; "1. Constructor Called" &lt;&lt; endl;
+    }
+
+    void display()
+    {
+        cout &lt;&lt; "2. Employee Details" &lt;&lt; endl;
+        cout &lt;&lt; "ID: " &lt;&lt; empId &lt;&lt; endl;
+        cout &lt;&lt; "Name: " &lt;&lt; name &lt;&lt; endl;
+    }
+
+    ~Employee()
+    {
+        cout &lt;&lt; "3. Destructor Called" &lt;&lt; endl;
+    }
+};
+
+int main()
+{
+    Employee e;
+
+    e.display();
+
+    cout &lt;&lt; "4. End of main scope" &lt;&lt; endl;
+
+    return 0;
+}</code></pre>
+                        </div>
+                    </div>
+
+
+                    <div class="problem-box">
+                        <h3>Expected Output</h3>
+
+                        <div class="output-box">
+<pre>1. Constructor Called
+2. Employee Details
+ID: 101
+Name: Riya
+4. End of main scope
+3. Destructor Called</pre>
+                        </div>
+                    </div>
+
+
+                    <div class="problem-visual">
+
+                        <span class="section-label">VISUAL EXPLANATION</span>
+                        <h3>Object Lifecycle</h3>
+
+                        <div class="lifecycle-flow">
+
+                            <div class="lifecycle-node">
+                                <strong>Create</strong>
+                                <small>Employee e;</small>
+                            </div>
+
+                            <div class="lifecycle-arrow">→</div>
+
+                            <div class="lifecycle-node">
+                                <strong>Constructor</strong>
+                                <small>Initialize object</small>
+                            </div>
+
+                            <div class="lifecycle-arrow">→</div>
+
+                            <div class="lifecycle-node">
+                                <strong>Use Object</strong>
+                                <small>e.display()</small>
+                            </div>
+
+                            <div class="lifecycle-arrow">→</div>
+
+                            <div class="lifecycle-node">
+                                <strong>Scope Ends</strong>
+                                <small>main() ends</small>
+                            </div>
+
+                            <div class="lifecycle-arrow">→</div>
+
+                            <div class="lifecycle-node">
+                                <strong>Destructor</strong>
+                                <small>Final cleanup</small>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="problem-box">
+                        <h3>Program Explanation</h3>
+
+                        <ul class="key-points">
+                            <li>Creating <strong>Employee e</strong> invokes the constructor automatically.</li>
+                            <li>The constructor initializes employee ID and name.</li>
+                            <li>The display() function accesses the initialized object.</li>
+                            <li>When the object reaches the end of its lifetime, the destructor is invoked automatically.</li>
+                            <li>This demonstrates the complete sequence: <strong>construction → use → destruction</strong>.</li>
+                        </ul>
+                    </div>
+
+
+                    <div class="problem-box">
+                        <h3>Real-Life Connection</h3>
+
+                        <p>
+                            An employee record object may be created, used to
+                            perform operations, and eventually removed from
+                            memory when its lifetime ends. The constructor and
+                            destructor provide clear points for initialization
+                            and cleanup.
+                        </p>
+                    </div>
+
+
+                    <div class="problem-box">
+                        <h3>Key Points</h3>
+
+                        <ul class="key-points">
+                            <li>Object lifetime starts with construction.</li>
+                            <li>Member functions operate while the object exists.</li>
+                            <li>Object destruction occurs at the end of its lifetime.</li>
+                            <li>The destructor performs final object-level cleanup.</li>
+                            <li>Understanding object lifetime helps explain resource management.</li>
+                        </ul>
+                    </div>
+
+
+                    <div class="problem-box">
+                        <h3>Common Errors</h3>
+
+                        <div class="error-grid">
+
+                            <div class="error-card">
+                                <h4>Wrong Sequence</h4>
+                                <p>
+                                    Remember that construction occurs before normal object use.
+                                </p>
+                            </div>
+
+                            <div class="error-card">
+                                <h4>Destructor Name</h4>
+                                <p>
+                                    Use ~ followed by the exact class name.
+                                </p>
+                            </div>
+
+                            <div class="error-card">
+                                <h4>Return Type</h4>
+                                <p>
+                                    Neither constructors nor destructors use a return type.
+                                </p>
+                            </div>
+
+                            <div class="error-card">
+                                <h4>Scope</h4>
+                                <p>
+                                    Understand when the object leaves its scope and is destroyed.
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- =====================================================
+             QUICK SUMMARY
+        ===================================================== -->
+
+        <section class="content-section">
+            <div class="container">
+
+                <span class="section-label">QUICK SUMMARY</span>
+                <h2>Practical 11 at a Glance</h2>
+
+                <div class="content-card">
+
+                    <ul class="key-points">
+
+                        <li>
+                            A destructor is a special member function used for cleanup.
+                        </li>
+
+                        <li>
+                            Its name is the class name preceded by the tilde (~).
+                        </li>
+
+                        <li>
+                            A destructor has no return type and takes no parameters.
+                        </li>
+
+                        <li>
+                            A destructor is automatically called when an object is destroyed.
+                        </li>
+
+                        <li>
+                            Local objects are generally destroyed in reverse order of construction.
+                        </li>
+
+                        <li>
+                            A destructor can release dynamically allocated resources owned by an object.
+                        </li>
+
+                        <li>
+                            A class has only one destructor and destructors cannot be overloaded.
+                        </li>
+
+                        <li>
+                            Constructor and destructor together help explain the lifecycle of an object.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- =====================================================
+             VIVA
+        ===================================================== -->
+
+        <section class="content-section">
+            <div class="container">
+
+                <span class="section-label">VIVA</span>
+                <h2>Viva Questions</h2>
+
+                <div class="viva-list">
+
+                    <div class="viva-item">
+                        <button type="button" class="viva-question">
+                            <span>What is a destructor?</span>
+                            <span class="viva-icon">+</span>
+                        </button>
+                        <div class="viva-answer">
+                            <p>
+                                A destructor is a special member function that
+                                is automatically called when an object is destroyed.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="viva-item">
+                        <button type="button" class="viva-question">
+                            <span>What is the syntax of a destructor?</span>
+                            <span class="viva-icon">+</span>
+                        </button>
+                        <div class="viva-answer">
+                            <p>
+                                The syntax is
+                                <strong>~ClassName()</strong> followed by the
+                                destructor body.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="viva-item">
+                        <button type="button" class="viva-question">
+                            <span>Does a destructor have a return type?</span>
+                            <span class="viva-icon">+</span>
+                        </button>
+                        <div class="viva-answer">
+                            <p>
+                                No. A destructor does not have a return type,
+                                not even <strong>void</strong>.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="viva-item">
+                        <button type="button" class="viva-question">
+                            <span>Can a destructor accept parameters?</span>
+                            <span class="viva-icon">+</span>
+                        </button>
+                        <div class="viva-answer">
+                            <p>
+                                No. A destructor does not accept parameters.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="viva-item">
+                        <button type="button" class="viva-question">
+                            <span>When is a destructor called?</span>
+                            <span class="viva-icon">+</span>
+                        </button>
+                        <div class="viva-answer">
+                            <p>
+                                It is called automatically when an object is
+                                destroyed. For a local object, this normally
+                                occurs when its lifetime ends.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="viva-item">
+                        <button type="button" class="viva-question">
+                            <span>Why is a destructor used?</span>
+                            <span class="viva-icon">+</span>
+                        </button>
+                        <div class="viva-answer">
+                            <p>
+                                It is used mainly for cleanup and for releasing
+                                resources owned by an object.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="viva-item">
+                        <button type="button" class="viva-question">
+                            <span>Can a class have more than one destructor?</span>
+                            <span class="viva-icon">+</span>
+                        </button>
+                        <div class="viva-answer">
+                            <p>
+                                No. A class can have only one destructor.
+                                Destructors cannot be overloaded.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="viva-item">
+                        <button type="button" class="viva-question">
+                            <span>What symbol is used in a destructor?</span>
+                            <span class="viva-icon">+</span>
+                        </button>
+                        <div class="viva-answer">
+                            <p>
+                                The tilde symbol <strong>~</strong> is placed
+                                before the class name.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="viva-item">
+                        <button type="button" class="viva-question">
+                            <span>What is the difference between a constructor and destructor?</span>
+                            <span class="viva-icon">+</span>
+                        </button>
+                        <div class="viva-answer">
+                            <p>
+                                A constructor initializes an object when it is
+                                created, while a destructor performs cleanup
+                                when the object is destroyed.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="viva-item">
+                        <button type="button" class="viva-question">
+                            <span>In what order are local objects destroyed?</span>
+                            <span class="viva-icon">+</span>
+                        </button>
+                        <div class="viva-answer">
+                            <p>
+                                Local objects created in the same scope are
+                                generally destroyed in reverse order of their
+                                construction.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="viva-item">
+                        <button type="button" class="viva-question">
+                            <span>What happens when delete is used on a dynamically allocated object?</span>
+                            <span class="viva-icon">+</span>
+                        </button>
+                        <div class="viva-answer">
+                            <p>
+                                For a dynamically allocated object, delete
+                                destroys the object and invokes its destructor
+                                as part of the destruction process.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div class="viva-item">
+                        <button type="button" class="viva-question">
+                            <span>Can a destructor be called explicitly?</span>
+                            <span class="viva-icon">+</span>
+                        </button>
+                        <div class="viva-answer">
+                            <p>
+                                A destructor is normally invoked automatically
+                                as part of object destruction. Explicit
+                                destructor calls are specialized C++ operations
+                                and should not be used casually.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+    ===================================================== -->
+
+    <footer class="footer">
+
+        <div class="footer-content">
+
+            <div class="footer-brand">
+
+                <div class="footer-logo">
+                    &lt;/&gt;
+                </div>
+
+                <div class="footer-brand-text">
+
+                    <div class="footer-brand-name">
+                        Rasika <span>CodeLab</span>
+                    </div>
+
+                    <p class="footer-tagline">
+                        Code • Understand • Visualize
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="footer-copy">
+                © 2026 Rasika CodeLab. Built for practical learning.
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =====================================================
+         MAIN JAVASCRIPT
+    ===================================================== -->
+
+    <script src="../js/main.js"></script>
+
+
+    <!-- =====================================================
+         PRACTICAL 11 JAVASCRIPT
+    ===================================================== -->
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            /* =================================================
+               PROBLEM TABS
+            ================================================= */
+
+            const problemTabs = document.querySelectorAll(
+                ".problem-mini-tabs .mini-problem-tab"
+            );
+
+            const problems = document.querySelectorAll(
+                ".mini-problem"
+            );
+
+            problemTabs.forEach(function (tab) {
+
+                tab.addEventListener("click", function () {
+
+                    const target =
+                        this.getAttribute("data-problem");
+
+                    problemTabs.forEach(function (item) {
+                        item.classList.remove("active");
+                    });
+
+                    this.classList.add("active");
+
+                    problems.forEach(function (problem) {
+                        problem.classList.remove("active");
+                    });
+
+                    const selectedProblem =
+                        document.getElementById(target);
+
+                    if (selectedProblem) {
+
+                        selectedProblem.classList.add("active");
+
+                        selectedProblem.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start"
+                        });
+
+                    }
+
+                });
+
+            });
+
+
+            /* =================================================
+               VIVA ACCORDION
+            ================================================= */
+
+            const vivaQuestions =
+                document.querySelectorAll(".viva-question");
+
+            vivaQuestions.forEach(function (question) {
+
+                question.addEventListener("click", function () {
+
+                    const currentItem =
+                        this.closest(".viva-item");
+
+                    currentItem.classList.toggle("active");
+
+                });
+
+            });
+
+        });
+    </script>
+
+</body>
+</html>

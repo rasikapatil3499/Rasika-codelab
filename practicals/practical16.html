@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Practical 16 | Exception Handling in C++ | Rasika CodeLab</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+/* PRACTICAL 16 — ALL LOCAL CSS IS SCOPED TO .practical16-page */
+.practical16-page .practical-hero{padding:78px 0 58px}
+.practical16-page .practical-hero h1{font-size:clamp(2.4rem,5vw,4.4rem);line-height:1.05;max-width:950px;margin:12px 0 18px;letter-spacing:-.04em}
+.practical16-page .practical-subtitle{max-width:850px;font-size:16px;line-height:1.75}
+.practical16-page .practical-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.practical16-page .practical-meta span{padding:8px 13px;border:1px solid var(--border);border-radius:999px;background:rgba(255,255,255,.035);font-size:12px;color:var(--text-secondary)}
+.practical16-page .content-section{padding:42px 0}
+.practical16-page .content-card{box-shadow:0 16px 45px rgba(0,0,0,.12)}
+.practical16-page .content-card+.content-card{margin-top:16px}
+.practical16-page .concept-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:20px}
+.practical16-page .concept-card{padding:23px;border:1px solid var(--border);border-radius:18px;background:var(--bg-card)}
+.practical16-page .concept-card h3{margin:12px 0 8px}
+.practical16-page .concept-card p{color:var(--text-secondary);line-height:1.65}
+.practical16-page .concept-number{display:inline-flex;width:36px;height:36px;align-items:center;justify-content:center;border:1px solid var(--border);border-radius:10px;color:var(--accent);background:rgba(255,255,255,.04);font-size:12px;font-weight:800}
+.practical16-page .exception-flow{display:flex;align-items:center;justify-content:center;gap:12px;overflow-x:auto;padding:10px 0;margin-top:18px}
+.practical16-page .exception-node{flex:0 0 145px;min-height:82px;padding:17px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1px solid var(--border);border-radius:15px;background:var(--bg-card)}
+.practical16-page .exception-node strong{margin-bottom:6px}
+.practical16-page .exception-node small{color:var(--text-secondary);line-height:1.4}
+.practical16-page .throw-node{border-color:var(--accent)}
+.practical16-page .catch-node{border-color:var(--accent)}
+.practical16-page .flow-arrow{color:var(--accent);font-size:22px;font-weight:800}
+.practical16-page .visual-card{margin-top:18px;padding:28px;border:1px solid var(--border);border-radius:20px;background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.012))}
+.practical16-page .visual-note{max-width:850px;margin:18px auto 0;text-align:center;color:var(--text-secondary);line-height:1.65}
+.practical16-page .comparison-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:20px}
+.practical16-page .comparison-card{padding:22px;border:1px solid var(--border);border-radius:17px;background:var(--bg-card)}
+.practical16-page .comparison-card h3{margin-bottom:9px}
+.practical16-page .comparison-card p{margin:0;color:var(--text-secondary);line-height:1.65}
+.practical16-page .main-type-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:28px}
+.practical16-page .main-type-tab{width:100%;min-width:0;min-height:68px;padding:12px 14px;display:flex;align-items:center;gap:10px;box-sizing:border-box;background:var(--bg-card);border:1px solid var(--border);border-radius:15px;color:var(--text-secondary);font:inherit;font-size:13px;font-weight:700;line-height:1.3;text-align:left;cursor:pointer;transition:.22s ease}
+.practical16-page .main-type-tab>span{flex:0 0 34px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;border-radius:9px;border:1px solid var(--border);background:rgba(255,255,255,.04);color:var(--accent);font-size:11px}
+.practical16-page .main-type-tab:hover{border-color:var(--accent);color:var(--text-primary);transform:translateY(-2px)}
+.practical16-page .main-type-tab.active{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 10px 28px rgba(0,0,0,.22)}
+.practical16-page .main-type-tab.active>span{background:rgba(0,0,0,.13);border-color:rgba(255,255,255,.22);color:#fff}
+.practical16-page .type-panel{display:none;margin-top:28px}
+.practical16-page .type-panel.active{display:block;animation:practical16Fade .35s ease}
+.practical16-page .mini-problem-selector{padding:0 0 14px;border-bottom:1px solid var(--border)}
+.practical16-page .mini-problem-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.practical16-page .mini-problem-tab{width:100%;min-width:0;min-height:58px;padding:11px 14px;display:flex;align-items:center;gap:10px;box-sizing:border-box;background:rgba(255,255,255,.018);border:1px solid var(--border);border-radius:13px;color:var(--text-secondary);font:inherit;font-size:13px;font-weight:650;line-height:1.3;text-align:left;cursor:pointer;transition:.22s ease}
+.practical16-page .mini-problem-tab>span{flex:0 0 32px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:9px;border:1px solid var(--border);background:rgba(255,255,255,.04);color:var(--accent);font-size:11px;font-weight:800}
+.practical16-page .mini-problem-tab:hover{border-color:var(--accent);color:var(--text-primary);transform:translateY(-2px)}
+.practical16-page .mini-problem-tab.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.practical16-page .mini-problem-tab.active>span{background:rgba(0,0,0,.13);border-color:rgba(255,255,255,.22);color:#fff}
+.practical16-page .mini-problem{display:none;margin-top:32px}
+.practical16-page .mini-problem.active{display:block;animation:practical16Fade .35s ease}
+.practical16-page .problem-heading{padding:8px 0 20px;border-bottom:1px solid var(--border);margin-bottom:22px}
+.practical16-page .problem-heading h2{margin:8px 0 0;font-size:clamp(1.7rem,3vw,2.35rem)}
+.practical16-page .problem-box{padding:24px;margin-bottom:16px;background:rgba(255,255,255,.018);border:1px solid var(--border);border-radius:18px}
+.practical16-page .problem-box h3{margin-bottom:12px}
+.practical16-page .algorithm-list{padding-left:22px}
+.practical16-page .algorithm-list li{margin-bottom:8px;line-height:1.6}
+.practical16-page .syntax-block{margin:20px 0 16px;padding:24px;border:1px solid rgba(255,255,255,.08);border-radius:18px;background:linear-gradient(145deg,rgba(150,92,255,.055),rgba(255,255,255,.015))}
+.practical16-page .syntax-heading{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.practical16-page .syntax-heading .section-label{margin:0}
+.practical16-page .syntax-heading h3{margin:0}
+.practical16-page .code-window{overflow-x:auto;border-radius:14px}
+.practical16-page .output-box{border-radius:14px}
+.practical16-page .key-points li{margin-bottom:8px;line-height:1.6}
+.practical16-page .error-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.practical16-page .error-card{padding:18px;border:1px solid var(--border);border-radius:14px;background:var(--bg-card)}
+.practical16-page .error-card h4{margin-bottom:7px}
+.practical16-page .error-card p{margin:0;color:var(--text-secondary);line-height:1.55;font-size:14px}
+.practical16-page .viva-list{display:grid;gap:12px;max-width:920px;margin-top:25px}
+.practical16-page .viva-item{overflow:hidden;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md)}
+.practical16-page .viva-question{width:100%;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:20px 22px;background:transparent;border:none;color:var(--text-primary);font:inherit;font-size:16px;font-weight:600;text-align:left;cursor:pointer}
+.practical16-page .viva-question:hover{background:rgba(255,255,255,.03)}
+.practical16-page .viva-icon{flex:0 0 auto;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);border-radius:50%;color:var(--accent);font-size:22px;transition:.25s ease}
+.practical16-page .viva-answer{display:none;padding:0 22px 22px;color:var(--text-secondary);line-height:1.7}
+.practical16-page .viva-item.active .viva-answer{display:block}
+.practical16-page .viva-item.active .viva-icon{transform:rotate(45deg)}
+@keyframes practical16Fade{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+@media(max-width:950px){
+.practical16-page .main-type-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}
+.practical16-page .error-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.practical16-page .exception-flow{justify-content:flex-start}
+}
+@media(max-width:700px){
+.practical16-page .practical-hero{padding:55px 0 40px}
+.practical16-page .content-section{padding:30px 0}
+.practical16-page .concept-grid,.practical16-page .comparison-grid,.practical16-page .error-grid{grid-template-columns:1fr}
+.practical16-page .main-type-tabs,.practical16-page .mini-problem-tabs{grid-template-columns:1fr}
+.practical16-page .problem-box,.practical16-page .visual-card,.practical16-page .syntax-block{padding:20px}
+}
+</style>
+</head>
+<body>
+<nav class="navbar">
+<div class="container nav-container">
+<a href="../index.html" class="logo"><span class="logo-symbol">&lt;/&gt;</span><span>Rasika<span class="logo-accent">CodeLab</span></span></a>
+<button class="menu-btn" aria-label="Open menu">☰</button>
+<div class="nav-links">
+<a href="../index.html">Home</a>
+<a href="../foundations/program.html">Foundations</a>
+<a href="index.html" class="active">Practicals</a>
+<a href="../index.html#about">About</a>
+</div>
+</div>
+</nav>
+
+<main class="practical-page practical16-page">
+<section class="practical-hero"><div class="container">
+<span class="section-label">PRACTICAL 16</span>
+<h1>Exception Handling in <span class="gradient-text">C++</span></h1>
+<p class="practical-subtitle">Learn how C++ handles exceptional situations using <strong>try</strong>, <strong>throw</strong> and <strong>catch</strong>, including multiple catch blocks, user-defined exceptions and standard exception classes.</p>
+<div class="practical-meta"><span>LLO 16.1</span><span>try</span><span>throw</span><span>catch</span><span>Standard Exceptions</span></div>
+</div></section>
+
+<section class="content-section"><div class="container">
+<span class="section-label">AIM</span><h2>Aim of the Practical</h2>
+<div class="content-card"><p>To implement C++ programs using exception handling for detecting, throwing and handling exceptional conditions.</p></div>
+</div></section>
+
+<section class="content-section"><div class="container">
+<span class="section-label">LEARNING OBJECTIVES</span><h2>What You Will Learn</h2>
+<div class="objective-grid">
+<div class="objective-card"><strong>01</strong><h3>Understand Exceptions</h3><p>Identify exceptional conditions and understand why they require separate handling.</p></div>
+<div class="objective-card"><strong>02</strong><h3>Use try, throw &amp; catch</h3><p>Implement the basic exception-handling mechanism in C++.</p></div>
+<div class="objective-card"><strong>03</strong><h3>Create Custom Exceptions</h3><p>Define user-specific exception classes for application rules.</p></div>
+<div class="objective-card"><strong>04</strong><h3>Use Standard Exceptions</h3><p>Work with standard classes such as out_of_range, invalid_argument and runtime_error.</p></div>
+</div>
+</div></section>
+
+<section class="content-section"><div class="container">
+<span class="section-label">CONCEPT</span><h2>Understanding Exception Handling</h2>
+<div class="content-card"><h3>What is an Exception?</h3><p>An <strong>exception</strong> is an unusual condition that occurs while a program is executing and prevents the normal flow of the operation. Exception handling provides a structured way to detect and handle such conditions.</p></div>
+
+<div class="concept-grid">
+<div class="concept-card"><span class="concept-number">01</span><h3>try</h3><p>Contains the code where an exceptional condition may occur.</p></div>
+<div class="concept-card"><span class="concept-number">02</span><h3>throw</h3><p>Signals that an exceptional condition has occurred.</p></div>
+<div class="concept-card"><span class="concept-number">03</span><h3>catch</h3><p>Receives and handles an exception thrown from a try block.</p></div>
+<div class="concept-card"><span class="concept-number">04</span><h3>Exception Class</h3><p>A standard or user-defined type can carry information about the error.</p></div>
+</div>
+
+<div class="content-card"><h3>Real-Life Example</h3><p>Consider an ATM. A withdrawal greater than the available balance is not a normal transaction. Instead of continuing with the transaction, the system detects the exceptional condition and shows an appropriate message. C++ exception handling provides a structured mechanism for similar situations.</p></div>
+
+<div class="content-card"><h3>Where and How Is It Used?</h3>
+<div class="comparison-grid">
+<div class="comparison-card"><h3>Input Validation</h3><p>Handle values that violate application rules.</p></div>
+<div class="comparison-card"><h3>Financial Operations</h3><p>Handle conditions such as insufficient balance or invalid transactions.</p></div>
+<div class="comparison-card"><h3>Array / Container Access</h3><p>Handle invalid indexes using bounds-checked operations and standard exceptions.</p></div>
+<div class="comparison-card"><h3>Runtime Failures</h3><p>Represent failures detected during execution using suitable standard exception classes.</p></div>
+</div></div>
+
+<div class="content-card"><h3>Exception Flow</h3>
+<div class="visual-card">
+<div class="exception-flow">
+<div class="exception-node"><strong>try</strong><small>Execute risky code</small></div>
+<div class="flow-arrow">→</div>
+<div class="exception-node throw-node"><strong>throw</strong><small>Signal exception</small></div>
+<div class="flow-arrow">→</div>
+<div class="exception-node catch-node"><strong>catch</strong><small>Handle exception</small></div>
+<div class="flow-arrow">→</div>
+<div class="exception-node"><strong>Continue</strong><small>After handling</small></div>
+</div>
+</div></div>
+</div></section>
+
+<section class="content-section"><div class="container">
+<span class="section-label">PRACTICAL PROBLEMS</span><h2>Explore Exception Handling</h2>
+<div class="main-type-tabs">
+<button type="button" class="main-type-tab active" data-type="basic-exceptions"><span>01</span>Basic Exception Handling</button>
+<button type="button" class="main-type-tab" data-type="multiple-catch"><span>02</span>Multiple Catch Blocks</button>
+<button type="button" class="main-type-tab" data-type="user-exceptions"><span>03</span>User-Defined Exceptions</button>
+<button type="button" class="main-type-tab" data-type="standard-exceptions"><span>04</span>Standard Exception Classes</button>
+</div>
+
+<div class="type-panel active" id="basic-exceptions">
+<div class="problem-box type-intro"><span class="section-label">TOPIC 01</span><h2>Basic Exception Handling</h2><p>Learn the try–throw–catch flow through simple validation and arithmetic errors.</p></div>
+<div class="mini-problem-selector"><div class="mini-problem-tabs"><button type="button" class="mini-problem-tab active" data-problem="be1"><span>01</span>Divide by Zero</button><button type="button" class="mini-problem-tab " data-problem="be2"><span>02</span>Check Negative Number</button><button type="button" class="mini-problem-tab " data-problem="be3"><span>03</span>Invalid Age</button></div></div>
+
+<div class="mini-problem active" id="be1">
+<div class="problem-heading"><span class="section-label">PROBLEM</span><h2>Divide by Zero</h2></div>
+<div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to divide two numbers and throw an exception when the denominator is zero.</p></div>
+<div class="problem-box"><h3>Theory / Concept</h3><p>Exception handling separates error-handling code from normal program logic. A risky operation is placed inside try, an error is reported using throw, and the matching catch block handles it.</p></div>
+<div class="syntax-block"><div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Exception Handling Syntax</h3></div>
+<div class="code-window"><pre><code>try
+{
+    // risky code
+    if (b == 0)
+        throw b;
+}
+catch (int)
+{
+    // handle exception
+}</code></pre></div></div>
+<div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Accept two numbers.</li><li>Start the try block.</li><li>Check whether the denominator is zero.</li><li>Throw an exception if it is zero.</li><li>Otherwise perform division.</li><li>Handle the exception in catch.</li><li>Display the result or error message.</li></ol></div>
+<div class="problem-box"><h3>C++ Program</h3><div class="code-window"><pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    int a = 20, b = 0;
+
+    try
+    {
+        if (b == 0)
+            throw b;
+
+        cout &lt;&lt; &quot;Result: &quot; &lt;&lt; a / b;
+    }
+    catch (int)
+    {
+        cout &lt;&lt; &quot;Error: Division by zero is not allowed.&quot;;
+    }
+
+    return 0;
+}</code></pre></div></div>
+<div class="problem-box"><h3>Expected Output</h3><div class="output-box"><pre>Error: Division by zero is not allowed.</pre></div></div>
+<div class="visual-card"><span class="section-label">VISUAL EXPLANATION</span><h3>How Exception Handling Works</h3>
+<div class="exception-flow">
+<div class="exception-node"><strong>try</strong><small>Risky code</small></div><div class="flow-arrow">→</div>
+<div class="exception-node throw-node"><strong>throw</strong><small>Exception raised</small></div><div class="flow-arrow">→</div>
+<div class="exception-node catch-node"><strong>catch</strong><small>Error handled</small></div><div class="flow-arrow">→</div>
+<div class="exception-node"><strong>Continue</strong><small>After handling</small></div>
+</div>
+<p class="visual-note">The program detects the invalid denominator, throws an exception and transfers control to the matching catch block.</p></div>
+<div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>try contains code that may generate an exception.</li><li>throw signals an exceptional condition.</li><li>catch handles the thrown exception.</li><li>Normal execution resumes after the handled exception.</li></ul></div>
+<div class="problem-box"><h3>Real-Life Connection</h3><p>Division by zero can occur in calculators, billing systems and mathematical applications. Exception handling prevents the invalid operation from being processed normally.</p></div>
+<div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>try contains code that may generate an exception.</li><li>throw signals an exceptional condition.</li><li>catch handles the thrown exception.</li><li>Normal execution resumes after the handled exception.</li></ul></div>
+<div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>No zero check</h4><p>Check the denominator before division.</p></div><div class="error-card"><h4>Wrong catch type</h4><p>The catch parameter should match the thrown type.</p></div><div class="error-card"><h4>Division before validation</h4><p>Validate the denominator before performing division.</p></div></div></div>
+</div>
+<div class="mini-problem " id="be2">
+<div class="problem-heading"><span class="section-label">PROBLEM</span><h2>Check Negative Number</h2></div>
+<div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to accept a number and throw an exception if the number is negative.</p></div>
+<div class="problem-box"><h3>Theory / Concept</h3><p>A program can define conditions that are invalid for a particular operation. Here, a negative value is treated as an exceptional condition.</p></div>
+<div class="syntax-block"><div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Exception Handling Syntax</h3></div>
+<div class="code-window"><pre><code>try
+{
+    if (number &lt; 0)
+        throw number;
+}
+catch (int)
+{
+    // handle negative value
+}</code></pre></div></div>
+<div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Declare or accept a number.</li><li>Check whether it is negative.</li><li>Throw the number if the condition is true.</li><li>Catch the exception.</li><li>Display an appropriate message.</li></ol></div>
+<div class="problem-box"><h3>C++ Program</h3><div class="code-window"><pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    int number = -5;
+
+    try
+    {
+        if (number &lt; 0)
+            throw number;
+
+        cout &lt;&lt; &quot;Valid number: &quot; &lt;&lt; number;
+    }
+    catch (int)
+    {
+        cout &lt;&lt; &quot;Error: Negative number is not allowed.&quot;;
+    }
+
+    return 0;
+}</code></pre></div></div>
+<div class="problem-box"><h3>Expected Output</h3><div class="output-box"><pre>Error: Negative number is not allowed.</pre></div></div>
+<div class="visual-card"><span class="section-label">VISUAL EXPLANATION</span><h3>How Exception Handling Works</h3>
+<div class="exception-flow">
+<div class="exception-node"><strong>try</strong><small>Risky code</small></div><div class="flow-arrow">→</div>
+<div class="exception-node throw-node"><strong>throw</strong><small>Exception raised</small></div><div class="flow-arrow">→</div>
+<div class="exception-node catch-node"><strong>catch</strong><small>Error handled</small></div><div class="flow-arrow">→</div>
+<div class="exception-node"><strong>Continue</strong><small>After handling</small></div>
+</div>
+<p class="visual-note">The condition identifies an invalid value and throw transfers control to catch.</p></div>
+<div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>Throw only when the invalid condition occurs.</li><li>Use a suitable exception type.</li><li>Keep validation close to the operation it protects.</li></ul></div>
+<div class="problem-box"><h3>Real-Life Connection</h3><p>Applications may reject negative quantities, marks, counts or other values where only non-negative values are meaningful.</p></div>
+<div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>Throw only when the invalid condition occurs.</li><li>Use a suitable exception type.</li><li>Keep validation close to the operation it protects.</li></ul></div>
+<div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Wrong condition</h4><p>Check number &lt; 0.</p></div><div class="error-card"><h4>Missing throw</h4><p>The catch block is reached only when an exception is thrown.</p></div><div class="error-card"><h4>Unclear message</h4><p>Tell the user which condition is invalid.</p></div></div></div>
+</div>
+<div class="mini-problem " id="be3">
+<div class="problem-heading"><span class="section-label">PROBLEM</span><h2>Invalid Age</h2></div>
+<div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to accept an age and throw an exception if the age is outside the valid range of 0 to 120.</p></div>
+<div class="problem-box"><h3>Theory / Concept</h3><p>Exception handling can enforce application-specific validation rules. The program treats an out-of-range age as an exceptional condition.</p></div>
+<div class="syntax-block"><div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Exception Handling Syntax</h3></div>
+<div class="code-window"><pre><code>if (age &lt; 0 || age &gt; 120)
+    throw age;</code></pre></div></div>
+<div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Accept an age.</li><li>Check whether it is below 0 or above 120.</li><li>Throw the invalid age.</li><li>Catch the exception.</li><li>Display an error or the valid age.</li></ol></div>
+<div class="problem-box"><h3>C++ Program</h3><div class="code-window"><pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    int age = 150;
+
+    try
+    {
+        if (age &lt; 0 || age &gt; 120)
+            throw age;
+
+        cout &lt;&lt; &quot;Valid age: &quot; &lt;&lt; age;
+    }
+    catch (int)
+    {
+        cout &lt;&lt; &quot;Error: Age must be between 0 and 120.&quot;;
+    }
+
+    return 0;
+}</code></pre></div></div>
+<div class="problem-box"><h3>Expected Output</h3><div class="output-box"><pre>Error: Age must be between 0 and 120.</pre></div></div>
+<div class="visual-card"><span class="section-label">VISUAL EXPLANATION</span><h3>How Exception Handling Works</h3>
+<div class="exception-flow">
+<div class="exception-node"><strong>try</strong><small>Risky code</small></div><div class="flow-arrow">→</div>
+<div class="exception-node throw-node"><strong>throw</strong><small>Exception raised</small></div><div class="flow-arrow">→</div>
+<div class="exception-node catch-node"><strong>catch</strong><small>Error handled</small></div><div class="flow-arrow">→</div>
+<div class="exception-node"><strong>Continue</strong><small>After handling</small></div>
+</div>
+<p class="visual-note">The try block validates the age. If the range is invalid, the integer value is thrown and the catch block displays the error.</p></div>
+<div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>Define a clear valid range.</li><li>Throw invalid input.</li><li>Handle it without continuing the invalid operation.</li></ul></div>
+<div class="problem-box"><h3>Real-Life Connection</h3><p>Registration systems, admission forms and profile applications commonly validate age ranges before accepting records.</p></div>
+<div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>Define a clear valid range.</li><li>Throw invalid input.</li><li>Handle it without continuing the invalid operation.</li></ul></div>
+<div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Incorrect range</h4><p>Use 0 through 120 for this example.</p></div><div class="error-card"><h4>No exception handling</h4><p>Invalid data should be handled through the designed catch block.</p></div><div class="error-card"><h4>Wrong message</h4><p>State the valid range clearly.</p></div></div></div>
+</div>
+</div>
+<div class="type-panel " id="multiple-catch">
+<div class="problem-box type-intro"><span class="section-label">TOPIC 02</span><h2>Multiple Catch Blocks</h2><p>Handle different exception types with separate catch blocks.</p></div>
+<div class="mini-problem-selector"><div class="mini-problem-tabs"><button type="button" class="mini-problem-tab active" data-problem="mc1"><span>01</span>Handle Integer Exception</button><button type="button" class="mini-problem-tab " data-problem="mc2"><span>02</span>Handle Different Data Types</button><button type="button" class="mini-problem-tab " data-problem="mc3"><span>03</span>Calculator Exception Handling</button></div></div>
+
+<div class="mini-problem active" id="mc1">
+<div class="problem-heading"><span class="section-label">PROBLEM</span><h2>Handle Integer Exception</h2></div>
+<div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program that throws an integer exception and handles it using an integer catch block.</p></div>
+<div class="problem-box"><h3>Theory / Concept</h3><p>Different exception types can be handled by corresponding catch blocks. An integer exception can be used for a simple numeric error code or value.</p></div>
+<div class="syntax-block"><div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Exception Handling Syntax</h3></div>
+<div class="code-window"><pre><code>try
+{
+    throw 10;
+}
+catch (int error)
+{
+    cout &lt;&lt; error;
+}</code></pre></div></div>
+<div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Start the try block.</li><li>Throw an integer value.</li><li>Catch the value using catch(int).</li><li>Display the exception value.</li></ol></div>
+<div class="problem-box"><h3>C++ Program</h3><div class="code-window"><pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    try
+    {
+        throw 10;
+    }
+    catch (int error)
+    {
+        cout &lt;&lt; &quot;Integer exception: &quot; &lt;&lt; error;
+    }
+
+    return 0;
+}</code></pre></div></div>
+<div class="problem-box"><h3>Expected Output</h3><div class="output-box"><pre>Integer exception: 10</pre></div></div>
+<div class="visual-card"><span class="section-label">VISUAL EXPLANATION</span><h3>How Exception Handling Works</h3>
+<div class="exception-flow">
+<div class="exception-node"><strong>try</strong><small>Risky code</small></div><div class="flow-arrow">→</div>
+<div class="exception-node throw-node"><strong>throw</strong><small>Exception raised</small></div><div class="flow-arrow">→</div>
+<div class="exception-node catch-node"><strong>catch</strong><small>Error handled</small></div><div class="flow-arrow">→</div>
+<div class="exception-node"><strong>Continue</strong><small>After handling</small></div>
+</div>
+<p class="visual-note">The integer 10 is thrown from try and caught by catch(int).</p></div>
+<div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>The catch type must match the thrown type.</li><li>Use a meaningful error value.</li><li>Keep exception handling focused.</li></ul></div>
+<div class="problem-box"><h3>Real-Life Connection</h3><p>Numeric exception codes can represent categories of errors in simple programs.</p></div>
+<div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>The catch type must match the thrown type.</li><li>Use a meaningful error value.</li><li>Keep exception handling focused.</li></ul></div>
+<div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Wrong catch type</h4><p>catch(double) does not match an int exception.</p></div><div class="error-card"><h4>Throwing outside handling flow</h4><p>Place the throw where the condition is detected.</p></div><div class="error-card"><h4>Ignoring the value</h4><p>Use the caught value when it carries useful information.</p></div></div></div>
+</div>
+<div class="mini-problem " id="mc2">
+<div class="problem-heading"><span class="section-label">PROBLEM</span><h2>Handle Different Data Types</h2></div>
+<div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program that demonstrates separate catch blocks for integer and character exceptions.</p></div>
+<div class="problem-box"><h3>Theory / Concept</h3><p>Multiple catch blocks allow different exception types to be handled differently. The first compatible catch block is selected.</p></div>
+<div class="syntax-block"><div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Exception Handling Syntax</h3></div>
+<div class="code-window"><pre><code>try
+{
+    throw &#x27;E&#x27;;
+}
+catch (int)
+{
+}
+catch (char)
+{
+}</code></pre></div></div>
+<div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Create a try block.</li><li>Throw a character exception.</li><li>Provide an int catch block.</li><li>Provide a char catch block.</li><li>Observe that the char handler is selected.</li></ol></div>
+<div class="problem-box"><h3>C++ Program</h3><div class="code-window"><pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    try
+    {
+        throw &#x27;E&#x27;;
+    }
+    catch (int)
+    {
+        cout &lt;&lt; &quot;Integer exception&quot;;
+    }
+    catch (char error)
+    {
+        cout &lt;&lt; &quot;Character exception: &quot; &lt;&lt; error;
+    }
+
+    return 0;
+}</code></pre></div></div>
+<div class="problem-box"><h3>Expected Output</h3><div class="output-box"><pre>Character exception: E</pre></div></div>
+<div class="visual-card"><span class="section-label">VISUAL EXPLANATION</span><h3>How Exception Handling Works</h3>
+<div class="exception-flow">
+<div class="exception-node"><strong>try</strong><small>Risky code</small></div><div class="flow-arrow">→</div>
+<div class="exception-node throw-node"><strong>throw</strong><small>Exception raised</small></div><div class="flow-arrow">→</div>
+<div class="exception-node catch-node"><strong>catch</strong><small>Error handled</small></div><div class="flow-arrow">→</div>
+<div class="exception-node"><strong>Continue</strong><small>After handling</small></div>
+</div>
+<p class="visual-note">The thrown character matches catch(char), so that handler executes.</p></div>
+<div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>Use multiple catch blocks when exception types differ.</li><li>The thrown type determines the matching handler.</li><li>Order catch blocks appropriately.</li></ul></div>
+<div class="problem-box"><h3>Real-Life Connection</h3><p>Different error categories may need different handling logic, such as numeric validation versus command/input errors.</p></div>
+<div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>Use multiple catch blocks when exception types differ.</li><li>The thrown type determines the matching handler.</li><li>Order catch blocks appropriately.</li></ul></div>
+<div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Mismatched type</h4><p>Use a catch type compatible with the thrown value.</p></div><div class="error-card"><h4>Duplicate handling</h4><p>Avoid unnecessary handlers for the same type.</p></div><div class="error-card"><h4>Wrong order with inheritance</h4><p>More specific handlers should precede broader handlers when inheritance is involved.</p></div></div></div>
+</div>
+<div class="mini-problem " id="mc3">
+<div class="problem-heading"><span class="section-label">PROBLEM</span><h2>Calculator Exception Handling</h2></div>
+<div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program for a calculator that handles division-by-zero and invalid operation errors using multiple catch blocks.</p></div>
+<div class="problem-box"><h3>Theory / Concept</h3><p>A calculator can use different exception types for different invalid conditions. Multiple catch blocks make the error handling explicit.</p></div>
+<div class="syntax-block"><div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Exception Handling Syntax</h3></div>
+<div class="code-window"><pre><code>try
+{
+    if (op == &#x27;/&#x27; &amp;&amp; b == 0)
+        throw 1;
+
+    if (op != &#x27;+&#x27; &amp;&amp; op != &#x27;-&#x27; &amp;&amp; op != &#x27;*&#x27; &amp;&amp; op != &#x27;/&#x27;)
+        throw &#x27;E&#x27;;
+}
+catch (int)
+{
+}
+catch (char)
+{
+}</code></pre></div></div>
+<div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Declare operands and an operator.</li><li>Check for division by zero.</li><li>Throw an integer exception for division by zero.</li><li>Check for an unsupported operator.</li><li>Throw a character exception for invalid operation.</li><li>Handle each exception separately.</li></ol></div>
+<div class="problem-box"><h3>C++ Program</h3><div class="code-window"><pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    int a = 20, b = 0;
+    char op = &#x27;/&#x27;;
+
+    try
+    {
+        if (op == &#x27;/&#x27; &amp;&amp; b == 0)
+            throw 1;
+
+        if (op != &#x27;+&#x27; &amp;&amp; op != &#x27;-&#x27; &amp;&amp; op != &#x27;*&#x27; &amp;&amp; op != &#x27;/&#x27;)
+            throw &#x27;E&#x27;;
+
+        cout &lt;&lt; &quot;Valid operation&quot;;
+    }
+    catch (int)
+    {
+        cout &lt;&lt; &quot;Error: Cannot divide by zero.&quot;;
+    }
+    catch (char)
+    {
+        cout &lt;&lt; &quot;Error: Invalid operator.&quot;;
+    }
+
+    return 0;
+}</code></pre></div></div>
+<div class="problem-box"><h3>Expected Output</h3><div class="output-box"><pre>Error: Cannot divide by zero.</pre></div></div>
+<div class="visual-card"><span class="section-label">VISUAL EXPLANATION</span><h3>How Exception Handling Works</h3>
+<div class="exception-flow">
+<div class="exception-node"><strong>try</strong><small>Risky code</small></div><div class="flow-arrow">→</div>
+<div class="exception-node throw-node"><strong>throw</strong><small>Exception raised</small></div><div class="flow-arrow">→</div>
+<div class="exception-node catch-node"><strong>catch</strong><small>Error handled</small></div><div class="flow-arrow">→</div>
+<div class="exception-node"><strong>Continue</strong><small>After handling</small></div>
+</div>
+<p class="visual-note">Different conditions throw different types, allowing separate catch blocks to produce specific messages.</p></div>
+<div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>Validate before calculation.</li><li>Use different exception types only when separate handling is useful.</li><li>Keep catch blocks specific.</li></ul></div>
+<div class="problem-box"><h3>Real-Life Connection</h3><p>Financial calculators and utility applications can distinguish different input or operation errors.</p></div>
+<div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>Validate before calculation.</li><li>Use different exception types only when separate handling is useful.</li><li>Keep catch blocks specific.</li></ul></div>
+<div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Performing division too early</h4><p>Validate b before dividing.</p></div><div class="error-card"><h4>Wrong operator check</h4><p>List all supported operators.</p></div><div class="error-card"><h4>Unclear handlers</h4><p>Each catch should explain its associated error.</p></div></div></div>
+</div>
+</div>
+<div class="type-panel " id="user-exceptions">
+<div class="problem-box type-intro"><span class="section-label">TOPIC 03</span><h2>User-Defined Exceptions</h2><p>Create application-specific exception classes for domain rules.</p></div>
+<div class="mini-problem-selector"><div class="mini-problem-tabs"><button type="button" class="mini-problem-tab active" data-problem="ue1"><span>01</span>Invalid Marks</button><button type="button" class="mini-problem-tab " data-problem="ue2"><span>02</span>Insufficient Bank Balance</button><button type="button" class="mini-problem-tab " data-problem="ue3"><span>03</span>Invalid Product Quantity</button></div></div>
+
+<div class="mini-problem active" id="ue1">
+<div class="problem-heading"><span class="section-label">PROBLEM</span><h2>Invalid Marks</h2></div>
+<div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to create a user-defined exception for marks outside the range 0 to 100.</p></div>
+<div class="problem-box"><h3>Theory / Concept</h3><p>User-defined exceptions let the programmer represent application-specific errors. A custom class can carry a meaningful error message.</p></div>
+<div class="syntax-block"><div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Exception Handling Syntax</h3></div>
+<div class="code-window"><pre><code>class InvalidMarks
+{
+public:
+    string message;
+    InvalidMarks(string msg) : message(msg) {}
+};
+
+throw InvalidMarks(&quot;Invalid marks&quot;);</code></pre></div></div>
+<div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Create a custom exception class.</li><li>Accept or assign marks.</li><li>Check the range.</li><li>Throw an InvalidMarks object when the range is invalid.</li><li>Catch the custom exception.</li><li>Display its message.</li></ol></div>
+<div class="problem-box"><h3>C++ Program</h3><div class="code-window"><pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+class InvalidMarks
+{
+public:
+    string message;
+
+    InvalidMarks(string msg)
+    {
+        message = msg;
+    }
+};
+
+int main()
+{
+    int marks = 125;
+
+    try
+    {
+        if (marks &lt; 0 || marks &gt; 100)
+            throw InvalidMarks(&quot;Marks must be between 0 and 100.&quot;);
+
+        cout &lt;&lt; &quot;Valid marks.&quot;;
+    }
+    catch (InvalidMarks e)
+    {
+        cout &lt;&lt; &quot;Error: &quot; &lt;&lt; e.message;
+    }
+
+    return 0;
+}</code></pre></div></div>
+<div class="problem-box"><h3>Expected Output</h3><div class="output-box"><pre>Error: Marks must be between 0 and 100.</pre></div></div>
+<div class="visual-card"><span class="section-label">VISUAL EXPLANATION</span><h3>How Exception Handling Works</h3>
+<div class="exception-flow">
+<div class="exception-node"><strong>try</strong><small>Risky code</small></div><div class="flow-arrow">→</div>
+<div class="exception-node throw-node"><strong>throw</strong><small>Exception raised</small></div><div class="flow-arrow">→</div>
+<div class="exception-node catch-node"><strong>catch</strong><small>Error handled</small></div><div class="flow-arrow">→</div>
+<div class="exception-node"><strong>Continue</strong><small>After handling</small></div>
+</div>
+<p class="visual-note">The custom InvalidMarks class stores an application-specific message. Its object is thrown and caught.</p></div>
+<div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>A user-defined exception is a class created by the programmer.</li><li>The exception object can carry useful information.</li><li>The catch type should match the custom class.</li></ul></div>
+<div class="problem-box"><h3>Real-Life Connection</h3><p>College examination systems can use validation rules to prevent impossible marks from entering records.</p></div>
+<div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>A user-defined exception is a class created by the programmer.</li><li>The exception object can carry useful information.</li><li>The catch type should match the custom class.</li></ul></div>
+<div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Missing string header</h4><p>Include &lt;string&gt; for string.</p></div><div class="error-card"><h4>Wrong range</h4><p>Marks are valid from 0 to 100 in this example.</p></div><div class="error-card"><h4>Throwing only text</h4><p>The custom class demonstrates a structured exception object.</p></div></div></div>
+</div>
+<div class="mini-problem " id="ue2">
+<div class="problem-heading"><span class="section-label">PROBLEM</span><h2>Insufficient Bank Balance</h2></div>
+<div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to create a user-defined exception when a withdrawal amount is greater than the available balance.</p></div>
+<div class="problem-box"><h3>Theory / Concept</h3><p>A custom exception can represent a domain-specific condition such as insufficient funds and carry a message describing the problem.</p></div>
+<div class="syntax-block"><div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Exception Handling Syntax</h3></div>
+<div class="code-window"><pre><code>class InsufficientBalance
+{
+public:
+    string message;
+    InsufficientBalance(string msg) : message(msg) {}
+};
+
+if (amount &gt; balance)
+    throw InsufficientBalance(&quot;Insufficient balance&quot;);</code></pre></div></div>
+<div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Set the account balance and withdrawal amount.</li><li>Check whether the withdrawal exceeds the balance.</li><li>Throw InsufficientBalance if it does.</li><li>Catch the custom exception.</li><li>Otherwise subtract the amount and display the balance.</li></ol></div>
+<div class="problem-box"><h3>C++ Program</h3><div class="code-window"><pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+class InsufficientBalance
+{
+public:
+    string message;
+
+    InsufficientBalance(string msg)
+    {
+        message = msg;
+    }
+};
+
+int main()
+{
+    double balance = 5000;
+    double amount = 7000;
+
+    try
+    {
+        if (amount &gt; balance)
+            throw InsufficientBalance(&quot;Insufficient balance.&quot;);
+
+        balance -= amount;
+        cout &lt;&lt; &quot;Remaining balance: &quot; &lt;&lt; balance;
+    }
+    catch (InsufficientBalance e)
+    {
+        cout &lt;&lt; &quot;Error: &quot; &lt;&lt; e.message;
+    }
+
+    return 0;
+}</code></pre></div></div>
+<div class="problem-box"><h3>Expected Output</h3><div class="output-box"><pre>Error: Insufficient balance.</pre></div></div>
+<div class="visual-card"><span class="section-label">VISUAL EXPLANATION</span><h3>How Exception Handling Works</h3>
+<div class="exception-flow">
+<div class="exception-node"><strong>try</strong><small>Risky code</small></div><div class="flow-arrow">→</div>
+<div class="exception-node throw-node"><strong>throw</strong><small>Exception raised</small></div><div class="flow-arrow">→</div>
+<div class="exception-node catch-node"><strong>catch</strong><small>Error handled</small></div><div class="flow-arrow">→</div>
+<div class="exception-node"><strong>Continue</strong><small>After handling</small></div>
+</div>
+<p class="visual-note">The withdrawal is validated before the balance is changed. The custom exception handles the invalid transaction.</p></div>
+<div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>Validate before changing balance.</li><li>Use a domain-specific exception.</li><li>Do not allow the invalid transaction to continue.</li></ul></div>
+<div class="problem-box"><h3>Real-Life Connection</h3><p>Banking applications must reject transactions that violate account rules while clearly reporting the reason.</p></div>
+<div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>Validate before changing balance.</li><li>Use a domain-specific exception.</li><li>Do not allow the invalid transaction to continue.</li></ul></div>
+<div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Updating balance first</h4><p>Check the withdrawal amount before subtraction.</p></div><div class="error-card"><h4>Wrong condition</h4><p>Throw when amount &gt; balance.</p></div><div class="error-card"><h4>Missing custom type</h4><p>Use the InsufficientBalance class for this example.</p></div></div></div>
+</div>
+<div class="mini-problem " id="ue3">
+<div class="problem-heading"><span class="section-label">PROBLEM</span><h2>Invalid Product Quantity</h2></div>
+<div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to create a user-defined exception when a product quantity is less than or equal to zero.</p></div>
+<div class="problem-box"><h3>Theory / Concept</h3><p>A custom exception is useful when an application has a specific business rule that should be enforced consistently.</p></div>
+<div class="syntax-block"><div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Exception Handling Syntax</h3></div>
+<div class="code-window"><pre><code>class InvalidQuantity
+{
+public:
+    string message;
+    InvalidQuantity(string msg) : message(msg) {}
+};
+
+if (quantity &lt;= 0)
+    throw InvalidQuantity(&quot;Quantity must be positive.&quot;);</code></pre></div></div>
+<div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Set the product quantity.</li><li>Check whether it is less than or equal to zero.</li><li>Throw InvalidQuantity.</li><li>Catch and display the message.</li><li>Continue only when the quantity is valid.</li></ol></div>
+<div class="problem-box"><h3>C++ Program</h3><div class="code-window"><pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+class InvalidQuantity
+{
+public:
+    string message;
+
+    InvalidQuantity(string msg)
+    {
+        message = msg;
+    }
+};
+
+int main()
+{
+    int quantity = 0;
+
+    try
+    {
+        if (quantity &lt;= 0)
+            throw InvalidQuantity(&quot;Quantity must be greater than zero.&quot;);
+
+        cout &lt;&lt; &quot;Valid quantity: &quot; &lt;&lt; quantity;
+    }
+    catch (InvalidQuantity e)
+    {
+        cout &lt;&lt; &quot;Error: &quot; &lt;&lt; e.message;
+    }
+
+    return 0;
+}</code></pre></div></div>
+<div class="problem-box"><h3>Expected Output</h3><div class="output-box"><pre>Error: Quantity must be greater than zero.</pre></div></div>
+<div class="visual-card"><span class="section-label">VISUAL EXPLANATION</span><h3>How Exception Handling Works</h3>
+<div class="exception-flow">
+<div class="exception-node"><strong>try</strong><small>Risky code</small></div><div class="flow-arrow">→</div>
+<div class="exception-node throw-node"><strong>throw</strong><small>Exception raised</small></div><div class="flow-arrow">→</div>
+<div class="exception-node catch-node"><strong>catch</strong><small>Error handled</small></div><div class="flow-arrow">→</div>
+<div class="exception-node"><strong>Continue</strong><small>After handling</small></div>
+</div>
+<p class="visual-note">The custom exception represents a product-entry rule. Invalid quantity is rejected before further processing.</p></div>
+<div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>Define the business rule clearly.</li><li>Throw before processing invalid data.</li><li>Store a useful message in the exception object.</li></ul></div>
+<div class="problem-box"><h3>Real-Life Connection</h3><p>Shopping, inventory and billing systems require positive quantities for normal purchase transactions.</p></div>
+<div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>Define the business rule clearly.</li><li>Throw before processing invalid data.</li><li>Store a useful message in the exception object.</li></ul></div>
+<div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Allowing zero quantity</h4><p>Use quantity &lt;= 0 as the invalid condition.</p></div><div class="error-card"><h4>Processing before validation</h4><p>Validate first.</p></div><div class="error-card"><h4>Missing &lt;string&gt;</h4><p>Include &lt;string&gt;.</p></div></div></div>
+</div>
+</div>
+<div class="type-panel " id="standard-exceptions">
+<div class="problem-box type-intro"><span class="section-label">TOPIC 04</span><h2>Standard Exception Classes</h2><p>Use standard C++ exceptions such as out_of_range, invalid_argument and runtime_error.</p></div>
+<div class="mini-problem-selector"><div class="mini-problem-tabs"><button type="button" class="mini-problem-tab active" data-problem="se1"><span>01</span>out_of_range — Array Access</button><button type="button" class="mini-problem-tab " data-problem="se2"><span>02</span>invalid_argument — Invalid Input</button><button type="button" class="mini-problem-tab " data-problem="se3"><span>03</span>runtime_error — Runtime Error</button></div></div>
+
+<div class="mini-problem active" id="se1">
+<div class="problem-heading"><span class="section-label">PROBLEM</span><h2>out_of_range — Array Access</h2></div>
+<div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program using the standard out_of_range exception to handle an invalid array/vector index.</p></div>
+<div class="problem-box"><h3>Theory / Concept</h3><p>Standard exception classes are provided by the C++ library. out_of_range represents an attempt to access an element outside an allowed range. vector::at() performs bounds checking and can throw it.</p></div>
+<div class="syntax-block"><div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Exception Handling Syntax</h3></div>
+<div class="code-window"><pre><code>vector&lt;int&gt; values = {10, 20, 30};
+
+try
+{
+    cout &lt;&lt; values.at(index);
+}
+catch (const out_of_range &amp;e)
+{
+    cout &lt;&lt; e.what();
+}</code></pre></div></div>
+<div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Create a vector.</li><li>Choose an invalid index.</li><li>Use at() to access the element.</li><li>Catch out_of_range.</li><li>Display the exception message.</li></ol></div>
+<div class="problem-box"><h3>C++ Program</h3><div class="code-window"><pre><code>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;stdexcept&gt;
+using namespace std;
+
+int main()
+{
+    vector&lt;int&gt; values = {10, 20, 30};
+    int index = 5;
+
+    try
+    {
+        cout &lt;&lt; &quot;Value: &quot; &lt;&lt; values.at(index);
+    }
+    catch (const out_of_range &amp;e)
+    {
+        cout &lt;&lt; &quot;Error: &quot; &lt;&lt; e.what();
+    }
+
+    return 0;
+}</code></pre></div></div>
+<div class="problem-box"><h3>Expected Output</h3><div class="output-box"><pre>Error: vector::_M_range_check: __n (which is 5) &gt;= this-&gt;size() (which is 3)</pre></div></div>
+<div class="visual-card"><span class="section-label">VISUAL EXPLANATION</span><h3>How Exception Handling Works</h3>
+<div class="exception-flow">
+<div class="exception-node"><strong>try</strong><small>Risky code</small></div><div class="flow-arrow">→</div>
+<div class="exception-node throw-node"><strong>throw</strong><small>Exception raised</small></div><div class="flow-arrow">→</div>
+<div class="exception-node catch-node"><strong>catch</strong><small>Error handled</small></div><div class="flow-arrow">→</div>
+<div class="exception-node"><strong>Continue</strong><small>After handling</small></div>
+</div>
+<p class="visual-note">The exact library-generated message can vary by compiler and standard library. The important result is that out_of_range is caught.</p></div>
+<div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>out_of_range is a standard exception.</li><li>vector::at() performs bounds checking.</li><li>Exception messages may vary by implementation.</li></ul></div>
+<div class="problem-box"><h3>Real-Life Connection</h3><p>Bounds-checked access is useful when an application must safely reject an invalid index instead of silently accessing outside a valid range.</p></div>
+<div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>out_of_range is a standard exception.</li><li>vector::at() performs bounds checking.</li><li>Exception messages may vary by implementation.</li></ul></div>
+<div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Using [] for this demonstration</h4><p>Use at() because it performs range checking.</p></div><div class="error-card"><h4>Assuming exact message</h4><p>Library messages vary by implementation.</p></div><div class="error-card"><h4>Wrong header</h4><p>Include &lt;stdexcept&gt; for standard exception declarations.</p></div></div></div>
+</div>
+<div class="mini-problem " id="se2">
+<div class="problem-heading"><span class="section-label">PROBLEM</span><h2>invalid_argument — Invalid Input</h2></div>
+<div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program using invalid_argument when a supplied age is invalid.</p></div>
+<div class="problem-box"><h3>Theory / Concept</h3><p>invalid_argument is a standard exception used when a function receives an argument that is not acceptable for the requested operation.</p></div>
+<div class="syntax-block"><div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Exception Handling Syntax</h3></div>
+<div class="code-window"><pre><code>if (age &lt; 0)
+    throw invalid_argument(&quot;Age cannot be negative.&quot;);</code></pre></div></div>
+<div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Set or accept an age.</li><li>Validate the argument.</li><li>Throw invalid_argument for an unacceptable value.</li><li>Catch invalid_argument.</li><li>Display its message.</li></ol></div>
+<div class="problem-box"><h3>C++ Program</h3><div class="code-window"><pre><code>#include &lt;iostream&gt;
+#include &lt;stdexcept&gt;
+using namespace std;
+
+int main()
+{
+    int age = -4;
+
+    try
+    {
+        if (age &lt; 0)
+            throw invalid_argument(&quot;Age cannot be negative.&quot;);
+
+        cout &lt;&lt; &quot;Valid age: &quot; &lt;&lt; age;
+    }
+    catch (const invalid_argument &amp;e)
+    {
+        cout &lt;&lt; &quot;Error: &quot; &lt;&lt; e.what();
+    }
+
+    return 0;
+}</code></pre></div></div>
+<div class="problem-box"><h3>Expected Output</h3><div class="output-box"><pre>Error: Age cannot be negative.</pre></div></div>
+<div class="visual-card"><span class="section-label">VISUAL EXPLANATION</span><h3>How Exception Handling Works</h3>
+<div class="exception-flow">
+<div class="exception-node"><strong>try</strong><small>Risky code</small></div><div class="flow-arrow">→</div>
+<div class="exception-node throw-node"><strong>throw</strong><small>Exception raised</small></div><div class="flow-arrow">→</div>
+<div class="exception-node catch-node"><strong>catch</strong><small>Error handled</small></div><div class="flow-arrow">→</div>
+<div class="exception-node"><strong>Continue</strong><small>After handling</small></div>
+</div>
+<p class="visual-note">The standard invalid_argument object carries the reason for rejecting the supplied value.</p></div>
+<div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>invalid_argument is a standard library exception.</li><li>Use what() to obtain its message.</li><li>Catch by const reference when appropriate.</li></ul></div>
+<div class="problem-box"><h3>Real-Life Connection</h3><p>Input-processing functions can use invalid_argument when a caller provides a value that violates the function&#x27;s expected rules.</p></div>
+<div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>invalid_argument is a standard library exception.</li><li>Use what() to obtain its message.</li><li>Catch by const reference when appropriate.</li></ul></div>
+<div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Missing stdexcept</h4><p>Include &lt;stdexcept&gt;.</p></div><div class="error-card"><h4>Using the wrong standard exception</h4><p>Use invalid_argument for an unacceptable argument.</p></div><div class="error-card"><h4>No validation</h4><p>Throw only when the input violates the defined rule.</p></div></div></div>
+</div>
+<div class="mini-problem " id="se3">
+<div class="problem-heading"><span class="section-label">PROBLEM</span><h2>runtime_error — Runtime Error</h2></div>
+<div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program that throws a runtime_error when a required runtime condition cannot be completed.</p></div>
+<div class="problem-box"><h3>Theory / Concept</h3><p>runtime_error represents errors detected during program execution that are not more specifically represented by another standard exception class.</p></div>
+<div class="syntax-block"><div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Exception Handling Syntax</h3></div>
+<div class="code-window"><pre><code>if (!fileOpened)
+    throw runtime_error(&quot;Required resource is unavailable.&quot;);</code></pre></div></div>
+<div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Define a runtime condition.</li><li>Check whether the condition is satisfied.</li><li>Throw runtime_error when it fails.</li><li>Catch the exception.</li><li>Display its message.</li></ol></div>
+<div class="problem-box"><h3>C++ Program</h3><div class="code-window"><pre><code>#include &lt;iostream&gt;
+#include &lt;stdexcept&gt;
+using namespace std;
+
+int main()
+{
+    bool resourceAvailable = false;
+
+    try
+    {
+        if (!resourceAvailable)
+            throw runtime_error(&quot;Required resource is unavailable.&quot;);
+
+        cout &lt;&lt; &quot;Resource is available.&quot;;
+    }
+    catch (const runtime_error &amp;e)
+    {
+        cout &lt;&lt; &quot;Runtime error: &quot; &lt;&lt; e.what();
+    }
+
+    return 0;
+}</code></pre></div></div>
+<div class="problem-box"><h3>Expected Output</h3><div class="output-box"><pre>Runtime error: Required resource is unavailable.</pre></div></div>
+<div class="visual-card"><span class="section-label">VISUAL EXPLANATION</span><h3>How Exception Handling Works</h3>
+<div class="exception-flow">
+<div class="exception-node"><strong>try</strong><small>Risky code</small></div><div class="flow-arrow">→</div>
+<div class="exception-node throw-node"><strong>throw</strong><small>Exception raised</small></div><div class="flow-arrow">→</div>
+<div class="exception-node catch-node"><strong>catch</strong><small>Error handled</small></div><div class="flow-arrow">→</div>
+<div class="exception-node"><strong>Continue</strong><small>After handling</small></div>
+</div>
+<p class="visual-note">The program detects a runtime failure condition and uses the standard runtime_error class to report it.</p></div>
+<div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>runtime_error represents runtime-detected failures.</li><li>Use what() for the message.</li><li>Prefer a more specific standard exception when one clearly describes the error.</li></ul></div>
+<div class="problem-box"><h3>Real-Life Connection</h3><p>Applications may encounter runtime failures when a required resource or operation is unavailable during execution.</p></div>
+<div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>runtime_error represents runtime-detected failures.</li><li>Use what() for the message.</li><li>Prefer a more specific standard exception when one clearly describes the error.</li></ul></div>
+<div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Throwing unrelated types</h4><p>Use runtime_error for a runtime failure condition.</p></div><div class="error-card"><h4>Missing stdexcept</h4><p>Include &lt;stdexcept&gt;.</p></div><div class="error-card"><h4>Ignoring the condition</h4><p>Check the runtime condition before proceeding.</p></div></div></div>
+</div>
+</div>
+</div></section>
+
+<section class="content-section"><div class="container">
+<span class="section-label">QUICK SUMMARY</span><h2>Practical 16 at a Glance</h2>
+<div class="content-card"><ul class="key-points">
+<li><strong>try</strong> contains code that may produce an exception.</li>
+<li><strong>throw</strong> signals an exceptional condition.</li>
+<li><strong>catch</strong> handles a matching exception.</li>
+<li>Multiple catch blocks can handle different exception types.</li>
+<li>User-defined exception classes represent application-specific errors.</li>
+<li>Standard exceptions provide reusable error categories from the C++ library.</li>
+<li>Catch standard exceptions by <strong>const reference</strong> when appropriate.</li>
+<li>Exception handling should complement, not replace, ordinary input validation and program logic.</li>
+</ul></div>
+</div></section>
+
+<section class="content-section"><div class="container">
+<span class="section-label">VIVA</span><h2>Viva Questions</h2>
+<div class="viva-list">
+<div class="viva-item"><button type="button" class="viva-question"><span>What is exception handling?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>Exception handling is a mechanism for detecting and handling exceptional conditions separately from the normal flow of a program.</p></div></div>
+<div class="viva-item"><button type="button" class="viva-question"><span>What is the purpose of try?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>The try block contains code where an exception may occur.</p></div></div>
+<div class="viva-item"><button type="button" class="viva-question"><span>What does throw do?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>throw signals an exceptional condition and transfers control toward a matching catch handler.</p></div></div>
+<div class="viva-item"><button type="button" class="viva-question"><span>What is catch?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>catch defines a handler for an exception of a matching type.</p></div></div>
+<div class="viva-item"><button type="button" class="viva-question"><span>Can there be multiple catch blocks?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>Yes. Multiple catch blocks can handle different exception types.</p></div></div>
+<div class="viva-item"><button type="button" class="viva-question"><span>What is a user-defined exception?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>It is an exception type created by the programmer, usually as a class, to represent an application-specific error.</p></div></div>
+<div class="viva-item"><button type="button" class="viva-question"><span>What is invalid_argument?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>invalid_argument is a standard exception used when an argument supplied to an operation is not acceptable.</p></div></div>
+<div class="viva-item"><button type="button" class="viva-question"><span>What is out_of_range?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>out_of_range represents an attempt to access something outside its valid range. For example, vector::at() can throw it for an invalid index.</p></div></div>
+<div class="viva-item"><button type="button" class="viva-question"><span>What is runtime_error?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>runtime_error is a standard exception class for errors detected during program execution.</p></div></div>
+<div class="viva-item"><button type="button" class="viva-question"><span>Why use what()?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>Standard exception classes provide what() to obtain a descriptive error message.</p></div></div>
+<div class="viva-item"><button type="button" class="viva-question"><span>What happens when an exception is thrown?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>Normal execution of the current try block stops and C++ searches for a matching catch handler.</p></div></div>
+<div class="viva-item"><button type="button" class="viva-question"><span>Why catch standard exceptions by const reference?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>It avoids unnecessary copying, preserves polymorphic behavior for exception hierarchies and prevents modification of the exception object.</p></div></div>
+</div>
+</div></section>
+</main>
+
+<footer class="footer">
+<div class="footer-content">
+<div class="footer-brand"><div class="footer-logo">&lt;/&gt;</div><div class="footer-brand-text"><div class="footer-brand-name">Rasika <span>CodeLab</span></div><p class="footer-tagline">Code • Understand • Visualize</p></div></div>
+<div class="footer-copy">© 2026 Rasika CodeLab. Built for practical learning.</div>
+</div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const page = document.querySelector(".practical16-page");
+    if (!page) return;
+
+    const typeTabs = page.querySelectorAll(".main-type-tab");
+    const typePanels = page.querySelectorAll(".type-panel");
+
+    typeTabs.forEach(function(tab) {
+        tab.addEventListener("click", function() {
+            const target = this.getAttribute("data-type");
+            typeTabs.forEach(function(item) { item.classList.remove("active"); });
+            typePanels.forEach(function(panel) { panel.classList.remove("active"); });
+            this.classList.add("active");
+
+            const selected = page.querySelector("#" + target);
+            if (selected) {
+                selected.classList.add("active");
+                selected.scrollIntoView({behavior:"smooth", block:"start"});
+            }
+        });
+    });
+
+    typePanels.forEach(function(panel) {
+        const problemTabs = panel.querySelectorAll(".mini-problem-tab");
+        const problems = panel.querySelectorAll(".mini-problem");
+
+        problemTabs.forEach(function(tab) {
+            tab.addEventListener("click", function() {
+                const target = this.getAttribute("data-problem");
+                problemTabs.forEach(function(item) { item.classList.remove("active"); });
+                problems.forEach(function(problem) { problem.classList.remove("active"); });
+                this.classList.add("active");
+
+                const selected = panel.querySelector("#" + target);
+                if (selected) {
+                    selected.classList.add("active");
+                    selected.scrollIntoView({behavior:"smooth", block:"start"});
+                }
+            });
+        });
+    });
+
+    page.querySelectorAll(".viva-question").forEach(function(question) {
+        question.addEventListener("click", function() {
+            this.closest(".viva-item").classList.toggle("active");
+        });
+    });
+});
+</script>
+</body>
+</html>

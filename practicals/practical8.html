@@ -1,0 +1,3360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Practical 8 | Static Members | Rasika CodeLab</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+
+        .llo-section {
+            display: none;
+        }
+
+        .llo-section.active {
+            display: block;
+            animation: practicalFadeIn 0.35s ease;
+        }
+
+        .llo-tab small {
+            display: block;
+            margin-top: 4px;
+            font-size: 11px;
+            opacity: 0.75;
+        }
+
+        .problem-mini-selector {
+            margin-top: 30px;
+        }
+
+    </style>
+
+</head>
+
+
+<body class="detail-page">
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<header class="navbar">
+
+    <div class="nav-container">
+
+        <a href="../index.html" class="logo">
+
+            <span class="logo-icon">
+                &lt;/&gt;
+            </span>
+
+            <span>
+                Rasika<span>CodeLab</span>
+            </span>
+
+        </a>
+
+
+        <button class="menu-btn" aria-label="Toggle menu">
+            ☰
+        </button>
+
+
+        <nav class="nav-links">
+
+            <a href="../index.html">
+                Home
+            </a>
+
+            <a href="../foundations/program.html">
+                Foundations
+            </a>
+
+            <a href="index.html" class="active">
+                Practicals
+            </a>
+
+            <a href="../index.html#about">
+                About
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<main class="practical-page">
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="practical-hero">
+
+    <div class="container">
+
+        <span class="section-label">
+            C++ PRACTICAL 08
+        </span>
+
+        <h1>
+            Static Members
+        </h1>
+
+        <p class="practical-subtitle">
+            Learn how static data members and static member functions
+            belong to the class rather than individual objects.
+        </p>
+
+
+        <div class="practical-meta">
+
+            <span>
+                💻 C++
+            </span>
+
+            <span>
+                📘 Practical 8
+            </span>
+
+            <span>
+                🎯 LLO 8.1
+            </span>
+
+            <span>
+                🎯 LLO 8.2
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     AIM
+===================================================== -->
+
+<section class="content-section">
+
+    <div class="container">
+
+        <span class="section-label">
+            01 — AIM
+        </span>
+
+
+        <div class="content-card">
+
+            <p>
+                To implement programs using static data members and
+                static member functions in C++.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     LEARNING OBJECTIVES
+===================================================== -->
+
+<section class="content-section">
+
+    <div class="container">
+
+        <span class="section-label">
+            02 — LEARNING OBJECTIVES
+        </span>
+
+
+        <div class="objective-grid">
+
+
+            <div class="objective-card">
+
+                <span>
+                    01
+                </span>
+
+                <p>
+                    Understand the concept of static data members.
+                </p>
+
+            </div>
+
+
+            <div class="objective-card">
+
+                <span>
+                    02
+                </span>
+
+                <p>
+                    Understand how static members are shared among objects.
+                </p>
+
+            </div>
+
+
+            <div class="objective-card">
+
+                <span>
+                    03
+                </span>
+
+                <p>
+                    Implement static member functions in C++.
+                </p>
+
+            </div>
+
+
+            <div class="objective-card">
+
+                <span>
+                    04
+                </span>
+
+                <p>
+                    Apply static members to practical programming problems.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     EXPLORE CONCEPT
+===================================================== -->
+
+<section class="content-section">
+
+    <div class="container">
+
+        <span class="section-label">
+            03 — EXPLORE THE CONCEPT
+        </span>
+
+
+        <h2>
+            Understanding Static Members
+        </h2>
+
+
+        <p class="section-description">
+            Static members are associated with the class itself and are
+            shared among all objects of that class.
+        </p>
+
+
+        <!-- THEORY -->
+
+        <div class="theory-box">
+
+            <h3>
+                Theory
+            </h3>
+
+
+            <p>
+                A <strong>static data member</strong> is a class variable
+                that is shared by all objects of the class. Unlike ordinary
+                data members, only one copy of a static data member exists
+                for the entire class.
+            </p>
+
+
+            <p>
+                A <strong>static member function</strong> also belongs to
+                the class rather than to a particular object. It can be
+                called using the class name and the scope resolution operator.
+            </p>
+
+
+            <p>
+                Static member functions can directly access static data
+                members of the class.
+            </p>
+
+
+            <div class="syntax-box">
+
+<code>class Demo
+{
+    static int count;
+
+public:
+    static void show();
+};
+
+int Demo::count = 0;
+
+void Demo::show()
+{
+    cout &lt;&lt; count;
+}</code>
+
+            </div>
+
+
+            <div class="casting-rule">
+
+                <span>
+                    Class
+                </span>
+
+                <strong>
+                    →
+                </strong>
+
+                <span>
+                    Static Member
+                </span>
+
+                <strong>
+                    →
+                </strong>
+
+                <span>
+                    Shared Data
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- REAL LIFE -->
+
+        <div class="real-life-box">
+
+            <div class="real-life-icon">
+                🌍
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Real-Life Example
+                </h3>
+
+
+                <p>
+                    Consider a college application where many Student
+                    objects are created. If the application needs to
+                    maintain the total number of students created, the
+                    count can be stored in a static data member.
+                </p>
+
+
+                <p>
+                    Similarly, a static member function can provide a
+                    class-level operation to display or access that
+                    shared count.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- WHERE USED -->
+
+        <div class="where-used-box">
+
+            <h3>
+                Where & How Is It Used?
+            </h3>
+
+
+            <div class="use-grid">
+
+
+                <div>
+
+                    <strong>
+                        Object Counting
+                    </strong>
+
+                    <p>
+                        A static data member can maintain the number
+                        of objects created from a class.
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Shared Information
+                    </strong>
+
+                    <p>
+                        Data that belongs to the class as a whole can
+                        be stored using a static data member.
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Class-Level Operations
+                    </strong>
+
+                    <p>
+                        Static member functions can perform operations
+                        that do not require a particular object.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- BASIC SYNTAX -->
+
+        <div class="content-block">
+
+            <h4>
+                Basic Syntax
+            </h4>
+
+
+            <div class="code-window">
+
+<pre><code>class ClassName
+{
+    static int data;
+
+public:
+    static void function();
+};
+
+int ClassName::data = 0;
+
+void ClassName::function()
+{
+    // function body
+}</code></pre>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             LLO SELECTOR
+        ===================================================== -->
+
+        <div class="problem-mini-selector">
+
+
+            <button
+                class="mini-problem-tab llo-tab active"
+                data-llo="static-data-problems">
+
+                LLO 8.1
+
+                <small>
+                    Static Data Member
+                </small>
+
+            </button>
+
+
+            <button
+                class="mini-problem-tab llo-tab"
+                data-llo="static-function-problems">
+
+                LLO 8.2
+
+                <small>
+                    Static Member Function
+                </small>
+
+            </button>
+
+
+        </div>
+
+
+        <!-- =====================================================
+             LLO 8.1
+        ===================================================== -->
+
+        <div
+            class="llo-section active"
+            id="static-data-problems">
+
+
+            <span class="problem-badge">
+                LLO 8.1
+            </span>
+
+
+            <h3>
+                Static Data Member
+            </h3>
+
+
+            <div class="theory-box">
+
+                <h3>
+                    Concept
+                </h3>
+
+
+                <p>
+                    A static data member is shared by all objects of
+                    a class. Only one copy of the static data member
+                    exists, regardless of how many objects are created.
+                </p>
+
+
+                <p>
+                    It is declared inside the class and normally defined
+                    outside the class using the scope resolution operator.
+                </p>
+
+            </div>
+
+
+            <!-- PROBLEM TABS -->
+
+            <div class="problem-mini-selector">
+
+
+                <button
+                    class="mini-problem-tab active"
+                    data-problem="static-data-problem1">
+
+                    Problem 01
+
+                </button>
+
+
+                <button
+                    class="mini-problem-tab"
+                    data-problem="static-data-problem2">
+
+                    Problem 02
+
+                </button>
+
+
+                <button
+                    class="mini-problem-tab"
+                    data-problem="static-data-problem3">
+
+                    Problem 03
+
+                </button>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 PROBLEM 1
+            ================================================= -->
+
+            <article
+                class="mini-problem active"
+                id="static-data-problem1">
+
+
+                <span class="problem-badge">
+                    PROBLEM 01
+                </span>
+
+
+                <h3>
+                    Count Number of Objects
+                </h3>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Problem Statement
+                    </h4>
+
+
+                    <p>
+                        Write a C++ program to create a class Student
+                        with a static data member to count the number
+                        of Student objects created.
+                    </p>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Algorithm
+                    </h4>
+
+
+                    <ol class="algorithm-list">
+
+                        <li>
+                            Start.
+                        </li>
+
+                        <li>
+                            Create a Student class.
+                        </li>
+
+                        <li>
+                            Declare a static integer variable count.
+                        </li>
+
+                        <li>
+                            Define count outside the class.
+                        </li>
+
+                        <li>
+                            Increment count whenever an object is created.
+                        </li>
+
+                        <li>
+                            Create multiple Student objects.
+                        </li>
+
+                        <li>
+                            Display the number of objects.
+                        </li>
+
+                        <li>
+                            Stop.
+                        </li>
+
+                    </ol>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        C++ Program
+                    </h4>
+
+
+                    <div class="code-window">
+
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+class Student
+{
+    static int count;
+
+public:
+
+    Student()
+    {
+        count++;
+    }
+
+    void displayCount()
+    {
+        cout &lt;&lt; "Number of objects = "
+             &lt;&lt; count;
+    }
+};
+
+int Student::count = 0;
+
+int main()
+{
+    Student s1, s2, s3;
+
+    s1.displayCount();
+
+    return 0;
+}</code></pre>
+
+                    </div>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Expected Output
+                    </h4>
+
+
+                    <div class="output-box">
+
+<pre>Number of objects = 3</pre>
+
+                    </div>
+
+                </div>
+
+
+                <!-- VISUALIZATION -->
+
+                <div class="visualization-section">
+
+
+                    <div class="visualization-header">
+
+                        <span class="problem-badge">
+                            STATIC DATA VISUALIZATION
+                        </span>
+
+
+                        <h3>
+                            One Static Variable → All Objects
+                        </h3>
+
+
+                        <p>
+                            The static data member is shared by every
+                            Student object.
+                        </p>
+
+                    </div>
+
+
+                    <div class="casting-visual">
+
+
+                        <div class="casting-value">
+
+                            <span>
+                                OBJECT 1
+                            </span>
+
+                            <strong>
+                                s1
+                            </strong>
+
+                            <small>
+                                count = 1
+                            </small>
+
+                        </div>
+
+
+                        <div class="casting-arrow">
+                            +
+                        </div>
+
+
+                        <div class="casting-value">
+
+                            <span>
+                                OBJECT 2
+                            </span>
+
+                            <strong>
+                                s2
+                            </strong>
+
+                            <small>
+                                count = 2
+                            </small>
+
+                        </div>
+
+
+                        <div class="casting-arrow">
+                            +
+                        </div>
+
+
+                        <div class="casting-value">
+
+                            <span>
+                                OBJECT 3
+                            </span>
+
+                            <strong>
+                                s3
+                            </strong>
+
+                            <small>
+                                count = 3
+                            </small>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Program Explanation
+                    </h4>
+
+
+                    <ul class="key-points">
+
+                        <li>
+                            <code>count</code> is declared as a static
+                            data member.
+                        </li>
+
+                        <li>
+                            Only one copy of <code>count</code> exists
+                            for the Student class.
+                        </li>
+
+                        <li>
+                            The constructor increments count whenever
+                            an object is created.
+                        </li>
+
+                        <li>
+                            Three objects result in a count of 3.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Real-Life Connection
+                    </h4>
+
+
+                    <p>
+                        A college management system can use a static
+                        counter to maintain the total number of Student
+                        objects currently created by a program.
+                    </p>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Key Points
+                    </h4>
+
+
+                    <ul class="key-points">
+
+                        <li>
+                            Static data belongs to the class.
+                        </li>
+
+                        <li>
+                            It is shared by all objects.
+                        </li>
+
+                        <li>
+                            It is defined outside the class.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Common Errors
+                    </h4>
+
+
+                    <div class="error-grid">
+
+
+                        <div class="error-card">
+
+                            <strong>
+                                Missing Definition
+                            </strong>
+
+                            <p>
+                                Define the static data member outside
+                                the class.
+                            </p>
+
+                        </div>
+
+
+                        <div class="error-card">
+
+                            <strong>
+                                Creating Separate Copies
+                            </strong>
+
+                            <p>
+                                Do not define the static variable as
+                                an ordinary object data member.
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 PROBLEM 2
+            ================================================= -->
+
+            <article
+                class="mini-problem"
+                id="static-data-problem2">
+
+
+                <span class="problem-badge">
+                    PROBLEM 02
+                </span>
+
+
+                <h3>
+                    Common College Name
+                </h3>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Problem Statement
+                    </h4>
+
+
+                    <p>
+                        Write a C++ program to create a Student class
+                        having a static data member to store the common
+                        college name shared by all Student objects.
+                    </p>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Algorithm
+                    </h4>
+
+
+                    <ol class="algorithm-list">
+
+                        <li>
+                            Start.
+                        </li>
+
+                        <li>
+                            Define a Student class.
+                        </li>
+
+                        <li>
+                            Declare name as a normal data member.
+                        </li>
+
+                        <li>
+                            Declare college as a static data member.
+                        </li>
+
+                        <li>
+                            Define the static college member outside
+                            the class.
+                        </li>
+
+                        <li>
+                            Create multiple Student objects.
+                        </li>
+
+                        <li>
+                            Display student names and common college name.
+                        </li>
+
+                        <li>
+                            Stop.
+                        </li>
+
+                    </ol>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        C++ Program
+                    </h4>
+
+
+                    <div class="code-window">
+
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+class Student
+{
+    string name;
+
+    static string college;
+
+public:
+
+    Student(string n)
+    {
+        name = n;
+    }
+
+    void display()
+    {
+        cout &lt;&lt; "Name = "
+             &lt;&lt; name &lt;&lt; endl;
+
+        cout &lt;&lt; "College = "
+             &lt;&lt; college &lt;&lt; endl;
+    }
+};
+
+string Student::college =
+    "Rasika College";
+
+int main()
+{
+    Student s1("Rahul");
+    Student s2("Priya");
+
+    s1.display();
+    cout &lt;&lt; endl;
+    s2.display();
+
+    return 0;
+}</code></pre>
+
+                    </div>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Expected Output
+                    </h4>
+
+
+                    <div class="output-box">
+
+<pre>Name = Rahul
+College = Rasika College
+
+Name = Priya
+College = Rasika College</pre>
+
+                    </div>
+
+                </div>
+
+
+                <div class="visualization-section">
+
+
+                    <div class="visualization-header">
+
+                        <span class="problem-badge">
+                            STATIC DATA VISUALIZATION
+                        </span>
+
+
+                        <h3>
+                            Shared College Information
+                        </h3>
+
+                    </div>
+
+
+                    <div class="casting-visual">
+
+
+                        <div class="casting-value">
+
+                            <span>
+                                STUDENT 1
+                            </span>
+
+                            <strong>
+                                Rahul
+                            </strong>
+
+                            <small>
+                                College → Rasika College
+                            </small>
+
+                        </div>
+
+
+                        <div class="casting-arrow">
+                            →
+                        </div>
+
+
+                        <div class="casting-value">
+
+                            <span>
+                                STATIC DATA
+                            </span>
+
+                            <strong>
+                                College
+                            </strong>
+
+                            <small>
+                                One Shared Copy
+                            </small>
+
+                        </div>
+
+
+                        <div class="casting-arrow">
+                            ←
+                        </div>
+
+
+                        <div class="casting-value">
+
+                            <span>
+                                STUDENT 2
+                            </span>
+
+                            <strong>
+                                Priya
+                            </strong>
+
+                            <small>
+                                College → Rasika College
+                            </small>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Program Explanation
+                    </h4>
+
+
+                    <ul class="key-points">
+
+                        <li>
+                            <code>name</code> belongs separately to
+                            each Student object.
+                        </li>
+
+                        <li>
+                            <code>college</code> is static and shared
+                            by all Student objects.
+                        </li>
+
+                        <li>
+                            Only one copy of the college name exists.
+                        </li>
+
+                        <li>
+                            Both objects access the same static value.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Real-Life Connection
+                    </h4>
+
+
+                    <p>
+                        In a student management system, every student
+                        may belong to the same college. Storing the
+                        common college name as a static data member
+                        avoids maintaining separate copies.
+                    </p>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Key Points
+                    </h4>
+
+
+                    <ul class="key-points">
+
+                        <li>
+                            Static data is common to all objects.
+                        </li>
+
+                        <li>
+                            Ordinary data members have separate copies.
+                        </li>
+
+                        <li>
+                            Static data can be accessed by class scope.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Common Errors
+                    </h4>
+
+
+                    <div class="error-grid">
+
+
+                        <div class="error-card">
+
+                            <strong>
+                                Wrong Declaration
+                            </strong>
+
+                            <p>
+                                Use the <code>static</code> keyword when
+                                declaring the shared data member.
+                            </p>
+
+                        </div>
+
+
+                        <div class="error-card">
+
+                            <strong>
+                                Missing Scope
+                            </strong>
+
+                            <p>
+                                Define the static member using
+                                <code>Student::college</code>.
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 PROBLEM 3
+            ================================================= -->
+
+            <article
+                class="mini-problem"
+                id="static-data-problem3">
+
+
+                <span class="problem-badge">
+                    PROBLEM 03
+                </span>
+
+
+                <h3>
+                    Bank Account Counter
+                </h3>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Problem Statement
+                    </h4>
+
+
+                    <p>
+                        Write a C++ program to create a BankAccount class
+                        with a static data member that stores the total
+                        number of bank account objects created.
+                    </p>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Algorithm
+                    </h4>
+
+
+                    <ol class="algorithm-list">
+
+                        <li>
+                            Start.
+                        </li>
+
+                        <li>
+                            Define the BankAccount class.
+                        </li>
+
+                        <li>
+                            Declare a static variable accountCount.
+                        </li>
+
+                        <li>
+                            Define accountCount outside the class.
+                        </li>
+
+                        <li>
+                            Increment the counter when an account object
+                            is created.
+                        </li>
+
+                        <li>
+                            Create three account objects.
+                        </li>
+
+                        <li>
+                            Display the total account count.
+                        </li>
+
+                        <li>
+                            Stop.
+                        </li>
+
+                    </ol>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        C++ Program
+                    </h4>
+
+
+                    <div class="code-window">
+
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+class BankAccount
+{
+    static int accountCount;
+
+public:
+
+    BankAccount()
+    {
+        accountCount++;
+    }
+
+    void displayCount()
+    {
+        cout &lt;&lt; "Total accounts = "
+             &lt;&lt; accountCount;
+    }
+};
+
+int BankAccount::accountCount = 0;
+
+int main()
+{
+    BankAccount a1;
+    BankAccount a2;
+    BankAccount a3;
+
+    a1.displayCount();
+
+    return 0;
+}</code></pre>
+
+                    </div>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Expected Output
+                    </h4>
+
+
+                    <div class="output-box">
+
+<pre>Total accounts = 3</pre>
+
+                    </div>
+
+                </div>
+
+
+                <div class="visualization-section">
+
+
+                    <div class="visualization-header">
+
+                        <span class="problem-badge">
+                            STATIC DATA VISUALIZATION
+                        </span>
+
+
+                        <h3>
+                            Account Objects Share One Counter
+                        </h3>
+
+                    </div>
+
+
+                    <div class="casting-visual">
+
+
+                        <div class="casting-value">
+
+                            <span>
+                                ACCOUNT 1
+                            </span>
+
+                            <strong>
+                                a1
+                            </strong>
+
+                            <small>
+                                Count = 1
+                            </small>
+
+                        </div>
+
+
+                        <div class="casting-arrow">
+                            +
+                        </div>
+
+
+                        <div class="casting-value">
+
+                            <span>
+                                ACCOUNT 2
+                            </span>
+
+                            <strong>
+                                a2
+                            </strong>
+
+                            <small>
+                                Count = 2
+                            </small>
+
+                        </div>
+
+
+                        <div class="casting-arrow">
+                            +
+                        </div>
+
+
+                        <div class="casting-value">
+
+                            <span>
+                                ACCOUNT 3
+                            </span>
+
+                            <strong>
+                                a3
+                            </strong>
+
+                            <small>
+                                Count = 3
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Program Explanation
+                    </h4>
+
+
+                    <ul class="key-points">
+
+                        <li>
+                            <code>accountCount</code> is a static
+                            data member.
+                        </li>
+
+                        <li>
+                            It is shared by all BankAccount objects.
+                        </li>
+
+                        <li>
+                            The constructor increases the counter.
+                        </li>
+
+                        <li>
+                            Three objects result in a count of 3.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Real-Life Connection
+                    </h4>
+
+
+                    <p>
+                        Banking software can maintain a class-level
+                        count of account objects created during the
+                        execution of an application.
+                    </p>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Key Points
+                    </h4>
+
+
+                    <ul class="key-points">
+
+                        <li>
+                            Static data is shared.
+                        </li>
+
+                        <li>
+                            It has a single class-level copy.
+                        </li>
+
+                        <li>
+                            It can maintain common information.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Common Errors
+                    </h4>
+
+
+                    <div class="error-grid">
+
+
+                        <div class="error-card">
+
+                            <strong>
+                                Not Initializing
+                            </strong>
+
+                            <p>
+                                Initialize the static counter before
+                                using it.
+                            </p>
+
+                        </div>
+
+
+                        <div class="error-card">
+
+                            <strong>
+                                Incorrect Scope
+                            </strong>
+
+                            <p>
+                                Use <code>BankAccount::accountCount</code>
+                                for the external definition.
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+
+        <!-- =====================================================
+             LLO 8.2
+        ===================================================== -->
+
+        <div
+            class="llo-section"
+            id="static-function-problems">
+
+
+            <span class="problem-badge">
+                LLO 8.2
+            </span>
+
+
+            <h3>
+                Static Member Function
+            </h3>
+
+
+            <div class="theory-box">
+
+                <h3>
+                    Concept
+                </h3>
+
+
+                <p>
+                    A static member function belongs to the class rather
+                    than a particular object. It can be called using the
+                    class name and the scope resolution operator.
+                </p>
+
+
+                <p>
+                    A static member function can directly access static
+                    data members because both belong to the class.
+                </p>
+
+            </div>
+
+
+            <!-- PROBLEM TABS -->
+
+            <div class="problem-mini-selector">
+
+
+                <button
+                    class="mini-problem-tab active"
+                    data-problem="static-function-problem1">
+
+                    Problem 01
+
+                </button>
+
+
+                <button
+                    class="mini-problem-tab"
+                    data-problem="static-function-problem2">
+
+                    Problem 02
+
+                </button>
+
+
+                <button
+                    class="mini-problem-tab"
+                    data-problem="static-function-problem3">
+
+                    Problem 03
+
+                </button>
+
+            </div>
+
+
+            <!-- =================================================
+                 PROBLEM 1
+            ================================================= -->
+
+            <article
+                class="mini-problem active"
+                id="static-function-problem1">
+
+
+                <span class="problem-badge">
+                    PROBLEM 01
+                </span>
+
+
+                <h3>
+                    Display Object Count
+                </h3>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Problem Statement
+                    </h4>
+
+
+                    <p>
+                        Write a C++ program to create a class Student
+                        with a static data member and a static member
+                        function to display the number of objects created.
+                    </p>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Algorithm
+                    </h4>
+
+
+                    <ol class="algorithm-list">
+
+                        <li>
+                            Start.
+                        </li>
+
+                        <li>
+                            Define the Student class.
+                        </li>
+
+                        <li>
+                            Declare static variable count.
+                        </li>
+
+                        <li>
+                            Declare static function showCount().
+                        </li>
+
+                        <li>
+                            Define the static data member.
+                        </li>
+
+                        <li>
+                            Increment count in the constructor.
+                        </li>
+
+                        <li>
+                            Create Student objects.
+                        </li>
+
+                        <li>
+                            Call showCount() using the class name.
+                        </li>
+
+                        <li>
+                            Display the count.
+                        </li>
+
+                        <li>
+                            Stop.
+                        </li>
+
+                    </ol>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        C++ Program
+                    </h4>
+
+
+                    <div class="code-window">
+
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+class Student
+{
+    static int count;
+
+public:
+
+    Student()
+    {
+        count++;
+    }
+
+    static void showCount()
+    {
+        cout &lt;&lt; "Number of objects = "
+             &lt;&lt; count;
+    }
+};
+
+int Student::count = 0;
+
+int main()
+{
+    Student s1;
+    Student s2;
+    Student s3;
+
+    Student::showCount();
+
+    return 0;
+}</code></pre>
+
+                    </div>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Expected Output
+                    </h4>
+
+
+                    <div class="output-box">
+
+<pre>Number of objects = 3</pre>
+
+                    </div>
+
+                </div>
+
+
+                <div class="visualization-section">
+
+
+                    <div class="visualization-header">
+
+                        <span class="problem-badge">
+                            STATIC FUNCTION VISUALIZATION
+                        </span>
+
+
+                        <h3>
+                            Class Name → Static Function → Shared Data
+                        </h3>
+
+                    </div>
+
+
+                    <div class="casting-visual">
+
+
+                        <div class="casting-value">
+
+                            <span>
+                                CLASS
+                            </span>
+
+                            <strong>
+                                Student
+                            </strong>
+
+                            <small>
+                                Class Scope
+                            </small>
+
+                        </div>
+
+
+                        <div class="casting-arrow">
+                            →
+                        </div>
+
+
+                        <div class="casting-value">
+
+                            <span>
+                                STATIC FUNCTION
+                            </span>
+
+                            <strong>
+                                showCount()
+                            </strong>
+
+                            <small>
+                                No object required
+                            </small>
+
+                        </div>
+
+
+                        <div class="casting-arrow">
+                            →
+                        </div>
+
+
+                        <div class="casting-value">
+
+                            <span>
+                                STATIC DATA
+                            </span>
+
+                            <strong>
+                                count = 3
+                            </strong>
+
+                            <small>
+                                Shared value
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Program Explanation
+                    </h4>
+
+
+                    <ul class="key-points">
+
+                        <li>
+                            <code>showCount()</code> is declared as
+                            a static member function.
+                        </li>
+
+                        <li>
+                            It accesses the static variable
+                            <code>count</code>.
+                        </li>
+
+                        <li>
+                            It is called using
+                            <code>Student::showCount()</code>.
+                        </li>
+
+                        <li>
+                            No Student object is required to call the
+                            static member function.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Real-Life Connection
+                    </h4>
+
+
+                    <p>
+                        A student management application can provide a
+                        class-level operation to display the total number
+                        of Student objects without requiring a particular
+                        student object.
+                    </p>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Key Points
+                    </h4>
+
+
+                    <ul class="key-points">
+
+                        <li>
+                            Static functions belong to the class.
+                        </li>
+
+                        <li>
+                            They can be called using the class name.
+                        </li>
+
+                        <li>
+                            They can directly access static members.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Common Errors
+                    </h4>
+
+
+                    <div class="error-grid">
+
+
+                        <div class="error-card">
+
+                            <strong>
+                                Missing static
+                            </strong>
+
+                            <p>
+                                Use the <code>static</code> keyword in
+                                the function declaration.
+                            </p>
+
+                        </div>
+
+
+                        <div class="error-card">
+
+                            <strong>
+                                Accessing Normal Data
+                            </strong>
+
+                            <p>
+                                A static member function cannot directly
+                                access non-static data members.
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 PROBLEM 2
+            ================================================= -->
+
+            <article
+                class="mini-problem"
+                id="static-function-problem2">
+
+
+                <span class="problem-badge">
+                    PROBLEM 02
+                </span>
+
+
+                <h3>
+                    Calculate Square Using Static Function
+                </h3>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Problem Statement
+                    </h4>
+
+
+                    <p>
+                        Write a C++ program to create a class Calculator
+                        with a static member function to calculate the
+                        square of a given number.
+                    </p>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Formula
+                    </h4>
+
+
+                    <div class="formula-grid">
+
+                        <div class="formula-card">
+
+                            <strong>
+                                Square
+                            </strong>
+
+                            <span>
+                                Number × Number
+                            </span>
+
+                        </div>
+
+
+                        <div class="formula-card">
+
+                            <strong>
+                                Input
+                            </strong>
+
+                            <span>
+                                8
+                            </span>
+
+                        </div>
+
+
+                        <div class="formula-card">
+
+                            <strong>
+                                Output
+                            </strong>
+
+                            <span>
+                                64
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Algorithm
+                    </h4>
+
+
+                    <ol class="algorithm-list">
+
+                        <li>
+                            Start.
+                        </li>
+
+                        <li>
+                            Create a Calculator class.
+                        </li>
+
+                        <li>
+                            Declare a static function square().
+                        </li>
+
+                        <li>
+                            Accept a number.
+                        </li>
+
+                        <li>
+                            Call square() using the class name.
+                        </li>
+
+                        <li>
+                            Calculate the square.
+                        </li>
+
+                        <li>
+                            Display the result.
+                        </li>
+
+                        <li>
+                            Stop.
+                        </li>
+
+                    </ol>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        C++ Program
+                    </h4>
+
+
+                    <div class="code-window">
+
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+class Calculator
+{
+public:
+
+    static int square(int n)
+    {
+        return n * n;
+    }
+};
+
+int main()
+{
+    int num;
+
+    cout &lt;&lt; "Enter a number: ";
+    cin &gt;&gt; num;
+
+    cout &lt;&lt; "Square = "
+         &lt;&lt; Calculator::square(num);
+
+    return 0;
+}</code></pre>
+
+                    </div>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Expected Output
+                    </h4>
+
+
+                    <div class="output-box">
+
+<pre>Enter a number: 8
+Square = 64</pre>
+
+                    </div>
+
+                </div>
+
+
+                <div class="visualization-section">
+
+
+                    <div class="visualization-header">
+
+                        <span class="problem-badge">
+                            STATIC FUNCTION VISUALIZATION
+                        </span>
+
+
+                        <h3>
+                            Class → Static Function → Result
+                        </h3>
+
+                    </div>
+
+
+                    <div class="casting-visual">
+
+
+                        <div class="casting-value">
+
+                            <span>
+                                INPUT
+                            </span>
+
+                            <strong>
+                                8
+                            </strong>
+
+                            <small>
+                                Number
+                            </small>
+
+                        </div>
+
+
+                        <div class="casting-arrow">
+                            →
+                        </div>
+
+
+                        <div class="casting-value">
+
+                            <span>
+                                STATIC FUNCTION
+                            </span>
+
+                            <strong>
+                                square()
+                            </strong>
+
+                            <small>
+                                Calculator::square()
+                            </small>
+
+                        </div>
+
+
+                        <div class="casting-arrow">
+                            →
+                        </div>
+
+
+                        <div class="casting-value">
+
+                            <span>
+                                OUTPUT
+                            </span>
+
+                            <strong>
+                                64
+                            </strong>
+
+                            <small>
+                                8 × 8
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Program Explanation
+                    </h4>
+
+
+                    <ul class="key-points">
+
+                        <li>
+                            <code>square()</code> is a static member function.
+                        </li>
+
+                        <li>
+                            It does not require a Calculator object.
+                        </li>
+
+                        <li>
+                            It is called using
+                            <code>Calculator::square()</code>.
+                        </li>
+
+                        <li>
+                            The function receives a number and returns
+                            its square.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Real-Life Connection
+                    </h4>
+
+
+                    <p>
+                        Utility calculations such as square, cube,
+                        conversion or validation can be implemented as
+                        class-level operations when they do not depend
+                        on individual object data.
+                    </p>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Key Points
+                    </h4>
+
+
+                    <ul class="key-points">
+
+                        <li>
+                            A static function can be called without
+                            creating an object.
+                        </li>
+
+                        <li>
+                            It is accessed using the class name.
+                        </li>
+
+                        <li>
+                            It is useful for class-level utility operations.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Common Errors
+                    </h4>
+
+
+                    <div class="error-grid">
+
+
+                        <div class="error-card">
+
+                            <strong>
+                                Wrong Call
+                            </strong>
+
+                            <p>
+                                Use <code>Calculator::square()</code>
+                                to call the static function.
+                            </p>
+
+                        </div>
+
+
+                        <div class="error-card">
+
+                            <strong>
+                                Missing static
+                            </strong>
+
+                            <p>
+                                The function must be declared using
+                                the <code>static</code> keyword.
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 PROBLEM 3
+            ================================================= -->
+
+            <article
+                class="mini-problem"
+                id="static-function-problem3">
+
+
+                <span class="problem-badge">
+                    PROBLEM 03
+                </span>
+
+
+                <h3>
+                    Display Company Information
+                </h3>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Problem Statement
+                    </h4>
+
+
+                    <p>
+                        Write a C++ program to create an Employee class
+                        containing a static data member for company name
+                        and a static member function to display the company
+                        information.
+                    </p>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Algorithm
+                    </h4>
+
+
+                    <ol class="algorithm-list">
+
+                        <li>
+                            Start.
+                        </li>
+
+                        <li>
+                            Create an Employee class.
+                        </li>
+
+                        <li>
+                            Declare company as a static data member.
+                        </li>
+
+                        <li>
+                            Declare showCompany() as a static member function.
+                        </li>
+
+                        <li>
+                            Define the static company variable.
+                        </li>
+
+                        <li>
+                            Define the static member function.
+                        </li>
+
+                        <li>
+                            Call showCompany() using the class name.
+                        </li>
+
+                        <li>
+                            Display company information.
+                        </li>
+
+                        <li>
+                            Stop.
+                        </li>
+
+                    </ol>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        C++ Program
+                    </h4>
+
+
+                    <div class="code-window">
+
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+class Employee
+{
+    static string company;
+
+public:
+
+    static void showCompany()
+    {
+        cout &lt;&lt; "Company = "
+             &lt;&lt; company;
+    }
+};
+
+string Employee::company =
+    "Tech Solutions";
+
+int main()
+{
+    Employee::showCompany();
+
+    return 0;
+}</code></pre>
+
+                    </div>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Expected Output
+                    </h4>
+
+
+                    <div class="output-box">
+
+<pre>Company = Tech Solutions</pre>
+
+                    </div>
+
+                </div>
+
+
+                <div class="visualization-section">
+
+
+                    <div class="visualization-header">
+
+                        <span class="problem-badge">
+                            STATIC FUNCTION VISUALIZATION
+                        </span>
+
+
+                        <h3>
+                            Class-Level Information
+                        </h3>
+
+                    </div>
+
+
+                    <div class="casting-visual">
+
+
+                        <div class="casting-value">
+
+                            <span>
+                                CLASS
+                            </span>
+
+                            <strong>
+                                Employee
+                            </strong>
+
+                            <small>
+                                No object required
+                            </small>
+
+                        </div>
+
+
+                        <div class="casting-arrow">
+                            →
+                        </div>
+
+
+                        <div class="casting-value">
+
+                            <span>
+                                STATIC FUNCTION
+                            </span>
+
+                            <strong>
+                                showCompany()
+                            </strong>
+
+                            <small>
+                                Class-level operation
+                            </small>
+
+                        </div>
+
+
+                        <div class="casting-arrow">
+                            →
+                        </div>
+
+
+                        <div class="casting-value">
+
+                            <span>
+                                STATIC DATA
+                            </span>
+
+                            <strong>
+                                Tech Solutions
+                            </strong>
+
+                            <small>
+                                Shared company name
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Program Explanation
+                    </h4>
+
+
+                    <ul class="key-points">
+
+                        <li>
+                            <code>company</code> is a static data member.
+                        </li>
+
+                        <li>
+                            <code>showCompany()</code> is a static member
+                            function.
+                        </li>
+
+                        <li>
+                            The function can access the static company
+                            variable.
+                        </li>
+
+                        <li>
+                            The function is called using
+                            <code>Employee::showCompany()</code>.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Real-Life Connection
+                    </h4>
+
+
+                    <p>
+                        In an employee management system, company information
+                        is common to all employees. A static member can store
+                        this common information and a static function can
+                        display it without requiring an employee object.
+                    </p>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Key Points
+                    </h4>
+
+
+                    <ul class="key-points">
+
+                        <li>
+                            Static functions belong to the class.
+                        </li>
+
+                        <li>
+                            They can directly access static data members.
+                        </li>
+
+                        <li>
+                            They can be called using the class name.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Common Errors
+                    </h4>
+
+
+                    <div class="error-grid">
+
+
+                        <div class="error-card">
+
+                            <strong>
+                                Accessing Non-Static Data
+                            </strong>
+
+                            <p>
+                                A static member function cannot directly
+                                access ordinary non-static data members.
+                            </p>
+
+                        </div>
+
+
+                        <div class="error-card">
+
+                            <strong>
+                                Missing Static Definition
+                            </strong>
+
+                            <p>
+                                Define the static data member outside
+                                the class.
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+
+        <!-- =====================================================
+             QUICK SUMMARY
+        ===================================================== -->
+
+        <div class="casting-summary">
+
+
+            <span class="section-label">
+                QUICK SUMMARY
+            </span>
+
+
+            <h3>
+                Static Members at a Glance
+            </h3>
+
+
+            <div class="casting-comparison">
+
+
+                <div class="comparison-card">
+
+                    <span class="comparison-number">
+                        01
+                    </span>
+
+                    <h4>
+                        Static Data
+                    </h4>
+
+                    <p>
+                        One shared copy exists for the entire class.
+                    </p>
+
+                    <code>
+                        static int count;
+                    </code>
+
+                </div>
+
+
+                <div class="comparison-card">
+
+                    <span class="comparison-number">
+                        02
+                    </span>
+
+                    <h4>
+                        Static Function
+                    </h4>
+
+                    <p>
+                        A function that belongs to the class rather
+                        than an individual object.
+                    </p>
+
+                    <code>
+                        static void show();
+                    </code>
+
+                </div>
+
+
+                <div class="comparison-card">
+
+                    <span class="comparison-number">
+                        03
+                    </span>
+
+                    <h4>
+                        Shared Data
+                    </h4>
+
+                    <p>
+                        All objects access the same static data member.
+                    </p>
+
+                    <code>
+                        ClassName::data
+                    </code>
+
+                </div>
+
+
+                <div class="comparison-card">
+
+                    <span class="comparison-number">
+                        04
+                    </span>
+
+                    <h4>
+                        Class Access
+                    </h4>
+
+                    <p>
+                        Static member functions can be called using
+                        the class name.
+                    </p>
+
+                    <code>
+                        ClassName::function()
+                    </code>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             VIVA
+        ===================================================== -->
+
+        <section class="viva-section">
+
+
+            <span class="section-label">
+                04 — VIVA QUESTIONS
+            </span>
+
+
+            <h2>
+                Test Your Understanding
+            </h2>
+
+
+            <!-- STATIC DATA -->
+
+            <div class="viva-group">
+
+
+                <h3>
+                    Static Data Member
+                </h3>
+
+
+                <details>
+
+                    <summary>
+                        What is a static data member?
+                    </summary>
+
+                    <p>
+                        A static data member is a class-level variable
+                        shared by all objects of the class.
+                    </p>
+
+                </details>
+
+
+                <details>
+
+                    <summary>
+                        How many copies of a static data member exist?
+                    </summary>
+
+                    <p>
+                        Only one copy exists for the entire class.
+                    </p>
+
+                </details>
+
+
+                <details>
+
+                    <summary>
+                        How is a static data member defined outside the class?
+                    </summary>
+
+                    <p>
+                        It is defined using the class name and scope
+                        resolution operator, for example
+                        <code>Student::count = 0;</code>.
+                    </p>
+
+                </details>
+
+
+                <details>
+
+                    <summary>
+                        Why is a static data member useful?
+                    </summary>
+
+                    <p>
+                        It is useful when data needs to be shared among
+                        all objects of a class.
+                    </p>
+
+                </details>
+
+
+                <details>
+
+                    <summary>
+                        Give one real-life use of a static data member.
+                    </summary>
+
+                    <p>
+                        A static counter can be used to maintain the
+                        number of objects or records created by a class.
+                    </p>
+
+                </details>
+
+            </div>
+
+
+            <!-- STATIC FUNCTION -->
+
+            <div class="viva-group">
+
+
+                <h3>
+                    Static Member Function
+                </h3>
+
+
+                <details>
+
+                    <summary>
+                        What is a static member function?
+                    </summary>
+
+                    <p>
+                        A static member function is a function that belongs
+                        to the class rather than a particular object.
+                    </p>
+
+                </details>
+
+
+                <details>
+
+                    <summary>
+                        How is a static member function called?
+                    </summary>
+
+                    <p>
+                        It can be called using the class name and scope
+                        resolution operator, such as
+                        <code>Student::showCount()</code>.
+                    </p>
+
+                </details>
+
+
+                <details>
+
+                    <summary>
+                        Can a static member function access non-static data?
+                    </summary>
+
+                    <p>
+                        A static member function cannot directly access
+                        non-static data members because it does not have
+                        an object context.
+                    </p>
+
+                </details>
+
+
+                <details>
+
+                    <summary>
+                        What can a static member function directly access?
+                    </summary>
+
+                    <p>
+                        It can directly access static data members and
+                        other static member functions of the class.
+                    </p>
+
+                </details>
+
+
+                <details>
+
+                    <summary>
+                        Is an object required to call a static member function?
+                    </summary>
+
+                    <p>
+                        No. It can be called using the class name.
+                    </p>
+
+                </details>
+
+            </div>
+
+
+            <!-- COMPARISON -->
+
+            <div class="viva-group">
+
+
+                <h3>
+                    Static vs Non-Static
+                </h3>
+
+
+                <details>
+
+                    <summary>
+                        What is the main difference between static and
+                        non-static data members?
+                    </summary>
+
+                    <p>
+                        A non-static data member has a separate copy for
+                        each object, while a static data member has one
+                        shared copy for the entire class.
+                    </p>
+
+                </details>
+
+
+                <details>
+
+                    <summary>
+                        Can a static function be called using an object?
+                    </summary>
+
+                    <p>
+                        C++ permits calling a static member function through
+                        an object, but class-name syntax such as
+                        <code>ClassName::function()</code> clearly expresses
+                        that the function belongs to the class.
+                    </p>
+
+                </details>
+
+            </div>
+
+
+        </section>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="footer">
+
+    <div class="footer-content">
+
+
+        <div class="footer-brand">
+
+            <div class="footer-logo">
+                &lt;/&gt;
+            </div>
+
+
+            <div class="footer-brand-text">
+
+                <div class="footer-brand-name">
+                    Rasika <span>CodeLab</span>
+                </div>
+
+
+                <p class="footer-tagline">
+                    Code • Understand • Visualize
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-copy">
+            © 2026 Rasika CodeLab. Built for practical learning.
+        </div>
+
+    </div>
+
+</footer>
+
+
+<script src="../js/main.js"></script>
+
+
+<!-- =====================================================
+     TAB SCRIPT
+===================================================== -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+
+    /* =====================================================
+       LLO 8.1 / LLO 8.2
+       ===================================================== */
+
+    const lloTabs =
+        document.querySelectorAll(".llo-tab");
+
+
+    const lloSections =
+        document.querySelectorAll(".llo-section");
+
+
+    lloTabs.forEach(tab => {
+
+
+        tab.addEventListener("click", function () {
+
+
+            const target =
+                this.dataset.llo;
+
+
+            lloTabs.forEach(item => {
+
+                item.classList.remove("active");
+
+            });
+
+
+            this.classList.add("active");
+
+
+            lloSections.forEach(section => {
+
+                section.classList.remove("active");
+
+            });
+
+
+            const selectedSection =
+                document.getElementById(target);
+
+
+            if (selectedSection) {
+
+                selectedSection.classList.add("active");
+
+            }
+
+        });
+
+    });
+
+
+    /* =====================================================
+       PROBLEM SWITCHING
+       Each LLO controls only its own problems
+       ===================================================== */
+
+    lloSections.forEach(section => {
+
+
+        const problemTabs =
+            section.querySelectorAll(
+                ".problem-mini-selector .mini-problem-tab:not(.llo-tab)"
+            );
+
+
+        const problems =
+            section.querySelectorAll(
+                ":scope > .mini-problem"
+            );
+
+
+        problemTabs.forEach(tab => {
+
+
+            tab.addEventListener("click", function () {
+
+
+                const target =
+                    this.dataset.problem;
+
+
+                problemTabs.forEach(item => {
+
+                    item.classList.remove("active");
+
+                });
+
+
+                this.classList.add("active");
+
+
+                problems.forEach(problem => {
+
+                    problem.classList.remove("active");
+
+                });
+
+
+                const selectedProblem =
+                    document.getElementById(target);
+
+
+                if (selectedProblem) {
+
+                    selectedProblem.classList.add("active");
+
+                }
+
+            });
+
+        });
+
+    });
+
+});
+
+</script>
+
+
+</body>
+
+</html>

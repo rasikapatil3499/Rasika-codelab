@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>How a Program Executes | Rasika CodeLab</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+    <div class="container nav-container">
+
+        <a href="../index.html" class="logo">
+            <span class="logo-mark">&lt;/&gt;</span>
+            Rasika<span>CodeLab</span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="../index.html">Home</a>
+            <a href="../foundations.html" class="active">Foundations</a>
+            <a href="../practicals.html">Practicals</a>
+            <a href="../about.html">About</a>
+        </nav>
+
+        <button class="menu-btn" aria-label="Open Menu">☰</button>
+
+    </div>
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="detail-hero">
+
+    <div class="container">
+
+        <div class="breadcrumb">
+            <a href="../foundations.html">C++ Foundations</a>
+            <span>›</span>
+            <span>02</span>
+        </div>
+
+        <div class="detail-badge">
+            FOUNDATION 02
+        </div>
+
+        <h1>How Does a <span>Program Execute?</span></h1>
+
+        <p class="detail-intro">
+            You write C++ code in a human-readable form.
+            But how does that code become instructions that the computer can execute?
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CONTENT ================= -->
+
+<main class="detail-page">
+
+    <div class="container detail-container">
+
+
+        <!-- BASIC IDEA -->
+
+        <section class="concept-section">
+
+            <div class="section-label">01 — BASIC IDEA</div>
+
+            <h2>The computer does not directly execute C++ source code.</h2>
+
+            <p>
+                A C++ program is written using a language that humans can
+                understand. The computer's processor ultimately works with
+                machine instructions.
+            </p>
+
+            <div class="definition-card">
+
+                <div class="definition-icon">⚙</div>
+
+                <div>
+
+                    <span class="definition-label">
+                        CORE IDEA
+                    </span>
+
+                    <p>
+                        <strong>Source Code → Translation → Executable → Execution</strong>
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- BIG PIPELINE -->
+
+        <section class="concept-section">
+
+            <div class="section-label">02 — VISUALIZE</div>
+
+            <h2>From C++ code to execution</h2>
+
+            <p>
+                A simplified view of what happens when a C++ program is built
+                and executed is shown below.
+            </p>
+
+
+            <div class="execution-pipeline">
+
+                <div class="pipeline-card">
+
+                    <div class="pipeline-number">01</div>
+
+                    <div class="pipeline-icon">&lt;/&gt;</div>
+
+                    <h3>Source Code</h3>
+
+                    <p>
+                        Programmer writes the C++ program.
+                    </p>
+
+                    <code>program.cpp</code>
+
+                </div>
+
+
+                <div class="pipeline-arrow">→</div>
+
+
+                <div class="pipeline-card">
+
+                    <div class="pipeline-number">02</div>
+
+                    <div class="pipeline-icon">⚙</div>
+
+                    <h3>Preprocessing</h3>
+
+                    <p>
+                        Preprocessor handles directives such as
+                        <code>#include</code>.
+                    </p>
+
+                </div>
+
+
+                <div class="pipeline-arrow">→</div>
+
+
+                <div class="pipeline-card">
+
+                    <div class="pipeline-number">03</div>
+
+                    <div class="pipeline-icon">▣</div>
+
+                    <h3>Compilation</h3>
+
+                    <p>
+                        The compiler translates C++ source into lower-level
+                        object code.
+                    </p>
+
+                </div>
+
+
+                <div class="pipeline-arrow">→</div>
+
+
+                <div class="pipeline-card">
+
+                    <div class="pipeline-number">04</div>
+
+                    <div class="pipeline-icon">🔗</div>
+
+                    <h3>Linking</h3>
+
+                    <p>
+                        Required object files and libraries are combined
+                        to create the executable.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="execution-final">
+
+                <div class="final-stage">
+                    <span>05</span>
+                    <strong>Executable Program</strong>
+                    <small>Ready to be loaded and executed</small>
+                </div>
+
+                <div class="final-arrow">↓</div>
+
+                <div class="final-stage active">
+                    <span>06</span>
+                    <strong>CPU Executes Instructions</strong>
+                    <small>Fetch → Decode → Execute</small>
+                </div>
+
+                <div class="final-arrow">↓</div>
+
+                <div class="final-stage">
+                    <span>07</span>
+                    <strong>Output</strong>
+                    <small>Program produces the result</small>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SOURCE CODE -->
+
+        <section class="concept-section">
+
+            <div class="section-label">03 — SOURCE CODE</div>
+
+            <h2>Step 1: Write the program</h2>
+
+            <p>
+                The programmer first creates a source file containing
+                C++ instructions.
+            </p>
+
+
+            <div class="code-example">
+
+                <div class="code-header">
+                    <span>PROGRAM.CPP</span>
+                    <span>SOURCE CODE</span>
+                </div>
+
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    int a = 10;
+    int b = 20;
+
+    cout &lt;&lt; a + b;
+
+    return 0;
+}</code></pre>
+
+            </div>
+
+        </section>
+
+
+        <!-- PREPROCESSOR -->
+
+        <section class="concept-section">
+
+            <div class="section-label">04 — PREPROCESSING</div>
+
+            <h2>Step 2: Preprocessor prepares the source</h2>
+
+            <p>
+                Before compilation, preprocessing directives are handled.
+                For example, an <code>#include</code> directive tells the
+                preprocessor to include the required header information.
+            </p>
+
+
+            <div class="stage-card">
+
+                <div class="stage-symbol">#</div>
+
+                <div>
+                    <h3>#include &lt;iostream&gt;</h3>
+
+                    <p>
+                        This provides declarations needed for standard
+                        input/output operations such as <code>cout</code>.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- COMPILATION -->
+
+        <section class="concept-section">
+
+            <div class="section-label">05 — COMPILATION</div>
+
+            <h2>Step 3: Compiler translates the program</h2>
+
+            <p>
+                The compiler analyzes the C++ source code and translates it
+                into lower-level code suitable for the target system.
+            </p>
+
+
+            <div class="compare-box">
+
+                <div class="compare-side">
+
+                    <span>HUMAN-READABLE</span>
+
+                    <code>
+                        cout &lt;&lt; a + b;
+                    </code>
+
+                    <p>
+                        C++ source instruction
+                    </p>
+
+                </div>
+
+
+                <div class="compare-arrow">
+                    →
+                </div>
+
+
+                <div class="compare-side">
+
+                    <span>LOWER-LEVEL REPRESENTATION</span>
+
+                    <code>
+                        Machine / Object Code
+                    </code>
+
+                    <p>
+                        Suitable for further processing by the toolchain
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- LINKER -->
+
+        <section class="concept-section">
+
+            <div class="section-label">06 — LINKING</div>
+
+            <h2>Step 4: Link required components</h2>
+
+            <p>
+                A program may depend on code provided by libraries.
+                The linker combines the required pieces and produces
+                the final executable program.
+            </p>
+
+
+            <div class="linker-visual">
+
+                <div class="linker-input">
+                    <span>OBJECT CODE</span>
+                    <strong>program.o</strong>
+                </div>
+
+                <div class="plus">+</div>
+
+                <div class="linker-input">
+                    <span>LIBRARIES</span>
+                    <strong>Required code</strong>
+                </div>
+
+                <div class="plus">+</div>
+
+                <div class="linker-output">
+                    <span>RESULT</span>
+                    <strong>Executable</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- LOADING -->
+
+        <section class="concept-section">
+
+            <div class="section-label">07 — LOADING</div>
+
+            <h2>Step 5: Load the program into memory</h2>
+
+            <p>
+                When you start an executable program, the operating system
+                creates a process and loads the necessary program information
+                into memory.
+            </p>
+
+
+            <div class="memory-visual">
+
+                <div class="memory-title">
+                    MAIN MEMORY
+                </div>
+
+                <div class="memory-row">
+
+                    <div class="memory-block code-block">
+                        <strong>CODE</strong>
+                        <small>Program instructions</small>
+                    </div>
+
+                    <div class="memory-block data-block">
+                        <strong>DATA</strong>
+                        <small>Program data</small>
+                    </div>
+
+                    <div class="memory-block heap-block">
+                        <strong>HEAP</strong>
+                        <small>Dynamic memory</small>
+                    </div>
+
+                    <div class="memory-block stack-block">
+                        <strong>STACK</strong>
+                        <small>Function calls & local data</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <p class="note-text">
+                <strong>Note:</strong>
+                This is a simplified conceptual model. Actual process memory
+                organization depends on the operating system, compiler,
+                architecture, and runtime environment.
+            </p>
+
+        </section>
+
+
+        <!-- CPU -->
+
+        <section class="concept-section">
+
+            <div class="section-label">08 — CPU EXECUTION</div>
+
+            <h2>Step 6: CPU executes instructions</h2>
+
+            <p>
+                The processor repeatedly performs a fundamental cycle:
+                <strong>fetch, decode, and execute</strong>.
+            </p>
+
+
+            <div class="cpu-cycle">
+
+                <div class="cpu-step">
+
+                    <div class="cpu-number">01</div>
+
+                    <h3>Fetch</h3>
+
+                    <p>
+                        Fetch the next instruction from memory.
+                    </p>
+
+                </div>
+
+                <div class="cpu-arrow">→</div>
+
+                <div class="cpu-step">
+
+                    <div class="cpu-number">02</div>
+
+                    <h3>Decode</h3>
+
+                    <p>
+                        Determine what operation the instruction represents.
+                    </p>
+
+                </div>
+
+                <div class="cpu-arrow">→</div>
+
+                <div class="cpu-step">
+
+                    <div class="cpu-number">03</div>
+
+                    <h3>Execute</h3>
+
+                    <p>
+                        Perform the required operation.
+                    </p>
+
+                </div>
+
+                <div class="cpu-arrow return-arrow">↻</div>
+
+            </div>
+
+        </section>
+
+
+        <!-- EXAMPLE -->
+
+        <section class="concept-section">
+
+            <div class="section-label">09 — FOLLOW AN EXAMPLE</div>
+
+            <h2>What happens to <code>a + b</code>?</h2>
+
+            <p>
+                Consider a simple expression where
+                <code>a = 10</code> and <code>b = 20</code>.
+            </p>
+
+
+            <div class="calculation-flow">
+
+                <div class="calc-box">
+                    <span>MEMORY</span>
+                    <strong>a = 10</strong>
+                </div>
+
+                <div class="calc-symbol">+</div>
+
+                <div class="calc-box">
+                    <span>MEMORY</span>
+                    <strong>b = 20</strong>
+                </div>
+
+                <div class="calc-symbol">→</div>
+
+                <div class="calc-result">
+                    <span>RESULT</span>
+                    <strong>30</strong>
+                </div>
+
+            </div>
+
+
+            <div class="explanation-box">
+
+                <div class="explanation-title">
+                    Conceptual flow
+                </div>
+
+                <ul>
+                    <li>The program stores the values of <strong>a</strong> and <strong>b</strong>.</li>
+                    <li>The CPU performs the addition operation.</li>
+                    <li>The result is <strong>30</strong>.</li>
+                    <li><code>cout</code> sends the result to the output stream.</li>
+                </ul>
+
+            </div>
+
+        </section>
+
+
+        <!-- ERROR -->
+
+        <section class="concept-section">
+
+            <div class="section-label">10 — WHAT IF SOMETHING IS WRONG?</div>
+
+            <h2>The program may stop before execution.</h2>
+
+            <p>
+                Different problems are detected at different stages.
+                Understanding the stages makes errors easier to understand.
+            </p>
+
+
+            <div class="error-grid">
+
+                <div class="error-card">
+
+                    <span>01</span>
+
+                    <h3>Syntax / Compilation Error</h3>
+
+                    <p>
+                        The compiler cannot translate the source because
+                        the code violates language rules.
+                    </p>
+
+                </div>
+
+
+                <div class="error-card">
+
+                    <span>02</span>
+
+                    <h3>Linker Error</h3>
+
+                    <p>
+                        Required symbols or libraries cannot be resolved
+                        during linking.
+                    </p>
+
+                </div>
+
+
+                <div class="error-card">
+
+                    <span>03</span>
+
+                    <h3>Runtime Error</h3>
+
+                    <p>
+                        A problem occurs while the program is executing.
+                    </p>
+
+                </div>
+
+
+                <div class="error-card">
+
+                    <span>04</span>
+
+                    <h3>Logical Error</h3>
+
+                    <p>
+                        The program runs but produces an incorrect result
+                        because the logic is wrong.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- TAKEAWAYS -->
+
+        <section class="takeaway-section">
+
+            <div class="section-label">11 — REMEMBER</div>
+
+            <h2>Key Takeaways</h2>
+
+            <div class="takeaways">
+
+                <div>
+                    <span>✓</span>
+                    C++ source code is translated before execution.
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    Preprocessing handles directives such as #include.
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    The compiler translates the source code.
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    The linker combines required program components.
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    An executable is loaded into memory when started.
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    The CPU executes instructions using fetch-decode-execute.
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- NAVIGATION -->
+
+        <section class="lesson-navigation">
+
+            <a href="program.html" class="lesson-nav-card">
+
+                <span>←</span>
+
+                <div>
+                    <small>PREVIOUS FOUNDATION</small>
+                    <strong>What is a Program?</strong>
+                </div>
+
+            </a>
+
+
+            <a href="variables.html" class="lesson-nav-card next">
+
+                <div>
+                    <small>NEXT FOUNDATION</small>
+                    <strong>What is a Variable?</strong>
+                </div>
+
+                <span>→</span>
+
+            </a>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <div class="container">
+
+        <div class="footer-content">
+
+            <div>
+
+                <div class="logo">
+                    <span class="logo-mark">&lt;/&gt;</span>
+                    Rasika<span>CodeLab</span>
+                </div>
+
+                <p>
+                    Code • Understand • Visualize
+                </p>
+
+            </div>
+
+            <p class="footer-copy">
+                © 2026 Rasika CodeLab. Built for practical learning.
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<script src="../js/main.js"></script>
+
+</body>
+</html>

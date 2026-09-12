@@ -1,0 +1,1781 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Practical 6 | Inline Function | Rasika CodeLab</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="detail-page">
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+
+    <div class="nav-container">
+
+        <a href="../index.html" class="logo">
+            <span class="logo-icon">&lt;/&gt;</span>
+            <span>Rasika<span>CodeLab</span></span>
+        </a>
+
+        <button class="menu-btn" aria-label="Toggle menu">
+            ☰
+        </button>
+
+        <nav class="nav-links">
+            <a href="../index.html">Home</a>
+            <a href="../foundations/program.html">Foundations</a>
+            <a href="index.html" class="active">Practicals</a>
+            <a href="../index.html#about">About</a>
+        </nav>
+
+    </div>
+
+</header>
+
+
+<main class="practical-page">
+
+
+<!-- ================= HERO ================= -->
+
+<section class="practical-hero">
+
+    <div class="container">
+
+        <span class="section-label">
+            C++ PRACTICAL 06
+        </span>
+
+        <h1>
+            Inline Functions
+        </h1>
+
+        <p class="practical-subtitle">
+            Learn how to implement inline functions in C++ and understand
+            how they can be used for small, frequently called operations.
+        </p>
+
+        <div class="practical-meta">
+            <span>💻 C++</span>
+            <span>📘 Practical 6</span>
+            <span>🎯 LLO 6.1</span>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= AIM ================= -->
+
+<section class="content-section">
+
+    <div class="container">
+
+        <span class="section-label">
+            01 — AIM
+        </span>
+
+        <div class="content-card">
+
+            <p>
+                To implement programs using inline functions in C++.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= LEARNING OBJECTIVES ================= -->
+
+<section class="content-section">
+
+    <div class="container">
+
+        <span class="section-label">
+            02 — LEARNING OBJECTIVES
+        </span>
+
+        <div class="objective-grid">
+
+            <div class="objective-card">
+                <span>01</span>
+                <p>
+                    Understand the concept of inline functions in C++.
+                </p>
+            </div>
+
+            <div class="objective-card">
+                <span>02</span>
+                <p>
+                    Learn how to declare and define an inline function.
+                </p>
+            </div>
+
+            <div class="objective-card">
+                <span>03</span>
+                <p>
+                    Use inline functions for small and frequently used
+                    operations.
+                </p>
+            </div>
+
+            <div class="objective-card">
+                <span>04</span>
+                <p>
+                    Apply inline functions to practical programming problems.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CONCEPT ================= -->
+
+<section class="content-section">
+
+    <div class="container">
+
+        <span class="section-label">
+            03 — EXPLORE THE CONCEPT
+        </span>
+
+        <h2>
+            What is an Inline Function?
+        </h2>
+
+        <p class="section-description">
+            Understand how inline functions work and where they can be
+            useful in C++ programs.
+        </p>
+
+
+        <!-- THEORY -->
+
+        <div class="theory-box">
+
+            <h3>
+                Theory
+            </h3>
+
+            <p>
+                An <strong>inline function</strong> is a function declared
+                using the <code>inline</code> keyword. It is generally used
+                for small functions that are called frequently.
+            </p>
+
+            <p>
+                When a function is declared inline, the compiler may replace
+                the function call with the actual function code. This can
+                reduce the overhead associated with a normal function call.
+            </p>
+
+            <p>
+                Inline functions are most suitable for short operations such
+                as finding a square, maximum value, or performing a simple
+                calculation.
+            </p>
+
+
+            <div class="syntax-box">
+
+                <code>
+                    inline returnType functionName(parameters)
+                    {
+                        // function body
+                    }
+                </code>
+
+            </div>
+
+
+            <div class="casting-rule">
+
+                <span>Function Call</span>
+
+                <strong>→</strong>
+
+                <span>Inline Function</span>
+
+                <strong>→</strong>
+
+                <span>Result</span>
+
+            </div>
+
+        </div>
+
+
+        <!-- REAL LIFE -->
+
+        <div class="real-life-box">
+
+            <div class="real-life-icon">
+                🌍
+            </div>
+
+            <div>
+
+                <h3>
+                    Real-Life Example
+                </h3>
+
+                <p>
+                    Imagine a billing system that repeatedly calculates
+                    a small service charge. Instead of repeatedly handling
+                    the overhead of a normal function call, a small calculation
+                    can be written as an inline function.
+                </p>
+
+                <p>
+                    Similarly, small calculations such as tax, discount,
+                    percentage or maximum value can be implemented using
+                    inline functions.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- WHERE USED -->
+
+        <div class="where-used-box">
+
+            <h3>
+                Where & How Is It Used?
+            </h3>
+
+            <div class="use-grid">
+
+                <div>
+
+                    <strong>
+                        Small Calculations
+                    </strong>
+
+                    <p>
+                        Useful for short mathematical operations such as
+                        square, cube or percentage.
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Frequently Called Functions
+                    </strong>
+
+                    <p>
+                        Suitable for functions that are called repeatedly
+                        during program execution.
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Utility Functions
+                    </strong>
+
+                    <p>
+                        Small utility operations can be written as inline
+                        functions to keep the code concise.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- BASIC SYNTAX -->
+
+        <div class="content-block">
+
+            <h4>
+                Basic Syntax
+            </h4>
+
+            <div class="code-window">
+
+<pre><code>inline returnType functionName(parameters)
+{
+    // function body
+}</code></pre>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= PROBLEM SELECTOR ================= -->
+
+        <div class="problem-mini-selector">
+
+            <button
+                class="mini-problem-tab active"
+                data-problem="inline-problem1">
+                Problem 01
+            </button>
+
+            <button
+                class="mini-problem-tab"
+                data-problem="inline-problem2">
+                Problem 02
+            </button>
+
+            <button
+                class="mini-problem-tab"
+                data-problem="inline-problem3">
+                Problem 03
+            </button>
+
+        </div>
+
+
+        <!-- ================================================== -->
+        <!-- PROBLEM 1 -->
+        <!-- ================================================== -->
+
+        <article
+            class="mini-problem active"
+            id="inline-problem1">
+
+            <span class="problem-badge">
+                PROBLEM 01
+            </span>
+
+            <h3>
+                Square of a Number
+            </h3>
+
+
+            <!-- PROBLEM STATEMENT -->
+
+            <div class="content-block">
+
+                <h4>
+                    Problem Statement
+                </h4>
+
+                <p>
+                    Write a C++ program to calculate the square of a number
+                    using an inline function.
+                </p>
+
+            </div>
+
+
+            <!-- ALGORITHM -->
+
+            <div class="content-block">
+
+                <h4>
+                    Algorithm
+                </h4>
+
+                <ol class="algorithm-list">
+
+                    <li>
+                        Start.
+                    </li>
+
+                    <li>
+                        Define an inline function named
+                        <code>square()</code>.
+                    </li>
+
+                    <li>
+                        Accept a number from the user.
+                    </li>
+
+                    <li>
+                        Pass the number to the inline function.
+                    </li>
+
+                    <li>
+                        Calculate the square.
+                    </li>
+
+                    <li>
+                        Display the result.
+                    </li>
+
+                    <li>
+                        Stop.
+                    </li>
+
+                </ol>
+
+            </div>
+
+
+            <!-- PROGRAM -->
+
+            <div class="content-block">
+
+                <h4>
+                    C++ Program
+                </h4>
+
+                <div class="code-window">
+
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+inline int square(int n)
+{
+    return n * n;
+}
+
+int main()
+{
+    int num;
+
+    cout &lt;&lt; "Enter a number: ";
+    cin &gt;&gt; num;
+
+    cout &lt;&lt; "Square = "
+         &lt;&lt; square(num);
+
+    return 0;
+}</code></pre>
+
+                </div>
+
+            </div>
+
+
+            <!-- OUTPUT -->
+
+            <div class="content-block">
+
+                <h4>
+                    Expected Output
+                </h4>
+
+                <div class="output-box">
+
+<pre>Enter a number: 5
+Square = 25</pre>
+
+                </div>
+
+            </div>
+
+
+            <!-- VISUALIZATION -->
+
+            <div class="visualization-section">
+
+                <div class="visualization-header">
+
+                    <span class="problem-badge">
+                        INLINE FUNCTION VISUALIZATION
+                    </span>
+
+                    <h3>
+                        Function Call → Calculation → Result
+                    </h3>
+
+                    <p>
+                        The small calculation is implemented using an
+                        inline function.
+                    </p>
+
+                </div>
+
+
+                <div class="casting-visual">
+
+                    <div class="casting-value">
+
+                        <span>INPUT</span>
+
+                        <strong>5</strong>
+
+                        <small>square(5)</small>
+
+                    </div>
+
+
+                    <div class="casting-arrow">
+                        →
+                    </div>
+
+
+                    <div class="casting-value">
+
+                        <span>INLINE FUNCTION</span>
+
+                        <strong>5 × 5</strong>
+
+                        <small>square(int n)</small>
+
+                    </div>
+
+
+                    <div class="casting-arrow">
+                        →
+                    </div>
+
+
+                    <div class="casting-value">
+
+                        <span>OUTPUT</span>
+
+                        <strong>25</strong>
+
+                        <small>Result</small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- EXPLANATION -->
+
+            <div class="content-block">
+
+                <h4>
+                    Program Explanation
+                </h4>
+
+                <ul class="key-points">
+
+                    <li>
+                        <code>square()</code> is declared using the
+                        <code>inline</code> keyword.
+                    </li>
+
+                    <li>
+                        The function accepts an integer parameter.
+                    </li>
+
+                    <li>
+                        It returns <code>n * n</code>.
+                    </li>
+
+                    <li>
+                        The function is called using
+                        <code>square(num)</code>.
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- REAL LIFE -->
+
+            <div class="content-block">
+
+                <h4>
+                    Real-Life Connection
+                </h4>
+
+                <p>
+                    Square calculations are commonly required in geometry,
+                    engineering calculations and mathematical applications.
+                    A small frequently used calculation can be represented
+                    using an inline function.
+                </p>
+
+            </div>
+
+
+            <!-- KEY POINTS -->
+
+            <div class="content-block">
+
+                <h4>
+                    Key Points
+                </h4>
+
+                <ul class="key-points">
+
+                    <li>
+                        Use the <code>inline</code> keyword to declare
+                        an inline function.
+                    </li>
+
+                    <li>
+                        Inline functions are generally suitable for
+                        small operations.
+                    </li>
+
+                    <li>
+                        The compiler decides whether to actually inline
+                        the function.
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- COMMON ERRORS -->
+
+            <div class="content-block">
+
+                <h4>
+                    Common Errors
+                </h4>
+
+                <div class="error-grid">
+
+                    <div class="error-card">
+
+                        <strong>
+                            Missing Return Type
+                        </strong>
+
+                        <p>
+                            Always specify the correct return type before
+                            the function name.
+                        </p>
+
+                    </div>
+
+
+                    <div class="error-card">
+
+                        <strong>
+                            Incorrect Function Call
+                        </strong>
+
+                        <p>
+                            Pass the required parameter when calling
+                            the inline function.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- ================================================== -->
+        <!-- PROBLEM 2 -->
+        <!-- ================================================== -->
+
+        <article
+            class="mini-problem"
+            id="inline-problem2">
+
+            <span class="problem-badge">
+                PROBLEM 02
+            </span>
+
+            <h3>
+                Maximum of Two Numbers
+            </h3>
+
+
+            <div class="content-block">
+
+                <h4>
+                    Problem Statement
+                </h4>
+
+                <p>
+                    Write a C++ program to find the maximum of two numbers
+                    using an inline function.
+                </p>
+
+            </div>
+
+
+            <div class="content-block">
+
+                <h4>
+                    Algorithm
+                </h4>
+
+                <ol class="algorithm-list">
+
+                    <li>
+                        Start.
+                    </li>
+
+                    <li>
+                        Define an inline function named
+                        <code>maximum()</code>.
+                    </li>
+
+                    <li>
+                        Accept two numbers.
+                    </li>
+
+                    <li>
+                        Pass both numbers to the inline function.
+                    </li>
+
+                    <li>
+                        Compare the two numbers.
+                    </li>
+
+                    <li>
+                        Return the greater number.
+                    </li>
+
+                    <li>
+                        Display the maximum value.
+                    </li>
+
+                    <li>
+                        Stop.
+                    </li>
+
+                </ol>
+
+            </div>
+
+
+            <div class="content-block">
+
+                <h4>
+                    C++ Program
+                </h4>
+
+                <div class="code-window">
+
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+inline int maximum(int a, int b)
+{
+    return (a &gt; b) ? a : b;
+}
+
+int main()
+{
+    int a, b;
+
+    cout &lt;&lt; "Enter two numbers: ";
+    cin &gt;&gt; a &gt;&gt; b;
+
+    cout &lt;&lt; "Maximum = "
+         &lt;&lt; maximum(a, b);
+
+    return 0;
+}</code></pre>
+
+                </div>
+
+            </div>
+
+
+            <div class="content-block">
+
+                <h4>
+                    Expected Output
+                </h4>
+
+                <div class="output-box">
+
+<pre>Enter two numbers: 25 40
+Maximum = 40</pre>
+
+                </div>
+
+            </div>
+
+
+            <!-- VISUALIZATION -->
+
+            <div class="visualization-section">
+
+                <div class="visualization-header">
+
+                    <span class="problem-badge">
+                        INLINE FUNCTION VISUALIZATION
+                    </span>
+
+                    <h3>
+                        Compare → Select → Return
+                    </h3>
+
+                    <p>
+                        The inline function compares both values and
+                        returns the greater number.
+                    </p>
+
+                </div>
+
+
+                <div class="casting-visual">
+
+                    <div class="casting-value">
+
+                        <span>INPUT A</span>
+
+                        <strong>25</strong>
+
+                        <small>a</small>
+
+                    </div>
+
+
+                    <div class="casting-arrow">
+                        +
+                    </div>
+
+
+                    <div class="casting-value">
+
+                        <span>INPUT B</span>
+
+                        <strong>40</strong>
+
+                        <small>b</small>
+
+                    </div>
+
+
+                    <div class="casting-arrow">
+                        →
+                    </div>
+
+
+                    <div class="casting-value">
+
+                        <span>INLINE FUNCTION</span>
+
+                        <strong>40</strong>
+
+                        <small>maximum(a,b)</small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="content-block">
+
+                <h4>
+                    Program Explanation
+                </h4>
+
+                <ul class="key-points">
+
+                    <li>
+                        <code>maximum()</code> is an inline function.
+                    </li>
+
+                    <li>
+                        It accepts two integer parameters.
+                    </li>
+
+                    <li>
+                        The conditional operator compares both values.
+                    </li>
+
+                    <li>
+                        The greater value is returned to
+                        <code>main()</code>.
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <div class="content-block">
+
+                <h4>
+                    Real-Life Connection
+                </h4>
+
+                <p>
+                    Finding the larger of two values is useful in
+                    result processing, salary comparison, product pricing
+                    and many decision-making applications.
+                </p>
+
+            </div>
+
+
+            <div class="content-block">
+
+                <h4>
+                    Key Points
+                </h4>
+
+                <ul class="key-points">
+
+                    <li>
+                        An inline function can accept multiple parameters.
+                    </li>
+
+                    <li>
+                        It can contain a short expression or calculation.
+                    </li>
+
+                    <li>
+                        The returned value can be directly used in
+                        <code>cout</code>.
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <div class="content-block">
+
+                <h4>
+                    Common Errors
+                </h4>
+
+                <div class="error-grid">
+
+                    <div class="error-card">
+
+                        <strong>
+                            Wrong Parameters
+                        </strong>
+
+                        <p>
+                            The number and type of arguments should match
+                            the function parameters.
+                        </p>
+
+                    </div>
+
+
+                    <div class="error-card">
+
+                        <strong>
+                            Incorrect Comparison
+                        </strong>
+
+                        <p>
+                            Make sure the comparison returns the greater
+                            value correctly.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- ================================================== -->
+        <!-- PROBLEM 3 -->
+        <!-- ================================================== -->
+
+        <article
+            class="mini-problem"
+            id="inline-problem3">
+
+            <span class="problem-badge">
+                PROBLEM 03
+            </span>
+
+            <h3>
+                Simple Interest
+            </h3>
+
+
+            <div class="content-block">
+
+                <h4>
+                    Problem Statement
+                </h4>
+
+                <p>
+                    Write a C++ program to calculate simple interest using
+                    an inline function.
+                </p>
+
+            </div>
+
+
+            <!-- FORMULA -->
+
+            <div class="content-block">
+
+                <h4>
+                    Formula
+                </h4>
+
+                <div class="formula-grid">
+
+                    <div class="formula-card">
+
+                        <strong>
+                            Simple Interest
+                        </strong>
+
+                        <span>
+                            (P × R × T) / 100
+                        </span>
+
+                    </div>
+
+                    <div class="formula-card">
+
+                        <strong>
+                            P
+                        </strong>
+
+                        <span>
+                            Principal Amount
+                        </span>
+
+                    </div>
+
+                    <div class="formula-card">
+
+                        <strong>
+                            R & T
+                        </strong>
+
+                        <span>
+                            Rate & Time
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ALGORITHM -->
+
+            <div class="content-block">
+
+                <h4>
+                    Algorithm
+                </h4>
+
+                <ol class="algorithm-list">
+
+                    <li>
+                        Start.
+                    </li>
+
+                    <li>
+                        Define an inline function named
+                        <code>simpleInterest()</code>.
+                    </li>
+
+                    <li>
+                        Accept principal amount, rate and time.
+                    </li>
+
+                    <li>
+                        Pass the values to the inline function.
+                    </li>
+
+                    <li>
+                        Calculate simple interest using the formula.
+                    </li>
+
+                    <li>
+                        Return the calculated interest.
+                    </li>
+
+                    <li>
+                        Display the simple interest.
+                    </li>
+
+                    <li>
+                        Stop.
+                    </li>
+
+                </ol>
+
+            </div>
+
+
+            <!-- PROGRAM -->
+
+            <div class="content-block">
+
+                <h4>
+                    C++ Program
+                </h4>
+
+                <div class="code-window">
+
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+inline float simpleInterest(
+    float p, float r, float t)
+{
+    return (p * r * t) / 100;
+}
+
+int main()
+{
+    float p, r, t;
+
+    cout &lt;&lt; "Enter principal amount: ";
+    cin &gt;&gt; p;
+
+    cout &lt;&lt; "Enter rate of interest: ";
+    cin &gt;&gt; r;
+
+    cout &lt;&lt; "Enter time: ";
+    cin &gt;&gt; t;
+
+    cout &lt;&lt; "Simple Interest = "
+         &lt;&lt; simpleInterest(p, r, t);
+
+    return 0;
+}</code></pre>
+
+                </div>
+
+            </div>
+
+
+            <!-- OUTPUT -->
+
+            <div class="content-block">
+
+                <h4>
+                    Expected Output
+                </h4>
+
+                <div class="output-box">
+
+<pre>Enter principal amount: 10000
+Enter rate of interest: 5
+Enter time: 2
+Simple Interest = 1000</pre>
+
+                </div>
+
+            </div>
+
+
+            <!-- VISUALIZATION -->
+
+            <div class="visualization-section">
+
+                <div class="visualization-header">
+
+                    <span class="problem-badge">
+                        INLINE FUNCTION VISUALIZATION
+                    </span>
+
+                    <h3>
+                        Financial Calculation
+                    </h3>
+
+                    <p>
+                        The values are passed to the inline function and
+                        the simple interest is calculated.
+                    </p>
+
+                </div>
+
+
+                <div class="casting-visual">
+
+                    <div class="casting-value">
+
+                        <span>PRINCIPAL</span>
+
+                        <strong>₹10,000</strong>
+
+                        <small>P</small>
+
+                    </div>
+
+
+                    <div class="casting-arrow">
+                        +
+                    </div>
+
+
+                    <div class="casting-value">
+
+                        <span>RATE</span>
+
+                        <strong>5%</strong>
+
+                        <small>R</small>
+
+                    </div>
+
+
+                    <div class="casting-arrow">
+                        +
+                    </div>
+
+
+                    <div class="casting-value">
+
+                        <span>TIME</span>
+
+                        <strong>2</strong>
+
+                        <small>T</small>
+
+                    </div>
+
+
+                    <div class="casting-arrow">
+                        →
+                    </div>
+
+
+                    <div class="casting-value">
+
+                        <span>RESULT</span>
+
+                        <strong>₹1,000</strong>
+
+                        <small>Simple Interest</small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- EXPLANATION -->
+
+            <div class="content-block">
+
+                <h4>
+                    Program Explanation
+                </h4>
+
+                <ul class="key-points">
+
+                    <li>
+                        <code>simpleInterest()</code> is declared as
+                        an inline function.
+                    </li>
+
+                    <li>
+                        It accepts principal, rate and time as parameters.
+                    </li>
+
+                    <li>
+                        The formula
+                        <code>(P × R × T) / 100</code>
+                        is applied.
+                    </li>
+
+                    <li>
+                        The calculated value is returned to
+                        <code>main()</code>.
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- REAL LIFE -->
+
+            <div class="content-block">
+
+                <h4>
+                    Real-Life Connection
+                </h4>
+
+                <p>
+                    Simple interest calculations can be used in basic
+                    banking, loan calculations, savings calculations and
+                    financial education applications.
+                </p>
+
+            </div>
+
+
+            <!-- KEY POINTS -->
+
+            <div class="content-block">
+
+                <h4>
+                    Key Points
+                </h4>
+
+                <ul class="key-points">
+
+                    <li>
+                        Inline functions can work with different data types.
+                    </li>
+
+                    <li>
+                        Multiple parameters can be passed to an inline function.
+                    </li>
+
+                    <li>
+                        Inline functions are useful for short calculations.
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- COMMON ERRORS -->
+
+            <div class="content-block">
+
+                <h4>
+                    Common Errors
+                </h4>
+
+                <div class="error-grid">
+
+                    <div class="error-card">
+
+                        <strong>
+                            Formula Error
+                        </strong>
+
+                        <p>
+                            Use the correct simple interest formula:
+                            <code>(P × R × T) / 100</code>.
+                        </p>
+
+                    </div>
+
+
+                    <div class="error-card">
+
+                        <strong>
+                            Data Type Error
+                        </strong>
+
+                        <p>
+                            Use a suitable data type such as
+                            <code>float</code> for decimal values.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- ================= QUICK SUMMARY ================= -->
+
+        <div class="casting-summary">
+
+            <span class="section-label">
+                QUICK SUMMARY
+            </span>
+
+            <h3>
+                Inline Function at a Glance
+            </h3>
+
+            <div class="casting-comparison">
+
+                <div class="comparison-card">
+
+                    <span class="comparison-number">
+                        01
+                    </span>
+
+                    <h4>
+                        Keyword
+                    </h4>
+
+                    <p>
+                        Use the <code>inline</code> keyword before the
+                        function declaration.
+                    </p>
+
+                    <code>
+                        inline int square(int n)
+                    </code>
+
+                </div>
+
+
+                <div class="comparison-card">
+
+                    <span class="comparison-number">
+                        02
+                    </span>
+
+                    <h4>
+                        Small Function
+                    </h4>
+
+                    <p>
+                        Inline functions are generally suitable for
+                        short operations.
+                    </p>
+
+                    <code>
+                        return n * n;
+                    </code>
+
+                </div>
+
+
+                <div class="comparison-card">
+
+                    <span class="comparison-number">
+                        03
+                    </span>
+
+                    <h4>
+                        Function Call
+                    </h4>
+
+                    <p>
+                        The function can be called normally from the
+                        program.
+                    </p>
+
+                    <code>
+                        square(5);
+                    </code>
+
+                </div>
+
+
+                <div class="comparison-card">
+
+                    <span class="comparison-number">
+                        04
+                    </span>
+
+                    <h4>
+                        Compiler Decision
+                    </h4>
+
+                    <p>
+                        The <code>inline</code> keyword is a request;
+                        the compiler decides whether to inline it.
+                    </p>
+
+                    <code>
+                        inline
+                    </code>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= VIVA ================= -->
+
+        <section class="viva-section">
+
+            <span class="section-label">
+                04 — VIVA QUESTIONS
+            </span>
+
+            <h2>
+                Test Your Understanding
+            </h2>
+
+
+            <div class="viva-group">
+
+                <h3>
+                    Inline Functions
+                </h3>
+
+
+                <details>
+
+                    <summary>
+                        What is an inline function?
+                    </summary>
+
+                    <p>
+                        An inline function is a function declared using
+                        the <code>inline</code> keyword and is generally
+                        used for small, frequently called operations.
+                    </p>
+
+                </details>
+
+
+                <details>
+
+                    <summary>
+                        Which keyword is used to declare an inline function?
+                    </summary>
+
+                    <p>
+                        The <code>inline</code> keyword is used.
+                    </p>
+
+                </details>
+
+
+                <details>
+
+                    <summary>
+                        Why are inline functions used?
+                    </summary>
+
+                    <p>
+                        They can reduce the overhead of function calls
+                        for suitable small functions.
+                    </p>
+
+                </details>
+
+
+                <details>
+
+                    <summary>
+                        Can every function be made inline?
+                    </summary>
+
+                    <p>
+                        The <code>inline</code> keyword is generally intended
+                        for small functions. The compiler decides whether
+                        the function is actually expanded inline.
+                    </p>
+
+                </details>
+
+
+                <details>
+
+                    <summary>
+                        Give one example of an inline function.
+                    </summary>
+
+                    <p>
+                        For example:
+                        <code>inline int square(int n)</code>
+                        can be used to calculate the square of a number.
+                    </p>
+
+                </details>
+
+
+                <details>
+
+                    <summary>
+                        What is the difference between a normal function
+                        and an inline function?
+                    </summary>
+
+                    <p>
+                        A normal function is called in the usual way,
+                        while an inline function may allow the compiler
+                        to replace a suitable function call with its
+                        function body.
+                    </p>
+
+                </details>
+
+            </div>
+
+
+            <div class="viva-group">
+
+                <h3>
+                    Practical Applications
+                </h3>
+
+
+                <details>
+
+                    <summary>
+                        Can an inline function accept parameters?
+                    </summary>
+
+                    <p>
+                        Yes. An inline function can accept one or more
+                        parameters like a normal function.
+                    </p>
+
+                </details>
+
+
+                <details>
+
+                    <summary>
+                        Can an inline function return a value?
+                    </summary>
+
+                    <p>
+                        Yes. It can return a value using its specified
+                        return type.
+                    </p>
+
+                </details>
+
+
+                <details>
+
+                    <summary>
+                        Give two examples where inline functions can be useful.
+                    </summary>
+
+                    <p>
+                        They can be useful for small calculations such as
+                        finding a square, maximum value, percentage,
+                        discount or simple interest.
+                    </p>
+
+                </details>
+
+
+                <details>
+
+                    <summary>
+                        Is the compiler forced to inline a function?
+                    </summary>
+
+                    <p>
+                        No. The <code>inline</code> keyword is a request
+                        to the compiler; the compiler can decide whether
+                        inlining is appropriate.
+                    </p>
+
+                </details>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <div class="footer-content">
+
+        <div class="footer-brand">
+
+            <div class="footer-logo">
+                &lt;/&gt;
+            </div>
+
+            <div class="footer-brand-text">
+
+                <div class="footer-brand-name">
+                    Rasika <span>CodeLab</span>
+                </div>
+
+                <p class="footer-tagline">
+                    Code • Understand • Visualize
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-copy">
+            © 2026 Rasika CodeLab. Built for practical learning.
+        </div>
+
+    </div>
+
+</footer>
+
+
+<script src="../js/main.js"></script>
+
+
+<!-- ================= PROBLEM SWITCHING ================= -->
+
+<script>
+
+const problemTabs =
+    document.querySelectorAll(".mini-problem-tab");
+
+const problems =
+    document.querySelectorAll(".mini-problem");
+
+
+problemTabs.forEach(tab => {
+
+    tab.addEventListener("click", () => {
+
+        const target =
+            tab.dataset.problem;
+
+
+        problemTabs.forEach(item => {
+
+            item.classList.remove("active");
+
+        });
+
+
+        problems.forEach(problem => {
+
+            problem.classList.remove("active");
+
+        });
+
+
+        tab.classList.add("active");
+
+
+        const selected =
+            document.getElementById(target);
+
+
+        if (selected) {
+
+            selected.classList.add("active");
+
+        }
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>

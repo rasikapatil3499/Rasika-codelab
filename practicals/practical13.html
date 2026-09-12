@@ -1,0 +1,2016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Practical 13 | Polymorphism | Rasika CodeLab</title>
+<link rel="stylesheet" href="../css/style.css">
+
+<style>
+/* =====================================================
+   PRACTICAL 13 — POLYMORPHISM
+   Scoped to .practical13-page to prevent global conflicts
+===================================================== */
+
+.practical13-page .practical-hero{padding:78px 0 58px;}
+.practical13-page .practical-hero h1{font-size:clamp(2.4rem,5vw,4.4rem);line-height:1.05;max-width:850px;margin:12px 0 18px;letter-spacing:-.04em;}
+.practical13-page .practical-subtitle{max-width:800px;font-size:16px;line-height:1.75;}
+.practical13-page .practical-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px;}
+.practical13-page .practical-meta span{padding:8px 13px;border:1px solid var(--border);border-radius:999px;background:rgba(255,255,255,.035);font-size:12px;color:var(--text-secondary);}
+
+.practical13-page .content-section{padding:42px 0;}
+.practical13-page .content-card{box-shadow:0 16px 45px rgba(0,0,0,.12);}
+.practical13-page .content-card + .content-card{margin-top:16px;}
+
+.practical13-page .polymorphism-types{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:16px;
+    margin-top:22px;
+}
+.practical13-page .poly-type-card{
+    padding:24px;
+    background:var(--bg-card);
+    border:1px solid var(--border);
+    border-radius:18px;
+    transition:.25s ease;
+}
+.practical13-page .poly-type-card:hover{transform:translateY(-4px);border-color:var(--accent);}
+.practical13-page .type-number{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:36px;height:36px;
+    border-radius:10px;
+    background:rgba(255,255,255,.045);
+    border:1px solid var(--border);
+    color:var(--accent);
+    font-size:12px;font-weight:800;
+}
+.practical13-page .poly-type-card h3{margin:14px 0 7px;}
+.practical13-page .poly-type-card p{color:var(--text-secondary);line-height:1.65;}
+.practical13-page .type-flow{
+    margin-top:15px;
+    padding:15px;
+    text-align:center;
+    border:1px solid var(--border);
+    border-radius:13px;
+    background:rgba(255,255,255,.018);
+    color:var(--text-secondary);
+    line-height:1.7;
+    font-weight:650;
+}
+
+.practical13-page .syntax-block{
+    margin-top:20px;
+    padding:24px;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:18px;
+    background:linear-gradient(145deg,rgba(150,92,255,.055),rgba(255,255,255,.015));
+}
+.practical13-page .syntax-heading{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.practical13-page .syntax-heading .section-label{margin:0;}
+.practical13-page .syntax-heading h3{margin:0;}
+
+.practical13-page .visual-card{
+    margin-top:22px;
+    padding:28px;
+    border:1px solid var(--border);
+    border-radius:20px;
+    background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.012));
+}
+.practical13-page .poly-flow{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    overflow-x:auto;
+    padding:8px;
+    margin-top:22px;
+}
+.practical13-page .flow-node{
+    flex:0 0 165px;
+    min-height:88px;
+    padding:18px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    background:var(--bg-card);
+    border:1px solid var(--border);
+    border-radius:15px;
+}
+.practical13-page .flow-node strong{margin-bottom:6px;}
+.practical13-page .flow-node small{color:var(--text-secondary);line-height:1.45;}
+.practical13-page .flow-arrow{color:var(--accent);font-size:22px;font-weight:800;}
+
+.practical13-page .comparison-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:16px;
+    margin-top:20px;
+}
+.practical13-page .comparison-card{
+    padding:22px;
+    border:1px solid var(--border);
+    border-radius:17px;
+    background:var(--bg-card);
+}
+.practical13-page .comparison-card h3{margin-bottom:10px;}
+.practical13-page .comparison-card p{margin:0;color:var(--text-secondary);line-height:1.65;}
+
+.practical13-page .main-type-tabs{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:12px;
+    margin-top:28px;
+}
+.practical13-page .main-type-tab{
+    width:100%;
+    min-width:0;
+    min-height:68px;
+    padding:12px 14px;
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    gap:10px;
+    box-sizing:border-box;
+    background:var(--bg-card);
+    border:1px solid var(--border);
+    border-radius:15px;
+    color:var(--text-secondary);
+    font:inherit;
+    font-size:13px;
+    font-weight:700;
+    line-height:1.3;
+    text-align:left;
+    cursor:pointer;
+    transition:.22s ease;
+}
+.practical13-page .main-type-tab > span{
+    flex:0 0 34px;
+    width:34px;height:34px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:9px;
+    border:1px solid var(--border);
+    background:rgba(255,255,255,.04);
+    color:var(--accent);
+    font-size:11px;
+}
+.practical13-page .main-type-tab:hover{border-color:var(--accent);color:var(--text-primary);transform:translateY(-2px);}
+.practical13-page .main-type-tab.active{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 10px 28px rgba(0,0,0,.22);}
+.practical13-page .main-type-tab.active > span{background:rgba(0,0,0,.13);border-color:rgba(255,255,255,.22);color:#fff;}
+
+.practical13-page .type-panel{display:none;margin-top:28px;}
+.practical13-page .type-panel.active{display:block;animation:practicalFadeIn .35s ease;}
+
+.practical13-page .mini-problem-selector{padding:0 0 14px;border-bottom:1px solid var(--border);}
+.practical13-page .mini-problem-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;}
+.practical13-page .mini-problem-tab{
+    width:100%;
+    min-width:0;
+    min-height:58px;
+    padding:11px 14px;
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    gap:10px;
+    box-sizing:border-box;
+    background:rgba(255,255,255,.018);
+    border:1px solid var(--border);
+    border-radius:13px;
+    color:var(--text-secondary);
+    font:inherit;
+    font-size:13px;
+    font-weight:650;
+    line-height:1.3;
+    text-align:left;
+    cursor:pointer;
+    transition:.22s ease;
+}
+.practical13-page .mini-problem-tab > span{
+    flex:0 0 32px;
+    width:32px;height:32px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:9px;
+    border:1px solid var(--border);
+    background:rgba(255,255,255,.04);
+    color:var(--accent);
+    font-size:11px;
+    font-weight:800;
+}
+.practical13-page .mini-problem-tab:hover{border-color:var(--accent);color:var(--text-primary);transform:translateY(-2px);}
+.practical13-page .mini-problem-tab.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+.practical13-page .mini-problem-tab.active > span{background:rgba(0,0,0,.13);border-color:rgba(255,255,255,.22);color:#fff;}
+
+.practical13-page .mini-problem{display:none;margin-top:32px;}
+.practical13-page .mini-problem.active{display:block;animation:practicalFadeIn .35s ease;}
+.practical13-page .problem-heading{padding:8px 0 20px;border-bottom:1px solid var(--border);margin-bottom:22px;}
+.practical13-page .problem-heading h2{margin:8px 0 0;font-size:clamp(1.7rem,3vw,2.35rem);}
+.practical13-page .problem-box{
+    padding:24px;
+    margin-bottom:16px;
+    background:rgba(255,255,255,.018);
+    border:1px solid var(--border);
+    border-radius:18px;
+}
+.practical13-page .problem-box h3{margin-bottom:12px;}
+.practical13-page .algorithm-list{padding-left:22px;}
+.practical13-page .algorithm-list li{margin-bottom:8px;line-height:1.6;}
+.practical13-page .code-window{overflow-x:auto;border-radius:14px;}
+.practical13-page .output-box{border-radius:14px;}
+.practical13-page .key-points li{margin-bottom:8px;}
+
+.practical13-page .error-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:12px;
+}
+.practical13-page .error-card{
+    padding:18px;
+    border:1px solid var(--border);
+    border-radius:14px;
+    background:var(--bg-card);
+}
+.practical13-page .error-card h4{margin-bottom:7px;}
+.practical13-page .error-card p{margin:0;color:var(--text-secondary);line-height:1.55;font-size:14px;}
+
+.practical13-page .viva-list{display:grid;gap:12px;max-width:920px;margin-top:25px;}
+.practical13-page .viva-item{overflow:hidden;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);}
+.practical13-page .viva-question{
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    padding:20px 22px;
+    background:transparent;
+    border:none;
+    color:var(--text-primary);
+    font:inherit;
+    font-size:16px;
+    font-weight:600;
+    text-align:left;
+    cursor:pointer;
+}
+.practical13-page .viva-question:hover{background:rgba(255,255,255,.03);}
+.practical13-page .viva-icon{
+    flex:0 0 auto;
+    width:32px;height:32px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid var(--border);
+    border-radius:50%;
+    color:var(--accent);
+    font-size:22px;
+    transition:.25s ease;
+}
+.practical13-page .viva-answer{display:none;padding:0 22px 22px;color:var(--text-secondary);line-height:1.7;}
+.practical13-page .viva-item.active .viva-answer{display:block;}
+.practical13-page .viva-item.active .viva-icon{transform:rotate(45deg);}
+
+@media(max-width:950px){
+    .practical13-page .main-type-tabs{grid-template-columns:repeat(2,minmax(0,1fr));}
+    .practical13-page .poly-flow{justify-content:flex-start;}
+}
+@media(max-width:700px){
+    .practical13-page .practical-hero{padding:55px 0 40px;}
+    .practical13-page .content-section{padding:30px 0;}
+    .practical13-page .polymorphism-types,
+    .practical13-page .comparison-grid,
+    .practical13-page .error-grid{grid-template-columns:1fr;}
+    .practical13-page .main-type-tabs,
+    .practical13-page .mini-problem-tabs{grid-template-columns:1fr;}
+    .practical13-page .problem-box,
+    .practical13-page .visual-card{padding:20px;}
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="container nav-container">
+        <a href="../index.html" class="logo">
+            <span class="logo-symbol">&lt;/&gt;</span>
+            <span>Rasika<span class="logo-accent">CodeLab</span></span>
+        </a>
+
+        <button class="menu-btn" aria-label="Open menu">☰</button>
+
+        <div class="nav-links">
+            <a href="../index.html">Home</a>
+            <a href="../foundations/program.html">Foundations</a>
+            <a href="index.html" class="active">Practicals</a>
+            <a href="../index.html#about">About</a>
+        </div>
+    </div>
+</nav>
+
+
+<main class="practical-page practical13-page">
+
+<section class="practical-hero">
+<div class="container">
+    <span class="section-label">PRACTICAL 13</span>
+    <h1>Polymorphism in <span class="gradient-text">C++</span></h1>
+    <p class="practical-subtitle">
+        Understand how one interface can represent different behaviors.
+        Explore function overloading, operator overloading, function overriding
+        and virtual functions through practical C++ programs.
+    </p>
+
+    <div class="practical-meta">
+        <span>LLO 13.1</span>
+        <span>Object-Oriented Programming</span>
+        <span>Classes &amp; Objects</span>
+        <span>Polymorphism</span>
+        <span>C++ Programming</span>
+    </div>
+</div>
+</section>
+
+
+<section class="content-section">
+<div class="container">
+    <span class="section-label">AIM</span>
+    <h2>Aim of the Practical</h2>
+    <div class="content-card">
+        <p>
+            To implement C++ programs demonstrating <strong>polymorphism</strong>
+            using function overloading, operator overloading, function overriding
+            and virtual functions.
+        </p>
+    </div>
+</div>
+</section>
+
+
+<section class="content-section">
+<div class="container">
+    <span class="section-label">LEARNING OBJECTIVES</span>
+    <h2>What You Will Learn</h2>
+
+    <div class="objective-grid">
+
+        <div class="objective-card">
+            <strong>01</strong>
+            <h3>Understand Polymorphism</h3>
+            <p>Understand how one interface can have multiple forms or behaviors.</p>
+        </div>
+
+        <div class="objective-card">
+            <strong>02</strong>
+            <h3>Use Overloading</h3>
+            <p>Implement function and operator overloading at compile time.</p>
+        </div>
+
+        <div class="objective-card">
+            <strong>03</strong>
+            <h3>Understand Overriding</h3>
+            <p>Redefine inherited behavior in a derived class.</p>
+        </div>
+
+        <div class="objective-card">
+            <strong>04</strong>
+            <h3>Use Virtual Functions</h3>
+            <p>Implement runtime polymorphism using virtual functions.</p>
+        </div>
+
+    </div>
+</div>
+</section>
+
+
+<section class="content-section">
+<div class="container">
+    <span class="section-label">CONCEPT</span>
+    <h2>Understanding Polymorphism</h2>
+
+    <div class="content-card">
+        <h3>What is Polymorphism?</h3>
+        <p>
+            <strong>Polymorphism</strong> means “many forms”. In C++, polymorphism
+            allows the same function name, operator or interface to perform
+            different operations depending on the context.
+        </p>
+        <p>
+            Polymorphism is an important feature of object-oriented programming
+            because it allows programs to be flexible, reusable and easier to extend.
+        </p>
+    </div>
+
+    <div class="content-card">
+        <h3>Real-Life Example</h3>
+        <p>
+            Consider the word <strong>“print”</strong>. A system may print a
+            document, a photograph or a report. The basic operation is the same,
+            but the behavior can differ depending on what is being printed.
+        </p>
+        <p>
+            Similarly, C++ can use the same function or interface to perform
+            different operations.
+        </p>
+    </div>
+
+    <div class="content-card">
+        <h3>Compile-Time and Runtime Polymorphism</h3>
+
+        <div class="comparison-grid">
+
+            <div class="comparison-card">
+                <h3>Compile-Time Polymorphism</h3>
+                <p>
+                    The compiler determines which function or operator operation
+                    should be used before the program runs. Function overloading
+                    and operator overloading are common examples.
+                </p>
+            </div>
+
+            <div class="comparison-card">
+                <h3>Runtime Polymorphism</h3>
+                <p>
+                    The function to execute is selected while the program is
+                    running. Function overriding through virtual functions is
+                    a common example.
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="content-card">
+        <h3>Types Covered in This Practical</h3>
+
+        <div class="polymorphism-types">
+
+            <div class="poly-type-card">
+                <span class="type-number">01</span>
+                <h3>Function Overloading</h3>
+                <p>
+                    Multiple functions have the same name but different parameter lists.
+                </p>
+                <div class="type-flow">sum(int, int)<br>sum(int, int, int)<br>sum(float, float)</div>
+            </div>
+
+            <div class="poly-type-card">
+                <span class="type-number">02</span>
+                <h3>Operator Overloading</h3>
+                <p>
+                    Operators are given a suitable meaning for objects of a user-defined class.
+                </p>
+                <div class="type-flow">object1 + object2<br>↓<br>overloaded +</div>
+            </div>
+
+            <div class="poly-type-card">
+                <span class="type-number">03</span>
+                <h3>Function Overriding</h3>
+                <p>
+                    A derived class provides its own implementation of an inherited function.
+                </p>
+                <div class="type-flow">Base::display()<br>↓<br>Derived::display()</div>
+            </div>
+
+            <div class="poly-type-card">
+                <span class="type-number">04</span>
+                <h3>Virtual Function</h3>
+                <p>
+                    A virtual function enables runtime selection of the overridden function.
+                </p>
+                <div class="type-flow">Base pointer<br>↓<br>Derived function</div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="content-card">
+        <h3>Basic Polymorphism Flow</h3>
+
+        <div class="visual-card">
+            <div class="poly-flow">
+
+                <div class="flow-node">
+                    <strong>Same Interface</strong>
+                    <small>Function / Operator</small>
+                </div>
+
+                <div class="flow-arrow">→</div>
+
+                <div class="flow-node">
+                    <strong>Different Context</strong>
+                    <small>Arguments / Object Type</small>
+                </div>
+
+                <div class="flow-arrow">→</div>
+
+                <div class="flow-node">
+                    <strong>Different Behavior</strong>
+                    <small>Selected operation</small>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+</section>
+
+
+<section class="content-section">
+<div class="container">
+
+    <span class="section-label">PRACTICAL PROBLEMS</span>
+    <h2>Explore Polymorphism</h2>
+
+    <!-- MAIN TYPE TABS -->
+
+    <div class="main-type-tabs">
+
+        <button type="button" class="main-type-tab active" data-type="function-overloading">
+            <span>01</span>
+            Function Overloading
+        </button>
+
+        <button type="button" class="main-type-tab" data-type="operator-overloading">
+            <span>02</span>
+            Operator Overloading
+        </button>
+
+        <button type="button" class="main-type-tab" data-type="function-overriding">
+            <span>03</span>
+            Function Overriding
+        </button>
+
+        <button type="button" class="main-type-tab" data-type="virtual-function">
+            <span>04</span>
+            Virtual Function
+        </button>
+
+    </div>
+
+
+    <!-- =================================================
+         TYPE 1 — FUNCTION OVERLOADING
+    ================================================= -->
+
+    <div class="type-panel active" id="function-overloading">
+
+        <div class="problem-box">
+            <span class="section-label">TYPE 01</span>
+            <h2>Function Overloading</h2>
+            <p>
+                Function overloading allows multiple functions to have the same
+                name with different parameter lists.
+            </p>
+        </div>
+
+        <div class="mini-problem-selector">
+            <div class="mini-problem-tabs">
+
+                <button type="button" class="mini-problem-tab active" data-problem="fo1">
+                    <span>01</span> Area Calculation
+                </button>
+
+                <button type="button" class="mini-problem-tab" data-problem="fo2">
+                    <span>02</span> Calculate Sum
+                </button>
+
+                <button type="button" class="mini-problem-tab" data-problem="fo3">
+                    <span>03</span> Display Details
+                </button>
+
+            </div>
+        </div>
+
+
+        <div class="mini-problem active" id="fo1">
+
+            <div class="problem-heading">
+                <span class="section-label">PROBLEM 01.1</span>
+                <h2>Area Calculation</h2>
+            </div>
+
+            <div class="problem-box">
+                <h3>Problem Statement</h3>
+                <p>
+                    Write a C++ program to demonstrate function overloading by
+                    creating overloaded <strong>area()</strong> functions to
+                    calculate the area of a square, rectangle and circle.
+                </p>
+            </div>
+
+            <div class="problem-box">
+                <h3>Theory / Concept</h3>
+                <p>
+                    The same function name <strong>area()</strong> is used with
+                    different parameter lists. The compiler selects the appropriate
+                    function based on the arguments supplied.
+                </p>
+            </div>
+
+            <div class="syntax-block">
+                <div class="syntax-heading">
+                    <span class="section-label">SYNTAX</span>
+                    <h3>Function Overloading</h3>
+                </div>
+                <div class="code-window">
+<pre><code>returnType functionName(int value)
+{
+}
+
+returnType functionName(int value1, int value2)
+{
+}
+
+returnType functionName(float value)
+{
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="problem-box">
+                <h3>Algorithm</h3>
+                <ol class="algorithm-list">
+                    <li>Define a class Calculator.</li>
+                    <li>Create overloaded area() functions.</li>
+                    <li>Use one parameter for square.</li>
+                    <li>Use two parameters for rectangle.</li>
+                    <li>Use a floating-point parameter for circle.</li>
+                    <li>Call the functions with appropriate arguments.</li>
+                    <li>Display all calculated areas.</li>
+                </ol>
+            </div>
+
+            <div class="problem-box">
+                <h3>C++ Program</h3>
+                <div class="code-window">
+<pre><code>#include &lt;iostream&gt;
+
+using namespace std;
+
+class Calculator
+{
+public:
+
+    int area(int side)
+    {
+        return side * side;
+    }
+
+    int area(int length, int breadth)
+    {
+        return length * breadth;
+    }
+
+    float area(float radius)
+    {
+        return 3.14f * radius * radius;
+    }
+};
+
+int main()
+{
+    Calculator c;
+
+    cout &lt;&lt; "Square Area: " &lt;&lt; c.area(5) &lt;&lt; endl;
+    cout &lt;&lt; "Rectangle Area: " &lt;&lt; c.area(10, 4) &lt;&lt; endl;
+    cout &lt;&lt; "Circle Area: " &lt;&lt; c.area(3.0f) &lt;&lt; endl;
+
+    return 0;
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="problem-box">
+                <h3>Expected Output</h3>
+                <div class="output-box">
+<pre>Square Area: 25
+Rectangle Area: 40
+Circle Area: 28.26</pre>
+                </div>
+            </div>
+
+            <div class="visual-card">
+                <span class="section-label">VISUAL EXPLANATION</span>
+                <h3>Compiler Selects the Matching Function</h3>
+                <div class="poly-flow">
+                    <div class="flow-node"><strong>area(5)</strong><small>1 integer</small></div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node"><strong>Square</strong><small>5 × 5</small></div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node"><strong>25</strong><small>Result</small></div>
+                </div>
+            </div>
+
+            <div class="problem-box">
+                <h3>Program Explanation</h3>
+                <ul class="key-points">
+                    <li>All three functions have the same name: area().</li>
+                    <li>The parameter lists are different.</li>
+                    <li>The compiler chooses the matching overloaded function.</li>
+                    <li>This is compile-time polymorphism.</li>
+                </ul>
+            </div>
+
+            <div class="problem-box"><h3>Real-Life Connection</h3><p>A calculator application can use the same operation name while accepting different kinds or numbers of inputs.</p></div>
+
+            <div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>Function name remains the same.</li><li>Parameter list must differ.</li><li>Return type alone cannot overload a function.</li></ul></div>
+
+            <div class="problem-box">
+                <h3>Common Errors</h3>
+                <div class="error-grid">
+                    <div class="error-card"><h4>Same Parameters</h4><p>Overloaded functions must have different parameter lists.</p></div>
+                    <div class="error-card"><h4>Return Type Only</h4><p>Changing only the return type does not create a valid overload.</p></div>
+                    <div class="error-card"><h4>Ambiguous Call</h4><p>Use arguments that clearly match one overloaded function.</p></div>
+                    <div class="error-card"><h4>Wrong Formula</h4><p>Use the correct formula for each shape.</p></div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="mini-problem" id="fo2">
+
+            <div class="problem-heading"><span class="section-label">PROBLEM 01.2</span><h2>Calculate Sum</h2></div>
+
+            <div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to demonstrate function overloading by creating overloaded <strong>sum()</strong> functions to calculate the sum of two integers, three integers and two floating-point numbers.</p></div>
+
+            <div class="problem-box"><h3>Theory / Concept</h3><p>Different parameter counts and parameter types allow the same function name to perform different forms of addition.</p></div>
+
+            <div class="syntax-block"><div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Overloaded sum()</h3></div><div class="code-window">
+<pre><code>int sum(int a, int b)
+{
+}
+
+int sum(int a, int b, int c)
+{
+}
+
+float sum(float a, float b)
+{
+}</code></pre>
+            </div></div>
+
+            <div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Define a class Calculator.</li><li>Define three overloaded sum() functions.</li><li>Create versions for two integers, three integers and two floats.</li><li>Call each function with suitable arguments.</li><li>Display the results.</li></ol></div>
+
+            <div class="problem-box"><h3>C++ Program</h3><div class="code-window">
+<pre><code>#include &lt;iostream&gt;
+
+using namespace std;
+
+class Calculator
+{
+public:
+    int sum(int a, int b)
+    {
+        return a + b;
+    }
+
+    int sum(int a, int b, int c)
+    {
+        return a + b + c;
+    }
+
+    float sum(float a, float b)
+    {
+        return a + b;
+    }
+};
+
+int main()
+{
+    Calculator c;
+
+    cout &lt;&lt; "Sum of 2 integers: "
+         &lt;&lt; c.sum(10, 20) &lt;&lt; endl;
+
+    cout &lt;&lt; "Sum of 3 integers: "
+         &lt;&lt; c.sum(10, 20, 30) &lt;&lt; endl;
+
+    cout &lt;&lt; "Sum of 2 floats: "
+         &lt;&lt; c.sum(2.5f, 3.5f) &lt;&lt; endl;
+
+    return 0;
+}</code></pre>
+            </div></div>
+
+            <div class="problem-box"><h3>Expected Output</h3><div class="output-box"><pre>Sum of 2 integers: 30
+Sum of 3 integers: 60
+Sum of 2 floats: 6</pre></div></div>
+
+            <div class="visual-card"><span class="section-label">VISUAL EXPLANATION</span><h3>Same Name, Different Parameters</h3><div class="poly-flow"><div class="flow-node"><strong>sum()</strong><small>2 integers</small></div><div class="flow-arrow">→</div><div class="flow-node"><strong>Compiler</strong><small>matches signature</small></div><div class="flow-arrow">→</div><div class="flow-node"><strong>30</strong><small>Result</small></div></div></div>
+
+            <div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>Three sum() functions are defined.</li><li>Each function has a different signature.</li><li>The call determines which version is selected.</li><li>The selection happens at compile time.</li></ul></div>
+
+            <div class="problem-box"><h3>Real-Life Connection</h3><p>Utility classes often provide one operation in several forms to support different input combinations.</p></div>
+
+            <div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>Overloading improves readability.</li><li>Parameter count or type can differ.</li><li>The function name remains the same.</li></ul></div>
+
+            <div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Signature</h4><p>Ensure overloaded functions have distinct parameter lists.</p></div><div class="error-card"><h4>Float Literal</h4><p>Use f when explicitly passing a float literal.</p></div><div class="error-card"><h4>Ambiguity</h4><p>Avoid calls that can match multiple overloads equally.</p></div><div class="error-card"><h4>Return Value</h4><p>Return the calculated sum from each function.</p></div></div></div>
+
+        </div>
+
+
+        <div class="mini-problem" id="fo3">
+
+            <div class="problem-heading"><span class="section-label">PROBLEM 01.3</span><h2>Display Details</h2></div>
+
+            <div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to demonstrate function overloading by creating overloaded <strong>display()</strong> functions to display an integer, a floating-point number and a string.</p></div>
+
+            <div class="problem-box"><h3>Theory / Concept</h3><p>The same display() function name can work with different parameter types. The compiler selects the appropriate version based on the argument type.</p></div>
+
+            <div class="syntax-block"><div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Overloaded display()</h3></div><div class="code-window">
+<pre><code>void display(int value)
+{
+}
+
+void display(float value)
+{
+}
+
+void display(string value)
+{
+}</code></pre>
+            </div></div>
+
+            <div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Create a Display class.</li><li>Define display() for integer.</li><li>Define display() for float.</li><li>Define display() for string.</li><li>Call each overloaded function.</li><li>Display the values.</li></ol></div>
+
+            <div class="problem-box"><h3>C++ Program</h3><div class="code-window">
+<pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+using namespace std;
+
+class Display
+{
+public:
+    void display(int value)
+    {
+        cout &lt;&lt; "Integer: " &lt;&lt; value &lt;&lt; endl;
+    }
+
+    void display(float value)
+    {
+        cout &lt;&lt; "Float: " &lt;&lt; value &lt;&lt; endl;
+    }
+
+    void display(string value)
+    {
+        cout &lt;&lt; "String: " &lt;&lt; value &lt;&lt; endl;
+    }
+};
+
+int main()
+{
+    Display d;
+
+    d.display(25);
+    d.display(12.5f);
+    d.display("Rasika CodeLab");
+
+    return 0;
+}</code></pre>
+            </div></div>
+
+            <div class="problem-box"><h3>Expected Output</h3><div class="output-box"><pre>Integer: 25
+Float: 12.5
+String: Rasika CodeLab</pre></div></div>
+
+            <div class="visual-card"><span class="section-label">VISUAL EXPLANATION</span><h3>Type Determines the Function</h3><div class="poly-flow"><div class="flow-node"><strong>display(25)</strong><small>int</small></div><div class="flow-arrow">→</div><div class="flow-node"><strong>display(int)</strong><small>matching overload</small></div><div class="flow-arrow">→</div><div class="flow-node"><strong>Output</strong><small>25</small></div></div></div>
+
+            <div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>All functions are named display().</li><li>The parameter types are int, float and string.</li><li>The compiler identifies the correct function from the argument type.</li></ul></div>
+
+            <div class="problem-box"><h3>Real-Life Connection</h3><p>A display or logging utility may accept different types of information while keeping one simple operation name.</p></div>
+
+            <div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>Parameter type can distinguish overloaded functions.</li><li>Use clear and non-ambiguous calls.</li><li>Function overloading is compile-time polymorphism.</li></ul></div>
+
+            <div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Missing String</h4><p>Include the string header when using std::string.</p></div><div class="error-card"><h4>Wrong Type</h4><p>Pass values matching the intended overload.</p></div><div class="error-card"><h4>Same Signature</h4><p>Do not define duplicate overloads.</p></div><div class="error-card"><h4>Ambiguous Call</h4><p>Avoid conversions that make multiple overloads equally suitable.</p></div></div></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         TYPE 2 — OPERATOR OVERLOADING
+    ================================================= -->
+
+    <div class="type-panel" id="operator-overloading">
+
+        <div class="problem-box">
+            <span class="section-label">TYPE 02</span>
+            <h2>Operator Overloading</h2>
+            <p>
+                Operator overloading gives an existing C++ operator a meaningful
+                behavior for objects of a user-defined class.
+            </p>
+        </div>
+
+        <div class="mini-problem-selector">
+            <div class="mini-problem-tabs">
+                <button type="button" class="mini-problem-tab active" data-problem="oo1"><span>01</span> Complex Number Addition</button>
+                <button type="button" class="mini-problem-tab" data-problem="oo2"><span>02</span> Compare Student Objects</button>
+                <button type="button" class="mini-problem-tab" data-problem="oo3"><span>03</span> Add Distance Objects</button>
+            </div>
+        </div>
+
+
+        <div class="mini-problem active" id="oo1">
+
+            <div class="problem-heading"><span class="section-label">PROBLEM 02.1</span><h2>Add Two Complex Numbers</h2></div>
+
+            <div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to overload the <strong>+</strong> operator to add two complex numbers.</p></div>
+
+            <div class="problem-box"><h3>Theory / Concept</h3><p>The + operator normally works with built-in numeric types. Operator overloading allows the same operator to work meaningfully with Complex objects.</p></div>
+
+            <div class="syntax-block"><div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Operator Function</h3></div><div class="code-window">
+<pre><code>ClassName operator+(const ClassName &amp;obj)
+{
+    // operation
+}</code></pre>
+            </div></div>
+
+            <div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Create a Complex class with real and imaginary parts.</li><li>Define the overloaded + operator.</li><li>Add the corresponding real parts.</li><li>Add the corresponding imaginary parts.</li><li>Return the resulting Complex object.</li><li>Display the result.</li></ol></div>
+
+            <div class="problem-box"><h3>C++ Program</h3><div class="code-window">
+<pre><code>#include &lt;iostream&gt;
+
+using namespace std;
+
+class Complex
+{
+    int real;
+    int imag;
+
+public:
+    Complex(int r = 0, int i = 0)
+    {
+        real = r;
+        imag = i;
+    }
+
+    Complex operator+(const Complex &amp;c)
+    {
+        return Complex(real + c.real, imag + c.imag);
+    }
+
+    void display()
+    {
+        cout &lt;&lt; real &lt;&lt; " + " &lt;&lt; imag &lt;&lt; "i" &lt;&lt; endl;
+    }
+};
+
+int main()
+{
+    Complex c1(3, 4);
+    Complex c2(5, 2);
+
+    Complex c3 = c1 + c2;
+
+    cout &lt;&lt; "Result: ";
+    c3.display();
+
+    return 0;
+}</code></pre>
+            </div></div>
+
+            <div class="problem-box"><h3>Expected Output</h3><div class="output-box"><pre>Result: 8 + 6i</pre></div></div>
+
+            <div class="visual-card"><span class="section-label">VISUAL EXPLANATION</span><h3>Object + Object</h3><div class="poly-flow"><div class="flow-node"><strong>c1</strong><small>3 + 4i</small></div><div class="flow-arrow">+</div><div class="flow-node"><strong>c2</strong><small>5 + 2i</small></div><div class="flow-arrow">→</div><div class="flow-node"><strong>c3</strong><small>8 + 6i</small></div></div></div>
+
+            <div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>The + operator is overloaded inside Complex.</li><li>Two Complex objects can now be added using c1 + c2.</li><li>The operator function returns a new Complex object.</li></ul></div>
+
+            <div class="problem-box"><h3>Real-Life Connection</h3><p>Mathematical libraries can represent numbers such as complex numbers as objects and make expressions easier to read.</p></div>
+
+            <div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>Operators can be overloaded for user-defined types.</li><li>The operator keeps its familiar symbol.</li><li>The overloaded operation should have a logical meaning.</li></ul></div>
+
+            <div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Return Type</h4><p>Return a suitable result object from the operator function.</p></div><div class="error-card"><h4>Wrong Members</h4><p>Add corresponding real and imaginary parts.</p></div><div class="error-card"><h4>Reference</h4><p>Passing the operand by const reference avoids unnecessary copying.</p></div><div class="error-card"><h4>Operator</h4><p>Use the correct operator symbol in the overloaded function name.</p></div></div></div>
+
+        </div>
+
+
+        <div class="mini-problem" id="oo2">
+
+            <div class="problem-heading"><span class="section-label">PROBLEM 02.2</span><h2>Compare Two Student Objects</h2></div>
+
+            <div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to overload the <strong>==</strong> operator to compare two objects of a Student class based on their roll number.</p></div>
+
+            <div class="problem-box"><h3>Theory / Concept</h3><p>The == operator can be overloaded so that two Student objects can be compared using a natural expression such as s1 == s2.</p></div>
+
+            <div class="syntax-block"><div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Equality Operator</h3></div><div class="code-window">
+<pre><code>bool operator==(const ClassName &amp;obj)
+{
+    return condition;
+}</code></pre>
+            </div></div>
+
+            <div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Create a Student class.</li><li>Store roll number and name.</li><li>Overload ==.</li><li>Compare the roll numbers.</li><li>Return true if they are equal.</li><li>Display whether the objects are equal.</li></ol></div>
+
+            <div class="problem-box"><h3>C++ Program</h3><div class="code-window">
+<pre><code>#include &lt;iostream&gt;
+
+using namespace std;
+
+class Student
+{
+    int rollNo;
+
+public:
+    Student(int r)
+    {
+        rollNo = r;
+    }
+
+    bool operator==(const Student &amp;s)
+    {
+        return rollNo == s.rollNo;
+    }
+};
+
+int main()
+{
+    Student s1(101);
+    Student s2(101);
+
+    if (s1 == s2)
+        cout &lt;&lt; "Students have the same Roll No.";
+    else
+        cout &lt;&lt; "Students have different Roll No.";
+
+    return 0;
+}</code></pre>
+            </div></div>
+
+            <div class="problem-box"><h3>Expected Output</h3><div class="output-box"><pre>Students have the same Roll No.</pre></div></div>
+
+            <div class="visual-card"><span class="section-label">VISUAL EXPLANATION</span><h3>Comparing Objects</h3><div class="poly-flow"><div class="flow-node"><strong>s1</strong><small>Roll 101</small></div><div class="flow-arrow">==</div><div class="flow-node"><strong>s2</strong><small>Roll 101</small></div><div class="flow-arrow">→</div><div class="flow-node"><strong>true</strong><small>Same roll number</small></div></div></div>
+
+            <div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>The == operator is overloaded.</li><li>The operator compares rollNo of two Student objects.</li><li>The result is a Boolean value.</li></ul></div>
+
+            <div class="problem-box"><h3>Real-Life Connection</h3><p>Student management software may compare records to determine whether two objects represent the same student identifier.</p></div>
+
+            <div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>Operators can be used with class objects after overloading.</li><li>The comparison logic is defined by the class.</li><li>Return bool for an equality comparison.</li></ul></div>
+
+            <div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Wrong Member</h4><p>Compare the required roll number member.</p></div><div class="error-card"><h4>Return Type</h4><p>Equality comparison should return a Boolean result.</p></div><div class="error-card"><h4>Operand</h4><p>Accept the second Student object correctly.</p></div><div class="error-card"><h4>Condition</h4><p>Use == for comparison, not = for assignment.</p></div></div></div>
+
+        </div>
+
+
+        <div class="mini-problem" id="oo3">
+
+            <div class="problem-heading"><span class="section-label">PROBLEM 02.3</span><h2>Add Two Distance Objects</h2></div>
+
+            <div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to overload the <strong>+</strong> operator to add two distance objects containing feet and inches.</p></div>
+
+            <div class="problem-box"><h3>Theory / Concept</h3><p>The + operator can be customized to add distance objects and handle conversion when inches reach 12.</p></div>
+
+            <div class="syntax-block"><div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Distance Addition</h3></div><div class="code-window">
+<pre><code>Distance operator+(const Distance &amp;d)
+{
+    Distance temp;
+
+    // add members
+    // normalize units
+
+    return temp;
+}</code></pre>
+            </div></div>
+
+            <div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Create Distance with feet and inches.</li><li>Overload +.</li><li>Add feet and inches separately.</li><li>If inches are 12 or more, convert extra inches into feet.</li><li>Return the resulting distance.</li><li>Display the result.</li></ol></div>
+
+            <div class="problem-box"><h3>C++ Program</h3><div class="code-window">
+<pre><code>#include &lt;iostream&gt;
+
+using namespace std;
+
+class Distance
+{
+    int feet;
+    int inches;
+
+public:
+    Distance(int f = 0, int i = 0)
+    {
+        feet = f;
+        inches = i;
+    }
+
+    Distance operator+(const Distance &amp;d)
+    {
+        Distance temp;
+
+        temp.feet = feet + d.feet;
+        temp.inches = inches + d.inches;
+
+        if (temp.inches &gt;= 12)
+        {
+            temp.feet += temp.inches / 12;
+            temp.inches %= 12;
+        }
+
+        return temp;
+    }
+
+    void display()
+    {
+        cout &lt;&lt; feet &lt;&lt; " feet "
+             &lt;&lt; inches &lt;&lt; " inches";
+    }
+};
+
+int main()
+{
+    Distance d1(5, 8);
+    Distance d2(3, 7);
+
+    Distance d3 = d1 + d2;
+
+    cout &lt;&lt; "Total Distance: ";
+    d3.display();
+
+    return 0;
+}</code></pre>
+            </div></div>
+
+            <div class="problem-box"><h3>Expected Output</h3><div class="output-box"><pre>Total Distance: 9 feet 3 inches</pre></div></div>
+
+            <div class="visual-card"><span class="section-label">VISUAL EXPLANATION</span><h3>Unit Normalization</h3><div class="poly-flow"><div class="flow-node"><strong>5' 8"</strong><small>Distance 1</small></div><div class="flow-arrow">+</div><div class="flow-node"><strong>3' 7"</strong><small>Distance 2</small></div><div class="flow-arrow">→</div><div class="flow-node"><strong>9' 3"</strong><small>Normalized result</small></div></div></div>
+
+            <div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>The + operator adds two Distance objects.</li><li>Feet and inches are added separately.</li><li>Every 12 inches are converted into one foot.</li><li>The normalized Distance object is returned.</li></ul></div>
+
+            <div class="problem-box"><h3>Real-Life Connection</h3><p>Engineering and measurement software can represent physical quantities as objects and support natural arithmetic expressions.</p></div>
+
+            <div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>Operator overloading improves object expression syntax.</li><li>Unit conversion may be necessary after arithmetic.</li><li>The overloaded operator should model a meaningful operation.</li></ul></div>
+
+            <div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Conversion</h4><p>Convert 12 or more inches into feet.</p></div><div class="error-card"><h4>Remainder</h4><p>Use the remainder for the final inches value.</p></div><div class="error-card"><h4>Return Object</h4><p>Return the calculated Distance object.</p></div><div class="error-card"><h4>Wrong Operator</h4><p>Use operator+ for the + operation.</p></div></div></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         TYPE 3 — FUNCTION OVERRIDING
+    ================================================= -->
+
+    <div class="type-panel" id="function-overriding">
+
+        <div class="problem-box">
+            <span class="section-label">TYPE 03</span>
+            <h2>Function Overriding</h2>
+            <p>
+                Function overriding occurs when a derived class provides its own
+                implementation of a function already defined in its base class.
+            </p>
+        </div>
+
+        <div class="mini-problem-selector">
+            <div class="mini-problem-tabs">
+                <button type="button" class="mini-problem-tab active" data-problem="fr1"><span>01</span> Employee Salary</button>
+                <button type="button" class="mini-problem-tab" data-problem="fr2"><span>02</span> Vehicle Information</button>
+                <button type="button" class="mini-problem-tab" data-problem="fr3"><span>03</span> Shape Area</button>
+            </div>
+        </div>
+
+
+        <div class="mini-problem active" id="fr1">
+
+            <div class="problem-heading"><span class="section-label">PROBLEM 03.1</span><h2>Employee Salary</h2></div>
+
+            <div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to create a base class <strong>Employee</strong> with a <strong>display()</strong> function and derive classes <strong>Manager</strong> and <strong>Developer</strong> that redefine the display() function to show their respective details.</p></div>
+
+            <div class="problem-box"><h3>Theory / Concept</h3><p>Manager and Developer provide their own implementation of a function inherited from Employee. This demonstrates function overriding.</p></div>
+
+            <div class="syntax-block"><div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Function Overriding</h3></div><div class="code-window">
+<pre><code>class Base
+{
+public:
+    void display()
+    {
+    }
+};
+
+class Derived : public Base
+{
+public:
+    void display()
+    {
+    }
+};</code></pre>
+            </div></div>
+
+            <div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Create Employee with display().</li><li>Derive Manager and Developer.</li><li>Redefine display() in both derived classes.</li><li>Create objects of Manager and Developer.</li><li>Call display() for each object.</li><li>Display role-specific information.</li></ol></div>
+
+            <div class="problem-box"><h3>C++ Program</h3><div class="code-window">
+<pre><code>#include &lt;iostream&gt;
+
+using namespace std;
+
+class Employee
+{
+public:
+    void display()
+    {
+        cout &lt;&lt; "Employee details" &lt;&lt; endl;
+    }
+};
+
+class Manager : public Employee
+{
+public:
+    void display()
+    {
+        cout &lt;&lt; "Manager: Handles the team" &lt;&lt; endl;
+    }
+};
+
+class Developer : public Employee
+{
+public:
+    void display()
+    {
+        cout &lt;&lt; "Developer: Writes software" &lt;&lt; endl;
+    }
+};
+
+int main()
+{
+    Manager m;
+    Developer d;
+
+    m.display();
+    d.display();
+
+    return 0;
+}</code></pre>
+            </div></div>
+
+            <div class="problem-box"><h3>Expected Output</h3><div class="output-box"><pre>Manager: Handles the team
+Developer: Writes software</pre></div></div>
+
+            <div class="visual-card"><span class="section-label">VISUAL EXPLANATION</span><h3>Derived Classes Redefine the Function</h3><div class="poly-flow"><div class="flow-node"><strong>Employee</strong><small>display()</small></div><div class="flow-arrow">↓</div><div class="flow-node"><strong>Manager</strong><small>own display()</small></div><div class="flow-arrow">+</div><div class="flow-node"><strong>Developer</strong><small>own display()</small></div></div></div>
+
+            <div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>Employee defines display().</li><li>Manager and Developer define their own display().</li><li>The derived implementation is selected when calling through the derived object.</li><li>This is function overriding.</li></ul></div>
+
+            <div class="problem-box"><h3>Real-Life Connection</h3><p>Different employee roles can provide different behavior for a common operation such as displaying role information.</p></div>
+
+            <div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>Base and derived functions have the same name and compatible signature.</li><li>The derived class supplies specialized behavior.</li><li>Virtual functions are used when runtime polymorphism is required.</li></ul></div>
+
+            <div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Wrong Signature</h4><p>Use a compatible function signature when overriding.</p></div><div class="error-card"><h4>Wrong Class</h4><p>Define the specialized function inside the intended derived class.</p></div><div class="error-card"><h4>Confusing Overloading</h4><p>Overriding is different from using the same function name with different parameters.</p></div><div class="error-card"><h4>Runtime Expectation</h4><p>Non-virtual overriding does not by itself provide runtime dispatch through a base pointer.</p></div></div></div>
+
+        </div>
+
+
+        <div class="mini-problem" id="fr2">
+
+            <div class="problem-heading"><span class="section-label">PROBLEM 03.2</span><h2>Vehicle Information</h2></div>
+
+            <div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to create a base class <strong>Vehicle</strong> with a <strong>show()</strong> function and derive classes <strong>Car</strong> and <strong>Bike</strong> that override the function to display vehicle-specific information.</p></div>
+
+            <div class="problem-box"><h3>Theory / Concept</h3><p>The same inherited function name is redefined by each derived class to provide specialized output.</p></div>
+
+            <div class="syntax-block"><div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Overriding show()</h3></div><div class="code-window">
+<pre><code>class Vehicle
+{
+public:
+    void show()
+    {
+    }
+};
+
+class Car : public Vehicle
+{
+public:
+    void show()
+    {
+    }
+};</code></pre>
+            </div></div>
+
+            <div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Create Vehicle with show().</li><li>Derive Car and Bike.</li><li>Override show() in both classes.</li><li>Create Car and Bike objects.</li><li>Call show() for both.</li><li>Display specialized information.</li></ol></div>
+
+            <div class="problem-box"><h3>C++ Program</h3><div class="code-window">
+<pre><code>#include &lt;iostream&gt;
+
+using namespace std;
+
+class Vehicle
+{
+public:
+    void show()
+    {
+        cout &lt;&lt; "Vehicle" &lt;&lt; endl;
+    }
+};
+
+class Car : public Vehicle
+{
+public:
+    void show()
+    {
+        cout &lt;&lt; "Car: Four-wheel vehicle" &lt;&lt; endl;
+    }
+};
+
+class Bike : public Vehicle
+{
+public:
+    void show()
+    {
+        cout &lt;&lt; "Bike: Two-wheel vehicle" &lt;&lt; endl;
+    }
+};
+
+int main()
+{
+    Car c;
+    Bike b;
+
+    c.show();
+    b.show();
+
+    return 0;
+}</code></pre>
+            </div></div>
+
+            <div class="problem-box"><h3>Expected Output</h3><div class="output-box"><pre>Car: Four-wheel vehicle
+Bike: Two-wheel vehicle</pre></div></div>
+
+            <div class="visual-card"><span class="section-label">VISUAL EXPLANATION</span><h3>Vehicle Behavior Is Specialized</h3><div class="poly-flow"><div class="flow-node"><strong>Vehicle</strong><small>show()</small></div><div class="flow-arrow">↓</div><div class="flow-node"><strong>Car</strong><small>four-wheel behavior</small></div><div class="flow-arrow">+</div><div class="flow-node"><strong>Bike</strong><small>two-wheel behavior</small></div></div></div>
+
+            <div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>Vehicle provides the common operation.</li><li>Car and Bike redefine show().</li><li>Each derived object calls its own implementation.</li></ul></div>
+
+            <div class="problem-box"><h3>Real-Life Connection</h3><p>A vehicle management application can give different display behavior to different vehicle categories.</p></div>
+
+            <div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>Derived classes can specialize inherited behavior.</li><li>Overriding is closely related to inheritance.</li><li>Use virtual functions for runtime dispatch through a base interface.</li></ul></div>
+
+            <div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Function Name</h4><p>Use the same function name in the derived class.</p></div><div class="error-card"><h4>Signature</h4><p>Keep a compatible signature for overriding.</p></div><div class="error-card"><h4>Inheritance</h4><p>Car and Bike must inherit Vehicle.</p></div><div class="error-card"><h4>Virtual Dispatch</h4><p>Ordinary non-virtual calls through base references do not dynamically dispatch.</p></div></div></div>
+
+        </div>
+
+
+        <div class="mini-problem" id="fr3">
+
+            <div class="problem-heading"><span class="section-label">PROBLEM 03.3</span><h2>Shape Area</h2></div>
+
+            <div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to create a base class <strong>Shape</strong> with an <strong>area()</strong> function and derive classes <strong>Circle</strong> and <strong>Rectangle</strong> that redefine the area() function.</p></div>
+
+            <div class="problem-box"><h3>Theory / Concept</h3><p>Circle and Rectangle provide their own area calculation while using the same function name inherited from Shape.</p></div>
+
+            <div class="syntax-block"><div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Overriding area()</h3></div><div class="code-window">
+<pre><code>class Shape
+{
+public:
+    void area()
+    {
+    }
+};
+
+class Circle : public Shape
+{
+public:
+    void area()
+    {
+    }
+};</code></pre>
+            </div></div>
+
+            <div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Create Shape with area().</li><li>Derive Circle and Rectangle.</li><li>Redefine area() in each class.</li><li>Accept dimensions.</li><li>Calculate each area using the appropriate formula.</li><li>Display the areas.</li></ol></div>
+
+            <div class="problem-box"><h3>C++ Program</h3><div class="code-window">
+<pre><code>#include &lt;iostream&gt;
+
+using namespace std;
+
+class Shape
+{
+public:
+    void area()
+    {
+        cout &lt;&lt; "Shape area" &lt;&lt; endl;
+    }
+};
+
+class Circle : public Shape
+{
+    float radius;
+
+public:
+    Circle(float r)
+    {
+        radius = r;
+    }
+
+    void area()
+    {
+        cout &lt;&lt; "Circle Area: "
+             &lt;&lt; 3.14f * radius * radius &lt;&lt; endl;
+    }
+};
+
+class Rectangle : public Shape
+{
+    float length;
+    float breadth;
+
+public:
+    Rectangle(float l, float b)
+    {
+        length = l;
+        breadth = b;
+    }
+
+    void area()
+    {
+        cout &lt;&lt; "Rectangle Area: "
+             &lt;&lt; length * breadth &lt;&lt; endl;
+    }
+};
+
+int main()
+{
+    Circle c(5);
+    Rectangle r(10, 4);
+
+    c.area();
+    r.area();
+
+    return 0;
+}</code></pre>
+            </div></div>
+
+            <div class="problem-box"><h3>Expected Output</h3><div class="output-box"><pre>Circle Area: 78.5
+Rectangle Area: 40</pre></div></div>
+
+            <div class="visual-card"><span class="section-label">VISUAL EXPLANATION</span><h3>Same Operation, Different Formula</h3><div class="poly-flow"><div class="flow-node"><strong>Shape</strong><small>area()</small></div><div class="flow-arrow">↓</div><div class="flow-node"><strong>Circle</strong><small>π × r × r</small></div><div class="flow-arrow">+</div><div class="flow-node"><strong>Rectangle</strong><small>l × b</small></div></div></div>
+
+            <div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>Shape defines the common area operation.</li><li>Circle and Rectangle redefine area().</li><li>Each derived class applies its own formula.</li></ul></div>
+
+            <div class="problem-box"><h3>Real-Life Connection</h3><p>Graphics software can use a common area operation while each shape performs the calculation appropriate to its geometry.</p></div>
+
+            <div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>Same operation can have specialized implementations.</li><li>Inheritance provides the common interface.</li><li>Virtual functions extend this idea to runtime polymorphism.</li></ul></div>
+
+            <div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Formula</h4><p>Use the correct formula for the selected shape.</p></div><div class="error-card"><h4>Constructor</h4><p>Initialize dimensions before calculating the area.</p></div><div class="error-card"><h4>Signature</h4><p>Keep the overridden function signature compatible.</p></div><div class="error-card"><h4>Inheritance</h4><p>Circle and Rectangle should inherit Shape.</p></div></div></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         TYPE 4 — VIRTUAL FUNCTION
+    ================================================= -->
+
+    <div class="type-panel" id="virtual-function">
+
+        <div class="problem-box">
+            <span class="section-label">TYPE 04</span>
+            <h2>Virtual Function / Runtime Polymorphism</h2>
+            <p>
+                A virtual function allows a call through a base-class pointer or
+                reference to execute the overridden function belonging to the
+                actual derived object.
+            </p>
+        </div>
+
+        <div class="mini-problem-selector">
+            <div class="mini-problem-tabs">
+                <button type="button" class="mini-problem-tab active" data-problem="vf1"><span>01</span> Shape Area</button>
+                <button type="button" class="mini-problem-tab" data-problem="vf2"><span>02</span> Employee Salary</button>
+                <button type="button" class="mini-problem-tab" data-problem="vf3"><span>03</span> Vehicle Start</button>
+            </div>
+        </div>
+
+
+        <div class="mini-problem active" id="vf1">
+
+            <div class="problem-heading"><span class="section-label">PROBLEM 04.1</span><h2>Shape Area Using Virtual Function</h2></div>
+
+            <div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to demonstrate runtime polymorphism using a virtual <strong>area()</strong> function in a base class Shape and derived classes Circle and Rectangle.</p></div>
+
+            <div class="problem-box"><h3>Theory / Concept</h3><p>The base pointer refers to a derived object. Because area() is virtual, the correct derived implementation is selected at runtime.</p></div>
+
+            <div class="syntax-block"><div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Virtual Function</h3></div><div class="code-window">
+<pre><code>class Base
+{
+public:
+    virtual void display()
+    {
+    }
+};
+
+class Derived : public Base
+{
+public:
+    void display() override
+    {
+    }
+};</code></pre>
+            </div></div>
+
+            <div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Create Shape with a virtual area() function.</li><li>Derive Circle and Rectangle.</li><li>Override area() in both classes.</li><li>Create derived objects.</li><li>Use a Shape pointer to refer to each object.</li><li>Call area() through the base pointer.</li><li>Observe runtime selection of the derived function.</li></ol></div>
+
+            <div class="problem-box"><h3>C++ Program</h3><div class="code-window">
+<pre><code>#include &lt;iostream&gt;
+
+using namespace std;
+
+class Shape
+{
+public:
+    virtual void area()
+    {
+        cout &lt;&lt; "Shape area" &lt;&lt; endl;
+    }
+};
+
+class Circle : public Shape
+{
+    float radius;
+
+public:
+    Circle(float r)
+    {
+        radius = r;
+    }
+
+    void area() override
+    {
+        cout &lt;&lt; "Circle Area: "
+             &lt;&lt; 3.14f * radius * radius &lt;&lt; endl;
+    }
+};
+
+class Rectangle : public Shape
+{
+    float length;
+    float breadth;
+
+public:
+    Rectangle(float l, float b)
+    {
+        length = l;
+        breadth = b;
+    }
+
+    void area() override
+    {
+        cout &lt;&lt; "Rectangle Area: "
+             &lt;&lt; length * breadth &lt;&lt; endl;
+    }
+};
+
+int main()
+{
+    Circle c(5);
+    Rectangle r(10, 4);
+
+    Shape *ptr;
+
+    ptr = &amp;c;
+    ptr-&gt;area();
+
+    ptr = &amp;r;
+    ptr-&gt;area();
+
+    return 0;
+}</code></pre>
+            </div></div>
+
+            <div class="problem-box"><h3>Expected Output</h3><div class="output-box"><pre>Circle Area: 78.5
+Rectangle Area: 40</pre></div></div>
+
+            <div class="visual-card"><span class="section-label">VISUAL EXPLANATION</span><h3>Runtime Function Selection</h3><div class="poly-flow"><div class="flow-node"><strong>Shape *ptr</strong><small>Base pointer</small></div><div class="flow-arrow">→</div><div class="flow-node"><strong>ptr = &amp;c</strong><small>Circle object</small></div><div class="flow-arrow">→</div><div class="flow-node"><strong>area()</strong><small>Circle version</small></div></div><div class="poly-flow"><div class="flow-node"><strong>Shape *ptr</strong><small>Same pointer</small></div><div class="flow-arrow">→</div><div class="flow-node"><strong>ptr = &amp;r</strong><small>Rectangle object</small></div><div class="flow-arrow">→</div><div class="flow-node"><strong>area()</strong><small>Rectangle version</small></div></div></div>
+
+            <div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>Shape declares area() as virtual.</li><li>Circle and Rectangle override area().</li><li>The Shape pointer can point to either derived object.</li><li>The actual object's area() executes at runtime.</li><li>The override keyword helps the compiler verify the intended override.</li></ul></div>
+
+            <div class="problem-box"><h3>Real-Life Connection</h3><p>A graphics application can store different shape objects through a common Shape interface and ask each object to calculate its own area.</p></div>
+
+            <div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>Virtual functions enable runtime polymorphism.</li><li>A base pointer can refer to a derived object.</li><li>The derived implementation is selected according to the actual object.</li></ul></div>
+
+            <div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Missing virtual</h4><p>The base function must be virtual for dynamic dispatch in this example.</p></div><div class="error-card"><h4>Wrong Pointer</h4><p>Use a base-class pointer or reference to demonstrate runtime polymorphism.</p></div><div class="error-card"><h4>Signature</h4><p>The overriding function must have a compatible signature.</p></div><div class="error-card"><h4>Object Lifetime</h4><p>Make sure the derived object remains alive while the pointer is used.</p></div></div></div>
+
+        </div>
+
+
+        <div class="mini-problem" id="vf2">
+
+            <div class="problem-heading"><span class="section-label">PROBLEM 04.2</span><h2>Employee Salary Using Virtual Function</h2></div>
+
+            <div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to demonstrate runtime polymorphism using a virtual <strong>calculateSalary()</strong> function in a base class Employee and derived classes Manager and Developer.</p></div>
+
+            <div class="problem-box"><h3>Theory / Concept</h3><p>Employee provides a common salary operation. Manager and Developer implement their own salary calculation. A base pointer selects the appropriate calculation at runtime.</p></div>
+
+            <div class="syntax-block"><div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Virtual Salary Function</h3></div><div class="code-window">
+<pre><code>class Employee
+{
+public:
+    virtual void calculateSalary()
+    {
+    }
+};
+
+class Manager : public Employee
+{
+public:
+    void calculateSalary() override
+    {
+    }
+};</code></pre>
+            </div></div>
+
+            <div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Create Employee with virtual calculateSalary().</li><li>Derive Manager and Developer.</li><li>Override calculateSalary() in both classes.</li><li>Create objects of Manager and Developer.</li><li>Use an Employee pointer.</li><li>Point it to each derived object.</li><li>Call calculateSalary() and display the result.</li></ol></div>
+
+            <div class="problem-box"><h3>C++ Program</h3><div class="code-window">
+<pre><code>#include &lt;iostream&gt;
+
+using namespace std;
+
+class Employee
+{
+public:
+    virtual void calculateSalary()
+    {
+        cout &lt;&lt; "Employee Salary" &lt;&lt; endl;
+    }
+};
+
+class Manager : public Employee
+{
+    float basic;
+
+public:
+    Manager(float b)
+    {
+        basic = b;
+    }
+
+    void calculateSalary() override
+    {
+        cout &lt;&lt; "Manager Salary: "
+             &lt;&lt; basic + basic * 0.20f &lt;&lt; endl;
+    }
+};
+
+class Developer : public Employee
+{
+    float basic;
+
+public:
+    Developer(float b)
+    {
+        basic = b;
+    }
+
+    void calculateSalary() override
+    {
+        cout &lt;&lt; "Developer Salary: "
+             &lt;&lt; basic + basic * 0.10f &lt;&lt; endl;
+    }
+};
+
+int main()
+{
+    Manager m(50000);
+    Developer d(40000);
+
+    Employee *ptr;
+
+    ptr = &amp;m;
+    ptr-&gt;calculateSalary();
+
+    ptr = &amp;d;
+    ptr-&gt;calculateSalary();
+
+    return 0;
+}</code></pre>
+            </div></div>
+
+            <div class="problem-box"><h3>Expected Output</h3><div class="output-box"><pre>Manager Salary: 60000
+Developer Salary: 44000</pre></div></div>
+
+            <div class="visual-card"><span class="section-label">VISUAL EXPLANATION</span><h3>One Base Interface, Different Salary Rules</h3><div class="poly-flow"><div class="flow-node"><strong>Employee *</strong><small>Base pointer</small></div><div class="flow-arrow">→</div><div class="flow-node"><strong>Manager</strong><small>+20%</small></div><div class="flow-arrow">→</div><div class="flow-node"><strong>₹60,000</strong><small>Runtime result</small></div></div><div class="poly-flow"><div class="flow-node"><strong>Employee *</strong><small>Base pointer</small></div><div class="flow-arrow">→</div><div class="flow-node"><strong>Developer</strong><small>+10%</small></div><div class="flow-arrow">→</div><div class="flow-node"><strong>₹44,000</strong><small>Runtime result</small></div></div></div>
+
+            <div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>Employee declares a virtual salary operation.</li><li>Manager and Developer provide different implementations.</li><li>The Employee pointer refers to different derived objects.</li><li>The appropriate calculation is selected at runtime.</li></ul></div>
+
+            <div class="problem-box"><h3>Real-Life Connection</h3><p>Payroll software can process different employee categories through one common interface while applying role-specific salary rules.</p></div>
+
+            <div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>Runtime polymorphism reduces dependence on concrete derived types.</li><li>Derived classes can provide different implementations.</li><li>A common base interface makes the code extensible.</li></ul></div>
+
+            <div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Missing virtual</h4><p>Use virtual in the base declaration for dynamic dispatch.</p></div><div class="error-card"><h4>Wrong Percentage</h4><p>Use the intended salary rule for each role.</p></div><div class="error-card"><h4>Base Pointer</h4><p>Use Employee* to demonstrate runtime selection.</p></div><div class="error-card"><h4>Override</h4><p>Keep the derived function signature compatible with the base.</p></div></div></div>
+
+        </div>
+
+
+        <div class="mini-problem" id="vf3">
+
+            <div class="problem-heading"><span class="section-label">PROBLEM 04.3</span><h2>Vehicle Start Using Virtual Function</h2></div>
+
+            <div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to demonstrate runtime polymorphism using a virtual <strong>start()</strong> function in a base class Vehicle and derived classes Car and Bike.</p></div>
+
+            <div class="problem-box"><h3>Theory / Concept</h3><p>Vehicle defines a common start operation. Car and Bike override it with their own behavior. A Vehicle pointer can invoke the correct derived function at runtime.</p></div>
+
+            <div class="syntax-block"><div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Virtual start()</h3></div><div class="code-window">
+<pre><code>class Vehicle
+{
+public:
+    virtual void start()
+    {
+    }
+};
+
+class Car : public Vehicle
+{
+public:
+    void start() override
+    {
+    }
+};</code></pre>
+            </div></div>
+
+            <div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Create Vehicle with virtual start().</li><li>Derive Car and Bike.</li><li>Override start() in both classes.</li><li>Create Car and Bike objects.</li><li>Use a Vehicle pointer.</li><li>Point it to each derived object.</li><li>Call start() and display the corresponding message.</li></ol></div>
+
+            <div class="problem-box"><h3>C++ Program</h3><div class="code-window">
+<pre><code>#include &lt;iostream&gt;
+
+using namespace std;
+
+class Vehicle
+{
+public:
+    virtual void start()
+    {
+        cout &lt;&lt; "Vehicle starts" &lt;&lt; endl;
+    }
+};
+
+class Car : public Vehicle
+{
+public:
+    void start() override
+    {
+        cout &lt;&lt; "Car starts with a key/button" &lt;&lt; endl;
+    }
+};
+
+class Bike : public Vehicle
+{
+public:
+    void start() override
+    {
+        cout &lt;&lt; "Bike starts with a key/button" &lt;&lt; endl;
+    }
+};
+
+int main()
+{
+    Car c;
+    Bike b;
+
+    Vehicle *ptr;
+
+    ptr = &amp;c;
+    ptr-&gt;start();
+
+    ptr = &amp;b;
+    ptr-&gt;start();
+
+    return 0;
+}</code></pre>
+            </div></div>
+
+            <div class="problem-box"><h3>Expected Output</h3><div class="output-box"><pre>Car starts with a key/button
+Bike starts with a key/button</pre></div></div>
+
+            <div class="visual-card"><span class="section-label">VISUAL EXPLANATION</span><h3>Runtime Selection of start()</h3><div class="poly-flow"><div class="flow-node"><strong>Vehicle *</strong><small>Base pointer</small></div><div class="flow-arrow">→</div><div class="flow-node"><strong>Car</strong><small>Car::start()</small></div><div class="flow-arrow">→</div><div class="flow-node"><strong>Car Starts</strong><small>Runtime behavior</small></div></div><div class="poly-flow"><div class="flow-node"><strong>Vehicle *</strong><small>Base pointer</small></div><div class="flow-arrow">→</div><div class="flow-node"><strong>Bike</strong><small>Bike::start()</small></div><div class="flow-arrow">→</div><div class="flow-node"><strong>Bike Starts</strong><small>Runtime behavior</small></div></div></div>
+
+            <div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>Vehicle declares start() as virtual.</li><li>Car and Bike override start().</li><li>The same Vehicle pointer is used for both objects.</li><li>The actual object's implementation runs at runtime.</li></ul></div>
+
+            <div class="problem-box"><h3>Real-Life Connection</h3><p>A vehicle application can use a common control interface while allowing each vehicle type to define its own starting behavior.</p></div>
+
+            <div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>Virtual functions support dynamic dispatch.</li><li>The base pointer can refer to different derived objects.</li><li>The actual object determines the overridden function that executes.</li></ul></div>
+
+            <div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Missing virtual</h4><p>Declare the base function virtual.</p></div><div class="error-card"><h4>Pointer Type</h4><p>Use a Vehicle pointer for runtime polymorphism.</p></div><div class="error-card"><h4>Override</h4><p>Use a compatible overridden function in each derived class.</p></div><div class="error-card"><h4>Object Assignment</h4><p>Assign the pointer to the correct derived object before calling start().</p></div></div></div>
+
+        </div>
+
+    </div>
+
+</div>
+</section>
+
+
+<section class="content-section">
+<div class="container">
+    <span class="section-label">QUICK SUMMARY</span>
+    <h2>Practical 13 at a Glance</h2>
+
+    <div class="content-card">
+        <ul class="key-points">
+            <li>Polymorphism means one interface can have multiple forms or behaviors.</li>
+            <li>Function overloading is compile-time polymorphism.</li>
+            <li>Operator overloading is compile-time polymorphism.</li>
+            <li>Function overriding allows a derived class to redefine inherited behavior.</li>
+            <li>Virtual functions enable runtime polymorphism.</li>
+            <li>A base-class pointer or reference can refer to a derived object.</li>
+            <li>The actual derived implementation is selected at runtime when a virtual function is called.</li>
+            <li>The <strong>override</strong> keyword helps verify that a derived function correctly overrides a virtual base function.</li>
+        </ul>
+    </div>
+</div>
+</section>
+
+
+<section class="content-section">
+<div class="container">
+    <span class="section-label">VIVA</span>
+    <h2>Viva Questions</h2>
+
+    <div class="viva-list">
+
+        <div class="viva-item"><button type="button" class="viva-question"><span>What is polymorphism?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>Polymorphism is the ability of an interface, function or operator to represent different forms or behaviors.</p></div></div>
+
+        <div class="viva-item"><button type="button" class="viva-question"><span>What are the two broad forms of polymorphism covered here?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>Compile-time polymorphism and runtime polymorphism.</p></div></div>
+
+        <div class="viva-item"><button type="button" class="viva-question"><span>What is function overloading?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>Function overloading means defining multiple functions with the same name but different parameter lists.</p></div></div>
+
+        <div class="viva-item"><button type="button" class="viva-question"><span>Can functions be overloaded by changing only the return type?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>No. The parameter list must differ; changing only the return type is not sufficient.</p></div></div>
+
+        <div class="viva-item"><button type="button" class="viva-question"><span>What is operator overloading?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>Operator overloading defines how an existing operator behaves when used with objects of a user-defined class.</p></div></div>
+
+        <div class="viva-item"><button type="button" class="viva-question"><span>What is function overriding?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>Function overriding occurs when a derived class provides its own implementation of an inherited function with a compatible signature.</p></div></div>
+
+        <div class="viva-item"><button type="button" class="viva-question"><span>What is a virtual function?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>A virtual function is a base-class member function that supports dynamic dispatch when overridden in derived classes.</p></div></div>
+
+        <div class="viva-item"><button type="button" class="viva-question"><span>What is runtime polymorphism?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>Runtime polymorphism occurs when the appropriate overridden function is selected while the program is running, typically through a virtual function and a base pointer or reference.</p></div></div>
+
+        <div class="viva-item"><button type="button" class="viva-question"><span>What is the use of the override keyword?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>The override keyword tells the compiler that a derived function is intended to override a virtual function from the base class and helps detect signature mistakes.</p></div></div>
+
+        <div class="viva-item"><button type="button" class="viva-question"><span>What is the difference between overloading and overriding?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>Overloading uses the same name with different parameter lists, while overriding provides a derived-class implementation of an inherited function with a compatible signature.</p></div></div>
+
+        <div class="viva-item"><button type="button" class="viva-question"><span>Why is a base pointer used in runtime polymorphism?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>A base pointer can refer to objects of different derived classes, allowing a virtual function call to select the appropriate derived implementation at runtime.</p></div></div>
+
+        <div class="viva-item"><button type="button" class="viva-question"><span>Is operator overloading the same as function overloading?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>No. Function overloading provides multiple functions with the same name, while operator overloading defines an operator's behavior for user-defined types.</p></div></div>
+
+    </div>
+</div>
+</section>
+
+</main>
+
+
+<footer class="footer">
+    <div class="footer-content">
+
+        <div class="footer-brand">
+            <div class="footer-logo">&lt;/&gt;</div>
+
+            <div class="footer-brand-text">
+                <div class="footer-brand-name">
+                    Rasika <span>CodeLab</span>
+                </div>
+
+                <p class="footer-tagline">
+                    Code • Understand • Visualize
+                </p>
+            </div>
+        </div>
+
+        <div class="footer-copy">
+            © 2026 Rasika CodeLab. Built for practical learning.
+        </div>
+
+    </div>
+</footer>
+
+
+<script src="../js/main.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const page = document.querySelector(".practical13-page");
+
+    if (!page) return;
+
+
+    /* =================================================
+       MAIN TYPE TABS
+    ================================================= */
+
+    const typeTabs = page.querySelectorAll(".main-type-tab");
+    const typePanels = page.querySelectorAll(".type-panel");
+
+    typeTabs.forEach(function (tab) {
+
+        tab.addEventListener("click", function () {
+
+            const target = this.getAttribute("data-type");
+
+            typeTabs.forEach(function (item) {
+                item.classList.remove("active");
+            });
+
+            typePanels.forEach(function (panel) {
+                panel.classList.remove("active");
+            });
+
+            this.classList.add("active");
+
+            const selectedPanel = page.querySelector("#" + target);
+
+            if (selectedPanel) {
+                selectedPanel.classList.add("active");
+
+                selectedPanel.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+            }
+
+        });
+
+    });
+
+
+    /* =================================================
+       MINI PROBLEM TABS
+       Scoped to each type panel
+    ================================================= */
+
+    typePanels.forEach(function (panel) {
+
+        const problemTabs =
+            panel.querySelectorAll(".mini-problem-tab");
+
+        const problems =
+            panel.querySelectorAll(".mini-problem");
+
+        problemTabs.forEach(function (tab) {
+
+            tab.addEventListener("click", function () {
+
+                const target =
+                    this.getAttribute("data-problem");
+
+                problemTabs.forEach(function (item) {
+                    item.classList.remove("active");
+                });
+
+                problems.forEach(function (problem) {
+                    problem.classList.remove("active");
+                });
+
+                this.classList.add("active");
+
+                const selectedProblem =
+                    panel.querySelector("#" + target);
+
+                if (selectedProblem) {
+                    selectedProblem.classList.add("active");
+
+                    selectedProblem.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start"
+                    });
+                }
+
+            });
+
+        });
+
+    });
+
+
+    /* =================================================
+       VIVA ACCORDION
+    ================================================= */
+
+    const vivaQuestions =
+        page.querySelectorAll(".viva-question");
+
+    vivaQuestions.forEach(function (question) {
+
+        question.addEventListener("click", function () {
+
+            const currentItem =
+                this.closest(".viva-item");
+
+            currentItem.classList.toggle("active");
+
+        });
+
+    });
+
+});
+</script>
+
+</body>
+</html>

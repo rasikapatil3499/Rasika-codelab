@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Practical 1 | Rasika CodeLab</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="detail-page">
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="navbar">
+
+        <div class="nav-container">
+
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">&lt;/&gt;</span>
+                <span>Rasika<span>CodeLab</span></span>
+            </a>
+
+            <button class="menu-btn" aria-label="Toggle menu">
+                ☰
+            </button>
+
+            <nav class="nav-links">
+
+                <a href="../index.html">Home</a>
+
+                <a href="../foundations/program.html">
+                    Foundations
+                </a>
+
+                <a href="index.html" class="active">
+                    Practicals
+                </a>
+
+                <a href="../index.html#about">
+                    About
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="practical-page">
+
+        <!-- PRACTICAL HEADER -->
+
+        <section class="practical-hero">
+
+            <div class="container">
+
+                <span class="section-label">
+                    C++ PRACTICAL 01
+                </span>
+
+                <h1>
+                    Operators & Input / Output
+                </h1>
+
+                <p class="practical-subtitle">
+                    Evaluation of expressions using C++ input/output
+                    functions.
+                </p>
+
+                <div class="practical-meta">
+
+                    <span>
+                        💻 C++
+                    </span>
+
+                    <span>
+                        📘 Practical 1
+                    </span>
+
+                    <span>
+                        🎯 LLO 1.1
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= AIM ================= -->
+
+        <section class="content-section">
+
+            <div class="container">
+
+                <span class="section-label">
+                    01 — AIM
+                </span>
+
+                <div class="content-card">
+
+                    <p>
+                        To develop C++ programs that use variables,
+                        operators, expressions, and input/output
+                        functions to solve basic computational problems.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= OBJECTIVES ================= -->
+
+        <section class="content-section">
+
+            <div class="container">
+
+                <span class="section-label">
+                    02 — LEARNING OBJECTIVES
+                </span>
+
+                <div class="objective-grid">
+
+                    <div class="objective-card">
+                        <span>01</span>
+                        <p>
+                            Understand arithmetic operators.
+                        </p>
+                    </div>
+
+                    <div class="objective-card">
+                        <span>02</span>
+                        <p>
+                            Use variables to store input values.
+                        </p>
+                    </div>
+
+                    <div class="objective-card">
+                        <span>03</span>
+                        <p>
+                            Construct and evaluate expressions.
+                        </p>
+                    </div>
+
+                    <div class="objective-card">
+                        <span>04</span>
+                        <p>
+                            Use <code>cin</code> and <code>cout</code>
+                            for input and output.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= PROBLEMS ================= -->
+
+        <section class="content-section problems-section">
+
+            <div class="container">
+
+                <span class="section-label">
+                    03 — SELECT A PROBLEM
+                </span>
+
+                <h2>
+                    Choose a Problem to Explore
+                </h2>
+
+                <p class="section-description">
+                    This practical contains five programs. Select a
+                    problem to view its statement, algorithm, program,
+                    output and visualization.
+                </p>
+
+
+                <div class="problem-selector">
+
+                    <button class="problem-tab active"
+                        data-problem="problem1">
+
+                        <span class="problem-number">
+                            01
+                        </span>
+
+                        <span>
+                            Calculator
+                        </span>
+
+                    </button>
+
+
+                    <button class="problem-tab"
+                        data-problem="problem2">
+
+                        <span class="problem-number">
+                            02
+                        </span>
+
+                        <span>
+                            Area Calculator
+                        </span>
+
+                    </button>
+
+
+                    <button class="problem-tab"
+                        data-problem="problem3">
+
+                        <span class="problem-number">
+                            03
+                        </span>
+
+                        <span>
+                            Temperature
+                        </span>
+
+                    </button>
+
+
+                    <button class="problem-tab"
+                        data-problem="problem4">
+
+                        <span class="problem-number">
+                            04
+                        </span>
+
+                        <span>
+                            Simple Interest
+                        </span>
+
+                    </button>
+
+
+                    <button class="problem-tab"
+                        data-problem="problem5">
+
+                        <span class="problem-number">
+                            05
+                        </span>
+
+                        <span>
+                            Average & Percentage
+                        </span>
+
+                    </button>
+
+                </div>
+
+
+                <!-- ================= PROBLEM 1 ================= -->
+
+                <article class="problem-content active"
+                    id="problem1">
+
+                    <div class="problem-heading">
+
+                        <span class="problem-badge">
+                            PROBLEM 01
+                        </span>
+
+                        <h2>
+                            Simple Calculator
+                        </h2>
+
+                    </div>
+
+
+                    <div class="content-block">
+
+                        <h3>
+                            Problem Statement
+                        </h3>
+
+                        <p>
+                            Write a C++ program to develop a simple
+                            calculator that accepts two numbers from
+                            the user and performs basic arithmetic
+                            operations such as addition, subtraction,
+                            multiplication, and division.
+                        </p>
+
+                    </div>
+
+
+                    <div class="content-block">
+
+                        <h3>
+                            Operations
+                        </h3>
+
+                        <div class="formula-grid">
+
+                            <div>
+                                <strong>Addition</strong>
+                                <code>a + b</code>
+                            </div>
+
+                            <div>
+                                <strong>Subtraction</strong>
+                                <code>a - b</code>
+                            </div>
+
+                            <div>
+                                <strong>Multiplication</strong>
+                                <code>a * b</code>
+                            </div>
+
+                            <div>
+                                <strong>Division</strong>
+                                <code>a / b</code>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="content-block">
+
+                        <h3>
+                            Algorithm
+                        </h3>
+
+                        <ol class="algorithm-list">
+
+                            <li>Start.</li>
+
+                            <li>
+                                Declare two variables.
+                            </li>
+
+                            <li>
+                                Accept two numbers using
+                                <code>cin</code>.
+                            </li>
+
+                            <li>
+                                Perform addition, subtraction,
+                                multiplication and division.
+                            </li>
+
+                            <li>
+                                Display the results using
+                                <code>cout</code>.
+                            </li>
+
+                            <li>Stop.</li>
+
+                        </ol>
+
+                    </div>
+
+
+                    <div class="content-block">
+
+                        <h3>
+                            C++ Program
+                        </h3>
+
+                        <div class="code-window">
+
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    float a, b;
+
+    cout &lt;&lt; "Enter first number: ";
+    cin &gt;&gt; a;
+
+    cout &lt;&lt; "Enter second number: ";
+    cin &gt;&gt; b;
+
+    cout &lt;&lt; "Addition = " &lt;&lt; a + b &lt;&lt; endl;
+    cout &lt;&lt; "Subtraction = " &lt;&lt; a - b &lt;&lt; endl;
+    cout &lt;&lt; "Multiplication = " &lt;&lt; a * b &lt;&lt; endl;
+
+    if (b != 0)
+        cout &lt;&lt; "Division = " &lt;&lt; a / b &lt;&lt; endl;
+    else
+        cout &lt;&lt; "Division is not possible." &lt;&lt; endl;
+
+    return 0;
+}</code></pre>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="content-block">
+
+                        <h3>
+                            Expected Output
+                        </h3>
+
+                        <div class="output-box">
+
+<pre>Enter first number: 20
+Enter second number: 5
+
+Addition = 25
+Subtraction = 15
+Multiplication = 100
+Division = 4</pre>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- VISUALIZATION -->
+
+                    <div class="visualization-section">
+
+                        <div class="visualization-header">
+
+                            <span class="problem-badge">
+                                INTERACTIVE
+                            </span>
+
+                            <h3>
+                                Visualize the Execution
+                            </h3>
+
+                            <p>
+                                See how input moves through variables,
+                                expressions and output.
+                            </p>
+
+                        </div>
+
+
+                        <div class="execution-flow">
+
+                            <div class="flow-node">
+                                <span>01</span>
+                                <strong>INPUT</strong>
+                                <small>20, 5</small>
+                            </div>
+
+                            <div class="flow-arrow">
+                                →
+                            </div>
+
+                            <div class="flow-node">
+                                <span>02</span>
+                                <strong>VARIABLES</strong>
+                                <small>a = 20<br>b = 5</small>
+                            </div>
+
+                            <div class="flow-arrow">
+                                →
+                            </div>
+
+                            <div class="flow-node">
+                                <span>03</span>
+                                <strong>EXPRESSION</strong>
+                                <small>a + b</small>
+                            </div>
+
+                            <div class="flow-arrow">
+                                →
+                            </div>
+
+                            <div class="flow-node">
+                                <span>04</span>
+                                <strong>OUTPUT</strong>
+                                <small>25</small>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- KEY POINTS -->
+
+                    <div class="content-block">
+
+                        <h3>
+                            Key Points
+                        </h3>
+
+                        <ul class="key-points">
+
+                            <li>
+                                <code>cin</code> is used to accept
+                                input from the user.
+                            </li>
+
+                            <li>
+                                <code>cout</code> is used to display
+                                output.
+                            </li>
+
+                            <li>
+                                Arithmetic operators perform
+                                mathematical calculations.
+                            </li>
+
+                            <li>
+                                Division by zero must be avoided.
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+                    <!-- COMMON ERRORS -->
+
+                    <div class="content-block">
+
+                        <h3>
+                            Common Errors
+                        </h3>
+
+                        <div class="error-grid">
+
+                            <div class="error-card">
+
+                                <strong>
+                                    Division by zero
+                                </strong>
+
+                                <p>
+                                    Always check that the second
+                                    number is not zero before division.
+                                </p>
+
+                            </div>
+
+                            <div class="error-card">
+
+                                <strong>
+                                    Wrong operator
+                                </strong>
+
+                                <p>
+                                    Use <code>*</code> for
+                                    multiplication, not ×.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- ================= PROBLEM 2 ================= -->
+
+                <article class="problem-content"
+                    id="problem2">
+
+                    <div class="problem-heading">
+
+                        <span class="problem-badge">
+                            PROBLEM 02
+                        </span>
+
+                        <h2>
+                            Area Calculator
+                        </h2>
+
+                    </div>
+
+                    <div class="content-block">
+
+                        <h3>
+                            Problem Statement
+                        </h3>
+
+                        <p>
+                            Write a C++ program to accept the required
+                            dimensions from the user and calculate
+                            the area of a circle, rectangle, and
+                            triangle using appropriate expressions
+                            and input/output functions.
+                        </p>
+
+                    </div>
+
+                    <div class="content-block">
+
+                        <h3>
+                            Formula
+                        </h3>
+
+                        <div class="formula-grid">
+
+                            <div>
+                                <strong>Circle</strong>
+                                <code>π × r × r</code>
+                            </div>
+
+                            <div>
+                                <strong>Rectangle</strong>
+                                <code>l × b</code>
+                            </div>
+
+                            <div>
+                                <strong>Triangle</strong>
+                                <code>½ × b × h</code>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- ================= PROBLEM 3 ================= -->
+
+                <article class="problem-content"
+                    id="problem3">
+
+                    <div class="problem-heading">
+
+                        <span class="problem-badge">
+                            PROBLEM 03
+                        </span>
+
+                        <h2>
+                            Temperature Converter
+                        </h2>
+
+                    </div>
+
+                    <div class="content-block">
+
+                        <h3>
+                            Problem Statement
+                        </h3>
+
+                        <p>
+                            Write a C++ program to accept a temperature
+                            in Celsius from the user and convert it
+                            into Fahrenheit and Kelvin using appropriate
+                            arithmetic expressions and input/output
+                            functions.
+                        </p>
+
+                    </div>
+
+                    <div class="content-block">
+
+                        <h3>
+                            Formula
+                        </h3>
+
+                        <div class="formula-grid">
+
+                            <div>
+                                <strong>Fahrenheit</strong>
+                                <code>(C × 9/5) + 32</code>
+                            </div>
+
+                            <div>
+                                <strong>Kelvin</strong>
+                                <code>C + 273.15</code>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- ================= PROBLEM 4 ================= -->
+
+                <article class="problem-content"
+                    id="problem4">
+
+                    <div class="problem-heading">
+
+                        <span class="problem-badge">
+                            PROBLEM 04
+                        </span>
+
+                        <h2>
+                            Simple Interest Calculator
+                        </h2>
+
+                    </div>
+
+                    <div class="content-block">
+
+                        <h3>
+                            Problem Statement
+                        </h3>
+
+                        <p>
+                            Write a C++ program to accept the principal
+                            amount, rate of interest, and time from the
+                            user and calculate the simple interest and
+                            total amount using appropriate arithmetic
+                            expressions and input/output functions.
+                        </p>
+
+                    </div>
+
+                    <div class="content-block">
+
+                        <h3>
+                            Formula
+                        </h3>
+
+                        <div class="formula-grid">
+
+                            <div>
+                                <strong>Simple Interest</strong>
+                                <code>(P × R × T) / 100</code>
+                            </div>
+
+                            <div>
+                                <strong>Total Amount</strong>
+                                <code>P + SI</code>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- ================= PROBLEM 5 ================= -->
+
+                <article class="problem-content"
+                    id="problem5">
+
+                    <div class="problem-heading">
+
+                        <span class="problem-badge">
+                            PROBLEM 05
+                        </span>
+
+                        <h2>
+                            Average & Percentage
+                        </h2>
+
+                    </div>
+
+                    <div class="content-block">
+
+                        <h3>
+                            Problem Statement
+                        </h3>
+
+                        <p>
+                            Write a C++ program to accept marks obtained
+                            in three subjects from the user and calculate
+                            the total marks, average marks, and percentage
+                            using appropriate arithmetic expressions and
+                            input/output functions.
+                        </p>
+
+                    </div>
+
+                    <div class="content-block">
+
+                        <h3>
+                            Formula
+                        </h3>
+
+                        <div class="formula-grid">
+
+                            <div>
+                                <strong>Total</strong>
+                                <code>M1 + M2 + M3</code>
+                            </div>
+
+                            <div>
+                                <strong>Average</strong>
+                                <code>Total / 3</code>
+                            </div>
+
+                            <div>
+                                <strong>Percentage</strong>
+                                <code>(Total / 300) × 100</code>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <div class="footer-content">
+
+            <div class="footer-brand">
+
+                <div class="footer-logo">
+                    &lt;/&gt;
+                </div>
+
+                <div class="footer-brand-text">
+
+                    <div class="footer-brand-name">
+                        Rasika <span>CodeLab</span>
+                    </div>
+
+                    <p class="footer-tagline">
+                        Code • Understand • Visualize
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="footer-copy">
+                © 2026 Rasika CodeLab. Built for practical learning.
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <script src="../js/main.js"></script>
+
+
+    <!-- ================= PRACTICAL JS ================= -->
+
+    <script>
+
+        const tabs =
+            document.querySelectorAll(".problem-tab");
+
+        const problems =
+            document.querySelectorAll(".problem-content");
+
+
+        tabs.forEach(tab => {
+
+            tab.addEventListener("click", () => {
+
+                const target =
+                    tab.dataset.problem;
+
+
+                tabs.forEach(item => {
+                    item.classList.remove("active");
+                });
+
+
+                problems.forEach(problem => {
+                    problem.classList.remove("active");
+                });
+
+
+                tab.classList.add("active");
+
+
+                const selected =
+                    document.getElementById(target);
+
+
+                if (selected) {
+                    selected.classList.add("active");
+                }
+
+            });
+
+        });
+
+    </script>
+
+</body>
+
+</html>

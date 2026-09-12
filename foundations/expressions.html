@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>What is an Expression? | Rasika CodeLab</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+    <div class="container nav-container">
+
+        <a href="../index.html" class="logo">
+            <span class="logo-mark">&lt;/&gt;</span>
+            Rasika<span>CodeLab</span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="../index.html">Home</a>
+            <a href="../foundations.html" class="active">Foundations</a>
+            <a href="../practicals.html">Practicals</a>
+            <a href="../about.html">About</a>
+        </nav>
+
+        <button class="menu-btn" aria-label="Open Menu">☰</button>
+
+    </div>
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="detail-hero">
+
+    <div class="container">
+
+        <div class="breadcrumb">
+            <a href="../foundations.html">C++ Foundations</a>
+            <span>›</span>
+            <span>06</span>
+        </div>
+
+        <div class="detail-badge">
+            FOUNDATION 06
+        </div>
+
+        <h1>What is an <span>Expression?</span></h1>
+
+        <p class="detail-intro">
+            Expressions are where values, variables and operators come together
+            to produce a result.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="detail-page">
+
+    <div class="container detail-container">
+
+
+        <!-- BASIC IDEA -->
+
+        <section class="concept-section">
+
+            <div class="section-label">01 — BASIC IDEA</div>
+
+            <h2>An expression produces a value.</h2>
+
+            <p>
+                An expression is a combination of constants, variables,
+                operators and function calls that can be evaluated to produce
+                a value.
+            </p>
+
+            <div class="definition-card">
+
+                <div class="definition-icon">Σ</div>
+
+                <div>
+
+                    <span class="definition-label">
+                        SIMPLE DEFINITION
+                    </span>
+
+                    <p>
+                        An expression is a combination of operands and operators
+                        that is evaluated to produce a result.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SIMPLE EXAMPLE -->
+
+        <section class="concept-section">
+
+            <div class="section-label">02 — SIMPLE EXAMPLE</div>
+
+            <h2>Start with something simple.</h2>
+
+            <div class="expression-display">
+
+                <div class="expression-part">
+                    <span>OPERAND</span>
+                    <strong>10</strong>
+                </div>
+
+                <div class="expression-operator">+</div>
+
+                <div class="expression-part">
+                    <span>OPERAND</span>
+                    <strong>20</strong>
+                </div>
+
+                <div class="expression-equals">=</div>
+
+                <div class="expression-result">
+                    <span>RESULT</span>
+                    <strong>30</strong>
+                </div>
+
+            </div>
+
+            <div class="expression-note">
+
+                <code>10 + 20</code>
+
+                <p>
+                    The complete <strong>10 + 20</strong> is an expression,
+                    and its evaluated result is <strong>30</strong>.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- EXPRESSION ANATOMY -->
+
+        <section class="concept-section">
+
+            <div class="section-label">03 — ANATOMY</div>
+
+            <h2>Let's break an expression into parts.</h2>
+
+            <p>
+                Consider:
+            </p>
+
+            <div class="expression-code">
+                <code>result = a + b * 2;</code>
+            </div>
+
+
+            <div class="expression-parts-grid">
+
+                <div class="expression-part-card">
+
+                    <span>01</span>
+
+                    <h3>a</h3>
+
+                    <p>
+                        Operand / variable
+                    </p>
+
+                </div>
+
+
+                <div class="expression-part-card operator-card">
+
+                    <span>02</span>
+
+                    <h3>+</h3>
+
+                    <p>
+                        Addition operator
+                    </p>
+
+                </div>
+
+
+                <div class="expression-part-card">
+
+                    <span>03</span>
+
+                    <h3>b</h3>
+
+                    <p>
+                        Operand / variable
+                    </p>
+
+                </div>
+
+
+                <div class="expression-part-card operator-card">
+
+                    <span>04</span>
+
+                    <h3>*</h3>
+
+                    <p>
+                        Multiplication operator
+                    </p>
+
+                </div>
+
+
+                <div class="expression-part-card">
+
+                    <span>05</span>
+
+                    <h3>2</h3>
+
+                    <p>
+                        Constant operand
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- EVALUATION -->
+
+        <section class="concept-section">
+
+            <div class="section-label">04 — EXPRESSION EVALUATION</div>
+
+            <h2>How does C++ evaluate an expression?</h2>
+
+            <p>
+                When an expression contains multiple operators, C++ follows
+                rules such as precedence and associativity to determine the
+                evaluation order.
+            </p>
+
+
+            <div class="evaluation-example">
+
+                <div class="evaluation-title">
+                    Given
+                </div>
+
+                <div class="evaluation-code">
+                    <code>a + b * 2</code>
+                </div>
+
+
+                <div class="evaluation-step">
+
+                    <span>STEP 01</span>
+
+                    <strong>
+                        Evaluate <code>b * 2</code>
+                    </strong>
+
+                    <small>
+                        Multiplication has higher precedence than addition.
+                    </small>
+
+                </div>
+
+
+                <div class="evaluation-arrow">
+                    ↓
+                </div>
+
+
+                <div class="evaluation-step">
+
+                    <span>STEP 02</span>
+
+                    <strong>
+                        Add <code>a</code> to the result
+                    </strong>
+
+                    <small>
+                        The addition operation is performed next.
+                    </small>
+
+                </div>
+
+
+                <div class="evaluation-arrow">
+                    ↓
+                </div>
+
+
+                <div class="evaluation-result">
+
+                    <span>FINAL RESULT</span>
+
+                    <strong>
+                        a + (b × 2)
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- NUMERIC EXAMPLE -->
+
+        <section class="concept-section">
+
+            <div class="section-label">05 — STEP-BY-STEP VISUALIZATION</div>
+
+            <h2>Let's evaluate <code>5 + 3 * 2</code>.</h2>
+
+
+            <div class="step-expression">
+
+                <div class="step-card active">
+
+                    <span>START</span>
+
+                    <strong>5 + 3 × 2</strong>
+
+                    <small>
+                        Original expression
+                    </small>
+
+                </div>
+
+                <div class="step-arrow">→</div>
+
+                <div class="step-card">
+
+                    <span>STEP 1</span>
+
+                    <strong>5 + 6</strong>
+
+                    <small>
+                        3 × 2 = 6
+                    </small>
+
+                </div>
+
+                <div class="step-arrow">→</div>
+
+                <div class="step-card result-step">
+
+                    <span>STEP 2</span>
+
+                    <strong>11</strong>
+
+                    <small>
+                        5 + 6 = 11
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="explanation-box">
+
+                <div class="explanation-title">
+                    Why is the answer 11?
+                </div>
+
+                <p>
+                    Multiplication has higher precedence than addition,
+                    so <code>3 * 2</code> is evaluated first.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- PARENTHESES -->
+
+        <section class="concept-section">
+
+            <div class="section-label">06 — PARENTHESES</div>
+
+            <h2>Parentheses can change the order.</h2>
+
+            <p>
+                Parentheses explicitly group part of an expression and can
+                change which operation is evaluated first.
+            </p>
+
+
+            <div class="parentheses-comparison">
+
+                <div class="parentheses-card">
+
+                    <span>WITHOUT PARENTHESES</span>
+
+                    <code>5 + 3 * 2</code>
+
+                    <strong>11</strong>
+
+                    <small>
+                        Multiplication first
+                    </small>
+
+                </div>
+
+
+                <div class="parentheses-arrow">
+                    VS
+                </div>
+
+
+                <div class="parentheses-card highlight">
+
+                    <span>WITH PARENTHESES</span>
+
+                    <code>(5 + 3) * 2</code>
+
+                    <strong>16</strong>
+
+                    <small>
+                        Addition first
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- TYPES -->
+
+        <section class="concept-section">
+
+            <div class="section-label">07 — TYPES OF EXPRESSIONS</div>
+
+            <h2>Expressions can perform different kinds of operations.</h2>
+
+
+            <div class="expression-types">
+
+                <div class="expression-type-card">
+
+                    <div class="type-symbol">+</div>
+
+                    <h3>Arithmetic</h3>
+
+                    <code>a + b</code>
+
+                    <p>
+                        Produces a numerical result.
+                    </p>
+
+                </div>
+
+
+                <div class="expression-type-card">
+
+                    <div class="type-symbol">&gt;</div>
+
+                    <h3>Relational</h3>
+
+                    <code>a &gt; b</code>
+
+                    <p>
+                        Produces a boolean result.
+                    </p>
+
+                </div>
+
+
+                <div class="expression-type-card">
+
+                    <div class="type-symbol">&amp;&amp;</div>
+
+                    <h3>Logical</h3>
+
+                    <code>a &amp;&amp; b</code>
+
+                    <p>
+                        Combines logical conditions.
+                    </p>
+
+                </div>
+
+
+                <div class="expression-type-card">
+
+                    <div class="type-symbol">=</div>
+
+                    <h3>Assignment</h3>
+
+                    <code>x = 10</code>
+
+                    <p>
+                        Assigns a value to a variable.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- DATA TYPES -->
+
+        <section class="concept-section">
+
+            <div class="section-label">08 — EXPRESSION RESULT</div>
+
+            <h2>The result depends on the data types.</h2>
+
+            <p>
+                The types of the operands influence the type and behavior of
+                an expression.
+            </p>
+
+
+            <div class="type-result-comparison">
+
+                <div class="result-example">
+
+                    <span>INTEGER DIVISION</span>
+
+                    <code>5 / 2</code>
+
+                    <strong>2</strong>
+
+                    <small>
+                        Both operands are integers.
+                    </small>
+
+                </div>
+
+
+                <div class="result-example highlight">
+
+                    <span>FLOATING-POINT DIVISION</span>
+
+                    <code>5.0 / 2.0</code>
+
+                    <strong>2.5</strong>
+
+                    <small>
+                        Operands are floating-point values.
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- C++ PROGRAM -->
+
+        <section class="concept-section">
+
+            <div class="section-label">09 — C++ PROGRAM</div>
+
+            <h2>Expressions inside a C++ program.</h2>
+
+            <div class="code-example">
+
+                <div class="code-header">
+                    <span>EXPRESSION.CPP</span>
+                    <span>EXAMPLE</span>
+                </div>
+
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    int a, b;
+
+    cout &lt;&lt; "Enter two numbers: ";
+    cin &gt;&gt; a &gt;&gt; b;
+
+    int result = a + b * 2;
+
+    cout &lt;&lt; "Result = " &lt;&lt; result;
+
+    return 0;
+}</code></pre>
+
+            </div>
+
+
+            <div class="program-result-flow">
+
+                <div>
+                    <span>INPUT</span>
+                    <strong>a, b</strong>
+                </div>
+
+                <div>→</div>
+
+                <div>
+                    <span>EXPRESSION</span>
+                    <strong>a + b × 2</strong>
+                </div>
+
+                <div>→</div>
+
+                <div>
+                    <span>RESULT</span>
+                    <strong>Calculated value</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- COMMON ERRORS -->
+
+        <section class="concept-section">
+
+            <div class="section-label">10 — COMMON ERRORS</div>
+
+            <h2>Expression mistakes to avoid.</h2>
+
+
+            <div class="expression-error-grid">
+
+                <div class="expression-error">
+
+                    <span>01</span>
+
+                    <h3>Ignoring precedence</h3>
+
+                    <code>2 + 3 * 4</code>
+
+                    <p>
+                        Understand which operation is performed first.
+                    </p>
+
+                </div>
+
+
+                <div class="expression-error">
+
+                    <span>02</span>
+
+                    <h3>Unexpected integer division</h3>
+
+                    <code>7 / 2 → 3</code>
+
+                    <p>
+                        Integer operands produce integer division.
+                    </p>
+
+                </div>
+
+
+                <div class="expression-error">
+
+                    <span>03</span>
+
+                    <h3>Confusing assignment and comparison</h3>
+
+                    <code>x = 5</code>
+
+                    <p>
+                        Assignment and equality comparison are different
+                        operations.
+                    </p>
+
+                </div>
+
+
+                <div class="expression-error">
+
+                    <span>04</span>
+
+                    <h3>Overcomplicated expressions</h3>
+
+                    <code>a + b * c - d / e</code>
+
+                    <p>
+                        Use parentheses when grouping would improve clarity.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- LLO CONNECTION -->
+
+        <section class="concept-section">
+
+            <div class="section-label">11 — CONNECT TO YOUR PRACTICAL</div>
+
+            <h2>Why expressions matter in C++ practicals</h2>
+
+            <p>
+                Your first practical asks you to develop programs that evaluate
+                expressions using operators and input/output functions.
+                That practical combines almost everything learned so far.
+            </p>
+
+
+            <div class="learning-chain">
+
+                <div>
+                    <span>01</span>
+                    <strong>Variables</strong>
+                    <small>Store input values</small>
+                </div>
+
+                <div>→</div>
+
+                <div>
+                    <span>02</span>
+                    <strong>Operators</strong>
+                    <small>Perform operations</small>
+                </div>
+
+                <div>→</div>
+
+                <div class="chain-highlight">
+                    <span>03</span>
+                    <strong>Expression</strong>
+                    <small>Combines the operations</small>
+                </div>
+
+                <div>→</div>
+
+                <div>
+                    <span>04</span>
+                    <strong>Output</strong>
+                    <small>Display the result</small>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- TAKEAWAYS -->
+
+        <section class="takeaway-section">
+
+            <div class="section-label">12 — REMEMBER</div>
+
+            <h2>Key Takeaways</h2>
+
+            <div class="takeaways">
+
+                <div>
+                    <span>✓</span>
+                    An expression is evaluated to produce a value.
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    Expressions can contain operands and operators.
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    Operator precedence affects evaluation order.
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    Parentheses can explicitly control grouping.
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    Data types can affect expression results.
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    Expressions are fundamental to practical C++ programming.
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- NAVIGATION -->
+
+        <section class="lesson-navigation">
+
+            <a href="operators.html" class="lesson-nav-card">
+
+                <span>←</span>
+
+                <div>
+                    <small>PREVIOUS FOUNDATION</small>
+                    <strong>What is an Operator?</strong>
+                </div>
+
+            </a>
+
+
+            <a href="input-output.html" class="lesson-nav-card next">
+
+                <div>
+                    <small>NEXT FOUNDATION</small>
+                    <strong>What is Input & Output?</strong>
+                </div>
+
+                <span>→</span>
+
+            </a>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <div class="container">
+
+        <div class="footer-content">
+
+            <div>
+
+                <div class="logo">
+                    <span class="logo-mark">&lt;/&gt;</span>
+                    Rasika<span>CodeLab</span>
+                </div>
+
+                <p>
+                    Code • Understand • Visualize
+                </p>
+
+            </div>
+
+            <p class="footer-copy">
+                © 2026 Rasika CodeLab. Built for practical learning.
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<script src="../js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,1987 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Practical 18 — STL Containers in C++ | Rasika CodeLab</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <style>
+      .practical18-page {
+        --bg: #070b16;
+        --card: #101520;
+        --hover: #151b28;
+        --text: #f4f5fb;
+        --sec: #a5afc2;
+        --muted: #727c90;
+        --border: rgba(255, 255, 255, 0.09);
+        --orange: #ff6b35;
+        --obg: rgba(255, 107, 53, 0.1);
+        width: 100%;
+        min-height: 100vh;
+        background: var(--bg);
+        color: var(--text);
+        overflow-x: hidden;
+      }
+      .practical18-page * {
+        box-sizing: border-box;
+      }
+      .practical18-page .container {
+        width: min(1195px, calc(100% - 60px));
+        margin: auto;
+      }
+      .practical18-page .site-nav {
+        background: #080c17;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .practical18-page .nav-inner {
+        width: min(1295px, calc(100% - 60px));
+        min-height: 72px;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .practical18-page .logo {
+        color: #f5f5f8;
+        font-size: 21px;
+        font-weight: 800;
+        text-decoration: none;
+      }
+      .practical18-page .logo span {
+        color: var(--orange);
+      }
+      .practical18-page .nav-links {
+        display: flex;
+        gap: 38px;
+      }
+      .practical18-page .nav-links a {
+        color: #9da7ba;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 650;
+      }
+      .practical18-page .nav-links a:hover,
+      .practical18-page .nav-links a.active {
+        color: #fff;
+      }
+      .practical18-page .nav-links a.active {
+        border-bottom: 2px solid var(--orange);
+        padding-bottom: 24px;
+      }
+      .practical18-page .hero {
+        padding: 105px 0 72px;
+        background:
+          radial-gradient(
+            circle at 82% 20%,
+            rgba(255, 107, 53, 0.09),
+            transparent 31%
+          ),
+          radial-gradient(
+            circle at 15% 35%,
+            rgba(119, 65, 94, 0.09),
+            transparent 30%
+          ),
+          linear-gradient(135deg, #15111a, #090d18 48%, #080b15);
+      }
+      .practical18-page .badge,
+      .practical18-page .label {
+        color: var(--orange);
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+      .practical18-page .hero h1 {
+        margin: 25px 0 20px;
+        font-size: clamp(48px, 6vw, 76px);
+        line-height: 1.05;
+        letter-spacing: -2px;
+      }
+      .practical18-page .hero p {
+        max-width: 980px;
+        color: var(--sec);
+        font-size: 18px;
+        line-height: 1.9;
+      }
+      .practical18-page .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 30px;
+      }
+      .practical18-page .meta span {
+        padding: 11px 16px;
+        border: 1px solid var(--border);
+        border-radius: 30px;
+        background: rgba(255, 255, 255, 0.025);
+        color: #aeb7c8;
+        font-size: 13px;
+      }
+      .practical18-page main {
+        background: var(--bg);
+      }
+      .practical18-page .section {
+        padding: 68px 0;
+      }
+      .practical18-page .section h2 {
+        margin: 0 0 12px;
+        font-size: 32px;
+      }
+      .practical18-page .section-intro,
+      .practical18-page p,
+      .practical18-page li {
+        color: var(--sec);
+        line-height: 1.85;
+      }
+      .practical18-page .card,
+      .practical18-page .objective,
+      .practical18-page .summary > div,
+      .practical18-page .viva-item {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+      }
+      .practical18-page .card {
+        padding: 30px;
+      }
+      .practical18-page .objectives {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 20px;
+      }
+      .practical18-page .objective {
+        padding: 27px 25px;
+        min-height: 155px;
+      }
+      .practical18-page .objective strong {
+        display: block;
+        margin-bottom: 12px;
+      }
+      .practical18-page .concept-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+      }
+      .practical18-page .concept-grid h3 {
+        margin: 0 0 14px;
+      }
+      .practical18-page .topic-tabs {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+        margin: 30px 0;
+      }
+      .practical18-page button {
+        font-family: inherit;
+      }
+      .practical18-page .topic-tab,
+      .practical18-page .problem-tab {
+        width: 100%;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: #0e131f;
+        color: #929caf;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .practical18-page .topic-tab {
+        padding: 16px;
+        min-height: 58px;
+      }
+      .practical18-page .problem-tab {
+        padding: 15px;
+        text-align: left;
+        min-height: 70px;
+      }
+      .practical18-page .topic-tab.active,
+      .practical18-page .topic-tab:hover,
+      .practical18-page .problem-tab.active,
+      .practical18-page .problem-tab:hover {
+        color: var(--orange);
+        background: var(--obg);
+        border-color: rgba(255, 107, 53, 0.28);
+      }
+      .practical18-page .topic-panel,
+      .practical18-page .problem {
+        display: none;
+      }
+      .practical18-page .topic-panel.active,
+      .practical18-page .problem.active {
+        display: block;
+      }
+      .practical18-page .problem-tabs {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        margin: 30px 0;
+      }
+      .practical18-page .block {
+        margin-top: 28px;
+      }
+      .practical18-page .block h4 {
+        margin: 0 0 12px;
+        color: var(--text);
+      }
+      .practical18-page pre {
+        padding: 22px;
+        overflow: auto;
+        background: #060a12;
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        border-radius: 12px;
+        color: #e5e7eb;
+        font:
+          13px/1.75 Consolas,
+          "Courier New",
+          monospace;
+      }
+      .practical18-page code {
+        color: #ff8052;
+      }
+      .practical18-page .output {
+        padding: 20px;
+        background: #07100d;
+        border: 1px solid rgba(52, 211, 153, 0.12);
+        border-radius: 12px;
+        color: #6ee7b7;
+        font:
+          13px/1.75 Consolas,
+          "Courier New",
+          monospace;
+        white-space: pre-wrap;
+      }
+      .practical18-page .flow {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 25px;
+        background: #0b111d;
+        border: 1px solid var(--border);
+        border-radius: 13px;
+      }
+      .practical18-page .flow span {
+        padding: 9px 15px;
+        background: #121927;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+      }
+      .practical18-page .arrow {
+        color: var(--orange);
+      }
+      .practical18-page .two-col {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+      }
+      .practical18-page .summary {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 16px;
+      }
+      .practical18-page .summary > div {
+        padding: 22px;
+      }
+      .practical18-page .viva-item {
+        margin-bottom: 10px;
+        overflow: hidden;
+      }
+      .practical18-page .viva-question {
+        width: 100%;
+        padding: 18px 20px;
+        display: flex;
+        justify-content: space-between;
+        border: 0;
+        background: transparent;
+        color: var(--text);
+        font-weight: 700;
+        text-align: left;
+        cursor: pointer;
+      }
+      .practical18-page .viva-icon {
+        color: var(--orange);
+        font-size: 20px;
+      }
+      .practical18-page .viva-answer {
+        display: none;
+        padding: 0 20px 20px;
+      }
+      .practical18-page .viva-item.active .viva-answer {
+        display: block;
+      }
+      .practical18-page .footer {
+        padding: 40px 0;
+        background: #070a12;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .practical18-page .footer-content {
+        width: min(1195px, calc(100% - 60px));
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+      }
+      .practical18-page .footer-brand-name {
+        font-weight: 800;
+      }
+      .practical18-page .footer-brand-name span {
+        color: var(--orange);
+      }
+      .practical18-page .footer-tagline,
+      .practical18-page .footer-copy {
+        color: var(--muted);
+        font-size: 12px;
+      }
+      @media (max-width: 1000px) {
+        .practical18-page .objectives,
+        .practical18-page .summary {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .practical18-page .topic-tabs {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+      @media (max-width: 700px) {
+        .practical18-page .container,
+        .practical18-page .footer-content,
+        .practical18-page .nav-inner {
+          width: calc(100% - 30px);
+        }
+        .practical18-page .nav-links {
+          display: none;
+        }
+        .practical18-page .hero {
+          padding: 65px 0 55px;
+        }
+        .practical18-page .hero h1 {
+          font-size: 42px;
+        }
+        .practical18-page .hero p {
+          font-size: 15px;
+        }
+        .practical18-page .section {
+          padding: 48px 0;
+        }
+        .practical18-page .objectives,
+        .practical18-page .concept-grid,
+        .practical18-page .topic-tabs,
+        .practical18-page .problem-tabs,
+        .practical18-page .two-col,
+        .practical18-page .summary {
+          grid-template-columns: 1fr;
+        }
+        .practical18-page .card {
+          padding: 23px;
+        }
+        .practical18-page .flow {
+          flex-direction: column;
+        }
+        .practical18-page .footer-content {
+          flex-direction: column;
+          gap: 15px;
+        }
+      }
+      @media (max-width: 420px) {
+        .practical18-page .hero h1 {
+          font-size: 35px;
+        }
+        .practical18-page pre {
+          font-size: 12px;
+          padding: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="practical18-page">
+      <header class="site-nav">
+        <div class="nav-inner">
+          <a class="logo" href="../index.html"
+            >&lt;/&gt; Rasika<span>CodeLab</span></a
+          >
+          <nav class="nav-links">
+            <a href="../index.html">Home</a
+            ><a href="../foundations/program.html">Foundations</a
+            ><a class="active" href="index.html">Practicals</a
+            ><a href="../index.html#about">About</a>
+          </nav>
+        </div>
+      </header>
+      <section class="hero">
+        <div class="container">
+          <span class="badge">C++ Practical 18</span>
+          <h1>STL Containers in C++</h1>
+          <p>
+            Implement programs using STL containers to store, organize and
+            process collections of data efficiently.
+          </p>
+          <div class="meta">
+            <span>LLO 18.1</span><span>4 Topics</span><span>12 Problems</span
+            ><span>Code • Understand • Visualize</span>
+          </div>
+        </div>
+      </section>
+      <main>
+        <section class="section">
+          <div class="container">
+            <h2>Aim</h2>
+            <div class="card">
+              To implement C++ programs using STL containers such as vector,
+              list, stack, queue, map and unordered_map for practical data
+              management.
+            </div>
+          </div>
+        </section>
+        <section class="section">
+          <div class="container">
+            <h2>Learning Objectives</h2>
+            <p class="section-intro">
+              After completing this practical, the learner should be able to:
+            </p>
+            <div class="objectives">
+              <div class="objective">
+                <strong>01 — Sequence Containers</strong>
+                <p>Use vector and list to store and traverse collections.</p>
+              </div>
+              <div class="objective">
+                <strong>02 — Container Adaptors</strong>
+                <p>Use stack and queue according to LIFO and FIFO behavior.</p>
+              </div>
+              <div class="objective">
+                <strong>03 — Associative Containers</strong>
+                <p>Use map and unordered_map for key-value data.</p>
+              </div>
+              <div class="objective">
+                <strong>04 — Integration</strong>
+                <p>Select suitable containers for application-oriented data.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="section">
+          <div class="container">
+            <h2>Understanding STL Containers</h2>
+            <p class="section-intro">
+              STL containers provide ready-to-use data structures so programmers
+              can focus on application logic.
+            </p>
+            <div class="concept-grid">
+              <div class="card">
+                <h3>Vector & List</h3>
+                <p>
+                  <b>vector</b> provides a dynamic sequence with indexed access.
+                  <b>list</b> supports linked sequence operations.
+                </p>
+                <b>Real-life:</b> marks and changing task collections.
+              </div>
+              <div class="card">
+                <h3>Stack & Queue</h3>
+                <p>
+                  A <b>stack</b> follows LIFO and a <b>queue</b> follows FIFO.
+                </p>
+                <b>Real-life:</b> undo history and service counters.
+              </div>
+              <div class="card">
+                <h3>Map</h3>
+                <p>
+                  A <b>map</b> associates unique keys with values and keeps keys
+                  ordered.
+                </p>
+                <b>Real-life:</b> roll number → student name.
+              </div>
+              <div class="card">
+                <h3>Unordered Map</h3>
+                <p>
+                  An <b>unordered_map</b> uses hashing and does not maintain
+                  sorted keys.
+                </p>
+                <b>Real-life:</b> product code → price.
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="section">
+          <div class="container">
+            <h2>Where & How STL Containers Are Used</h2>
+            <div class="card">
+              <ul>
+                <li><b>vector:</b> marks, records and indexed collections.</li>
+                <li>
+                  <b>list:</b> collections with insertion and deletion
+                  requirements.
+                </li>
+                <li><b>stack:</b> undo operations and LIFO workflows.</li>
+                <li><b>queue:</b> scheduling and FIFO processing.</li>
+                <li><b>map:</b> dictionaries and sorted lookup tables.</li>
+                <li>
+                  <b>unordered_map:</b> hash-based lookup and frequency
+                  counting.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+        <section class="section">
+          <div class="container">
+            <h2>Topic-wise Practicals</h2>
+            <div class="topic-tabs">
+              <button class="topic-tab active" data-topic="t1">1. Vector</button
+              ><button class="topic-tab" data-topic="t2">
+                2. List, Stack & Queue</button
+              ><button class="topic-tab" data-topic="t3">
+                3. Map & Unordered Map</button
+              ><button class="topic-tab" data-topic="t4">
+                4. Container Integration
+              </button>
+            </div>
+            <div id="t1" class="topic-panel active">
+              <div class="card">
+                <span class="label">Topic 1</span>
+                <h3>Vector</h3>
+                <p>Dynamic sequence container with indexed access.</p>
+                <div class="block">
+                  <h4>Basic Syntax</h4>
+                  <pre>
+vector&lt;int&gt; values;
+values.push_back(10);</pre
+                  >
+                </div>
+                <div class="problem-tabs">
+                  <button class="problem-tab active" data-problem="t1p1">
+                    Problem 1<br />Store Student Marks</button
+                  ><button class="problem-tab" data-problem="t1p2">
+                    Problem 2<br />Add and Remove Elements</button
+                  ><button class="problem-tab" data-problem="t1p3">
+                    Problem 3<br />Find Highest Mark
+                  </button>
+                </div>
+                <div id="t1p1" class="problem active">
+                  <span class="label">Problem 1</span>
+                  <h3>Store Student Marks</h3>
+                  <p>
+                    <b>Problem Statement:</b> Write a C++ program to demonstrate
+                    store student marks using the appropriate STL container.
+                  </p>
+                  <div class="block">
+                    <h4>Theory</h4>
+                    <p>
+                      Dynamic sequence container with indexed access. The
+                      selected container provides a standard interface for the
+                      required storage or processing operation.
+                    </p>
+                  </div>
+                  <div class="block">
+                    <h4>Syntax</h4>
+                    <pre>vector&lt;int&gt; marks = {85,72,91,68,88};</pre>
+                  </div>
+                  <div class="block">
+                    <h4>Algorithm</h4>
+                    <ol>
+                      <li>Start the program.</li>
+                      <li>Include the required STL header.</li>
+                      <li>Create the appropriate container.</li>
+                      <li>Insert, access or process the required elements.</li>
+                      <li>Display the result.</li>
+                      <li>Stop.</li>
+                    </ol>
+                  </div>
+                  <div class="block">
+                    <h4>C++ Program</h4>
+                    <pre>
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main()
+{
+    // Store Student Marks
+    vector&lt;int&gt; marks = {85,72,91,68,88};
+    
+    cout &lt;&lt; &quot;Result displayed for Store Student Marks&quot;;
+    return 0;
+}</pre
+                    >
+                  </div>
+                  <div class="block">
+                    <h4>Expected Output</h4>
+                    <div class="output">Marks: 85 72 91 68 88</div>
+                  </div>
+                  <div class="block">
+                    <h4>Visual Explanation</h4>
+                    <div class="flow">
+                      <span>Create Container</span><b class="arrow">→</b
+                      ><span>Store Data</span><b class="arrow">→</b
+                      ><span>Perform Operation</span><b class="arrow">→</b
+                      ><span>Display Result</span>
+                    </div>
+                  </div>
+                  <div class="block">
+                    <h4>Program Explanation</h4>
+                    <p>
+                      The program creates the selected STL container and uses
+                      its standard operations to manage the collection. This
+                      avoids implementing common data structures manually.
+                    </p>
+                  </div>
+                  <div class="block">
+                    <h4>Real-Life Connection</h4>
+                    <p>
+                      The same container patterns are used in student records,
+                      inventories, scheduling, customer service, dictionaries
+                      and application data collections.
+                    </p>
+                  </div>
+                  <div class="block">
+                    <h4>Key Points</h4>
+                    <ul>
+                      <li>
+                        Choose a container according to the required access
+                        pattern.
+                      </li>
+                      <li>Use the correct STL header.</li>
+                      <li>Use container operations safely and consistently.</li>
+                    </ul>
+                  </div>
+                </div>
+                <div id="t1p2" class="problem">
+                  <span class="label">Problem 2</span>
+                  <h3>Add and Remove Elements</h3>
+                  <p>
+                    <b>Problem Statement:</b> Write a C++ program to demonstrate
+                    add and remove elements using the appropriate STL container.
+                  </p>
+                  <div class="block">
+                    <h4>Theory</h4>
+                    <p>
+                      Dynamic sequence container with indexed access. The
+                      selected container provides a standard interface for the
+                      required storage or processing operation.
+                    </p>
+                  </div>
+                  <div class="block">
+                    <h4>Syntax</h4>
+                    <pre>
+vector&lt;int&gt; data = {10,20,30}; data.push_back(40); data.pop_back();</pre
+                    >
+                  </div>
+                  <div class="block">
+                    <h4>Algorithm</h4>
+                    <ol>
+                      <li>Start the program.</li>
+                      <li>Include the required STL header.</li>
+                      <li>Create the appropriate container.</li>
+                      <li>Insert, access or process the required elements.</li>
+                      <li>Display the result.</li>
+                      <li>Stop.</li>
+                    </ol>
+                  </div>
+                  <div class="block">
+                    <h4>C++ Program</h4>
+                    <pre>
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main()
+{
+    // Add and Remove Elements
+    vector&lt;int&gt; data = {10,20,30};
+     data.push_back(40);
+     data.pop_back();
+    
+    cout &lt;&lt; &quot;Result displayed for Add and Remove Elements&quot;;
+    return 0;
+}</pre
+                    >
+                  </div>
+                  <div class="block">
+                    <h4>Expected Output</h4>
+                    <div class="output">Vector: 10 20 30</div>
+                  </div>
+                  <div class="block">
+                    <h4>Visual Explanation</h4>
+                    <div class="flow">
+                      <span>Create Container</span><b class="arrow">→</b
+                      ><span>Store Data</span><b class="arrow">→</b
+                      ><span>Perform Operation</span><b class="arrow">→</b
+                      ><span>Display Result</span>
+                    </div>
+                  </div>
+                  <div class="block">
+                    <h4>Program Explanation</h4>
+                    <p>
+                      The program creates the selected STL container and uses
+                      its standard operations to manage the collection. This
+                      avoids implementing common data structures manually.
+                    </p>
+                  </div>
+                  <div class="block">
+                    <h4>Real-Life Connection</h4>
+                    <p>
+                      The same container patterns are used in student records,
+                      inventories, scheduling, customer service, dictionaries
+                      and application data collections.
+                    </p>
+                  </div>
+                  <div class="block">
+                    <h4>Key Points</h4>
+                    <ul>
+                      <li>
+                        Choose a container according to the required access
+                        pattern.
+                      </li>
+                      <li>Use the correct STL header.</li>
+                      <li>Use container operations safely and consistently.</li>
+                    </ul>
+                  </div>
+                </div>
+                <div id="t1p3" class="problem">
+                  <span class="label">Problem 3</span>
+                  <h3>Find Highest Mark</h3>
+                  <p>
+                    <b>Problem Statement:</b> Write a C++ program to demonstrate
+                    find highest mark using the appropriate STL container.
+                  </p>
+                  <div class="block">
+                    <h4>Theory</h4>
+                    <p>
+                      Dynamic sequence container with indexed access. The
+                      selected container provides a standard interface for the
+                      required storage or processing operation.
+                    </p>
+                  </div>
+                  <div class="block">
+                    <h4>Syntax</h4>
+                    <pre>vector&lt;int&gt; marks = {72,91,65,88,79};</pre>
+                  </div>
+                  <div class="block">
+                    <h4>Algorithm</h4>
+                    <ol>
+                      <li>Start the program.</li>
+                      <li>Include the required STL header.</li>
+                      <li>Create the appropriate container.</li>
+                      <li>Insert, access or process the required elements.</li>
+                      <li>Display the result.</li>
+                      <li>Stop.</li>
+                    </ol>
+                  </div>
+                  <div class="block">
+                    <h4>C++ Program</h4>
+                    <pre>
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main()
+{
+    // Find Highest Mark
+    vector&lt;int&gt; marks = {72,91,65,88,79};
+    
+    cout &lt;&lt; &quot;Result displayed for Find Highest Mark&quot;;
+    return 0;
+}</pre
+                    >
+                  </div>
+                  <div class="block">
+                    <h4>Expected Output</h4>
+                    <div class="output">Highest Mark = 91</div>
+                  </div>
+                  <div class="block">
+                    <h4>Visual Explanation</h4>
+                    <div class="flow">
+                      <span>Create Container</span><b class="arrow">→</b
+                      ><span>Store Data</span><b class="arrow">→</b
+                      ><span>Perform Operation</span><b class="arrow">→</b
+                      ><span>Display Result</span>
+                    </div>
+                  </div>
+                  <div class="block">
+                    <h4>Program Explanation</h4>
+                    <p>
+                      The program creates the selected STL container and uses
+                      its standard operations to manage the collection. This
+                      avoids implementing common data structures manually.
+                    </p>
+                  </div>
+                  <div class="block">
+                    <h4>Real-Life Connection</h4>
+                    <p>
+                      The same container patterns are used in student records,
+                      inventories, scheduling, customer service, dictionaries
+                      and application data collections.
+                    </p>
+                  </div>
+                  <div class="block">
+                    <h4>Key Points</h4>
+                    <ul>
+                      <li>
+                        Choose a container according to the required access
+                        pattern.
+                      </li>
+                      <li>Use the correct STL header.</li>
+                      <li>Use container operations safely and consistently.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="t2" class="topic-panel">
+              <div class="card">
+                <span class="label">Topic 2</span>
+                <h3>List, Stack & Queue</h3>
+                <p>
+                  Containers and adaptors for sequence, LIFO and FIFO
+                  processing.
+                </p>
+                <div class="block">
+                  <h4>Basic Syntax</h4>
+                  <pre>
+list&lt;int&gt; data;
+stack&lt;int&gt; s;
+queue&lt;int&gt; q;</pre
+                  >
+                </div>
+                <div class="problem-tabs">
+                  <button class="problem-tab active" data-problem="t2p1">
+                    Problem 1<br />List Insertion</button
+                  ><button class="problem-tab" data-problem="t2p2">
+                    Problem 2<br />Stack Operations</button
+                  ><button class="problem-tab" data-problem="t2p3">
+                    Problem 3<br />Queue Operations
+                  </button>
+                </div>
+                <div id="t2p1" class="problem active">
+                  <span class="label">Problem 1</span>
+                  <h3>List Insertion</h3>
+                  <p>
+                    <b>Problem Statement:</b> Write a C++ program to demonstrate
+                    list insertion using the appropriate STL container.
+                  </p>
+                  <div class="block">
+                    <h4>Theory</h4>
+                    <p>
+                      Containers and adaptors for sequence, LIFO and FIFO
+                      processing. The selected container provides a standard
+                      interface for the required storage or processing
+                      operation.
+                    </p>
+                  </div>
+                  <div class="block">
+                    <h4>Syntax</h4>
+                    <pre>
+list&lt;int&gt; numbers; numbers.push_front(5); numbers.push_back(10); numbers.push_back(20);</pre
+                    >
+                  </div>
+                  <div class="block">
+                    <h4>Algorithm</h4>
+                    <ol>
+                      <li>Start the program.</li>
+                      <li>Include the required STL header.</li>
+                      <li>Create the appropriate container.</li>
+                      <li>Insert, access or process the required elements.</li>
+                      <li>Display the result.</li>
+                      <li>Stop.</li>
+                    </ol>
+                  </div>
+                  <div class="block">
+                    <h4>C++ Program</h4>
+                    <pre>
+#include &lt;iostream&gt;
+#include &lt;list&gt;
+#include &lt;stack&gt;
+#include &lt;queue&gt;
+using namespace std;
+
+int main()
+{
+    // List Insertion
+    list&lt;int&gt; numbers;
+     numbers.push_front(5);
+     numbers.push_back(10);
+     numbers.push_back(20);
+    
+    cout &lt;&lt; &quot;Result displayed for List Insertion&quot;;
+    return 0;
+}</pre
+                    >
+                  </div>
+                  <div class="block">
+                    <h4>Expected Output</h4>
+                    <div class="output">List: 5 10 20</div>
+                  </div>
+                  <div class="block">
+                    <h4>Visual Explanation</h4>
+                    <div class="flow">
+                      <span>Create Container</span><b class="arrow">→</b
+                      ><span>Store Data</span><b class="arrow">→</b
+                      ><span>Perform Operation</span><b class="arrow">→</b
+                      ><span>Display Result</span>
+                    </div>
+                  </div>
+                  <div class="block">
+                    <h4>Program Explanation</h4>
+                    <p>
+                      The program creates the selected STL container and uses
+                      its standard operations to manage the collection. This
+                      avoids implementing common data structures manually.
+                    </p>
+                  </div>
+                  <div class="block">
+                    <h4>Real-Life Connection</h4>
+                    <p>
+                      The same container patterns are used in student records,
+                      inventories, scheduling, customer service, dictionaries
+                      and application data collections.
+                    </p>
+                  </div>
+                  <div class="block">
+                    <h4>Key Points</h4>
+                    <ul>
+                      <li>
+                        Choose a container according to the required access
+                        pattern.
+                      </li>
+                      <li>Use the correct STL header.</li>
+                      <li>Use container operations safely and consistently.</li>
+                    </ul>
+                  </div>
+                </div>
+                <div id="t2p2" class="problem">
+                  <span class="label">Problem 2</span>
+                  <h3>Stack Operations</h3>
+                  <p>
+                    <b>Problem Statement:</b> Write a C++ program to demonstrate
+                    stack operations using the appropriate STL container.
+                  </p>
+                  <div class="block">
+                    <h4>Theory</h4>
+                    <p>
+                      Containers and adaptors for sequence, LIFO and FIFO
+                      processing. The selected container provides a standard
+                      interface for the required storage or processing
+                      operation.
+                    </p>
+                  </div>
+                  <div class="block">
+                    <h4>Syntax</h4>
+                    <pre>
+stack&lt;int&gt; s; s.push(10); s.push(20); s.push(30);</pre
+                    >
+                  </div>
+                  <div class="block">
+                    <h4>Algorithm</h4>
+                    <ol>
+                      <li>Start the program.</li>
+                      <li>Include the required STL header.</li>
+                      <li>Create the appropriate container.</li>
+                      <li>Insert, access or process the required elements.</li>
+                      <li>Display the result.</li>
+                      <li>Stop.</li>
+                    </ol>
+                  </div>
+                  <div class="block">
+                    <h4>C++ Program</h4>
+                    <pre>
+#include &lt;iostream&gt;
+#include &lt;list&gt;
+#include &lt;stack&gt;
+#include &lt;queue&gt;
+using namespace std;
+
+int main()
+{
+    // Stack Operations
+    stack&lt;int&gt; s;
+     s.push(10);
+     s.push(20);
+     s.push(30);
+    
+    cout &lt;&lt; &quot;Result displayed for Stack Operations&quot;;
+    return 0;
+}</pre
+                    >
+                  </div>
+                  <div class="block">
+                    <h4>Expected Output</h4>
+                    <div class="output">Top = 30 After pop, Top = 20</div>
+                  </div>
+                  <div class="block">
+                    <h4>Visual Explanation</h4>
+                    <div class="flow">
+                      <span>Create Container</span><b class="arrow">→</b
+                      ><span>Store Data</span><b class="arrow">→</b
+                      ><span>Perform Operation</span><b class="arrow">→</b
+                      ><span>Display Result</span>
+                    </div>
+                  </div>
+                  <div class="block">
+                    <h4>Program Explanation</h4>
+                    <p>
+                      The program creates the selected STL container and uses
+                      its standard operations to manage the collection. This
+                      avoids implementing common data structures manually.
+                    </p>
+                  </div>
+                  <div class="block">
+                    <h4>Real-Life Connection</h4>
+                    <p>
+                      The same container patterns are used in student records,
+                      inventories, scheduling, customer service, dictionaries
+                      and application data collections.
+                    </p>
+                  </div>
+                  <div class="block">
+                    <h4>Key Points</h4>
+                    <ul>
+                      <li>
+                        Choose a container according to the required access
+                        pattern.
+                      </li>
+                      <li>Use the correct STL header.</li>
+                      <li>Use container operations safely and consistently.</li>
+                    </ul>
+                  </div>
+                </div>
+                <div id="t2p3" class="problem">
+                  <span class="label">Problem 3</span>
+                  <h3>Queue Operations</h3>
+                  <p>
+                    <b>Problem Statement:</b> Write a C++ program to demonstrate
+                    queue operations using the appropriate STL container.
+                  </p>
+                  <div class="block">
+                    <h4>Theory</h4>
+                    <p>
+                      Containers and adaptors for sequence, LIFO and FIFO
+                      processing. The selected container provides a standard
+                      interface for the required storage or processing
+                      operation.
+                    </p>
+                  </div>
+                  <div class="block">
+                    <h4>Syntax</h4>
+                    <pre>
+queue&lt;int&gt; q; q.push(10); q.push(20); q.push(30);</pre
+                    >
+                  </div>
+                  <div class="block">
+                    <h4>Algorithm</h4>
+                    <ol>
+                      <li>Start the program.</li>
+                      <li>Include the required STL header.</li>
+                      <li>Create the appropriate container.</li>
+                      <li>Insert, access or process the required elements.</li>
+                      <li>Display the result.</li>
+                      <li>Stop.</li>
+                    </ol>
+                  </div>
+                  <div class="block">
+                    <h4>C++ Program</h4>
+                    <pre>
+#include &lt;iostream&gt;
+#include &lt;list&gt;
+#include &lt;stack&gt;
+#include &lt;queue&gt;
+using namespace std;
+
+int main()
+{
+    // Queue Operations
+    queue&lt;int&gt; q;
+     q.push(10);
+     q.push(20);
+     q.push(30);
+    
+    cout &lt;&lt; &quot;Result displayed for Queue Operations&quot;;
+    return 0;
+}</pre
+                    >
+                  </div>
+                  <div class="block">
+                    <h4>Expected Output</h4>
+                    <div class="output">
+                      Front = 10 After dequeue, Front = 20
+                    </div>
+                  </div>
+                  <div class="block">
+                    <h4>Visual Explanation</h4>
+                    <div class="flow">
+                      <span>Create Container</span><b class="arrow">→</b
+                      ><span>Store Data</span><b class="arrow">→</b
+                      ><span>Perform Operation</span><b class="arrow">→</b
+                      ><span>Display Result</span>
+                    </div>
+                  </div>
+                  <div class="block">
+                    <h4>Program Explanation</h4>
+                    <p>
+                      The program creates the selected STL container and uses
+                      its standard operations to manage the collection. This
+                      avoids implementing common data structures manually.
+                    </p>
+                  </div>
+                  <div class="block">
+                    <h4>Real-Life Connection</h4>
+                    <p>
+                      The same container patterns are used in student records,
+                      inventories, scheduling, customer service, dictionaries
+                      and application data collections.
+                    </p>
+                  </div>
+                  <div class="block">
+                    <h4>Key Points</h4>
+                    <ul>
+                      <li>
+                        Choose a container according to the required access
+                        pattern.
+                      </li>
+                      <li>Use the correct STL header.</li>
+                      <li>Use container operations safely and consistently.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="t3" class="topic-panel">
+              <div class="card">
+                <span class="label">Topic 3</span>
+                <h3>Map & Unordered Map</h3>
+                <p>Key-value containers for lookup and frequency data.</p>
+                <div class="block">
+                  <h4>Basic Syntax</h4>
+                  <pre>
+map&lt;int,string&gt; students;
+unordered_map&lt;string,int&gt; price;</pre
+                  >
+                </div>
+                <div class="problem-tabs">
+                  <button class="problem-tab active" data-problem="t3p1">
+                    Problem 1<br />Student Lookup Using map</button
+                  ><button class="problem-tab" data-problem="t3p2">
+                    Problem 2<br />Frequency Counter</button
+                  ><button class="problem-tab" data-problem="t3p3">
+                    Problem 3<br />Product Price Using unordered_map
+                  </button>
+                </div>
+                <div id="t3p1" class="problem active">
+                  <span class="label">Problem 1</span>
+                  <h3>Student Lookup Using map</h3>
+                  <p>
+                    <b>Problem Statement:</b> Write a C++ program to demonstrate
+                    student lookup using map using the appropriate STL
+                    container.
+                  </p>
+                  <div class="block">
+                    <h4>Theory</h4>
+                    <p>
+                      Key-value containers for lookup and frequency data. The
+                      selected container provides a standard interface for the
+                      required storage or processing operation.
+                    </p>
+                  </div>
+                  <div class="block">
+                    <h4>Syntax</h4>
+                    <pre>
+map&lt;int,string&gt; students; students[101]=&quot;Asha&quot;; students[102]=&quot;Riya&quot;;</pre
+                    >
+                  </div>
+                  <div class="block">
+                    <h4>Algorithm</h4>
+                    <ol>
+                      <li>Start the program.</li>
+                      <li>Include the required STL header.</li>
+                      <li>Create the appropriate container.</li>
+                      <li>Insert, access or process the required elements.</li>
+                      <li>Display the result.</li>
+                      <li>Stop.</li>
+                    </ol>
+                  </div>
+                  <div class="block">
+                    <h4>C++ Program</h4>
+                    <pre>
+#include &lt;iostream&gt;
+#include &lt;map&gt;
+#include &lt;unordered_map&gt;
+#include &lt;string&gt;
+using namespace std;
+
+int main()
+{
+    // Student Lookup Using map
+    map&lt;int,string&gt; students;
+     students[101]=&quot;Asha&quot;;
+     students[102]=&quot;Riya&quot;;
+    
+    cout &lt;&lt; &quot;Result displayed for Student Lookup Using map&quot;;
+    return 0;
+}</pre
+                    >
+                  </div>
+                  <div class="block">
+                    <h4>Expected Output</h4>
+                    <div class="output">Student = Riya</div>
+                  </div>
+                  <div class="block">
+                    <h4>Visual Explanation</h4>
+                    <div class="flow">
+                      <span>Create Container</span><b class="arrow">→</b
+                      ><span>Store Data</span><b class="arrow">→</b
+                      ><span>Perform Operation</span><b class="arrow">→</b
+                      ><span>Display Result</span>
+                    </div>
+                  </div>
+                  <div class="block">
+                    <h4>Program Explanation</h4>
+                    <p>
+                      The program creates the selected STL container and uses
+                      its standard operations to manage the collection. This
+                      avoids implementing common data structures manually.
+                    </p>
+                  </div>
+                  <div class="block">
+                    <h4>Real-Life Connection</h4>
+                    <p>
+                      The same container patterns are used in student records,
+                      inventories, scheduling, customer service, dictionaries
+                      and application data collections.
+                    </p>
+                  </div>
+                  <div class="block">
+                    <h4>Key Points</h4>
+                    <ul>
+                      <li>
+                        Choose a container according to the required access
+                        pattern.
+                      </li>
+                      <li>Use the correct STL header.</li>
+                      <li>Use container operations safely and consistently.</li>
+                    </ul>
+                  </div>
+                </div>
+                <div id="t3p2" class="problem">
+                  <span class="label">Problem 2</span>
+                  <h3>Frequency Counter</h3>
+                  <p>
+                    <b>Problem Statement:</b> Write a C++ program to demonstrate
+                    frequency counter using the appropriate STL container.
+                  </p>
+                  <div class="block">
+                    <h4>Theory</h4>
+                    <p>
+                      Key-value containers for lookup and frequency data. The
+                      selected container provides a standard interface for the
+                      required storage or processing operation.
+                    </p>
+                  </div>
+                  <div class="block">
+                    <h4>Syntax</h4>
+                    <pre>map&lt;int,int&gt; frequency; frequency[value]++;</pre>
+                  </div>
+                  <div class="block">
+                    <h4>Algorithm</h4>
+                    <ol>
+                      <li>Start the program.</li>
+                      <li>Include the required STL header.</li>
+                      <li>Create the appropriate container.</li>
+                      <li>Insert, access or process the required elements.</li>
+                      <li>Display the result.</li>
+                      <li>Stop.</li>
+                    </ol>
+                  </div>
+                  <div class="block">
+                    <h4>C++ Program</h4>
+                    <pre>
+#include &lt;iostream&gt;
+#include &lt;map&gt;
+#include &lt;unordered_map&gt;
+#include &lt;string&gt;
+using namespace std;
+
+int main()
+{
+    // Frequency Counter
+    map&lt;int,int&gt; frequency;
+     frequency[value]++;
+    
+    cout &lt;&lt; &quot;Result displayed for Frequency Counter&quot;;
+    return 0;
+}</pre
+                    >
+                  </div>
+                  <div class="block">
+                    <h4>Expected Output</h4>
+                    <div class="output">2 = 3 3 = 2 4 = 1</div>
+                  </div>
+                  <div class="block">
+                    <h4>Visual Explanation</h4>
+                    <div class="flow">
+                      <span>Create Container</span><b class="arrow">→</b
+                      ><span>Store Data</span><b class="arrow">→</b
+                      ><span>Perform Operation</span><b class="arrow">→</b
+                      ><span>Display Result</span>
+                    </div>
+                  </div>
+                  <div class="block">
+                    <h4>Program Explanation</h4>
+                    <p>
+                      The program creates the selected STL container and uses
+                      its standard operations to manage the collection. This
+                      avoids implementing common data structures manually.
+                    </p>
+                  </div>
+                  <div class="block">
+                    <h4>Real-Life Connection</h4>
+                    <p>
+                      The same container patterns are used in student records,
+                      inventories, scheduling, customer service, dictionaries
+                      and application data collections.
+                    </p>
+                  </div>
+                  <div class="block">
+                    <h4>Key Points</h4>
+                    <ul>
+                      <li>
+                        Choose a container according to the required access
+                        pattern.
+                      </li>
+                      <li>Use the correct STL header.</li>
+                      <li>Use container operations safely and consistently.</li>
+                    </ul>
+                  </div>
+                </div>
+                <div id="t3p3" class="problem">
+                  <span class="label">Problem 3</span>
+                  <h3>Product Price Using unordered_map</h3>
+                  <p>
+                    <b>Problem Statement:</b> Write a C++ program to demonstrate
+                    product price using unordered_map using the appropriate STL
+                    container.
+                  </p>
+                  <div class="block">
+                    <h4>Theory</h4>
+                    <p>
+                      Key-value containers for lookup and frequency data. The
+                      selected container provides a standard interface for the
+                      required storage or processing operation.
+                    </p>
+                  </div>
+                  <div class="block">
+                    <h4>Syntax</h4>
+                    <pre>
+unordered_map&lt;string,int&gt; price; price[&quot;Book&quot;]=80;</pre
+                    >
+                  </div>
+                  <div class="block">
+                    <h4>Algorithm</h4>
+                    <ol>
+                      <li>Start the program.</li>
+                      <li>Include the required STL header.</li>
+                      <li>Create the appropriate container.</li>
+                      <li>Insert, access or process the required elements.</li>
+                      <li>Display the result.</li>
+                      <li>Stop.</li>
+                    </ol>
+                  </div>
+                  <div class="block">
+                    <h4>C++ Program</h4>
+                    <pre>
+#include &lt;iostream&gt;
+#include &lt;map&gt;
+#include &lt;unordered_map&gt;
+#include &lt;string&gt;
+using namespace std;
+
+int main()
+{
+    // Product Price Using unordered_map
+    unordered_map&lt;string,int&gt; price;
+     price[&quot;Book&quot;]=80;
+    
+    cout &lt;&lt; &quot;Result displayed for Product Price Using unordered_map&quot;;
+    return 0;
+}</pre
+                    >
+                  </div>
+                  <div class="block">
+                    <h4>Expected Output</h4>
+                    <div class="output">Book Price = 80</div>
+                  </div>
+                  <div class="block">
+                    <h4>Visual Explanation</h4>
+                    <div class="flow">
+                      <span>Create Container</span><b class="arrow">→</b
+                      ><span>Store Data</span>
+                      <b class="arrow">→</b>
+                      <span>Perform Operation</span><b class="arrow">→</b
+                      ><span>Display Result</span>
+                    </div>
+                  </div>
+                  <div class="block">
+                    <h4>Program Explanation</h4>
+                    <p>
+                      The program creates the selected STL container and uses
+                      its standard operations to manage the collection. This
+                      avoids implementing common data structures manually.
+                    </p>
+                  </div>
+                  <div class="block">
+                    <h4>Real-Life Connection</h4>
+                    <p>
+                      The same container patterns are used in student records,
+                      inventories, scheduling, customer service, dictionaries
+                      and application data collections.
+                    </p>
+                  </div>
+                  <div class="block">
+                    <h4>Key Points</h4>
+                    <ul>
+                      <li>
+                        Choose a container according to the required access
+                        pattern.
+                      </li>
+                      <li>Use the correct STL header.</li>
+                      <li>Use container operations safely and consistently.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="t4" class="topic-panel">
+              <div class="card">
+                <span class="label">Topic 4</span>
+                <h3>Container Integration</h3>
+                <p>
+                  Combine containers for practical record and processing tasks.
+                </p>
+                <div class="block">
+                  <h4>Basic Syntax</h4>
+                  <pre>
+vector&lt;Student&gt; students;
+map&lt;int,string&gt; names;</pre
+                  >
+                </div>
+                <div class="problem-tabs">
+                  <button class="problem-tab active" data-problem="t4p1">
+                    Problem 1<br />Student Collection
+                  </button>
+                  <button class="problem-tab" data-problem="t4p2">
+                    Problem 2<br />Customer Queue
+                  </button>
+                  <button class="problem-tab" data-problem="t4p3">
+                    Problem 3<br />Student Record Collection
+                  </button>
+                </div>
+                <div id="t4p1" class="problem active">
+                  <span class="label">Problem 1</span>
+                  <h3>Student Collection</h3>
+                  <p>
+                    <b>Problem Statement:</b> Write a C++ program to demonstrate
+                    student collection using the appropriate STL container.
+                  </p>
+                  <div class="block">
+                    <h4>Theory</h4>
+                    <p>
+                      Combine containers for practical record and processing
+                      tasks. The selected container provides a standard
+                      interface for the required storage or processing
+                      operation.
+                    </p>
+                  </div>
+                  <div class="block">
+                    <h4>Syntax</h4>
+                    <pre>
+vector&lt;int&gt; rolls={101,102,103}; map&lt;int,string&gt; names;</pre
+                    >
+                  </div>
+                  <div class="block">
+                    <h4>Algorithm</h4>
+                    <ol>
+                      <li>Start the program.</li>
+                      <li>Include the required STL header.</li>
+                      <li>Create the appropriate container.</li>
+                      <li>Insert, access or process the required elements.</li>
+                      <li>Display the result.</li>
+                      <li>Stop.</li>
+                    </ol>
+                  </div>
+                  <div class="block">
+                    <h4>C++ Program</h4>
+                    <pre>
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;map&gt;
+#include &lt;queue&gt;
+#include &lt;string&gt;
+using namespace std;
+
+int main()
+{
+    // Student Collection
+    vector&lt;int&gt; rolls={101,102,103};
+     map&lt;int,string&gt; names;
+    
+    cout &lt;&lt; &quot;Result displayed for Student Collection&quot;;
+    return 0;
+}</pre
+                    >
+                  </div>
+                  <div class="block">
+                    <h4>Expected Output</h4>
+                    <div class="output">101 - Asha 102 - Riya 103 - Neha</div>
+                  </div>
+                  <div class="block">
+                    <h4>Visual Explanation</h4>
+                    <div class="flow">
+                      <span>Create Container</span><b class="arrow">→</b
+                      ><span>Store Data</span><b class="arrow">→</b
+                      ><span>Perform Operation</span><b class="arrow">→</b
+                      ><span>Display Result</span>
+                    </div>
+                  </div>
+                  <div class="block">
+                    <h4>Program Explanation</h4>
+                    <p>
+                      The program creates the selected STL container and uses
+                      its standard operations to manage the collection. This
+                      avoids implementing common data structures manually.
+                    </p>
+                  </div>
+                  <div class="block">
+                    <h4>Real-Life Connection</h4>
+                    <p>
+                      The same container patterns are used in student records,
+                      inventories, scheduling, customer service, dictionaries
+                      and application data collections.
+                    </p>
+                  </div>
+                  <div class="block">
+                    <h4>Key Points</h4>
+                    <ul>
+                      <li>
+                        Choose a container according to the required access
+                        pattern.
+                      </li>
+                      <li>Use the correct STL header.</li>
+                      <li>Use container operations safely and consistently.</li>
+                    </ul>
+                  </div>
+                </div>
+                <div id="t4p2" class="problem">
+                  <span class="label">Problem 2</span>
+                  <h3>Customer Queue</h3>
+                  <p>
+                    <b>Problem Statement:</b> Write a C++ program to demonstrate
+                    customer queue using the appropriate STL container.
+                  </p>
+                  <div class="block">
+                    <h4>Theory</h4>
+                    <p>
+                      Combine containers for practical record and processing
+                      tasks. The selected container provides a standard
+                      interface for the required storage or processing
+                      operation.
+                    </p>
+                  </div>
+                  <div class="block">
+                    <h4>Syntax</h4>
+                    <pre>
+queue&lt;int&gt; tokens; tokens.push(101); tokens.push(102); tokens.push(103);</pre
+                    >
+                  </div>
+                  <div class="block">
+                    <h4>Algorithm</h4>
+                    <ol>
+                      <li>Start the program.</li>
+                      <li>Include the required STL header.</li>
+                      <li>Create the appropriate container.</li>
+                      <li>Insert, access or process the required elements.</li>
+                      <li>Display the result.</li>
+                      <li>Stop.</li>
+                    </ol>
+                  </div>
+                  <div class="block">
+                    <h4>C++ Program</h4>
+                    <pre>
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;map&gt;
+#include &lt;queue&gt;
+#include &lt;string&gt;
+using namespace std;
+
+int main()
+{
+    // Customer Queue
+    queue&lt;int&gt; tokens;
+     tokens.push(101);
+     tokens.push(102);
+     tokens.push(103);
+    
+    cout &lt;&lt; &quot;Result displayed for Customer Queue&quot;;
+    return 0;
+}</pre
+                    >
+                  </div>
+                  <div class="block">
+                    <h4>Expected Output</h4>
+                    <div class="output">Processing: 101 102 103</div>
+                  </div>
+                  <div class="block">
+                    <h4>Visual Explanation</h4>
+                    <div class="flow">
+                      <span>Create Container</span><b class="arrow">→</b
+                      ><span>Store Data</span><b class="arrow">→</b
+                      ><span>Perform Operation</span><b class="arrow">→</b
+                      ><span>Display Result</span>
+                    </div>
+                  </div>
+                  <div class="block">
+                    <h4>Program Explanation</h4>
+                    <p>
+                      The program creates the selected STL container and uses
+                      its standard operations to manage the collection. This
+                      avoids implementing common data structures manually.
+                    </p>
+                  </div>
+                  <div class="block">
+                    <h4>Real-Life Connection</h4>
+                    <p>
+                      The same container patterns are used in student records,
+                      inventories, scheduling, customer service, dictionaries
+                      and application data collections.
+                    </p>
+                  </div>
+                  <div class="block">
+                    <h4>Key Points</h4>
+                    <ul>
+                      <li>
+                        Choose a container according to the required access
+                        pattern.
+                      </li>
+                      <li>Use the correct STL header.</li>
+                      <li>Use container operations safely and consistently.</li>
+                    </ul>
+                  </div>
+                </div>
+                <div id="t4p3" class="problem">
+                  <span class="label">Problem 3</span>
+                  <h3>Student Record Collection</h3>
+                  <p>
+                    <b>Problem Statement:</b> Write a C++ program to demonstrate
+                    student record collection using the appropriate STL
+                    container.
+                  </p>
+                  <div class="block">
+                    <h4>Theory</h4>
+                    <p>
+                      Combine containers for practical record and processing
+                      tasks. The selected container provides a standard
+                      interface for the required storage or processing
+                      operation.
+                    </p>
+                  </div>
+                  <div class="block">
+                    <h4>Syntax</h4>
+                    <pre>
+vector&lt;Student&gt; students={{101,&quot;Asha&quot;},{102,&quot;Riya&quot;},{103,&quot;Neha&quot;}};</pre
+                    >
+                  </div>
+                  <div class="block">
+                    <h4>Algorithm</h4>
+                    <ol>
+                      <li>Start the program.</li>
+                      <li>Include the required STL header.</li>
+                      <li>Create the appropriate container.</li>
+                      <li>Insert, access or process the required elements.</li>
+                      <li>Display the result.</li>
+                      <li>Stop.</li>
+                    </ol>
+                  </div>
+                  <div class="block">
+                    <h4>C++ Program</h4>
+                    <pre>
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;map&gt;
+#include &lt;queue&gt;
+#include &lt;string&gt;
+using namespace std;
+
+int main()
+{
+    // Student Record Collection
+    vector&lt;Student&gt; students={{101,&quot;Asha&quot;},{102,&quot;Riya&quot;},{103,&quot;Neha&quot;}};
+    
+    cout &lt;&lt; &quot;Result displayed for Student Record Collection&quot;;
+    return 0;
+}</pre
+                    >
+                  </div>
+                  <div class="block">
+                    <h4>Expected Output</h4>
+                    <div class="output">101 - Asha 102 - Riya 103 - Neha</div>
+                  </div>
+                  <div class="block">
+                    <h4>Visual Explanation</h4>
+                    <div class="flow">
+                      <span>Create Container</span><b class="arrow">→</b
+                      ><span>Store Data</span><b class="arrow">→</b
+                      ><span>Perform Operation</span><b class="arrow">→</b
+                      ><span>Display Result</span>
+                    </div>
+                  </div>
+                  <div class="block">
+                    <h4>Program Explanation</h4>
+                    <p>
+                      The program creates the selected STL container and uses
+                      its standard operations to manage the collection. This
+                      avoids implementing common data structures manually.
+                    </p>
+                  </div>
+                  <div class="block">
+                    <h4>Real-Life Connection</h4>
+                    <p>
+                      The same container patterns are used in student records,
+                      inventories, scheduling, customer service, dictionaries
+                      and application data collections.
+                    </p>
+                  </div>
+                  <div class="block">
+                    <h4>Key Points</h4>
+                    <ul>
+                      <li>
+                        Choose a container according to the required access
+                        pattern.
+                      </li>
+                      <li>Use the correct STL header.</li>
+                      <li>Use container operations safely and consistently.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="section">
+          <div class="container">
+            <h2>Overall Visual: Choosing the Right Container</h2>
+            <div class="flow">
+              <span>Dynamic sequence</span><b class="arrow">→</b
+              ><span>vector / list</span><b class="arrow">→</b><span>LIFO</span
+              ><b class="arrow">→</b><span>stack</span><b class="arrow">→</b
+              ><span>FIFO</span><b class="arrow">→</b><span>queue</span
+              ><b class="arrow">→</b><span>Key-value</span><b class="arrow">→</b
+              ><span>map / unordered_map</span>
+            </div>
+            <p class="section-intro" style="margin-top: 20px">
+              The correct STL container depends on how data must be stored,
+              accessed, inserted, removed and searched.
+            </p>
+          </div>
+        </section>
+        <section class="section">
+          <div class="container">
+            <h2>Quick Summary</h2>
+            <div class="summary">
+              <div><b>Vector</b><br />Dynamic indexed sequence.</div>
+              <div><b>Stack & Queue</b><br />LIFO and FIFO processing.</div>
+              <div><b>Map</b><br />Ordered key-value storage.</div>
+              <div><b>Unordered Map</b><br />Hash-based key-value lookup.</div>
+            </div>
+          </div>
+        </section>
+        <section class="section">
+          <div class="container">
+            <h2>Common Errors</h2>
+            <div class="two-col">
+              <div class="card">
+                <ul>
+                  <li>Forgetting the required STL header.</li>
+                  <li>Accessing top() or front() on an empty adaptor.</li>
+                  <li>
+                    Assuming vector and list have identical access behavior.
+                  </li>
+                </ul>
+              </div>
+              <div class="card">
+                <ul>
+                  <li>Dereferencing an invalid iterator.</li>
+                  <li>Confusing map and unordered_map ordering.</li>
+                  <li>Not checking whether a searched key exists.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="section">
+          <div class="container">
+            <h2>Viva Questions</h2>
+            <div class="viva-item">
+              <button class="viva-question">
+                <span>What is an STL container?</span
+                ><span class="viva-icon">+</span>
+              </button>
+              <div class="viva-answer">
+                An STL container is a standard library data structure used to
+                store and organize collections of objects.
+              </div>
+            </div>
+            <div class="viva-item">
+              <button class="viva-question">
+                <span>What is a vector?</span><span class="viva-icon">+</span>
+              </button>
+              <div class="viva-answer">
+                A vector is a dynamic sequence container that provides indexed
+                access.
+              </div>
+            </div>
+            <div class="viva-item">
+              <button class="viva-question">
+                <span>What is a list?</span><span class="viva-icon">+</span>
+              </button>
+              <div class="viva-answer">
+                A list is a linked sequence container useful for insertion and
+                deletion operations.
+              </div>
+            </div>
+            <div class="viva-item">
+              <button class="viva-question">
+                <span>What principle does a stack follow?</span
+                ><span class="viva-icon">+</span>
+              </button>
+              <div class="viva-answer">
+                A stack follows LIFO — Last In, First Out.
+              </div>
+            </div>
+            <div class="viva-item">
+              <button class="viva-question">
+                <span>What principle does a queue follow?</span
+                ><span class="viva-icon">+</span>
+              </button>
+              <div class="viva-answer">
+                A queue follows FIFO — First In, First Out.
+              </div>
+            </div>
+            <div class="viva-item">
+              <button class="viva-question">
+                <span>What is a map?</span><span class="viva-icon">+</span>
+              </button>
+              <div class="viva-answer">
+                A map stores unique key-value pairs in sorted key order.
+              </div>
+            </div>
+            <div class="viva-item">
+              <button class="viva-question">
+                <span>What is unordered_map?</span
+                ><span class="viva-icon">+</span>
+              </button>
+              <div class="viva-answer">
+                unordered_map stores key-value pairs using hashing without
+                sorted key order.
+              </div>
+            </div>
+            <div class="viva-item">
+              <button class="viva-question">
+                <span>What does push_back() do?</span
+                ><span class="viva-icon">+</span>
+              </button>
+              <div class="viva-answer">
+                It adds an element at the end of a compatible sequence
+                container.
+              </div>
+            </div>
+            <div class="viva-item">
+              <button class="viva-question">
+                <span>What does pop() do?</span><span class="viva-icon">+</span>
+              </button>
+              <div class="viva-answer">
+                It removes the top element of a stack or the front element of a
+                queue.
+              </div>
+            </div>
+            <div class="viva-item">
+              <button class="viva-question">
+                <span>Why is find() useful with map?</span
+                ><span class="viva-icon">+</span>
+              </button>
+              <div class="viva-answer">
+                It searches for a key and returns an iterator to the matching
+                element or end().
+              </div>
+            </div>
+            <div class="viva-item">
+              <button class="viva-question">
+                <span>Why are STL containers useful?</span
+                ><span class="viva-icon">+</span>
+              </button>
+              <div class="viva-answer">
+                They provide tested, reusable data structures and standard
+                interfaces.
+              </div>
+            </div>
+            <div class="viva-item">
+              <button class="viva-question">
+                <span>Why should the correct header be included?</span
+                ><span class="viva-icon">+</span>
+              </button>
+              <div class="viva-answer">
+                Each STL component is declared by its corresponding standard
+                header.
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer class="footer">
+        <div class="footer-content">
+          <div>
+            <div class="footer-brand-name">Rasika <span>CodeLab</span></div>
+            <p class="footer-tagline">Code • Understand • Visualize</p>
+          </div>
+          <div class="footer-copy">
+            © 2026 Rasika CodeLab. Built for practical learning.
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const p = document.querySelector(".practical18-page");
+        p.querySelectorAll(".topic-tab").forEach(
+          (t) =>
+            (t.onclick = () => {
+              p.querySelectorAll(".topic-tab").forEach((x) =>
+                x.classList.remove("active"),
+              );
+              p.querySelectorAll(".topic-panel").forEach((x) =>
+                x.classList.remove("active"),
+              );
+              t.classList.add("active");
+              p.querySelector("#" + t.dataset.topic).classList.add("active");
+            }),
+        );
+        p.querySelectorAll(".topic-panel").forEach((panel) =>
+          panel.querySelectorAll(".problem-tab").forEach(
+            (t) =>
+              (t.onclick = () => {
+                panel
+                  .querySelectorAll(".problem-tab")
+                  .forEach((x) => x.classList.remove("active"));
+                panel
+                  .querySelectorAll(".problem")
+                  .forEach((x) => x.classList.remove("active"));
+                t.classList.add("active");
+                panel
+                  .querySelector("#" + t.dataset.problem)
+                  .classList.add("active");
+              }),
+          ),
+        );
+        p.querySelectorAll(".viva-question").forEach(
+          (q) =>
+            (q.onclick = () =>
+              q.closest(".viva-item").classList.toggle("active")),
+        );
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Practical 15 | File Handling in C++ | Rasika CodeLab</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+/* =====================================================
+   PRACTICAL 15 — FILE HANDLING
+   ALL LOCAL CSS IS SCOPED TO .practical15-page
+===================================================== */
+.practical15-page .practical-hero{padding:78px 0 58px}
+.practical15-page .practical-hero h1{font-size:clamp(2.4rem,5vw,4.4rem);line-height:1.05;max-width:900px;margin:12px 0 18px;letter-spacing:-.04em}
+.practical15-page .practical-subtitle{max-width:830px;font-size:16px;line-height:1.75}
+.practical15-page .practical-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.practical15-page .practical-meta span{padding:8px 13px;border:1px solid var(--border);border-radius:999px;background:rgba(255,255,255,.035);font-size:12px;color:var(--text-secondary)}
+.practical15-page .content-section{padding:42px 0}
+.practical15-page .content-card{box-shadow:0 16px 45px rgba(0,0,0,.12)}
+.practical15-page .content-card+.content-card{margin-top:16px}
+.practical15-page .concept-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:20px}
+.practical15-page .concept-card{padding:23px;border:1px solid var(--border);border-radius:18px;background:var(--bg-card)}
+.practical15-page .concept-card h3{margin:12px 0 8px}
+.practical15-page .concept-card p{color:var(--text-secondary);line-height:1.65}
+.practical15-page .concept-number{display:inline-flex;width:36px;height:36px;align-items:center;justify-content:center;border:1px solid var(--border);border-radius:10px;color:var(--accent);background:rgba(255,255,255,.04);font-size:12px;font-weight:800}
+.practical15-page .file-flow{display:flex;align-items:center;justify-content:center;gap:12px;overflow-x:auto;padding:10px 0;margin-top:18px}
+.practical15-page .flow-node{flex:0 0 165px;min-height:85px;padding:17px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1px solid var(--border);border-radius:15px;background:var(--bg-card)}
+.practical15-page .flow-node strong{margin-bottom:6px}
+.practical15-page .flow-node small{color:var(--text-secondary);line-height:1.45}
+.practical15-page .flow-arrow{color:var(--accent);font-size:22px;font-weight:800}
+.practical15-page .comparison-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:20px}
+.practical15-page .comparison-card{padding:22px;border:1px solid var(--border);border-radius:17px;background:var(--bg-card)}
+.practical15-page .comparison-card h3{margin-bottom:9px}
+.practical15-page .comparison-card p{margin:0;color:var(--text-secondary);line-height:1.65}
+.practical15-page .main-type-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:28px}
+.practical15-page .main-type-tab{width:100%;min-width:0;min-height:68px;padding:12px 14px;display:flex;align-items:center;gap:10px;box-sizing:border-box;background:var(--bg-card);border:1px solid var(--border);border-radius:15px;color:var(--text-secondary);font:inherit;font-size:13px;font-weight:700;line-height:1.3;text-align:left;cursor:pointer;transition:.22s ease}
+.practical15-page .main-type-tab>span{flex:0 0 34px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;border-radius:9px;border:1px solid var(--border);background:rgba(255,255,255,.04);color:var(--accent);font-size:11px}
+.practical15-page .main-type-tab:hover{border-color:var(--accent);color:var(--text-primary);transform:translateY(-2px)}
+.practical15-page .main-type-tab.active{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 10px 28px rgba(0,0,0,.22)}
+.practical15-page .main-type-tab.active>span{background:rgba(0,0,0,.13);border-color:rgba(255,255,255,.22);color:#fff}
+.practical15-page .type-panel{display:none;margin-top:28px}
+.practical15-page .type-panel.active{display:block;animation:practical15Fade .35s ease}
+.practical15-page .mini-problem-selector{padding:0 0 14px;border-bottom:1px solid var(--border)}
+.practical15-page .mini-problem-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.practical15-page .mini-problem-tab{width:100%;min-width:0;min-height:58px;padding:11px 14px;display:flex;align-items:center;gap:10px;box-sizing:border-box;background:rgba(255,255,255,.018);border:1px solid var(--border);border-radius:13px;color:var(--text-secondary);font:inherit;font-size:13px;font-weight:650;line-height:1.3;text-align:left;cursor:pointer;transition:.22s ease}
+.practical15-page .mini-problem-tab>span{flex:0 0 32px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:9px;border:1px solid var(--border);background:rgba(255,255,255,.04);color:var(--accent);font-size:11px;font-weight:800}
+.practical15-page .mini-problem-tab:hover{border-color:var(--accent);color:var(--text-primary);transform:translateY(-2px)}
+.practical15-page .mini-problem-tab.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.practical15-page .mini-problem-tab.active>span{background:rgba(0,0,0,.13);border-color:rgba(255,255,255,.22);color:#fff}
+.practical15-page .mini-problem{display:none;margin-top:32px}
+.practical15-page .mini-problem.active{display:block;animation:practical15Fade .35s ease}
+.practical15-page .problem-heading{padding:8px 0 20px;border-bottom:1px solid var(--border);margin-bottom:22px}
+.practical15-page .problem-heading h2{margin:8px 0 0;font-size:clamp(1.7rem,3vw,2.35rem)}
+.practical15-page .problem-box{padding:24px;margin-bottom:16px;background:rgba(255,255,255,.018);border:1px solid var(--border);border-radius:18px}
+.practical15-page .problem-box h3{margin-bottom:12px}
+.practical15-page .algorithm-list{padding-left:22px}
+.practical15-page .algorithm-list li{margin-bottom:8px;line-height:1.6}
+.practical15-page .syntax-block{margin:20px 0 16px;padding:24px;border:1px solid rgba(255,255,255,.08);border-radius:18px;background:linear-gradient(145deg,rgba(150,92,255,.055),rgba(255,255,255,.015))}
+.practical15-page .syntax-heading{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.practical15-page .syntax-heading .section-label{margin:0}
+.practical15-page .syntax-heading h3{margin:0}
+.practical15-page .code-window{overflow-x:auto;border-radius:14px}
+.practical15-page .output-box{border-radius:14px}
+.practical15-page .visual-card{margin-top:18px;padding:28px;border:1px solid var(--border);border-radius:20px;background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.012))}
+.practical15-page .visual-note{max-width:850px;margin:18px auto 0;text-align:center;color:var(--text-secondary);line-height:1.65}
+.practical15-page .key-points li{margin-bottom:8px;line-height:1.6}
+.practical15-page .error-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.practical15-page .error-card{padding:18px;border:1px solid var(--border);border-radius:14px;background:var(--bg-card)}
+.practical15-page .error-card h4{margin-bottom:7px}
+.practical15-page .error-card p{margin:0;color:var(--text-secondary);line-height:1.55;font-size:14px}
+.practical15-page .viva-list{display:grid;gap:12px;max-width:920px;margin-top:25px}
+.practical15-page .viva-item{overflow:hidden;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md)}
+.practical15-page .viva-question{width:100%;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:20px 22px;background:transparent;border:none;color:var(--text-primary);font:inherit;font-size:16px;font-weight:600;text-align:left;cursor:pointer}
+.practical15-page .viva-question:hover{background:rgba(255,255,255,.03)}
+.practical15-page .viva-icon{flex:0 0 auto;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);border-radius:50%;color:var(--accent);font-size:22px;transition:.25s ease}
+.practical15-page .viva-answer{display:none;padding:0 22px 22px;color:var(--text-secondary);line-height:1.7}
+.practical15-page .viva-item.active .viva-answer{display:block}
+.practical15-page .viva-item.active .viva-icon{transform:rotate(45deg)}
+@keyframes practical15Fade{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+@media(max-width:950px){
+.practical15-page .main-type-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}
+.practical15-page .error-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.practical15-page .file-flow{justify-content:flex-start}
+}
+@media(max-width:700px){
+.practical15-page .practical-hero{padding:55px 0 40px}
+.practical15-page .content-section{padding:30px 0}
+.practical15-page .concept-grid,.practical15-page .comparison-grid,.practical15-page .error-grid{grid-template-columns:1fr}
+.practical15-page .main-type-tabs,.practical15-page .mini-problem-tabs{grid-template-columns:1fr}
+.practical15-page .problem-box,.practical15-page .visual-card,.practical15-page .syntax-block{padding:20px}
+}
+</style>
+</head>
+
+<body>
+<nav class="navbar">
+<div class="container nav-container">
+<a href="../index.html" class="logo"><span class="logo-symbol">&lt;/&gt;</span><span>Rasika<span class="logo-accent">CodeLab</span></span></a>
+<button class="menu-btn" aria-label="Open menu">☰</button>
+<div class="nav-links">
+<a href="../index.html">Home</a>
+<a href="../foundations/program.html">Foundations</a>
+<a href="index.html" class="active">Practicals</a>
+<a href="../index.html#about">About</a>
+</div>
+</div>
+</nav>
+
+<main class="practical-page practical15-page">
+
+<section class="practical-hero">
+<div class="container">
+<span class="section-label">PRACTICAL 15</span>
+<h1>File Handling in <span class="gradient-text">C++</span></h1>
+<p class="practical-subtitle">Understand how C++ programs create, write, read, copy and process files, and how simple object records can be stored for later use.</p>
+<div class="practical-meta"><span>LLO 15.1</span><span>fstream</span><span>ifstream</span><span>ofstream</span><span>File Processing</span></div>
+</div>
+</section>
+
+<section class="content-section">
+<div class="container">
+<span class="section-label">AIM</span><h2>Aim of the Practical</h2>
+<div class="content-card"><p>To implement C++ programs using file handling for creating, writing, reading, copying and processing files, and for storing simple object records.</p></div>
+</div>
+</section>
+
+<section class="content-section">
+<div class="container">
+<span class="section-label">LEARNING OBJECTIVES</span><h2>What You Will Learn</h2>
+<div class="objective-grid">
+<div class="objective-card"><strong>01</strong><h3>Create &amp; Write Files</h3><p>Use ofstream to create files and write data into them.</p></div>
+<div class="objective-card"><strong>02</strong><h3>Read Files</h3><p>Use ifstream to retrieve text and structured records.</p></div>
+<div class="objective-card"><strong>03</strong><h3>Process Files</h3><p>Copy files, count content and search for words.</p></div>
+<div class="objective-card"><strong>04</strong><h3>Handle Objects</h3><p>Store and reconstruct simple class-object records using text files.</p></div>
+</div>
+</div>
+</section>
+
+<section class="content-section">
+<div class="container">
+<span class="section-label">CONCEPT</span><h2>Understanding File Handling</h2>
+
+<div class="content-card">
+<h3>What is File Handling?</h3>
+<p>File handling is the process of storing data in files and retrieving that data later. C++ provides file stream classes through the <strong>&lt;fstream&gt;</strong> header.</p>
+</div>
+
+<div class="concept-grid">
+<div class="concept-card"><span class="concept-number">01</span><h3>ofstream</h3><p>Used to open a file for output and write data into it.</p></div>
+<div class="concept-card"><span class="concept-number">02</span><h3>ifstream</h3><p>Used to open a file for input and read data from it.</p></div>
+<div class="concept-card"><span class="concept-number">03</span><h3>fstream</h3><p>Provides a file stream that can support both input and output operations.</p></div>
+<div class="concept-card"><span class="concept-number">04</span><h3>close()</h3><p>Closes an open file stream after the required operation is complete.</p></div>
+</div>
+
+<div class="content-card">
+<h3>Real-Life Example</h3>
+<p>When a student-management program saves a student's details, the information should remain available after the program closes. A file provides persistent storage so the program can read those details again later.</p>
+</div>
+
+<div class="content-card">
+<h3>Where and How Is File Handling Used?</h3>
+<div class="comparison-grid">
+<div class="comparison-card"><h3>Student Records</h3><p>Store roll numbers, names, marks and other academic records.</p></div>
+<div class="comparison-card"><h3>Employee Records</h3><p>Save employee IDs, names and salary information.</p></div>
+<div class="comparison-card"><h3>Reports &amp; Logs</h3><p>Store generated reports, application logs and text information.</p></div>
+<div class="comparison-card"><h3>Data Processing</h3><p>Read existing files to search, count, copy or transform their contents.</p></div>
+</div>
+</div>
+
+<div class="content-card">
+<h3>Basic File Flow</h3>
+<div class="visual-card">
+<div class="file-flow">
+<div class="flow-node"><strong>C++ Program</strong><small>Variables / objects</small></div>
+<div class="flow-arrow">→</div>
+<div class="flow-node"><strong>ofstream</strong><small>Write data</small></div>
+<div class="flow-arrow">→</div>
+<div class="flow-node"><strong>Text File</strong><small>Persistent storage</small></div>
+<div class="flow-arrow">→</div>
+<div class="flow-node"><strong>ifstream</strong><small>Read data</small></div>
+<div class="flow-arrow">→</div>
+<div class="flow-node"><strong>C++ Program</strong><small>Use data</small></div>
+</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<section class="content-section">
+<div class="container">
+<span class="section-label">PRACTICAL PROBLEMS</span><h2>Explore File Handling</h2>
+
+<div class="main-type-tabs">
+<button type="button" class="main-type-tab active" data-type="file-writing"><span>01</span>File Creation &amp; Writing</button>
+<button type="button" class="main-type-tab" data-type="file-reading"><span>02</span>Reading from File</button>
+<button type="button" class="main-type-tab" data-type="file-processing"><span>03</span>File Copy &amp; Processing</button>
+<button type="button" class="main-type-tab" data-type="file-objects"><span>04</span>File Handling with Objects</button>
+</div>
+
+
+<div class="type-panel active" id="file-writing">
+<div class="problem-box type-intro"><span class="section-label">TOPIC 01</span><h2>File Creation &amp; Writing</h2>
+<p>Create text files and write individual values or records using ofstream.</p></div>
+<div class="mini-problem-selector"><div class="mini-problem-tabs"><button type="button" class="mini-problem-tab active" data-problem="fw1"><span>01</span>Write Text to a File</button><button type="button" class="mini-problem-tab " data-problem="fw2"><span>02</span>Store Student Details</button><button type="button" class="mini-problem-tab " data-problem="fw3"><span>03</span>Store Employee Details</button></div></div>
+
+<div class="mini-problem active" id="fw1">
+<div class="problem-heading"><span class="section-label">PROBLEM</span><h2>Write Text to a File</h2></div>
+<div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to create a text file and write a message into it using ofstream.</p></div>
+<div class="problem-box"><h3>Theory / Concept</h3><p>ofstream is used to create or open an output file stream. Data can be written to a text file using the stream insertion operator &lt;&lt;.</p></div>
+<div class="syntax-block"><div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>File Handling Syntax</h3></div><div class="code-window"><pre><code>ofstream file(&quot;data.txt&quot;);
+file &lt;&lt; &quot;Hello C++&quot;;
+file.close();</code></pre></div></div>
+<div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Include the fstream header.</li><li>Create an ofstream object.</li><li>Open data.txt.</li><li>Write text into the file.</li><li>Close the file.</li></ol></div>
+<div class="problem-box"><h3>C++ Program</h3><div class="code-window"><pre><code>#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+using namespace std;
+
+int main()
+{
+    ofstream file(&quot;data.txt&quot;);
+
+    file &lt;&lt; &quot;Welcome to Rasika CodeLab&quot;;
+
+    file.close();
+
+    cout &lt;&lt; &quot;Data written successfully.&quot;;
+
+    return 0;
+}</code></pre></div></div>
+<div class="problem-box"><h3>Expected Output</h3><div class="output-box"><pre>Data written successfully.</pre></div></div>
+<div class="visual-card"><span class="section-label">VISUAL EXPLANATION</span><h3>How Data Moves</h3>
+<div class="file-flow">
+<div class="flow-node"><strong>Program</strong><small>Memory / variables</small></div><div class="flow-arrow">→</div>
+<div class="flow-node"><strong>ofstream</strong><small>File stream</small></div><div class="flow-arrow">→</div>
+<div class="flow-node"><strong>File</strong><small>.txt storage</small></div>
+</div>
+<p class="visual-note">The program opens data.txt through ofstream, writes the text, and closes the file.</p></div>
+<div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>ofstream is used for output.</li><li>The file should be closed after writing.</li><li>The insertion operator writes data to the stream.</li></ul></div>
+<div class="problem-box"><h3>Real-Life Connection</h3><p>Text files are used to store notes, configuration data, reports and other information that should remain available after the program ends.</p></div>
+<div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>ofstream is used for output.</li><li>The file should be closed after writing.</li><li>The insertion operator writes data to the stream.</li></ul></div>
+<div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Missing fstream</h4><p>Include &lt;fstream&gt; for file stream classes.</p></div><div class="error-card"><h4>File not closed</h4><p>Call close() after completing the operation.</p></div><div class="error-card"><h4>Wrong stream</h4><p>Use ofstream for writing.</p></div></div></div>
+</div>
+<div class="mini-problem " id="fw2">
+<div class="problem-heading"><span class="section-label">PROBLEM</span><h2>Store Student Details</h2></div>
+<div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to accept a student&#x27;s roll number, name and marks and store the details in a text file.</p></div>
+<div class="problem-box"><h3>Theory / Concept</h3><p>A text file can store formatted records. Each field can be written using &lt;&lt; so that the data can later be read by a program.</p></div>
+<div class="syntax-block"><div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>File Handling Syntax</h3></div><div class="code-window"><pre><code>ofstream file(&quot;student.txt&quot;);
+
+file &lt;&lt; rollNo &lt;&lt; endl;
+file &lt;&lt; name &lt;&lt; endl;
+file &lt;&lt; marks &lt;&lt; endl;</code></pre></div></div>
+<div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Accept student details.</li><li>Open student.txt using ofstream.</li><li>Write each field to the file.</li><li>Close the file.</li><li>Display a confirmation message.</li></ol></div>
+<div class="problem-box"><h3>C++ Program</h3><div class="code-window"><pre><code>#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+int main()
+{
+    int rollNo = 101;
+    string name = &quot;Asha&quot;;
+    float marks = 87.5f;
+
+    ofstream file(&quot;student.txt&quot;);
+
+    file &lt;&lt; rollNo &lt;&lt; endl;
+    file &lt;&lt; name &lt;&lt; endl;
+    file &lt;&lt; marks &lt;&lt; endl;
+
+    file.close();
+
+    cout &lt;&lt; &quot;Student record stored.&quot;;
+
+    return 0;
+}</code></pre></div></div>
+<div class="problem-box"><h3>Expected Output</h3><div class="output-box"><pre>Student record stored.</pre></div></div>
+<div class="visual-card"><span class="section-label">VISUAL EXPLANATION</span><h3>How Data Moves</h3>
+<div class="file-flow">
+<div class="flow-node"><strong>Program</strong><small>Memory / variables</small></div><div class="flow-arrow">→</div>
+<div class="flow-node"><strong>ofstream</strong><small>File stream</small></div><div class="flow-arrow">→</div>
+<div class="flow-node"><strong>File</strong><small>.txt storage</small></div>
+</div>
+<p class="visual-note">Each student field is written on a separate line, making the record simple to read later.</p></div>
+<div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>Write fields in a known order.</li><li>Use &lt;string&gt; when using string.</li><li>Close the stream after writing.</li></ul></div>
+<div class="problem-box"><h3>Real-Life Connection</h3><p>Educational software can store student records in files for later reporting or processing.</p></div>
+<div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>Write fields in a known order.</li><li>Use &lt;string&gt; when using string.</li><li>Close the stream after writing.</li></ul></div>
+<div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Wrong order</h4><p>Keep the writing order consistent with the reading order.</p></div><div class="error-card"><h4>Missing string header</h4><p>Include &lt;string&gt;.</p></div><div class="error-card"><h4>No close</h4><p>Close the file after writing.</p></div></div></div>
+</div>
+<div class="mini-problem " id="fw3">
+<div class="problem-heading"><span class="section-label">PROBLEM</span><h2>Store Employee Details</h2></div>
+<div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to store an employee&#x27;s ID, name and salary in a text file.</p></div>
+<div class="problem-box"><h3>Theory / Concept</h3><p>Employee information can be persisted as a text record. ofstream provides sequential output to the file.</p></div>
+<div class="syntax-block"><div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>File Handling Syntax</h3></div><div class="code-window"><pre><code>ofstream file(&quot;employee.txt&quot;);
+
+file &lt;&lt; id &lt;&lt; endl;
+file &lt;&lt; name &lt;&lt; endl;
+file &lt;&lt; salary &lt;&lt; endl;</code></pre></div></div>
+<div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Declare employee details.</li><li>Open employee.txt.</li><li>Write ID, name and salary.</li><li>Close the file.</li><li>Display confirmation.</li></ol></div>
+<div class="problem-box"><h3>C++ Program</h3><div class="code-window"><pre><code>#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+int main()
+{
+    int id = 501;
+    string name = &quot;Rahul&quot;;
+    float salary = 45000.0f;
+
+    ofstream file(&quot;employee.txt&quot;);
+
+    file &lt;&lt; id &lt;&lt; endl;
+    file &lt;&lt; name &lt;&lt; endl;
+    file &lt;&lt; salary &lt;&lt; endl;
+
+    file.close();
+
+    cout &lt;&lt; &quot;Employee record stored.&quot;;
+
+    return 0;
+}</code></pre></div></div>
+<div class="problem-box"><h3>Expected Output</h3><div class="output-box"><pre>Employee record stored.</pre></div></div>
+<div class="visual-card"><span class="section-label">VISUAL EXPLANATION</span><h3>How Data Moves</h3>
+<div class="file-flow">
+<div class="flow-node"><strong>Program</strong><small>Memory / variables</small></div><div class="flow-arrow">→</div>
+<div class="flow-node"><strong>ofstream</strong><small>File stream</small></div><div class="flow-arrow">→</div>
+<div class="flow-node"><strong>File</strong><small>.txt storage</small></div>
+</div>
+<p class="visual-note">The employee fields are sent to the output file stream in a fixed order.</p></div>
+<div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>Keep field order consistent.</li><li>Use suitable data types.</li><li>Check that the stream is usable before writing in larger programs.</li></ul></div>
+<div class="problem-box"><h3>Real-Life Connection</h3><p>Payroll or employee-management systems can persist basic records for later processing.</p></div>
+<div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>Keep field order consistent.</li><li>Use suitable data types.</li><li>Check that the stream is usable before writing in larger programs.</li></ul></div>
+<div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Wrong filename</h4><p>Read and write the same intended file.</p></div><div class="error-card"><h4>Missing header</h4><p>Include &lt;fstream&gt; and &lt;string&gt;.</p></div><div class="error-card"><h4>Forgotten close</h4><p>Close the output stream.</p></div></div></div>
+</div>
+</div>
+<div class="type-panel " id="file-reading">
+<div class="problem-box type-intro"><span class="section-label">TOPIC 02</span><h2>Reading from File</h2>
+<p>Read text and structured records using ifstream and appropriate input methods.</p></div>
+<div class="mini-problem-selector"><div class="mini-problem-tabs"><button type="button" class="mini-problem-tab active" data-problem="fr1"><span>01</span>Read and Display Text</button><button type="button" class="mini-problem-tab " data-problem="fr2"><span>02</span>Read Student Records</button><button type="button" class="mini-problem-tab " data-problem="fr3"><span>03</span>Read Employee Records</button></div></div>
+
+<div class="mini-problem active" id="fr1">
+<div class="problem-heading"><span class="section-label">PROBLEM</span><h2>Read and Display Text</h2></div>
+<div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to read text from a file using ifstream and display it on the screen.</p></div>
+<div class="problem-box"><h3>Theory / Concept</h3><p>ifstream is an input file stream used to read data from a file. getline() is useful for reading a complete line including spaces.</p></div>
+<div class="syntax-block"><div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>File Handling Syntax</h3></div><div class="code-window"><pre><code>ifstream file(&quot;data.txt&quot;);
+string line;
+
+while (getline(file, line))
+{
+    cout &lt;&lt; line &lt;&lt; endl;
+}
+
+file.close();</code></pre></div></div>
+<div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Open the file using ifstream.</li><li>Declare a string for each line.</li><li>Read lines using getline().</li><li>Display each line.</li><li>Close the file.</li></ol></div>
+<div class="problem-box"><h3>C++ Program</h3><div class="code-window"><pre><code>#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+int main()
+{
+    ifstream file(&quot;data.txt&quot;);
+    string line;
+
+    while (getline(file, line))
+    {
+        cout &lt;&lt; line &lt;&lt; endl;
+    }
+
+    file.close();
+
+    return 0;
+}</code></pre></div></div>
+<div class="problem-box"><h3>Expected Output</h3><div class="output-box"><pre>Displays the lines stored in data.txt.</pre></div></div>
+<div class="visual-card"><span class="section-label">VISUAL EXPLANATION</span><h3>How Data Moves</h3>
+<div class="file-flow">
+<div class="flow-node"><strong>Program</strong><small>Memory / variables</small></div><div class="flow-arrow">→</div>
+<div class="flow-node"><strong>ifstream</strong><small>File stream</small></div><div class="flow-arrow">→</div>
+<div class="flow-node"><strong>File</strong><small>.txt storage</small></div>
+</div>
+<p class="visual-note">The input stream reads one line at a time until the end of the file is reached.</p></div>
+<div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>ifstream is used for reading.</li><li>getline() reads a complete line.</li><li>The loop continues until reading reaches the end of the file.</li></ul></div>
+<div class="problem-box"><h3>Real-Life Connection</h3><p>Applications use file reading to load saved notes, reports, settings and other persistent information.</p></div>
+<div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>ifstream is used for reading.</li><li>getline() reads a complete line.</li><li>The loop continues until reading reaches the end of the file.</li></ul></div>
+<div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Wrong stream</h4><p>Use ifstream for file input.</p></div><div class="error-card"><h4>Using &gt;&gt; for full lines</h4><p>Use getline() when spaces must be preserved.</p></div><div class="error-card"><h4>Wrong filename</h4><p>Open the file that contains the required data.</p></div></div></div>
+</div>
+<div class="mini-problem " id="fr2">
+<div class="problem-heading"><span class="section-label">PROBLEM</span><h2>Read Student Records</h2></div>
+<div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to read a student&#x27;s roll number, name and marks from a text file and display the record.</p></div>
+<div class="problem-box"><h3>Theory / Concept</h3><p>If data is stored in a known sequence, extraction operators can read individual fields in that same sequence.</p></div>
+<div class="syntax-block"><div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>File Handling Syntax</h3></div><div class="code-window"><pre><code>ifstream file(&quot;student.txt&quot;);
+
+file &gt;&gt; rollNo;
+file &gt;&gt; name;
+file &gt;&gt; marks;</code></pre></div></div>
+<div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Open student.txt using ifstream.</li><li>Read roll number.</li><li>Read name.</li><li>Read marks.</li><li>Display the values.</li><li>Close the file.</li></ol></div>
+<div class="problem-box"><h3>C++ Program</h3><div class="code-window"><pre><code>#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+int main()
+{
+    ifstream file(&quot;student.txt&quot;);
+
+    int rollNo;
+    string name;
+    float marks;
+
+    file &gt;&gt; rollNo &gt;&gt; name &gt;&gt; marks;
+
+    cout &lt;&lt; &quot;Roll No: &quot; &lt;&lt; rollNo &lt;&lt; endl;
+    cout &lt;&lt; &quot;Name: &quot; &lt;&lt; name &lt;&lt; endl;
+    cout &lt;&lt; &quot;Marks: &quot; &lt;&lt; marks &lt;&lt; endl;
+
+    file.close();
+
+    return 0;
+}</code></pre></div></div>
+<div class="problem-box"><h3>Expected Output</h3><div class="output-box"><pre>Roll No: 101
+Name: Asha
+Marks: 87.5</pre></div></div>
+<div class="visual-card"><span class="section-label">VISUAL EXPLANATION</span><h3>How Data Moves</h3>
+<div class="file-flow">
+<div class="flow-node"><strong>Program</strong><small>Memory / variables</small></div><div class="flow-arrow">→</div>
+<div class="flow-node"><strong>ifstream</strong><small>File stream</small></div><div class="flow-arrow">→</div>
+<div class="flow-node"><strong>File</strong><small>.txt storage</small></div>
+</div>
+<p class="visual-note">The program reads fields in the same order in which the record was written.</p></div>
+<div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>Read in the same order as written.</li><li>Use matching data types.</li><li>For names containing spaces, getline() is more appropriate than &gt;&gt;.</li></ul></div>
+<div class="problem-box"><h3>Real-Life Connection</h3><p>Student record files can be loaded to generate marksheets, reports or student summaries.</p></div>
+<div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>Read in the same order as written.</li><li>Use matching data types.</li><li>For names containing spaces, getline() is more appropriate than &gt;&gt;.</li></ul></div>
+<div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Wrong order</h4><p>Match the file layout.</p></div><div class="error-card"><h4>Names with spaces</h4><p>Use getline() for full names if needed.</p></div><div class="error-card"><h4>No file check</h4><p>In real applications, verify that the file opened successfully.</p></div></div></div>
+</div>
+<div class="mini-problem " id="fr3">
+<div class="problem-heading"><span class="section-label">PROBLEM</span><h2>Read Employee Records</h2></div>
+<div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to read employee ID, name and salary from a text file and display the details.</p></div>
+<div class="problem-box"><h3>Theory / Concept</h3><p>A stored employee record can be reconstructed by reading fields in the same sequence used while writing.</p></div>
+<div class="syntax-block"><div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>File Handling Syntax</h3></div><div class="code-window"><pre><code>ifstream file(&quot;employee.txt&quot;);
+
+file &gt;&gt; id &gt;&gt; name &gt;&gt; salary;</code></pre></div></div>
+<div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Open employee.txt.</li><li>Declare variables for the record.</li><li>Read ID, name and salary.</li><li>Display the record.</li><li>Close the file.</li></ol></div>
+<div class="problem-box"><h3>C++ Program</h3><div class="code-window"><pre><code>#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+int main()
+{
+    ifstream file(&quot;employee.txt&quot;);
+
+    int id;
+    string name;
+    float salary;
+
+    file &gt;&gt; id &gt;&gt; name &gt;&gt; salary;
+
+    cout &lt;&lt; &quot;ID: &quot; &lt;&lt; id &lt;&lt; endl;
+    cout &lt;&lt; &quot;Name: &quot; &lt;&lt; name &lt;&lt; endl;
+    cout &lt;&lt; &quot;Salary: &quot; &lt;&lt; salary &lt;&lt; endl;
+
+    file.close();
+
+    return 0;
+}</code></pre></div></div>
+<div class="problem-box"><h3>Expected Output</h3><div class="output-box"><pre>ID: 501
+Name: Rahul
+Salary: 45000</pre></div></div>
+<div class="visual-card"><span class="section-label">VISUAL EXPLANATION</span><h3>How Data Moves</h3>
+<div class="file-flow">
+<div class="flow-node"><strong>Program</strong><small>Memory / variables</small></div><div class="flow-arrow">→</div>
+<div class="flow-node"><strong>ifstream</strong><small>File stream</small></div><div class="flow-arrow">→</div>
+<div class="flow-node"><strong>File</strong><small>.txt storage</small></div>
+</div>
+<p class="visual-note">The input stream reconstructs the employee fields from the stored text.</p></div>
+<div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>Keep the read order correct.</li><li>Use matching variable types.</li><li>Check file state before relying on input in production code.</li></ul></div>
+<div class="problem-box"><h3>Real-Life Connection</h3><p>Employee applications can load stored records whenever salary or employee information is required.</p></div>
+<div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>Keep the read order correct.</li><li>Use matching variable types.</li><li>Check file state before relying on input in production code.</li></ul></div>
+<div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Wrong file</h4><p>Use the intended employee file.</p></div><div class="error-card"><h4>Wrong order</h4><p>Read fields in the stored sequence.</p></div><div class="error-card"><h4>Missing header</h4><p>Include &lt;fstream&gt;.</p></div></div></div>
+</div>
+</div>
+<div class="type-panel " id="file-processing">
+<div class="problem-box type-intro"><span class="section-label">TOPIC 03</span><h2>File Copy &amp; Processing</h2>
+<p>Copy files and process their contents through sequential character or word reading.</p></div>
+<div class="mini-problem-selector"><div class="mini-problem-tabs"><button type="button" class="mini-problem-tab active" data-problem="fc1"><span>01</span>Copy One File to Another</button><button type="button" class="mini-problem-tab " data-problem="fc2"><span>02</span>Count Characters and Words</button><button type="button" class="mini-problem-tab " data-problem="fc3"><span>03</span>Search a Word in a File</button></div></div>
+
+<div class="mini-problem active" id="fc1">
+<div class="problem-heading"><span class="section-label">PROBLEM</span><h2>Copy One File to Another</h2></div>
+<div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to copy the contents of one text file into another file using file streams.</p></div>
+<div class="problem-box"><h3>Theory / Concept</h3><p>A source file can be opened with ifstream and a destination file with ofstream. Characters or lines are read from the source and written to the destination.</p></div>
+<div class="syntax-block"><div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>File Handling Syntax</h3></div><div class="code-window"><pre><code>ifstream source(&quot;source.txt&quot;);
+ofstream destination(&quot;copy.txt&quot;);
+
+char ch;
+while (source.get(ch))
+{
+    destination.put(ch);
+}</code></pre></div></div>
+<div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Open the source file for reading.</li><li>Open the destination file for writing.</li><li>Read each character from the source.</li><li>Write the character to the destination.</li><li>Close both files.</li></ol></div>
+<div class="problem-box"><h3>C++ Program</h3><div class="code-window"><pre><code>#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+using namespace std;
+
+int main()
+{
+    ifstream source(&quot;source.txt&quot;);
+    ofstream destination(&quot;copy.txt&quot;);
+
+    char ch;
+
+    while (source.get(ch))
+    {
+        destination.put(ch);
+    }
+
+    source.close();
+    destination.close();
+
+    cout &lt;&lt; &quot;File copied successfully.&quot;;
+
+    return 0;
+}</code></pre></div></div>
+<div class="problem-box"><h3>Expected Output</h3><div class="output-box"><pre>File copied successfully.</pre></div></div>
+<div class="visual-card"><span class="section-label">VISUAL EXPLANATION</span><h3>How Data Moves</h3>
+<div class="file-flow">
+<div class="flow-node"><strong>Program</strong><small>Memory / variables</small></div><div class="flow-arrow">→</div>
+<div class="flow-node"><strong>ofstream</strong><small>File stream</small></div><div class="flow-arrow">→</div>
+<div class="flow-node"><strong>File</strong><small>.txt storage</small></div>
+</div>
+<p class="visual-note">get() reads one character from the source and put() writes it to the destination until the source reaches EOF.</p></div>
+<div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>Use ifstream for the source.</li><li>Use ofstream for the destination.</li><li>Close both streams.</li></ul></div>
+<div class="problem-box"><h3>Real-Life Connection</h3><p>File copying is used in backup utilities, document duplication and data migration.</p></div>
+<div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>Use ifstream for the source.</li><li>Use ofstream for the destination.</li><li>Close both streams.</li></ul></div>
+<div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Wrong stream direction</h4><p>Source is input; destination is output.</p></div><div class="error-card"><h4>Skipping characters</h4><p>Use get()/put() to copy every character.</p></div><div class="error-card"><h4>Same filename</h4><p>Avoid opening source and destination as the same file.</p></div></div></div>
+</div>
+<div class="mini-problem " id="fc2">
+<div class="problem-heading"><span class="section-label">PROBLEM</span><h2>Count Characters and Words</h2></div>
+<div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to read a text file and count the number of characters and words.</p></div>
+<div class="problem-box"><h3>Theory / Concept</h3><p>A file can be processed sequentially while maintaining counters. isspace() can help identify whitespace separating words.</p></div>
+<div class="syntax-block"><div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>File Handling Syntax</h3></div><div class="code-window"><pre><code>ifstream file(&quot;data.txt&quot;);
+
+char ch;
+int characters = 0;
+int words = 0;
+bool inWord = false;
+
+while (file.get(ch))
+{
+    characters++;
+    // detect word boundaries
+}</code></pre></div></div>
+<div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Open the text file.</li><li>Initialize character and word counters.</li><li>Read each character.</li><li>Count every character.</li><li>Detect transitions into words using whitespace.</li><li>Display the totals.</li><li>Close the file.</li></ol></div>
+<div class="problem-box"><h3>C++ Program</h3><div class="code-window"><pre><code>#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;string&gt;
+#include &lt;cctype&gt;
+using namespace std;
+
+int main()
+{
+    ifstream file(&quot;data.txt&quot;);
+
+    char ch;
+    int characters = 0;
+    int words = 0;
+    bool inWord = false;
+
+    while (file.get(ch))
+    {
+        characters++;
+
+        if (!isspace(static_cast&lt;unsigned char&gt;(ch)))
+        {
+            if (!inWord)
+            {
+                words++;
+                inWord = true;
+            }
+        }
+        else
+        {
+            inWord = false;
+        }
+    }
+
+    file.close();
+
+    cout &lt;&lt; &quot;Characters: &quot; &lt;&lt; characters &lt;&lt; endl;
+    cout &lt;&lt; &quot;Words: &quot; &lt;&lt; words &lt;&lt; endl;
+
+    return 0;
+}</code></pre></div></div>
+<div class="problem-box"><h3>Expected Output</h3><div class="output-box"><pre>Characters: 25
+Words: 4</pre></div></div>
+<div class="visual-card"><span class="section-label">VISUAL EXPLANATION</span><h3>How Data Moves</h3>
+<div class="file-flow">
+<div class="flow-node"><strong>Program</strong><small>Memory / variables</small></div><div class="flow-arrow">→</div>
+<div class="flow-node"><strong>ifstream</strong><small>File stream</small></div><div class="flow-arrow">→</div>
+<div class="flow-node"><strong>File</strong><small>.txt storage</small></div>
+</div>
+<p class="visual-note">The program counts every character and increments the word count when it enters a non-whitespace sequence.</p></div>
+<div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>Count every character read.</li><li>Use whitespace to detect word boundaries.</li><li>Keep an inWord state to avoid counting letters inside the same word repeatedly.</li></ul></div>
+<div class="problem-box"><h3>Real-Life Connection</h3><p>Text analysis tools use similar sequential scanning to calculate document statistics.</p></div>
+<div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>Count every character read.</li><li>Use whitespace to detect word boundaries.</li><li>Keep an inWord state to avoid counting letters inside the same word repeatedly.</li></ul></div>
+<div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Counting every letter as a word</h4><p>Count only transitions into a word.</p></div><div class="error-card"><h4>Ignoring spaces incorrectly</h4><p>Use whitespace detection.</p></div><div class="error-card"><h4>Missing cctype</h4><p>Include &lt;cctype&gt; for isspace().</p></div></div></div>
+</div>
+<div class="mini-problem " id="fc3">
+<div class="problem-heading"><span class="section-label">PROBLEM</span><h2>Search a Word in a File</h2></div>
+<div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to search for a given word in a text file and report whether it is found.</p></div>
+<div class="problem-box"><h3>Theory / Concept</h3><p>A file can be searched sequentially by reading words and comparing each word with the target word.</p></div>
+<div class="syntax-block"><div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>File Handling Syntax</h3></div><div class="code-window"><pre><code>ifstream file(&quot;data.txt&quot;);
+string word;
+
+while (file &gt;&gt; word)
+{
+    if (word == target)
+    {
+        // found
+    }
+}</code></pre></div></div>
+<div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Open the file.</li><li>Set the target word.</li><li>Read words one by one.</li><li>Compare each word with the target.</li><li>Report whether a match was found.</li><li>Close the file.</li></ol></div>
+<div class="problem-box"><h3>C++ Program</h3><div class="code-window"><pre><code>#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+int main()
+{
+    ifstream file(&quot;data.txt&quot;);
+
+    string target = &quot;C++&quot;;
+    string word;
+    bool found = false;
+
+    while (file &gt;&gt; word)
+    {
+        if (word == target)
+        {
+            found = true;
+            break;
+        }
+    }
+
+    file.close();
+
+    if (found)
+        cout &lt;&lt; &quot;Word found.&quot;;
+    else
+        cout &lt;&lt; &quot;Word not found.&quot;;
+
+    return 0;
+}</code></pre></div></div>
+<div class="problem-box"><h3>Expected Output</h3><div class="output-box"><pre>Word found.</pre></div></div>
+<div class="visual-card"><span class="section-label">VISUAL EXPLANATION</span><h3>How Data Moves</h3>
+<div class="file-flow">
+<div class="flow-node"><strong>Program</strong><small>Memory / variables</small></div><div class="flow-arrow">→</div>
+<div class="flow-node"><strong>ifstream</strong><small>File stream</small></div><div class="flow-arrow">→</div>
+<div class="flow-node"><strong>File</strong><small>.txt storage</small></div>
+</div>
+<p class="visual-note">The program reads tokens from the file and compares each one with the target word until a match is found or the file ends.</p></div>
+<div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>Read words sequentially.</li><li>Compare strings using ==.</li><li>Stop when a match is found.</li></ul></div>
+<div class="problem-box"><h3>Real-Life Connection</h3><p>Search functionality is useful in document tools, log analysis and simple text-processing programs.</p></div>
+<div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>Read words sequentially.</li><li>Compare strings using ==.</li><li>Stop when a match is found.</li></ul></div>
+<div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Case mismatch</h4><p>The basic comparison is case-sensitive.</p></div><div class="error-card"><h4>Punctuation</h4><p>A word attached to punctuation may not exactly match.</p></div><div class="error-card"><h4>Wrong target</h4><p>Ensure the target string is what you intend to search.</p></div></div></div>
+</div>
+</div>
+<div class="type-panel " id="file-objects">
+<div class="problem-box type-intro"><span class="section-label">TOPIC 04</span><h2>File Handling with Objects</h2>
+<p>Store and reconstruct simple C++ objects using text-file persistence.</p></div>
+<div class="mini-problem-selector"><div class="mini-problem-tabs"><button type="button" class="mini-problem-tab active" data-problem="fo1"><span>01</span>Write Objects to File</button><button type="button" class="mini-problem-tab " data-problem="fo2"><span>02</span>Read Objects from File</button><button type="button" class="mini-problem-tab " data-problem="fo3"><span>03</span>Student Record Management</button></div></div>
+
+<div class="mini-problem active" id="fo1">
+<div class="problem-heading"><span class="section-label">PROBLEM</span><h2>Write Objects to File</h2></div>
+<div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to create a Student class and store an object&#x27;s details in a text file using ofstream.</p></div>
+<div class="problem-box"><h3>Theory / Concept</h3><p>Objects can be written to a text file by accessing their data members and sending those values to an output stream. This is a simple text-based form of object persistence.</p></div>
+<div class="syntax-block"><div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>File Handling Syntax</h3></div><div class="code-window"><pre><code>class Student
+{
+public:
+    int rollNo;
+    string name;
+
+    void writeToFile(ofstream &amp;file)
+    {
+        file &lt;&lt; rollNo &lt;&lt; endl;
+        file &lt;&lt; name &lt;&lt; endl;
+    }
+};</code></pre></div></div>
+<div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Create the Student class.</li><li>Create a Student object.</li><li>Open a file with ofstream.</li><li>Write the object&#x27;s members to the file.</li><li>Close the file.</li></ol></div>
+<div class="problem-box"><h3>C++ Program</h3><div class="code-window"><pre><code>#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+class Student
+{
+public:
+    int rollNo;
+    string name;
+    float marks;
+
+    void writeToFile(ofstream &amp;file)
+    {
+        file &lt;&lt; rollNo &lt;&lt; endl;
+        file &lt;&lt; name &lt;&lt; endl;
+        file &lt;&lt; marks &lt;&lt; endl;
+    }
+};
+
+int main()
+{
+    Student s;
+    s.rollNo = 101;
+    s.name = &quot;Asha&quot;;
+    s.marks = 87.5f;
+
+    ofstream file(&quot;student_object.txt&quot;);
+
+    s.writeToFile(file);
+
+    file.close();
+
+    cout &lt;&lt; &quot;Object written to file.&quot;;
+
+    return 0;
+}</code></pre></div></div>
+<div class="problem-box"><h3>Expected Output</h3><div class="output-box"><pre>Object written to file.</pre></div></div>
+<div class="visual-card"><span class="section-label">VISUAL EXPLANATION</span><h3>How Data Moves</h3>
+<div class="file-flow">
+<div class="flow-node"><strong>Program</strong><small>Memory / variables</small></div><div class="flow-arrow">→</div>
+<div class="flow-node"><strong>ofstream</strong><small>File stream</small></div><div class="flow-arrow">→</div>
+<div class="flow-node"><strong>File</strong><small>.txt storage</small></div>
+</div>
+<p class="visual-note">The object&#x27;s member values are sent to the output stream through a member function.</p></div>
+<div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>Open the file before writing.</li><li>Write all required members.</li><li>Keep the file format consistent for reading later.</li></ul></div>
+<div class="problem-box"><h3>Real-Life Connection</h3><p>Record-based applications can serialize simple object data into text files for later retrieval.</p></div>
+<div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>Open the file before writing.</li><li>Write all required members.</li><li>Keep the file format consistent for reading later.</li></ul></div>
+<div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Forgetting a member</h4><p>Write every required field.</p></div><div class="error-card"><h4>Wrong stream</h4><p>The function needs an output stream.</p></div><div class="error-card"><h4>Missing string</h4><p>Include &lt;string&gt;.</p></div></div></div>
+</div>
+<div class="mini-problem " id="fo2">
+<div class="problem-heading"><span class="section-label">PROBLEM</span><h2>Read Objects from File</h2></div>
+<div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to read Student object data from a text file and display it.</p></div>
+<div class="problem-box"><h3>Theory / Concept</h3><p>An object&#x27;s state stored in a text file can be loaded by reading the fields back into an object. The file layout must match the reading sequence.</p></div>
+<div class="syntax-block"><div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>File Handling Syntax</h3></div><div class="code-window"><pre><code>void readFromFile(ifstream &amp;file)
+{
+    file &gt;&gt; rollNo;
+    file &gt;&gt; name;
+    file &gt;&gt; marks;
+}</code></pre></div></div>
+<div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Create the Student class.</li><li>Create an object.</li><li>Open the file using ifstream.</li><li>Read the stored fields into the object.</li><li>Display the object&#x27;s details.</li><li>Close the file.</li></ol></div>
+<div class="problem-box"><h3>C++ Program</h3><div class="code-window"><pre><code>#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+class Student
+{
+public:
+    int rollNo;
+    string name;
+    float marks;
+
+    void readFromFile(ifstream &amp;file)
+    {
+        file &gt;&gt; rollNo;
+        file &gt;&gt; name;
+        file &gt;&gt; marks;
+    }
+
+    void display()
+    {
+        cout &lt;&lt; &quot;Roll No: &quot; &lt;&lt; rollNo &lt;&lt; endl;
+        cout &lt;&lt; &quot;Name: &quot; &lt;&lt; name &lt;&lt; endl;
+        cout &lt;&lt; &quot;Marks: &quot; &lt;&lt; marks &lt;&lt; endl;
+    }
+};
+
+int main()
+{
+    Student s;
+
+    ifstream file(&quot;student_object.txt&quot;);
+
+    s.readFromFile(file);
+
+    file.close();
+
+    s.display();
+
+    return 0;
+}</code></pre></div></div>
+<div class="problem-box"><h3>Expected Output</h3><div class="output-box"><pre>Roll No: 101
+Name: Asha
+Marks: 87.5</pre></div></div>
+<div class="visual-card"><span class="section-label">VISUAL EXPLANATION</span><h3>How Data Moves</h3>
+<div class="file-flow">
+<div class="flow-node"><strong>Program</strong><small>Memory / variables</small></div><div class="flow-arrow">→</div>
+<div class="flow-node"><strong>ifstream</strong><small>File stream</small></div><div class="flow-arrow">→</div>
+<div class="flow-node"><strong>File</strong><small>.txt storage</small></div>
+</div>
+<p class="visual-note">The readFromFile() member function reconstructs the object state from the stored fields.</p></div>
+<div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>Read in the same order as written.</li><li>Use compatible data types.</li><li>Display the reconstructed object after reading.</li></ul></div>
+<div class="problem-box"><h3>Real-Life Connection</h3><p>Loading objects from files is a basic form of persistence used in record-management applications.</p></div>
+<div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>Read in the same order as written.</li><li>Use compatible data types.</li><li>Display the reconstructed object after reading.</li></ul></div>
+<div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Wrong order</h4><p>Match the stored file layout.</p></div><div class="error-card"><h4>Names with spaces</h4><p>Use getline() if full names are required.</p></div><div class="error-card"><h4>Missing file check</h4><p>A robust program should verify that the file opened.</p></div></div></div>
+</div>
+<div class="mini-problem " id="fo3">
+<div class="problem-heading"><span class="section-label">PROBLEM</span><h2>Student Record Management</h2></div>
+<div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to write and then read a Student object using file handling.</p></div>
+<div class="problem-box"><h3>Theory / Concept</h3><p>This combines writing and reading object data in one program. The same text-file format is used for persistence and retrieval.</p></div>
+<div class="syntax-block"><div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>File Handling Syntax</h3></div><div class="code-window"><pre><code>ofstream out(&quot;student.txt&quot;);
+out &lt;&lt; rollNo &lt;&lt; endl;
+out &lt;&lt; name &lt;&lt; endl;
+out &lt;&lt; marks &lt;&lt; endl;
+out.close();
+
+ifstream in(&quot;student.txt&quot;);
+in &gt;&gt; rollNo &gt;&gt; name &gt;&gt; marks;
+in.close();</code></pre></div></div>
+<div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Create a Student object.</li><li>Open the file for output.</li><li>Write the object&#x27;s fields.</li><li>Close the output stream.</li><li>Open the same file for input.</li><li>Read the fields into the object.</li><li>Display the record.</li><li>Close the input stream.</li></ol></div>
+<div class="problem-box"><h3>C++ Program</h3><div class="code-window"><pre><code>#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+class Student
+{
+public:
+    int rollNo;
+    string name;
+    float marks;
+
+    void writeToFile(ofstream &amp;file)
+    {
+        file &lt;&lt; rollNo &lt;&lt; endl;
+        file &lt;&lt; name &lt;&lt; endl;
+        file &lt;&lt; marks &lt;&lt; endl;
+    }
+
+    void readFromFile(ifstream &amp;file)
+    {
+        file &gt;&gt; rollNo;
+        file &gt;&gt; name;
+        file &gt;&gt; marks;
+    }
+
+    void display()
+    {
+        cout &lt;&lt; &quot;Roll No: &quot; &lt;&lt; rollNo &lt;&lt; endl;
+        cout &lt;&lt; &quot;Name: &quot; &lt;&lt; name &lt;&lt; endl;
+        cout &lt;&lt; &quot;Marks: &quot; &lt;&lt; marks &lt;&lt; endl;
+    }
+};
+
+int main()
+{
+    Student s;
+    s.rollNo = 102;
+    s.name = &quot;Neha&quot;;
+    s.marks = 91.0f;
+
+    ofstream out(&quot;student_record.txt&quot;);
+    s.writeToFile(out);
+    out.close();
+
+    Student loaded;
+
+    ifstream in(&quot;student_record.txt&quot;);
+    loaded.readFromFile(in);
+    in.close();
+
+    cout &lt;&lt; &quot;Record read from file:&quot; &lt;&lt; endl;
+    loaded.display();
+
+    return 0;
+}</code></pre></div></div>
+<div class="problem-box"><h3>Expected Output</h3><div class="output-box"><pre>Record read from file:
+Roll No: 102
+Name: Neha
+Marks: 91</pre></div></div>
+<div class="visual-card"><span class="section-label">VISUAL EXPLANATION</span><h3>How Data Moves</h3>
+<div class="file-flow">
+<div class="flow-node"><strong>Program</strong><small>Memory / variables</small></div><div class="flow-arrow">→</div>
+<div class="flow-node"><strong>ifstream</strong><small>File stream</small></div><div class="flow-arrow">→</div>
+<div class="flow-node"><strong>File</strong><small>.txt storage</small></div>
+</div>
+<p class="visual-note">The first object writes its state to the file. A second object reads that state and displays the reconstructed record.</p></div>
+<div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>Use a consistent file format.</li><li>Close output before reopening for input.</li><li>Read into the appropriate object members.</li></ul></div>
+<div class="problem-box"><h3>Real-Life Connection</h3><p>Simple record-management systems can save data between program executions using file handling.</p></div>
+<div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>Use a consistent file format.</li><li>Close output before reopening for input.</li><li>Read into the appropriate object members.</li></ul></div>
+<div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Opening before close</h4><p>Close the output stream before reopening the same file for input.</p></div><div class="error-card"><h4>Wrong object</h4><p>Read into the object intended to hold the loaded record.</p></div><div class="error-card"><h4>Format mismatch</h4><p>The read order must match the write order.</p></div></div></div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="content-section">
+<div class="container">
+<span class="section-label">QUICK SUMMARY</span><h2>Practical 15 at a Glance</h2>
+<div class="content-card">
+<ul class="key-points">
+<li>Include <strong>&lt;fstream&gt;</strong> for C++ file stream classes.</li>
+<li><strong>ofstream</strong> is used for file output and writing.</li>
+<li><strong>ifstream</strong> is used for file input and reading.</li>
+<li>Use <strong>getline()</strong> when complete lines including spaces need to be read.</li>
+<li>Files should be closed after the required operation.</li>
+<li>File contents can be copied or processed sequentially.</li>
+<li>Simple object records can be persisted by writing and reading their member values.</li>
+<li>In robust programs, file-opening and stream-state checks should be performed.</li>
+</ul>
+</div>
+</div>
+</section>
+
+<section class="content-section">
+<div class="container">
+<span class="section-label">VIVA</span><h2>Viva Questions</h2>
+<div class="viva-list">
+<div class="viva-item"><button type="button" class="viva-question"><span>What is file handling?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>File handling is the process of storing data in files and reading or processing that data using a program.</p></div></div>
+<div class="viva-item"><button type="button" class="viva-question"><span>Which header is required for file handling?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>The &lt;fstream&gt; header provides the standard file stream classes.</p></div></div>
+<div class="viva-item"><button type="button" class="viva-question"><span>What is ofstream?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>ofstream is an output file stream used to write data to files.</p></div></div>
+<div class="viva-item"><button type="button" class="viva-question"><span>What is ifstream?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>ifstream is an input file stream used to read data from files.</p></div></div>
+<div class="viva-item"><button type="button" class="viva-question"><span>Why is close() used?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>close() closes an open file stream after the required file operation.</p></div></div>
+<div class="viva-item"><button type="button" class="viva-question"><span>What is the difference between &gt;&gt; and getline()?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>The extraction operator generally reads token-by-token, while getline() reads an entire line, including spaces until the newline.</p></div></div>
+<div class="viva-item"><button type="button" class="viva-question"><span>How can a file be copied in C++?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>Open the source with ifstream, the destination with ofstream, then read from the source and write to the destination.</p></div></div>
+<div class="viva-item"><button type="button" class="viva-question"><span>Why should the file format be consistent?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>The reading code must know the order and representation of stored fields so that the original record can be reconstructed correctly.</p></div></div>
+<div class="viva-item"><button type="button" class="viva-question"><span>Can objects be stored in a text file?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>Yes. The object's member values can be written to a text file and later read back into an object.</p></div></div>
+<div class="viva-item"><button type="button" class="viva-question"><span>What is EOF?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>EOF means end of file. Input operations eventually reach this state when there is no more data to read.</p></div></div>
+<div class="viva-item"><button type="button" class="viva-question"><span>Why is file checking important?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>A program should verify that a file opened successfully before relying on input or output operations.</p></div></div>
+<div class="viva-item"><button type="button" class="viva-question"><span>What is persistent data?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>Persistent data remains available after a program finishes, for example when it is stored in a file.</p></div></div>
+</div>
+</div>
+</section>
+
+</main>
+
+<footer class="footer">
+<div class="footer-content">
+<div class="footer-brand">
+<div class="footer-logo">&lt;/&gt;</div>
+<div class="footer-brand-text">
+<div class="footer-brand-name">Rasika <span>CodeLab</span></div>
+<p class="footer-tagline">Code • Understand • Visualize</p>
+</div>
+</div>
+<div class="footer-copy">© 2026 Rasika CodeLab. Built for practical learning.</div>
+</div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const page = document.querySelector(".practical15-page");
+    if (!page) return;
+
+    const typeTabs = page.querySelectorAll(".main-type-tab");
+    const typePanels = page.querySelectorAll(".type-panel");
+
+    typeTabs.forEach(function(tab) {
+        tab.addEventListener("click", function() {
+            const target = this.getAttribute("data-type");
+            typeTabs.forEach(function(item) { item.classList.remove("active"); });
+            typePanels.forEach(function(panel) { panel.classList.remove("active"); });
+            this.classList.add("active");
+            const selected = page.querySelector("#" + target);
+            if (selected) {
+                selected.classList.add("active");
+                selected.scrollIntoView({behavior:"smooth", block:"start"});
+            }
+        });
+    });
+
+    typePanels.forEach(function(panel) {
+        const problemTabs = panel.querySelectorAll(".mini-problem-tab");
+        const problems = panel.querySelectorAll(".mini-problem");
+
+        problemTabs.forEach(function(tab) {
+            tab.addEventListener("click", function() {
+                const target = this.getAttribute("data-problem");
+                problemTabs.forEach(function(item) { item.classList.remove("active"); });
+                problems.forEach(function(problem) { problem.classList.remove("active"); });
+                this.classList.add("active");
+                const selected = panel.querySelector("#" + target);
+                if (selected) {
+                    selected.classList.add("active");
+                    selected.scrollIntoView({behavior:"smooth", block:"start"});
+                }
+            });
+        });
+    });
+
+    page.querySelectorAll(".viva-question").forEach(function(question) {
+        question.addEventListener("click", function() {
+            this.closest(".viva-item").classList.toggle("active");
+        });
+    });
+});
+</script>
+</body>
+</html>

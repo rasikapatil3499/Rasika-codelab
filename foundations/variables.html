@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>What is a Variable? | Rasika CodeLab</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+    <div class="container nav-container">
+
+        <a href="../index.html" class="logo">
+            <span class="logo-mark">&lt;/&gt;</span>
+            Rasika<span>CodeLab</span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="../index.html">Home</a>
+            <a href="../foundations.html" class="active">Foundations</a>
+            <a href="../practicals.html">Practicals</a>
+            <a href="../about.html">About</a>
+        </nav>
+
+        <button class="menu-btn" aria-label="Open Menu">☰</button>
+
+    </div>
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="detail-hero">
+
+    <div class="container">
+
+        <div class="breadcrumb">
+            <a href="../foundations.html">C++ Foundations</a>
+            <span>›</span>
+            <span>03</span>
+        </div>
+
+        <div class="detail-badge">
+            FOUNDATION 03
+        </div>
+
+        <h1>What is a <span>Variable?</span></h1>
+
+        <p class="detail-intro">
+            A variable is more than just a name in your C++ program.
+            It represents data that the program needs to store and work with.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="detail-page">
+
+    <div class="container detail-container">
+
+
+        <!-- BASIC IDEA -->
+
+        <section class="concept-section">
+
+            <div class="section-label">01 — BASIC IDEA</div>
+
+            <h2>A variable is a named storage location.</h2>
+
+            <p>
+                A variable allows a program to give a name to a piece of
+                stored data. The program can then use that name to access
+                or modify the data.
+            </p>
+
+            <div class="definition-card">
+
+                <div class="definition-icon">x</div>
+
+                <div>
+
+                    <span class="definition-label">
+                        SIMPLE DEFINITION
+                    </span>
+
+                    <p>
+                        A variable is a named location used by a program
+                        to store a value in memory.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- REAL WORLD -->
+
+        <section class="concept-section">
+
+            <div class="section-label">02 — REAL WORLD ANALOGY</div>
+
+            <h2>Think of a labeled box.</h2>
+
+            <p>
+                Imagine several boxes. Each box has a label and contains
+                something inside it.
+            </p>
+
+
+            <div class="variable-analogy">
+
+                <div class="analogy-box">
+
+                    <div class="box-label">
+                        AGE
+                    </div>
+
+                    <div class="box-value">
+                        20
+                    </div>
+
+                </div>
+
+
+                <div class="analogy-box">
+
+                    <div class="box-label">
+                        MARKS
+                    </div>
+
+                    <div class="box-value">
+                        85
+                    </div>
+
+                </div>
+
+
+                <div class="analogy-box">
+
+                    <div class="box-label">
+                        PRICE
+                    </div>
+
+                    <div class="box-value">
+                        499.50
+                    </div>
+
+                </div>
+
+            </div>
+
+            <p class="analogy-caption">
+                The label helps us identify the stored value.
+                A variable works using the same basic idea.
+            </p>
+
+        </section>
+
+
+        <!-- VARIABLE ANATOMY -->
+
+        <section class="concept-section">
+
+            <div class="section-label">03 — ANATOMY OF A VARIABLE</div>
+
+            <h2>What makes up a variable?</h2>
+
+            <p>
+                A variable declaration generally specifies a data type
+                and a variable name. An initial value may also be assigned.
+            </p>
+
+
+            <div class="variable-code">
+
+                <div class="variable-line">
+
+                    <span class="syntax-type">int</span>
+
+                    <span class="syntax-name">age</span>
+
+                    <span class="syntax-equal">=</span>
+
+                    <span class="syntax-value">20</span>
+
+                    <span>;</span>
+
+                </div>
+
+                <div class="variable-labels">
+
+                    <div>
+                        <strong>DATA TYPE</strong>
+                        <small>What kind of value?</small>
+                    </div>
+
+                    <div>
+                        <strong>NAME</strong>
+                        <small>How do we identify it?</small>
+                    </div>
+
+                    <div>
+                        <strong>ASSIGNMENT</strong>
+                        <small>Store a value</small>
+                    </div>
+
+                    <div>
+                        <strong>VALUE</strong>
+                        <small>Data being stored</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- MEMORY VISUALIZATION -->
+
+        <section class="concept-section">
+
+            <div class="section-label">04 — VISUALIZE MEMORY</div>
+
+            <h2>Where does the variable actually exist?</h2>
+
+            <p>
+                When a variable is used during program execution, storage
+                is associated with that variable in the program's memory.
+                The exact address is determined by the running environment.
+            </p>
+
+
+            <div class="memory-demo">
+
+                <div class="memory-demo-header">
+
+                    <div>
+                        <span>VARIABLE</span>
+                        <strong>age</strong>
+                    </div>
+
+                    <div>
+                        <span>TYPE</span>
+                        <strong>int</strong>
+                    </div>
+
+                    <div>
+                        <span>VALUE</span>
+                        <strong>20</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="memory-address">
+
+                    <div class="address-label">
+                        MEMORY
+                    </div>
+
+                    <div class="memory-cell">
+
+                        <div class="address">
+                            0x1004
+                        </div>
+
+                        <div class="cell-content">
+
+                            <strong>20</strong>
+
+                            <small>
+                                value stored for <b>age</b>
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <p class="note-text">
+                <strong>Important:</strong>
+                The address shown above is only a conceptual example.
+                You should not assume that a variable will actually be
+                stored at that address.
+            </p>
+
+        </section>
+
+
+        <!-- CHANGE VALUE -->
+
+        <section class="concept-section">
+
+            <div class="section-label">05 — VARIABLES CAN CHANGE</div>
+
+            <h2>A variable can hold a new value.</h2>
+
+            <p>
+                One important property of a variable is that its stored
+                value can change during program execution.
+            </p>
+
+
+            <div class="change-flow">
+
+                <div class="change-stage">
+
+                    <span>INITIAL VALUE</span>
+
+                    <div class="change-variable">
+                        age
+                    </div>
+
+                    <strong>20</strong>
+
+                </div>
+
+
+                <div class="change-arrow">
+                    →
+                </div>
+
+
+                <div class="change-stage">
+
+                    <span>ASSIGN NEW VALUE</span>
+
+                    <div class="change-variable">
+                        age
+                    </div>
+
+                    <strong>21</strong>
+
+                </div>
+
+
+                <div class="change-arrow">
+                    →
+                </div>
+
+
+                <div class="change-stage active">
+
+                    <span>MEMORY NOW CONTAINS</span>
+
+                    <div class="change-variable">
+                        age
+                    </div>
+
+                    <strong>21</strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="code-example">
+
+                <div class="code-header">
+                    <span>VARIABLE.CPP</span>
+                    <span>EXAMPLE</span>
+                </div>
+
+<pre><code>int age = 20;
+
+age = 21;</code></pre>
+
+            </div>
+
+        </section>
+
+
+        <!-- DATA TYPES -->
+
+        <section class="concept-section">
+
+            <div class="section-label">06 — DATA TYPES</div>
+
+            <h2>Not every variable stores the same kind of data.</h2>
+
+            <p>
+                A data type tells the compiler what kind of value a variable
+                is intended to represent.
+            </p>
+
+
+            <div class="data-type-grid">
+
+                <div class="data-type-card">
+
+                    <div class="type-symbol">42</div>
+
+                    <h3>int</h3>
+
+                    <p>
+                        Typically used for whole numbers.
+                    </p>
+
+                    <code>int age = 20;</code>
+
+                </div>
+
+
+                <div class="data-type-card">
+
+                    <div class="type-symbol">3.14</div>
+
+                    <h3>float</h3>
+
+                    <p>
+                        Used for floating-point values.
+                    </p>
+
+                    <code>float temp = 36.5f;</code>
+
+                </div>
+
+
+                <div class="data-type-card">
+
+                    <div class="type-symbol">A</div>
+
+                    <h3>char</h3>
+
+                    <p>
+                        Used for a single character.
+                    </p>
+
+                    <code>char grade = 'A';</code>
+
+                </div>
+
+
+                <div class="data-type-card">
+
+                    <div class="type-symbol">T/F</div>
+
+                    <h3>bool</h3>
+
+                    <p>
+                        Represents true or false.
+                    </p>
+
+                    <code>bool passed = true;</code>
+
+                </div>
+
+
+                <div class="data-type-card wide">
+
+                    <div class="type-symbol">ABC</div>
+
+                    <div>
+
+                        <h3>string</h3>
+
+                        <p>
+                            Used for sequences of characters.
+                        </p>
+
+                        <code>string name = "Rasika";</code>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- VARIABLE VS VALUE -->
+
+        <section class="concept-section">
+
+            <div class="section-label">07 — IMPORTANT DISTINCTION</div>
+
+            <h2>Variable name ≠ variable value</h2>
+
+            <p>
+                This distinction becomes extremely important when we study
+                memory, pointers and references.
+            </p>
+
+
+            <div class="distinction-box">
+
+                <div class="distinction-name">
+
+                    <span>NAME</span>
+
+                    <strong>age</strong>
+
+                    <small>
+                        Identifies the variable
+                    </small>
+
+                </div>
+
+
+                <div class="distinction-arrow">
+                    →
+                </div>
+
+
+                <div class="distinction-value">
+
+                    <span>VALUE</span>
+
+                    <strong>20</strong>
+
+                    <small>
+                        Data currently stored
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- MULTIPLE VARIABLES -->
+
+        <section class="concept-section">
+
+            <div class="section-label">08 — MULTIPLE VARIABLES</div>
+
+            <h2>A program can work with many variables.</h2>
+
+            <div class="code-example">
+
+                <div class="code-header">
+                    <span>STUDENT.CPP</span>
+                    <span>EXAMPLE</span>
+                </div>
+
+<pre><code>string name = "Riya";
+int age = 20;
+float percentage = 85.5;
+char grade = 'A';
+bool passed = true;</code></pre>
+
+            </div>
+
+
+            <div class="multi-memory">
+
+                <div class="multi-memory-title">
+                    CONCEPTUAL MEMORY VIEW
+                </div>
+
+
+                <div class="memory-item">
+
+                    <span>name</span>
+
+                    <strong>"Riya"</strong>
+
+                </div>
+
+
+                <div class="memory-item">
+
+                    <span>age</span>
+
+                    <strong>20</strong>
+
+                </div>
+
+
+                <div class="memory-item">
+
+                    <span>percentage</span>
+
+                    <strong>85.5</strong>
+
+                </div>
+
+
+                <div class="memory-item">
+
+                    <span>grade</span>
+
+                    <strong>'A'</strong>
+
+                </div>
+
+
+                <div class="memory-item">
+
+                    <span>passed</span>
+
+                    <strong>true</strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- COMMON MISTAKES -->
+
+        <section class="concept-section">
+
+            <div class="section-label">09 — COMMON MISTAKES</div>
+
+            <h2>Things beginners often confuse</h2>
+
+
+            <div class="mistake-grid">
+
+                <div class="mistake-card">
+
+                    <span>01</span>
+
+                    <h3>Using a variable before declaring it</h3>
+
+                    <code>age = 20;</code>
+
+                    <p>
+                        The variable should be declared before it is used.
+                    </p>
+
+                </div>
+
+
+                <div class="mistake-card">
+
+                    <span>02</span>
+
+                    <h3>Using an incompatible value</h3>
+
+                    <code>int age = "twenty";</code>
+
+                    <p>
+                        The value should be appropriate for the variable's type.
+                    </p>
+
+                </div>
+
+
+                <div class="mistake-card">
+
+                    <span>03</span>
+
+                    <h3>Confusing = with ==</h3>
+
+                    <code>age = 20;</code>
+
+                    <p>
+                        <code>=</code> performs assignment, while
+                        <code>==</code> is used for comparison.
+                    </p>
+
+                </div>
+
+
+                <div class="mistake-card">
+
+                    <span>04</span>
+
+                    <h3>Choosing unclear names</h3>
+
+                    <code>x = 85;</code>
+
+                    <p>
+                        Meaningful names such as <code>marks</code>
+                        make programs easier to understand.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- TAKEAWAYS -->
+
+        <section class="takeaway-section">
+
+            <div class="section-label">10 — REMEMBER</div>
+
+            <h2>Key Takeaways</h2>
+
+            <div class="takeaways">
+
+                <div>
+                    <span>✓</span>
+                    A variable is a named location used to work with stored data.
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    A variable has a name, type and value.
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    Variables can be assigned new values.
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    Data types describe the kind of data a variable represents.
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    A variable name identifies the variable; its value is the data.
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    Variables are closely connected with memory.
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- NAVIGATION -->
+
+        <section class="lesson-navigation">
+
+            <a href="execution.html" class="lesson-nav-card">
+
+                <span>←</span>
+
+                <div>
+                    <small>PREVIOUS FOUNDATION</small>
+                    <strong>How a Program Executes</strong>
+                </div>
+
+            </a>
+
+
+            <a href="memory.html" class="lesson-nav-card next">
+
+                <div>
+                    <small>NEXT FOUNDATION</small>
+                    <strong>What is Memory?</strong>
+                </div>
+
+                <span>→</span>
+
+            </a>
+
+        </section>
+
+
+    </div>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <div class="container">
+
+        <div class="footer-content">
+
+            <div>
+
+                <div class="logo">
+                    <span class="logo-mark">&lt;/&gt;</span>
+                    Rasika<span>CodeLab</span>
+                </div>
+
+                <p>
+                    Code • Understand • Visualize
+                </p>
+
+            </div>
+
+            <p class="footer-copy">
+                © 2026 Rasika CodeLab. Built for practical learning.
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<script src="../js/main.js"></script>
+
+</body>
+</html>

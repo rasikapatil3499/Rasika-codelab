@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>What is an Operator? | Rasika CodeLab</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+<header class="navbar">
+    <div class="container nav-container">
+
+        <a href="../index.html" class="logo">
+            <span class="logo-mark">&lt;/&gt;</span>
+            Rasika<span>CodeLab</span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="../index.html">Home</a>
+            <a href="../foundations.html" class="active">Foundations</a>
+            <a href="../practicals.html">Practicals</a>
+            <a href="../about.html">About</a>
+        </nav>
+
+        <button class="menu-btn" aria-label="Open Menu">☰</button>
+
+    </div>
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="detail-hero">
+
+    <div class="container">
+
+        <div class="breadcrumb">
+            <a href="../foundations.html">C++ Foundations</a>
+            <span>›</span>
+            <span>05</span>
+        </div>
+
+        <div class="detail-badge">
+            FOUNDATION 05
+        </div>
+
+        <h1>What is an <span>Operator?</span></h1>
+
+        <p class="detail-intro">
+            Operators are symbols that tell a program to perform an operation
+            on one or more values.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="detail-page">
+
+    <div class="container detail-container">
+
+
+        <!-- BASIC IDEA -->
+
+        <section class="concept-section">
+
+            <div class="section-label">01 — BASIC IDEA</div>
+
+            <h2>An operator performs an operation.</h2>
+
+            <p>
+                In C++, operators are special symbols used to perform
+                calculations, comparisons, assignments and logical operations.
+            </p>
+
+            <div class="definition-card">
+
+                <div class="definition-icon">+</div>
+
+                <div>
+
+                    <span class="definition-label">
+                        SIMPLE DEFINITION
+                    </span>
+
+                    <p>
+                        An operator is a symbol that tells the computer
+                        to perform a specific operation on one or more operands.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- OPERAND -->
+
+        <section class="concept-section">
+
+            <div class="section-label">02 — OPERATOR + OPERAND</div>
+
+            <h2>First understand the operands.</h2>
+
+            <p>
+                The values or variables on which an operator works are called
+                <strong>operands</strong>.
+            </p>
+
+
+            <div class="operator-anatomy">
+
+                <div class="operand-box">
+                    <span>OPERAND</span>
+                    <strong>10</strong>
+                </div>
+
+                <div class="operator-center">
+                    +
+                </div>
+
+                <div class="operand-box">
+                    <span>OPERAND</span>
+                    <strong>20</strong>
+                </div>
+
+                <div class="operator-equals">
+                    =
+                </div>
+
+                <div class="result-box">
+                    <span>RESULT</span>
+                    <strong>30</strong>
+                </div>
+
+            </div>
+
+            <div class="operator-formula">
+
+                <code>10 + 20</code>
+
+                <p>
+                    <strong>10</strong> and <strong>20</strong> are operands,
+                    while <strong>+</strong> is the operator.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- OPERATOR CATEGORIES -->
+
+        <section class="concept-section">
+
+            <div class="section-label">03 — TYPES OF OPERATORS</div>
+
+            <h2>C++ provides different types of operators.</h2>
+
+            <div class="operator-category-grid">
+
+                <div class="operator-category">
+                    <div class="category-symbol">+</div>
+                    <h3>Arithmetic</h3>
+                    <p>Perform mathematical calculations.</p>
+                    <code>+ − * / %</code>
+                </div>
+
+                <div class="operator-category">
+                    <div class="category-symbol">=</div>
+                    <h3>Assignment</h3>
+                    <p>Assign values to variables.</p>
+                    <code>= += -= *= /=</code>
+                </div>
+
+                <div class="operator-category">
+                    <div class="category-symbol">&gt;</div>
+                    <h3>Relational</h3>
+                    <p>Compare two values.</p>
+                    <code>== != &gt; &lt; &gt;= &lt;=</code>
+                </div>
+
+                <div class="operator-category">
+                    <div class="category-symbol">&amp;&amp;</div>
+                    <h3>Logical</h3>
+                    <p>Combine or invert conditions.</p>
+                    <code>&amp;&amp; || !</code>
+                </div>
+
+                <div class="operator-category">
+                    <div class="category-symbol">++</div>
+                    <h3>Increment / Decrement</h3>
+                    <p>Increase or decrease a value by one.</p>
+                    <code>++ --</code>
+                </div>
+
+                <div class="operator-category">
+                    <div class="category-symbol">&amp;</div>
+                    <h3>Other Operators</h3>
+                    <p>Used for special programming operations.</p>
+                    <code>&amp; * ?: ::</code>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ARITHMETIC -->
+
+        <section class="concept-section">
+
+            <div class="section-label">04 — ARITHMETIC OPERATORS</div>
+
+            <h2>Perform mathematical operations.</h2>
+
+            <div class="operator-table">
+
+                <div class="operator-table-head">
+                    <span>OPERATOR</span>
+                    <span>MEANING</span>
+                    <span>EXAMPLE</span>
+                    <span>RESULT</span>
+                </div>
+
+                <div class="operator-table-row">
+                    <strong>+</strong>
+                    <span>Addition</span>
+                    <code>10 + 5</code>
+                    <b>15</b>
+                </div>
+
+                <div class="operator-table-row">
+                    <strong>-</strong>
+                    <span>Subtraction</span>
+                    <code>10 - 5</code>
+                    <b>5</b>
+                </div>
+
+                <div class="operator-table-row">
+                    <strong>*</strong>
+                    <span>Multiplication</span>
+                    <code>10 * 5</code>
+                    <b>50</b>
+                </div>
+
+                <div class="operator-table-row">
+                    <strong>/</strong>
+                    <span>Division</span>
+                    <code>10 / 5</code>
+                    <b>2</b>
+                </div>
+
+                <div class="operator-table-row">
+                    <strong>%</strong>
+                    <span>Remainder</span>
+                    <code>10 % 3</code>
+                    <b>1</b>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- INTERACTIVE STYLE CALCULATION -->
+
+        <section class="concept-section">
+
+            <div class="section-label">05 — VISUALIZE</div>
+
+            <h2>Follow an arithmetic operation.</h2>
+
+            <p>
+                Let's break down the expression:
+                <code>8 + 4</code>
+            </p>
+
+            <div class="operator-visual-flow">
+
+                <div class="visual-number">
+                    <span>OPERAND</span>
+                    <strong>8</strong>
+                </div>
+
+                <div class="visual-operation">
+                    +
+                </div>
+
+                <div class="visual-number">
+                    <span>OPERAND</span>
+                    <strong>4</strong>
+                </div>
+
+                <div class="visual-operation">
+                    →
+                </div>
+
+                <div class="visual-result">
+                    <span>RESULT</span>
+                    <strong>12</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ASSIGNMENT -->
+
+        <section class="concept-section">
+
+            <div class="section-label">06 — ASSIGNMENT OPERATOR</div>
+
+            <h2><code>=</code> means assignment.</h2>
+
+            <p>
+                The assignment operator stores a value in a variable.
+            </p>
+
+            <div class="assignment-flow">
+
+                <div class="assignment-code">
+                    <code>marks = 85;</code>
+                </div>
+
+                <div class="assignment-arrow">
+                    →
+                </div>
+
+                <div class="assignment-memory">
+
+                    <span>VARIABLE</span>
+
+                    <strong>marks</strong>
+
+                    <div class="stored-value">
+                        85
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="explanation-box">
+
+                <div class="explanation-title">
+                    Important
+                </div>
+
+                <ul>
+                    <li>
+                        <code>=</code> is the assignment operator.
+                    </li>
+
+                    <li>
+                        It does not mean "is equal to" in the mathematical sense.
+                    </li>
+
+                    <li>
+                        Comparison for equality uses <code>==</code>.
+                    </li>
+                </ul>
+
+            </div>
+
+        </section>
+
+
+        <!-- RELATIONAL -->
+
+        <section class="concept-section">
+
+            <div class="section-label">07 — RELATIONAL OPERATORS</div>
+
+            <h2>Compare values.</h2>
+
+            <div class="comparison-demo">
+
+                <div class="comparison-value">
+                    20
+                </div>
+
+                <div class="comparison-operator">
+                    &gt;
+                </div>
+
+                <div class="comparison-value">
+                    10
+                </div>
+
+                <div class="comparison-arrow">
+                    →
+                </div>
+
+                <div class="comparison-result">
+                    true
+                </div>
+
+            </div>
+
+
+            <div class="operator-mini-grid">
+
+                <div>
+                    <strong>==</strong>
+                    <span>Equal to</span>
+                </div>
+
+                <div>
+                    <strong>!=</strong>
+                    <span>Not equal to</span>
+                </div>
+
+                <div>
+                    <strong>&gt;</strong>
+                    <span>Greater than</span>
+                </div>
+
+                <div>
+                    <strong>&lt;</strong>
+                    <span>Less than</span>
+                </div>
+
+                <div>
+                    <strong>&gt;=</strong>
+                    <span>Greater or equal</span>
+                </div>
+
+                <div>
+                    <strong>&lt;=</strong>
+                    <span>Less or equal</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- LOGICAL -->
+
+        <section class="concept-section">
+
+            <div class="section-label">08 — LOGICAL OPERATORS</div>
+
+            <h2>Work with conditions.</h2>
+
+            <div class="logical-grid">
+
+                <div class="logical-card">
+
+                    <strong>&amp;&amp;</strong>
+
+                    <h3>AND</h3>
+
+                    <p>
+                        True only when both conditions are true.
+                    </p>
+
+                    <code>true &amp;&amp; true → true</code>
+
+                </div>
+
+
+                <div class="logical-card">
+
+                    <strong>||</strong>
+
+                    <h3>OR</h3>
+
+                    <p>
+                        True when at least one condition is true.
+                    </p>
+
+                    <code>true || false → true</code>
+
+                </div>
+
+
+                <div class="logical-card">
+
+                    <strong>!</strong>
+
+                    <h3>NOT</h3>
+
+                    <p>
+                        Reverses a boolean condition.
+                    </p>
+
+                    <code>!true → false</code>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- INCREMENT -->
+
+        <section class="concept-section">
+
+            <div class="section-label">09 — INCREMENT & DECREMENT</div>
+
+            <h2>Change a value by one.</h2>
+
+            <div class="increment-flow">
+
+                <div class="increment-state">
+                    <span>START</span>
+                    <strong>count = 5</strong>
+                </div>
+
+                <div class="increment-symbol">
+                    ++
+                </div>
+
+                <div class="increment-state active">
+                    <span>AFTER INCREMENT</span>
+                    <strong>count = 6</strong>
+                </div>
+
+            </div>
+
+
+            <div class="code-example">
+
+                <div class="code-header">
+                    <span>INCREMENT.CPP</span>
+                    <span>EXAMPLE</span>
+                </div>
+
+<pre><code>int count = 5;
+
+count++;
+
+cout &lt;&lt; count;</code></pre>
+
+            </div>
+
+        </section>
+
+
+        <!-- OPERATOR IN PROGRAM -->
+
+        <section class="concept-section">
+
+            <div class="section-label">10 — C++ PROGRAM</div>
+
+            <h2>Putting operators together.</h2>
+
+            <div class="code-example">
+
+                <div class="code-header">
+                    <span>OPERATORS.CPP</span>
+                    <span>EXAMPLE</span>
+                </div>
+
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    int a = 10;
+    int b = 5;
+
+    int sum = a + b;
+    int difference = a - b;
+    int product = a * b;
+
+    cout &lt;&lt; sum &lt;&lt; endl;
+    cout &lt;&lt; difference &lt;&lt; endl;
+    cout &lt;&lt; product;
+
+    return 0;
+}</code></pre>
+
+            </div>
+
+
+            <div class="operator-execution">
+
+                <div>
+                    <span>INPUT VALUES</span>
+                    <strong>a = 10, b = 5</strong>
+                </div>
+
+                <div>→</div>
+
+                <div>
+                    <span>OPERATIONS</span>
+                    <strong>+, -, *</strong>
+                </div>
+
+                <div>→</div>
+
+                <div>
+                    <span>RESULTS</span>
+                    <strong>15, 5, 50</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PRECEDENCE -->
+
+        <section class="concept-section">
+
+            <div class="section-label">11 — IMPORTANT</div>
+
+            <h2>Operators don't always execute left-to-right.</h2>
+
+            <p>
+                When an expression contains multiple operators, C++ uses
+                rules such as operator precedence and associativity to
+                determine the order in which operations are performed.
+            </p>
+
+            <div class="precedence-example">
+
+                <div class="precedence-code">
+                    <code>2 + 3 * 4</code>
+                </div>
+
+                <div class="precedence-step">
+                    <span>STEP 1</span>
+                    <strong>3 × 4 = 12</strong>
+                </div>
+
+                <div class="precedence-arrow">→</div>
+
+                <div class="precedence-step">
+                    <span>STEP 2</span>
+                    <strong>2 + 12 = 14</strong>
+                </div>
+
+            </div>
+
+            <div class="explanation-box">
+
+                <div class="explanation-title">
+                    Result
+                </div>
+
+                <p>
+                    <code>2 + 3 * 4</code> produces <strong>14</strong>,
+                    not 20, because multiplication has higher precedence
+                    than addition.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- TAKEAWAYS -->
+
+        <section class="takeaway-section">
+
+            <div class="section-label">12 — REMEMBER</div>
+
+            <h2>Key Takeaways</h2>
+
+            <div class="takeaways">
+
+                <div>
+                    <span>✓</span>
+                    Operators perform operations on operands.
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    Arithmetic operators perform mathematical calculations.
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    Assignment operators store values in variables.
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    Relational operators compare values.
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    Logical operators work with conditions.
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    Operator precedence affects expression evaluation.
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- NAVIGATION -->
+
+        <section class="lesson-navigation">
+
+            <a href="memory.html" class="lesson-nav-card">
+
+                <span>←</span>
+
+                <div>
+                    <small>PREVIOUS FOUNDATION</small>
+                    <strong>What is Memory?</strong>
+                </div>
+
+            </a>
+
+
+            <a href="expressions.html" class="lesson-nav-card next">
+
+                <div>
+                    <small>NEXT FOUNDATION</small>
+                    <strong>What is an Expression?</strong>
+                </div>
+
+                <span>→</span>
+
+            </a>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<footer class="footer">
+
+    <div class="container">
+
+        <div class="footer-content">
+
+            <div>
+
+                <div class="logo">
+                    <span class="logo-mark">&lt;/&gt;</span>
+                    Rasika<span>CodeLab</span>
+                </div>
+
+                <p>
+                    Code • Understand • Visualize
+                </p>
+
+            </div>
+
+            <p class="footer-copy">
+                © 2026 Rasika CodeLab. Built for practical learning.
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<script src="../js/main.js"></script>
+
+</body>
+</html>

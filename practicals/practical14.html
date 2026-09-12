@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Practical 14 | Pointers in C++ | Rasika CodeLab</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+/* PRACTICAL 14 — ALL LOCAL STYLES ARE SCOPED */
+.practical14-page .practical-hero{padding:78px 0 58px}
+.practical14-page .practical-hero h1{font-size:clamp(2.4rem,5vw,4.4rem);line-height:1.05;max-width:850px;margin:12px 0 18px;letter-spacing:-.04em}
+.practical14-page .practical-subtitle{max-width:820px;font-size:16px;line-height:1.75}
+.practical14-page .practical-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.practical14-page .practical-meta span{padding:8px 13px;border:1px solid var(--border);border-radius:999px;background:rgba(255,255,255,.035);font-size:12px;color:var(--text-secondary)}
+.practical14-page .content-section{padding:42px 0}
+.practical14-page .content-card{box-shadow:0 16px 45px rgba(0,0,0,.12)}
+.practical14-page .content-card + .content-card{margin-top:16px}
+.practical14-page .pointer-concept-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:22px}
+.practical14-page .concept-card{padding:24px;background:var(--bg-card);border:1px solid var(--border);border-radius:18px}
+.practical14-page .concept-card h3{margin:12px 0 8px}
+.practical14-page .concept-card p{color:var(--text-secondary);line-height:1.65}
+.practical14-page .concept-number{display:inline-flex;width:36px;height:36px;align-items:center;justify-content:center;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid var(--border);color:var(--accent);font-size:12px;font-weight:800}
+.practical14-page .pointer-flow{display:flex;align-items:center;justify-content:center;gap:12px;overflow-x:auto;padding:10px 0;margin-top:18px}
+.practical14-page .pointer-node{flex:0 0 170px;min-height:84px;padding:17px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:var(--bg-card);border:1px solid var(--border);border-radius:15px}
+.practical14-page .pointer-node strong{margin-bottom:6px}
+.practical14-page .pointer-node small{color:var(--text-secondary);line-height:1.4}
+.practical14-page .accent-node{border-color:var(--accent)}
+.practical14-page .pointer-arrow{font-size:22px;color:var(--accent);font-weight:800}
+.practical14-page .pointer-image-card{margin-top:22px;padding:18px;border:1px solid var(--border);border-radius:20px;background:rgba(255,255,255,.02);text-align:center}
+.practical14-page .pointer-image-card img{display:block;width:100%;height:auto;max-height:760px;object-fit:contain;border-radius:12px}
+.practical14-page .image-caption{margin:14px auto 2px;max-width:850px;color:var(--text-secondary);line-height:1.6;font-size:14px}
+.practical14-page .comparison-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:20px}
+.practical14-page .comparison-card{padding:22px;border:1px solid var(--border);border-radius:17px;background:var(--bg-card)}
+.practical14-page .comparison-card h3{margin-bottom:10px}
+.practical14-page .comparison-card p{margin:0;color:var(--text-secondary);line-height:1.65}
+.practical14-page .main-type-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:28px}
+.practical14-page .main-type-tab{width:100%;min-width:0;min-height:68px;padding:12px 14px;display:flex;align-items:center;justify-content:flex-start;gap:10px;box-sizing:border-box;background:var(--bg-card);border:1px solid var(--border);border-radius:15px;color:var(--text-secondary);font:inherit;font-size:13px;font-weight:700;line-height:1.3;text-align:left;cursor:pointer;transition:.22s ease}
+.practical14-page .main-type-tab>span{flex:0 0 34px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;border-radius:9px;border:1px solid var(--border);background:rgba(255,255,255,.04);color:var(--accent);font-size:11px}
+.practical14-page .main-type-tab:hover{border-color:var(--accent);color:var(--text-primary);transform:translateY(-2px)}
+.practical14-page .main-type-tab.active{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 10px 28px rgba(0,0,0,.22)}
+.practical14-page .main-type-tab.active>span{background:rgba(0,0,0,.13);border-color:rgba(255,255,255,.22);color:#fff}
+.practical14-page .type-panel{display:none;margin-top:28px}
+.practical14-page .type-panel.active{display:block;animation:practical14Fade .35s ease}
+.practical14-page .mini-problem-selector{padding:0 0 14px;border-bottom:1px solid var(--border)}
+.practical14-page .mini-problem-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.practical14-page .mini-problem-tab{width:100%;min-width:0;min-height:58px;padding:11px 14px;display:flex;align-items:center;justify-content:flex-start;gap:10px;box-sizing:border-box;background:rgba(255,255,255,.018);border:1px solid var(--border);border-radius:13px;color:var(--text-secondary);font:inherit;font-size:13px;font-weight:650;line-height:1.3;text-align:left;cursor:pointer;transition:.22s ease}
+.practical14-page .mini-problem-tab>span{flex:0 0 32px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:9px;border:1px solid var(--border);background:rgba(255,255,255,.04);color:var(--accent);font-size:11px;font-weight:800}
+.practical14-page .mini-problem-tab:hover{border-color:var(--accent);color:var(--text-primary);transform:translateY(-2px)}
+.practical14-page .mini-problem-tab.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.practical14-page .mini-problem-tab.active>span{background:rgba(0,0,0,.13);border-color:rgba(255,255,255,.22);color:#fff}
+.practical14-page .mini-problem{display:none;margin-top:32px}
+.practical14-page .mini-problem.active{display:block;animation:practical14Fade .35s ease}
+.practical14-page .problem-heading{padding:8px 0 20px;border-bottom:1px solid var(--border);margin-bottom:22px}
+.practical14-page .problem-heading h2{margin:8px 0 0;font-size:clamp(1.7rem,3vw,2.35rem)}
+.practical14-page .problem-box{padding:24px;margin-bottom:16px;background:rgba(255,255,255,.018);border:1px solid var(--border);border-radius:18px}
+.practical14-page .problem-box h3{margin-bottom:12px}
+.practical14-page .algorithm-list{padding-left:22px}
+.practical14-page .algorithm-list li{margin-bottom:8px;line-height:1.6}
+.practical14-page .code-window{overflow-x:auto;border-radius:14px}
+.practical14-page .output-box{border-radius:14px}
+.practical14-page .visual-card{margin-top:18px;padding:28px;border:1px solid var(--border);border-radius:20px;background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.012))}
+.practical14-page .visual-note{margin:18px auto 0;max-width:850px;text-align:center;color:var(--text-secondary);line-height:1.65}
+.practical14-page .syntax-block{margin-top:20px;margin-bottom:16px;padding:24px;border:1px solid rgba(255,255,255,.08);border-radius:18px;background:linear-gradient(145deg,rgba(150,92,255,.055),rgba(255,255,255,.015))}
+.practical14-page .syntax-heading{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.practical14-page .syntax-heading .section-label{margin:0}
+.practical14-page .syntax-heading h3{margin:0}
+.practical14-page .key-points li{margin-bottom:8px;line-height:1.6}
+.practical14-page .error-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.practical14-page .error-card{padding:18px;border:1px solid var(--border);border-radius:14px;background:var(--bg-card)}
+.practical14-page .error-card h4{margin-bottom:7px}
+.practical14-page .error-card p{margin:0;color:var(--text-secondary);line-height:1.55;font-size:14px}
+.practical14-page .viva-list{display:grid;gap:12px;max-width:920px;margin-top:25px}
+.practical14-page .viva-item{overflow:hidden;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md)}
+.practical14-page .viva-question{width:100%;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:20px 22px;background:transparent;border:none;color:var(--text-primary);font:inherit;font-size:16px;font-weight:600;text-align:left;cursor:pointer}
+.practical14-page .viva-question:hover{background:rgba(255,255,255,.03)}
+.practical14-page .viva-icon{flex:0 0 auto;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);border-radius:50%;color:var(--accent);font-size:22px;transition:.25s ease}
+.practical14-page .viva-answer{display:none;padding:0 22px 22px;color:var(--text-secondary);line-height:1.7}
+.practical14-page .viva-item.active .viva-answer{display:block}
+.practical14-page .viva-item.active .viva-icon{transform:rotate(45deg)}
+@keyframes practical14Fade{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+@media(max-width:950px){
+.practical14-page .main-type-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}
+.practical14-page .error-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.practical14-page .pointer-flow{justify-content:flex-start}
+}
+@media(max-width:700px){
+.practical14-page .practical-hero{padding:55px 0 40px}
+.practical14-page .content-section{padding:30px 0}
+.practical14-page .pointer-concept-grid,.practical14-page .comparison-grid,.practical14-page .error-grid{grid-template-columns:1fr}
+.practical14-page .main-type-tabs,.practical14-page .mini-problem-tabs{grid-template-columns:1fr}
+.practical14-page .problem-box,.practical14-page .visual-card,.practical14-page .syntax-block{padding:20px}
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+<div class="container nav-container">
+<a href="../index.html" class="logo"><span class="logo-symbol">&lt;/&gt;</span><span>Rasika<span class="logo-accent">CodeLab</span></span></a>
+<button class="menu-btn" aria-label="Open menu">☰</button>
+<div class="nav-links">
+<a href="../index.html">Home</a>
+<a href="../foundations/program.html">Foundations</a>
+<a href="index.html" class="active">Practicals</a>
+<a href="../index.html#about">About</a>
+</div>
+</div>
+</nav>
+
+<main class="practical-page practical14-page">
+
+<section class="practical-hero">
+<div class="container">
+<span class="section-label">PRACTICAL 14</span>
+<h1>Pointers in <span class="gradient-text">C++</span></h1>
+<p class="practical-subtitle">Understand how pointers store memory addresses, access data, work with functions and objects, and manage dynamic memory.</p>
+<div class="practical-meta">
+<span>LLO 14.1</span><span>Pointer Basics</span><span>Functions</span><span>Objects</span><span>Dynamic Memory</span>
+</div>
+</div>
+</section>
+
+<section class="content-section">
+<div class="container">
+<span class="section-label">AIM</span><h2>Aim of the Practical</h2>
+<div class="content-card"><p>To implement C++ programs using pointers for accessing variables, passing addresses to functions, working with objects and arrays, and dynamically allocating memory.</p></div>
+</div>
+</section>
+
+<section class="content-section">
+<div class="container">
+<span class="section-label">LEARNING OBJECTIVES</span><h2>What You Will Learn</h2>
+<div class="objective-grid">
+<div class="objective-card"><strong>01</strong><h3>Understand Addresses</h3><p>Understand how a pointer stores the address of another variable or object.</p></div>
+<div class="objective-card"><strong>02</strong><h3>Use Dereferencing</h3><p>Access and modify data through the dereference operator.</p></div>
+<div class="objective-card"><strong>03</strong><h3>Use Pointers with Functions</h3><p>Pass addresses to functions and modify caller-owned data.</p></div>
+<div class="objective-card"><strong>04</strong><h3>Use Dynamic Memory</h3><p>Allocate and release memory using new, delete, new[] and delete[].</p></div>
+</div>
+</div>
+</section>
+
+<section class="content-section">
+<div class="container">
+<span class="section-label">CONCEPT</span><h2>Understanding Pointers</h2>
+
+<div class="content-card">
+<h3>What is a Pointer?</h3>
+<p>A <strong>pointer</strong> is a variable that stores the memory address of another variable or object.</p>
+<div class="pointer-flow">
+<div class="pointer-node"><strong>int value = 25</strong><small>Actual data</small></div>
+<div class="pointer-arrow">←</div>
+<div class="pointer-node accent-node"><strong>int *ptr</strong><small>Stores address</small></div>
+<div class="pointer-arrow">→</div>
+<div class="pointer-node"><strong>*ptr</strong><small>Reads value 25</small></div>
+</div>
+</div>
+
+<div class="pointer-concept-grid">
+<div class="concept-card"><span class="concept-number">01</span><h3>Address-of Operator &amp;</h3><p>The <strong>&amp;</strong> operator obtains the memory address of a variable.</p></div>
+<div class="concept-card"><span class="concept-number">02</span><h3>Dereference Operator *</h3><p>The <strong>*</strong> operator accesses the value stored at the address held by a pointer.</p></div>
+<div class="concept-card"><span class="concept-number">03</span><h3>Arrow Operator -&gt;</h3><p>The <strong>-&gt;</strong> operator accesses members of an object through an object pointer.</p></div>
+<div class="concept-card"><span class="concept-number">04</span><h3>Pointer Arithmetic</h3><p>Adding to a typed pointer moves it by the size of its pointed-to type.</p></div>
+</div>
+
+<div class="content-card">
+<h3>Real-Life Example</h3>
+<p>A pointer can be compared with an address written on a location card. The card does not contain the building itself; it tells you where the building is. Similarly, a pointer stores an address that lets the program reach the data at that location.</p>
+</div>
+
+<div class="content-card">
+<h3>Where and How Are Pointers Used?</h3>
+<div class="comparison-grid">
+<div class="comparison-card"><h3>Functions</h3><p>Pass addresses so functions can modify original variables or receive output through pointer parameters.</p></div>
+<div class="comparison-card"><h3>Arrays</h3><p>Traverse arrays using pointer arithmetic and access elements through dereferencing.</p></div>
+<div class="comparison-card"><h3>Objects</h3><p>Access class members using object pointers and the arrow operator.</p></div>
+<div class="comparison-card"><h3>Dynamic Memory</h3><p>Create memory during runtime using new and release it using delete.</p></div>
+</div>
+</div>
+
+<div class="pointer-image-card">
+<span class="section-label">VISUAL REFERENCE</span>
+<img src="../assets/pointer-visualization.png" alt="Pointer to object, array of objects, pointer to derived class and base class pointer memory diagrams">
+<p class="image-caption">Pointer-to-object, pointer-to-array-of-objects, derived-class pointer and base-class pointer examples. This visual is used as a reference for the object-pointer and polymorphism concepts in this practical.</p>
+</div>
+
+</div>
+</section>
+
+<section class="content-section">
+<div class="container">
+<span class="section-label">PRACTICAL PROBLEMS</span><h2>Explore Pointer Programs</h2>
+
+<div class="main-type-tabs">
+<button type="button" class="main-type-tab active" data-type="pointer-basics"><span>01</span>Pointer Basics</button>
+<button type="button" class="main-type-tab" data-type="pointer-functions"><span>02</span>Pointer and Functions</button>
+<button type="button" class="main-type-tab" data-type="pointer-objects"><span>03</span>Pointer and Objects</button>
+<button type="button" class="main-type-tab" data-type="dynamic-memory"><span>04</span>Dynamic Memory</button>
+</div>
+
+
+<div class="type-panel active" id="pointer-basics">
+    <div class="problem-box type-intro"><span class="section-label">TOPIC 01</span><h2>Pointer Basics</h2>
+    <p>Learn how pointers store addresses, access values and move through arrays.</p></div>
+    <div class="mini-problem-selector"><div class="mini-problem-tabs"><button type="button" class="mini-problem-tab active" data-problem="pb1"><span>01</span>Display Value and Address</button><button type="button" class="mini-problem-tab " data-problem="pb2"><span>02</span>Swap Two Numbers Using Pointers</button><button type="button" class="mini-problem-tab " data-problem="pb3"><span>03</span>Access Array Elements Using Pointer</button></div></div>
+    
+<div class="mini-problem active" id="pb1">
+    <div class="problem-heading"><span class="section-label">POINTER BASICS</span><h2>Display Value and Address</h2></div>
+
+    <div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to create a pointer to an integer variable and display the variable&#x27;s value, its address, and the value stored in the pointer.</p></div>
+    <div class="problem-box"><h3>Theory / Concept</h3><p>A pointer is a variable that stores the memory address of another variable. The address-of operator (&amp;) obtains an address and the dereference operator (*) accesses the value stored at that address.</p></div>
+
+    <div class="syntax-block">
+        <div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Display Value and Address</h3></div>
+        <div class="code-window"><pre><code>int value = 10;
+int *ptr = &amp;value;
+
+cout &lt;&lt; value;
+cout &lt;&lt; &amp;value;
+cout &lt;&lt; *ptr;</code></pre></div>
+    </div>
+
+    <div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Declare an integer variable.</li><li>Declare an integer pointer.</li><li>Store the address of the integer using &amp;.</li><li>Display the variable value and address.</li><li>Dereference the pointer using * and display the value.</li></ol></div>
+
+    <div class="problem-box"><h3>C++ Program</h3>
+        <div class="code-window"><pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    int value = 25;
+    int *ptr = &amp;value;
+
+    cout &lt;&lt; &quot;Value: &quot; &lt;&lt; value &lt;&lt; endl;
+    cout &lt;&lt; &quot;Address: &quot; &lt;&lt; &amp;value &lt;&lt; endl;
+    cout &lt;&lt; &quot;Value using pointer: &quot; &lt;&lt; *ptr &lt;&lt; endl;
+
+    return 0;
+}</code></pre></div>
+    </div>
+
+    <div class="problem-box"><h3>Expected Output</h3>
+        <div class="output-box"><pre>Value: 25
+Address: 0x...
+Value using pointer: 25</pre></div>
+    </div>
+
+    <div class="visual-card">
+        <span class="section-label">VISUAL EXPLANATION</span>
+        <h3>How the Pointer Works</h3>
+        <div class="pointer-flow">
+            <div class="pointer-node"><strong>Variable / Object</strong><small>Stores actual data</small></div>
+            <div class="pointer-arrow">←</div>
+            <div class="pointer-node accent-node"><strong>Pointer</strong><small>Stores its address</small></div>
+            <div class="pointer-arrow">→</div>
+            <div class="pointer-node"><strong>Dereference *</strong><small>Accesses the data</small></div>
+        </div>
+        <p class="visual-note">ptr stores the address of value. Dereferencing ptr gives the value stored at that address.</p>
+    </div>
+
+    <div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>A pointer stores an address.</li><li>&amp; gives an address.</li><li>* dereferences a pointer.</li><li>The pointer type should match the pointed-to data type.</li></ul></div>
+    <div class="problem-box"><h3>Real-Life Connection</h3><p>Pointers are useful when a program needs direct access to a variable&#x27;s memory location, such as in low-level programming and dynamic data structures.</p></div>
+    <div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>A pointer stores an address.</li><li>&amp; gives an address.</li><li>* dereferences a pointer.</li><li>The pointer type should match the pointed-to data type.</li></ul></div>
+
+    <div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Uninitialized pointer</h4><p>Always initialize a pointer before dereferencing it.</p></div><div class="error-card"><h4>Wrong type</h4><p>Use a compatible pointer type, such as int* for an int.</p></div><div class="error-card"><h4>Confusing &amp; and *</h4><p>&amp; obtains an address; * accesses the value at an address.</p></div></div></div>
+</div>
+
+<div class="mini-problem " id="pb2">
+    <div class="problem-heading"><span class="section-label">POINTER BASICS</span><h2>Swap Two Numbers Using Pointers</h2></div>
+
+    <div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to swap two numbers using pointers and a function.</p></div>
+    <div class="problem-box"><h3>Theory / Concept</h3><p>When addresses are passed to a function, the function can modify the original variables through dereferencing. This is a practical use of pass-by-address.</p></div>
+
+    <div class="syntax-block">
+        <div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Swap Two Numbers Using Pointers</h3></div>
+        <div class="code-window"><pre><code>void swapNumbers(int *a, int *b)
+{
+    // use *a and *b
+}</code></pre></div>
+    </div>
+
+    <div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Declare two integer variables.</li><li>Pass their addresses to swapNumbers().</li><li>Store the first value in a temporary variable.</li><li>Assign the second value to the first.</li><li>Assign the temporary value to the second.</li><li>Display the swapped values.</li></ol></div>
+
+    <div class="problem-box"><h3>C++ Program</h3>
+        <div class="code-window"><pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+void swapNumbers(int *a, int *b)
+{
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+int main()
+{
+    int x = 10, y = 20;
+
+    swapNumbers(&amp;x, &amp;y);
+
+    cout &lt;&lt; &quot;After swapping: &quot; &lt;&lt; x &lt;&lt; &quot; &quot; &lt;&lt; y;
+
+    return 0;
+}</code></pre></div>
+    </div>
+
+    <div class="problem-box"><h3>Expected Output</h3>
+        <div class="output-box"><pre>After swapping: 20 10</pre></div>
+    </div>
+
+    <div class="visual-card">
+        <span class="section-label">VISUAL EXPLANATION</span>
+        <h3>How the Pointer Works</h3>
+        <div class="pointer-flow">
+            <div class="pointer-node"><strong>Variable / Object</strong><small>Stores actual data</small></div>
+            <div class="pointer-arrow">←</div>
+            <div class="pointer-node accent-node"><strong>Pointer</strong><small>Stores its address</small></div>
+            <div class="pointer-arrow">→</div>
+            <div class="pointer-node"><strong>Dereference *</strong><small>Accesses the data</small></div>
+        </div>
+        <p class="visual-note">main() sends &amp;x and &amp;y. The function receives their addresses, and *a and *b modify the original variables.</p>
+    </div>
+
+    <div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>Pass addresses using &amp;.</li><li>Dereference parameters using *.</li><li>Changes through the pointer affect the original variables.</li></ul></div>
+    <div class="problem-box"><h3>Real-Life Connection</h3><p>Functions can use addresses to update original data, which is useful in operations such as swapping, sorting and modifying multiple values.</p></div>
+    <div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>Pass addresses using &amp;.</li><li>Dereference parameters using *.</li><li>Changes through the pointer affect the original variables.</li></ul></div>
+
+    <div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Passing values</h4><p>Pass &amp;x and &amp;y when the function expects pointers.</p></div><div class="error-card"><h4>Missing dereference</h4><p>Use *a and *b to access the original values.</p></div><div class="error-card"><h4>Wrong temporary logic</h4><p>Store one value before overwriting it.</p></div></div></div>
+</div>
+
+<div class="mini-problem " id="pb3">
+    <div class="problem-heading"><span class="section-label">POINTER BASICS</span><h2>Access Array Elements Using Pointer</h2></div>
+
+    <div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to access and display array elements using a pointer.</p></div>
+    <div class="problem-box"><h3>Theory / Concept</h3><p>The name of an array represents the address of its first element in most expressions. A pointer can move through the array using pointer arithmetic.</p></div>
+
+    <div class="syntax-block">
+        <div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Access Array Elements Using Pointer</h3></div>
+        <div class="code-window"><pre><code>int arr[5] = {10, 20, 30, 40, 50};
+int *ptr = arr;
+
+cout &lt;&lt; *(ptr + i);</code></pre></div>
+    </div>
+
+    <div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Create an integer array.</li><li>Declare a pointer and assign the array&#x27;s first-element address.</li><li>Use pointer arithmetic to move through the array.</li><li>Dereference the pointer at each position.</li><li>Display all elements.</li></ol></div>
+
+    <div class="problem-box"><h3>C++ Program</h3>
+        <div class="code-window"><pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    int arr[5] = {10, 20, 30, 40, 50};
+    int *ptr = arr;
+
+    for (int i = 0; i &lt; 5; i++)
+    {
+        cout &lt;&lt; *(ptr + i) &lt;&lt; &quot; &quot;;
+    }
+
+    return 0;
+}</code></pre></div>
+    </div>
+
+    <div class="problem-box"><h3>Expected Output</h3>
+        <div class="output-box"><pre>10 20 30 40 50</pre></div>
+    </div>
+
+    <div class="visual-card">
+        <span class="section-label">VISUAL EXPLANATION</span>
+        <h3>How the Pointer Works</h3>
+        <div class="pointer-flow">
+            <div class="pointer-node"><strong>Variable / Object</strong><small>Stores actual data</small></div>
+            <div class="pointer-arrow">←</div>
+            <div class="pointer-node accent-node"><strong>Pointer</strong><small>Stores its address</small></div>
+            <div class="pointer-arrow">→</div>
+            <div class="pointer-node"><strong>Dereference *</strong><small>Accesses the data</small></div>
+        </div>
+        <p class="visual-note">ptr points to arr[0]. ptr + 1 points to the next integer element, so *(ptr + i) accesses arr[i].</p>
+    </div>
+
+    <div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>Array name gives the first-element address in this context.</li><li>ptr+i moves by i elements, not i bytes.</li><li>*(ptr+i) accesses the element.</li></ul></div>
+    <div class="problem-box"><h3>Real-Life Connection</h3><p>Pointers are commonly used to traverse arrays efficiently and form the basis of many data structures and algorithms.</p></div>
+    <div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>Array name gives the first-element address in this context.</li><li>ptr+i moves by i elements, not i bytes.</li><li>*(ptr+i) accesses the element.</li></ul></div>
+
+    <div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Out of bounds</h4><p>Only access valid array indexes.</p></div><div class="error-card"><h4>Wrong arithmetic</h4><p>Use pointer arithmetic according to the pointer&#x27;s type.</p></div><div class="error-card"><h4>Missing *</h4><p>ptr+i is an address; *(ptr+i) is the value.</p></div></div></div>
+</div>
+
+</div>
+
+<div class="type-panel " id="pointer-functions">
+    <div class="problem-box type-intro"><span class="section-label">TOPIC 02</span><h2>Pointer and Functions</h2>
+    <p>Use pointer parameters to read or modify data through functions.</p></div>
+    <div class="mini-problem-selector"><div class="mini-problem-tabs"><button type="button" class="mini-problem-tab active" data-problem="pf1"><span>01</span>Pass by Address</button><button type="button" class="mini-problem-tab " data-problem="pf2"><span>02</span>Return Value Through Pointer</button><button type="button" class="mini-problem-tab " data-problem="pf3"><span>03</span>Function with Pointer Parameters</button></div></div>
+    
+<div class="mini-problem active" id="pf1">
+    <div class="problem-heading"><span class="section-label">POINTER AND FUNCTIONS</span><h2>Pass by Address</h2></div>
+
+    <div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to modify the value of a variable using a pointer parameter.</p></div>
+    <div class="problem-box"><h3>Theory / Concept</h3><p>Pass-by-address allows a function to receive the memory address of a variable and modify the original data through a pointer.</p></div>
+
+    <div class="syntax-block">
+        <div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Pass by Address</h3></div>
+        <div class="code-window"><pre><code>void update(int *ptr)
+{
+    *ptr = 100;
+}
+
+update(&amp;value);</code></pre></div>
+    </div>
+
+    <div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Declare a variable.</li><li>Create a function with an int pointer parameter.</li><li>Pass the variable&#x27;s address.</li><li>Dereference the pointer inside the function.</li><li>Display the modified value.</li></ol></div>
+
+    <div class="problem-box"><h3>C++ Program</h3>
+        <div class="code-window"><pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+void update(int *ptr)
+{
+    *ptr = 100;
+}
+
+int main()
+{
+    int value = 25;
+
+    update(&amp;value);
+
+    cout &lt;&lt; &quot;Updated value: &quot; &lt;&lt; value;
+
+    return 0;
+}</code></pre></div>
+    </div>
+
+    <div class="problem-box"><h3>Expected Output</h3>
+        <div class="output-box"><pre>Updated value: 100</pre></div>
+    </div>
+
+    <div class="visual-card">
+        <span class="section-label">VISUAL EXPLANATION</span>
+        <h3>How the Pointer Works</h3>
+        <div class="pointer-flow">
+            <div class="pointer-node"><strong>Variable / Object</strong><small>Stores actual data</small></div>
+            <div class="pointer-arrow">←</div>
+            <div class="pointer-node accent-node"><strong>Pointer</strong><small>Stores its address</small></div>
+            <div class="pointer-arrow">→</div>
+            <div class="pointer-node"><strong>Dereference *</strong><small>Accesses the data</small></div>
+        </div>
+        <p class="visual-note">The function receives the address of value. Assigning to *ptr changes the original variable.</p>
+    </div>
+
+    <div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>Pointer parameters receive addresses.</li><li>Use &amp; at the call site.</li><li>Use * inside the function to modify the value.</li></ul></div>
+    <div class="problem-box"><h3>Real-Life Connection</h3><p>Pass-by-address is useful when a function must change caller-owned data.</p></div>
+    <div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>Pointer parameters receive addresses.</li><li>Use &amp; at the call site.</li><li>Use * inside the function to modify the value.</li></ul></div>
+
+    <div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Passing value instead of address</h4><p>Call update(&amp;value).</p></div><div class="error-card"><h4>Dereferencing null</h4><p>Never dereference a null pointer.</p></div><div class="error-card"><h4>Wrong parameter type</h4><p>Use a pointer type compatible with the argument.</p></div></div></div>
+</div>
+
+<div class="mini-problem " id="pf2">
+    <div class="problem-heading"><span class="section-label">POINTER AND FUNCTIONS</span><h2>Return Value Through Pointer</h2></div>
+
+    <div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to calculate the sum of two numbers and store the result in a variable supplied through a pointer.</p></div>
+    <div class="problem-box"><h3>Theory / Concept</h3><p>A pointer parameter can be used as an output parameter. The function writes its result into the memory location supplied by the caller.</p></div>
+
+    <div class="syntax-block">
+        <div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Return Value Through Pointer</h3></div>
+        <div class="code-window"><pre><code>void calculate(int a, int b, int *result)
+{
+    *result = a + b;
+}</code></pre></div>
+    </div>
+
+    <div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Declare two numbers and a result variable.</li><li>Pass the two numbers and address of result.</li><li>Calculate the sum.</li><li>Store the result using *result.</li><li>Display the result.</li></ol></div>
+
+    <div class="problem-box"><h3>C++ Program</h3>
+        <div class="code-window"><pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+void calculate(int a, int b, int *result)
+{
+    *result = a + b;
+}
+
+int main()
+{
+    int a = 15, b = 25;
+    int result;
+
+    calculate(a, b, &amp;result);
+
+    cout &lt;&lt; &quot;Sum: &quot; &lt;&lt; result;
+
+    return 0;
+}</code></pre></div>
+    </div>
+
+    <div class="problem-box"><h3>Expected Output</h3>
+        <div class="output-box"><pre>Sum: 40</pre></div>
+    </div>
+
+    <div class="visual-card">
+        <span class="section-label">VISUAL EXPLANATION</span>
+        <h3>How the Pointer Works</h3>
+        <div class="pointer-flow">
+            <div class="pointer-node"><strong>Variable / Object</strong><small>Stores actual data</small></div>
+            <div class="pointer-arrow">←</div>
+            <div class="pointer-node accent-node"><strong>Pointer</strong><small>Stores its address</small></div>
+            <div class="pointer-arrow">→</div>
+            <div class="pointer-node"><strong>Dereference *</strong><small>Accesses the data</small></div>
+        </div>
+        <p class="visual-note">result is supplied by address. The function writes 40 into that memory location.</p>
+    </div>
+
+    <div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>Pass &amp;result.</li><li>Assign through *result.</li><li>The result variable exists in main().</li></ul></div>
+    <div class="problem-box"><h3>Real-Life Connection</h3><p>Output parameters are useful when a function needs to return calculated data through caller-provided storage.</p></div>
+    <div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>Pass &amp;result.</li><li>Assign through *result.</li><li>The result variable exists in main().</li></ul></div>
+
+    <div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Uninitialized output use</h4><p>Assign to *result before reading result.</p></div><div class="error-card"><h4>Missing &amp;</h4><p>Pass the address of the output variable.</p></div><div class="error-card"><h4>Wrong pointer</h4><p>The result parameter must be int*.</p></div></div></div>
+</div>
+
+<div class="mini-problem " id="pf3">
+    <div class="problem-heading"><span class="section-label">POINTER AND FUNCTIONS</span><h2>Function with Pointer Parameters</h2></div>
+
+    <div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to find the larger of two numbers using a function that accepts pointer parameters.</p></div>
+    <div class="problem-box"><h3>Theory / Concept</h3><p>Pointer parameters allow the function to read values indirectly from the addresses passed by the caller.</p></div>
+
+    <div class="syntax-block">
+        <div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Function with Pointer Parameters</h3></div>
+        <div class="code-window"><pre><code>int larger(int *a, int *b)
+{
+    return (*a &gt; *b) ? *a : *b;
+}</code></pre></div>
+    </div>
+
+    <div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Declare two integers.</li><li>Pass their addresses to the function.</li><li>Dereference both pointers.</li><li>Compare the values.</li><li>Return the larger value.</li><li>Display it.</li></ol></div>
+
+    <div class="problem-box"><h3>C++ Program</h3>
+        <div class="code-window"><pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+int larger(int *a, int *b)
+{
+    return (*a &gt; *b) ? *a : *b;
+}
+
+int main()
+{
+    int x = 45, y = 32;
+
+    cout &lt;&lt; &quot;Larger value: &quot;
+         &lt;&lt; larger(&amp;x, &amp;y);
+
+    return 0;
+}</code></pre></div>
+    </div>
+
+    <div class="problem-box"><h3>Expected Output</h3>
+        <div class="output-box"><pre>Larger value: 45</pre></div>
+    </div>
+
+    <div class="visual-card">
+        <span class="section-label">VISUAL EXPLANATION</span>
+        <h3>How the Pointer Works</h3>
+        <div class="pointer-flow">
+            <div class="pointer-node"><strong>Variable / Object</strong><small>Stores actual data</small></div>
+            <div class="pointer-arrow">←</div>
+            <div class="pointer-node accent-node"><strong>Pointer</strong><small>Stores its address</small></div>
+            <div class="pointer-arrow">→</div>
+            <div class="pointer-node"><strong>Dereference *</strong><small>Accesses the data</small></div>
+        </div>
+        <p class="visual-note">The function receives addresses, dereferences them and compares the original values.</p>
+    </div>
+
+    <div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>Pass addresses.</li><li>Dereference before comparison.</li><li>The function returns the selected value.</li></ul></div>
+    <div class="problem-box"><h3>Real-Life Connection</h3><p>Pointer parameters can provide a common interface for functions that operate directly on memory locations.</p></div>
+    <div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>Pass addresses.</li><li>Dereference before comparison.</li><li>The function returns the selected value.</li></ul></div>
+
+    <div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Comparing addresses</h4><p>Compare *a and *b, not a and b.</p></div><div class="error-card"><h4>Wrong call</h4><p>Use larger(&amp;x, &amp;y).</p></div><div class="error-card"><h4>Missing return</h4><p>Return the larger value.</p></div></div></div>
+</div>
+
+</div>
+
+<div class="type-panel " id="pointer-objects">
+    <div class="problem-box type-intro"><span class="section-label">TOPIC 03</span><h2>Pointer and Objects</h2>
+    <p>Use pointers with class objects and arrays of objects.</p></div>
+    <div class="mini-problem-selector"><div class="mini-problem-tabs"><button type="button" class="mini-problem-tab active" data-problem="po1"><span>01</span>Pointer to Object</button><button type="button" class="mini-problem-tab " data-problem="po2"><span>02</span>Access Members Using -&gt;</button><button type="button" class="mini-problem-tab " data-problem="po3"><span>03</span>Array of Objects Using Pointer</button></div></div>
+    
+<div class="mini-problem active" id="po1">
+    <div class="problem-heading"><span class="section-label">POINTER AND OBJECTS</span><h2>Pointer to Object</h2></div>
+
+    <div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to create an object and a pointer to that object, then access a member function through the pointer.</p></div>
+    <div class="problem-box"><h3>Theory / Concept</h3><p>A pointer can store the address of a class object. The arrow operator (-&gt;) is used to access members through an object pointer.</p></div>
+
+    <div class="syntax-block">
+        <div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Pointer to Object</h3></div>
+        <div class="code-window"><pre><code>ClassName obj;
+ClassName *ptr = &amp;obj;
+
+ptr-&gt;function();</code></pre></div>
+    </div>
+
+    <div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Create a class with a member function.</li><li>Create an object.</li><li>Create a pointer to the object.</li><li>Store the object&#x27;s address in the pointer.</li><li>Call the member function using -&gt;.</li></ol></div>
+
+    <div class="problem-box"><h3>C++ Program</h3>
+        <div class="code-window"><pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+class Student
+{
+public:
+    void display()
+    {
+        cout &lt;&lt; &quot;Student object accessed using pointer&quot;;
+    }
+};
+
+int main()
+{
+    Student obj;
+    Student *ptr = &amp;obj;
+
+    ptr-&gt;display();
+
+    return 0;
+}</code></pre></div>
+    </div>
+
+    <div class="problem-box"><h3>Expected Output</h3>
+        <div class="output-box"><pre>Student object accessed using pointer</pre></div>
+    </div>
+
+    <div class="visual-card">
+        <span class="section-label">VISUAL EXPLANATION</span>
+        <h3>How the Pointer Works</h3>
+        <div class="pointer-flow">
+            <div class="pointer-node"><strong>Variable / Object</strong><small>Stores actual data</small></div>
+            <div class="pointer-arrow">←</div>
+            <div class="pointer-node accent-node"><strong>Pointer</strong><small>Stores its address</small></div>
+            <div class="pointer-arrow">→</div>
+            <div class="pointer-node"><strong>Dereference *</strong><small>Accesses the data</small></div>
+        </div>
+        <p class="visual-note">ptr stores the address of obj. ptr-&gt;display() accesses the member function through that address.</p>
+    </div>
+
+    <div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>Use ClassName* for an object pointer.</li><li>Store the object&#x27;s address using &amp;.</li><li>Use -&gt; to access members through a pointer.</li></ul></div>
+    <div class="problem-box"><h3>Real-Life Connection</h3><p>Pointers to objects are useful when working with dynamically created objects and polymorphic class hierarchies.</p></div>
+    <div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>Use ClassName* for an object pointer.</li><li>Store the object&#x27;s address using &amp;.</li><li>Use -&gt; to access members through a pointer.</li></ul></div>
+
+    <div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Using . with pointer</h4><p>Use -&gt; when the variable is an object pointer.</p></div><div class="error-card"><h4>Uninitialized pointer</h4><p>Assign a valid object address first.</p></div><div class="error-card"><h4>Wrong class type</h4><p>The pointer should point to a compatible object.</p></div></div></div>
+</div>
+
+<div class="mini-problem " id="po2">
+    <div class="problem-heading"><span class="section-label">POINTER AND OBJECTS</span><h2>Access Members Using -&gt;</h2></div>
+
+    <div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to create an Employee object and access its data members and member function using an object pointer.</p></div>
+    <div class="problem-box"><h3>Theory / Concept</h3><p>The arrow operator provides member access through a pointer. It is equivalent to dereferencing the pointer and then using the dot operator.</p></div>
+
+    <div class="syntax-block">
+        <div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Access Members Using -&gt;</h3></div>
+        <div class="code-window"><pre><code>Employee *ptr = &amp;emp;
+
+ptr-&gt;id;
+ptr-&gt;display();</code></pre></div>
+    </div>
+
+    <div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Define Employee with id and name.</li><li>Create an Employee object.</li><li>Create an Employee pointer.</li><li>Assign the object&#x27;s address.</li><li>Access members using -&gt;.</li><li>Display the details.</li></ol></div>
+
+    <div class="problem-box"><h3>C++ Program</h3>
+        <div class="code-window"><pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+class Employee
+{
+public:
+    int id;
+    string name;
+
+    void display()
+    {
+        cout &lt;&lt; &quot;ID: &quot; &lt;&lt; id &lt;&lt; endl;
+        cout &lt;&lt; &quot;Name: &quot; &lt;&lt; name;
+    }
+};
+
+int main()
+{
+    Employee emp;
+    emp.id = 101;
+    emp.name = &quot;Asha&quot;;
+
+    Employee *ptr = &amp;emp;
+
+    cout &lt;&lt; &quot;ID through pointer: &quot; &lt;&lt; ptr-&gt;id &lt;&lt; endl;
+    cout &lt;&lt; &quot;Name through pointer: &quot; &lt;&lt; ptr-&gt;name &lt;&lt; endl;
+
+    ptr-&gt;display();
+
+    return 0;
+}</code></pre></div>
+    </div>
+
+    <div class="problem-box"><h3>Expected Output</h3>
+        <div class="output-box"><pre>ID through pointer: 101
+Name through pointer: Asha
+ID: 101
+Name: Asha</pre></div>
+    </div>
+
+    <div class="visual-card">
+        <span class="section-label">VISUAL EXPLANATION</span>
+        <h3>How the Pointer Works</h3>
+        <div class="pointer-flow">
+            <div class="pointer-node"><strong>Variable / Object</strong><small>Stores actual data</small></div>
+            <div class="pointer-arrow">←</div>
+            <div class="pointer-node accent-node"><strong>Pointer</strong><small>Stores its address</small></div>
+            <div class="pointer-arrow">→</div>
+            <div class="pointer-node"><strong>Dereference *</strong><small>Accesses the data</small></div>
+        </div>
+        <p class="visual-note">ptr points to emp. The -&gt; operator accesses id, name and display() through the pointer.</p>
+    </div>
+
+    <div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>obj.member uses an object.</li><li>ptr-&gt;member uses an object pointer.</li><li>-&gt; combines dereferencing and member access.</li></ul></div>
+    <div class="problem-box"><h3>Real-Life Connection</h3><p>Object pointers are useful in applications that manage collections of objects or dynamically allocated class instances.</p></div>
+    <div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>obj.member uses an object.</li><li>ptr-&gt;member uses an object pointer.</li><li>-&gt; combines dereferencing and member access.</li></ul></div>
+
+    <div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Using .</h4><p>Use -&gt; for a pointer.</p></div><div class="error-card"><h4>Missing string header</h4><p>Include &lt;string&gt; when using string.</p></div><div class="error-card"><h4>Invalid address</h4><p>Point to a valid Employee object.</p></div></div></div>
+</div>
+
+<div class="mini-problem " id="po3">
+    <div class="problem-heading"><span class="section-label">POINTER AND OBJECTS</span><h2>Array of Objects Using Pointer</h2></div>
+
+    <div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to create an array of Student objects and access each object using a pointer.</p></div>
+    <div class="problem-box"><h3>Theory / Concept</h3><p>A pointer can point to the first object in an array. Incrementing the pointer moves it to the next object because pointer arithmetic uses the size of the pointed-to type.</p></div>
+
+    <div class="syntax-block">
+        <div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Array of Objects Using Pointer</h3></div>
+        <div class="code-window"><pre><code>Student obj[3];
+Student *ptr = obj;
+
+(ptr + i)-&gt;display();</code></pre></div>
+    </div>
+
+    <div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Create an array of Student objects.</li><li>Point a Student pointer to the first object.</li><li>Use pointer arithmetic to reach each object.</li><li>Use -&gt; to call the member function.</li><li>Display all student details.</li></ol></div>
+
+    <div class="problem-box"><h3>C++ Program</h3>
+        <div class="code-window"><pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+class Student
+{
+    int rollNo;
+
+public:
+    Student(int r = 0)
+    {
+        rollNo = r;
+    }
+
+    void display()
+    {
+        cout &lt;&lt; &quot;Roll No: &quot; &lt;&lt; rollNo &lt;&lt; endl;
+    }
+};
+
+int main()
+{
+    Student obj[3] = {Student(101), Student(102), Student(103)};
+    Student *ptr = obj;
+
+    for (int i = 0; i &lt; 3; i++)
+    {
+        (ptr + i)-&gt;display();
+    }
+
+    return 0;
+}</code></pre></div>
+    </div>
+
+    <div class="problem-box"><h3>Expected Output</h3>
+        <div class="output-box"><pre>Roll No: 101
+Roll No: 102
+Roll No: 103</pre></div>
+    </div>
+
+    <div class="visual-card">
+        <span class="section-label">VISUAL EXPLANATION</span>
+        <h3>How the Pointer Works</h3>
+        <div class="pointer-flow">
+            <div class="pointer-node"><strong>Variable / Object</strong><small>Stores actual data</small></div>
+            <div class="pointer-arrow">←</div>
+            <div class="pointer-node accent-node"><strong>Pointer</strong><small>Stores its address</small></div>
+            <div class="pointer-arrow">→</div>
+            <div class="pointer-node"><strong>Dereference *</strong><small>Accesses the data</small></div>
+        </div>
+        <p class="visual-note">ptr starts at obj[0]. ptr+1 points to obj[1], and so on. The -&gt; operator accesses each object&#x27;s member function.</p>
+    </div>
+
+    <div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>Pointer arithmetic advances by object size.</li><li>Use (ptr+i)-&gt;member for the i-th object.</li><li>The pointer should point to the first array element.</li></ul></div>
+    <div class="problem-box"><h3>Real-Life Connection</h3><p>Arrays of objects with pointers are useful when processing many records sequentially.</p></div>
+    <div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>Pointer arithmetic advances by object size.</li><li>Use (ptr+i)-&gt;member for the i-th object.</li><li>The pointer should point to the first array element.</li></ul></div>
+
+    <div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Wrong increment</h4><p>Use ptr+i for the i-th object.</p></div><div class="error-card"><h4>Out of bounds</h4><p>Stay within the array size.</p></div><div class="error-card"><h4>Operator precedence</h4><p>Use parentheses around ptr+i before -&gt; when needed.</p></div></div></div>
+</div>
+
+</div>
+
+<div class="type-panel " id="dynamic-memory">
+    <div class="problem-box type-intro"><span class="section-label">TOPIC 04</span><h2>Dynamic Memory</h2>
+    <p>Allocate and release memory during program execution using new and delete.</p></div>
+    <div class="mini-problem-selector"><div class="mini-problem-tabs"><button type="button" class="mini-problem-tab active" data-problem="dm1"><span>01</span>Dynamic Integer</button><button type="button" class="mini-problem-tab " data-problem="dm2"><span>02</span>Dynamic Array</button><button type="button" class="mini-problem-tab " data-problem="dm3"><span>03</span>Dynamic Object</button></div></div>
+    
+<div class="mini-problem active" id="dm1">
+    <div class="problem-heading"><span class="section-label">DYNAMIC MEMORY</span><h2>Dynamic Integer</h2></div>
+
+    <div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to allocate memory dynamically for one integer, assign a value, display it and release the memory.</p></div>
+    <div class="problem-box"><h3>Theory / Concept</h3><p>Dynamic memory is allocated during program execution using new. The allocated memory should be released using delete when it is no longer needed.</p></div>
+
+    <div class="syntax-block">
+        <div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Dynamic Integer</h3></div>
+        <div class="code-window"><pre><code>int *ptr = new int;
+
+*ptr = 50;
+
+delete ptr;</code></pre></div>
+    </div>
+
+    <div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Declare an integer pointer.</li><li>Allocate memory using new.</li><li>Store a value using dereferencing.</li><li>Display the value.</li><li>Release the allocated memory using delete.</li><li>Set the pointer to nullptr after deletion if it will be reused.</li></ol></div>
+
+    <div class="problem-box"><h3>C++ Program</h3>
+        <div class="code-window"><pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    int *ptr = new int;
+
+    *ptr = 50;
+
+    cout &lt;&lt; &quot;Dynamic value: &quot; &lt;&lt; *ptr &lt;&lt; endl;
+
+    delete ptr;
+    ptr = nullptr;
+
+    return 0;
+}</code></pre></div>
+    </div>
+
+    <div class="problem-box"><h3>Expected Output</h3>
+        <div class="output-box"><pre>Dynamic value: 50</pre></div>
+    </div>
+
+    <div class="visual-card">
+        <span class="section-label">VISUAL EXPLANATION</span>
+        <h3>How the Pointer Works</h3>
+        <div class="pointer-flow">
+            <div class="pointer-node"><strong>Variable / Object</strong><small>Stores actual data</small></div>
+            <div class="pointer-arrow">←</div>
+            <div class="pointer-node accent-node"><strong>Pointer</strong><small>Stores its address</small></div>
+            <div class="pointer-arrow">→</div>
+            <div class="pointer-node"><strong>Dereference *</strong><small>Accesses the data</small></div>
+        </div>
+        <p class="visual-note">new allocates an integer on the free store and returns its address. delete releases that memory.</p>
+    </div>
+
+    <div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>new allocates memory.</li><li>delete releases a single dynamically allocated object.</li><li>Do not use a pointer after deleting its target.</li><li>nullptr represents no valid object.</li></ul></div>
+    <div class="problem-box"><h3>Real-Life Connection</h3><p>Dynamic allocation is useful when the amount of memory needed is determined during program execution.</p></div>
+    <div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>new allocates memory.</li><li>delete releases a single dynamically allocated object.</li><li>Do not use a pointer after deleting its target.</li><li>nullptr represents no valid object.</li></ul></div>
+
+    <div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Memory leak</h4><p>Release dynamically allocated memory.</p></div><div class="error-card"><h4>delete[] mismatch</h4><p>Use delete for one object allocated with new.</p></div><div class="error-card"><h4>Use-after-delete</h4><p>Do not dereference a pointer after delete.</p></div></div></div>
+</div>
+
+<div class="mini-problem " id="dm2">
+    <div class="problem-heading"><span class="section-label">DYNAMIC MEMORY</span><h2>Dynamic Array</h2></div>
+
+    <div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to dynamically allocate an integer array, accept values, display them and release the memory.</p></div>
+    <div class="problem-box"><h3>Theory / Concept</h3><p>The new[] operator allocates an array dynamically. The corresponding delete[] operator must be used to release that array.</p></div>
+
+    <div class="syntax-block">
+        <div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Dynamic Array</h3></div>
+        <div class="code-window"><pre><code>int *arr = new int[n];
+
+delete[] arr;</code></pre></div>
+    </div>
+
+    <div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Accept the array size.</li><li>Allocate n integers using new[].</li><li>Accept values through the pointer.</li><li>Display the elements.</li><li>Release the array using delete[].</li></ol></div>
+
+    <div class="problem-box"><h3>C++ Program</h3>
+        <div class="code-window"><pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    int n;
+
+    cout &lt;&lt; &quot;Enter size: &quot;;
+    cin &gt;&gt; n;
+
+    int *arr = new int[n];
+
+    for (int i = 0; i &lt; n; i++)
+        cin &gt;&gt; arr[i];
+
+    cout &lt;&lt; &quot;Array: &quot;;
+
+    for (int i = 0; i &lt; n; i++)
+        cout &lt;&lt; arr[i] &lt;&lt; &quot; &quot;;
+
+    delete[] arr;
+    arr = nullptr;
+
+    return 0;
+}</code></pre></div>
+    </div>
+
+    <div class="problem-box"><h3>Expected Output</h3>
+        <div class="output-box"><pre>Enter size: 3
+10 20 30
+Array: 10 20 30</pre></div>
+    </div>
+
+    <div class="visual-card">
+        <span class="section-label">VISUAL EXPLANATION</span>
+        <h3>How the Pointer Works</h3>
+        <div class="pointer-flow">
+            <div class="pointer-node"><strong>Variable / Object</strong><small>Stores actual data</small></div>
+            <div class="pointer-arrow">←</div>
+            <div class="pointer-node accent-node"><strong>Pointer</strong><small>Stores its address</small></div>
+            <div class="pointer-arrow">→</div>
+            <div class="pointer-node"><strong>Dereference *</strong><small>Accesses the data</small></div>
+        </div>
+        <p class="visual-note">arr points to the first element of a dynamically allocated array. arr[i] accesses each element.</p>
+    </div>
+
+    <div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>Use new[] for dynamic arrays.</li><li>Use delete[] for memory allocated with new[].</li><li>Check the size before allocating and accessing memory.</li></ul></div>
+    <div class="problem-box"><h3>Real-Life Connection</h3><p>Dynamic arrays are useful when the required collection size is known only at runtime.</p></div>
+    <div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>Use new[] for dynamic arrays.</li><li>Use delete[] for memory allocated with new[].</li><li>Check the size before allocating and accessing memory.</li></ul></div>
+
+    <div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Using delete</h4><p>Use delete[] for an array.</p></div><div class="error-card"><h4>Out of bounds</h4><p>Access only indexes 0 to n-1.</p></div><div class="error-card"><h4>Invalid size</h4><p>Do not allocate an invalid or unintended size.</p></div></div></div>
+</div>
+
+<div class="mini-problem " id="dm3">
+    <div class="problem-heading"><span class="section-label">DYNAMIC MEMORY</span><h2>Dynamic Object</h2></div>
+
+    <div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to create an object dynamically using new, access its member function using -&gt; and release the object using delete.</p></div>
+    <div class="problem-box"><h3>Theory / Concept</h3><p>A class object can be created dynamically using new. The resulting pointer is used with -&gt;, and delete releases the object.</p></div>
+
+    <div class="syntax-block">
+        <div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Dynamic Object</h3></div>
+        <div class="code-window"><pre><code>ClassName *ptr = new ClassName;
+
+ptr-&gt;function();
+
+delete ptr;</code></pre></div>
+    </div>
+
+    <div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Define a class with a member function.</li><li>Allocate the object using new.</li><li>Store its address in a class pointer.</li><li>Access the member function using -&gt;.</li><li>Release the object using delete.</li></ol></div>
+
+    <div class="problem-box"><h3>C++ Program</h3>
+        <div class="code-window"><pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+class Employee
+{
+public:
+    void display()
+    {
+        cout &lt;&lt; &quot;Dynamic Employee object&quot;;
+    }
+};
+
+int main()
+{
+    Employee *ptr = new Employee;
+
+    ptr-&gt;display();
+
+    delete ptr;
+    ptr = nullptr;
+
+    return 0;
+}</code></pre></div>
+    </div>
+
+    <div class="problem-box"><h3>Expected Output</h3>
+        <div class="output-box"><pre>Dynamic Employee object</pre></div>
+    </div>
+
+    <div class="visual-card">
+        <span class="section-label">VISUAL EXPLANATION</span>
+        <h3>How the Pointer Works</h3>
+        <div class="pointer-flow">
+            <div class="pointer-node"><strong>Variable / Object</strong><small>Stores actual data</small></div>
+            <div class="pointer-arrow">←</div>
+            <div class="pointer-node accent-node"><strong>Pointer</strong><small>Stores its address</small></div>
+            <div class="pointer-arrow">→</div>
+            <div class="pointer-node"><strong>Dereference *</strong><small>Accesses the data</small></div>
+        </div>
+        <p class="visual-note">new Employee creates the object dynamically and returns its address. ptr-&gt;display() calls its member function.</p>
+    </div>
+
+    <div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>new creates the object.</li><li>-&gt; accesses members through the pointer.</li><li>delete destroys a single dynamically allocated object.</li></ul></div>
+    <div class="problem-box"><h3>Real-Life Connection</h3><p>Dynamic objects are useful when objects must be created and managed during runtime, especially in data structures.</p></div>
+    <div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>new creates the object.</li><li>-&gt; accesses members through the pointer.</li><li>delete destroys a single dynamically allocated object.</li></ul></div>
+
+    <div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Using delete[]</h4><p>A single object created with new requires delete.</p></div><div class="error-card"><h4>Memory leak</h4><p>Release the dynamically allocated object.</p></div><div class="error-card"><h4>Use-after-delete</h4><p>Do not access the object after delete.</p></div></div></div>
+</div>
+
+</div>
+
+
+</div>
+</section>
+
+<section class="content-section">
+<div class="container">
+<span class="section-label">QUICK SUMMARY</span><h2>Practical 14 at a Glance</h2>
+<div class="content-card">
+<ul class="key-points">
+<li>A pointer stores a memory address.</li>
+<li>&amp; obtains an address and * dereferences a pointer.</li>
+<li>Pointer arithmetic is commonly used to traverse arrays.</li>
+<li>Pointer parameters allow functions to access caller-owned data.</li>
+<li>The -&gt; operator accesses members through an object pointer.</li>
+<li>new allocates dynamic memory and delete releases a single dynamically allocated object.</li>
+<li>new[] allocates a dynamic array and delete[] releases it.</li>
+<li>Always avoid invalid, uninitialized and dangling pointers.</li>
+</ul>
+</div>
+</div>
+</section>
+
+<section class="content-section">
+<div class="container">
+<span class="section-label">VIVA</span><h2>Viva Questions</h2>
+<div class="viva-list">
+<div class="viva-item"><button type="button" class="viva-question"><span>What is a pointer?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>A pointer is a variable that stores the memory address of another variable or object.</p></div></div>
+<div class="viva-item"><button type="button" class="viva-question"><span>What is the use of the &amp; operator?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>It obtains the address of a variable.</p></div></div>
+<div class="viva-item"><button type="button" class="viva-question"><span>What is dereferencing?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>Dereferencing means accessing the value stored at the address held by a pointer using *.</p></div></div>
+<div class="viva-item"><button type="button" class="viva-question"><span>What is the arrow operator?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>The -&gt; operator accesses a class member through an object pointer.</p></div></div>
+<div class="viva-item"><button type="button" class="viva-question"><span>What is pointer arithmetic?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>Pointer arithmetic moves a pointer between elements of a typed array according to the size of the pointed-to type.</p></div></div>
+<div class="viva-item"><button type="button" class="viva-question"><span>What is a null pointer?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>A null pointer does not point to a valid object. In modern C++, nullptr is preferred to represent this state.</p></div></div>
+<div class="viva-item"><button type="button" class="viva-question"><span>What is dynamic memory allocation?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>It is allocating memory during program execution, for example with new.</p></div></div>
+<div class="viva-item"><button type="button" class="viva-question"><span>What is the difference between new and new[]?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>new allocates one object or value, while new[] allocates an array of objects or values.</p></div></div>
+<div class="viva-item"><button type="button" class="viva-question"><span>Why is delete[] used?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>delete[] releases memory allocated with new[].</p></div></div>
+<div class="viva-item"><button type="button" class="viva-question"><span>What is a dangling pointer?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>A dangling pointer refers to memory that is no longer a valid object, such as memory after it has been released.</p></div></div>
+<div class="viva-item"><button type="button" class="viva-question"><span>Can a pointer point to an object?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>Yes. An object pointer can store the address of an object and access its members using -&gt;.</p></div></div>
+<div class="viva-item"><button type="button" class="viva-question"><span>Why should dynamically allocated memory be released?</span><span class="viva-icon">+</span></button><div class="viva-answer"><p>To prevent memory leaks and return memory that is no longer needed to the free store.</p></div></div>
+</div>
+</div>
+</section>
+
+</main>
+
+<footer class="footer">
+<div class="footer-content">
+<div class="footer-brand">
+<div class="footer-logo">&lt;/&gt;</div>
+<div class="footer-brand-text">
+<div class="footer-brand-name">Rasika <span>CodeLab</span></div>
+<p class="footer-tagline">Code • Understand • Visualize</p>
+</div>
+</div>
+<div class="footer-copy">© 2026 Rasika CodeLab. Built for practical learning.</div>
+</div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const page = document.querySelector(".practical14-page");
+    if (!page) return;
+
+    const typeTabs = page.querySelectorAll(".main-type-tab");
+    const typePanels = page.querySelectorAll(".type-panel");
+
+    typeTabs.forEach(function(tab) {
+        tab.addEventListener("click", function() {
+            const target = this.getAttribute("data-type");
+
+            typeTabs.forEach(function(item) { item.classList.remove("active"); });
+            typePanels.forEach(function(panel) { panel.classList.remove("active"); });
+
+            this.classList.add("active");
+            const selected = page.querySelector("#" + target);
+
+            if (selected) {
+                selected.classList.add("active");
+                selected.scrollIntoView({behavior:"smooth", block:"start"});
+            }
+        });
+    });
+
+    typePanels.forEach(function(panel) {
+        const problemTabs = panel.querySelectorAll(".mini-problem-tab");
+        const problems = panel.querySelectorAll(".mini-problem");
+
+        problemTabs.forEach(function(tab) {
+            tab.addEventListener("click", function() {
+                const target = this.getAttribute("data-problem");
+
+                problemTabs.forEach(function(item) { item.classList.remove("active"); });
+                problems.forEach(function(problem) { problem.classList.remove("active"); });
+
+                this.classList.add("active");
+                const selected = panel.querySelector("#" + target);
+
+                if (selected) {
+                    selected.classList.add("active");
+                    selected.scrollIntoView({behavior:"smooth", block:"start"});
+                }
+            });
+        });
+    });
+
+    page.querySelectorAll(".viva-question").forEach(function(question) {
+        question.addEventListener("click", function() {
+            this.closest(".viva-item").classList.toggle("active");
+        });
+    });
+});
+</script>
+</body>
+</html>

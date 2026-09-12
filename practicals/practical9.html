@@ -1,0 +1,2781 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Practical 9 | Array of Objects | Rasika CodeLab</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+
+        /* =====================================================
+           PRACTICAL 9 - EXTRA STYLES
+        ===================================================== */
+
+        .problem-mini-selector {
+            margin-top: 30px;
+        }
+
+        .problem-mini-tabs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .mini-problem {
+            display: none;
+            margin-top: 40px;
+        }
+
+        .mini-problem.active {
+            display: block;
+            animation: practicalFadeIn .35s ease;
+        }
+
+
+        /* =====================================================
+           ARRAY OF OBJECTS VISUAL
+        ===================================================== */
+
+        .object-array-visual {
+            margin-top: 30px;
+            padding: 25px;
+
+            background: rgba(255, 255, 255, .02);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+        }
+
+        .object-array {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .object-box {
+            padding: 20px;
+            text-align: center;
+
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+
+            transition:
+                transform .25s ease,
+                border-color .25s ease;
+        }
+
+        .object-box:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .object-index {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 38px;
+            height: 38px;
+
+            margin-bottom: 12px;
+
+            border-radius: 50%;
+
+            background: rgba(255, 122, 69, .12);
+            color: var(--accent);
+
+            font-weight: 700;
+        }
+
+        .object-box strong {
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .object-box span {
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+
+
+        /* =====================================================
+           ARRAY FLOW
+        ===================================================== */
+
+        .array-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            gap: 15px;
+            margin-top: 25px;
+
+            overflow-x: auto;
+            padding: 10px 5px;
+        }
+
+        .array-flow-node {
+            flex: 0 0 150px;
+
+            padding: 18px;
+
+            text-align: center;
+
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+        }
+
+        .array-flow-node strong {
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .array-flow-node small {
+            color: var(--text-secondary);
+        }
+
+        .array-flow-arrow {
+            color: var(--accent);
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+
+        /* =====================================================
+           VIVA ACCORDION
+        ===================================================== */
+
+        .viva-list {
+            display: grid;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .viva-item {
+            overflow: hidden;
+
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+        }
+
+        .viva-question {
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+
+            padding: 20px 22px;
+
+            background: transparent;
+            border: none;
+
+            color: var(--text-primary);
+
+            font-family: inherit;
+            font-size: 16px;
+            font-weight: 600;
+
+            text-align: left;
+            cursor: pointer;
+
+            transition: background .25s ease;
+        }
+
+        .viva-question:hover {
+            background: rgba(255, 255, 255, .03);
+        }
+
+        .viva-icon {
+            flex: 0 0 auto;
+
+            width: 32px;
+            height: 32px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid var(--border);
+            border-radius: 50%;
+
+            color: var(--accent);
+
+            font-size: 22px;
+            font-weight: 400;
+
+            transition: transform .25s ease;
+        }
+
+        .viva-answer {
+            display: none;
+
+            padding: 0 22px 22px;
+
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .viva-item.active .viva-answer {
+            display: block;
+        }
+
+        .viva-item.active .viva-icon {
+            transform: rotate(45deg);
+        }
+
+        .viva-answer p {
+            margin: 0;
+        }
+
+        .viva-answer .code-window {
+            margin-top: 15px;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 800px) {
+
+            .problem-mini-tabs,
+            .object-array {
+                grid-template-columns: 1fr;
+            }
+
+            .array-flow {
+                justify-content: flex-start;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         NAVBAR
+    ===================================================== -->
+
+    <nav class="navbar">
+
+        <div class="container nav-container">
+
+            <a href="../index.html" class="logo">
+
+                <span class="logo-symbol">
+                    &lt;/&gt;
+                </span>
+
+                <span>
+                    Rasika<span class="logo-accent">CodeLab</span>
+                </span>
+
+            </a>
+
+
+            <button class="menu-btn" aria-label="Open menu">
+                ☰
+            </button>
+
+
+            <div class="nav-links">
+
+                <a href="../index.html">
+                    Home
+                </a>
+
+                <a href="../foundations/program.html">
+                    Foundations
+                </a>
+
+                <a href="index.html" class="active">
+                    Practicals
+                </a>
+
+                <a href="../index.html#about">
+                    About
+                </a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =====================================================
+         MAIN
+    ===================================================== -->
+
+    <main class="practical-page">
+
+
+        <!-- =====================================================
+             HERO
+        ===================================================== -->
+
+        <section class="practical-hero">
+
+            <div class="container">
+
+                <span class="section-label">
+                    PRACTICAL 09
+                </span>
+
+                <h1>
+                    Array of
+                    <span class="gradient-text">
+                        Objects
+                    </span>
+                </h1>
+
+                <p class="practical-subtitle">
+                    Learn how multiple objects of the same class can be stored,
+                    accessed and processed using an array of objects in C++.
+                </p>
+
+
+                <div class="practical-meta">
+
+                    <span>
+                        LLO 9.1
+                    </span>
+
+                    <span>
+                        Classes & Objects
+                    </span>
+
+                    <span>
+                        Array of Objects
+                    </span>
+
+                    <span>
+                        C++ Programming
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             AIM
+        ===================================================== -->
+
+        <section class="content-section">
+
+            <div class="container">
+
+                <span class="section-label">
+                    AIM
+                </span>
+
+                <h2>
+                    Aim of the Practical
+                </h2>
+
+
+                <div class="content-card">
+
+                    <p>
+                        To implement programs that demonstrate the use of
+                        <strong>array of objects</strong> in C++.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             LEARNING OBJECTIVES
+        ===================================================== -->
+
+        <section class="content-section">
+
+            <div class="container">
+
+                <span class="section-label">
+                    LEARNING OBJECTIVES
+                </span>
+
+                <h2>
+                    What You Will Learn
+                </h2>
+
+
+                <div class="objective-grid">
+
+
+                    <div class="objective-card">
+
+                        <strong>
+                            01
+                        </strong>
+
+                        <h3>
+                            Create Objects
+                        </h3>
+
+                        <p>
+                            Create multiple objects of the same class.
+                        </p>
+
+                    </div>
+
+
+                    <div class="objective-card">
+
+                        <strong>
+                            02
+                        </strong>
+
+                        <h3>
+                            Store Objects
+                        </h3>
+
+                        <p>
+                            Store objects inside an array.
+                        </p>
+
+                    </div>
+
+
+                    <div class="objective-card">
+
+                        <strong>
+                            03
+                        </strong>
+
+                        <h3>
+                            Access Objects
+                        </h3>
+
+                        <p>
+                            Access individual objects using array indexing.
+                        </p>
+
+                    </div>
+
+
+                    <div class="objective-card">
+
+                        <strong>
+                            04
+                        </strong>
+
+                        <h3>
+                            Process Records
+                        </h3>
+
+                        <p>
+                            Accept and display multiple records efficiently.
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             MAIN CONCEPT
+        ===================================================== -->
+
+        <section class="content-section">
+
+            <div class="container">
+
+
+                <span class="section-label">
+                    CONCEPT
+                </span>
+
+                <h2>
+                    Understanding Array of Objects
+                </h2>
+
+
+                <!-- THEORY -->
+
+                <div class="content-card">
+
+                    <h3>
+                        What is an Array of Objects?
+                    </h3>
+
+                    <p>
+                        An <strong>array of objects</strong> is a collection of
+                        objects belonging to the same class. Instead of creating
+                        each object separately, we can create multiple objects
+                        using a single array declaration.
+                    </p>
+
+                    <p>
+                        Each element of the array represents one complete object
+                        and contains its own copy of the class data members.
+                    </p>
+
+
+                    <div class="code-window">
+
+<pre><code>class Student
+{
+    int rollNo;
+    string name;
+};
+
+Student s[3];</code></pre>
+
+                    </div>
+
+
+                    <p>
+                        Here,
+                        <strong>s[0]</strong>,
+                        <strong>s[1]</strong> and
+                        <strong>s[2]</strong>
+                        are three different Student objects.
+                    </p>
+
+                </div>
+
+
+
+                <!-- REAL LIFE -->
+
+                <div class="content-card">
+
+                    <h3>
+                        Real-Life Example
+                    </h3>
+
+                    <p>
+                        Consider a college class containing 50 students.
+                        Every student has information such as roll number,
+                        name and marks.
+                    </p>
+
+                    <p>
+                        Creating 50 separate variables would be difficult to
+                        manage. Instead, we can create an array of Student
+                        objects:
+                    </p>
+
+
+                    <div class="code-window">
+
+<pre><code>Student students[50];</code></pre>
+
+                    </div>
+
+
+                    <p>
+                        Each array element represents one student's complete
+                        record.
+                    </p>
+
+                </div>
+
+
+
+                <!-- WHERE AND HOW -->
+
+                <div class="content-card">
+
+                    <h3>
+                        Where & How Is It Used?
+                    </h3>
+
+
+                    <ul class="key-points">
+
+                        <li>
+                            <strong>Student Management:</strong>
+                            Store records of multiple students.
+                        </li>
+
+                        <li>
+                            <strong>Employee Management:</strong>
+                            Store details of employees in an organization.
+                        </li>
+
+                        <li>
+                            <strong>Library Systems:</strong>
+                            Store information about multiple books.
+                        </li>
+
+                        <li>
+                            <strong>Banking Systems:</strong>
+                            Store multiple customer or account objects.
+                        </li>
+
+                        <li>
+                            <strong>Inventory Systems:</strong>
+                            Store multiple product objects.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+
+                <!-- BASIC SYNTAX -->
+
+                <div class="content-card">
+
+                    <h3>
+                        Basic Syntax
+                    </h3>
+
+
+                    <div class="code-window">
+
+<pre><code>class ClassName
+{
+    // data members
+    // member functions
+};
+
+ClassName object[size];</code></pre>
+
+                    </div>
+
+
+                    <p>
+                        To access an individual object:
+                    </p>
+
+
+                    <div class="code-window">
+
+<pre><code>object[index].function();</code></pre>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- VISUALIZATION -->
+
+                <div class="object-array-visual">
+
+                    <h3>
+                        Visualize an Array of Objects
+                    </h3>
+
+                    <p>
+                        One class can create multiple independent objects,
+                        and the array keeps them together in indexed positions.
+                    </p>
+
+
+                    <div class="object-array">
+
+
+                        <div class="object-box">
+
+                            <div class="object-index">
+                                0
+                            </div>
+
+                            <strong>
+                                Object 1
+                            </strong>
+
+                            <span>
+                                Student Record
+                            </span>
+
+                        </div>
+
+
+                        <div class="object-box">
+
+                            <div class="object-index">
+                                1
+                            </div>
+
+                            <strong>
+                                Object 2
+                            </strong>
+
+                            <span>
+                                Student Record
+                            </span>
+
+                        </div>
+
+
+                        <div class="object-box">
+
+                            <div class="object-index">
+                                2
+                            </div>
+
+                            <strong>
+                                Object 3
+                            </strong>
+
+                            <span>
+                                Student Record
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     PROBLEM SELECTOR
+                ================================================= -->
+
+                <div class="problem-selector">
+
+                    <div class="problem-mini-tabs">
+
+
+                        <button
+                            type="button"
+                            class="mini-problem-tab active"
+                            data-problem="problem9-1">
+
+                            <span>
+                                01
+                            </span>
+
+                            Student Details
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="mini-problem-tab"
+                            data-problem="problem9-2">
+
+                            <span>
+                                02
+                            </span>
+
+                            Employee Details
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="mini-problem-tab"
+                            data-problem="problem9-3">
+
+                            <span>
+                                03
+                            </span>
+
+                            Book Details
+
+                        </button>
+
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     PROBLEM 1
+                ================================================= -->
+
+                <div
+                    class="mini-problem active"
+                    id="problem9-1">
+
+
+                    <div class="problem-heading">
+
+                        <span class="section-label">
+                            PROBLEM 01
+                        </span>
+
+                        <h2>
+                            Student Details Using Array of Objects
+                        </h2>
+
+                    </div>
+
+
+
+                    <!-- PROBLEM STATEMENT -->
+
+                    <div class="content-block">
+
+                        <h3>
+                            Problem Statement
+                        </h3>
+
+                        <p>
+                            Write a C++ program to create a class Student
+                            containing roll number, name and marks. Create an
+                            array of three Student objects, accept their details
+                            and display all student records.
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- ALGORITHM -->
+
+                    <div class="content-block">
+
+                        <h3>
+                            Algorithm
+                        </h3>
+
+
+                        <ol class="algorithm-list">
+
+                            <li>
+                                Start the program.
+                            </li>
+
+                            <li>
+                                Define a class named Student.
+                            </li>
+
+                            <li>
+                                Declare roll number, name and marks as data members.
+                            </li>
+
+                            <li>
+                                Define member functions to accept and display details.
+                            </li>
+
+                            <li>
+                                Create an array of three Student objects.
+                            </li>
+
+                            <li>
+                                Use a loop to accept details of all students.
+                            </li>
+
+                            <li>
+                                Use another loop to display all student records.
+                            </li>
+
+                            <li>
+                                Stop the program.
+                            </li>
+
+                        </ol>
+
+                    </div>
+
+
+
+                    <!-- PROGRAM -->
+
+                    <div class="content-block">
+
+                        <h3>
+                            C++ Program
+                        </h3>
+
+
+                        <div class="code-window">
+
+<pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+using namespace std;
+
+class Student
+{
+    int rollNo;
+    string name;
+    float marks;
+
+public:
+
+    void accept()
+    {
+        cout &lt;&lt; "Enter Roll No: ";
+        cin &gt;&gt; rollNo;
+
+        cout &lt;&lt; "Enter Name: ";
+        cin &gt;&gt; name;
+
+        cout &lt;&lt; "Enter Marks: ";
+        cin &gt;&gt; marks;
+    }
+
+    void display()
+    {
+        cout &lt;&lt; rollNo &lt;&lt; "\t"
+             &lt;&lt; name &lt;&lt; "\t"
+             &lt;&lt; marks &lt;&lt; endl;
+    }
+};
+
+int main()
+{
+    Student s[3];
+
+    cout &lt;&lt; "Enter details of 3 students\n";
+
+    for(int i = 0; i &lt; 3; i++)
+    {
+        cout &lt;&lt; "\nStudent " &lt;&lt; i + 1 &lt;&lt; endl;
+
+        s[i].accept();
+    }
+
+    cout &lt;&lt; "\nStudent Details\n";
+
+    for(int i = 0; i &lt; 3; i++)
+    {
+        s[i].display();
+    }
+
+    return 0;
+}</code></pre>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- OUTPUT -->
+
+                    <div class="content-block">
+
+                        <h3>
+                            Expected Output
+                        </h3>
+
+
+                        <div class="output-box">
+
+<pre>Enter details of 3 students
+
+Student 1
+Enter Roll No: 101
+Enter Name: Rahul
+Enter Marks: 85
+
+Student 2
+Enter Roll No: 102
+Enter Name: Priya
+Enter Marks: 91
+
+Student 3
+Enter Roll No: 103
+Enter Name: Amit
+Enter Marks: 78
+
+Student Details
+101     Rahul   85
+102     Priya   91
+103     Amit    78</pre>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- VISUALIZATION -->
+
+                    <div class="visualization-section">
+
+                        <div class="visualization-header">
+
+                            <span class="section-label">
+                                VISUAL EXPLANATION
+                            </span>
+
+                            <h3>
+                                Three Objects, One Array
+                            </h3>
+
+                        </div>
+
+
+                        <div class="array-flow">
+
+
+                            <div class="array-flow-node">
+
+                                <strong>
+                                    Student s[3]
+                                </strong>
+
+                                <small>
+                                    Array
+                                </small>
+
+                            </div>
+
+
+                            <div class="array-flow-arrow">
+                                →
+                            </div>
+
+
+                            <div class="array-flow-node">
+
+                                <strong>
+                                    s[0]
+                                </strong>
+
+                                <small>
+                                    Rahul
+                                </small>
+
+                            </div>
+
+
+                            <div class="array-flow-arrow">
+                                →
+                            </div>
+
+
+                            <div class="array-flow-node">
+
+                                <strong>
+                                    s[1]
+                                </strong>
+
+                                <small>
+                                    Priya
+                                </small>
+
+                            </div>
+
+
+                            <div class="array-flow-arrow">
+                                →
+                            </div>
+
+
+                            <div class="array-flow-node">
+
+                                <strong>
+                                    s[2]
+                                </strong>
+
+                                <small>
+                                    Amit
+                                </small>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- EXPLANATION -->
+
+                    <div class="content-block">
+
+                        <h3>
+                            Program Explanation
+                        </h3>
+
+
+                        <ul class="key-points">
+
+                            <li>
+                                <strong>Student s[3]</strong>
+                                creates three Student objects.
+                            </li>
+
+                            <li>
+                                <strong>s[i].accept()</strong>
+                                calls the accept function for each object.
+                            </li>
+
+                            <li>
+                                <strong>s[i].display()</strong>
+                                displays the data stored in each object.
+                            </li>
+
+                            <li>
+                                The loop allows the same function to process
+                                every object.
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+
+                    <!-- REAL LIFE -->
+
+                    <div class="content-block">
+
+                        <h3>
+                            Real-Life Connection
+                        </h3>
+
+                        <p>
+                            A college management system can store the details
+                            of many students using an array of Student objects.
+                            Each object represents one student's complete record.
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- KEY POINTS -->
+
+                    <div class="content-block">
+
+                        <h3>
+                            Key Points
+                        </h3>
+
+
+                        <ul class="key-points">
+
+                            <li>
+                                All objects belong to the same class.
+                            </li>
+
+                            <li>
+                                Array indexing starts from 0.
+                            </li>
+
+                            <li>
+                                Each object has its own copy of non-static data members.
+                            </li>
+
+                            <li>
+                                Member functions are called using the specific
+                                array element.
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+
+                    <!-- COMMON ERRORS -->
+
+                    <div class="content-block">
+
+                        <h3>
+                            Common Errors
+                        </h3>
+
+
+                        <div class="error-grid">
+
+
+                            <div class="error-card">
+
+                                <h4>
+                                    Wrong Array Size
+                                </h4>
+
+                                <p>
+                                    Make sure the array size matches the number
+                                    of objects required.
+                                </p>
+
+                            </div>
+
+
+                            <div class="error-card">
+
+                                <h4>
+                                    Wrong Index
+                                </h4>
+
+                                <p>
+                                    Remember that array indexing starts from 0.
+                                </p>
+
+                            </div>
+
+
+                            <div class="error-card">
+
+                                <h4>
+                                    Missing Object Access
+                                </h4>
+
+                                <p>
+                                    Use
+                                    <strong>
+                                        object[index].function()
+                                    </strong>
+                                    to call a member function.
+                                </p>
+
+                            </div>
+
+
+                            <div class="error-card">
+
+                                <h4>
+                                    Loop Condition
+                                </h4>
+
+                                <p>
+                                    Ensure the loop does not access an index
+                                    outside the array.
+                                </p>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     PROBLEM 2
+                ================================================= -->
+
+                <div
+                    class="mini-problem"
+                    id="problem9-2">
+
+
+                    <div class="problem-heading">
+
+                        <span class="section-label">
+                            PROBLEM 02
+                        </span>
+
+                        <h2>
+                            Employee Details Using Array of Objects
+                        </h2>
+
+                    </div>
+
+
+
+                    <!-- PROBLEM -->
+
+                    <div class="content-block">
+
+                        <h3>
+                            Problem Statement
+                        </h3>
+
+                        <p>
+                            Write a C++ program to create a class Employee
+                            containing employee ID, name and salary. Create
+                            an array of three Employee objects, accept employee
+                            details and display all records.
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- ALGORITHM -->
+
+                    <div class="content-block">
+
+                        <h3>
+                            Algorithm
+                        </h3>
+
+
+                        <ol class="algorithm-list">
+
+                            <li>
+                                Start the program.
+                            </li>
+
+                            <li>
+                                Define the Employee class.
+                            </li>
+
+                            <li>
+                                Declare employee ID, name and salary.
+                            </li>
+
+                            <li>
+                                Define functions to accept and display employee details.
+                            </li>
+
+                            <li>
+                                Create an array containing three Employee objects.
+                            </li>
+
+                            <li>
+                                Accept details using a loop.
+                            </li>
+
+                            <li>
+                                Display all employee records using another loop.
+                            </li>
+
+                            <li>
+                                Stop the program.
+                            </li>
+
+                        </ol>
+
+                    </div>
+
+
+
+                    <!-- PROGRAM -->
+
+                    <div class="content-block">
+
+                        <h3>
+                            C++ Program
+                        </h3>
+
+
+                        <div class="code-window">
+
+<pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+using namespace std;
+
+class Employee
+{
+    int empId;
+    string name;
+    float salary;
+
+public:
+
+    void accept()
+    {
+        cout &lt;&lt; "Enter Employee ID: ";
+        cin &gt;&gt; empId;
+
+        cout &lt;&lt; "Enter Name: ";
+        cin &gt;&gt; name;
+
+        cout &lt;&lt; "Enter Salary: ";
+        cin &gt;&gt; salary;
+    }
+
+    void display()
+    {
+        cout &lt;&lt; empId &lt;&lt; "\t"
+             &lt;&lt; name &lt;&lt; "\t"
+             &lt;&lt; salary &lt;&lt; endl;
+    }
+};
+
+int main()
+{
+    Employee e[3];
+
+    cout &lt;&lt; "Enter details of 3 employees\n";
+
+    for(int i = 0; i &lt; 3; i++)
+    {
+        cout &lt;&lt; "\nEmployee " &lt;&lt; i + 1 &lt;&lt; endl;
+
+        e[i].accept();
+    }
+
+    cout &lt;&lt; "\nEmployee Details\n";
+
+    for(int i = 0; i &lt; 3; i++)
+    {
+        e[i].display();
+    }
+
+    return 0;
+}</code></pre>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- OUTPUT -->
+
+                    <div class="content-block">
+
+                        <h3>
+                            Expected Output
+                        </h3>
+
+
+                        <div class="output-box">
+
+<pre>Enter details of 3 employees
+
+Employee 1
+Enter Employee ID: 201
+Enter Name: Neha
+Enter Salary: 35000
+
+Employee 2
+Enter Employee ID: 202
+Enter Name: Rohit
+Enter Salary: 42000
+
+Employee 3
+Enter Employee ID: 203
+Enter Name: Sneha
+Enter Salary: 39000
+
+Employee Details
+201     Neha    35000
+202     Rohit   42000
+203     Sneha   39000</pre>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- VISUAL -->
+
+                    <div class="visualization-section">
+
+                        <div class="visualization-header">
+
+                            <span class="section-label">
+                                VISUAL EXPLANATION
+                            </span>
+
+                            <h3>
+                                Employee Objects in Memory
+                            </h3>
+
+                        </div>
+
+
+                        <div class="object-array">
+
+
+                            <div class="object-box">
+
+                                <div class="object-index">
+                                    0
+                                </div>
+
+                                <strong>
+                                    e[0]
+                                </strong>
+
+                                <span>
+                                    ID: 201<br>
+                                    Name: Neha<br>
+                                    Salary: ₹35000
+                                </span>
+
+                            </div>
+
+
+                            <div class="object-box">
+
+                                <div class="object-index">
+                                    1
+                                </div>
+
+                                <strong>
+                                    e[1]
+                                </strong>
+
+                                <span>
+                                    ID: 202<br>
+                                    Name: Rohit<br>
+                                    Salary: ₹42000
+                                </span>
+
+                            </div>
+
+
+                            <div class="object-box">
+
+                                <div class="object-index">
+                                    2
+                                </div>
+
+                                <strong>
+                                    e[2]
+                                </strong>
+
+                                <span>
+                                    ID: 203<br>
+                                    Name: Sneha<br>
+                                    Salary: ₹39000
+                                </span>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- EXPLANATION -->
+
+                    <div class="content-block">
+
+                        <h3>
+                            Program Explanation
+                        </h3>
+
+
+                        <ul class="key-points">
+
+                            <li>
+                                <strong>Employee e[3]</strong>
+                                creates three Employee objects.
+                            </li>
+
+                            <li>
+                                Each object stores its own employee ID,
+                                name and salary.
+                            </li>
+
+                            <li>
+                                The first loop accepts data for every object.
+                            </li>
+
+                            <li>
+                                The second loop displays every employee record.
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+
+                    <!-- REAL LIFE -->
+
+                    <div class="content-block">
+
+                        <h3>
+                            Real-Life Connection
+                        </h3>
+
+                        <p>
+                            Companies maintain information about many employees.
+                            An array of Employee objects can represent a collection
+                            of employee records in a simple object-oriented program.
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- KEY POINTS -->
+
+                    <div class="content-block">
+
+                        <h3>
+                            Key Points
+                        </h3>
+
+
+                        <ul class="key-points">
+
+                            <li>
+                                Objects are stored as array elements.
+                            </li>
+
+                            <li>
+                                Each object contains independent data.
+                            </li>
+
+                            <li>
+                                Loops make processing multiple objects easier.
+                            </li>
+
+                            <li>
+                                Member functions operate on the object that calls them.
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+
+                    <!-- ERRORS -->
+
+                    <div class="content-block">
+
+                        <h3>
+                            Common Errors
+                        </h3>
+
+
+                        <div class="error-grid">
+
+
+                            <div class="error-card">
+
+                                <h4>
+                                    Incorrect Index
+                                </h4>
+
+                                <p>
+                                    Do not access indexes outside the declared
+                                    array size.
+                                </p>
+
+                            </div>
+
+
+                            <div class="error-card">
+
+                                <h4>
+                                    Incorrect Function Call
+                                </h4>
+
+                                <p>
+                                    Use
+                                    <strong>
+                                        e[i].accept()
+                                    </strong>
+                                    and
+                                    <strong>
+                                        e[i].display()
+                                    </strong>.
+                                </p>
+
+                            </div>
+
+
+                            <div class="error-card">
+
+                                <h4>
+                                    Missing Header
+                                </h4>
+
+                                <p>
+                                    Include
+                                    <strong>
+                                        &lt;string&gt;
+                                    </strong>
+                                    when using string data.
+                                </p>
+
+                            </div>
+
+
+                            <div class="error-card">
+
+                                <h4>
+                                    Wrong Loop Limit
+                                </h4>
+
+                                <p>
+                                    Use the correct number of iterations.
+                                </p>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     PROBLEM 3
+                ================================================= -->
+
+                <div
+                    class="mini-problem"
+                    id="problem9-3">
+
+
+                    <div class="problem-heading">
+
+                        <span class="section-label">
+                            PROBLEM 03
+                        </span>
+
+                        <h2>
+                            Book Details Using Array of Objects
+                        </h2>
+
+                    </div>
+
+
+
+                    <!-- PROBLEM -->
+
+                    <div class="content-block">
+
+                        <h3>
+                            Problem Statement
+                        </h3>
+
+                        <p>
+                            Write a C++ program to create a class Book containing
+                            book ID, title and price. Create an array of three
+                            Book objects, accept book details and display all
+                            book records.
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- ALGORITHM -->
+
+                    <div class="content-block">
+
+                        <h3>
+                            Algorithm
+                        </h3>
+
+
+                        <ol class="algorithm-list">
+
+                            <li>
+                                Start the program.
+                            </li>
+
+                            <li>
+                                Define the Book class.
+                            </li>
+
+                            <li>
+                                Declare book ID, title and price.
+                            </li>
+
+                            <li>
+                                Define member functions for input and output.
+                            </li>
+
+                            <li>
+                                Create an array of three Book objects.
+                            </li>
+
+                            <li>
+                                Accept details of each book using a loop.
+                            </li>
+
+                            <li>
+                                Display all book records using a loop.
+                            </li>
+
+                            <li>
+                                Stop the program.
+                            </li>
+
+                        </ol>
+
+                    </div>
+
+
+
+                    <!-- PROGRAM -->
+
+                    <div class="content-block">
+
+                        <h3>
+                            C++ Program
+                        </h3>
+
+
+                        <div class="code-window">
+
+<pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+using namespace std;
+
+class Book
+{
+    int bookId;
+    string title;
+    float price;
+
+public:
+
+    void accept()
+    {
+        cout &lt;&lt; "Enter Book ID: ";
+        cin &gt;&gt; bookId;
+
+        cout &lt;&lt; "Enter Title: ";
+        cin &gt;&gt; title;
+
+        cout &lt;&lt; "Enter Price: ";
+        cin &gt;&gt; price;
+    }
+
+    void display()
+    {
+        cout &lt;&lt; bookId &lt;&lt; "\t"
+             &lt;&lt; title &lt;&lt; "\t"
+             &lt;&lt; price &lt;&lt; endl;
+    }
+};
+
+int main()
+{
+    Book b[3];
+
+    cout &lt;&lt; "Enter details of 3 books\n";
+
+    for(int i = 0; i &lt; 3; i++)
+    {
+        cout &lt;&lt; "\nBook " &lt;&lt; i + 1 &lt;&lt; endl;
+
+        b[i].accept();
+    }
+
+    cout &lt;&lt; "\nBook Details\n";
+
+    for(int i = 0; i &lt; 3; i++)
+    {
+        b[i].display();
+    }
+
+    return 0;
+}</code></pre>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- OUTPUT -->
+
+                    <div class="content-block">
+
+                        <h3>
+                            Expected Output
+                        </h3>
+
+
+                        <div class="output-box">
+
+<pre>Enter details of 3 books
+
+Book 1
+Enter Book ID: 301
+Enter Title: Cpp
+Enter Price: 450
+
+Book 2
+Enter Book ID: 302
+Enter Title: Java
+Enter Price: 500
+
+Book 3
+Enter Book ID: 303
+Enter Title: Python
+Enter Price: 550
+
+Book Details
+301     Cpp     450
+302     Java    500
+303     Python  550</pre>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- VISUAL -->
+
+                    <div class="visualization-section">
+
+                        <div class="visualization-header">
+
+                            <span class="section-label">
+                                VISUAL EXPLANATION
+                            </span>
+
+                            <h3>
+                                Array of Book Objects
+                            </h3>
+
+                        </div>
+
+
+                        <div class="object-array">
+
+
+                            <div class="object-box">
+
+                                <div class="object-index">
+                                    0
+                                </div>
+
+                                <strong>
+                                    b[0]
+                                </strong>
+
+                                <span>
+                                    Cpp<br>
+                                    ₹450
+                                </span>
+
+                            </div>
+
+
+                            <div class="object-box">
+
+                                <div class="object-index">
+                                    1
+                                </div>
+
+                                <strong>
+                                    b[1]
+                                </strong>
+
+                                <span>
+                                    Java<br>
+                                    ₹500
+                                </span>
+
+                            </div>
+
+
+                            <div class="object-box">
+
+                                <div class="object-index">
+                                    2
+                                </div>
+
+                                <strong>
+                                    b[2]
+                                </strong>
+
+                                <span>
+                                    Python<br>
+                                    ₹550
+                                </span>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- EXPLANATION -->
+
+                    <div class="content-block">
+
+                        <h3>
+                            Program Explanation
+                        </h3>
+
+
+                        <ul class="key-points">
+
+                            <li>
+                                <strong>Book b[3]</strong>
+                                creates three Book objects.
+                            </li>
+
+                            <li>
+                                Each object stores a separate book ID,
+                                title and price.
+                            </li>
+
+                            <li>
+                                <strong>b[i].accept()</strong>
+                                accepts details for each book.
+                            </li>
+
+                            <li>
+                                <strong>b[i].display()</strong>
+                                displays the corresponding book record.
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+
+                    <!-- REAL LIFE -->
+
+                    <div class="content-block">
+
+                        <h3>
+                            Real-Life Connection
+                        </h3>
+
+                        <p>
+                            A library system may contain thousands of books.
+                            Each book can be represented as an object, while an
+                            array of objects can be used in a basic program to
+                            manage multiple book records.
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- KEY POINTS -->
+
+                    <div class="content-block">
+
+                        <h3>
+                            Key Points
+                        </h3>
+
+
+                        <ul class="key-points">
+
+                            <li>
+                                An array can contain objects just like it contains
+                                primitive data values.
+                            </li>
+
+                            <li>
+                                Every object has its own data members.
+                            </li>
+
+                            <li>
+                                The dot operator is used to access member functions.
+                            </li>
+
+                            <li>
+                                Loops are commonly used to process arrays of objects.
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+
+                    <!-- ERRORS -->
+
+                    <div class="content-block">
+
+                        <h3>
+                            Common Errors
+                        </h3>
+
+
+                        <div class="error-grid">
+
+
+                            <div class="error-card">
+
+                                <h4>
+                                    Wrong Object Name
+                                </h4>
+
+                                <p>
+                                    Use the correct array name while accessing
+                                    its elements.
+                                </p>
+
+                            </div>
+
+
+                            <div class="error-card">
+
+                                <h4>
+                                    Array Out of Bounds
+                                </h4>
+
+                                <p>
+                                    For three objects, valid indexes are
+                                    0, 1 and 2.
+                                </p>
+
+                            </div>
+
+
+                            <div class="error-card">
+
+                                <h4>
+                                    Missing Class Definition
+                                </h4>
+
+                                <p>
+                                    Define the class before creating its objects.
+                                </p>
+
+                            </div>
+
+
+                            <div class="error-card">
+
+                                <h4>
+                                    Incorrect Loop
+                                </h4>
+
+                                <p>
+                                    Ensure the loop processes every object exactly once.
+                                </p>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             QUICK SUMMARY
+        ===================================================== -->
+
+        <section class="content-section">
+
+            <div class="container">
+
+                <span class="section-label">
+                    QUICK SUMMARY
+                </span>
+
+                <h2>
+                    Practical 9 at a Glance
+                </h2>
+
+
+                <div class="content-card">
+
+                    <ul class="key-points">
+
+                        <li>
+                            An array of objects stores multiple objects of
+                            the same class.
+                        </li>
+
+                        <li>
+                            Syntax:
+                            <strong>
+                                ClassName object[size];
+                            </strong>
+                        </li>
+
+                        <li>
+                            Individual objects are accessed using indexes.
+                        </li>
+
+                        <li>
+                            Member functions are called using the dot operator.
+                        </li>
+
+                        <li>
+                            Loops are useful for accepting and displaying
+                            multiple object records.
+                        </li>
+
+                        <li>
+                            Array of objects is useful for representing
+                            collections such as students, employees and books.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             VIVA
+        ===================================================== -->
+
+        <section class="content-section">
+
+            <div class="container">
+
+                <span class="section-label">
+                    VIVA
+                </span>
+
+                <h2>
+                    Viva Questions
+                </h2>
+
+
+                <div class="viva-list">
+
+
+                    <!-- VIVA 1 -->
+
+                    <div class="viva-item">
+
+                        <button
+                            type="button"
+                            class="viva-question">
+
+                            <span>
+                                What is an array of objects?
+                            </span>
+
+                            <span class="viva-icon">
+                                +
+                            </span>
+
+                        </button>
+
+
+                        <div class="viva-answer">
+
+                            <p>
+                                An array of objects is an array in which each
+                                element is an object of the same class.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- VIVA 2 -->
+
+                    <div class="viva-item">
+
+                        <button
+                            type="button"
+                            class="viva-question">
+
+                            <span>
+                                How do you declare an array of objects?
+                            </span>
+
+                            <span class="viva-icon">
+                                +
+                            </span>
+
+                        </button>
+
+
+                        <div class="viva-answer">
+
+                            <p>
+                                An array of objects can be declared using:
+                            </p>
+
+
+                            <div class="code-window">
+
+<pre><code>Student s[10];</code></pre>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- VIVA 3 -->
+
+                    <div class="viva-item">
+
+                        <button
+                            type="button"
+                            class="viva-question">
+
+                            <span>
+                                How do you access an object from the array?
+                            </span>
+
+                            <span class="viva-icon">
+                                +
+                            </span>
+
+                        </button>
+
+
+                        <div class="viva-answer">
+
+                            <p>
+                                An individual object is accessed using its
+                                array index, such as
+                                <strong>s[0]</strong>.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- VIVA 4 -->
+
+                    <div class="viva-item">
+
+                        <button
+                            type="button"
+                            class="viva-question">
+
+                            <span>
+                                How do you call a member function of an object?
+                            </span>
+
+                            <span class="viva-icon">
+                                +
+                            </span>
+
+                        </button>
+
+
+                        <div class="viva-answer">
+
+                            <p>
+                                The dot operator is used to call a member
+                                function.
+                            </p>
+
+
+                            <div class="code-window">
+
+<pre><code>s[0].display();</code></pre>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- VIVA 5 -->
+
+                    <div class="viva-item">
+
+                        <button
+                            type="button"
+                            class="viva-question">
+
+                            <span>
+                                Does every object have separate data members?
+                            </span>
+
+                            <span class="viva-icon">
+                                +
+                            </span>
+
+                        </button>
+
+
+                        <div class="viva-answer">
+
+                            <p>
+                                Yes. Each object has its own separate copy
+                                of non-static data members.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- VIVA 6 -->
+
+                    <div class="viva-item">
+
+                        <button
+                            type="button"
+                            class="viva-question">
+
+                            <span>
+                                Why are loops used with arrays of objects?
+                            </span>
+
+                            <span class="viva-icon">
+                                +
+                            </span>
+
+                        </button>
+
+
+                        <div class="viva-answer">
+
+                            <p>
+                                Loops make it easier to process every object
+                                in the array without writing the same
+                                statements repeatedly.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- VIVA 7 -->
+
+                    <div class="viva-item">
+
+                        <button
+                            type="button"
+                            class="viva-question">
+
+                            <span>
+                                What is the first index of an array?
+                            </span>
+
+                            <span class="viva-icon">
+                                +
+                            </span>
+
+                        </button>
+
+
+                        <div class="viva-answer">
+
+                            <p>
+                                The first index of a C++ array is
+                                <strong>0</strong>.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- VIVA 8 -->
+
+                    <div class="viva-item">
+
+                        <button
+                            type="button"
+                            class="viva-question">
+
+                            <span>
+                                Can an array contain objects of different classes?
+                            </span>
+
+                            <span class="viva-icon">
+                                +
+                            </span>
+
+                        </button>
+
+
+                        <div class="viva-answer">
+
+                            <p>
+                                A normal array contains elements of one
+                                declared type, so an array declared for one
+                                class stores objects of that class.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- VIVA 9 -->
+
+                    <div class="viva-item">
+
+                        <button
+                            type="button"
+                            class="viva-question">
+
+                            <span>
+                                What is the advantage of an array of objects?
+                            </span>
+
+                            <span class="viva-icon">
+                                +
+                            </span>
+
+                        </button>
+
+
+                        <div class="viva-answer">
+
+                            <p>
+                                It provides an organized way to store and
+                                manage multiple objects of the same class.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- VIVA 10 -->
+
+                    <div class="viva-item">
+
+                        <button
+                            type="button"
+                            class="viva-question">
+
+                            <span>
+                                Give one real-life application of an array of objects.
+                            </span>
+
+                            <span class="viva-icon">
+                                +
+                            </span>
+
+                        </button>
+
+
+                        <div class="viva-answer">
+
+                            <p>
+                                Student record management is a common
+                                real-life application of an array of objects.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ===================================================== -->
+
+    <footer class="footer">
+
+        <div class="footer-content">
+
+
+            <div class="footer-brand">
+
+                <div class="footer-logo">
+                    &lt;/&gt;
+                </div>
+
+
+                <div class="footer-brand-text">
+
+                    <div class="footer-brand-name">
+                        Rasika <span>CodeLab</span>
+                    </div>
+
+                    <p class="footer-tagline">
+                        Code • Understand • Visualize
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-copy">
+                © 2026 Rasika CodeLab. Built for practical learning.
+            </div>
+
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         MAIN JAVASCRIPT
+    ===================================================== -->
+
+    <script src="../js/main.js"></script>
+
+
+
+    <!-- =====================================================
+         PRACTICAL 9 JAVASCRIPT
+    ===================================================== -->
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+
+            /* =================================================
+               PROBLEM 1 / 2 / 3 TABS
+            ================================================= */
+
+            const problemTabs =
+                document.querySelectorAll(
+                    ".problem-mini-tabs .mini-problem-tab"
+                );
+
+
+            const problems =
+                document.querySelectorAll(
+                    ".mini-problem"
+                );
+
+
+            problemTabs.forEach(function (tab) {
+
+                tab.addEventListener("click", function () {
+
+                    const target =
+                        this.getAttribute("data-problem");
+
+
+                    /* Remove active from all buttons */
+
+                    problemTabs.forEach(function (item) {
+
+                        item.classList.remove("active");
+
+                    });
+
+
+                    /* Activate clicked button */
+
+                    this.classList.add("active");
+
+
+                    /* Hide all problems */
+
+                    problems.forEach(function (problem) {
+
+                        problem.classList.remove("active");
+
+                    });
+
+
+                    /* Show selected problem */
+
+                    const selectedProblem =
+                        document.getElementById(target);
+
+
+                    if (selectedProblem) {
+
+                        selectedProblem.classList.add("active");
+
+                        selectedProblem.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start"
+                        });
+
+                    }
+
+                });
+
+            });
+
+
+
+            /* =================================================
+               VIVA ACCORDION
+            ================================================= */
+
+            const vivaQuestions =
+                document.querySelectorAll(
+                    ".viva-question"
+                );
+
+
+            vivaQuestions.forEach(function (question) {
+
+                question.addEventListener("click", function () {
+
+                    const currentItem =
+                        this.closest(".viva-item");
+
+
+                    currentItem.classList.toggle("active");
+
+                });
+
+            });
+
+
+        });
+
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>About | Rasika CodeLab</title>
+    <meta name="description" content="About Rasika CodeLab and Rasika Patil — software engineer, data scientist, educator and creator of interactive practical learning resources.">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* =========================================================
+           RASIKA CODELAB — ABOUT PAGE
+           All page-specific styles are scoped to .about-page
+           ========================================================= */
+
+        .about-page {
+            --about-bg: #070b16;
+            --about-card: #101520;
+            --about-hover: #151b28;
+            --about-text: #f4f5fb;
+            --about-secondary: #a5afc2;
+            --about-muted: #727c90;
+            --about-border: rgba(255,255,255,.09);
+            --about-orange: #ff6b35;
+            --about-orange-light: #ff8052;
+            --about-orange-bg: rgba(255,107,53,.10);
+            --about-orange-border: rgba(255,107,53,.28);
+
+            background: var(--about-bg);
+            color: var(--about-text);
+            min-height: 100vh;
+        }
+
+        .about-page main {
+            width: 100%;
+        }
+
+        .about-page .about-hero {
+            padding: 88px 24px 70px;
+            border-bottom: 1px solid var(--about-border);
+            background:
+                radial-gradient(circle at 15% 15%, rgba(255,107,53,.10), transparent 30%),
+                radial-gradient(circle at 85% 30%, rgba(255,255,255,.035), transparent 28%);
+        }
+
+        .about-page .about-container {
+            width: min(1120px, 100%);
+            margin: 0 auto;
+        }
+
+        .about-page .about-hero-grid {
+            display: grid;
+            grid-template-columns: 1.25fr .75fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-page .about-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            border: 1px solid var(--about-orange-border);
+            border-radius: 999px;
+            background: var(--about-orange-bg);
+            color: var(--about-orange-light);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: .02em;
+            margin-bottom: 22px;
+        }
+
+        .about-page .about-hero h1 {
+            margin: 0 0 18px;
+            font-size: clamp(40px, 6vw, 68px);
+            line-height: 1.03;
+            letter-spacing: -0.045em;
+        }
+
+        .about-page .about-hero h1 span {
+            color: var(--about-orange);
+        }
+
+        .about-page .about-hero-lead {
+            max-width: 700px;
+            margin: 0 0 26px;
+            color: var(--about-secondary);
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        .about-page .about-tagline {
+            margin: 0;
+            color: var(--about-text);
+            font-weight: 700;
+            letter-spacing: .04em;
+        }
+
+        .about-page .about-profile-card {
+            padding: 30px;
+            border: 1px solid var(--about-border);
+            border-radius: 24px;
+            background: linear-gradient(145deg, var(--about-card), #0c111c);
+            box-shadow: 0 24px 70px rgba(0,0,0,.25);
+        }
+
+        .about-page .profile-mark {
+            width: 82px;
+            height: 82px;
+            display: grid;
+            place-items: center;
+            border-radius: 22px;
+            background: var(--about-orange-bg);
+            border: 1px solid var(--about-orange-border);
+            color: var(--about-orange);
+            font-size: 27px;
+            font-weight: 800;
+            margin-bottom: 24px;
+        }
+
+        .about-page .profile-name {
+            margin: 0 0 8px;
+            font-size: 28px;
+        }
+
+        .about-page .profile-role {
+            margin: 0 0 24px;
+            color: var(--about-secondary);
+            line-height: 1.6;
+        }
+
+        .about-page .profile-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .about-page .profile-stat {
+            padding: 15px;
+            border: 1px solid var(--about-border);
+            border-radius: 14px;
+            background: rgba(255,255,255,.025);
+        }
+
+        .about-page .profile-stat strong {
+            display: block;
+            color: var(--about-orange-light);
+            font-size: 20px;
+            margin-bottom: 3px;
+        }
+
+        .about-page .profile-stat span {
+            color: var(--about-muted);
+            font-size: 12px;
+        }
+
+        .about-page .about-section {
+            padding: 76px 24px;
+        }
+
+        .about-page .about-section.alt {
+            background: rgba(255,255,255,.018);
+            border-top: 1px solid var(--about-border);
+            border-bottom: 1px solid var(--about-border);
+        }
+
+        .about-page .section-heading {
+            max-width: 760px;
+            margin-bottom: 34px;
+        }
+
+        .about-page .section-label {
+            display: block;
+            color: var(--about-orange);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .about-page .section-heading h2 {
+            margin: 0 0 12px;
+            font-size: clamp(28px, 4vw, 42px);
+            letter-spacing: -.025em;
+        }
+
+        .about-page .section-heading p {
+            margin: 0;
+            color: var(--about-secondary);
+            line-height: 1.8;
+        }
+
+        .about-page .summary-grid {
+            display: grid;
+            grid-template-columns: 1.15fr .85fr;
+            gap: 22px;
+        }
+
+        .about-page .about-card {
+            padding: 28px;
+            border: 1px solid var(--about-border);
+            border-radius: 20px;
+            background: var(--about-card);
+        }
+
+        .about-page .about-card h3 {
+            margin: 0 0 12px;
+            font-size: 21px;
+        }
+
+        .about-page .about-card p {
+            margin: 0;
+            color: var(--about-secondary);
+            line-height: 1.8;
+        }
+
+        .about-page .objective-card {
+            border-left: 3px solid var(--about-orange);
+        }
+
+        .about-page .experience-list {
+            display: grid;
+            gap: 16px;
+        }
+
+        .about-page .experience-item {
+            position: relative;
+            padding: 25px 26px 25px 30px;
+            border: 1px solid var(--about-border);
+            border-radius: 18px;
+            background: var(--about-card);
+        }
+
+        .about-page .experience-item::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 24px;
+            bottom: 24px;
+            width: 3px;
+            border-radius: 4px;
+            background: var(--about-orange);
+        }
+
+        .about-page .experience-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            align-items: flex-start;
+            margin-bottom: 7px;
+        }
+
+        .about-page .experience-item h3 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .about-page .experience-date {
+            color: var(--about-orange-light);
+            font-size: 13px;
+            white-space: nowrap;
+        }
+
+        .about-page .experience-org {
+            margin: 0 0 13px;
+            color: var(--about-secondary);
+            font-weight: 600;
+        }
+
+        .about-page .experience-item ul {
+            margin: 0;
+            padding-left: 18px;
+            color: var(--about-secondary);
+            line-height: 1.8;
+        }
+
+        .about-page .education-grid,
+        .about-page .skill-grid,
+        .about-page .service-grid,
+        .about-page .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .about-page .education-card,
+        .about-page .skill-card,
+        .about-page .service-card,
+        .about-page .achievement-card {
+            padding: 24px;
+            border: 1px solid var(--about-border);
+            border-radius: 18px;
+            background: var(--about-card);
+        }
+
+        .about-page .education-card h3,
+        .about-page .skill-card h3,
+        .about-page .service-card h3,
+        .about-page .achievement-card h3 {
+            margin: 0 0 8px;
+            font-size: 18px;
+        }
+
+        .about-page .education-card p,
+        .about-page .skill-card p,
+        .about-page .service-card p,
+        .about-page .achievement-card p {
+            margin: 0;
+            color: var(--about-secondary);
+            line-height: 1.65;
+        }
+
+        .about-page .education-card .year {
+            display: inline-block;
+            margin-top: 16px;
+            color: var(--about-orange-light);
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .about-page .skill-groups {
+            display: grid;
+            gap: 20px;
+        }
+
+        .about-page .skill-group h3 {
+            margin: 0 0 12px;
+            font-size: 17px;
+        }
+
+        .about-page .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+        }
+
+        .about-page .skill-tag {
+            padding: 8px 11px;
+            border: 1px solid var(--about-border);
+            border-radius: 10px;
+            background: rgba(255,255,255,.025);
+            color: var(--about-secondary);
+            font-size: 13px;
+        }
+
+        .about-page .service-grid {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .about-page .service-card {
+            min-height: 125px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .about-page .service-icon {
+            color: var(--about-orange);
+            font-weight: 900;
+            font-size: 18px;
+        }
+
+        .about-page .research-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .about-page .research-item {
+            padding: 22px 24px;
+            border: 1px solid var(--about-border);
+            border-radius: 16px;
+            background: var(--about-card);
+        }
+
+        .about-page .research-item h3 {
+            margin: 0 0 7px;
+            font-size: 17px;
+            line-height: 1.5;
+        }
+
+        .about-page .research-item p {
+            margin: 0;
+            color: var(--about-secondary);
+            line-height: 1.65;
+            font-size: 14px;
+        }
+
+        .about-page .project-note {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid var(--about-orange-border);
+            background: var(--about-orange-bg);
+            color: var(--about-secondary);
+            line-height: 1.7;
+        }
+
+        .about-page .project-note strong {
+            color: var(--about-orange-light);
+        }
+
+        .about-page .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .about-page .cert-card {
+            padding: 24px;
+            border: 1px solid var(--about-border);
+            border-radius: 18px;
+            background: var(--about-card);
+        }
+
+        .about-page .cert-card h3 {
+            margin: 0 0 12px;
+            color: var(--about-orange-light);
+        }
+
+        .about-page .cert-card ul {
+            margin: 0;
+            padding-left: 18px;
+            color: var(--about-secondary);
+            line-height: 1.8;
+        }
+
+        .about-page .cta {
+            padding: 80px 24px 90px;
+            text-align: center;
+        }
+
+        .about-page .cta-box {
+            width: min(900px, 100%);
+            margin: 0 auto;
+            padding: 48px 30px;
+            border: 1px solid var(--about-orange-border);
+            border-radius: 24px;
+            background:
+                radial-gradient(circle at 50% 0%, rgba(255,107,53,.12), transparent 55%),
+                var(--about-card);
+        }
+
+        .about-page .cta h2 {
+            margin: 0 0 12px;
+            font-size: clamp(28px, 4vw, 40px);
+        }
+
+        .about-page .cta p {
+            max-width: 650px;
+            margin: 0 auto 25px;
+            color: var(--about-secondary);
+            line-height: 1.8;
+        }
+
+        .about-page .cta-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .about-page .cta-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px;
+            padding: 0 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            border: 1px solid var(--about-orange-border);
+            color: var(--about-orange-light);
+            background: var(--about-orange-bg);
+        }
+
+        .about-page .cta-link.primary {
+            background: var(--about-orange);
+            border-color: var(--about-orange);
+            color: #fff;
+        }
+
+        @media (max-width: 900px) {
+            .about-page .about-hero-grid,
+            .about-page .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-page .education-grid,
+            .about-page .skill-grid,
+            .about-page .achievement-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .about-page .service-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .about-page .about-hero,
+            .about-page .about-section,
+            .about-page .cta {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .about-page .about-hero {
+                padding-top: 55px;
+            }
+
+            .about-page .education-grid,
+            .about-page .skill-grid,
+            .about-page .service-grid,
+            .about-page .achievement-grid,
+            .about-page .cert-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-page .experience-top {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .about-page .profile-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body class="detail-page about-page">
+
+<header class="navbar">
+    <div class="nav-container">
+
+        <a href="index.html" class="logo">
+            <span class="logo-mark">&lt;/&gt;</span>
+            <span>Rasika<span class="logo-accent">CodeLab</span></span>
+        </a>
+
+        <button class="menu-btn" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="foundations/program.html">Foundations</a>
+            <a href="practicals/index.html">Practicals</a>
+            <a href="c++_microproject.html">Micro Projects</a>
+            <a href="about.html" class="active">About</a>
+            <a href="login.html">Login</a>
+        </nav>
+
+    </div>
+</header>
+
+<main>
+
+    <section class="about-hero">
+        <div class="about-container about-hero-grid">
+
+            <div>
+                <div class="about-badge">About Rasika CodeLab</div>
+                <h1>Learn. Build. <span>Grow.</span></h1>
+                <p class="about-hero-lead">
+                    Rasika CodeLab is an educational platform created to make programming
+                    concepts practical, visual, and easy to understand.
+                </p>
+                <p class="about-tagline">Code • Understand • Visualize</p>
+            </div>
+
+            <div class="about-profile-card">
+                <div class="profile-mark">RP</div>
+                <h2 class="profile-name">Rasika Patil</h2>
+                <p class="profile-role">
+                    Software Engineer • Data Scientist • Educator
+                </p>
+                <div class="profile-stats">
+                    <div class="profile-stat">
+                        <strong>M.Tech</strong>
+                        <span>Computer Engineering</span>
+                    </div>
+                   
+                    <div class="profile-stat">
+                        <strong>5+</strong>
+                        <span>Research Papers</span>
+                    </div>
+                    <div class="profile-stat">
+                        <strong>10+</strong>
+                        <span>Certifications</span>
+                    </div>
+                     <div class="profile-stat">
+                        <strong>For More Details Visit My Portfolio</strong>
+                        <span><a href="https://rasikapatil3499.github.io/rasika_portfolio/" target="_blank" rel="noopener noreferrer">View Portfolio</a></span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="about-section">
+        <div class="about-container">
+
+            <div class="section-heading">
+                <span class="section-label">About Me</span>
+                <h2>Technology + Education</h2>
+                <p>
+                    My work combines software development, AI and data science,
+                    UI/UX, research, and technical education.
+                </p>
+            </div>
+
+            <div class="summary-grid">
+
+                <article class="about-card">
+                    <h3>What I Do</h3>
+                    <p>
+                        I develop web applications, explore AI and machine learning,
+                        conduct research, and teach computer engineering subjects.
+                    </p>
+                </article>
+
+                <article class="about-card objective-card">
+                    <h3>My Focus</h3>
+                    <p>
+                        Building useful technology and creating learning experiences
+                        that help students understand concepts, not just memorize code.
+                    </p>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="about-section alt">
+        <div class="about-container">
+
+            <div class="section-heading">
+                <span class="section-label">Expertise</span>
+                <h2>Skills</h2>
+            </div>
+
+            <div class="skill-grid">
+
+                <article class="skill-card">
+                    <h3>Development</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">HTML</span>
+                        <span class="skill-tag">CSS</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">React.js</span>
+                        <span class="skill-tag">PHP</span>
+                        <span class="skill-tag">MySQL</span>
+                    </div>
+                </article>
+
+                <article class="skill-card">
+                    <h3>Programming & AI</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">C</span>
+                        <span class="skill-tag">C++</span>
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Machine Learning</span>
+                        <span class="skill-tag">Data Science</span>
+                    </div>
+                </article>
+
+                <article class="skill-card">
+                    <h3>Design & Education</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">UI/UX</span>
+                        <span class="skill-tag">Figma</span>
+                        <span class="skill-tag">Research</span>
+                        <span class="skill-tag">Teaching</span>
+                        <span class="skill-tag">Mentoring</span>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="about-section">
+        <div class="about-container">
+
+            <div class="section-heading">
+                <span class="section-label">Rasika CodeLab</span>
+                <h2>Why This Platform?</h2>
+                <p>
+                    Students often learn programs without understanding what happens
+                    behind the code. Rasika CodeLab connects theory, code, visualization,
+                    practicals, viva preparation, and projects in one place.
+                </p>
+            </div>
+
+            <div class="summary-grid">
+                <article class="about-card">
+                    <h3>Practical Learning</h3>
+                    <p>Structured C++ practicals with algorithms, programs, outputs, and explanations.</p>
+                </article>
+
+                <article class="about-card">
+                    <h3>Project Thinking</h3>
+                    <p>Micro projects that connect programming concepts with real-world applications.</p>
+                </article>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="cta-box">
+            <h2>Explore Rasika CodeLab</h2>
+            <p>Learn concepts, practice programs, and build projects.</p>
+
+            <div class="cta-links">
+                <a class="cta-link primary" href="index.html">Start Learning</a>
+                <a class="cta-link" href="c++_microproject.html">Micro Projects</a>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer class="footer">
+    <div class="footer-content">
+
+        <div class="footer-brand">
+
+            <div class="footer-logo">
+                &lt;/&gt;
+            </div>
+
+            <div class="footer-brand-text">
+
+                <div class="footer-brand-name">
+                    Rasika <span>CodeLab</span>
+                </div>
+
+                <p class="footer-tagline">
+                    Code • Understand • Visualize
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="footer-copy">
+            © 2026 Rasika CodeLab. Built for practical learning.
+        </div>
+
+    </div>
+</footer>
+
+<script src="js/main.js"></script>
+
+</body>
+</html>

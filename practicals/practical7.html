@@ -1,0 +1,3572 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Practical 7 | Friend Function | Rasika CodeLab</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+        /* =========================
+           LLO TABS
+           ========================= */
+
+        .llo-section {
+            display: none;
+        }
+
+        .llo-section.active {
+            display: block;
+            animation: practicalFadeIn 0.35s ease;
+        }
+
+        .llo-tab small {
+            display: block;
+            margin-top: 4px;
+            font-size: 11px;
+            opacity: 0.75;
+        }
+
+        .problem-mini-selector {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body class="detail-page">
+
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+
+    <div class="nav-container">
+
+        <a href="../index.html" class="logo">
+
+            <span class="logo-icon">
+                &lt;/&gt;
+            </span>
+
+            <span>
+                Rasika<span>CodeLab</span>
+            </span>
+
+        </a>
+
+
+        <button class="menu-btn" aria-label="Toggle menu">
+            ☰
+        </button>
+
+
+        <nav class="nav-links">
+
+            <a href="../index.html">
+                Home
+            </a>
+
+            <a href="../foundations/program.html">
+                Foundations
+            </a>
+
+            <a href="index.html" class="active">
+                Practicals
+            </a>
+
+            <a href="../index.html#about">
+                About
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<main class="practical-page">
+
+
+<!-- ================= HERO ================= -->
+
+<section class="practical-hero">
+
+    <div class="container">
+
+        <span class="section-label">
+            C++ PRACTICAL 07
+        </span>
+
+        <h1>
+            Friend Functions
+        </h1>
+
+        <p class="practical-subtitle">
+            Learn how friend functions can access private members of
+            classes and work with different classes and external functions.
+        </p>
+
+
+        <div class="practical-meta">
+
+            <span>
+                💻 C++
+            </span>
+
+            <span>
+                📘 Practical 7
+            </span>
+
+            <span>
+                🎯 LLO 7.1
+            </span>
+
+            <span>
+                🎯 LLO 7.2
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= AIM ================= -->
+
+<section class="content-section">
+
+    <div class="container">
+
+        <span class="section-label">
+            01 — AIM
+        </span>
+
+
+        <div class="content-card">
+
+            <p>
+                To implement friend functions using two different
+                classes and external functions in C++.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= LEARNING OBJECTIVES ================= -->
+
+<section class="content-section">
+
+    <div class="container">
+
+        <span class="section-label">
+            02 — LEARNING OBJECTIVES
+        </span>
+
+
+        <div class="objective-grid">
+
+            <div class="objective-card">
+
+                <span>
+                    01
+                </span>
+
+                <p>
+                    Understand the concept of friend functions in C++.
+                </p>
+
+            </div>
+
+
+            <div class="objective-card">
+
+                <span>
+                    02
+                </span>
+
+                <p>
+                    Implement a friend function using two different classes.
+                </p>
+
+            </div>
+
+
+            <div class="objective-card">
+
+                <span>
+                    03
+                </span>
+
+                <p>
+                    Implement an external function as a friend function.
+                </p>
+
+            </div>
+
+
+            <div class="objective-card">
+
+                <span>
+                    04
+                </span>
+
+                <p>
+                    Access private class members using a friend function.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CONCEPT ================= -->
+
+<section class="content-section">
+
+    <div class="container">
+
+        <span class="section-label">
+            03 — EXPLORE THE CONCEPT
+        </span>
+
+
+        <h2>
+            Understanding Friend Functions
+        </h2>
+
+
+        <p class="section-description">
+            A friend function is a non-member function that is given
+            special permission to access private and protected members
+            of a class.
+        </p>
+
+
+        <!-- THEORY -->
+
+        <div class="theory-box">
+
+            <h3>
+                Theory
+            </h3>
+
+
+            <p>
+                A <strong>friend function</strong> is a function that
+                is not a member of a class but can access the private
+                and protected members of that class.
+            </p>
+
+
+            <p>
+                The function is declared inside the class using the
+                <code>friend</code> keyword. Its definition is normally
+                written outside the class.
+            </p>
+
+
+            <p>
+                Friend functions are useful when an external function
+                needs access to private data or when one function needs
+                to work with private data belonging to more than one class.
+            </p>
+
+
+            <div class="syntax-box">
+
+<code>class Demo
+{
+private:
+    int value;
+
+public:
+    friend void show(Demo);
+};
+
+void show(Demo d)
+{
+    cout &lt;&lt; d.value;
+}</code>
+
+            </div>
+
+
+            <div class="casting-rule">
+
+                <span>
+                    Class
+                </span>
+
+                <strong>
+                    →
+                </strong>
+
+                <span>
+                    Friend Declaration
+                </span>
+
+                <strong>
+                    →
+                </strong>
+
+                <span>
+                    External Function
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- REAL LIFE -->
+
+        <div class="real-life-box">
+
+            <div class="real-life-icon">
+                🌍
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Real-Life Example
+                </h3>
+
+
+                <p>
+                    Consider a banking application where account
+                    information is kept private inside an Account class.
+                    A separate reporting function may need controlled
+                    access to this private information to generate a report.
+                </p>
+
+
+                <p>
+                    A friend function can provide this access without
+                    making the private data publicly accessible.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- WHERE USED -->
+
+        <div class="where-used-box">
+
+            <h3>
+                Where & How Is It Used?
+            </h3>
+
+
+            <div class="use-grid">
+
+                <div>
+
+                    <strong>
+                        Different Classes
+                    </strong>
+
+                    <p>
+                        A single friend function can access private
+                        data from two or more classes.
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        External Functions
+                    </strong>
+
+                    <p>
+                        A non-member function can be given special
+                        access to private class members.
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Operator Overloading
+                    </strong>
+
+                    <p>
+                        Friend functions are commonly used when an
+                        operator needs access to private object data.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- BASIC SYNTAX -->
+
+        <div class="content-block">
+
+            <h4>
+                Basic Syntax
+            </h4>
+
+
+            <div class="code-window">
+
+<pre><code>class ClassName
+{
+private:
+    int data;
+
+public:
+    friend void functionName(ClassName);
+};
+
+void functionName(ClassName obj)
+{
+    // access private data
+}</code></pre>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- LLO SELECTOR -->
+        <!-- ================================================= -->
+
+        <div class="problem-mini-selector">
+
+            <button
+                class="mini-problem-tab llo-tab active"
+                data-llo="friend-class-problems">
+
+                LLO 7.1
+
+                <small>
+                    Two Different Classes
+                </small>
+
+            </button>
+
+
+            <button
+                class="mini-problem-tab llo-tab"
+                data-llo="friend-external-problems">
+
+                LLO 7.2
+
+                <small>
+                    External Function
+                </small>
+
+            </button>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- LLO 7.1 -->
+        <!-- ================================================= -->
+
+        <div
+            class="llo-section active"
+            id="friend-class-problems">
+
+
+            <span class="problem-badge">
+                LLO 7.1
+            </span>
+
+
+            <h3>
+                Friend Function Using Two Different Classes
+            </h3>
+
+
+            <div class="theory-box">
+
+                <h3>
+                    Concept
+                </h3>
+
+
+                <p>
+                    A friend function can be declared in two different
+                    classes. The same external function can then access
+                    private members of both classes.
+                </p>
+
+
+                <p>
+                    This is useful when two objects contain related
+                    information and a common operation needs access
+                    to their private data.
+                </p>
+
+            </div>
+
+
+            <!-- PROBLEM TABS -->
+
+            <div class="problem-mini-selector">
+
+                <button
+                    class="mini-problem-tab active"
+                    data-problem="friend-class-problem1">
+
+                    Problem 01
+
+                </button>
+
+
+                <button
+                    class="mini-problem-tab"
+                    data-problem="friend-class-problem2">
+
+                    Problem 02
+
+                </button>
+
+
+                <button
+                    class="mini-problem-tab"
+                    data-problem="friend-class-problem3">
+
+                    Problem 03
+
+                </button>
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- PROBLEM 1 -->
+            <!-- ================================================= -->
+
+            <article
+                class="mini-problem active"
+                id="friend-class-problem1">
+
+
+                <span class="problem-badge">
+                    PROBLEM 01
+                </span>
+
+
+                <h3>
+                    Compare Two Numbers
+                </h3>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Problem Statement
+                    </h4>
+
+                    <p>
+                        Write a C++ program to create two classes
+                        containing private integer values. Use a common
+                        friend function to find the greater value from
+                        the two classes.
+                    </p>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Algorithm
+                    </h4>
+
+
+                    <ol class="algorithm-list">
+
+                        <li>
+                            Start.
+                        </li>
+
+                        <li>
+                            Create two classes named A and B.
+                        </li>
+
+                        <li>
+                            Declare a private integer in each class.
+                        </li>
+
+                        <li>
+                            Declare <code>findMax()</code> as a friend
+                            function in both classes.
+                        </li>
+
+                        <li>
+                            Accept values for both objects.
+                        </li>
+
+                        <li>
+                            Pass both objects to the friend function.
+                        </li>
+
+                        <li>
+                            Compare the private values.
+                        </li>
+
+                        <li>
+                            Display the greater value.
+                        </li>
+
+                        <li>
+                            Stop.
+                        </li>
+
+                    </ol>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        C++ Program
+                    </h4>
+
+
+                    <div class="code-window">
+
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+class B;
+
+class A
+{
+    int valueA;
+
+public:
+
+    void accept()
+    {
+        cout &lt;&lt; "Enter value for A: ";
+        cin &gt;&gt; valueA;
+    }
+
+    friend void findMax(A, B);
+};
+
+class B
+{
+    int valueB;
+
+public:
+
+    void accept()
+    {
+        cout &lt;&lt; "Enter value for B: ";
+        cin &gt;&gt; valueB;
+    }
+
+    friend void findMax(A, B);
+};
+
+void findMax(A a, B b)
+{
+    if (a.valueA &gt; b.valueB)
+        cout &lt;&lt; "Greater value = "
+             &lt;&lt; a.valueA;
+    else
+        cout &lt;&lt; "Greater value = "
+             &lt;&lt; b.valueB;
+}
+
+int main()
+{
+    A a;
+    B b;
+
+    a.accept();
+    b.accept();
+
+    findMax(a, b);
+
+    return 0;
+}</code></pre>
+
+                    </div>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Expected Output
+                    </h4>
+
+
+                    <div class="output-box">
+
+<pre>Enter value for A: 25
+Enter value for B: 40
+Greater value = 40</pre>
+
+                    </div>
+
+                </div>
+
+
+                <!-- VISUALIZATION -->
+
+                <div class="visualization-section">
+
+                    <div class="visualization-header">
+
+                        <span class="problem-badge">
+                            FRIEND FUNCTION VISUALIZATION
+                        </span>
+
+
+                        <h3>
+                            Two Classes → One Friend Function
+                        </h3>
+
+
+                        <p>
+                            The same friend function can access private
+                            data from both classes.
+                        </p>
+
+                    </div>
+
+
+                    <div class="casting-visual">
+
+                        <div class="casting-value">
+
+                            <span>
+                                CLASS A
+                            </span>
+
+                            <strong>
+                                25
+                            </strong>
+
+                            <small>
+                                Private valueA
+                            </small>
+
+                        </div>
+
+
+                        <div class="casting-arrow">
+                            →
+                        </div>
+
+
+                        <div class="casting-value">
+
+                            <span>
+                                FRIEND FUNCTION
+                            </span>
+
+                            <strong>
+                                findMax()
+                            </strong>
+
+                            <small>
+                                Accesses both classes
+                            </small>
+
+                        </div>
+
+
+                        <div class="casting-arrow">
+                            ←
+                        </div>
+
+
+                        <div class="casting-value">
+
+                            <span>
+                                CLASS B
+                            </span>
+
+                            <strong>
+                                40
+                            </strong>
+
+                            <small>
+                                Private valueB
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Program Explanation
+                    </h4>
+
+
+                    <ul class="key-points">
+
+                        <li>
+                            Classes <code>A</code> and <code>B</code>
+                            contain private data.
+                        </li>
+
+                        <li>
+                            <code>findMax()</code> is declared as a friend
+                            in both classes.
+                        </li>
+
+                        <li>
+                            It is not a member function of either class.
+                        </li>
+
+                        <li>
+                            It can directly access
+                            <code>valueA</code> and <code>valueB</code>.
+                        </li>
+
+                        <li>
+                            The function compares both private values.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Real-Life Connection
+                    </h4>
+
+                    <p>
+                        A comparison function can combine private
+                        information from two different objects, such as
+                        comparing two bank accounts, two products or
+                        two students.
+                    </p>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Key Points
+                    </h4>
+
+
+                    <ul class="key-points">
+
+                        <li>
+                            A friend function is not a member of the class.
+                        </li>
+
+                        <li>
+                            It can be declared as a friend in multiple classes.
+                        </li>
+
+                        <li>
+                            It can access private data of all classes that
+                            declare it as a friend.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Common Errors
+                    </h4>
+
+
+                    <div class="error-grid">
+
+                        <div class="error-card">
+
+                            <strong>
+                                Missing Friend Declaration
+                            </strong>
+
+                            <p>
+                                The function must be declared using the
+                                <code>friend</code> keyword in both classes.
+                            </p>
+
+                        </div>
+
+
+                        <div class="error-card">
+
+                            <strong>
+                                Wrong Class Access
+                            </strong>
+
+                            <p>
+                                Make sure the correct object is used when
+                                accessing each private data member.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- ================================================= -->
+            <!-- PROBLEM 2 -->
+            <!-- ================================================= -->
+
+            <article
+                class="mini-problem"
+                id="friend-class-problem2">
+
+
+                <span class="problem-badge">
+                    PROBLEM 02
+                </span>
+
+
+                <h3>
+                    Add Distance
+                </h3>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Problem Statement
+                    </h4>
+
+                    <p>
+                        Write a C++ program to create two classes
+                        Distance1 and Distance2 containing private
+                        distance values. Use a friend function to
+                        add the distances.
+                    </p>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Formula
+                    </h4>
+
+
+                    <div class="formula-grid">
+
+                        <div class="formula-card">
+
+                            <strong>
+                                Total Distance
+                            </strong>
+
+                            <span>
+                                Distance 1 + Distance 2
+                            </span>
+
+                        </div>
+
+
+                        <div class="formula-card">
+
+                            <strong>
+                                Distance 1
+                            </strong>
+
+                            <span>
+                                Private member of class 1
+                            </span>
+
+                        </div>
+
+
+                        <div class="formula-card">
+
+                            <strong>
+                                Distance 2
+                            </strong>
+
+                            <span>
+                                Private member of class 2
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Algorithm
+                    </h4>
+
+
+                    <ol class="algorithm-list">
+
+                        <li>
+                            Start.
+                        </li>
+
+                        <li>
+                            Define classes Distance1 and Distance2.
+                        </li>
+
+                        <li>
+                            Declare private distance members.
+                        </li>
+
+                        <li>
+                            Declare <code>addDistance()</code> as a
+                            friend function in both classes.
+                        </li>
+
+                        <li>
+                            Accept both distances.
+                        </li>
+
+                        <li>
+                            Pass both objects to the friend function.
+                        </li>
+
+                        <li>
+                            Add the private distance values.
+                        </li>
+
+                        <li>
+                            Display the total distance.
+                        </li>
+
+                        <li>
+                            Stop.
+                        </li>
+
+                    </ol>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        C++ Program
+                    </h4>
+
+
+                    <div class="code-window">
+
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+class Distance2;
+
+class Distance1
+{
+    float distance1;
+
+public:
+
+    void accept()
+    {
+        cout &lt;&lt; "Enter first distance: ";
+        cin &gt;&gt; distance1;
+    }
+
+    friend void addDistance(Distance1, Distance2);
+};
+
+class Distance2
+{
+    float distance2;
+
+public:
+
+    void accept()
+    {
+        cout &lt;&lt; "Enter second distance: ";
+        cin &gt;&gt; distance2;
+    }
+
+    friend void addDistance(Distance1, Distance2);
+};
+
+void addDistance(Distance1 d1, Distance2 d2)
+{
+    cout &lt;&lt; "Total distance = "
+         &lt;&lt; d1.distance1 + d2.distance2;
+}
+
+int main()
+{
+    Distance1 d1;
+    Distance2 d2;
+
+    d1.accept();
+    d2.accept();
+
+    addDistance(d1, d2);
+
+    return 0;
+}</code></pre>
+
+                    </div>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Expected Output
+                    </h4>
+
+
+                    <div class="output-box">
+
+<pre>Enter first distance: 12.5
+Enter second distance: 7.5
+Total distance = 20</pre>
+
+                    </div>
+
+                </div>
+
+
+                <div class="visualization-section">
+
+                    <div class="visualization-header">
+
+                        <span class="problem-badge">
+                            FRIEND FUNCTION VISUALIZATION
+                        </span>
+
+
+                        <h3>
+                            Private Data From Two Classes
+                        </h3>
+
+                    </div>
+
+
+                    <div class="casting-visual">
+
+                        <div class="casting-value">
+
+                            <span>
+                                DISTANCE 1
+                            </span>
+
+                            <strong>
+                                12.5
+                            </strong>
+
+                            <small>
+                                Distance1
+                            </small>
+
+                        </div>
+
+
+                        <div class="casting-arrow">
+                            +
+                        </div>
+
+
+                        <div class="casting-value">
+
+                            <span>
+                                DISTANCE 2
+                            </span>
+
+                            <strong>
+                                7.5
+                            </strong>
+
+                            <small>
+                                Distance2
+                            </small>
+
+                        </div>
+
+
+                        <div class="casting-arrow">
+                            →
+                        </div>
+
+
+                        <div class="casting-value">
+
+                            <span>
+                                FRIEND FUNCTION
+                            </span>
+
+                            <strong>
+                                20
+                            </strong>
+
+                            <small>
+                                addDistance()
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Program Explanation
+                    </h4>
+
+
+                    <ul class="key-points">
+
+                        <li>
+                            Two separate classes store private distance values.
+                        </li>
+
+                        <li>
+                            <code>addDistance()</code> is declared as a
+                            friend in both classes.
+                        </li>
+
+                        <li>
+                            The friend function directly accesses both
+                            private members.
+                        </li>
+
+                        <li>
+                            The two values are added and displayed.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Real-Life Connection
+                    </h4>
+
+                    <p>
+                        A common operation can combine information stored
+                        in different objects, such as calculating total
+                        travel distance from two journeys.
+                    </p>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Key Points
+                    </h4>
+
+
+                    <ul class="key-points">
+
+                        <li>
+                            Friend functions can work with objects of
+                            different classes.
+                        </li>
+
+                        <li>
+                            They can access private members when friendship
+                            is granted.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Common Errors
+                    </h4>
+
+
+                    <div class="error-grid">
+
+                        <div class="error-card">
+
+                            <strong>
+                                Incorrect Declaration
+                            </strong>
+
+                            <p>
+                                The friend function declaration should use
+                                the correct class names.
+                            </p>
+
+                        </div>
+
+
+                        <div class="error-card">
+
+                            <strong>
+                                Wrong Member Access
+                            </strong>
+
+                            <p>
+                                Access the correct private member through
+                                its corresponding object.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- ================================================= -->
+            <!-- PROBLEM 3 -->
+            <!-- ================================================= -->
+
+            <article
+                class="mini-problem"
+                id="friend-class-problem3">
+
+
+                <span class="problem-badge">
+                    PROBLEM 03
+                </span>
+
+
+                <h3>
+                    Student Marks Comparison
+                </h3>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Problem Statement
+                    </h4>
+
+                    <p>
+                        Write a C++ program to create two classes Student1
+                        and Student2 containing private marks. Use a common
+                        friend function to compare the marks of both students.
+                    </p>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Algorithm
+                    </h4>
+
+
+                    <ol class="algorithm-list">
+
+                        <li>
+                            Start.
+                        </li>
+
+                        <li>
+                            Create Student1 and Student2 classes.
+                        </li>
+
+                        <li>
+                            Declare marks as private members.
+                        </li>
+
+                        <li>
+                            Declare <code>compareMarks()</code> as a
+                            friend function in both classes.
+                        </li>
+
+                        <li>
+                            Accept marks for both students.
+                        </li>
+
+                        <li>
+                            Pass both objects to the friend function.
+                        </li>
+
+                        <li>
+                            Compare the private marks.
+                        </li>
+
+                        <li>
+                            Display the student with higher marks.
+                        </li>
+
+                        <li>
+                            Stop.
+                        </li>
+
+                    </ol>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        C++ Program
+                    </h4>
+
+
+                    <div class="code-window">
+
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+class Student2;
+
+class Student1
+{
+    int marks1;
+
+public:
+
+    void accept()
+    {
+        cout &lt;&lt; "Enter marks of Student 1: ";
+        cin &gt;&gt; marks1;
+    }
+
+    friend void compareMarks(Student1, Student2);
+};
+
+class Student2
+{
+    int marks2;
+
+public:
+
+    void accept()
+    {
+        cout &lt;&lt; "Enter marks of Student 2: ";
+        cin &gt;&gt; marks2;
+    }
+
+    friend void compareMarks(Student1, Student2);
+};
+
+void compareMarks(Student1 s1, Student2 s2)
+{
+    if (s1.marks1 &gt; s2.marks2)
+        cout &lt;&lt; "Student 1 has higher marks.";
+    else if (s2.marks2 &gt; s1.marks1)
+        cout &lt;&lt; "Student 2 has higher marks.";
+    else
+        cout &lt;&lt; "Both students have equal marks.";
+}
+
+int main()
+{
+    Student1 s1;
+    Student2 s2;
+
+    s1.accept();
+    s2.accept();
+
+    compareMarks(s1, s2);
+
+    return 0;
+}</code></pre>
+
+                    </div>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Expected Output
+                    </h4>
+
+
+                    <div class="output-box">
+
+<pre>Enter marks of Student 1: 85
+Enter marks of Student 2: 78
+Student 1 has higher marks.</pre>
+
+                    </div>
+
+                </div>
+
+
+                <div class="visualization-section">
+
+                    <div class="visualization-header">
+
+                        <span class="problem-badge">
+                            FRIEND FUNCTION VISUALIZATION
+                        </span>
+
+
+                        <h3>
+                            Student Objects → Common Friend Function
+                        </h3>
+
+                    </div>
+
+
+                    <div class="casting-visual">
+
+                        <div class="casting-value">
+
+                            <span>
+                                STUDENT 1
+                            </span>
+
+                            <strong>
+                                85
+                            </strong>
+
+                            <small>
+                                Private marks
+                            </small>
+
+                        </div>
+
+
+                        <div class="casting-arrow">
+                            →
+                        </div>
+
+
+                        <div class="casting-value">
+
+                            <span>
+                                COMPARE
+                            </span>
+
+                            <strong>
+                                compareMarks()
+                            </strong>
+
+                            <small>
+                                Friend Function
+                            </small>
+
+                        </div>
+
+
+                        <div class="casting-arrow">
+                            ←
+                        </div>
+
+
+                        <div class="casting-value">
+
+                            <span>
+                                STUDENT 2
+                            </span>
+
+                            <strong>
+                                78
+                            </strong>
+
+                            <small>
+                                Private marks
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Program Explanation
+                    </h4>
+
+
+                    <ul class="key-points">
+
+                        <li>
+                            Both student classes contain private marks.
+                        </li>
+
+                        <li>
+                            <code>compareMarks()</code> is a friend of
+                            both classes.
+                        </li>
+
+                        <li>
+                            It receives objects of both classes.
+                        </li>
+
+                        <li>
+                            It directly accesses both private marks.
+                        </li>
+
+                        <li>
+                            The greater marks are identified.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Real-Life Connection
+                    </h4>
+
+                    <p>
+                        Educational systems may compare private academic
+                        data belonging to different student objects while
+                        keeping those marks private within their classes.
+                    </p>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Key Points
+                    </h4>
+
+
+                    <ul class="key-points">
+
+                        <li>
+                            Friendship can be granted to the same function
+                            by multiple classes.
+                        </li>
+
+                        <li>
+                            The function can access private members of
+                            those classes.
+                        </li>
+
+                        <li>
+                            The friend function remains an external
+                            non-member function.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Common Errors
+                    </h4>
+
+
+                    <div class="error-grid">
+
+                        <div class="error-card">
+
+                            <strong>
+                                Missing Forward Declaration
+                            </strong>
+
+                            <p>
+                                When required, declare the second class
+                                before using it in the first class's
+                                friend declaration.
+                            </p>
+
+                        </div>
+
+
+                        <div class="error-card">
+
+                            <strong>
+                                Calling as Member
+                            </strong>
+
+                            <p>
+                                A friend function is not called using the
+                                object-dot syntax. Call it as a normal
+                                function.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- LLO 7.2 -->
+        <!-- ================================================= -->
+
+        <div
+            class="llo-section"
+            id="friend-external-problems">
+
+
+            <span class="problem-badge">
+                LLO 7.2
+            </span>
+
+
+            <h3>
+                Friend Function Using External Function
+            </h3>
+
+
+            <div class="theory-box">
+
+                <h3>
+                    Concept
+                </h3>
+
+
+                <p>
+                    An external function is a function defined outside
+                    the class. By declaring that function as a friend,
+                    the class gives it permission to access its private
+                    members.
+                </p>
+
+
+                <p>
+                    The function remains an independent function and is
+                    called like a normal function.
+                </p>
+
+            </div>
+
+
+            <!-- PROBLEM TABS -->
+
+            <div class="problem-mini-selector">
+
+                <button
+                    class="mini-problem-tab active"
+                    data-problem="friend-external-problem1">
+
+                    Problem 01
+
+                </button>
+
+
+                <button
+                    class="mini-problem-tab"
+                    data-problem="friend-external-problem2">
+
+                    Problem 02
+
+                </button>
+
+
+                <button
+                    class="mini-problem-tab"
+                    data-problem="friend-external-problem3">
+
+                    Problem 03
+
+                </button>
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- PROBLEM 1 -->
+            <!-- ================================================= -->
+
+            <article
+                class="mini-problem active"
+                id="friend-external-problem1">
+
+
+                <span class="problem-badge">
+                    PROBLEM 01
+                </span>
+
+
+                <h3>
+                    Display Private Data
+                </h3>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Problem Statement
+                    </h4>
+
+                    <p>
+                        Write a C++ program to create a class Student
+                        with private roll number and name. Use an
+                        external friend function to display the private data.
+                    </p>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Algorithm
+                    </h4>
+
+
+                    <ol class="algorithm-list">
+
+                        <li>
+                            Start.
+                        </li>
+
+                        <li>
+                            Create a Student class.
+                        </li>
+
+                        <li>
+                            Declare roll number and name as private members.
+                        </li>
+
+                        <li>
+                            Declare <code>display()</code> as a friend function.
+                        </li>
+
+                        <li>
+                            Define the function outside the class.
+                        </li>
+
+                        <li>
+                            Create a Student object.
+                        </li>
+
+                        <li>
+                            Accept student details.
+                        </li>
+
+                        <li>
+                            Pass the object to the friend function.
+                        </li>
+
+                        <li>
+                            Display the private members.
+                        </li>
+
+                        <li>
+                            Stop.
+                        </li>
+
+                    </ol>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        C++ Program
+                    </h4>
+
+
+                    <div class="code-window">
+
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+class Student
+{
+    int rollNo;
+    string name;
+
+public:
+
+    void accept()
+    {
+        cout &lt;&lt; "Enter roll number: ";
+        cin &gt;&gt; rollNo;
+
+        cout &lt;&lt; "Enter name: ";
+        cin &gt;&gt; name;
+    }
+
+    friend void display(Student);
+};
+
+void display(Student s)
+{
+    cout &lt;&lt; "\nRoll Number = "
+         &lt;&lt; s.rollNo &lt;&lt; endl;
+
+    cout &lt;&lt; "Name = "
+         &lt;&lt; s.name;
+}
+
+int main()
+{
+    Student s;
+
+    s.accept();
+
+    display(s);
+
+    return 0;
+}</code></pre>
+
+                    </div>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Expected Output
+                    </h4>
+
+
+                    <div class="output-box">
+
+<pre>Enter roll number: 101
+Enter name: Rahul
+
+Roll Number = 101
+Name = Rahul</pre>
+
+                    </div>
+
+                </div>
+
+
+                <div class="visualization-section">
+
+                    <div class="visualization-header">
+
+                        <span class="problem-badge">
+                            FRIEND FUNCTION VISUALIZATION
+                        </span>
+
+
+                        <h3>
+                            Private Data → External Friend
+                        </h3>
+
+                    </div>
+
+
+                    <div class="casting-visual">
+
+                        <div class="casting-value">
+
+                            <span>
+                                STUDENT OBJECT
+                            </span>
+
+                            <strong>
+                                s
+                            </strong>
+
+                            <small>
+                                rollNo + name
+                            </small>
+
+                        </div>
+
+
+                        <div class="casting-arrow">
+                            →
+                        </div>
+
+
+                        <div class="casting-value">
+
+                            <span>
+                                FRIEND
+                            </span>
+
+                            <strong>
+                                display(s)
+                            </strong>
+
+                            <small>
+                                External Function
+                            </small>
+
+                        </div>
+
+
+                        <div class="casting-arrow">
+                            →
+                        </div>
+
+
+                        <div class="casting-value">
+
+                            <span>
+                                OUTPUT
+                            </span>
+
+                            <strong>
+                                101
+                            </strong>
+
+                            <small>
+                                Rahul
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Program Explanation
+                    </h4>
+
+
+                    <ul class="key-points">
+
+                        <li>
+                            <code>Student</code> contains private data.
+                        </li>
+
+                        <li>
+                            <code>display()</code> is declared as a friend.
+                        </li>
+
+                        <li>
+                            The function is defined outside the class.
+                        </li>
+
+                        <li>
+                            It can access <code>rollNo</code> and
+                            <code>name</code>.
+                        </li>
+
+                        <li>
+                            The function is called normally using
+                            <code>display(s)</code>.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Real-Life Connection
+                    </h4>
+
+                    <p>
+                        A reporting or display function may need access
+                        to private student information without becoming
+                        a member function of the Student class.
+                    </p>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Key Points
+                    </h4>
+
+
+                    <ul class="key-points">
+
+                        <li>
+                            Friend functions are external to the class.
+                        </li>
+
+                        <li>
+                            They can access private members when declared
+                            as friends.
+                        </li>
+
+                        <li>
+                            They are called like normal functions.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Common Errors
+                    </h4>
+
+
+                    <div class="error-grid">
+
+                        <div class="error-card">
+
+                            <strong>
+                                Missing friend Keyword
+                            </strong>
+
+                            <p>
+                                Use the <code>friend</code> keyword inside
+                                the class declaration.
+                            </p>
+
+                        </div>
+
+
+                        <div class="error-card">
+
+                            <strong>
+                                Calling as Member
+                            </strong>
+
+                            <p>
+                                Call <code>display(s)</code>, not
+                                <code>s.display()</code>.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- ================================================= -->
+            <!-- PROBLEM 2 -->
+            <!-- ================================================= -->
+
+            <article
+                class="mini-problem"
+                id="friend-external-problem2">
+
+
+                <span class="problem-badge">
+                    PROBLEM 02
+                </span>
+
+
+                <h3>
+                    Calculate Employee Salary
+                </h3>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Problem Statement
+                    </h4>
+
+                    <p>
+                        Write a C++ program to create an Employee class
+                        containing private basic salary. Use an external
+                        friend function to calculate and display the
+                        gross salary.
+                    </p>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Formula
+                    </h4>
+
+
+                    <div class="formula-grid">
+
+                        <div class="formula-card">
+
+                            <strong>
+                                HRA
+                            </strong>
+
+                            <span>
+                                Basic Salary × 20%
+                            </span>
+
+                        </div>
+
+
+                        <div class="formula-card">
+
+                            <strong>
+                                DA
+                            </strong>
+
+                            <span>
+                                Basic Salary × 10%
+                            </span>
+
+                        </div>
+
+
+                        <div class="formula-card">
+
+                            <strong>
+                                Gross Salary
+                            </strong>
+
+                            <span>
+                                Basic + HRA + DA
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Algorithm
+                    </h4>
+
+
+                    <ol class="algorithm-list">
+
+                        <li>
+                            Start.
+                        </li>
+
+                        <li>
+                            Define the Employee class.
+                        </li>
+
+                        <li>
+                            Declare basic salary as a private member.
+                        </li>
+
+                        <li>
+                            Declare <code>calculateSalary()</code> as
+                            a friend function.
+                        </li>
+
+                        <li>
+                            Define the friend function outside the class.
+                        </li>
+
+                        <li>
+                            Create an Employee object.
+                        </li>
+
+                        <li>
+                            Accept basic salary.
+                        </li>
+
+                        <li>
+                            Calculate HRA and DA.
+                        </li>
+
+                        <li>
+                            Calculate gross salary.
+                        </li>
+
+                        <li>
+                            Display the result.
+                        </li>
+
+                        <li>
+                            Stop.
+                        </li>
+
+                    </ol>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        C++ Program
+                    </h4>
+
+
+                    <div class="code-window">
+
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+class Employee
+{
+    float basicSalary;
+
+public:
+
+    void accept()
+    {
+        cout &lt;&lt; "Enter basic salary: ";
+        cin &gt;&gt; basicSalary;
+    }
+
+    friend void calculateSalary(Employee);
+};
+
+void calculateSalary(Employee e)
+{
+    float hra = e.basicSalary * 0.20;
+    float da = e.basicSalary * 0.10;
+
+    float gross =
+        e.basicSalary + hra + da;
+
+    cout &lt;&lt; "\nBasic Salary = "
+         &lt;&lt; e.basicSalary &lt;&lt; endl;
+
+    cout &lt;&lt; "HRA = "
+         &lt;&lt; hra &lt;&lt; endl;
+
+    cout &lt;&lt; "DA = "
+         &lt;&lt; da &lt;&lt; endl;
+
+    cout &lt;&lt; "Gross Salary = "
+         &lt;&lt; gross;
+}
+
+int main()
+{
+    Employee e;
+
+    e.accept();
+
+    calculateSalary(e);
+
+    return 0;
+}</code></pre>
+
+                    </div>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Expected Output
+                    </h4>
+
+
+                    <div class="output-box">
+
+<pre>Enter basic salary: 30000
+
+Basic Salary = 30000
+HRA = 6000
+DA = 3000
+Gross Salary = 39000</pre>
+
+                    </div>
+
+                </div>
+
+
+                <div class="visualization-section">
+
+                    <div class="visualization-header">
+
+                        <span class="problem-badge">
+                            FRIEND FUNCTION VISUALIZATION
+                        </span>
+
+
+                        <h3>
+                            Employee Data → Salary Calculation
+                        </h3>
+
+                    </div>
+
+
+                    <div class="casting-visual">
+
+                        <div class="casting-value">
+
+                            <span>
+                                PRIVATE DATA
+                            </span>
+
+                            <strong>
+                                ₹30,000
+                            </strong>
+
+                            <small>
+                                Basic Salary
+                            </small>
+
+                        </div>
+
+
+                        <div class="casting-arrow">
+                            →
+                        </div>
+
+
+                        <div class="casting-value">
+
+                            <span>
+                                FRIEND FUNCTION
+                            </span>
+
+                            <strong>
+                                calculateSalary()
+                            </strong>
+
+                            <small>
+                                External Function
+                            </small>
+
+                        </div>
+
+
+                        <div class="casting-arrow">
+                            →
+                        </div>
+
+
+                        <div class="casting-value">
+
+                            <span>
+                                RESULT
+                            </span>
+
+                            <strong>
+                                ₹39,000
+                            </strong>
+
+                            <small>
+                                Gross Salary
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Program Explanation
+                    </h4>
+
+
+                    <ul class="key-points">
+
+                        <li>
+                            <code>basicSalary</code> is private.
+                        </li>
+
+                        <li>
+                            <code>calculateSalary()</code> is an external
+                            friend function.
+                        </li>
+
+                        <li>
+                            Friendship allows it to access
+                            <code>basicSalary</code>.
+                        </li>
+
+                        <li>
+                            HRA and DA are calculated inside the
+                            external function.
+                        </li>
+
+                        <li>
+                            Gross salary is displayed.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Real-Life Connection
+                    </h4>
+
+                    <p>
+                        Payroll systems can keep salary information private
+                        inside an Employee class while an external reporting
+                        function performs salary calculations.
+                    </p>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Key Points
+                    </h4>
+
+
+                    <ul class="key-points">
+
+                        <li>
+                            A friend function can access private salary data.
+                        </li>
+
+                        <li>
+                            The function does not become a member of Employee.
+                        </li>
+
+                        <li>
+                            It can perform operations using the private data.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Common Errors
+                    </h4>
+
+
+                    <div class="error-grid">
+
+                        <div class="error-card">
+
+                            <strong>
+                                Direct Private Access
+                            </strong>
+
+                            <p>
+                                A normal external function cannot access
+                                private data unless it is declared as friend.
+                            </p>
+
+                        </div>
+
+
+                        <div class="error-card">
+
+                            <strong>
+                                Wrong Function Call
+                            </strong>
+
+                            <p>
+                                Use <code>calculateSalary(e)</code> instead
+                                of treating the function as a member.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- ================================================= -->
+            <!-- PROBLEM 3 -->
+            <!-- ================================================= -->
+
+            <article
+                class="mini-problem"
+                id="friend-external-problem3">
+
+
+                <span class="problem-badge">
+                    PROBLEM 03
+                </span>
+
+
+                <h3>
+                    Calculate Rectangle Area
+                </h3>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Problem Statement
+                    </h4>
+
+                    <p>
+                        Write a C++ program to create a Rectangle class
+                        containing private length and breadth. Use an
+                        external friend function to calculate and display
+                        the area of the rectangle.
+                    </p>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Formula
+                    </h4>
+
+
+                    <div class="formula-grid">
+
+                        <div class="formula-card">
+
+                            <strong>
+                                Area
+                            </strong>
+
+                            <span>
+                                Length × Breadth
+                            </span>
+
+                        </div>
+
+
+                        <div class="formula-card">
+
+                            <strong>
+                                Length
+                            </strong>
+
+                            <span>
+                                Private member
+                            </span>
+
+                        </div>
+
+
+                        <div class="formula-card">
+
+                            <strong>
+                                Breadth
+                            </strong>
+
+                            <span>
+                                Private member
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Algorithm
+                    </h4>
+
+
+                    <ol class="algorithm-list">
+
+                        <li>
+                            Start.
+                        </li>
+
+                        <li>
+                            Define the Rectangle class.
+                        </li>
+
+                        <li>
+                            Declare length and breadth as private members.
+                        </li>
+
+                        <li>
+                            Declare <code>calculateArea()</code> as a
+                            friend function.
+                        </li>
+
+                        <li>
+                            Define the friend function outside the class.
+                        </li>
+
+                        <li>
+                            Create a Rectangle object.
+                        </li>
+
+                        <li>
+                            Accept length and breadth.
+                        </li>
+
+                        <li>
+                            Pass the object to the friend function.
+                        </li>
+
+                        <li>
+                            Calculate the area.
+                        </li>
+
+                        <li>
+                            Display the area.
+                        </li>
+
+                        <li>
+                            Stop.
+                        </li>
+
+                    </ol>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        C++ Program
+                    </h4>
+
+
+                    <div class="code-window">
+
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+class Rectangle
+{
+    float length;
+    float breadth;
+
+public:
+
+    void accept()
+    {
+        cout &lt;&lt; "Enter length: ";
+        cin &gt;&gt; length;
+
+        cout &lt;&lt; "Enter breadth: ";
+        cin &gt;&gt; breadth;
+    }
+
+    friend void calculateArea(Rectangle);
+};
+
+void calculateArea(Rectangle r)
+{
+    float area =
+        r.length * r.breadth;
+
+    cout &lt;&lt; "\nArea = "
+         &lt;&lt; area;
+}
+
+int main()
+{
+    Rectangle r;
+
+    r.accept();
+
+    calculateArea(r);
+
+    return 0;
+}</code></pre>
+
+                    </div>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Expected Output
+                    </h4>
+
+
+                    <div class="output-box">
+
+<pre>Enter length: 10
+Enter breadth: 5
+
+Area = 50</pre>
+
+                    </div>
+
+                </div>
+
+
+                <div class="visualization-section">
+
+                    <div class="visualization-header">
+
+                        <span class="problem-badge">
+                            FRIEND FUNCTION VISUALIZATION
+                        </span>
+
+
+                        <h3>
+                            Private Dimensions → Area
+                        </h3>
+
+                    </div>
+
+
+                    <div class="rectangle-visual">
+
+                        <div class="rectangle-shape">
+
+                            <span class="rectangle-length">
+                                10
+                            </span>
+
+                            <span class="rectangle-breadth">
+                                5
+                            </span>
+
+                        </div>
+
+
+                        <div class="rectangle-info">
+
+                            <strong>
+                                Rectangle Object
+                            </strong>
+
+                            <span>
+                                length = 10
+                            </span>
+
+                            <span>
+                                breadth = 5
+                            </span>
+
+                        </div>
+
+
+                        <div class="class-visual-arrow">
+                            →
+                        </div>
+
+
+                        <div class="employee-function">
+
+                            <span>
+                                FRIEND FUNCTION
+                            </span>
+
+                            <strong>
+                                calculateArea()
+                            </strong>
+
+                            <small>
+                                Area = 10 × 5
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Program Explanation
+                    </h4>
+
+
+                    <ul class="key-points">
+
+                        <li>
+                            <code>length</code> and
+                            <code>breadth</code> are private members.
+                        </li>
+
+                        <li>
+                            <code>calculateArea()</code> is declared as
+                            a friend.
+                        </li>
+
+                        <li>
+                            The external function accesses both private
+                            members.
+                        </li>
+
+                        <li>
+                            The area is calculated using
+                            <code>length × breadth</code>.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Real-Life Connection
+                    </h4>
+
+                    <p>
+                        Geometry and engineering applications can keep
+                        dimensions private inside an object while a
+                        separate calculation function accesses them
+                        through friendship.
+                    </p>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Key Points
+                    </h4>
+
+
+                    <ul class="key-points">
+
+                        <li>
+                            Friend functions can access private dimensions.
+                        </li>
+
+                        <li>
+                            The external function is not a class member.
+                        </li>
+
+                        <li>
+                            Friendship provides controlled access to
+                            private data.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Common Errors
+                    </h4>
+
+
+                    <div class="error-grid">
+
+                        <div class="error-card">
+
+                            <strong>
+                                Forgetting friend
+                            </strong>
+
+                            <p>
+                                Declare the external function using the
+                                <code>friend</code> keyword inside the class.
+                            </p>
+
+                        </div>
+
+
+                        <div class="error-card">
+
+                            <strong>
+                                Wrong Formula
+                            </strong>
+
+                            <p>
+                                The area of a rectangle is
+                                <code>length × breadth</code>.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        </div>
+
+
+        <!-- ================= QUICK SUMMARY ================= -->
+
+        <div class="casting-summary">
+
+            <span class="section-label">
+                QUICK SUMMARY
+            </span>
+
+
+            <h3>
+                Friend Function at a Glance
+            </h3>
+
+
+            <div class="casting-comparison">
+
+
+                <div class="comparison-card">
+
+                    <span class="comparison-number">
+                        01
+                    </span>
+
+                    <h4>
+                        Non-Member
+                    </h4>
+
+                    <p>
+                        A friend function is not a member function
+                        of the class.
+                    </p>
+
+                    <code>
+                        friend void show();
+                    </code>
+
+                </div>
+
+
+                <div class="comparison-card">
+
+                    <span class="comparison-number">
+                        02
+                    </span>
+
+                    <h4>
+                        Private Access
+                    </h4>
+
+                    <p>
+                        It can access private and protected members
+                        of the class.
+                    </p>
+
+                    <code>
+                        obj.privateData
+                    </code>
+
+                </div>
+
+
+                <div class="comparison-card">
+
+                    <span class="comparison-number">
+                        03
+                    </span>
+
+                    <h4>
+                        Multiple Classes
+                    </h4>
+
+                    <p>
+                        The same function can be declared as a friend
+                        in multiple classes.
+                    </p>
+
+                    <code>
+                        friend void compare(A,B);
+                    </code>
+
+                </div>
+
+
+                <div class="comparison-card">
+
+                    <span class="comparison-number">
+                        04
+                    </span>
+
+                    <h4>
+                        Normal Call
+                    </h4>
+
+                    <p>
+                        A friend function is called like a normal
+                        external function.
+                    </p>
+
+                    <code>
+                        show(obj);
+                    </code>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= VIVA ================= -->
+
+        <section class="viva-section">
+
+            <span class="section-label">
+                04 — VIVA QUESTIONS
+            </span>
+
+
+            <h2>
+                Test Your Understanding
+            </h2>
+
+
+            <!-- BASIC -->
+
+            <div class="viva-group">
+
+                <h3>
+                    Friend Function Basics
+                </h3>
+
+
+                <details>
+
+                    <summary>
+                        What is a friend function?
+                    </summary>
+
+                    <p>
+                        A friend function is a non-member function that
+                        is given permission to access private and protected
+                        members of a class.
+                    </p>
+
+                </details>
+
+
+                <details>
+
+                    <summary>
+                        Which keyword is used to declare a friend function?
+                    </summary>
+
+                    <p>
+                        The <code>friend</code> keyword is used.
+                    </p>
+
+                </details>
+
+
+                <details>
+
+                    <summary>
+                        Is a friend function a member of the class?
+                    </summary>
+
+                    <p>
+                        No. A friend function is not a member function
+                        of the class.
+                    </p>
+
+                </details>
+
+
+                <details>
+
+                    <summary>
+                        Can a friend function access private members?
+                    </summary>
+
+                    <p>
+                        Yes. A friend function can directly access private
+                        and protected members of the class that declares
+                        it as a friend.
+                    </p>
+
+                </details>
+
+
+                <details>
+
+                    <summary>
+                        How is a friend function called?
+                    </summary>
+
+                    <p>
+                        It is called like a normal function, for example
+                        <code>display(obj)</code>.
+                    </p>
+
+                </details>
+
+            </div>
+
+
+            <!-- DIFFERENT CLASSES -->
+
+            <div class="viva-group">
+
+                <h3>
+                    Friend Function Using Different Classes
+                </h3>
+
+
+                <details>
+
+                    <summary>
+                        Can one friend function access two classes?
+                    </summary>
+
+                    <p>
+                        Yes. The same friend function can be declared
+                        as a friend in two or more classes.
+                    </p>
+
+                </details>
+
+
+                <details>
+
+                    <summary>
+                        Why is a forward declaration sometimes required?
+                    </summary>
+
+                    <p>
+                        A forward declaration can be used when one class
+                        needs to be referenced before its complete
+                        definition appears.
+                    </p>
+
+                </details>
+
+
+                <details>
+
+                    <summary>
+                        Can a friend function compare objects of two classes?
+                    </summary>
+
+                    <p>
+                        Yes. A friend function can receive objects of
+                        different classes and access their private
+                        members if friendship has been granted.
+                    </p>
+
+                </details>
+
+            </div>
+
+
+            <!-- EXTERNAL -->
+
+            <div class="viva-group">
+
+                <h3>
+                    External Friend Function
+                </h3>
+
+
+                <details>
+
+                    <summary>
+                        What is an external function?
+                    </summary>
+
+                    <p>
+                        An external function is a function defined outside
+                        the class. If it is declared as a friend, it can
+                        access the class's private and protected members.
+                    </p>
+
+                </details>
+
+
+                <details>
+
+                    <summary>
+                        Does a friend function use the dot operator?
+                    </summary>
+
+                    <p>
+                        No. A friend function is not a member function,
+                        so it is normally called as an ordinary function.
+                    </p>
+
+                </details>
+
+
+                <details>
+
+                    <summary>
+                        Can a friend function be overloaded?
+                    </summary>
+
+                    <p>
+                        Yes. Friend functions can be overloaded like
+                        other non-member functions.
+                    </p>
+
+                </details>
+
+
+                <details>
+
+                    <summary>
+                        Can friendship be inherited?
+                    </summary>
+
+                    <p>
+                        No. Friendship is not inherited by derived classes.
+                    </p>
+
+                </details>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <div class="footer-content">
+
+
+        <div class="footer-brand">
+
+            <div class="footer-logo">
+                &lt;/&gt;
+            </div>
+
+
+            <div class="footer-brand-text">
+
+                <div class="footer-brand-name">
+                    Rasika <span>CodeLab</span>
+                </div>
+
+
+                <p class="footer-tagline">
+                    Code • Understand • Visualize
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-copy">
+            © 2026 Rasika CodeLab. Built for practical learning.
+        </div>
+
+    </div>
+
+</footer>
+
+
+<script src="../js/main.js"></script>
+
+
+<!-- ================= TAB SCRIPT ================= -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+
+    /* =====================================================
+       LLO 7.1 / LLO 7.2 SWITCHING
+       ===================================================== */
+
+    const lloTabs =
+        document.querySelectorAll(".llo-tab");
+
+
+    const lloSections =
+        document.querySelectorAll(".llo-section");
+
+
+    lloTabs.forEach(tab => {
+
+        tab.addEventListener("click", function () {
+
+            const target =
+                this.dataset.llo;
+
+
+            /* Activate selected LLO tab */
+
+            lloTabs.forEach(item => {
+
+                item.classList.remove("active");
+
+            });
+
+
+            this.classList.add("active");
+
+
+            /* Hide all LLO sections */
+
+            lloSections.forEach(section => {
+
+                section.classList.remove("active");
+
+            });
+
+
+            /* Show selected LLO section */
+
+            const selectedSection =
+                document.getElementById(target);
+
+
+            if (selectedSection) {
+
+                selectedSection.classList.add("active");
+
+            }
+
+        });
+
+    });
+
+
+    /* =====================================================
+       PROBLEM SWITCHING
+       Each LLO controls ONLY its own problems
+       ===================================================== */
+
+    lloSections.forEach(section => {
+
+
+        const problemTabs =
+            section.querySelectorAll(
+                ".problem-mini-selector .mini-problem-tab:not(.llo-tab)"
+            );
+
+
+        const problems =
+            section.querySelectorAll(
+                ":scope > .mini-problem"
+            );
+
+
+        problemTabs.forEach(tab => {
+
+            tab.addEventListener("click", function () {
+
+
+                const target =
+                    this.dataset.problem;
+
+
+                /* Activate selected problem tab */
+
+                problemTabs.forEach(item => {
+
+                    item.classList.remove("active");
+
+                });
+
+
+                this.classList.add("active");
+
+
+                /* Hide only problems in current LLO */
+
+                problems.forEach(problem => {
+
+                    problem.classList.remove("active");
+
+                });
+
+
+                /* Show selected problem */
+
+                const selectedProblem =
+                    document.getElementById(target);
+
+
+                if (selectedProblem) {
+
+                    selectedProblem.classList.add("active");
+
+                }
+
+            });
+
+        });
+
+    });
+
+});
+
+</script>
+
+
+</body>
+
+</html>

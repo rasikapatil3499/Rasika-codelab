@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>What is Memory? | Rasika CodeLab</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+    <div class="container nav-container">
+
+        <a href="../index.html" class="logo">
+            <span class="logo-mark">&lt;/&gt;</span>
+            Rasika<span>CodeLab</span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="../index.html">Home</a>
+            <a href="../foundations.html" class="active">Foundations</a>
+            <a href="../practicals.html">Practicals</a>
+            <a href="../about.html">About</a>
+        </nav>
+
+        <button class="menu-btn" aria-label="Open Menu">☰</button>
+
+    </div>
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="detail-hero">
+
+    <div class="container">
+
+        <div class="breadcrumb">
+            <a href="../foundations.html">C++ Foundations</a>
+            <span>›</span>
+            <span>04</span>
+        </div>
+
+        <div class="detail-badge">
+            FOUNDATION 04
+        </div>
+
+        <h1>What is <span>Memory?</span></h1>
+
+        <p class="detail-intro">
+            Every running program needs a place to store instructions,
+            values, objects and temporary data. That place is memory.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="detail-page">
+
+    <div class="container detail-container">
+
+
+        <!-- BASIC IDEA -->
+
+        <section class="concept-section">
+
+            <div class="section-label">01 — BASIC IDEA</div>
+
+            <h2>Memory is where a running program keeps information.</h2>
+
+            <p>
+                Computer memory provides storage that programs can use while
+                they execute. When a C++ program runs, different kinds of
+                information require storage.
+            </p>
+
+            <div class="definition-card">
+
+                <div class="definition-icon">▦</div>
+
+                <div>
+
+                    <span class="definition-label">
+                        SIMPLE DEFINITION
+                    </span>
+
+                    <p>
+                        <strong>Memory is a storage area used by a computer
+                        to hold data and instructions needed during execution.</strong>
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- MEMORY ANALOGY -->
+
+        <section class="concept-section">
+
+            <div class="section-label">02 — REAL WORLD ANALOGY</div>
+
+            <h2>Think of memory like a collection of numbered lockers.</h2>
+
+            <p>
+                Each memory location can be thought of as having an address.
+                Data can be stored at those locations.
+            </p>
+
+            <div class="locker-memory">
+
+                <div class="locker">
+                    <span>ADDRESS</span>
+                    <strong>1000</strong>
+                    <small>Data</small>
+                    <b>25</b>
+                </div>
+
+                <div class="locker">
+                    <span>ADDRESS</span>
+                    <strong>1001</strong>
+                    <small>Data</small>
+                    <b>42</b>
+                </div>
+
+                <div class="locker active">
+                    <span>ADDRESS</span>
+                    <strong>1002</strong>
+                    <small>Data</small>
+                    <b>75</b>
+                </div>
+
+                <div class="locker">
+                    <span>ADDRESS</span>
+                    <strong>1003</strong>
+                    <small>Data</small>
+                    <b>10</b>
+                </div>
+
+            </div>
+
+            <p class="analogy-caption">
+                The addresses above are simplified examples for learning.
+                Actual memory addresses are much larger values.
+            </p>
+
+        </section>
+
+
+        <!-- BITS BYTES -->
+
+        <section class="concept-section">
+
+            <div class="section-label">03 — BITS & BYTES</div>
+
+            <h2>Memory is measured in bytes.</h2>
+
+            <p>
+                At the lowest level, digital information is represented using
+                bits. A group of 8 bits forms one byte.
+            </p>
+
+            <div class="bits-visual">
+
+                <div class="bits-title">
+                    1 BYTE = 8 BITS
+                </div>
+
+                <div class="bit-row">
+
+                    <div class="bit">1</div>
+                    <div class="bit">0</div>
+                    <div class="bit">1</div>
+                    <div class="bit">0</div>
+                    <div class="bit">1</div>
+                    <div class="bit">1</div>
+                    <div class="bit">0</div>
+                    <div class="bit">0</div>
+
+                </div>
+
+            </div>
+
+            <div class="memory-units">
+
+                <div>
+                    <strong>1 Byte</strong>
+                    <span>8 bits</span>
+                </div>
+
+                <div>
+                    <strong>1 KB</strong>
+                    <span>1024 bytes</span>
+                </div>
+
+                <div>
+                    <strong>1 MB</strong>
+                    <span>1024 KB</span>
+                </div>
+
+                <div>
+                    <strong>1 GB</strong>
+                    <span>1024 MB</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ADDRESS -->
+
+        <section class="concept-section">
+
+            <div class="section-label">04 — MEMORY ADDRESS</div>
+
+            <h2>Every memory location has an address.</h2>
+
+            <p>
+                An address identifies a location in memory. In C++, pointers
+                allow programs to work explicitly with memory addresses.
+            </p>
+
+            <div class="address-visual">
+
+                <div class="address-column">
+
+                    <span>MEMORY ADDRESS</span>
+
+                    <div>0x1000</div>
+                    <div>0x1004</div>
+                    <div>0x1008</div>
+                    <div>0x100C</div>
+
+                </div>
+
+                <div class="address-column">
+
+                    <span>STORED VALUE</span>
+
+                    <div>10</div>
+                    <div class="highlight-value">25</div>
+                    <div>50</div>
+                    <div>100</div>
+
+                </div>
+
+            </div>
+
+            <div class="explanation-box">
+
+                <div class="explanation-title">
+                    Remember this distinction
+                </div>
+
+                <ul>
+                    <li>
+                        <strong>Address</strong> tells us where data is stored.
+                    </li>
+
+                    <li>
+                        <strong>Value</strong> tells us what data is stored.
+                    </li>
+
+                    <li>
+                        A variable provides a convenient name for working
+                        with stored data.
+                    </li>
+                </ul>
+
+            </div>
+
+        </section>
+
+
+        <!-- VARIABLE TO MEMORY -->
+
+        <section class="concept-section">
+
+            <div class="section-label">05 — VARIABLE → MEMORY</div>
+
+            <h2>Let's connect variables with memory.</h2>
+
+            <div class="memory-connection">
+
+                <div class="code-side">
+
+                    <span>C++ CODE</span>
+
+<pre><code>int marks = 85;</code></pre>
+
+                </div>
+
+                <div class="connection-arrow">
+                    →
+                </div>
+
+                <div class="memory-side">
+
+                    <span>CONCEPTUAL MEMORY</span>
+
+                    <div class="memory-cell-large">
+
+                        <div class="cell-address">
+                            0x2004
+                        </div>
+
+                        <div class="cell-value">
+
+                            <strong>85</strong>
+
+                            <small>
+                                marks
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PROCESS MEMORY -->
+
+        <section class="concept-section">
+
+            <div class="section-label">06 — PROGRAM MEMORY</div>
+
+            <h2>A running program uses different memory areas.</h2>
+
+            <p>
+                A simplified process-memory model commonly used for learning
+                divides memory into several conceptual regions.
+            </p>
+
+            <div class="process-memory">
+
+                <div class="process-area code-area">
+
+                    <div class="area-number">01</div>
+
+                    <h3>Code / Text</h3>
+
+                    <p>
+                        Contains program instructions.
+                    </p>
+
+                </div>
+
+                <div class="process-area data-area">
+
+                    <div class="area-number">02</div>
+
+                    <h3>Data</h3>
+
+                    <p>
+                        Stores certain global and static program data.
+                    </p>
+
+                </div>
+
+                <div class="process-area heap-area">
+
+                    <div class="area-number">03</div>
+
+                    <h3>Heap</h3>
+
+                    <p>
+                        Used for dynamic memory allocation.
+                    </p>
+
+                </div>
+
+                <div class="process-area stack-area">
+
+                    <div class="area-number">04</div>
+
+                    <h3>Stack</h3>
+
+                    <p>
+                        Used for function calls and automatic local data.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <p class="note-text">
+                <strong>Important:</strong>
+                This is a simplified educational model. Actual process
+                memory layout depends on the operating system, compiler,
+                architecture and runtime environment.
+            </p>
+
+        </section>
+
+
+        <!-- STACK VS HEAP -->
+
+        <section class="concept-section">
+
+            <div class="section-label">07 — STACK & HEAP</div>
+
+            <h2>Two memory areas you will use repeatedly in C++.</h2>
+
+            <div class="stack-heap-grid">
+
+                <div class="stack-heap-card">
+
+                    <div class="sh-icon">S</div>
+
+                    <h3>Stack</h3>
+
+                    <ul>
+                        <li>Used for function calls.</li>
+                        <li>Automatic local variables commonly reside here.</li>
+                        <li>Managed automatically.</li>
+                        <li>Very important when learning recursion.</li>
+                    </ul>
+
+                </div>
+
+
+                <div class="stack-heap-card">
+
+                    <div class="sh-icon">H</div>
+
+                    <h3>Heap</h3>
+
+                    <ul>
+                        <li>Used for dynamic memory allocation.</li>
+                        <li>Memory can be requested during execution.</li>
+                        <li>Important for pointers and dynamic objects.</li>
+                        <li>Requires appropriate memory management.</li>
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- INTERACTIVE CONCEPT -->
+
+        <section class="concept-section">
+
+            <div class="section-label">08 — MEMORY VIEW</div>
+
+            <h2>See how variables can be represented in memory.</h2>
+
+            <p>
+                This is a simplified visual model. In later lessons,
+                the same idea will be used to explain pointers and arrays.
+            </p>
+
+            <div class="memory-viewer">
+
+                <div class="viewer-header">
+
+                    <span>ADDRESS</span>
+                    <span>VARIABLE</span>
+                    <span>VALUE</span>
+
+                </div>
+
+                <div class="viewer-row">
+
+                    <span>0x1000</span>
+                    <strong>age</strong>
+                    <b>20</b>
+
+                </div>
+
+                <div class="viewer-row">
+
+                    <span>0x1004</span>
+                    <strong>marks</strong>
+                    <b>85</b>
+
+                </div>
+
+                <div class="viewer-row">
+
+                    <span>0x1008</span>
+                    <strong>count</strong>
+                    <b>5</b>
+
+                </div>
+
+                <div class="viewer-row">
+
+                    <span>0x100C</span>
+                    <strong>price</strong>
+                    <b>499.50</b>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- WHY MEMORY MATTERS -->
+
+        <section class="concept-section">
+
+            <div class="section-label">09 — WHY IT MATTERS</div>
+
+            <h2>Why should a C++ programmer understand memory?</h2>
+
+            <div class="importance-grid">
+
+                <div class="importance-card">
+                    <span>01</span>
+                    <h3>Variables</h3>
+                    <p>
+                        Variables need storage while a program executes.
+                    </p>
+                </div>
+
+                <div class="importance-card">
+                    <span>02</span>
+                    <h3>Arrays</h3>
+                    <p>
+                        Array elements are stored in an organized memory region.
+                    </p>
+                </div>
+
+                <div class="importance-card">
+                    <span>03</span>
+                    <h3>Pointers</h3>
+                    <p>
+                        Pointers can store and work with memory addresses.
+                    </p>
+                </div>
+
+                <div class="importance-card">
+                    <span>04</span>
+                    <h3>Functions</h3>
+                    <p>
+                        Function calls involve stack memory and execution state.
+                    </p>
+                </div>
+
+                <div class="importance-card">
+                    <span>05</span>
+                    <h3>Objects</h3>
+                    <p>
+                        Objects require memory to hold their state.
+                    </p>
+                </div>
+
+                <div class="importance-card">
+                    <span>06</span>
+                    <h3>Dynamic Memory</h3>
+                    <p>
+                        Dynamic allocation directly involves memory management.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- TAKEAWAYS -->
+
+        <section class="takeaway-section">
+
+            <div class="section-label">10 — REMEMBER</div>
+
+            <h2>Key Takeaways</h2>
+
+            <div class="takeaways">
+
+                <div>
+                    <span>✓</span>
+                    Memory stores information required by a running program.
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    Memory locations can be identified by addresses.
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    A value is different from the address where it is stored.
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    A variable provides a convenient name for stored data.
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    Stack and heap are important conceptual areas of process memory.
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    Understanding memory is essential for learning pointers.
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- NAVIGATION -->
+
+        <section class="lesson-navigation">
+
+            <a href="variables.html" class="lesson-nav-card">
+
+                <span>←</span>
+
+                <div>
+                    <small>PREVIOUS FOUNDATION</small>
+                    <strong>What is a Variable?</strong>
+                </div>
+
+            </a>
+
+
+            <a href="operators.html" class="lesson-nav-card next">
+
+                <div>
+                    <small>NEXT FOUNDATION</small>
+                    <strong>What is an Operator?</strong>
+                </div>
+
+                <span>→</span>
+
+            </a>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="footer">
+
+    <div class="container">
+
+        <div class="footer-content">
+
+            <div>
+
+                <div class="logo">
+                    <span class="logo-mark">&lt;/&gt;</span>
+                    Rasika<span>CodeLab</span>
+                </div>
+
+                <p>
+                    Code • Understand • Visualize
+                </p>
+
+            </div>
+
+            <p class="footer-copy">
+                © 2026 Rasika CodeLab. Built for practical learning.
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<script src="../js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,2419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Practical 2 | Rasika CodeLab</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="detail-page">
+
+    <!-- =====================================================
+         NAVBAR
+         ===================================================== -->
+
+    <header class="navbar">
+
+        <div class="nav-container">
+
+            <a href="../index.html" class="logo">
+
+                <span class="logo-icon">
+                    &lt;/&gt;
+                </span>
+
+                <span>
+                    Rasika<span>CodeLab</span>
+                </span>
+
+            </a>
+
+
+            <button class="menu-btn" aria-label="Toggle menu">
+                ☰
+            </button>
+
+
+            <nav class="nav-links">
+
+                <a href="../index.html">
+                    Home
+                </a>
+
+                <a href="../foundations/program.html">
+                    Foundations
+                </a>
+
+                <a href="index.html" class="active">
+                    Practicals
+                </a>
+
+                <a href="../index.html#about">
+                    About
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <main class="practical-page">
+
+
+        <!-- =================================================
+             HERO
+             ================================================= -->
+
+        <section class="practical-hero">
+
+            <div class="container">
+
+                <span class="section-label">
+                    C++ PRACTICAL 02
+                </span>
+
+                <h1>
+                    Special Type of Operators
+                </h1>
+
+                <p class="practical-subtitle">
+                    Develop C++ programs using scope resolution,
+                    memory management operators and manipulators.
+                </p>
+
+
+                <div class="practical-meta">
+
+                    <span>
+                        💻 C++
+                    </span>
+
+                    <span>
+                        📘 Practical 2
+                    </span>
+
+                    <span>
+                        🎯 LLO 2.1
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             AIM
+             ================================================= -->
+
+        <section class="content-section">
+
+            <div class="container">
+
+                <span class="section-label">
+                    01 — AIM
+                </span>
+
+
+                <div class="content-card">
+
+                    <p>
+                        To develop C++ programs using special type
+                        of operators such as the scope resolution
+                        operator, memory management operators and
+                        manipulators.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             LEARNING OBJECTIVES
+             ================================================= -->
+
+        <section class="content-section">
+
+            <div class="container">
+
+                <span class="section-label">
+                    02 — LEARNING OBJECTIVES
+                </span>
+
+
+                <div class="objective-grid">
+
+                    <div class="objective-card">
+
+                        <span>01</span>
+
+                        <p>
+                            Understand the scope resolution operator
+                            and its applications.
+                        </p>
+
+                    </div>
+
+
+                    <div class="objective-card">
+
+                        <span>02</span>
+
+                        <p>
+                            Understand dynamic memory allocation
+                            using new and delete.
+                        </p>
+
+                    </div>
+
+
+                    <div class="objective-card">
+
+                        <span>03</span>
+
+                        <p>
+                            Use manipulators to format C++ output.
+                        </p>
+
+                    </div>
+
+
+                    <div class="objective-card">
+
+                        <span>04</span>
+
+                        <p>
+                            Apply special operators in practical
+                            programming problems.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             TOPIC SECTION
+             ================================================= -->
+
+        <section class="content-section">
+
+            <div class="container">
+
+                <span class="section-label">
+                    03 — SELECT A TOPIC
+                </span>
+
+                <h2>
+                    Explore Special Operators
+                </h2>
+
+                <p class="section-description">
+                    Select a topic to explore its theory,
+                    real-life applications and practical programs.
+                </p>
+
+
+
+                <!-- TOPIC SELECTOR -->
+
+                <div class="topic-selector">
+
+                    <button class="topic-tab active"
+                            data-topic="scope">
+
+                        <span class="topic-number">
+                            01
+                        </span>
+
+                        <span class="topic-tab-content">
+
+                            <strong>
+                                Scope Resolution
+                            </strong>
+
+                            <small>
+                                ::
+                            </small>
+
+                        </span>
+
+                    </button>
+
+
+                    <button class="topic-tab"
+                            data-topic="memory">
+
+                        <span class="topic-number">
+                            02
+                        </span>
+
+                        <span class="topic-tab-content">
+
+                            <strong>
+                                Memory Management
+                            </strong>
+
+                            <small>
+                                new & delete
+                            </small>
+
+                        </span>
+
+                    </button>
+
+
+                    <button class="topic-tab"
+                            data-topic="manipulators">
+
+                        <span class="topic-number">
+                            03
+                        </span>
+
+                        <span class="topic-tab-content">
+
+                            <strong>
+                                Manipulators
+                            </strong>
+
+                            <small>
+                                setw • fixed • setprecision
+                            </small>
+
+                        </span>
+
+                    </button>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     TOPIC 1 — SCOPE RESOLUTION
+                     ================================================= -->
+
+                <div class="topic-content active"
+                     id="scope">
+
+
+                    <div class="topic-heading">
+
+                        <span class="problem-badge">
+                            TOPIC 01
+                        </span>
+
+                        <h2>
+                            Scope Resolution Operator ::
+                        </h2>
+
+                        <p>
+                            The scope resolution operator is used
+                            to specify the scope to which a variable,
+                            function or member belongs.
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- THEORY -->
+
+                    <div class="theory-box">
+
+                        <h3>
+                            Theory
+                        </h3>
+
+                        <p>
+                            In C++, scope defines the region of a
+                            program where a name such as a variable
+                            or function can be accessed. The scope
+                            resolution operator <code>::</code>
+                            allows the programmer to explicitly
+                            specify the scope of a name.
+                        </p>
+
+                        <p>
+                            It is especially useful when a local
+                            variable has the same name as a global
+                            variable, when defining class member
+                            functions outside the class, and when
+                            accessing members of a namespace.
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- REAL LIFE -->
+
+                    <div class="real-life-box">
+
+                        <div class="real-life-icon">
+                            🌍
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Real-Life Example
+                            </h3>
+
+                            <p>
+                                Imagine a college where both a
+                                department and the college have
+                                information with the same name.
+                                A scope identifier helps specify
+                                exactly which level of information
+                                should be accessed.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- WHERE USED -->
+
+                    <div class="where-used-box">
+
+                        <h3>
+                            Where & How Is It Used?
+                        </h3>
+
+                        <div class="use-grid">
+
+                            <div>
+                                <strong>
+                                    Global Variables
+                                </strong>
+
+                                <p>
+                                    Access a global variable when
+                                    a local variable has the same name.
+                                </p>
+                            </div>
+
+                            <div>
+                                <strong>
+                                    Class Functions
+                                </strong>
+
+                                <p>
+                                    Define a class member function
+                                    outside the class.
+                                </p>
+                            </div>
+
+                            <div>
+                                <strong>
+                                    Namespaces
+                                </strong>
+
+                                <p>
+                                    Access variables and functions
+                                    belonging to a namespace.
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- PROBLEM SELECTOR -->
+
+                    <div class="problem-mini-selector">
+
+                        <button class="mini-problem-tab active"
+                                data-problem="scope-problem1">
+
+                            Problem 01
+
+                        </button>
+
+                        <button class="mini-problem-tab"
+                                data-problem="scope-problem2">
+
+                            Problem 02
+
+                        </button>
+
+                        <button class="mini-problem-tab"
+                                data-problem="scope-problem3">
+
+                            Problem 03
+
+                        </button>
+
+                    </div>
+
+
+
+                    <!-- PROBLEM 1 -->
+
+                    <article class="mini-problem active"
+                             id="scope-problem1">
+
+                        <span class="problem-badge">
+                            PROBLEM 01
+                        </span>
+
+                        <h3>
+                            Global and Local Variables
+                        </h3>
+
+
+                        <div class="content-block">
+
+                            <h4>
+                                Problem Statement
+                            </h4>
+
+                            <p>
+                                Write a C++ program to demonstrate
+                                the use of the scope resolution
+                                operator to access a global variable
+                                when a local variable has the same name.
+                            </p>
+
+                        </div>
+
+
+                        <div class="content-block">
+
+                            <h4>
+                                Syntax
+                            </h4>
+
+                            <div class="syntax-box">
+
+                                <code>
+                                    ::variable
+                                </code>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="content-block">
+
+                            <h4>
+                                Algorithm
+                            </h4>
+
+                            <ol class="algorithm-list">
+
+                                <li>
+                                    Start.
+                                </li>
+
+                                <li>
+                                    Declare a global variable.
+                                </li>
+
+                                <li>
+                                    Declare a local variable with
+                                    the same name.
+                                </li>
+
+                                <li>
+                                    Display the local variable.
+                                </li>
+
+                                <li>
+                                    Use <code>::</code> to access
+                                    the global variable.
+                                </li>
+
+                                <li>
+                                    Display the global variable.
+                                </li>
+
+                                <li>
+                                    Stop.
+                                </li>
+
+                            </ol>
+
+                        </div>
+
+
+                        <div class="content-block">
+
+                            <h4>
+                                C++ Program
+                            </h4>
+
+                            <div class="code-window">
+
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+int number = 100;
+
+int main()
+{
+    int number = 50;
+
+    cout &lt;&lt; "Local value = " &lt;&lt; number &lt;&lt; endl;
+    cout &lt;&lt; "Global value = " &lt;&lt; ::number &lt;&lt; endl;
+
+    return 0;
+}</code></pre>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="content-block">
+
+                            <h4>
+                                Expected Output
+                            </h4>
+
+                            <div class="output-box">
+
+<pre>Local value = 50
+Global value = 100</pre>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- VISUALIZATION -->
+
+                        <div class="visualization-section">
+
+                            <div class="visualization-header">
+
+                                <span class="problem-badge">
+                                    INTERACTIVE CONCEPT
+                                </span>
+
+                                <h3>
+                                    Local vs Global Scope
+                                </h3>
+
+                                <p>
+                                    The same variable name can exist
+                                    in different scopes.
+                                </p>
+
+                            </div>
+
+
+                            <div class="scope-visual">
+
+                                <div class="scope-box local">
+
+                                    <span>
+                                        LOCAL SCOPE
+                                    </span>
+
+                                    <strong>
+                                        number = 50
+                                    </strong>
+
+                                    <small>
+                                        number
+                                    </small>
+
+                                </div>
+
+
+                                <div class="scope-operator">
+                                    ::
+                                </div>
+
+
+                                <div class="scope-box global">
+
+                                    <span>
+                                        GLOBAL SCOPE
+                                    </span>
+
+                                    <strong>
+                                        number = 100
+                                    </strong>
+
+                                    <small>
+                                        ::number
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="content-block">
+
+                            <h4>
+                                Key Points
+                            </h4>
+
+                            <ul class="key-points">
+
+                                <li>
+                                    Local variables have local scope.
+                                </li>
+
+                                <li>
+                                    Global variables can be accessed
+                                    using <code>::</code>.
+                                </li>
+
+                                <li>
+                                    Scope resolution removes ambiguity.
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+
+                        <div class="content-block">
+
+                            <h4>
+                                Common Errors
+                            </h4>
+
+                            <div class="error-grid">
+
+                                <div class="error-card">
+
+                                    <strong>
+                                        Forgetting ::
+                                    </strong>
+
+                                    <p>
+                                        Without <code>::</code>,
+                                        the local variable is accessed.
+                                    </p>
+
+                                </div>
+
+
+                                <div class="error-card">
+
+                                    <strong>
+                                        Same Name Confusion
+                                    </strong>
+
+                                    <p>
+                                        Always identify which scope
+                                        contains the required variable.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- PROBLEM 2 -->
+
+                    <article class="mini-problem"
+                             id="scope-problem2">
+
+                        <span class="problem-badge">
+                            PROBLEM 02
+                        </span>
+
+                        <h3>
+                            Class Member Function
+                        </h3>
+
+
+                        <div class="content-block">
+
+                            <h4>
+                                Problem Statement
+                            </h4>
+
+                            <p>
+                                Write a C++ program to define a class
+                                member function outside the class
+                                using the scope resolution operator.
+                            </p>
+
+                        </div>
+
+
+                        <div class="content-block">
+
+                            <h4>
+                                C++ Program
+                            </h4>
+
+                            <div class="code-window">
+
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+class Student
+{
+public:
+    void display();
+};
+
+void Student::display()
+{
+    cout &lt;&lt; "Student details displayed.";
+}
+
+int main()
+{
+    Student s;
+    s.display();
+
+    return 0;
+}</code></pre>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="content-block">
+
+                            <h4>
+                                Expected Output
+                            </h4>
+
+                            <div class="output-box">
+
+<pre>Student details displayed.</pre>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="content-block">
+
+                            <h4>
+                                Key Points
+                            </h4>
+
+                            <ul class="key-points">
+
+                                <li>
+                                    Member functions can be declared
+                                    inside a class.
+                                </li>
+
+                                <li>
+                                    They can be defined outside the
+                                    class using <code>ClassName::</code>.
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- PROBLEM 3 -->
+
+                    <article class="mini-problem"
+                             id="scope-problem3">
+
+                        <span class="problem-badge">
+                            PROBLEM 03
+                        </span>
+
+                        <h3>
+                            Namespace
+                        </h3>
+
+
+                        <div class="content-block">
+
+                            <h4>
+                                Problem Statement
+                            </h4>
+
+                            <p>
+                                Write a C++ program to demonstrate
+                                the use of the scope resolution
+                                operator to access a variable
+                                belonging to a user-defined namespace.
+                            </p>
+
+                        </div>
+
+
+                        <div class="content-block">
+
+                            <h4>
+                                C++ Program
+                            </h4>
+
+                            <div class="code-window">
+
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+namespace College
+{
+    int students = 500;
+}
+
+int main()
+{
+    cout &lt;&lt; "Students = "
+         &lt;&lt; College::students;
+
+    return 0;
+}</code></pre>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="content-block">
+
+                            <h4>
+                                Expected Output
+                            </h4>
+
+                            <div class="output-box">
+
+<pre>Students = 500</pre>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="content-block">
+
+                            <h4>
+                                Key Points
+                            </h4>
+
+                            <ul class="key-points">
+
+                                <li>
+                                    A namespace provides a separate
+                                    scope for its members.
+                                </li>
+
+                                <li>
+                                    The scope resolution operator
+                                    accesses namespace members.
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                    </article>
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     TOPIC 2 — MEMORY MANAGEMENT
+                     ================================================= -->
+
+                <div class="topic-content"
+                     id="memory">
+
+
+                    <div class="topic-heading">
+
+                        <span class="problem-badge">
+                            TOPIC 02
+                        </span>
+
+                        <h2>
+                            Memory Management Operators
+                        </h2>
+
+                        <p>
+                            C++ provides <code>new</code> and
+                            <code>delete</code> for dynamic memory
+                            allocation and deallocation.
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- THEORY -->
+
+                    <div class="theory-box">
+
+                        <h3>
+                            Theory
+                        </h3>
+
+                        <p>
+                            Dynamic memory allocation allows a program
+                            to request memory during program execution.
+                            The <code>new</code> operator allocates
+                            memory dynamically, while <code>delete</code>
+                            releases memory that is no longer required.
+                        </p>
+
+                        <p>
+                            Dynamic memory is useful when the amount
+                            of data required by a program is not known
+                            beforehand or when objects need to exist
+                            dynamically during execution.
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- REAL LIFE -->
+
+                    <div class="real-life-box">
+
+                        <div class="real-life-icon">
+                            🌍
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Real-Life Example
+                            </h3>
+
+                            <p>
+                                Consider an online shopping cart.
+                                Products can be added when required
+                                and removed when they are no longer
+                                needed. A program can dynamically
+                                allocate and release memory for such
+                                data.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- WHERE USED -->
+
+                    <div class="where-used-box">
+
+                        <h3>
+                            Where & How Is It Used?
+                        </h3>
+
+                        <div class="use-grid">
+
+                            <div>
+                                <strong>
+                                    Dynamic Arrays
+                                </strong>
+
+                                <p>
+                                    Allocate an array when its required
+                                    size is known only during execution.
+                                </p>
+                            </div>
+
+                            <div>
+                                <strong>
+                                    Dynamic Objects
+                                </strong>
+
+                                <p>
+                                    Create objects dynamically when
+                                    required.
+                                </p>
+                            </div>
+
+                            <div>
+                                <strong>
+                                    Data Structures
+                                </strong>
+
+                                <p>
+                                    Dynamic memory is fundamental to
+                                    structures such as linked lists
+                                    and trees.
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- PROBLEM SELECTOR -->
+
+                    <div class="problem-mini-selector">
+
+                        <button class="mini-problem-tab active"
+                                data-problem="memory-problem1">
+
+                            Problem 01
+
+                        </button>
+
+                        <button class="mini-problem-tab"
+                                data-problem="memory-problem2">
+
+                            Problem 02
+
+                        </button>
+
+                        <button class="mini-problem-tab"
+                                data-problem="memory-problem3">
+
+                            Problem 03
+
+                        </button>
+
+                    </div>
+
+
+
+                    <!-- MEMORY PROBLEM 1 -->
+
+                    <article class="mini-problem active"
+                             id="memory-problem1">
+
+                        <span class="problem-badge">
+                            PROBLEM 01
+                        </span>
+
+                        <h3>
+                            Dynamic Integer
+                        </h3>
+
+
+                        <div class="content-block">
+
+                            <h4>
+                                Problem Statement
+                            </h4>
+
+                            <p>
+                                Write a C++ program to dynamically
+                                allocate memory for an integer using
+                                the <code>new</code> operator, accept
+                                a value from the user, display it,
+                                and release the memory using
+                                <code>delete</code>.
+                            </p>
+
+                        </div>
+
+
+                        <div class="content-block">
+
+                            <h4>
+                                Algorithm
+                            </h4>
+
+                            <ol class="algorithm-list">
+
+                                <li>
+                                    Start.
+                                </li>
+
+                                <li>
+                                    Declare an integer pointer.
+                                </li>
+
+                                <li>
+                                    Allocate memory using
+                                    <code>new</code>.
+                                </li>
+
+                                <li>
+                                    Accept a value.
+                                </li>
+
+                                <li>
+                                    Display the value.
+                                </li>
+
+                                <li>
+                                    Release memory using
+                                    <code>delete</code>.
+                                </li>
+
+                                <li>
+                                    Stop.
+                                </li>
+
+                            </ol>
+
+                        </div>
+
+
+                        <div class="content-block">
+
+                            <h4>
+                                C++ Program
+                            </h4>
+
+                            <div class="code-window">
+
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    int *ptr;
+
+    ptr = new int;
+
+    cout &lt;&lt; "Enter value: ";
+    cin &gt;&gt; *ptr;
+
+    cout &lt;&lt; "Value = " &lt;&lt; *ptr;
+
+    delete ptr;
+
+    return 0;
+}</code></pre>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="content-block">
+
+                            <h4>
+                                Expected Output
+                            </h4>
+
+                            <div class="output-box">
+
+<pre>Enter value: 50
+Value = 50</pre>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="visualization-section">
+
+                            <div class="visualization-header">
+
+                                <span class="problem-badge">
+                                    MEMORY VISUALIZATION
+                                </span>
+
+                                <h3>
+                                    Pointer → Heap Memory
+                                </h3>
+
+                            </div>
+
+
+                            <div class="memory-visual">
+
+                                <div class="memory-pointer">
+                                    <strong>
+                                        ptr
+                                    </strong>
+
+                                    <small>
+                                        pointer
+                                    </small>
+
+                                </div>
+
+                                <div class="memory-arrow">
+                                    →
+                                </div>
+
+                                <div class="heap-box">
+
+                                    <span>
+                                        HEAP
+                                    </span>
+
+                                    <strong>
+                                        50
+                                    </strong>
+
+                                    <small>
+                                        dynamically allocated
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="content-block">
+
+                            <h4>
+                                Key Points
+                            </h4>
+
+                            <ul class="key-points">
+
+                                <li>
+                                    <code>new</code> dynamically
+                                    allocates memory.
+                                </li>
+
+                                <li>
+                                    A pointer stores the address
+                                    of the allocated memory.
+                                </li>
+
+                                <li>
+                                    <code>delete</code> releases
+                                    dynamically allocated memory.
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- MEMORY PROBLEM 2 -->
+
+                    <article class="mini-problem"
+                             id="memory-problem2">
+
+                        <span class="problem-badge">
+                            PROBLEM 02
+                        </span>
+
+                        <h3>
+                            Dynamic Array
+                        </h3>
+
+
+                        <div class="content-block">
+
+                            <h4>
+                                Problem Statement
+                            </h4>
+
+                            <p>
+                                Write a C++ program to dynamically
+                                allocate memory for an array of
+                                integers using <code>new</code>,
+                                accept and display the elements,
+                                and release the memory using
+                                <code>delete[]</code>.
+                            </p>
+
+                        </div>
+
+
+                        <div class="content-block">
+
+                            <h4>
+                                C++ Program
+                            </h4>
+
+                            <div class="code-window">
+
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    int n;
+
+    cout &lt;&lt; "Enter number of elements: ";
+    cin &gt;&gt; n;
+
+    int *arr = new int[n];
+
+    for (int i = 0; i &lt; n; i++)
+    {
+        cout &lt;&lt; "Enter element: ";
+        cin &gt;&gt; arr[i];
+    }
+
+    cout &lt;&lt; "Array elements: ";
+
+    for (int i = 0; i &lt; n; i++)
+        cout &lt;&lt; arr[i] &lt;&lt; " ";
+
+    delete[] arr;
+
+    return 0;
+}</code></pre>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="content-block">
+
+                            <h4>
+                                Expected Output
+                            </h4>
+
+                            <div class="output-box">
+
+<pre>Enter number of elements: 3
+Enter element: 10
+Enter element: 20
+Enter element: 30
+Array elements: 10 20 30</pre>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="content-block">
+
+                            <h4>
+                                Key Points
+                            </h4>
+
+                            <ul class="key-points">
+
+                                <li>
+                                    <code>new int[n]</code> creates
+                                    a dynamic array.
+                                </li>
+
+                                <li>
+                                    <code>delete[]</code> is used
+                                    to release an array.
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- MEMORY PROBLEM 3 -->
+
+                    <article class="mini-problem"
+                             id="memory-problem3">
+
+                        <span class="problem-badge">
+                            PROBLEM 03
+                        </span>
+
+                        <h3>
+                            Dynamic Object
+                        </h3>
+
+
+                        <div class="content-block">
+
+                            <h4>
+                                Problem Statement
+                            </h4>
+
+                            <p>
+                                Write a C++ program to dynamically
+                                create an object of a class using
+                                the <code>new</code> operator,
+                                access its data, and release the
+                                allocated memory using
+                                <code>delete</code>.
+                            </p>
+
+                        </div>
+
+
+                        <div class="content-block">
+
+                            <h4>
+                                C++ Program
+                            </h4>
+
+                            <div class="code-window">
+
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+class Student
+{
+public:
+    int marks;
+
+    void display()
+    {
+        cout &lt;&lt; "Marks = " &lt;&lt; marks;
+    }
+};
+
+int main()
+{
+    Student *s = new Student;
+
+    s-&gt;marks = 85;
+
+    s-&gt;display();
+
+    delete s;
+
+    return 0;
+}</code></pre>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="content-block">
+
+                            <h4>
+                                Expected Output
+                            </h4>
+
+                            <div class="output-box">
+
+<pre>Marks = 85</pre>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="content-block">
+
+                            <h4>
+                                Key Points
+                            </h4>
+
+                            <ul class="key-points">
+
+                                <li>
+                                    Objects can be created dynamically.
+                                </li>
+
+                                <li>
+                                    The arrow operator accesses
+                                    members through a pointer.
+                                </li>
+
+                                <li>
+                                    Dynamically created objects
+                                    should be released when no
+                                    longer required.
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                    </article>
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     TOPIC 3 — MANIPULATORS
+                     ================================================= -->
+
+                <div class="topic-content"
+                     id="manipulators">
+
+
+                    <div class="topic-heading">
+
+                        <span class="problem-badge">
+                            TOPIC 03
+                        </span>
+
+                        <h2>
+                            Manipulators
+                        </h2>
+
+                        <p>
+                            Manipulators are used to control and
+                            format input and output streams in C++.
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- THEORY -->
+
+                    <div class="theory-box">
+
+                        <h3>
+                            Theory
+                        </h3>
+
+                        <p>
+                            C++ manipulators provide a convenient
+                            way to control how data is displayed.
+                            They are commonly used to set field width,
+                            control decimal precision and format
+                            floating-point values.
+                        </p>
+
+                        <p>
+                            Common manipulators include
+                            <code>setw()</code>,
+                            <code>setprecision()</code>,
+                            <code>fixed</code> and
+                            <code>endl</code>.
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- REAL LIFE -->
+
+                    <div class="real-life-box">
+
+                        <div class="real-life-icon">
+                            🌍
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Real-Life Example
+                            </h3>
+
+                            <p>
+                                Think about a student marksheet,
+                                bank statement or shopping bill.
+                                Information is arranged into aligned
+                                columns so that it is easy to read.
+                                C++ manipulators help create this
+                                kind of formatted output.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- WHERE USED -->
+
+                    <div class="where-used-box">
+
+                        <h3>
+                            Where & How Is It Used?
+                        </h3>
+
+                        <div class="use-grid">
+
+                            <div>
+                                <strong>
+                                    Marksheet
+                                </strong>
+
+                                <p>
+                                    Align student names, marks and
+                                    grades into columns.
+                                </p>
+                            </div>
+
+                            <div>
+                                <strong>
+                                    Billing System
+                                </strong>
+
+                                <p>
+                                    Format product prices and
+                                    totals consistently.
+                                </p>
+                            </div>
+
+                            <div>
+                                <strong>
+                                    Reports
+                                </strong>
+
+                                <p>
+                                    Create readable console-based
+                                    tables and reports.
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- PROBLEM SELECTOR -->
+
+                    <div class="problem-mini-selector">
+
+                        <button class="mini-problem-tab active"
+                                data-problem="manipulator-problem1">
+
+                            Problem 01
+
+                        </button>
+
+                        <button class="mini-problem-tab"
+                                data-problem="manipulator-problem2">
+
+                            Problem 02
+
+                        </button>
+
+                        <button class="mini-problem-tab"
+                                data-problem="manipulator-problem3">
+
+                            Problem 03
+
+                        </button>
+
+                    </div>
+
+
+
+                    <!-- MANIPULATOR PROBLEM 1 -->
+
+                    <article class="mini-problem active"
+                             id="manipulator-problem1">
+
+                        <span class="problem-badge">
+                            PROBLEM 01
+                        </span>
+
+                        <h3>
+                            Student Marksheet
+                        </h3>
+
+
+                        <div class="content-block">
+
+                            <h4>
+                                Problem Statement
+                            </h4>
+
+                            <p>
+                                Write a C++ program to display
+                                student marks in a properly aligned
+                                tabular format using the
+                                <code>setw()</code> manipulator.
+                            </p>
+
+                        </div>
+
+
+                        <div class="content-block">
+
+                            <h4>
+                                C++ Program
+                            </h4>
+
+                            <div class="code-window">
+
+<pre><code>#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+
+using namespace std;
+
+int main()
+{
+    cout &lt;&lt; setw(15) &lt;&lt; "Name"
+         &lt;&lt; setw(10) &lt;&lt; "Marks" &lt;&lt; endl;
+
+    cout &lt;&lt; setw(15) &lt;&lt; "Rahul"
+         &lt;&lt; setw(10) &lt;&lt; 85 &lt;&lt; endl;
+
+    cout &lt;&lt; setw(15) &lt;&lt; "Priya"
+         &lt;&lt; setw(10) &lt;&lt; 92 &lt;&lt; endl;
+
+    return 0;
+}</code></pre>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="content-block">
+
+                            <h4>
+                                Expected Output
+                            </h4>
+
+                            <div class="output-box">
+
+<pre>           Name     Marks
+          Rahul        85
+          Priya        92</pre>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="visualization-section">
+
+                            <div class="visualization-header">
+
+                                <span class="problem-badge">
+                                    FORMAT VISUALIZATION
+                                </span>
+
+                                <h3>
+                                    Understanding setw()
+                                </h3>
+
+                            </div>
+
+
+                            <div class="format-visual">
+
+                                <div class="format-value">
+                                    Rahul
+                                </div>
+
+                                <div class="format-arrow">
+                                    →
+                                </div>
+
+                                <div class="format-result">
+                                    <span>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rahul
+                                    </span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="content-block">
+
+                            <h4>
+                                Key Points
+                            </h4>
+
+                            <ul class="key-points">
+
+                                <li>
+                                    <code>setw()</code> controls
+                                    the minimum field width.
+                                </li>
+
+                                <li>
+                                    <code>&lt;iomanip&gt;</code> is
+                                    required for <code>setw()</code>.
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- MANIPULATOR PROBLEM 2 -->
+
+                    <article class="mini-problem"
+                             id="manipulator-problem2">
+
+                        <span class="problem-badge">
+                            PROBLEM 02
+                        </span>
+
+                        <h3>
+                            Decimal Formatting
+                        </h3>
+
+
+                        <div class="content-block">
+
+                            <h4>
+                                Problem Statement
+                            </h4>
+
+                            <p>
+                                Write a C++ program to accept a
+                                floating-point value and display it
+                                with exactly two digits after the
+                                decimal point using
+                                <code>fixed</code> and
+                                <code>setprecision()</code>.
+                            </p>
+
+                        </div>
+
+
+                        <div class="content-block">
+
+                            <h4>
+                                C++ Program
+                            </h4>
+
+                            <div class="code-window">
+
+<pre><code>#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+
+using namespace std;
+
+int main()
+{
+    float value;
+
+    cout &lt;&lt; "Enter value: ";
+    cin &gt;&gt; value;
+
+    cout &lt;&lt; fixed
+         &lt;&lt; setprecision(2);
+
+    cout &lt;&lt; "Formatted value = "
+         &lt;&lt; value;
+
+    return 0;
+}</code></pre>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="content-block">
+
+                            <h4>
+                                Expected Output
+                            </h4>
+
+                            <div class="output-box">
+
+<pre>Enter value: 125.6789
+Formatted value = 125.68</pre>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="content-block">
+
+                            <h4>
+                                Key Points
+                            </h4>
+
+                            <ul class="key-points">
+
+                                <li>
+                                    <code>fixed</code> displays
+                                    floating-point values in
+                                    fixed notation.
+                                </li>
+
+                                <li>
+                                    <code>setprecision(2)</code>
+                                    displays two digits after
+                                    the decimal point when used
+                                    with <code>fixed</code>.
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <!-- MANIPULATOR PROBLEM 3 -->
+
+                    <article class="mini-problem"
+                             id="manipulator-problem3">
+
+                        <span class="problem-badge">
+                            PROBLEM 03
+                        </span>
+
+                        <h3>
+                            Product Bill
+                        </h3>
+
+
+                        <div class="content-block">
+
+                            <h4>
+                                Problem Statement
+                            </h4>
+
+                            <p>
+                                Write a C++ program to display a
+                                simple product bill containing
+                                product name, quantity, price and
+                                total amount using appropriate
+                                output manipulators for proper
+                                formatting.
+                            </p>
+
+                        </div>
+
+
+                        <div class="content-block">
+
+                            <h4>
+                                C++ Program
+                            </h4>
+
+                            <div class="code-window">
+
+<pre><code>#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+
+using namespace std;
+
+int main()
+{
+    cout &lt;&lt; left
+         &lt;&lt; setw(15) &lt;&lt; "Product"
+         &lt;&lt; setw(10) &lt;&lt; "Qty"
+         &lt;&lt; setw(12) &lt;&lt; "Price"
+         &lt;&lt; endl;
+
+    cout &lt;&lt; setw(15) &lt;&lt; "Notebook"
+         &lt;&lt; setw(10) &lt;&lt; 2
+         &lt;&lt; setw(12) &lt;&lt; fixed
+         &lt;&lt; setprecision(2)
+         &lt;&lt; 50.00
+         &lt;&lt; endl;
+
+    return 0;
+}</code></pre>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="content-block">
+
+                            <h4>
+                                Expected Output
+                            </h4>
+
+                            <div class="output-box">
+
+<pre>Product        Qty       Price
+Notebook       2         50.00</pre>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="content-block">
+
+                            <h4>
+                                Key Points
+                            </h4>
+
+                            <ul class="key-points">
+
+                                <li>
+                                    Multiple manipulators can be
+                                    combined for formatted output.
+                                </li>
+
+                                <li>
+                                    Formatting improves readability
+                                    of reports and bills.
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                    </article>
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     VIVA
+                     ================================================= -->
+
+                <section class="viva-section">
+
+                    <span class="section-label">
+                        04 — VIVA QUESTIONS
+                    </span>
+
+                    <h2>
+                        Test Your Understanding
+                    </h2>
+
+
+                    <div class="viva-group">
+
+                        <h3>
+                            Scope Resolution
+                        </h3>
+
+                        <details>
+                            <summary>
+                                What is the scope resolution operator?
+                            </summary>
+
+                            <p>
+                                It is the <code>::</code> operator
+                                used to specify the scope of a name.
+                            </p>
+
+                        </details>
+
+
+                        <details>
+                            <summary>
+                                How do you access a global variable
+                                when a local variable has the same name?
+                            </summary>
+
+                            <p>
+                                The global variable can be accessed
+                                using the scope resolution operator,
+                                for example <code>::number</code>.
+                            </p>
+
+                        </details>
+
+
+                        <details>
+                            <summary>
+                                How is :: used with a class?
+                            </summary>
+
+                            <p>
+                                It can be used to define a class
+                                member function outside the class,
+                                such as <code>Student::display()</code>.
+                            </p>
+
+                        </details>
+
+                    </div>
+
+
+
+                    <div class="viva-group">
+
+                        <h3>
+                            Memory Management
+                        </h3>
+
+                        <details>
+                            <summary>
+                                What is the purpose of new?
+                            </summary>
+
+                            <p>
+                                The <code>new</code> operator
+                                dynamically allocates memory.
+                            </p>
+
+                        </details>
+
+
+                        <details>
+                            <summary>
+                                What is the purpose of delete?
+                            </summary>
+
+                            <p>
+                                The <code>delete</code> operator
+                                releases dynamically allocated
+                                memory.
+                            </p>
+
+                        </details>
+
+
+                        <details>
+                            <summary>
+                                What is the difference between
+                                delete and delete[]?
+                            </summary>
+
+                            <p>
+                                <code>delete</code> is used for
+                                a dynamically allocated single
+                                object, while <code>delete[]</code>
+                                is used for a dynamically allocated
+                                array.
+                            </p>
+
+                        </details>
+
+                    </div>
+
+
+
+                    <div class="viva-group">
+
+                        <h3>
+                            Manipulators
+                        </h3>
+
+                        <details>
+                            <summary>
+                                What is setw()?
+                            </summary>
+
+                            <p>
+                                <code>setw()</code> sets the minimum
+                                width of the next output field.
+                            </p>
+
+                        </details>
+
+
+                        <details>
+                            <summary>
+                                Which header file is required
+                                for setw() and setprecision()?
+                            </summary>
+
+                            <p>
+                                The <code>&lt;iomanip&gt;</code>
+                                header is required.
+                            </p>
+
+                        </details>
+
+
+                        <details>
+                            <summary>
+                                What does setprecision(2) do with fixed?
+                            </summary>
+
+                            <p>
+                                It displays two digits after the
+                                decimal point.
+                            </p>
+
+                        </details>
+
+                    </div>
+
+                </section>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="footer">
+
+        <div class="footer-content">
+
+            <div class="footer-brand">
+
+                <div class="footer-logo">
+                    &lt;/&gt;
+                </div>
+
+                <div class="footer-brand-text">
+
+                    <div class="footer-brand-name">
+                        Rasika <span>CodeLab</span>
+                    </div>
+
+                    <p class="footer-tagline">
+                        Code • Understand • Visualize
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-copy">
+                © 2026 Rasika CodeLab. Built for practical learning.
+            </div>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         MAIN JS
+         ===================================================== -->
+
+    <script src="../js/main.js"></script>
+
+
+    <!-- =====================================================
+         PRACTICAL 2 JS
+         ===================================================== -->
+
+    <script>
+
+        /* =========================================
+           TOPIC SWITCHING
+           ========================================= */
+
+        const topicTabs =
+            document.querySelectorAll(".topic-tab");
+
+        const topicContents =
+            document.querySelectorAll(".topic-content");
+
+
+        topicTabs.forEach(tab => {
+
+            tab.addEventListener("click", () => {
+
+                const target =
+                    tab.dataset.topic;
+
+
+                topicTabs.forEach(item => {
+                    item.classList.remove("active");
+                });
+
+
+                topicContents.forEach(content => {
+                    content.classList.remove("active");
+                });
+
+
+                tab.classList.add("active");
+
+
+                const selected =
+                    document.getElementById(target);
+
+
+                if (selected) {
+                    selected.classList.add("active");
+                }
+
+            });
+
+        });
+
+
+
+        /* =========================================
+           PROBLEM SWITCHING
+           ========================================= */
+
+        document.querySelectorAll(".topic-content")
+            .forEach(topic => {
+
+                const problemTabs =
+                    topic.querySelectorAll(".mini-problem-tab");
+
+                const problems =
+                    topic.querySelectorAll(".mini-problem");
+
+
+                problemTabs.forEach(tab => {
+
+                    tab.addEventListener("click", () => {
+
+                        const target =
+                            tab.dataset.problem;
+
+
+                        problemTabs.forEach(item => {
+                            item.classList.remove("active");
+                        });
+
+
+                        problems.forEach(problem => {
+                            problem.classList.remove("active");
+                        });
+
+
+                        tab.classList.add("active");
+
+
+                        const selected =
+                            topic.querySelector("#" + target);
+
+
+                        if (selected) {
+                            selected.classList.add("active");
+                        }
+
+                    });
+
+                });
+
+            });
+
+    </script>
+
+</body>
+
+</html>

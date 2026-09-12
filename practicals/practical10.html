@@ -1,0 +1,2590 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Practical 10 | Constructors | Rasika CodeLab</title>
+
+    <link rel="stylesheet" href="../css/style.css" />
+
+    <style>
+      /* =====================================================
+           PRACTICAL 10 EXTRA STYLES
+        ===================================================== */
+
+      .problem-mini-selector {
+        margin-top: 30px;
+      }
+
+      .problem-mini-tabs {
+        display: grid;
+      
+        gap: 20px;
+        justify-content: center;
+      }
+
+      .mini-problem {
+        display: none;
+        margin-top: 40px;
+        padding: 20px;
+      }
+
+      .mini-problem.active {
+        display: block;
+        animation: practicalFadeIn 0.35s ease;
+      }
+
+      /* =====================================================
+           CONSTRUCTOR VISUALIZATION
+        ===================================================== */
+
+      .constructor-visual {
+        margin-top: 30px;
+        padding: 30px;
+
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+      }
+
+      .constructor-flow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        gap: 15px;
+        margin-top: 25px;
+
+        overflow-x: auto;
+        padding: 10px;
+      }
+
+      .constructor-node {
+        flex: 0 0 160px;
+
+        padding: 20px;
+
+        text-align: center;
+
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+
+        transition:
+          transform 0.25s ease,
+          border-color 0.25s ease;
+      }
+
+      .constructor-node:hover {
+        transform: translateY(-5px);
+        border-color: var(--accent);
+      }
+
+      .constructor-node strong {
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      .constructor-node small {
+        color: var(--text-secondary);
+      }
+
+      .constructor-arrow {
+        color: var(--accent);
+        font-size: 25px;
+        font-weight: 700;
+      }
+
+      /* =====================================================
+           CONSTRUCTOR TYPES
+        ===================================================== */
+
+      .constructor-type-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+        margin-top: 25px;
+      }
+
+      .constructor-type-card {
+        padding: 20px;
+
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+
+        transition:
+          transform 0.25s ease,
+          border-color 0.25s ease;
+      }
+
+      .constructor-type-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--accent);
+      }
+
+      .constructor-type-card span {
+        display: inline-block;
+
+        margin-bottom: 12px;
+
+        color: var(--accent);
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .constructor-type-card h4 {
+        margin-bottom: 8px;
+      }
+
+      .constructor-type-card h5 {
+        margin: 20px 0 10px;
+        color: var(--text-primary);
+        font-size: 14px;
+      }
+
+      .constructor-type-card .code-window {
+        margin-top: 10px;
+      }
+
+      .constructor-type-card .code-window pre {
+        font-size: 12px;
+        line-height: 1.5;
+      }
+
+      .constructor-type-card p {
+        color: var(--text-secondary);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      /* =====================================================
+           VIVA ACCORDION
+        ===================================================== */
+
+      .viva-list {
+        display: grid;
+        gap: 12px;
+        margin-top: 25px;
+      }
+
+      .viva-item {
+        overflow: hidden;
+
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+      }
+
+      .viva-question {
+        width: 100%;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        gap: 20px;
+
+        padding: 20px 22px;
+
+        background: transparent;
+        border: none;
+
+        color: var(--text-primary);
+
+        font-family: inherit;
+        font-size: 16px;
+        font-weight: 600;
+
+        text-align: left;
+        cursor: pointer;
+
+        transition: background 0.25s ease;
+      }
+
+      .viva-question:hover {
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      .viva-icon {
+        flex: 0 0 auto;
+
+        width: 32px;
+        height: 32px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border: 1px solid var(--border);
+        border-radius: 50%;
+
+        color: var(--accent);
+
+        font-size: 22px;
+        font-weight: 400;
+
+        transition: transform 0.25s ease;
+      }
+
+      .viva-answer {
+        display: none;
+
+        padding: 0 22px 22px;
+
+        color: var(--text-secondary);
+        line-height: 1.7;
+      }
+
+      .viva-item.active .viva-answer {
+        display: block;
+      }
+
+      .viva-item.active .viva-icon {
+        transform: rotate(45deg);
+      }
+
+      .viva-answer p {
+        margin: 0;
+      }
+
+      .viva-answer .code-window {
+        margin-top: 15px;
+      }
+
+      /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+      @media (max-width: 1000px) {
+        .problem-mini-tabs {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .constructor-type-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 700px) {
+        .problem-mini-tabs {
+          grid-template-columns: 1fr;
+        }
+
+        .constructor-type-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .constructor-flow {
+          justify-content: flex-start;
+        }
+      }
+    
+
+      /* =====================================================
+         PRACTICAL 10 POLISH / LAYOUT OVERRIDES
+         ===================================================== */
+
+      .practical-page {
+        background:
+          radial-gradient(circle at 78% 3%, rgba(150, 92, 255, 0.10), transparent 28%),
+          radial-gradient(circle at 10% 28%, rgba(75, 130, 255, 0.06), transparent 24%);
+      }
+
+      .practical-page .container {
+        max-width: 1120px;
+      }
+
+      .practical-hero {
+        padding: 78px 0 58px;
+      }
+
+      .practical-hero h1 {
+        font-size: clamp(2.4rem, 5vw, 4.4rem);
+        line-height: 1.05;
+        max-width: 850px;
+        margin: 12px 0 18px;
+        letter-spacing: -0.04em;
+      }
+
+      .practical-subtitle {
+        max-width: 760px;
+        font-size: 16px;
+        line-height: 1.75;
+      }
+
+      .practical-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 24px;
+      }
+
+      .practical-meta span {
+        padding: 8px 13px;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: rgba(255,255,255,.035);
+        font-size: 12px;
+        color: var(--text-secondary);
+      }
+
+      .content-section {
+        padding: 42px 0;
+      }
+
+      .content-section h2 {
+        margin: 7px 0 22px;
+      }
+
+      .content-card {
+        box-shadow: 0 16px 45px rgba(0,0,0,.12);
+      }
+
+      .content-card + .content-card {
+        margin-top: 16px;
+      }
+
+      .content-block {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 0 20px;
+      }
+
+      .content-block:last-child {
+        margin-bottom: 0;
+      }
+
+      .constructor-types-overview {
+        padding: 28px;
+      }
+
+      .section-intro {
+        margin-bottom: 22px;
+      }
+
+      .section-intro h3 {
+        margin: 7px 0 8px;
+      }
+
+      .section-intro p {
+        max-width: 700px;
+        color: var(--text-secondary);
+        line-height: 1.7;
+      }
+
+      .constructor-type-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+        margin-top: 0;
+      }
+
+      .constructor-type-card {
+        min-width: 0;
+        padding: 24px;
+        background: linear-gradient(145deg, rgba(255,255,255,.045), rgba(255,255,255,.018));
+        border-radius: 18px;
+      }
+
+      .constructor-type-card h4 {
+        font-size: 18px;
+        margin: 8px 0 9px;
+      }
+
+      .constructor-type-card p {
+        margin: 0;
+        line-height: 1.7;
+      }
+
+      .constructor-visual {
+        margin-top: 20px;
+        padding: 28px;
+        background: linear-gradient(145deg, rgba(255,255,255,.035), rgba(255,255,255,.015));
+      }
+
+      .constructor-flow {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+        gap: 10px;
+        align-items: center;
+        overflow: visible;
+      }
+
+      .constructor-node {
+        width: 100%;
+        min-height: 92px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-radius: 16px;
+      }
+
+      .problem-selector {
+        margin: 34px 0 8px;
+        position: sticky;
+        top: 74px;
+        z-index: 10;
+        padding: 10px 0;
+        background: rgba(5, 8, 18, .88);
+        backdrop-filter: blur(14px);
+      }
+
+      .problem-mini-tabs {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0,1fr));
+        gap: 10px;
+      }
+
+      .mini-problem-tab {
+        min-height: 58px;
+        padding: 10px 14px;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        background: var(--bg-card);
+        color: var(--text-secondary);
+        cursor: pointer;
+        transition: .25s ease;
+      }
+
+      .mini-problem-tab span {
+        display: block;
+        color: var(--accent);
+        font-size: 11px;
+        font-weight: 800;
+        margin-bottom: 3px;
+      }
+
+      .mini-problem-tab:hover,
+      .mini-problem-tab.active {
+        color: var(--text-primary);
+        border-color: var(--accent);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 28px rgba(0,0,0,.16);
+      }
+
+      .mini-problem {
+        display: none !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-top: 28px;
+      }
+
+      .mini-problem.active {
+        display: block !important;
+      }
+
+      .problem-heading {
+        padding: 28px 0 20px;
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 24px;
+      }
+
+      .problem-heading h2 {
+        margin: 8px 0 0;
+        font-size: clamp(1.7rem, 3vw, 2.4rem);
+      }
+
+      .mini-problem > .content-block,
+      .mini-problem > .visualization-section {
+        margin-bottom: 18px;
+      }
+
+      .mini-problem > .content-block {
+        padding: 24px;
+        background: rgba(255,255,255,.022);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+      }
+
+      .mini-problem > .content-block > h3 {
+        margin-bottom: 12px;
+      }
+
+      .syntax-block {
+        border-color: rgba(150, 92, 255, .28) !important;
+        background: linear-gradient(145deg, rgba(150,92,255,.065), rgba(255,255,255,.02)) !important;
+      }
+
+      .syntax-heading {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+
+      .syntax-heading h3 {
+        margin: 0;
+      }
+
+      .syntax-heading .section-label {
+        margin: 0;
+      }
+
+      .code-window {
+        overflow-x: auto;
+        border-radius: 14px;
+      }
+
+      .syntax-block .code-window {
+        margin-top: 10px;
+      }
+
+      .compact-code {
+        max-width: 520px;
+      }
+
+      .algorithm-list {
+        padding-left: 22px;
+      }
+
+      .algorithm-list li {
+        margin-bottom: 9px;
+        padding-left: 5px;
+      }
+
+      .visualization-section {
+        padding: 26px;
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        background: linear-gradient(145deg, rgba(255,255,255,.035), rgba(255,255,255,.015));
+      }
+
+      .output-box {
+        border-radius: 14px;
+      }
+
+      .key-points {
+        display: grid;
+        gap: 8px;
+      }
+
+      .error-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0,1fr));
+        gap: 12px;
+      }
+
+      .error-card {
+        min-width: 0;
+      }
+
+      .viva-list {
+        max-width: 900px;
+      }
+
+      @media (max-width: 900px) {
+        .constructor-flow {
+          grid-template-columns: 1fr;
+        }
+
+        .constructor-arrow {
+          transform: rotate(90deg);
+          justify-self: center;
+        }
+
+        .problem-mini-tabs {
+          grid-template-columns: repeat(2, minmax(0,1fr));
+        }
+      }
+
+      @media (max-width: 650px) {
+        .practical-hero {
+          padding: 55px 0 40px;
+        }
+
+        .content-section {
+          padding: 30px 0;
+        }
+
+        .constructor-types-overview,
+        .constructor-visual,
+        .visualization-section,
+        .mini-problem > .content-block {
+          padding: 20px;
+        }
+
+        .constructor-type-grid,
+        .error-grid,
+        .problem-mini-tabs {
+          grid-template-columns: 1fr;
+        }
+
+        .problem-selector {
+          position: static;
+          background: transparent;
+          backdrop-filter: none;
+        }
+
+        .syntax-heading {
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 6px;
+        }
+      }
+
+    
+/* =====================================================
+   PRACTICAL 10 — PROBLEM TABS FINAL FIX
+===================================================== */
+
+.problem-selector {
+    width: 100% !important;
+    display: block !important;
+    position: sticky;
+    top: 74px;
+    z-index: 20;
+
+    margin: 36px 0 20px !important;
+    padding: 12px 0 !important;
+
+    background: rgba(5, 8, 18, 0.92);
+    backdrop-filter: blur(14px);
+}
+
+/* TAB CONTAINER */
+.problem-selector .problem-mini-tabs {
+    width: 100% !important;
+    max-width: 100% !important;
+
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+
+    gap: 14px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    justify-content: stretch !important;
+    align-items: stretch !important;
+}
+
+/* EACH TAB */
+.problem-selector .problem-mini-tabs .mini-problem-tab {
+    position: static !important;
+    float: none !important;
+
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+
+    height: 68px !important;
+    min-height: 68px !important;
+
+    margin: 0 !important;
+    padding: 12px 16px !important;
+
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+
+    gap: 12px !important;
+
+    box-sizing: border-box !important;
+
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 15px !important;
+
+    color: var(--text-secondary) !important;
+
+    font-family: inherit !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    line-height: 1.3 !important;
+
+    text-align: left !important;
+
+    white-space: normal !important;
+    overflow: visible !important;
+
+    transform: none !important;
+    box-shadow: none !important;
+
+    cursor: pointer;
+
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        color 0.25s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+/* NUMBER */
+.problem-selector .mini-problem-tab > span {
+    position: static !important;
+
+    flex: 0 0 38px !important;
+
+    width: 38px !important;
+    height: 38px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    box-sizing: border-box !important;
+
+    border-radius: 10px !important;
+    border: 1px solid var(--border) !important;
+
+    background: rgba(255, 255, 255, 0.04) !important;
+
+    color: var(--accent) !important;
+
+    font-size: 12px !important;
+    font-weight: 800 !important;
+    line-height: 1 !important;
+}
+
+/* TEXT INSIDE TAB */
+.problem-selector .mini-problem-tab {
+    text-wrap: balance;
+}
+
+/* HOVER */
+.problem-selector .mini-problem-tab:hover {
+    background: rgba(255, 255, 255, 0.045) !important;
+    border-color: var(--accent) !important;
+    color: var(--text-primary) !important;
+
+    transform: translateY(-2px) !important;
+
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16) !important;
+}
+
+/* ACTIVE */
+.problem-selector .mini-problem-tab.active {
+    background: var(--accent) !important;
+    border-color: var(--accent) !important;
+    color: #ffffff !important;
+
+    transform: translateY(-2px) !important;
+
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22) !important;
+}
+
+.problem-selector .mini-problem-tab.active > span {
+    background: rgba(0, 0, 0, 0.13) !important;
+    border-color: rgba(255, 255, 255, 0.22) !important;
+    color: #ffffff !important;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 900px) {
+
+    .problem-selector .problem-mini-tabs {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    .problem-selector {
+        position: static !important;
+        background: transparent !important;
+        backdrop-filter: none !important;
+    }
+
+    .problem-selector .problem-mini-tabs {
+        grid-template-columns: 1fr !important;
+    }
+
+    .problem-selector .mini-problem-tab {
+        height: 62px !important;
+        min-height: 62px !important;
+    }
+
+}
+</style>
+  </head>
+
+  <body>
+    <!-- =====================================================
+         NAVBAR
+    ===================================================== -->
+
+    <nav class="navbar">
+      <div class="container nav-container">
+        <a href="../index.html" class="logo">
+          <span class="logo-symbol"> &lt;/&gt; </span>
+
+          <span> Rasika<span class="logo-accent">CodeLab</span> </span>
+        </a>
+
+        <button class="menu-btn" aria-label="Open menu">☰</button>
+
+        <div class="nav-links">
+          <a href="../index.html"> Home </a>
+
+          <a href="../foundations/program.html"> Foundations </a>
+
+          <a href="index.html" class="active"> Practicals </a>
+
+          <a href="../index.html#about"> About </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- =====================================================
+         MAIN
+    ===================================================== -->
+
+    <main class="practical-page">
+      <!-- =====================================================
+             HERO
+        ===================================================== -->
+
+      <section class="practical-hero">
+        <div class="container">
+          <span class="section-label"> PRACTICAL 10 </span>
+
+          <h1>
+            Constructors in
+            <span class="gradient-text"> C++ </span>
+          </h1>
+
+          <p class="practical-subtitle">
+            Learn how constructors initialize objects automatically and
+            understand default, parameterized, copy and multiple constructors in
+            C++.
+          </p>
+
+          <div class="practical-meta">
+            <span> LLO 10.1 </span>
+
+            <span> Classes & Objects </span>
+
+            <span> Constructors </span>
+
+            <span> C++ Programming </span>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================
+             AIM
+        ===================================================== -->
+
+      <section class="content-section">
+        <div class="container">
+          <span class="section-label"> AIM </span>
+
+          <h2>Aim of the Practical</h2>
+
+          <div class="content-card">
+            <p>
+              To implement programs demonstrating the concept of
+              <strong>constructors and destructors</strong> in C++, including
+              default, parameterized, copy and multiple constructors.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================
+             LEARNING OBJECTIVES
+        ===================================================== -->
+
+      <section class="content-section">
+        <div class="container">
+          <span class="section-label"> LEARNING OBJECTIVES </span>
+
+          <h2>What You Will Learn</h2>
+
+          <div class="objective-grid">
+            <div class="objective-card">
+              <strong> 01 </strong>
+
+              <h3>Understand Constructors</h3>
+
+              <p>Understand why constructors are used to initialize objects.</p>
+            </div>
+
+            <div class="objective-card">
+              <strong> 02 </strong>
+
+              <h3>Create Constructors</h3>
+
+              <p>Implement different types of constructors.</p>
+            </div>
+
+            <div class="objective-card">
+              <strong> 03 </strong>
+
+              <h3>Initialize Objects</h3>
+
+              <p>Initialize object data at the time of creation.</p>
+            </div>
+
+            <div class="objective-card">
+              <strong> 04 </strong>
+
+              <h3>Copy Objects</h3>
+
+              <p>
+                Understand how a copy constructor initializes one object from
+                another.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================
+             CONCEPT
+        ===================================================== -->
+
+      <section class="content-section">
+        <div class="container">
+          <span class="section-label"> CONCEPT </span>
+
+          <h2>Understanding Constructors</h2>
+
+          <!-- THEORY -->
+
+          <div class="content-card">
+            <h3>What is a Constructor?</h3>
+
+            <p>
+              A <strong>constructor</strong> is a special member function of a
+              class that is automatically called when an object is created.
+            </p>
+
+            <p>
+              Its main purpose is to initialize the data members of an object.
+            </p>
+
+            <p>
+              A constructor has the <strong>same name as the class</strong>
+              and does not have a return type.
+            </p>
+
+            <div class="code-window">
+              <pre><code>class Student
+{
+public:
+
+    Student()
+    {
+        // initialization
+    }
+};</code></pre>
+            </div>
+          </div>
+
+          <!-- REAL LIFE -->
+
+          <div class="content-card">
+            <h3>Real-Life Example</h3>
+
+            <p>
+              Think about creating a new student record in a college system.
+              When the record is created, basic information such as roll number
+              or name can be initialized immediately.
+            </p>
+
+            <p>
+              A constructor performs a similar job in an object-oriented
+              program. It prepares the object for use as soon as it is created.
+            </p>
+          </div>
+
+          <!-- WHERE HOW -->
+
+          <div class="content-card">
+            <h3>Where & How Is It Used?</h3>
+
+            <ul class="key-points">
+              <li>
+                <strong>Student Systems:</strong>
+                Initialize student records.
+              </li>
+
+              <li>
+                <strong>Banking Systems:</strong>
+                Initialize account details.
+              </li>
+
+              <li>
+                <strong>Employee Systems:</strong>
+                Initialize employee information.
+              </li>
+
+              <li>
+                <strong>Game Development:</strong>
+                Initialize player or game objects.
+              </li>
+
+              <li>
+                <strong>Inventory Systems:</strong>
+                Initialize product objects.
+              </li>
+            </ul>
+          </div>
+
+          <!-- TYPES -->
+
+          <div class="content-card constructor-types-overview">
+            <div class="section-intro">
+              <span class="section-label">TYPES</span>
+              <h3>Types of Constructors</h3>
+              <p>Each constructor type is explained with its own syntax in the corresponding problem below.</p>
+            </div>
+
+            <div class="constructor-type-grid">
+
+              <div class="constructor-type-card">
+                <span>TYPE 01</span>
+                <h4>Default Constructor</h4>
+                <p>Does not take parameters and initializes an object with default values.</p>
+              </div>
+
+              <div class="constructor-type-card">
+                <span>TYPE 02</span>
+                <h4>Parameterized Constructor</h4>
+                <p>Accepts parameters and initializes an object with specific values.</p>
+              </div>
+
+              <div class="constructor-type-card">
+                <span>TYPE 03</span>
+                <h4>Copy Constructor</h4>
+                <p>Creates a new object by copying the state of an existing object.</p>
+              </div>
+
+              <div class="constructor-type-card">
+                <span>TYPE 04</span>
+                <h4>Multiple Constructors</h4>
+                <p>Uses different constructors with different parameter lists. This is constructor overloading.</p>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- VISUALIZATION -->
+
+          <div class="constructor-visual">
+            <span class="section-label"> VISUAL EXPLANATION </span>
+
+            <h3>How a Constructor Works</h3>
+
+            <div class="constructor-flow">
+              <div class="constructor-node">
+                <strong> Create Object </strong>
+
+                <small> Student s; </small>
+              </div>
+
+              <div class="constructor-arrow">→</div>
+
+              <div class="constructor-node">
+                <strong> Constructor Called </strong>
+
+                <small> Automatically </small>
+              </div>
+
+              <div class="constructor-arrow">→</div>
+
+              <div class="constructor-node">
+                <strong> Initialize </strong>
+
+                <small> Data Members </small>
+              </div>
+
+              <div class="constructor-arrow">→</div>
+
+              <div class="constructor-node">
+                <strong> Object Ready </strong>
+
+                <small> Ready to use </small>
+              </div>
+            </div>
+          </div>
+
+          <!-- =================================================
+                     PROBLEM SELECTOR
+                ================================================= -->
+
+          <div class="problem-selector">
+            <div class="problem-mini-tabs">
+              <button
+                type="button"
+                class="mini-problem-tab active"
+                data-problem="problem10-1"
+              >
+                <span> 01 </span>
+
+                Default Constructor
+              </button>
+
+              <button
+                type="button"
+                class="mini-problem-tab"
+                data-problem="problem10-2"
+              >
+                <span> 02 </span>
+
+                Parameterized Constructor
+              </button>
+
+              <button
+                type="button"
+                class="mini-problem-tab"
+                data-problem="problem10-3"
+              >
+                <span> 03 </span>
+
+                Copy Constructor
+              </button>
+
+              <button
+                type="button"
+                class="mini-problem-tab"
+                data-problem="problem10-4"
+              >
+                <span> 04 </span>
+
+                Multiple Constructors
+              </button>
+            </div>
+          </div>
+
+          <!-- =================================================
+                     PROBLEM 1
+                ================================================= -->
+
+          <div class="mini-problem active" id="problem10-1">
+            <div class="problem-heading">
+              <span class="section-label"> PROBLEM 01 </span>
+
+              <h2>Default Constructor</h2>
+            </div>
+
+            <div class="content-block">
+              <h3>Problem Statement</h3>
+
+              <p>
+                Write a C++ program to create a class Student with roll number
+                and name as data members. Use a default constructor to
+                initialize the student details and display them.
+              </p>
+            </div>
+
+            <div class="content-block">
+              <h3>Theory / Concept</h3>
+
+              <p>
+                A default constructor does not take any arguments. It is
+                automatically called when an object is created without passing
+                values.
+              </p>
+            </div>
+
+            
+
+            <div class="content-block syntax-block">
+              <div class="syntax-heading">
+                <span class="section-label">SYNTAX</span>
+                <h3>Default Constructor Syntax</h3>
+              </div>
+              <div class="code-window">
+                <pre><code>class ClassName
+{
+public:
+    ClassName()
+    {
+        // initialization
+    }
+};</code></pre>
+              </div>
+              <p><strong>Object Creation:</strong></p>
+              <div class="code-window compact-code">
+                <pre><code>ClassName obj;</code></pre>
+              </div>
+            </div>
+
+<div class="content-block">
+              <h3>Algorithm</h3>
+
+              <ol class="algorithm-list">
+                <li>Start the program.</li>
+
+                <li>Define the Student class.</li>
+
+                <li>Declare roll number and name.</li>
+
+                <li>Define a default constructor.</li>
+
+                <li>Initialize the data members inside the constructor.</li>
+
+                <li>Create a Student object.</li>
+
+                <li>Display the initialized details.</li>
+
+                <li>Stop the program.</li>
+              </ol>
+            </div>
+
+            <div class="content-block">
+              <h3>C++ Program</h3>
+
+              <div class="code-window">
+                <pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+using namespace std;
+
+class Student
+{
+    int rollNo;
+    string name;
+
+public:
+
+    Student()
+    {
+        rollNo = 101;
+        name = "Rahul";
+    }
+
+    void display()
+    {
+        cout &lt;&lt; "Roll No: " &lt;&lt; rollNo &lt;&lt; endl;
+        cout &lt;&lt; "Name: " &lt;&lt; name &lt;&lt; endl;
+    }
+};
+
+int main()
+{
+    Student s;
+
+    s.display();
+
+    return 0;
+}</code></pre>
+              </div>
+            </div>
+
+            <div class="content-block">
+              <h3>Expected Output</h3>
+
+              <div class="output-box">
+                <pre>
+Roll No: 101
+Name: Rahul</pre
+                >
+              </div>
+            </div>
+
+            <div class="visualization-section">
+              <div class="visualization-header">
+                <span class="section-label"> VISUAL EXPLANATION </span>
+
+                <h3>Default Constructor Flow</h3>
+              </div>
+
+              <div class="array-flow">
+                <div class="array-flow-node">
+                  <strong> Student s </strong>
+
+                  <small> Object created </small>
+                </div>
+
+                <div class="array-flow-arrow">→</div>
+
+                <div class="array-flow-node">
+                  <strong> Student() </strong>
+
+                  <small> Constructor called </small>
+                </div>
+
+                <div class="array-flow-arrow">→</div>
+
+                <div class="array-flow-node">
+                  <strong> rollNo = 101 </strong>
+
+                  <small> name = Rahul </small>
+                </div>
+              </div>
+            </div>
+
+            <div class="content-block">
+              <h3>Program Explanation</h3>
+
+              <ul class="key-points">
+                <li>The constructor has the same name as the class.</li>
+
+                <li>It does not have a return type.</li>
+
+                <li>
+                  It is called automatically when object
+                  <strong>s</strong> is created.
+                </li>
+
+                <li>The constructor initializes roll number and name.</li>
+              </ul>
+            </div>
+
+            <div class="content-block">
+              <h3>Real-Life Connection</h3>
+
+              <p>
+                A default constructor can assign standard or default values when
+                a new record is created.
+              </p>
+            </div>
+
+            <div class="content-block">
+              <h3>Key Points</h3>
+
+              <ul class="key-points">
+                <li>No parameters are passed.</li>
+
+                <li>Called automatically during object creation.</li>
+
+                <li>Useful for assigning default values.</li>
+              </ul>
+            </div>
+
+            <div class="content-block">
+              <h3>Common Errors</h3>
+
+              <div class="error-grid">
+                <div class="error-card">
+                  <h4>Return Type</h4>
+
+                  <p>A constructor must not have a return type.</p>
+                </div>
+
+                <div class="error-card">
+                  <h4>Wrong Name</h4>
+
+                  <p>Constructor name must match the class name.</p>
+                </div>
+
+                <div class="error-card">
+                  <h4>Parameters</h4>
+
+                  <p>A default constructor has no parameters.</p>
+                </div>
+
+                <div class="error-card">
+                  <h4>Object Creation</h4>
+
+                  <p>Create the object correctly to invoke the constructor.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- =================================================
+                     PROBLEM 2
+                ================================================= -->
+
+          <div class="mini-problem" id="problem10-2">
+            <div class="problem-heading">
+              <span class="section-label"> PROBLEM 02 </span>
+
+              <h2>Parameterized Constructor</h2>
+            </div>
+
+            <div class="content-block">
+              <h3>Problem Statement</h3>
+
+              <p>
+                Write a C++ program to create a class Rectangle containing
+                length and breadth. Use a parameterized constructor to
+                initialize the values and calculate the area of the rectangle.
+              </p>
+            </div>
+
+            <div class="content-block">
+              <h3>Theory / Concept</h3>
+
+              <p>
+                A parameterized constructor accepts one or more arguments. These
+                arguments are used to initialize the object's data members with
+                values supplied during object creation.
+              </p>
+            </div>
+
+            <div class="content-block">
+              <h3>Formula</h3>
+
+              <div class="formula-grid">
+                <div class="content-card">
+                  <strong> Area </strong>
+
+                  <p>Area = Length × Breadth</p>
+                </div>
+              </div>
+            </div>
+
+            
+
+            <div class="content-block syntax-block">
+              <div class="syntax-heading">
+                <span class="section-label">SYNTAX</span>
+                <h3>Parameterized Constructor Syntax</h3>
+              </div>
+              <div class="code-window">
+                <pre><code>class ClassName
+{
+public:
+    ClassName(data_type value1, data_type value2)
+    {
+        // initialization
+    }
+};</code></pre>
+              </div>
+              <p><strong>Object Creation:</strong></p>
+              <div class="code-window compact-code">
+                <pre><code>ClassName obj(value1, value2);</code></pre>
+              </div>
+            </div>
+
+<div class="content-block">
+              <h3>Algorithm</h3>
+
+              <ol class="algorithm-list">
+                <li>Start the program.</li>
+
+                <li>Define the Rectangle class.</li>
+
+                <li>Declare length and breadth.</li>
+
+                <li>Define a parameterized constructor.</li>
+
+                <li>Pass length and breadth while creating the object.</li>
+
+                <li>Calculate the area.</li>
+
+                <li>Display the area.</li>
+
+                <li>Stop the program.</li>
+              </ol>
+            </div>
+
+            <div class="content-block">
+              <h3>C++ Program</h3>
+
+              <div class="code-window">
+                <pre><code>#include &lt;iostream&gt;
+
+using namespace std;
+
+class Rectangle
+{
+    int length;
+    int breadth;
+
+public:
+
+    Rectangle(int l, int b)
+    {
+        length = l;
+        breadth = b;
+    }
+
+    void displayArea()
+    {
+        cout &lt;&lt; "Length: " &lt;&lt; length &lt;&lt; endl;
+        cout &lt;&lt; "Breadth: " &lt;&lt; breadth &lt;&lt; endl;
+        cout &lt;&lt; "Area: " &lt;&lt; length * breadth &lt;&lt; endl;
+    }
+};
+
+int main()
+{
+    Rectangle r(10, 5);
+
+    r.displayArea();
+
+    return 0;
+}</code></pre>
+              </div>
+            </div>
+
+            <div class="content-block">
+              <h3>Expected Output</h3>
+
+              <div class="output-box">
+                <pre>
+Length: 10
+Breadth: 5
+Area: 50</pre
+                >
+              </div>
+            </div>
+
+            <div class="visualization-section">
+              <div class="visualization-header">
+                <span class="section-label"> VISUAL EXPLANATION </span>
+
+                <h3>Parameterized Constructor Flow</h3>
+              </div>
+
+              <div class="array-flow">
+                <div class="array-flow-node">
+                  <strong> Rectangle r </strong>
+
+                  <small> Object </small>
+                </div>
+
+                <div class="array-flow-arrow">→</div>
+
+                <div class="array-flow-node">
+                  <strong> r(10, 5) </strong>
+
+                  <small> Arguments </small>
+                </div>
+
+                <div class="array-flow-arrow">→</div>
+
+                <div class="array-flow-node">
+                  <strong> length = 10 </strong>
+
+                  <small> breadth = 5 </small>
+                </div>
+
+                <div class="array-flow-arrow">→</div>
+
+                <div class="array-flow-node">
+                  <strong> Area = 50 </strong>
+
+                  <small> Result </small>
+                </div>
+              </div>
+            </div>
+
+            <div class="content-block">
+              <h3>Program Explanation</h3>
+
+              <ul class="key-points">
+                <li>
+                  The constructor receives <strong>l</strong> and
+                  <strong>b</strong>.
+                </li>
+
+                <li>These values are assigned to length and breadth.</li>
+
+                <li>
+                  <strong>Rectangle r(10, 5)</strong> invokes the constructor
+                  automatically.
+                </li>
+
+                <li>The area is calculated using length × breadth.</li>
+              </ul>
+            </div>
+
+            <div class="content-block">
+              <h3>Real-Life Connection</h3>
+
+              <p>
+                A drawing or building application can create rectangle objects
+                with different dimensions. A parameterized constructor allows
+                each object to receive its own dimensions during creation.
+              </p>
+            </div>
+
+            <div class="content-block">
+              <h3>Key Points</h3>
+
+              <ul class="key-points">
+                <li>Parameters are passed during object creation.</li>
+
+                <li>Different objects can receive different values.</li>
+
+                <li>Useful when objects require specific initial values.</li>
+              </ul>
+            </div>
+
+            <div class="content-block">
+              <h3>Common Errors</h3>
+
+              <div class="error-grid">
+                <div class="error-card">
+                  <h4>Wrong Arguments</h4>
+
+                  <p>Pass the correct number and type of arguments.</p>
+                </div>
+
+                <div class="error-card">
+                  <h4>Constructor Name</h4>
+
+                  <p>The constructor name must match the class name.</p>
+                </div>
+
+                <div class="error-card">
+                  <h4>Missing Constructor</h4>
+
+                  <p>Define the parameterized constructor before using it.</p>
+                </div>
+
+                <div class="error-card">
+                  <h4>Calculation</h4>
+
+                  <p>Use the correct formula for area.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- =================================================
+                     PROBLEM 3
+                ================================================= -->
+
+          <div class="mini-problem" id="problem10-3">
+            <div class="problem-heading">
+              <span class="section-label"> PROBLEM 03 </span>
+
+              <h2>Copy Constructor</h2>
+            </div>
+
+            <div class="content-block">
+              <h3>Problem Statement</h3>
+
+              <p>
+                Write a C++ program to create a class Student with roll number
+                and marks. Use a copy constructor to create a second object from
+                the first object and display the details of both objects.
+              </p>
+            </div>
+
+            <div class="content-block">
+              <h3>Theory / Concept</h3>
+
+              <p>
+                A copy constructor initializes a new object using an existing
+                object of the same class.
+              </p>
+
+              <div class="code-window">
+                <pre><code>ClassName(const ClassName &amp;obj)
+{
+    // copy data
+}</code></pre>
+              </div>
+            </div>
+
+            
+
+            <div class="content-block syntax-block">
+              <div class="syntax-heading">
+                <span class="section-label">SYNTAX</span>
+                <h3>Copy Constructor Syntax</h3>
+              </div>
+              <div class="code-window">
+                <pre><code>class ClassName
+{
+public:
+    ClassName(const ClassName &amp;obj)
+    {
+        // copy data members
+    }
+};</code></pre>
+              </div>
+              <p><strong>Object Creation:</strong></p>
+              <div class="code-window compact-code">
+                <pre><code>ClassName obj1;
+ClassName obj2(obj1);</code></pre>
+              </div>
+            </div>
+
+<div class="content-block">
+              <h3>Algorithm</h3>
+
+              <ol class="algorithm-list">
+                <li>Start the program.</li>
+
+                <li>Define the Student class.</li>
+
+                <li>Declare roll number and marks.</li>
+
+                <li>
+                  Create a parameterized constructor to initialize the first
+                  object.
+                </li>
+
+                <li>Define a copy constructor.</li>
+
+                <li>Create the second object using the first object.</li>
+
+                <li>Display both objects.</li>
+
+                <li>Stop the program.</li>
+              </ol>
+            </div>
+
+            <div class="content-block">
+              <h3>C++ Program</h3>
+
+              <div class="code-window">
+                <pre><code>#include &lt;iostream&gt;
+
+using namespace std;
+
+class Student
+{
+    int rollNo;
+    float marks;
+
+public:
+
+    Student(int r, float m)
+    {
+        rollNo = r;
+        marks = m;
+    }
+
+    Student(const Student &amp;s)
+    {
+        rollNo = s.rollNo;
+        marks = s.marks;
+    }
+
+    void display()
+    {
+        cout &lt;&lt; "Roll No: " &lt;&lt; rollNo &lt;&lt; endl;
+        cout &lt;&lt; "Marks: " &lt;&lt; marks &lt;&lt; endl;
+    }
+};
+
+int main()
+{
+    Student s1(101, 85.5);
+
+    Student s2(s1);
+
+    cout &lt;&lt; "First Object\n";
+    s1.display();
+
+    cout &lt;&lt; "\nCopied Object\n";
+    s2.display();
+
+    return 0;
+}</code></pre>
+              </div>
+            </div>
+
+            <div class="content-block">
+              <h3>Expected Output</h3>
+
+              <div class="output-box">
+                <pre>
+First Object
+Roll No: 101
+Marks: 85.5
+
+Copied Object
+Roll No: 101
+Marks: 85.5</pre
+                >
+              </div>
+            </div>
+
+            <div class="visualization-section">
+              <div class="visualization-header">
+                <span class="section-label"> VISUAL EXPLANATION </span>
+
+                <h3>Copy Constructor Flow</h3>
+              </div>
+
+              <div class="array-flow">
+                <div class="array-flow-node">
+                  <strong> s1 </strong>
+
+                  <small>
+                    Roll: 101<br />
+                    Marks: 85.5
+                  </small>
+                </div>
+
+                <div class="array-flow-arrow">→</div>
+
+                <div class="array-flow-node">
+                  <strong> Copy Constructor </strong>
+
+                  <small> Student s2(s1) </small>
+                </div>
+
+                <div class="array-flow-arrow">→</div>
+
+                <div class="array-flow-node">
+                  <strong> s2 </strong>
+
+                  <small>
+                    Roll: 101<br />
+                    Marks: 85.5
+                  </small>
+                </div>
+              </div>
+            </div>
+
+            <div class="content-block">
+              <h3>Program Explanation</h3>
+
+              <ul class="key-points">
+                <li>
+                  <strong>s1</strong> is created using the parameterized
+                  constructor.
+                </li>
+
+                <li>
+                  <strong>Student s2(s1)</strong> creates a new object using s1.
+                </li>
+
+                <li>
+                  The copy constructor copies the data members from s1 into s2.
+                </li>
+
+                <li>Both objects contain the same initial values.</li>
+              </ul>
+            </div>
+
+            <div class="content-block">
+              <h3>Real-Life Connection</h3>
+
+              <p>
+                A copy constructor can be useful when creating a duplicate
+                record based on an existing record, such as creating a copy of a
+                student or product object.
+              </p>
+            </div>
+
+            <div class="content-block">
+              <h3>Key Points</h3>
+
+              <ul class="key-points">
+                <li>It receives an object of the same class.</li>
+
+                <li>It initializes a new object.</li>
+
+                <li>It is useful for copying object state.</li>
+              </ul>
+            </div>
+
+            <div class="content-block">
+              <h3>Common Errors</h3>
+
+              <div class="error-grid">
+                <div class="error-card">
+                  <h4>Wrong Parameter</h4>
+
+                  <p>
+                    A copy constructor should receive an object of the same
+                    class, conventionally by reference.
+                  </p>
+                </div>
+
+                <div class="error-card">
+                  <h4>Wrong Class Name</h4>
+
+                  <p>The constructor name must match the class name.</p>
+                </div>
+
+                <div class="error-card">
+                  <h4>Wrong Object</h4>
+
+                  <p>
+                    Pass the existing object when creating the copied object.
+                  </p>
+                </div>
+
+                <div class="error-card">
+                  <h4>Missing Data Copy</h4>
+
+                  <p>Copy all required data members.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- =================================================
+                     PROBLEM 4
+                ================================================= -->
+
+          <div class="mini-problem" id="problem10-4">
+            <div class="problem-heading">
+              <span class="section-label"> PROBLEM 04 </span>
+
+              <h2>Multiple Constructors in One Class</h2>
+            </div>
+
+            <div class="content-block">
+              <h3>Problem Statement</h3>
+
+              <p>
+                Write a C++ program to create a class Rectangle having multiple
+                constructors: a default constructor, a parameterized constructor
+                for a square, and another parameterized constructor for a
+                rectangle. Display the area calculated by each object.
+              </p>
+            </div>
+
+            <div class="content-block">
+              <h3>Theory / Concept</h3>
+
+              <p>
+                A class can contain more than one constructor as long as their
+                parameter lists are different. This is an example of
+                <strong>constructor overloading</strong>.
+              </p>
+            </div>
+
+            
+
+            <div class="content-block syntax-block">
+              <div class="syntax-heading">
+                <span class="section-label">SYNTAX</span>
+                <h3>Multiple Constructors Syntax</h3>
+              </div>
+              <div class="code-window">
+                <pre><code>class ClassName
+{
+public:
+    ClassName()
+    {
+        // default initialization
+    }
+
+    ClassName(data_type value)
+    {
+        // initialization
+    }
+
+    ClassName(data_type value1, data_type value2)
+    {
+        // initialization
+    }
+};</code></pre>
+              </div>
+              <p><strong>Object Creation:</strong></p>
+              <div class="code-window compact-code">
+                <pre><code>ClassName obj1;
+ClassName obj2(value);
+ClassName obj3(value1, value2);</code></pre>
+              </div>
+            </div>
+
+<div class="content-block">
+              <h3>Algorithm</h3>
+
+              <ol class="algorithm-list">
+                <li>Start the program.</li>
+
+                <li>Define the Rectangle class.</li>
+
+                <li>Define a default constructor.</li>
+
+                <li>Define a constructor with one parameter for a square.</li>
+
+                <li>
+                  Define a constructor with two parameters for a rectangle.
+                </li>
+
+                <li>Create objects using different constructors.</li>
+
+                <li>Calculate and display the areas.</li>
+
+                <li>Stop the program.</li>
+              </ol>
+            </div>
+
+            <div class="content-block">
+              <h3>C++ Program</h3>
+
+              <div class="code-window">
+                <pre><code>#include &lt;iostream&gt;
+
+using namespace std;
+
+class Rectangle
+{
+    int length;
+    int breadth;
+
+public:
+
+    // Default constructor
+    Rectangle()
+    {
+        length = 1;
+        breadth = 1;
+    }
+
+    // Constructor for square
+    Rectangle(int side)
+    {
+        length = side;
+        breadth = side;
+    }
+
+    // Constructor for rectangle
+    Rectangle(int l, int b)
+    {
+        length = l;
+        breadth = b;
+    }
+
+    void displayArea()
+    {
+        cout &lt;&lt; "Length: " &lt;&lt; length &lt;&lt; endl;
+        cout &lt;&lt; "Breadth: " &lt;&lt; breadth &lt;&lt; endl;
+        cout &lt;&lt; "Area: " &lt;&lt; length * breadth &lt;&lt; endl;
+        cout &lt;&lt; endl;
+    }
+};
+
+int main()
+{
+    Rectangle r1;
+
+    Rectangle r2(5);
+
+    Rectangle r3(10, 4);
+
+    cout &lt;&lt; "Object 1\n";
+    r1.displayArea();
+
+    cout &lt;&lt; "Object 2\n";
+    r2.displayArea();
+
+    cout &lt;&lt; "Object 3\n";
+    r3.displayArea();
+
+    return 0;
+}</code></pre>
+              </div>
+            </div>
+
+            <div class="content-block">
+              <h3>Expected Output</h3>
+
+              <div class="output-box">
+                <pre>
+Object 1
+Length: 1
+Breadth: 1
+Area: 1
+
+Object 2
+Length: 5
+Breadth: 5
+Area: 25
+
+Object 3
+Length: 10
+Breadth: 4
+Area: 40</pre
+                >
+              </div>
+            </div>
+
+            <div class="visualization-section">
+              <div class="visualization-header">
+                <span class="section-label"> VISUAL EXPLANATION </span>
+
+                <h3>Constructor Overloading</h3>
+              </div>
+
+              <div class="object-array">
+                <div class="object-box">
+                  <div class="object-index">01</div>
+
+                  <strong> r1 </strong>
+
+                  <span>
+                    Rectangle()<br />
+                    1 × 1
+                  </span>
+                </div>
+
+                <div class="object-box">
+                  <div class="object-index">02</div>
+
+                  <strong> r2 </strong>
+
+                  <span>
+                    Rectangle(5)<br />
+                    5 × 5
+                  </span>
+                </div>
+
+                <div class="object-box">
+                  <div class="object-index">03</div>
+
+                  <strong> r3 </strong>
+
+                  <span>
+                    Rectangle(10,4)<br />
+                    10 × 4
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="content-block">
+              <h3>Program Explanation</h3>
+
+              <ul class="key-points">
+                <li>The class contains three constructors.</li>
+
+                <li>Each constructor has a different parameter list.</li>
+
+                <li>
+                  <strong>Rectangle r1</strong> calls the default constructor.
+                </li>
+
+                <li>
+                  <strong>Rectangle r2(5)</strong> calls the one-parameter
+                  constructor.
+                </li>
+
+                <li>
+                  <strong>Rectangle r3(10,4)</strong> calls the two-parameter
+                  constructor.
+                </li>
+              </ul>
+            </div>
+
+            <div class="content-block">
+              <h3>Real-Life Connection</h3>
+
+              <p>
+                Different ways of creating an object are common in software
+                systems. For example, a product may be created with default
+                information, only a price, or complete product details.
+              </p>
+            </div>
+
+            <div class="content-block">
+              <h3>Key Points</h3>
+
+              <ul class="key-points">
+                <li>Multiple constructors can exist in one class.</li>
+
+                <li>Constructors must have different parameter lists.</li>
+
+                <li>This concept is called constructor overloading.</li>
+
+                <li>
+                  The compiler selects the appropriate constructor based on the
+                  arguments.
+                </li>
+              </ul>
+            </div>
+
+            <div class="content-block">
+              <h3>Common Errors</h3>
+
+              <div class="error-grid">
+                <div class="error-card">
+                  <h4>Same Parameter List</h4>
+
+                  <p>
+                    Two constructors cannot have exactly the same parameter
+                    list.
+                  </p>
+                </div>
+
+                <div class="error-card">
+                  <h4>Wrong Arguments</h4>
+
+                  <p>Pass arguments matching the intended constructor.</p>
+                </div>
+
+                <div class="error-card">
+                  <h4>Constructor Name</h4>
+
+                  <p>Every constructor must have the same name as the class.</p>
+                </div>
+
+                <div class="error-card">
+                  <h4>Return Type</h4>
+
+                  <p>Constructors do not have a return type.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================
+             QUICK SUMMARY
+        ===================================================== -->
+
+      <section class="content-section">
+        <div class="container">
+          <span class="section-label"> QUICK SUMMARY </span>
+
+          <h2>Practical 10 at a Glance</h2>
+
+          <div class="content-card">
+            <ul class="key-points">
+              <li>
+                A constructor is automatically called when an object is created.
+              </li>
+
+              <li>A constructor has the same name as its class.</li>
+
+              <li>A constructor does not have a return type.</li>
+
+              <li>A default constructor has no parameters.</li>
+
+              <li>A parameterized constructor accepts arguments.</li>
+
+              <li>
+                A copy constructor creates a new object from an existing object.
+              </li>
+
+              <li>
+                Multiple constructors with different parameter lists demonstrate
+                constructor overloading.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================
+             VIVA
+        ===================================================== -->
+
+      <section class="content-section">
+        <div class="container">
+          <span class="section-label"> VIVA </span>
+
+          <h2>Viva Questions</h2>
+
+          <div class="viva-list">
+            <!-- VIVA 1 -->
+
+            <div class="viva-item">
+              <button type="button" class="viva-question">
+                <span> What is a constructor? </span>
+
+                <span class="viva-icon"> + </span>
+              </button>
+
+              <div class="viva-answer">
+                <p>
+                  A constructor is a special member function that is
+                  automatically called when an object is created.
+                </p>
+              </div>
+            </div>
+
+            <!-- VIVA 2 -->
+
+            <div class="viva-item">
+              <button type="button" class="viva-question">
+                <span> What is the main purpose of a constructor? </span>
+
+                <span class="viva-icon"> + </span>
+              </button>
+
+              <div class="viva-answer">
+                <p>
+                  Its main purpose is to initialize the data members of an
+                  object.
+                </p>
+              </div>
+            </div>
+
+            <!-- VIVA 3 -->
+
+            <div class="viva-item">
+              <button type="button" class="viva-question">
+                <span> Does a constructor have a return type? </span>
+
+                <span class="viva-icon"> + </span>
+              </button>
+
+              <div class="viva-answer">
+                <p>
+                  No. A constructor does not have a return type, not even
+                  <strong>void</strong>.
+                </p>
+              </div>
+            </div>
+
+            <!-- VIVA 4 -->
+
+            <div class="viva-item">
+              <button type="button" class="viva-question">
+                <span> What is a default constructor? </span>
+
+                <span class="viva-icon"> + </span>
+              </button>
+
+              <div class="viva-answer">
+                <p>
+                  A default constructor is a constructor that takes no
+                  arguments.
+                </p>
+              </div>
+            </div>
+
+            <!-- VIVA 5 -->
+
+            <div class="viva-item">
+              <button type="button" class="viva-question">
+                <span> What is a parameterized constructor? </span>
+
+                <span class="viva-icon"> + </span>
+              </button>
+
+              <div class="viva-answer">
+                <p>
+                  A parameterized constructor accepts one or more arguments to
+                  initialize an object.
+                </p>
+              </div>
+            </div>
+
+            <!-- VIVA 6 -->
+
+            <div class="viva-item">
+              <button type="button" class="viva-question">
+                <span> What is a copy constructor? </span>
+
+                <span class="viva-icon"> + </span>
+              </button>
+
+              <div class="viva-answer">
+                <p>
+                  A copy constructor initializes a new object using an existing
+                  object of the same class.
+                </p>
+              </div>
+            </div>
+
+            <!-- VIVA 7 -->
+
+            <div class="viva-item">
+              <button type="button" class="viva-question">
+                <span> What is constructor overloading? </span>
+
+                <span class="viva-icon"> + </span>
+              </button>
+
+              <div class="viva-answer">
+                <p>
+                  Constructor overloading means defining multiple constructors
+                  in the same class with different parameter lists.
+                </p>
+              </div>
+            </div>
+
+            <!-- VIVA 8 -->
+
+            <div class="viva-item">
+              <button type="button" class="viva-question">
+                <span> When is a constructor called? </span>
+
+                <span class="viva-icon"> + </span>
+              </button>
+
+              <div class="viva-answer">
+                <p>
+                  A constructor is automatically called when an object of the
+                  class is created.
+                </p>
+              </div>
+            </div>
+
+            <!-- VIVA 9 -->
+
+            <div class="viva-item">
+              <button type="button" class="viva-question">
+                <span> Can a class have more than one constructor? </span>
+
+                <span class="viva-icon"> + </span>
+              </button>
+
+              <div class="viva-answer">
+                <p>
+                  Yes. A class can have multiple constructors as long as their
+                  parameter lists are different.
+                </p>
+              </div>
+            </div>
+
+            <!-- VIVA 10 -->
+
+            <div class="viva-item">
+              <button type="button" class="viva-question">
+                <span>
+                  Can a constructor be called like a normal function?
+                </span>
+
+                <span class="viva-icon"> + </span>
+              </button>
+
+              <div class="viva-answer">
+                <p>
+                  Constructors are normally invoked automatically during object
+                  creation rather than being called like ordinary member
+                  functions.
+                </p>
+              </div>
+            </div>
+
+            <!-- VIVA 11 -->
+
+            <div class="viva-item">
+              <button type="button" class="viva-question">
+                <span> Can constructors be inherited? </span>
+
+                <span class="viva-icon"> + </span>
+              </button>
+
+              <div class="viva-answer">
+                <p>
+                  Constructors are not inherited in the ordinary sense, although
+                  C++ provides mechanisms for explicitly making base
+                  constructors available in a derived class.
+                </p>
+              </div>
+            </div>
+
+            <!-- VIVA 12 -->
+
+            <div class="viva-item">
+              <button type="button" class="viva-question">
+                <span>
+                  What is the difference between a constructor and a normal
+                  function?
+                </span>
+
+                <span class="viva-icon"> + </span>
+              </button>
+
+              <div class="viva-answer">
+                <p>
+                  A constructor initializes an object and is automatically
+                  invoked during object creation. A normal member function
+                  performs an operation and is called explicitly.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- =====================================================
+         FOOTER
+    ===================================================== -->
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <div class="footer-logo">&lt;/&gt;</div>
+
+          <div class="footer-brand-text">
+            <div class="footer-brand-name">Rasika <span>CodeLab</span></div>
+
+            <p class="footer-tagline">Code • Understand • Visualize</p>
+          </div>
+        </div>
+
+        <div class="footer-copy">
+          © 2026 Rasika CodeLab. Built for practical learning.
+        </div>
+      </div>
+    </footer>
+
+    <!-- =====================================================
+         MAIN JAVASCRIPT
+    ===================================================== -->
+
+    <script src="../js/main.js"></script>
+
+    <!-- =====================================================
+         PRACTICAL 10 JAVASCRIPT
+    ===================================================== -->
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        /* =================================================
+                   PROBLEM TABS
+                ================================================= */
+
+        const problemTabs = document.querySelectorAll(
+          ".problem-mini-tabs .mini-problem-tab",
+        );
+
+        const problems = document.querySelectorAll(".mini-problem");
+
+        problemTabs.forEach(function (tab) {
+          tab.addEventListener("click", function () {
+            const target = this.getAttribute("data-problem");
+
+            /* Remove active from all tabs */
+
+            problemTabs.forEach(function (item) {
+              item.classList.remove("active");
+            });
+
+            /* Activate clicked tab */
+
+            this.classList.add("active");
+
+            /* Hide all problems */
+
+            problems.forEach(function (problem) {
+              problem.classList.remove("active");
+            });
+
+            /* Show selected problem */
+
+            const selectedProblem = document.getElementById(target);
+
+            if (selectedProblem) {
+              selectedProblem.classList.add("active");
+
+              selectedProblem.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+              });
+            }
+          });
+        });
+
+        /* =================================================
+                   VIVA ACCORDION
+                ================================================= */
+
+        const vivaQuestions = document.querySelectorAll(".viva-question");
+
+        vivaQuestions.forEach(function (question) {
+          question.addEventListener("click", function () {
+            const currentItem = this.closest(".viva-item");
+
+            currentItem.classList.toggle("active");
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

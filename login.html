@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Rasika CodeLab</title>
+    <meta name="description" content="Log in or create a Rasika CodeLab account.">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="auth-page">
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo" aria-label="Rasika CodeLab home">
+                <span class="logo-mark">&lt;/&gt;</span>
+                <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+            </a>
+            <a href="index.html" class="auth-back-link">Back to home</a>
+        </div>
+    </header>
+
+    <main class="auth-main">
+        <section class="auth-card" aria-labelledby="auth-title">
+            <div class="section-label">YOUR LEARNING SPACE</div>
+            <h1 id="auth-title">Log in to <span>CodeLab</span></h1>
+            <p class="auth-intro">Save your learning progress and return to your practicals anytime.</p>
+
+            <button type="button" class="auth-google-btn" id="google-login">
+                <span class="google-mark" aria-hidden="true">G</span>
+                Continue with Google
+            </button>
+
+            <div class="auth-divider"><span>or use email</span></div>
+
+            <form id="auth-form" class="auth-form">
+                <label for="email">Email address</label>
+                <input id="email" name="email" type="email" autocomplete="email" required>
+
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password" autocomplete="current-password" minlength="6" required>
+
+                <button type="submit" class="btn btn-primary auth-submit" id="email-login">Log in</button>
+            </form>
+
+            <button type="button" class="auth-switch" id="auth-switch">New here? Create an account</button>
+            <p class="auth-status" id="auth-status" role="status" aria-live="polite"></p>
+        </section>
+    </main>
+
+    <script type="module" src="js/auth.js"></script>
+</body>
+</html>

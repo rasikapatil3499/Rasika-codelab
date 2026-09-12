@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Input & Output | Rasika CodeLab</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="detail-page">
+
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar">
+        <div class="nav-container">
+
+            <a href="../index.html" class="logo">
+                <span class="logo-mark">&lt;/&gt;</span>
+                <span>Rasika<span class="logo-accent">CodeLab</span></span>
+            </a>
+
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="../foundations.html" class="active">Foundations</a>
+                <a href="../practicals.html">Practicals</a>
+                <a href="../about.html">About</a>
+            </div>
+
+            <button class="menu-btn">☰</button>
+
+        </div>
+    </nav>
+
+
+    <!-- ================= HERO ================= -->
+    <header class="detail-hero">
+
+        <div class="detail-hero-content">
+
+            <span class="detail-badge">
+                FOUNDATION 07
+            </span>
+
+            <h1>
+                What is <span>Input & Output?</span>
+            </h1>
+
+            <p>
+                Learn how a C++ program receives data from the user,
+                processes it, and displays the result.
+            </p>
+
+        </div>
+
+    </header>
+
+
+    <main>
+
+
+        <!-- ================= DEFINITION ================= -->
+        <section class="concept-section">
+
+            <div class="section-heading">
+                <span class="section-number">01</span>
+
+                <div>
+                    <h2>What is Input & Output?</h2>
+
+                    <p>
+                        Input and output are the basic ways a program
+                        communicates with the outside world.
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="definition-card">
+
+                <h3>Simple Definition</h3>
+
+                <p>
+                    <strong>Input</strong> means providing data to a program,
+                    while <strong>Output</strong> means displaying the result
+                    produced by the program.
+                </p>
+
+                <div class="io-flow">
+
+                    <div class="io-box">
+                        <span>INPUT</span>
+                        <strong>User</strong>
+                        <small>Provides Data</small>
+                    </div>
+
+                    <div class="flow-arrow">→</div>
+
+                    <div class="io-box process">
+                        <span>PROCESS</span>
+                        <strong>C++ Program</strong>
+                        <small>Processes Data</small>
+                    </div>
+
+                    <div class="flow-arrow">→</div>
+
+                    <div class="io-box">
+                        <span>OUTPUT</span>
+                        <strong>Screen</strong>
+                        <small>Shows Result</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= REAL WORLD ================= -->
+        <section class="concept-section">
+
+            <div class="section-heading">
+                <span class="section-number">02</span>
+
+                <div>
+                    <h2>Think of it in the Real World</h2>
+
+                    <p>
+                        Input and output are not unique to computers.
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="definition-card">
+
+                <h3>Example: Calculator</h3>
+
+                <p>
+                    Suppose you want to calculate the sum of two numbers.
+                </p>
+
+                <div class="example-flow">
+
+                    <div>
+                        <strong>10</strong>
+                        <small>Input</small>
+                    </div>
+
+                    <span>+</span>
+
+                    <div>
+                        <strong>20</strong>
+                        <small>Input</small>
+                    </div>
+
+                    <span>→</span>
+
+                    <div class="highlight">
+                        <strong>30</strong>
+                        <small>Output</small>
+                    </div>
+
+                </div>
+
+                <p class="explanation">
+                    The numbers <strong>10</strong> and <strong>20</strong>
+                    are input. The program performs addition and produces
+                    <strong>30</strong> as output.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= CIN ================= -->
+        <section class="concept-section">
+
+            <div class="section-heading">
+                <span class="section-number">03</span>
+
+                <div>
+                    <h2>Taking Input using <code>cin</code></h2>
+
+                    <p>
+                        C++ uses <code>cin</code> to receive input from
+                        the standard input device, normally the keyboard.
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="code-example">
+
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    int age;
+
+    cin &gt;&gt; age;
+
+    return 0;
+}</code></pre>
+
+            </div>
+
+
+            <div class="explanation-box">
+
+                <h3>How does it work?</h3>
+
+                <ol>
+                    <li>
+                        <code>int age;</code> creates an integer variable.
+                    </li>
+
+                    <li>
+                        <code>cin</code> waits for the user to enter data.
+                    </li>
+
+                    <li>
+                        <code>&gt;&gt;</code> sends the entered value into
+                        the variable.
+                    </li>
+
+                    <li>
+                        The value is stored in <code>age</code>.
+                    </li>
+                </ol>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= COUT ================= -->
+        <section class="concept-section">
+
+            <div class="section-heading">
+                <span class="section-number">04</span>
+
+                <div>
+                    <h2>Displaying Output using <code>cout</code></h2>
+
+                    <p>
+                        C++ uses <code>cout</code> to display information
+                        on the screen.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="code-example">
+
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    cout &lt;&lt; "Hello C++";
+
+    return 0;
+}</code></pre>
+
+            </div>
+
+
+            <div class="output-box">
+
+                <span>OUTPUT</span>
+
+                <pre>Hello C++</pre>
+
+            </div>
+
+
+            <div class="explanation-box">
+
+                <h3>Remember</h3>
+
+                <p>
+                    The operator <code>&lt;&lt;</code> is used with
+                    <code>cout</code> to send data toward the output stream.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= CIN COUT TOGETHER ================= -->
+        <section class="concept-section">
+
+            <div class="section-heading">
+
+                <span class="section-number">05</span>
+
+                <div>
+                    <h2>Input + Processing + Output</h2>
+
+                    <p>
+                        Most beginner C++ programs follow this basic pattern.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="code-example">
+
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    int a, b, sum;
+
+    cout &lt;&lt; "Enter two numbers: ";
+
+    cin &gt;&gt; a &gt;&gt; b;
+
+    sum = a + b;
+
+    cout &lt;&lt; "Sum = " &lt;&lt; sum;
+
+    return 0;
+}</code></pre>
+
+            </div>
+
+
+            <div class="io-flow large-flow">
+
+                <div class="io-box">
+                    <span>INPUT</span>
+                    <strong>a = 10</strong>
+                    <strong>b = 20</strong>
+                </div>
+
+                <div class="flow-arrow">→</div>
+
+                <div class="io-box process">
+                    <span>PROCESS</span>
+                    <strong>sum = a + b</strong>
+                </div>
+
+                <div class="flow-arrow">→</div>
+
+                <div class="io-box">
+                    <span>OUTPUT</span>
+                    <strong>Sum = 30</strong>
+                </div>
+
+            </div>
+
+
+            <div class="output-box">
+
+                <span>OUTPUT</span>
+
+<pre>Enter two numbers: 10 20
+Sum = 30</pre>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= MEMORY ================= -->
+        <section class="concept-section">
+
+            <div class="section-heading">
+
+                <span class="section-number">06</span>
+
+                <div>
+                    <h2>What happens in Memory?</h2>
+
+                    <p>
+                        Input is not simply displayed. It is stored in
+                        variables in memory.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="memory-visual">
+
+                <div class="memory-user">
+                    <span>KEYBOARD</span>
+                    <strong>25</strong>
+                </div>
+
+                <div class="memory-arrow">→</div>
+
+                <div class="memory-cell">
+
+                    <small>VARIABLE</small>
+
+                    <strong>age</strong>
+
+                    <span>25</span>
+
+                </div>
+
+                <div class="memory-arrow">→</div>
+
+                <div class="memory-screen">
+
+                    <span>SCREEN</span>
+
+                    <strong>25</strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="explanation-box">
+
+                <h3>Conceptual Flow</h3>
+
+                <p>
+                    When the user enters <strong>25</strong>, the input
+                    is received by the program and stored in the variable
+                    <code>age</code>. When <code>cout</code> is used,
+                    that value is sent to the output stream and displayed
+                    on the screen.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= OPERATORS ================= -->
+        <section class="concept-section">
+
+            <div class="section-heading">
+
+                <span class="section-number">07</span>
+
+                <div>
+                    <h2><code>&gt;&gt;</code> and <code>&lt;&lt;</code></h2>
+
+                    <p>
+                        These operators are commonly used with C++ input
+                        and output streams.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="operator-grid">
+
+                <div class="definition-card">
+
+                    <div class="operator-symbol">&gt;&gt;</div>
+
+                    <h3>Extraction Operator</h3>
+
+                    <p>
+                        Used with <code>cin</code> to extract data
+                        from the input stream.
+                    </p>
+
+                    <code>cin &gt;&gt; age;</code>
+
+                </div>
+
+
+                <div class="definition-card">
+
+                    <div class="operator-symbol">&lt;&lt;</div>
+
+                    <h3>Insertion Operator</h3>
+
+                    <p>
+                        Used with <code>cout</code> to insert data
+                        into the output stream.
+                    </p>
+
+                    <code>cout &lt;&lt; age;</code>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= MULTIPLE VALUES ================= -->
+        <section class="concept-section">
+
+            <div class="section-heading">
+
+                <span class="section-number">08</span>
+
+                <div>
+                    <h2>Taking Multiple Inputs</h2>
+
+                    <p>
+                        Multiple values can be read using a single
+                        <code>cin</code> statement.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="code-example">
+
+<pre><code>int a, b, c;
+
+cin &gt;&gt; a &gt;&gt; b &gt;&gt; c;</code></pre>
+
+            </div>
+
+
+            <div class="explanation-box">
+
+                <p>
+                    If the user enters:
+                </p>
+
+                <div class="input-line">
+                    <code>10 20 30</code>
+                </div>
+
+                <p>
+                    then:
+                </p>
+
+                <ul>
+                    <li><code>a = 10</code></li>
+                    <li><code>b = 20</code></li>
+                    <li><code>c = 30</code></li>
+                </ul>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= STRINGS ================= -->
+        <section class="concept-section">
+
+            <div class="section-heading">
+
+                <span class="section-number">09</span>
+
+                <div>
+                    <h2>Text Input and Output</h2>
+
+                    <p>
+                        Input and output are also used with strings.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="code-example">
+
+<pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+int main()
+{
+    string name;
+
+    cout &lt;&lt; "Enter your name: ";
+    cin &gt;&gt; name;
+
+    cout &lt;&lt; "Hello " &lt;&lt; name;
+
+    return 0;
+}</code></pre>
+
+            </div>
+
+
+            <div class="output-box">
+
+                <span>EXAMPLE OUTPUT</span>
+
+<pre>Enter your name: Rasika
+Hello Rasika</pre>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= COMMON ERRORS ================= -->
+        <section class="concept-section">
+
+            <div class="section-heading">
+
+                <span class="section-number">10</span>
+
+                <div>
+                    <h2>Common Errors</h2>
+
+                    <p>
+                        Avoid these common beginner mistakes.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="error-grid">
+
+                <div class="error-card">
+                    <h3>❌ Wrong</h3>
+                    <code>cout &gt;&gt; age;</code>
+                    <p>
+                        <code>cout</code> normally uses
+                        <code>&lt;&lt;</code>.
+                    </p>
+                </div>
+
+
+                <div class="error-card">
+                    <h3>❌ Wrong</h3>
+                    <code>cin &lt;&lt; age;</code>
+                    <p>
+                        <code>cin</code> normally uses
+                        <code>&gt;&gt;</code>.
+                    </p>
+                </div>
+
+
+                <div class="error-card">
+                    <h3>❌ Wrong</h3>
+                    <code>cin &gt;&gt; 25;</code>
+                    <p>
+                        Input must normally be stored in a variable
+                        or another suitable input destination.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= LLO CONNECTION ================= -->
+        <section class="takeaway-section">
+
+            <div class="takeaway-content">
+
+                <span class="detail-badge">LLO CONNECTION</span>
+
+                <h2>
+                    Why is Input & Output important?
+                </h2>
+
+                <p>
+                    Your first C++ practical requires you to evaluate
+                    expressions using input/output functions.
+                    Therefore, understanding <code>cin</code>,
+                    <code>cout</code>, variables and operators is essential.
+                </p>
+
+                <div class="takeaway-points">
+
+                    <div>
+                        <strong>01</strong>
+                        <span>Input receives data.</span>
+                    </div>
+
+                    <div>
+                        <strong>02</strong>
+                        <span>Variables store data.</span>
+                    </div>
+
+                    <div>
+                        <strong>03</strong>
+                        <span>Operators process data.</span>
+                    </div>
+
+                    <div>
+                        <strong>04</strong>
+                        <span>Output displays the result.</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= NAVIGATION ================= -->
+        <section class="lesson-navigation">
+
+            <a href="expressions.html" class="lesson-nav-card">
+
+                <span>← Previous</span>
+
+                <strong>What is an Expression?</strong>
+
+            </a>
+
+
+            <a href="../practicals.html" class="lesson-nav-card next">
+
+                <span>Next →</span>
+
+                <strong>Start Practicals</strong>
+
+            </a>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+
+        <div class="footer-content">
+
+            <div>
+                <strong>Rasika<span>CodeLab</span></strong>
+
+                <p>
+                    Code • Understand • Visualize
+                </p>
+            </div>
+
+            <p>
+                © 2026 Rasika CodeLab
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <script src="../js/main.js"></script>
+
+</body>
+</html>

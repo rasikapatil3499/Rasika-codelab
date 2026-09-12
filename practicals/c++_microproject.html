@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C++ Micro Projects | Rasika CodeLab</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+.micro-project-page{--bg:#070b16;--card:#101520;--hover:#151b28;--text:#f4f5fb;--secondary:#a5afc2;--muted:#727c90;--border:rgba(255,255,255,.09);--orange:#ff6b35;--orange-bg:rgba(255,107,53,.10);--orange-border:rgba(255,107,53,.28);width:100%;min-height:100vh;background:var(--bg);color:var(--text);overflow-x:hidden}
+.micro-project-page *,.micro-project-page *:before,.micro-project-page *:after{box-sizing:border-box}
+.micro-project-page .container{width:min(1195px,calc(100% - 60px));margin:auto}
+.micro-project-page .site-nav{background:#080c17;border-bottom:1px solid rgba(255,255,255,.06)}
+.micro-project-page .nav-inner{width:min(1295px,calc(100% - 60px));min-height:72px;margin:auto;display:flex;align-items:center;justify-content:space-between}
+.micro-project-page .logo{color:#f5f5f8;font-size:21px;font-weight:800;text-decoration:none}.micro-project-page .logo span{color:var(--orange)}
+.micro-project-page .nav-links{display:flex;gap:38px;align-items:center}.micro-project-page .nav-links a{color:#9da7ba;text-decoration:none;font-size:14px;font-weight:650}.micro-project-page .nav-links a:hover,.micro-project-page .nav-links a.active{color:#fff}
+.micro-project-page .hero{padding:105px 0 75px;background:radial-gradient(circle at 82% 18%,rgba(255,107,53,.09),transparent 31%),radial-gradient(circle at 15% 35%,rgba(119,65,94,.08),transparent 30%),linear-gradient(135deg,#15111a,#090d18 48%,#080b15);border-bottom:1px solid rgba(255,255,255,.03)}
+.micro-project-page .badge{color:var(--orange);font-size:13px;font-weight:800;letter-spacing:.15em;text-transform:uppercase}
+.micro-project-page h1{max-width:1000px;margin:22px 0 18px;color:var(--text);font-size:clamp(46px,6vw,72px);line-height:1.06;letter-spacing:-2px}
+.micro-project-page .hero-desc{max-width:900px;margin:0;color:var(--secondary);font-size:18px;line-height:1.85}
+.micro-project-page .meta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}.micro-project-page .meta span{padding:10px 15px;border:1px solid var(--border);border-radius:30px;color:var(--secondary);background:rgba(255,255,255,.025);font-size:13px}
+.micro-project-page main{background:var(--bg)}.micro-project-page .section{padding:65px 0}.micro-project-page .section h2{margin:0 0 12px;color:var(--text);font-size:32px}.micro-project-page .section-intro{color:var(--secondary);font-size:16px;line-height:1.8}
+.micro-project-page .card{padding:30px;background:var(--card);border:1px solid var(--border);border-radius:16px;color:var(--secondary);box-shadow:0 15px 40px rgba(0,0,0,.14)}
+.micro-project-page .card strong,.micro-project-page .card b{color:var(--text)}
+.micro-project-page .levels{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:28px}.micro-project-page .level{padding:23px;background:var(--card);border:1px solid var(--border);border-radius:14px}.micro-project-page .level span{color:var(--orange);font-size:12px;font-weight:800;letter-spacing:.1em}.micro-project-page .level h3{margin:10px 0 7px;color:var(--text);font-size:18px}.micro-project-page .level p{margin:0;color:var(--secondary);line-height:1.7;font-size:14px}
+.micro-project-page .project-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:28px}
+.micro-project-page .project-card{display:flex;gap:20px;padding:25px;background:var(--card);border:1px solid var(--border);border-radius:16px;transition:.25s}
+.micro-project-page .project-card:hover{transform:translateY(-3px);background:var(--hover);border-color:var(--orange-border)}
+.micro-project-page .project-number{flex:0 0 48px;height:48px;display:flex;align-items:center;justify-content:center;border-radius:11px;background:var(--orange-bg);border:1px solid var(--orange-border);color:var(--orange);font-weight:800}
+.micro-project-page .project-info{min-width:0}.micro-project-page .project-info h3{margin:0 0 10px;color:var(--text);font-size:18px;line-height:1.35}.micro-project-page .project-info p{margin:0 0 14px;color:var(--secondary);font-size:14px;line-height:1.75}
+.micro-project-page .tags{display:flex;flex-wrap:wrap;gap:7px}.micro-project-page .tag{padding:6px 9px;border-radius:7px;background:#0b111d;border:1px solid var(--border);color:#909aad;font-size:11px}
+.micro-project-page .extension{margin-top:12px;padding:12px 14px;border-left:2px solid var(--orange);background:rgba(255,107,53,.045);border-radius:0 8px 8px 0;color:#b4bdcc;font-size:13px;line-height:1.65}.micro-project-page .extension b{color:var(--orange)}
+.micro-project-page .roadmap{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:28px}.micro-project-page .roadmap div{padding:18px 12px;text-align:center;background:var(--card);border:1px solid var(--border);border-radius:12px;color:var(--secondary);font-size:13px;font-weight:700}.micro-project-page .roadmap .arrow{color:var(--orange);background:transparent;border:0;font-size:20px}
+.micro-project-page .requirements{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.micro-project-page .requirements .card{min-height:150px}.micro-project-page ul{margin:0;padding-left:21px}.micro-project-page li{margin-bottom:8px;line-height:1.8}.micro-project-page li::marker{color:var(--orange)}
+.micro-project-page .footer{padding:40px 0;background:#070a12;border-top:1px solid rgba(255,255,255,.06)}.micro-project-page .footer-content{width:min(1195px,calc(100% - 60px));margin:auto;display:flex;align-items:center;justify-content:space-between}.micro-project-page .footer-brand{display:flex;gap:12px;align-items:center}.micro-project-page .footer-logo{color:#f3f4f6;font-size:21px;font-weight:800}.micro-project-page .footer-name{color:#f3f4f6;font-weight:800}.micro-project-page .footer-name span{color:var(--orange)}.micro-project-page .footer-tagline,.micro-project-page .footer-copy{color:var(--muted);font-size:12px}.micro-project-page .footer-tagline{margin:4px 0 0}
+@media(max-width:1000px){.micro-project-page .levels{grid-template-columns:repeat(2,minmax(0,1fr))}.micro-project-page .roadmap{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:700px){.micro-project-page .container,.micro-project-page .footer-content,.micro-project-page .nav-inner{width:calc(100% - 30px)}.micro-project-page .nav-links{display:none}.micro-project-page .hero{padding:65px 0 55px}.micro-project-page h1{font-size:42px}.micro-project-page .section{padding:48px 0}.micro-project-page .levels,.micro-project-page .project-list,.micro-project-page .requirements,.micro-project-page .roadmap{grid-template-columns:1fr}.micro-project-page .project-card{padding:21px}.micro-project-page .footer-content{flex-direction:column;align-items:flex-start;gap:20px}}
+</style>
+</head>
+<body>
+<div class="micro-project-page">
+
+<header class="site-nav">
+<div class="nav-inner">
+<a class="logo" href="index.html">&lt;/&gt; Rasika<span>CodeLab</span></a>
+<nav class="nav-links">
+<a href="index.html">Home</a>
+<a href="foundations/program.html">Foundations</a>
+<a href="practicals/index.html">Practicals</a>
+<a class="active" href="c++_microproject.html">Micro Projects</a>
+<a href="index.html#about">About</a>
+</nav>
+</div>
+</header>
+
+<section class="hero">
+<div class="container">
+<span class="badge">C++ Micro Project Library</span>
+<h1>Build C++. Solve Real Problems.</h1>
+<p class="hero-desc">A structured collection of 47 C++ micro projects designed to move learners from programming concepts to practical systems, persistent data and 2030-oriented technology extensions.</p>
+<div class="meta">
+<span>47 Projects</span><span>Beginner → Advanced</span><span>C++ Focused</span><span>2030 Extensions</span>
+</div>
+</div>
+</section>
+
+<main>
+
+<section class="section">
+<div class="container">
+<h2>Why Micro Projects?</h2>
+<p class="section-intro">A project should not be just a menu-driven program. Each project starts with a real-world problem and gradually combines C++ concepts into a small application.</p>
+<div class="card">
+<strong>Project philosophy:</strong> understand the problem → model the data → design classes → select suitable STL structures → validate input → persist information → process data → generate useful results → identify a future technology extension.
+</div>
+<div class="roadmap">
+<div>Problem</div><div class="arrow">→</div><div>Design</div><div class="arrow">→</div><div>Implementation</div>
+</div>
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+<h2>Project Levels</h2>
+<div class="levels">
+<div class="level"><span>LEVEL 01</span><h3>Foundation</h3><p>Classes, objects, constructors, functions, files and basic STL.</p></div>
+<div class="level"><span>LEVEL 02</span><h3>Intermediate</h3><p>Inheritance, polymorphism, exceptions, searching and sorting.</p></div>
+<div class="level"><span>LEVEL 03</span><h3>Advanced</h3><p>Multiple classes, relationships, persistent data and analytics.</p></div>
+<div class="level"><span>LEVEL 04</span><h3>2030 Extension</h3><p>AI, IoT, cybersecurity, automation, analytics and intelligent systems.</p></div>
+</div>
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+<h2>Recommended Project Structure</h2>
+<p class="section-intro">Use the following specification for every micro project.</p>
+<div class="requirements">
+<div class="card"><ul>
+<li>Problem Statement</li><li>Project Objective</li><li>Real-World Scenario</li><li>Target Users</li><li>Functional Requirements</li><li>Classes and Entities</li>
+</ul></div>
+<div class="card"><ul>
+<li>STL Containers</li><li>File Handling</li><li>Exception Handling</li><li>Search and Sorting</li><li>Input Validation</li><li>2030 Extension</li>
+</ul></div>
+</div>
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+<h2>47 C++ Micro Projects</h2>
+<p class="section-intro">Each project includes a practical problem statement, suggested C++ concepts and a future-facing extension.</p>
+<div class="project-list">
+<article class="project-card">
+<div class="project-number">01</div>
+<div class="project-info">
+<h3>Student Information Management System</h3>
+<p>Build a student information system that stores student profiles, academic marks, attendance and performance reports. The system should support adding, searching, updating and displaying student records.</p>
+<div class="tags"><span class="tag">Classes</span><span class="tag">Objects</span><span class="tag">Constructors</span><span class="tag">STL</span><span class="tag">File Handling</span></div>
+<div class="extension"><b>2030 Extension:</b> Digital student profile, academic analytics and predictive performance support.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">02</div>
+<div class="project-info">
+<h3>Library Management System</h3>
+<p>Develop a library system to manage books, members, issue/return transactions, due dates, availability and overdue records.</p>
+<div class="tags"><span class="tag">Classes</span><span class="tag">Inheritance</span><span class="tag">STL</span><span class="tag">Files</span><span class="tag">Exceptions</span></div>
+<div class="extension"><b>2030 Extension:</b> QR/RFID-enabled library, recommendations and automated overdue alerts.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">03</div>
+<div class="project-info">
+<h3>Bank Account Management System</h3>
+<p>Create a banking simulation that supports account creation, deposits, withdrawals, transfers, balance enquiry and transaction history with validation.</p>
+<div class="tags"><span class="tag">Encapsulation</span><span class="tag">Inheritance</span><span class="tag">Exceptions</span><span class="tag">Files</span><span class="tag">Polymorphism</span></div>
+<div class="extension"><b>2030 Extension:</b> Digital identity, transaction monitoring and fraud-detection extension.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">04</div>
+<div class="project-info">
+<h3>Employee Payroll System</h3>
+<p>Develop a payroll system that calculates salary, allowances, deductions, bonuses and net salary for different employee categories.</p>
+<div class="tags"><span class="tag">Inheritance</span><span class="tag">Polymorphism</span><span class="tag">Classes</span><span class="tag">Files</span></div>
+<div class="extension"><b>2030 Extension:</b> Automated payroll analytics and compliance reporting.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">05</div>
+<div class="project-info">
+<h3>Hotel Room Booking System</h3>
+<p>Design a hotel system to manage rooms, customers, reservations, cancellations, availability and billing.</p>
+<div class="tags"><span class="tag">Classes</span><span class="tag">STL</span><span class="tag">Files</span><span class="tag">Exceptions</span></div>
+<div class="extension"><b>2030 Extension:</b> Dynamic pricing, smart rooms and personalized services.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">06</div>
+<div class="project-info">
+<h3>Railway Reservation System</h3>
+<p>Build a reservation system for trains, routes, passengers, seat availability, booking and cancellation.</p>
+<div class="tags"><span class="tag">Inheritance</span><span class="tag">STL</span><span class="tag">Files</span><span class="tag">Polymorphism</span></div>
+<div class="extension"><b>2030 Extension:</b> Live availability, intelligent scheduling and digital ticketing.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">07</div>
+<div class="project-info">
+<h3>Online Examination System</h3>
+<p>Create an examination system that stores questions, conducts tests, evaluates answers and generates result reports.</p>
+<div class="tags"><span class="tag">Classes</span><span class="tag">STL</span><span class="tag">Files</span><span class="tag">Exceptions</span></div>
+<div class="extension"><b>2030 Extension:</b> Adaptive assessment, learning analytics and personalized practice.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">08</div>
+<div class="project-info">
+<h3>College Admission Management System</h3>
+<p>Develop a system to manage applications, eligibility, merit ranking, document status and admission allocation.</p>
+<div class="tags"><span class="tag">Classes</span><span class="tag">STL</span><span class="tag">Sorting</span><span class="tag">Maps</span><span class="tag">Files</span></div>
+<div class="extension"><b>2030 Extension:</b> Automated eligibility analysis and admission analytics.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">09</div>
+<div class="project-info">
+<h3>Vehicle Rental System</h3>
+<p>Build a rental system to manage vehicles, customers, rentals, returns, pricing and vehicle availability.</p>
+<div class="tags"><span class="tag">Inheritance</span><span class="tag">Polymorphism</span><span class="tag">STL</span><span class="tag">Files</span></div>
+<div class="extension"><b>2030 Extension:</b> EV fleet management, telemetry and predictive maintenance.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">10</div>
+<div class="project-info">
+<h3>Inventory Management System</h3>
+<p>Create an inventory system to track products, stock, purchases, sales, suppliers and low-stock conditions.</p>
+<div class="tags"><span class="tag">Classes</span><span class="tag">Map</span><span class="tag">Vector</span><span class="tag">Files</span><span class="tag">Algorithms</span></div>
+<div class="extension"><b>2030 Extension:</b> Demand forecasting and automated stock replenishment.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">11</div>
+<div class="project-info">
+<h3>Hospital Management System</h3>
+<p>Design a system to manage patients, doctors, departments, appointments, treatments and billing records.</p>
+<div class="tags"><span class="tag">Inheritance</span><span class="tag">Polymorphism</span><span class="tag">STL</span><span class="tag">Files</span><span class="tag">Exceptions</span></div>
+<div class="extension"><b>2030 Extension:</b> Connected healthcare, analytics and interoperable records.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">12</div>
+<div class="project-info">
+<h3>Pharmacy Management System</h3>
+<p>Develop a pharmacy system to manage medicines, batches, expiry dates, suppliers, sales and stock alerts.</p>
+<div class="tags"><span class="tag">Classes</span><span class="tag">STL</span><span class="tag">Files</span><span class="tag">Date Handling</span></div>
+<div class="extension"><b>2030 Extension:</b> Expiry prediction and automated inventory management.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">13</div>
+<div class="project-info">
+<h3>Restaurant Billing System</h3>
+<p>Build a billing system that manages menu items, orders, quantities, taxes, discounts and final bills.</p>
+<div class="tags"><span class="tag">Classes</span><span class="tag">STL</span><span class="tag">Files</span></div>
+<div class="extension"><b>2030 Extension:</b> Digital ordering, demand analytics and personalized offers.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">14</div>
+<div class="project-info">
+<h3>Shopping Cart Application</h3>
+<p>Develop a shopping cart that supports products, quantities, pricing, discounts, cart operations and order totals.</p>
+<div class="tags"><span class="tag">Classes</span><span class="tag">Operator Overloading</span><span class="tag">STL</span></div>
+<div class="extension"><b>2030 Extension:</b> Recommendation and personalized shopping.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">15</div>
+<div class="project-info">
+<h3>ATM Simulation System</h3>
+<p>Simulate ATM operations including authentication, balance enquiry, withdrawal, deposit, transfer and transaction history.</p>
+<div class="tags"><span class="tag">Classes</span><span class="tag">Inheritance</span><span class="tag">Exceptions</span><span class="tag">Files</span></div>
+<div class="extension"><b>2030 Extension:</b> Biometric authentication and fraud monitoring.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">16</div>
+<div class="project-info">
+<h3>Electricity Bill Generation System</h3>
+<p>Develop a billing system that calculates electricity charges using consumption slabs, customer categories and applicable charges.</p>
+<div class="tags"><span class="tag">Functions</span><span class="tag">Classes</span><span class="tag">Files</span><span class="tag">Exceptions</span></div>
+<div class="extension"><b>2030 Extension:</b> Smart-meter integration and consumption prediction.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">17</div>
+<div class="project-info">
+<h3>Mobile Recharge Management System</h3>
+<p>Build a system to manage customers, mobile numbers, recharge plans, transactions and recharge history.</p>
+<div class="tags"><span class="tag">Classes</span><span class="tag">STL</span><span class="tag">Files</span></div>
+<div class="extension"><b>2030 Extension:</b> Personalized plans and automated recommendations.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">18</div>
+<div class="project-info">
+<h3>Movie Ticket Booking System</h3>
+<p>Create a system to manage movies, theatres, shows, seats, bookings, cancellations and ticket pricing.</p>
+<div class="tags"><span class="tag">Classes</span><span class="tag">Inheritance</span><span class="tag">STL</span><span class="tag">Files</span></div>
+<div class="extension"><b>2030 Extension:</b> Dynamic pricing and personalized recommendations.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">19</div>
+<div class="project-info">
+<h3>Bus Reservation System</h3>
+<p>Develop a system to manage routes, buses, seats, passengers, bookings, cancellations and fares.</p>
+<div class="tags"><span class="tag">Classes</span><span class="tag">STL</span><span class="tag">Files</span></div>
+<div class="extension"><b>2030 Extension:</b> GPS integration, live tracking and route optimization.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">20</div>
+<div class="project-info">
+<h3>Attendance Management System</h3>
+<p>Build an attendance system to record student attendance, calculate percentages, identify defaulters and generate reports.</p>
+<div class="tags"><span class="tag">Classes</span><span class="tag">Files</span><span class="tag">STL</span><span class="tag">Date Handling</span></div>
+<div class="extension"><b>2030 Extension:</b> Biometric/face integration and predictive attendance.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">21</div>
+<div class="project-info">
+<h3>Sports Club Management System</h3>
+<p>Develop a system to manage athletes, teams, coaches, events, participation and performance records.</p>
+<div class="tags"><span class="tag">Inheritance</span><span class="tag">Polymorphism</span><span class="tag">STL</span><span class="tag">Files</span></div>
+<div class="extension"><b>2030 Extension:</b> Wearable integration and performance analytics.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">22</div>
+<div class="project-info">
+<h3>Customer Feedback Management System</h3>
+<p>Create a system to collect, categorize, search and analyse customer feedback and complaints.</p>
+<div class="tags"><span class="tag">Classes</span><span class="tag">Strings</span><span class="tag">STL</span><span class="tag">Files</span></div>
+<div class="extension"><b>2030 Extension:</b> Automated categorization and sentiment-analysis extension.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">23</div>
+<div class="project-info">
+<h3>Event Management System</h3>
+<p>Develop a system to manage events, venues, participants, schedules, registrations and expenses.</p>
+<div class="tags"><span class="tag">Classes</span><span class="tag">STL</span><span class="tag">Files</span></div>
+<div class="extension"><b>2030 Extension:</b> QR check-in and intelligent event scheduling.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">24</div>
+<div class="project-info">
+<h3>Gym Membership Management System</h3>
+<p>Build a system to manage members, plans, payments, attendance, trainers and membership expiry.</p>
+<div class="tags"><span class="tag">Classes</span><span class="tag">Inheritance</span><span class="tag">Files</span><span class="tag">Exceptions</span></div>
+<div class="extension"><b>2030 Extension:</b> Wearable integration and personalized fitness insights.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">25</div>
+<div class="project-info">
+<h3>Courier Tracking System</h3>
+<p>Develop a system to manage parcels, customers, tracking IDs, shipment stages and delivery status.</p>
+<div class="tags"><span class="tag">Classes</span><span class="tag">STL</span><span class="tag">Maps</span><span class="tag">Files</span></div>
+<div class="extension"><b>2030 Extension:</b> GPS tracking and route optimization.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">26</div>
+<div class="project-info">
+<h3>Insurance Policy Management System</h3>
+<p>Create a system to manage customers, policies, premiums, claims, policy status and renewals.</p>
+<div class="tags"><span class="tag">Classes</span><span class="tag">Inheritance</span><span class="tag">Polymorphism</span><span class="tag">Files</span></div>
+<div class="extension"><b>2030 Extension:</b> Risk analytics and automated claim processing.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">27</div>
+<div class="project-info">
+<h3>E-Learning Management System</h3>
+<p>Develop a system to manage students, courses, lessons, assignments, assessments and learning progress.</p>
+<div class="tags"><span class="tag">Classes</span><span class="tag">Inheritance</span><span class="tag">STL</span><span class="tag">Files</span></div>
+<div class="extension"><b>2030 Extension:</b> Adaptive learning and AI tutoring extension.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">28</div>
+<div class="project-info">
+<h3>Hostel Management System</h3>
+<p>Build a system to manage students, rooms, allocation, fees, complaints and room availability.</p>
+<div class="tags"><span class="tag">Classes</span><span class="tag">Inheritance</span><span class="tag">Files</span><span class="tag">STL</span></div>
+<div class="extension"><b>2030 Extension:</b> Smart hostel monitoring and resource optimization.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">29</div>
+<div class="project-info">
+<h3>Online Food Ordering System</h3>
+<p>Develop a food-ordering system for restaurants, menus, customers, carts, orders, billing and order status.</p>
+<div class="tags"><span class="tag">Classes</span><span class="tag">STL</span><span class="tag">Files</span><span class="tag">Polymorphism</span></div>
+<div class="extension"><b>2030 Extension:</b> Recommendations and delivery optimization.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">30</div>
+<div class="project-info">
+<h3>Blood Bank Management System</h3>
+<p>Create a system to manage donors, blood groups, inventory, requests and compatible blood availability.</p>
+<div class="tags"><span class="tag">Classes</span><span class="tag">Inheritance</span><span class="tag">STL</span><span class="tag">Files</span></div>
+<div class="extension"><b>2030 Extension:</b> Real-time inventory and emergency matching.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">31</div>
+<div class="project-info">
+<h3>Pet Care Management System</h3>
+<p>Develop a system to manage pets, owners, vaccinations, appointments, treatments and medical history.</p>
+<div class="tags"><span class="tag">Classes</span><span class="tag">Inheritance</span><span class="tag">Files</span><span class="tag">STL</span></div>
+<div class="extension"><b>2030 Extension:</b> Smart reminders and connected pet-device integration.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">32</div>
+<div class="project-info">
+<h3>Book Store Management System</h3>
+<p>Build a system to manage books, authors, categories, stock, customers, sales and billing.</p>
+<div class="tags"><span class="tag">Classes</span><span class="tag">STL</span><span class="tag">Maps</span><span class="tag">Files</span></div>
+<div class="extension"><b>2030 Extension:</b> Recommendation and demand forecasting.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">33</div>
+<div class="project-info">
+<h3>Product Warranty Management System</h3>
+<p>Develop a system to register products, customers, warranty periods, claims and service status.</p>
+<div class="tags"><span class="tag">Classes</span><span class="tag">Date Handling</span><span class="tag">Inheritance</span><span class="tag">Files</span></div>
+<div class="extension"><b>2030 Extension:</b> Automated warranty verification.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">34</div>
+<div class="project-info">
+<h3>Vehicle Service Center Management System</h3>
+<p>Create a system to manage vehicles, customers, service jobs, parts, technicians, billing and service history.</p>
+<div class="tags"><span class="tag">Classes</span><span class="tag">Inheritance</span><span class="tag">STL</span><span class="tag">Files</span></div>
+<div class="extension"><b>2030 Extension:</b> Predictive maintenance and connected vehicle diagnostics.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">35</div>
+<div class="project-info">
+<h3>Digital Wallet System</h3>
+<p>Build a simulated wallet system supporting registration, balance, deposits, transfers, payments and transaction history.</p>
+<div class="tags"><span class="tag">Encapsulation</span><span class="tag">Exceptions</span><span class="tag">Files</span><span class="tag">Polymorphism</span></div>
+<div class="extension"><b>2030 Extension:</b> Secure digital identity and transaction-risk analysis.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">36</div>
+<div class="project-info">
+<h3>Banking Loan Processing System</h3>
+<p>Develop a system to capture applicant information, calculate eligibility, evaluate loan parameters and track repayment.</p>
+<div class="tags"><span class="tag">Classes</span><span class="tag">Inheritance</span><span class="tag">Polymorphism</span><span class="tag">Files</span></div>
+<div class="extension"><b>2030 Extension:</b> Risk scoring and automated decision-support extension.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">37</div>
+<div class="project-info">
+<h3>Patient Appointment Scheduling System</h3>
+<p>Create a scheduling system that manages patients, doctors, time slots, appointments, cancellations and availability.</p>
+<div class="tags"><span class="tag">Classes</span><span class="tag">STL</span><span class="tag">Maps</span><span class="tag">Files</span></div>
+<div class="extension"><b>2030 Extension:</b> Smart scheduling and healthcare integration.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">38</div>
+<div class="project-info">
+<h3>Parking Lot Management System</h3>
+<p>Develop a system to manage parking slots, vehicle entry/exit, vehicle types, duration and parking charges.</p>
+<div class="tags"><span class="tag">Classes</span><span class="tag">Inheritance</span><span class="tag">STL</span><span class="tag">Files</span></div>
+<div class="extension"><b>2030 Extension:</b> Smart parking and sensor integration.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">39</div>
+<div class="project-info">
+<h3>Airline Reservation System</h3>
+<p>Build a reservation system for flights, passengers, seats, schedules, cancellations and ticket pricing.</p>
+<div class="tags"><span class="tag">Classes</span><span class="tag">Inheritance</span><span class="tag">Polymorphism</span><span class="tag">STL</span></div>
+<div class="extension"><b>2030 Extension:</b> Dynamic pricing and intelligent scheduling.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">40</div>
+<div class="project-info">
+<h3>Smart Classroom Management System</h3>
+<p>Develop a system to manage classrooms, students, attendance, timetable, resources and classroom activities.</p>
+<div class="tags"><span class="tag">Classes</span><span class="tag">Files</span><span class="tag">STL</span><span class="tag">Inheritance</span></div>
+<div class="extension"><b>2030 Extension:</b> IoT classroom monitoring and learning analytics.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">41</div>
+<div class="project-info">
+<h3>Online Quiz Application</h3>
+<p>Create a quiz system that stores questions, conducts timed quizzes, evaluates responses and generates performance reports.</p>
+<div class="tags"><span class="tag">Classes</span><span class="tag">STL</span><span class="tag">Files</span><span class="tag">Timers</span></div>
+<div class="extension"><b>2030 Extension:</b> Adaptive quizzes and intelligent question selection.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">42</div>
+<div class="project-info">
+<h3>Course Registration System</h3>
+<p>Develop a system that lets students browse courses, check prerequisites, register, drop courses and view schedules.</p>
+<div class="tags"><span class="tag">Classes</span><span class="tag">Inheritance</span><span class="tag">STL</span><span class="tag">Maps</span><span class="tag">Files</span></div>
+<div class="extension"><b>2030 Extension:</b> Intelligent course recommendations.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">43</div>
+<div class="project-info">
+<h3>Water Bill Management System</h3>
+<p>Build a billing system that calculates water charges using consumption, customer category and billing slabs.</p>
+<div class="tags"><span class="tag">Classes</span><span class="tag">Functions</span><span class="tag">Files</span></div>
+<div class="extension"><b>2030 Extension:</b> Smart-meter integration and consumption analytics.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">44</div>
+<div class="project-info">
+<h3>Complaint Management System</h3>
+<p>Develop a system to register complaints, assign departments, track status, record resolutions and generate reports.</p>
+<div class="tags"><span class="tag">Classes</span><span class="tag">Inheritance</span><span class="tag">STL</span><span class="tag">Files</span></div>
+<div class="extension"><b>2030 Extension:</b> Automated classification and priority prediction.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">45</div>
+<div class="project-info">
+<h3>Alumni Information System</h3>
+<p>Create a system to maintain alumni profiles, graduation details, employment information, achievements and communication records.</p>
+<div class="tags"><span class="tag">Classes</span><span class="tag">Inheritance</span><span class="tag">STL</span><span class="tag">Files</span></div>
+<div class="extension"><b>2030 Extension:</b> Alumni networking and career analytics.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">46</div>
+<div class="project-info">
+<h3>Travel Agency Management System</h3>
+<p>Develop a system to manage customers, destinations, packages, bookings, payments and travel schedules.</p>
+<div class="tags"><span class="tag">Classes</span><span class="tag">STL</span><span class="tag">Files</span><span class="tag">Inheritance</span></div>
+<div class="extension"><b>2030 Extension:</b> Personalized travel planning.</div>
+</div>
+</article>
+<article class="project-card">
+<div class="project-number">47</div>
+<div class="project-info">
+<h3>Music Playlist Manager</h3>
+<p>Build a playlist manager supporting song management, playlists, search, sorting, play order and favourites.</p>
+<div class="tags"><span class="tag">STL</span><span class="tag">Vector</span><span class="tag">List</span><span class="tag">Map</span><span class="tag">Algorithms</span></div>
+<div class="extension"><b>2030 Extension:</b> Recommendation systems and intelligent playlists.</div>
+</div>
+</article>
+
+</div>
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+<h2>From C++ Concepts to Application Thinking</h2>
+<div class="card">
+<ul>
+<li><b>Classes & Objects</b> model real-world entities.</li>
+<li><b>Inheritance & Polymorphism</b> model categories and specialized behavior.</li>
+<li><b>STL</b> manages collections efficiently.</li>
+<li><b>Algorithms</b> search, sort and process data.</li>
+<li><b>File Handling</b> makes application data persistent.</li>
+<li><b>Exception Handling</b> makes programs safer and more robust.</li>
+<li><b>Projects</b> combine these concepts into a complete problem-solving workflow.</li>
+</ul>
+</div>
+</div>
+</section>
+
+</main>
+
+<footer class="footer">
+<div class="footer-content">
+<div class="footer-brand">
+<div class="footer-logo">&lt;/&gt;</div>
+<div>
+<div class="footer-name">Rasika <span>CodeLab</span></div>
+<p class="footer-tagline">Code • Understand • Visualize</p>
+</div>
+</div>
+<div class="footer-copy">© 2026 Rasika CodeLab. Built for practical learning.</div>
+</div>
+</footer>
+
+</div>
+</body>
+</html>

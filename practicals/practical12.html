@@ -1,0 +1,2633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Practical 12 | Inheritance | Rasika CodeLab</title>
+<link rel="stylesheet" href="../css/style.css">
+
+<style>
+/* =====================================================
+   PRACTICAL 12 — INHERITANCE
+   All selectors are scoped to .practical12-page
+===================================================== */
+
+.practical12-page .container{max-width:1120px;}
+.practical12-page .practical-hero{padding:78px 0 58px;}
+.practical12-page .practical-hero h1{font-size:clamp(2.4rem,5vw,4.4rem);line-height:1.05;max-width:850px;margin:12px 0 18px;letter-spacing:-.04em;}
+.practical12-page .practical-subtitle{max-width:780px;font-size:16px;line-height:1.75;}
+.practical12-page .practical-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px;}
+.practical12-page .practical-meta span{padding:8px 13px;border:1px solid var(--border);border-radius:999px;background:rgba(255,255,255,.035);font-size:12px;color:var(--text-secondary);}
+
+.practical12-page .content-section{padding:42px 0;}
+.practical12-page .content-section h2{margin:7px 0 22px;}
+.practical12-page .content-card{box-shadow:0 16px 45px rgba(0,0,0,.12);}
+.practical12-page .content-card + .content-card{margin-top:16px;}
+
+.practical12-page .inheritance-types{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:16px;
+    margin-top:22px;
+}
+.practical12-page .inheritance-type-card{
+    padding:24px;
+    background:var(--bg-card);
+    border:1px solid var(--border);
+    border-radius:18px;
+    transition:.25s ease;
+}
+.practical12-page .inheritance-type-card:hover{
+    transform:translateY(-4px);
+    border-color:var(--accent);
+}
+.practical12-page .type-number{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:36px;height:36px;
+    border-radius:10px;
+    background:rgba(255,255,255,.045);
+    border:1px solid var(--border);
+    color:var(--accent);
+    font-size:12px;font-weight:800;
+}
+.practical12-page .inheritance-type-card h3{margin:14px 0 7px;}
+.practical12-page .inheritance-type-card p{color:var(--text-secondary);line-height:1.65;margin-bottom:14px;}
+.practical12-page .type-diagram{
+    padding:15px;
+    text-align:center;
+    border:1px solid var(--border);
+    border-radius:13px;
+    background:rgba(255,255,255,.018);
+    color:var(--text-secondary);
+    font-weight:650;
+    line-height:1.7;
+}
+
+.practical12-page .syntax-block{
+    margin-top:20px;
+    padding:24px;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:18px;
+    background:linear-gradient(145deg,rgba(150,92,255,.055),rgba(255,255,255,.015));
+}
+.practical12-page .syntax-heading{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.practical12-page .syntax-heading .section-label{margin:0;}
+.practical12-page .syntax-heading h3{margin:0;}
+
+.practical12-page .visual-card{
+    margin-top:22px;
+    padding:28px;
+    border:1px solid var(--border);
+    border-radius:20px;
+    background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(255,255,255,.012));
+}
+.practical12-page .inheritance-flow{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    overflow-x:auto;
+    padding:8px;
+    margin-top:22px;
+}
+.practical12-page .flow-node{
+    flex:0 0 165px;
+    min-height:88px;
+    padding:18px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    background:var(--bg-card);
+    border:1px solid var(--border);
+    border-radius:15px;
+}
+.practical12-page .flow-node strong{margin-bottom:6px;}
+.practical12-page .flow-node small{color:var(--text-secondary);line-height:1.45;}
+.practical12-page .flow-arrow{color:var(--accent);font-size:22px;font-weight:800;}
+
+.practical12-page .access-grid{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:14px;
+    margin-top:20px;
+}
+.practical12-page .access-card{
+    padding:20px;
+    border:1px solid var(--border);
+    border-radius:16px;
+    background:var(--bg-card);
+}
+.practical12-page .access-card h4{margin-bottom:8px;}
+.practical12-page .access-card p{margin:0;color:var(--text-secondary);line-height:1.6;font-size:14px;}
+
+.practical12-page .main-type-tabs{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:26px;
+}
+.practical12-page .main-type-tab{
+    flex:1 1 0;
+    min-width:170px;
+    min-height:58px;
+    padding:12px 16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:9px;
+    background:var(--bg-card);
+    border:1px solid var(--border);
+    border-radius:14px;
+    color:var(--text-secondary);
+    font:inherit;
+    font-weight:700;
+    cursor:pointer;
+    transition:.22s ease;
+}
+.practical12-page .main-type-tab span{
+    color:var(--accent);
+    font-size:12px;
+}
+.practical12-page .main-type-tab:hover{
+    border-color:var(--accent);
+    color:var(--text-primary);
+    transform:translateY(-2px);
+}
+.practical12-page .main-type-tab.active{
+    background:var(--accent);
+    border-color:var(--accent);
+    color:#fff;
+    box-shadow:0 10px 28px rgba(0,0,0,.22);
+}
+.practical12-page .main-type-tab.active span{color:#fff;}
+
+.practical12-page .type-panel{display:none;margin-top:28px;}
+.practical12-page .type-panel.active{display:block;animation:practicalFadeIn .35s ease;}
+
+.practical12-page .mini-problem-selector{
+    padding:0 0 14px;
+    border-bottom:1px solid var(--border);
+}
+.practical12-page .mini-problem-tabs{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+.practical12-page .mini-problem-tab{
+    flex:1 1 0;
+    min-width:190px;
+    min-height:54px;
+    padding:11px 14px;
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    gap:10px;
+    background:rgba(255,255,255,.018);
+    border:1px solid var(--border);
+    border-radius:13px;
+    color:var(--text-secondary);
+    font:inherit;
+    font-size:13px;
+    font-weight:650;
+    line-height:1.3;
+    text-align:left;
+    cursor:pointer;
+    transition:.22s ease;
+}
+.practical12-page .mini-problem-tab > span{
+    flex:0 0 32px;
+    width:32px;height:32px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:9px;
+    border:1px solid var(--border);
+    background:rgba(255,255,255,.04);
+    color:var(--accent);
+    font-size:11px;
+    font-weight:800;
+}
+.practical12-page .mini-problem-tab:hover{
+    border-color:var(--accent);
+    color:var(--text-primary);
+    transform:translateY(-2px);
+}
+.practical12-page .mini-problem-tab.active{
+    background:var(--accent);
+    border-color:var(--accent);
+    color:#fff;
+}
+.practical12-page .mini-problem-tab.active > span{
+    background:rgba(0,0,0,.13);
+    border-color:rgba(255,255,255,.22);
+    color:#fff;
+}
+
+.practical12-page .mini-problem{display:none;margin-top:32px;}
+.practical12-page .mini-problem.active{display:block;animation:practicalFadeIn .35s ease;}
+.practical12-page .problem-heading{padding:8px 0 20px;border-bottom:1px solid var(--border);margin-bottom:22px;}
+.practical12-page .problem-heading h2{margin:8px 0 0;font-size:clamp(1.7rem,3vw,2.35rem);}
+.practical12-page .problem-box{
+    padding:24px;
+    margin-bottom:16px;
+    background:rgba(255,255,255,.018);
+    border:1px solid var(--border);
+    border-radius:18px;
+}
+.practical12-page .problem-box h3{margin-bottom:12px;}
+.practical12-page .algorithm-list{padding-left:22px;}
+.practical12-page .algorithm-list li{margin-bottom:8px;line-height:1.6;}
+.practical12-page .code-window{overflow-x:auto;border-radius:14px;}
+.practical12-page .output-box{border-radius:14px;}
+.practical12-page .key-points li{margin-bottom:8px;}
+
+.practical12-page .error-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:12px;
+}
+.practical12-page .error-card{
+    padding:18px;
+    border:1px solid var(--border);
+    border-radius:14px;
+    background:var(--bg-card);
+}
+.practical12-page .error-card h4{margin-bottom:7px;}
+.practical12-page .error-card p{margin:0;color:var(--text-secondary);line-height:1.55;font-size:14px;}
+
+.practical12-page .viva-list{display:grid;gap:12px;max-width:920px;margin-top:25px;}
+.practical12-page .viva-item{overflow:hidden;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);}
+.practical12-page .viva-question{
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    padding:20px 22px;
+    background:transparent;
+    border:none;
+    color:var(--text-primary);
+    font:inherit;
+    font-size:16px;
+    font-weight:600;
+    text-align:left;
+    cursor:pointer;
+}
+.practical12-page .viva-question:hover{background:rgba(255,255,255,.03);}
+.practical12-page .viva-icon{
+    flex:0 0 auto;
+    width:32px;height:32px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid var(--border);
+    border-radius:50%;
+    color:var(--accent);
+    font-size:22px;
+    transition:.25s ease;
+}
+.practical12-page .viva-answer{display:none;padding:0 22px 22px;color:var(--text-secondary);line-height:1.7;}
+.practical12-page .viva-item.active .viva-answer{display:block;}
+.practical12-page .viva-item.active .viva-icon{transform:rotate(45deg);}
+
+@media(max-width:900px){
+    .practical12-page .main-type-tabs{display:grid;grid-template-columns:repeat(2,1fr);}
+    .practical12-page .main-type-tab{min-width:0;}
+    .practical12-page .inheritance-flow{justify-content:flex-start;}
+    .practical12-page .access-grid{grid-template-columns:1fr;}
+}
+@media(max-width:650px){
+    .practical12-page .practical-hero{padding:55px 0 40px;}
+    .practical12-page .content-section{padding:30px 0;}
+    .practical12-page .inheritance-types,
+    .practical12-page .error-grid,
+    .practical12-page .main-type-tabs{grid-template-columns:1fr;}
+    .practical12-page .main-type-tabs{display:grid;}
+    .practical12-page .main-type-tab{min-height:54px;}
+    .practical12-page .mini-problem-tabs{display:grid;grid-template-columns:1fr;}
+    .practical12-page .mini-problem-tab{min-width:0;}
+    .practical12-page .problem-box,
+    .practical12-page .visual-card{padding:20px;}
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+    <div class="container nav-container">
+        <a href="../index.html" class="logo">
+            <span class="logo-symbol">&lt;/&gt;</span>
+            <span>Rasika<span class="logo-accent">CodeLab</span></span>
+        </a>
+
+        <button class="menu-btn" aria-label="Open menu">☰</button>
+
+        <div class="nav-links">
+            <a href="../index.html">Home</a>
+            <a href="../foundations/program.html">Foundations</a>
+            <a href="index.html" class="active">Practicals</a>
+            <a href="../index.html#about">About</a>
+        </div>
+    </div>
+</nav>
+
+<main class="practical-page practical12-page">
+
+<section class="practical-hero">
+    <div class="container">
+        <span class="section-label">PRACTICAL 12</span>
+        <h1>Inheritance in <span class="gradient-text">C++</span></h1>
+        <p class="practical-subtitle">
+            Understand how inheritance allows a class to reuse the properties
+            and functions of another class. Explore single, multilevel, multiple
+            and hierarchical inheritance through practical programs.
+        </p>
+
+        <div class="practical-meta">
+            <span>LLO 12.1</span>
+            <span>Object-Oriented Programming</span>
+            <span>Classes &amp; Objects</span>
+            <span>Inheritance</span>
+            <span>C++ Programming</span>
+        </div>
+    </div>
+</section>
+
+
+<section class="content-section">
+<div class="container">
+    <span class="section-label">AIM</span>
+    <h2>Aim of the Practical</h2>
+
+    <div class="content-card">
+        <p>
+            To implement C++ programs demonstrating different types of
+            <strong>inheritance</strong> and understand how derived classes
+            reuse and extend the features of base classes.
+        </p>
+    </div>
+</div>
+</section>
+
+
+<section class="content-section">
+<div class="container">
+    <span class="section-label">LEARNING OBJECTIVES</span>
+    <h2>What You Will Learn</h2>
+
+    <div class="objective-grid">
+
+        <div class="objective-card">
+            <strong>01</strong>
+            <h3>Understand Inheritance</h3>
+            <p>Understand why inheritance is used in object-oriented programming.</p>
+        </div>
+
+        <div class="objective-card">
+            <strong>02</strong>
+            <h3>Identify Base &amp; Derived Classes</h3>
+            <p>Differentiate between the class that provides features and the class that inherits them.</p>
+        </div>
+
+        <div class="objective-card">
+            <strong>03</strong>
+            <h3>Implement Types</h3>
+            <p>Implement single, multilevel, multiple and hierarchical inheritance.</p>
+        </div>
+
+        <div class="objective-card">
+            <strong>04</strong>
+            <h3>Apply Reusability</h3>
+            <p>Use inherited members to reduce repetition and extend existing classes.</p>
+        </div>
+
+    </div>
+</div>
+</section>
+
+
+<section class="content-section">
+<div class="container">
+    <span class="section-label">CONCEPT</span>
+    <h2>Understanding Inheritance</h2>
+
+    <div class="content-card">
+        <h3>What is Inheritance?</h3>
+        <p>
+            <strong>Inheritance</strong> is an object-oriented programming
+            mechanism in which a new class, called the <strong>derived class</strong>,
+            acquires accessible properties and member functions of an existing
+            class, called the <strong>base class</strong>.
+        </p>
+        <p>
+            It promotes <strong>code reusability</strong> and allows a derived
+            class to add its own features to the inherited functionality.
+        </p>
+    </div>
+
+    <div class="content-card">
+        <h3>Real-Life Example</h3>
+        <p>
+            Consider an organization. An employee has common information such
+            as employee ID and name. A manager may use that common information
+            and also have additional manager-specific information.
+        </p>
+        <p>
+            Inheritance models this relationship by allowing the derived class
+            to reuse common features from the base class.
+        </p>
+    </div>
+
+    <div class="content-card">
+        <h3>Where &amp; How Is It Used?</h3>
+        <ul class="key-points">
+            <li><strong>Employee Systems:</strong> Reuse common employee information in Manager, Developer and other classes.</li>
+            <li><strong>Education Systems:</strong> Extend Student information into Marks and Result classes.</li>
+            <li><strong>Vehicle Systems:</strong> Extend common Vehicle features into Car, Bike or ElectricCar classes.</li>
+            <li><strong>Banking Systems:</strong> Share common Account features among different account types.</li>
+            <li><strong>Software Design:</strong> Build specialized classes from general-purpose classes.</li>
+        </ul>
+    </div>
+
+
+    <div class="content-card">
+        <h3>Base Class and Derived Class</h3>
+
+        <div class="inheritance-flow">
+            <div class="flow-node">
+                <strong>Base Class</strong>
+                <small>Provides common features</small>
+            </div>
+
+            <div class="flow-arrow">→</div>
+
+            <div class="flow-node">
+                <strong>Inheritance</strong>
+                <small>Reuses accessible members</small>
+            </div>
+
+            <div class="flow-arrow">→</div>
+
+            <div class="flow-node">
+                <strong>Derived Class</strong>
+                <small>Adds specialized features</small>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="content-card">
+        <h3>Syntax of Inheritance</h3>
+
+        <div class="syntax-block">
+            <div class="syntax-heading">
+                <span class="section-label">SYNTAX</span>
+                <h3>Basic Inheritance Syntax</h3>
+            </div>
+
+            <div class="code-window">
+<pre><code>class BaseClass
+{
+    // base class members
+};
+
+class DerivedClass : access_specifier BaseClass
+{
+    // derived class members
+};</code></pre>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="content-card">
+        <h3>Types of Inheritance</h3>
+
+        <div class="inheritance-types">
+
+            <div class="inheritance-type-card">
+                <span class="type-number">01</span>
+                <h3>Single Inheritance</h3>
+                <p>One derived class inherits from one base class.</p>
+                <div class="type-diagram">Base Class<br>↓<br>Derived Class</div>
+            </div>
+
+            <div class="inheritance-type-card">
+                <span class="type-number">02</span>
+                <h3>Multilevel Inheritance</h3>
+                <p>A derived class becomes the base for another class.</p>
+                <div class="type-diagram">Base<br>↓<br>Derived<br>↓<br>Further Derived</div>
+            </div>
+
+            <div class="inheritance-type-card">
+                <span class="type-number">03</span>
+                <h3>Multiple Inheritance</h3>
+                <p>One derived class inherits from more than one base class.</p>
+                <div class="type-diagram">Base 1 ─┐<br>↓<br>Derived<br>↑<br>Base 2 ─┘</div>
+            </div>
+
+            <div class="inheritance-type-card">
+                <span class="type-number">04</span>
+                <h3>Hierarchical Inheritance</h3>
+                <p>Multiple derived classes inherit from one base class.</p>
+                <div class="type-diagram">Base<br>↙ ↓ ↘<br>Derived 1 • Derived 2 • Derived 3</div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="content-card">
+        <h3>Access Specifiers in Inheritance</h3>
+
+        <div class="access-grid">
+
+            <div class="access-card">
+                <h4>public</h4>
+                <p>
+                    Public members of the base class remain public in the
+                    derived class when public inheritance is used.
+                </p>
+            </div>
+
+            <div class="access-card">
+                <h4>protected</h4>
+                <p>
+                    Protected members can be accessed inside the derived class
+                    but are not directly accessible from outside.
+                </p>
+            </div>
+
+            <div class="access-card">
+                <h4>private</h4>
+                <p>
+                    Private members of a base class cannot be accessed directly
+                    by the derived class.
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="visual-card">
+        <span class="section-label">VISUAL EXPLANATION</span>
+        <h3>How Inheritance Works</h3>
+
+        <div class="inheritance-flow">
+
+            <div class="flow-node">
+                <strong>Existing Class</strong>
+                <small>Base Class</small>
+            </div>
+
+            <div class="flow-arrow">→</div>
+
+            <div class="flow-node">
+                <strong>Inherit</strong>
+                <small>Reuse accessible members</small>
+            </div>
+
+            <div class="flow-arrow">→</div>
+
+            <div class="flow-node">
+                <strong>Extend</strong>
+                <small>Add new members</small>
+            </div>
+
+            <div class="flow-arrow">→</div>
+
+            <div class="flow-node">
+                <strong>Specialized Class</strong>
+                <small>Derived Class</small>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- =================================================
+         MAIN TYPE TABS
+    ================================================= -->
+
+    <div class="main-type-tabs">
+
+        <button type="button" class="main-type-tab active" data-type="single">
+            <span>01</span> Single Inheritance
+        </button>
+
+        <button type="button" class="main-type-tab" data-type="multilevel">
+            <span>02</span> Multilevel Inheritance
+        </button>
+
+        <button type="button" class="main-type-tab" data-type="multiple">
+            <span>03</span> Multiple Inheritance
+        </button>
+
+        <button type="button" class="main-type-tab" data-type="hierarchical">
+            <span>04</span> Hierarchical Inheritance
+        </button>
+
+    </div>
+
+
+    <!-- =================================================
+         TYPE 1 — SINGLE
+    ================================================= -->
+
+    <div class="type-panel active" id="single">
+
+        <div class="problem-box">
+            <span class="section-label">TYPE 01</span>
+            <h2>Single Inheritance</h2>
+            <p>
+                In single inheritance, one derived class inherits from one base class.
+            </p>
+        </div>
+
+        <div class="mini-problem-selector">
+            <div class="mini-problem-tabs">
+
+                <button type="button" class="mini-problem-tab active" data-problem="s1">
+                    <span>01</span> Student &amp; Result
+                </button>
+
+                <button type="button" class="mini-problem-tab" data-problem="s2">
+                    <span>02</span> Employee &amp; Salary
+                </button>
+
+                <button type="button" class="mini-problem-tab" data-problem="s3">
+                    <span>03</span> Vehicle &amp; Car
+                </button>
+
+            </div>
+        </div>
+
+
+        <div class="mini-problem active" id="s1">
+            <div class="problem-heading">
+                <span class="section-label">PROBLEM 01.1</span>
+                <h2>Student and Result</h2>
+            </div>
+
+            <div class="problem-box">
+                <h3>Problem Statement</h3>
+                <p>
+                    Write a C++ program to create a base class <strong>Student</strong>
+                    containing roll number and name. Derive a class <strong>Result</strong>
+                    containing marks. Accept and display the complete student result
+                    using single inheritance.
+                </p>
+            </div>
+
+            <div class="problem-box">
+                <h3>Theory / Concept</h3>
+                <p>
+                    Result is the derived class and Student is the base class.
+                    Result reuses the accessible student details and adds marks.
+                </p>
+            </div>
+
+            <div class="syntax-block">
+                <div class="syntax-heading">
+                    <span class="section-label">SYNTAX</span>
+                    <h3>Single Inheritance</h3>
+                </div>
+                <div class="code-window">
+<pre><code>class Student
+{
+};
+
+class Result : public Student
+{
+};</code></pre>
+                </div>
+            </div>
+
+            <div class="problem-box">
+                <h3>Algorithm</h3>
+                <ol class="algorithm-list">
+                    <li>Define the Student base class.</li>
+                    <li>Declare roll number and name.</li>
+                    <li>Define the Result derived class.</li>
+                    <li>Add marks to the Result class.</li>
+                    <li>Accept student details and marks.</li>
+                    <li>Display all details.</li>
+                    <li>Stop the program.</li>
+                </ol>
+            </div>
+
+            <div class="problem-box">
+                <h3>C++ Program</h3>
+                <div class="code-window">
+<pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+using namespace std;
+
+class Student
+{
+protected:
+    int rollNo;
+    string name;
+
+public:
+    void acceptStudent()
+    {
+        cout &lt;&lt; "Enter Roll No: ";
+        cin &gt;&gt; rollNo;
+
+        cout &lt;&lt; "Enter Name: ";
+        cin &gt;&gt; name;
+    }
+};
+
+class Result : public Student
+{
+    float marks;
+
+public:
+    void acceptResult()
+    {
+        acceptStudent();
+
+        cout &lt;&lt; "Enter Marks: ";
+        cin &gt;&gt; marks;
+    }
+
+    void display()
+    {
+        cout &lt;&lt; "\nRoll No: " &lt;&lt; rollNo &lt;&lt; endl;
+        cout &lt;&lt; "Name: " &lt;&lt; name &lt;&lt; endl;
+        cout &lt;&lt; "Marks: " &lt;&lt; marks &lt;&lt; endl;
+    }
+};
+
+int main()
+{
+    Result r;
+
+    r.acceptResult();
+    r.display();
+
+    return 0;
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="problem-box">
+                <h3>Expected Output</h3>
+                <div class="output-box">
+<pre>Enter Roll No: 101
+Enter Name: Rahul
+Enter Marks: 85.5
+
+Roll No: 101
+Name: Rahul
+Marks: 85.5</pre>
+                </div>
+            </div>
+
+            <div class="visual-card">
+                <span class="section-label">VISUAL EXPLANATION</span>
+                <h3>Student → Result</h3>
+                <div class="inheritance-flow">
+                    <div class="flow-node"><strong>Student</strong><small>rollNo, name</small></div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-node"><strong>Result</strong><small>inherits Student + marks</small></div>
+                </div>
+            </div>
+
+            <div class="problem-box">
+                <h3>Program Explanation</h3>
+                <ul class="key-points">
+                    <li>Student is the base class.</li>
+                    <li>Result is derived from Student using public inheritance.</li>
+                    <li>Result can use the protected members rollNo and name.</li>
+                    <li>Result adds its own marks data member.</li>
+                </ul>
+            </div>
+
+            <div class="problem-box">
+                <h3>Real-Life Connection</h3>
+                <p>
+                    A result record is a specialized form of student information,
+                    so common student details can be reused instead of being declared again.
+                </p>
+            </div>
+
+            <div class="problem-box">
+                <h3>Key Points</h3>
+                <ul class="key-points">
+                    <li>One base class is inherited by one derived class.</li>
+                    <li>Inheritance promotes code reusability.</li>
+                    <li>The derived class can add new members.</li>
+                </ul>
+            </div>
+
+            <div class="problem-box">
+                <h3>Common Errors</h3>
+                <div class="error-grid">
+                    <div class="error-card"><h4>Wrong Syntax</h4><p>Use a colon followed by the inheritance access specifier and base class.</p></div>
+                    <div class="error-card"><h4>Private Access</h4><p>Private base-class members cannot be accessed directly in the derived class.</p></div>
+                    <div class="error-card"><h4>Wrong Class</h4><p>Make sure the intended base and derived class relationship is defined.</p></div>
+                    <div class="error-card"><h4>Missing Object</h4><p>Create an object of the derived class to use inherited functionality.</p></div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="mini-problem" id="s2">
+            <div class="problem-heading">
+                <span class="section-label">PROBLEM 01.2</span>
+                <h2>Employee and Salary</h2>
+            </div>
+
+            <div class="problem-box">
+                <h3>Problem Statement</h3>
+                <p>
+                    Write a C++ program to create a base class <strong>Employee</strong>
+                    containing employee ID and name. Derive a class <strong>Salary</strong>
+                    containing basic salary and calculate the gross salary using single inheritance.
+                </p>
+            </div>
+
+            <div class="problem-box">
+                <h3>Theory / Concept</h3>
+                <p>
+                    Salary is a specialized class that reuses employee information
+                    from Employee and adds salary-related information.
+                </p>
+            </div>
+
+            <div class="syntax-block">
+                <div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Single Inheritance</h3></div>
+                <div class="code-window">
+<pre><code>class Employee
+{
+};
+
+class Salary : public Employee
+{
+};</code></pre>
+                </div>
+            </div>
+
+            <div class="problem-box">
+                <h3>Algorithm</h3>
+                <ol class="algorithm-list">
+                    <li>Create the Employee base class.</li>
+                    <li>Declare employee ID and name.</li>
+                    <li>Create Salary derived class.</li>
+                    <li>Accept basic salary.</li>
+                    <li>Calculate gross salary using basic salary and allowance.</li>
+                    <li>Display employee and salary details.</li>
+                </ol>
+            </div>
+
+            <div class="problem-box">
+                <h3>C++ Program</h3>
+                <div class="code-window">
+<pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+using namespace std;
+
+class Employee
+{
+protected:
+    int empId;
+    string name;
+
+public:
+    void acceptEmployee()
+    {
+        cout &lt;&lt; "Enter Employee ID: ";
+        cin &gt;&gt; empId;
+
+        cout &lt;&lt; "Enter Name: ";
+        cin &gt;&gt; name;
+    }
+};
+
+class Salary : public Employee
+{
+    float basic, allowance;
+
+public:
+    void acceptSalary()
+    {
+        acceptEmployee();
+
+        cout &lt;&lt; "Enter Basic Salary: ";
+        cin &gt;&gt; basic;
+
+        cout &lt;&lt; "Enter Allowance: ";
+        cin &gt;&gt; allowance;
+    }
+
+    void display()
+    {
+        cout &lt;&lt; "\nEmployee ID: " &lt;&lt; empId &lt;&lt; endl;
+        cout &lt;&lt; "Name: " &lt;&lt; name &lt;&lt; endl;
+        cout &lt;&lt; "Gross Salary: " &lt;&lt; basic + allowance &lt;&lt; endl;
+    }
+};
+
+int main()
+{
+    Salary s;
+
+    s.acceptSalary();
+    s.display();
+
+    return 0;
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="problem-box">
+                <h3>Expected Output</h3>
+                <div class="output-box">
+<pre>Enter Employee ID: 101
+Enter Name: Riya
+Enter Basic Salary: 30000
+Enter Allowance: 5000
+
+Employee ID: 101
+Name: Riya
+Gross Salary: 35000</pre>
+                </div>
+            </div>
+
+            <div class="visual-card">
+                <span class="section-label">VISUAL EXPLANATION</span>
+                <h3>Employee → Salary</h3>
+                <div class="inheritance-flow">
+                    <div class="flow-node"><strong>Employee</strong><small>ID, name</small></div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-node"><strong>Salary</strong><small>basic + allowance</small></div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-node"><strong>Gross Salary</strong><small>basic + allowance</small></div>
+                </div>
+            </div>
+
+            <div class="problem-box">
+                <h3>Program Explanation</h3>
+                <ul class="key-points">
+                    <li>Employee stores common employee details.</li>
+                    <li>Salary inherits Employee.</li>
+                    <li>Salary adds basic salary and allowance.</li>
+                    <li>The derived class calculates the gross salary.</li>
+                </ul>
+            </div>
+
+            <div class="problem-box">
+                <h3>Real-Life Connection</h3>
+                <p>
+                    Payroll applications can reuse common employee information
+                    while specialized salary classes handle compensation details.
+                </p>
+            </div>
+
+            <div class="problem-box">
+                <h3>Key Points</h3>
+                <ul class="key-points">
+                    <li>Employee is the base class.</li>
+                    <li>Salary is the derived class.</li>
+                    <li>Common employee details are reused.</li>
+                </ul>
+            </div>
+
+            <div class="problem-box">
+                <h3>Common Errors</h3>
+                <div class="error-grid">
+                    <div class="error-card"><h4>Formula</h4><p>Use the correct formula for gross salary.</p></div>
+                    <div class="error-card"><h4>Inheritance</h4><p>Salary must inherit from Employee.</p></div>
+                    <div class="error-card"><h4>Access</h4><p>Use protected members when direct derived-class access is required.</p></div>
+                    <div class="error-card"><h4>Input</h4><p>Accept numeric salary values correctly.</p></div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="mini-problem" id="s3">
+            <div class="problem-heading">
+                <span class="section-label">PROBLEM 01.3</span>
+                <h2>Vehicle and Car</h2>
+            </div>
+
+            <div class="problem-box">
+                <h3>Problem Statement</h3>
+                <p>
+                    Write a C++ program to create a base class <strong>Vehicle</strong>
+                    containing brand and model. Derive a class <strong>Car</strong>
+                    containing price and fuel type. Accept and display the complete
+                    car information using single inheritance.
+                </p>
+            </div>
+
+            <div class="problem-box">
+                <h3>Theory / Concept</h3>
+                <p>
+                    Car is a specialized Vehicle. The Car class can reuse common
+                    vehicle information and add car-specific information.
+                </p>
+            </div>
+
+            <div class="syntax-block">
+                <div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Single Inheritance</h3></div>
+                <div class="code-window">
+<pre><code>class Vehicle
+{
+};
+
+class Car : public Vehicle
+{
+};</code></pre>
+                </div>
+            </div>
+
+            <div class="problem-box">
+                <h3>Algorithm</h3>
+                <ol class="algorithm-list">
+                    <li>Define Vehicle as the base class.</li>
+                    <li>Declare brand and model.</li>
+                    <li>Define Car as the derived class.</li>
+                    <li>Declare price and fuel type.</li>
+                    <li>Accept all details.</li>
+                    <li>Display the complete car information.</li>
+                </ol>
+            </div>
+
+            <div class="problem-box">
+                <h3>C++ Program</h3>
+                <div class="code-window">
+<pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+using namespace std;
+
+class Vehicle
+{
+protected:
+    string brand;
+    string model;
+
+public:
+    void acceptVehicle()
+    {
+        cout &lt;&lt; "Enter Brand: ";
+        cin &gt;&gt; brand;
+
+        cout &lt;&lt; "Enter Model: ";
+        cin &gt;&gt; model;
+    }
+};
+
+class Car : public Vehicle
+{
+    float price;
+    string fuelType;
+
+public:
+    void acceptCar()
+    {
+        acceptVehicle();
+
+        cout &lt;&lt; "Enter Price: ";
+        cin &gt;&gt; price;
+
+        cout &lt;&lt; "Enter Fuel Type: ";
+        cin &gt;&gt; fuelType;
+    }
+
+    void display()
+    {
+        cout &lt;&lt; "\nBrand: " &lt;&lt; brand &lt;&lt; endl;
+        cout &lt;&lt; "Model: " &lt;&lt; model &lt;&lt; endl;
+        cout &lt;&lt; "Price: " &lt;&lt; price &lt;&lt; endl;
+        cout &lt;&lt; "Fuel Type: " &lt;&lt; fuelType &lt;&lt; endl;
+    }
+};
+
+int main()
+{
+    Car c;
+
+    c.acceptCar();
+    c.display();
+
+    return 0;
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="problem-box">
+                <h3>Expected Output</h3>
+                <div class="output-box">
+<pre>Enter Brand: Tata
+Enter Model: Nexon
+Enter Price: 900000
+Enter Fuel Type: Petrol
+
+Brand: Tata
+Model: Nexon
+Price: 900000
+Fuel Type: Petrol</pre>
+                </div>
+            </div>
+
+            <div class="visual-card">
+                <span class="section-label">VISUAL EXPLANATION</span>
+                <h3>Vehicle → Car</h3>
+                <div class="inheritance-flow">
+                    <div class="flow-node"><strong>Vehicle</strong><small>brand, model</small></div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-node"><strong>Car</strong><small>price, fuel type</small></div>
+                </div>
+            </div>
+
+            <div class="problem-box">
+                <h3>Program Explanation</h3>
+                <ul class="key-points">
+                    <li>Vehicle contains common vehicle properties.</li>
+                    <li>Car inherits Vehicle using public inheritance.</li>
+                    <li>Car adds price and fuel type.</li>
+                    <li>The derived object can use the inherited protected members.</li>
+                </ul>
+            </div>
+
+            <div class="problem-box">
+                <h3>Real-Life Connection</h3>
+                <p>
+                    Vehicle applications can define common features once and
+                    extend them for specific vehicle categories.
+                </p>
+            </div>
+
+            <div class="problem-box">
+                <h3>Key Points</h3>
+                <ul class="key-points">
+                    <li>Single inheritance creates a simple parent-child relationship.</li>
+                    <li>Common properties are placed in the base class.</li>
+                    <li>Specific properties are placed in the derived class.</li>
+                </ul>
+            </div>
+
+            <div class="problem-box">
+                <h3>Common Errors</h3>
+                <div class="error-grid">
+                    <div class="error-card"><h4>Wrong Base</h4><p>Car should inherit from Vehicle.</p></div>
+                    <div class="error-card"><h4>Access</h4><p>Private base members are not directly accessible in Car.</p></div>
+                    <div class="error-card"><h4>Input Type</h4><p>Use an appropriate numeric type for price.</p></div>
+                    <div class="error-card"><h4>Missing Include</h4><p>Include string when using std::string.</p></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         TYPE 2 — MULTILEVEL
+    ================================================= -->
+
+    <div class="type-panel" id="multilevel">
+
+        <div class="problem-box">
+            <span class="section-label">TYPE 02</span>
+            <h2>Multilevel Inheritance</h2>
+            <p>
+                In multilevel inheritance, a class is derived from another derived class,
+                forming a chain of inheritance.
+            </p>
+        </div>
+
+        <div class="mini-problem-selector">
+            <div class="mini-problem-tabs">
+                <button type="button" class="mini-problem-tab active" data-problem="m1"><span>01</span> Student → Marks → Result</button>
+                <button type="button" class="mini-problem-tab" data-problem="m2"><span>02</span> Person → Employee → Manager</button>
+                <button type="button" class="mini-problem-tab" data-problem="m3"><span>03</span> Vehicle → Car → ElectricCar</button>
+            </div>
+        </div>
+
+
+        <div class="mini-problem active" id="m1">
+            <div class="problem-heading">
+                <span class="section-label">PROBLEM 02.1</span>
+                <h2>Student → Marks → Result</h2>
+            </div>
+
+            <div class="problem-box">
+                <h3>Problem Statement</h3>
+                <p>
+                    Write a C++ program to create three classes <strong>Student</strong>,
+                    <strong>Marks</strong>, and <strong>Result</strong>. Derive Marks from
+                    Student and Result from Marks. Accept student details and marks and
+                    display the final result using multilevel inheritance.
+                </p>
+            </div>
+
+            <div class="problem-box">
+                <h3>Theory / Concept</h3>
+                <p>
+                    Multilevel inheritance forms a chain. Result inherits from Marks,
+                    and Marks inherits from Student, so Result can use the accessible
+                    members provided through both levels.
+                </p>
+            </div>
+
+            <div class="syntax-block">
+                <div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Multilevel Inheritance</h3></div>
+                <div class="code-window">
+<pre><code>class A
+{
+};
+
+class B : public A
+{
+};
+
+class C : public B
+{
+};</code></pre>
+                </div>
+            </div>
+
+            <div class="problem-box">
+                <h3>Algorithm</h3>
+                <ol class="algorithm-list">
+                    <li>Create Student as the first base class.</li>
+                    <li>Create Marks derived from Student.</li>
+                    <li>Create Result derived from Marks.</li>
+                    <li>Accept roll number, name and marks.</li>
+                    <li>Calculate total and percentage.</li>
+                    <li>Display the result.</li>
+                </ol>
+            </div>
+
+            <div class="problem-box">
+                <h3>C++ Program</h3>
+                <div class="code-window">
+<pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+using namespace std;
+
+class Student
+{
+protected:
+    int rollNo;
+    string name;
+
+public:
+    void acceptStudent()
+    {
+        cout &lt;&lt; "Enter Roll No: ";
+        cin &gt;&gt; rollNo;
+
+        cout &lt;&lt; "Enter Name: ";
+        cin &gt;&gt; name;
+    }
+};
+
+class Marks : public Student
+{
+protected:
+    float m1, m2, m3;
+
+public:
+    void acceptMarks()
+    {
+        acceptStudent();
+
+        cout &lt;&lt; "Enter 3 Marks: ";
+        cin &gt;&gt; m1 &gt;&gt; m2 &gt;&gt; m3;
+    }
+};
+
+class Result : public Marks
+{
+public:
+    void display()
+    {
+        float total = m1 + m2 + m3;
+        float percentage = total / 3;
+
+        cout &lt;&lt; "\nRoll No: " &lt;&lt; rollNo &lt;&lt; endl;
+        cout &lt;&lt; "Name: " &lt;&lt; name &lt;&lt; endl;
+        cout &lt;&lt; "Total: " &lt;&lt; total &lt;&lt; endl;
+        cout &lt;&lt; "Percentage: " &lt;&lt; percentage &lt;&lt; "%" &lt;&lt; endl;
+    }
+};
+
+int main()
+{
+    Result r;
+
+    r.acceptMarks();
+    r.display();
+
+    return 0;
+}</code></pre>
+                </div>
+            </div>
+
+            <div class="problem-box">
+                <h3>Expected Output</h3>
+                <div class="output-box">
+<pre>Enter Roll No: 101
+Enter Name: Rahul
+Enter 3 Marks: 80 90 85
+
+Roll No: 101
+Name: Rahul
+Total: 255
+Percentage: 85%</pre>
+                </div>
+            </div>
+
+            <div class="visual-card">
+                <span class="section-label">VISUAL EXPLANATION</span>
+                <h3>Three-Level Inheritance Chain</h3>
+                <div class="inheritance-flow">
+                    <div class="flow-node"><strong>Student</strong><small>rollNo, name</small></div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-node"><strong>Marks</strong><small>m1, m2, m3</small></div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-node"><strong>Result</strong><small>total, percentage</small></div>
+                </div>
+            </div>
+
+            <div class="problem-box">
+                <h3>Program Explanation</h3>
+                <ul class="key-points">
+                    <li>Marks inherits Student.</li>
+                    <li>Result inherits Marks.</li>
+                    <li>Result therefore receives the accessible members from the inheritance chain.</li>
+                    <li>The final class performs the result calculation.</li>
+                </ul>
+            </div>
+
+            <div class="problem-box"><h3>Real-Life Connection</h3><p>An academic system can progressively extend a basic student record into marks and then final result information.</p></div>
+
+            <div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>Inheritance occurs in levels.</li><li>Each derived class can add new features.</li><li>The final derived class can access inherited accessible members.</li></ul></div>
+
+            <div class="problem-box">
+                <h3>Common Errors</h3>
+                <div class="error-grid">
+                    <div class="error-card"><h4>Wrong Chain</h4><p>Result should inherit from Marks, not directly from Student.</p></div>
+                    <div class="error-card"><h4>Access</h4><p>Use protected members when they need to be accessed by further derived classes.</p></div>
+                    <div class="error-card"><h4>Calculation</h4><p>Use the correct total and percentage calculation.</p></div>
+                    <div class="error-card"><h4>Class Order</h4><p>Define the base class before the class that inherits it.</p></div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="mini-problem" id="m2">
+            <div class="problem-heading"><span class="section-label">PROBLEM 02.2</span><h2>Person → Employee → Manager</h2></div>
+
+            <div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to create classes <strong>Person</strong>, <strong>Employee</strong>, and <strong>Manager</strong>. Derive Employee from Person and Manager from Employee. Accept and display personal, employee, and manager details using multilevel inheritance.</p></div>
+
+            <div class="problem-box"><h3>Theory / Concept</h3><p>The Manager class is at the third level. It inherits employee information through Employee, while Employee inherits common personal information from Person.</p></div>
+
+            <div class="syntax-block"><div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Multilevel Inheritance</h3></div><div class="code-window">
+<pre><code>class Person
+{
+};
+
+class Employee : public Person
+{
+};
+
+class Manager : public Employee
+{
+};</code></pre>
+            </div></div>
+
+            <div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Define Person.</li><li>Derive Employee from Person.</li><li>Derive Manager from Employee.</li><li>Accept personal and employee information.</li><li>Accept department and team size.</li><li>Display all details.</li></ol></div>
+
+            <div class="problem-box"><h3>C++ Program</h3><div class="code-window">
+<pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+using namespace std;
+
+class Person
+{
+protected:
+    string name;
+
+public:
+    void acceptPerson()
+    {
+        cout &lt;&lt; "Enter Name: ";
+        cin &gt;&gt; name;
+    }
+};
+
+class Employee : public Person
+{
+protected:
+    int empId;
+
+public:
+    void acceptEmployee()
+    {
+        acceptPerson();
+
+        cout &lt;&lt; "Enter Employee ID: ";
+        cin &gt;&gt; empId;
+    }
+};
+
+class Manager : public Employee
+{
+    string department;
+    int teamSize;
+
+public:
+    void acceptManager()
+    {
+        acceptEmployee();
+
+        cout &lt;&lt; "Enter Department: ";
+        cin &gt;&gt; department;
+
+        cout &lt;&lt; "Enter Team Size: ";
+        cin &gt;&gt; teamSize;
+    }
+
+    void display()
+    {
+        cout &lt;&lt; "\nName: " &lt;&lt; name &lt;&lt; endl;
+        cout &lt;&lt; "Employee ID: " &lt;&lt; empId &lt;&lt; endl;
+        cout &lt;&lt; "Department: " &lt;&lt; department &lt;&lt; endl;
+        cout &lt;&lt; "Team Size: " &lt;&lt; teamSize &lt;&lt; endl;
+    }
+};
+
+int main()
+{
+    Manager m;
+
+    m.acceptManager();
+    m.display();
+
+    return 0;
+}</code></pre>
+            </div></div>
+
+            <div class="problem-box"><h3>Expected Output</h3><div class="output-box"><pre>Enter Name: Riya
+Enter Employee ID: 205
+Enter Department: IT
+Enter Team Size: 8
+
+Name: Riya
+Employee ID: 205
+Department: IT
+Team Size: 8</pre></div></div>
+
+            <div class="visual-card"><span class="section-label">VISUAL EXPLANATION</span><h3>Person → Employee → Manager</h3><div class="inheritance-flow"><div class="flow-node"><strong>Person</strong><small>name</small></div><div class="flow-arrow">↓</div><div class="flow-node"><strong>Employee</strong><small>empId</small></div><div class="flow-arrow">↓</div><div class="flow-node"><strong>Manager</strong><small>department, teamSize</small></div></div></div>
+
+            <div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>Person provides the common name.</li><li>Employee adds employee ID.</li><li>Manager adds department and team size.</li><li>The Manager object can use the accessible members through the inheritance chain.</li></ul></div>
+
+            <div class="problem-box"><h3>Real-Life Connection</h3><p>Organizational software often represents general personal information first, then employee information, and finally specialized management information.</p></div>
+
+            <div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>Each level specializes the previous level.</li><li>The chain promotes reuse.</li><li>The final derived class can combine features from earlier levels.</li></ul></div>
+
+            <div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Wrong Level</h4><p>Manager should inherit from Employee.</p></div><div class="error-card"><h4>Access</h4><p>Keep inherited data accessible through suitable access specifiers.</p></div><div class="error-card"><h4>Input</h4><p>Accept team size as an integer.</p></div><div class="error-card"><h4>Class Order</h4><p>Define Person before Employee and Employee before Manager.</p></div></div></div>
+        </div>
+
+
+        <div class="mini-problem" id="m3">
+            <div class="problem-heading"><span class="section-label">PROBLEM 02.3</span><h2>Vehicle → Car → ElectricCar</h2></div>
+
+            <div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to create classes <strong>Vehicle</strong>, <strong>Car</strong>, and <strong>ElectricCar</strong>. Derive Car from Vehicle and ElectricCar from Car. Accept and display vehicle, car, and battery-related information using multilevel inheritance.</p></div>
+
+            <div class="problem-box"><h3>Theory / Concept</h3><p>ElectricCar is a specialized form of Car, and Car is a specialized form of Vehicle. This creates a three-level inheritance chain.</p></div>
+
+            <div class="syntax-block"><div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Multilevel Inheritance</h3></div><div class="code-window">
+<pre><code>class Vehicle
+{
+};
+
+class Car : public Vehicle
+{
+};
+
+class ElectricCar : public Car
+{
+};</code></pre>
+            </div></div>
+
+            <div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Create Vehicle with brand and model.</li><li>Derive Car and add price.</li><li>Derive ElectricCar from Car.</li><li>Add battery capacity.</li><li>Accept all details.</li><li>Display the complete information.</li></ol></div>
+
+            <div class="problem-box"><h3>C++ Program</h3><div class="code-window">
+<pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+using namespace std;
+
+class Vehicle
+{
+protected:
+    string brand;
+    string model;
+
+public:
+    void acceptVehicle()
+    {
+        cout &lt;&lt; "Enter Brand: ";
+        cin &gt;&gt; brand;
+
+        cout &lt;&lt; "Enter Model: ";
+        cin &gt;&gt; model;
+    }
+};
+
+class Car : public Vehicle
+{
+protected:
+    float price;
+
+public:
+    void acceptCar()
+    {
+        acceptVehicle();
+
+        cout &lt;&lt; "Enter Price: ";
+        cin &gt;&gt; price;
+    }
+};
+
+class ElectricCar : public Car
+{
+    float batteryCapacity;
+
+public:
+    void acceptElectricCar()
+    {
+        acceptCar();
+
+        cout &lt;&lt; "Enter Battery Capacity (kWh): ";
+        cin &gt;&gt; batteryCapacity;
+    }
+
+    void display()
+    {
+        cout &lt;&lt; "\nBrand: " &lt;&lt; brand &lt;&lt; endl;
+        cout &lt;&lt; "Model: " &lt;&lt; model &lt;&lt; endl;
+        cout &lt;&lt; "Price: " &lt;&lt; price &lt;&lt; endl;
+        cout &lt;&lt; "Battery: " &lt;&lt; batteryCapacity &lt;&lt; " kWh" &lt;&lt; endl;
+    }
+};
+
+int main()
+{
+    ElectricCar e;
+
+    e.acceptElectricCar();
+    e.display();
+
+    return 0;
+}</code></pre>
+            </div></div>
+
+            <div class="problem-box"><h3>Expected Output</h3><div class="output-box"><pre>Enter Brand: Tata
+Enter Model: NexonEV
+Enter Price: 1500000
+Enter Battery Capacity (kWh): 40
+
+Brand: Tata
+Model: NexonEV
+Price: 1500000
+Battery: 40 kWh</pre></div></div>
+
+            <div class="visual-card"><span class="section-label">VISUAL EXPLANATION</span><h3>Vehicle → Car → ElectricCar</h3><div class="inheritance-flow"><div class="flow-node"><strong>Vehicle</strong><small>brand, model</small></div><div class="flow-arrow">↓</div><div class="flow-node"><strong>Car</strong><small>price</small></div><div class="flow-arrow">↓</div><div class="flow-node"><strong>ElectricCar</strong><small>battery capacity</small></div></div></div>
+
+            <div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>Car inherits Vehicle.</li><li>ElectricCar inherits Car.</li><li>ElectricCar can access the protected information inherited through both levels.</li><li>Each class adds a more specialized feature.</li></ul></div>
+
+            <div class="problem-box"><h3>Real-Life Connection</h3><p>Vehicle software can gradually specialize a general vehicle into a car and then into a specific electric car category.</p></div>
+
+            <div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>Multilevel inheritance forms a chain.</li><li>Each level can add new data or functions.</li><li>It represents an “is-a” specialization relationship.</li></ul></div>
+
+            <div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Wrong Chain</h4><p>ElectricCar should inherit from Car.</p></div><div class="error-card"><h4>Data Type</h4><p>Use suitable numeric types for price and battery capacity.</p></div><div class="error-card"><h4>Access</h4><p>Protected members are suitable for direct derived-class access.</p></div><div class="error-card"><h4>Missing Include</h4><p>Include string when using std::string.</p></div></div></div>
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         TYPE 3 — MULTIPLE
+    ================================================= -->
+
+    <div class="type-panel" id="multiple">
+
+        <div class="problem-box">
+            <span class="section-label">TYPE 03</span>
+            <h2>Multiple Inheritance</h2>
+            <p>
+                In multiple inheritance, one derived class inherits from two or more base classes.
+            </p>
+        </div>
+
+        <div class="mini-problem-selector">
+            <div class="mini-problem-tabs">
+                <button type="button" class="mini-problem-tab active" data-problem="mi1"><span>01</span> Academic + Sports</button>
+                <button type="button" class="mini-problem-tab" data-problem="mi2"><span>02</span> Personal + Professional</button>
+                <button type="button" class="mini-problem-tab" data-problem="mi3"><span>03</span> Theory + Practical</button>
+            </div>
+        </div>
+
+
+        <div class="mini-problem active" id="mi1">
+            <div class="problem-heading"><span class="section-label">PROBLEM 03.1</span><h2>Academic + Sports → Student Result</h2></div>
+
+            <div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to create two base classes <strong>Academic</strong> and <strong>Sports</strong>. Create a derived class <strong>StudentResult</strong> that inherits from both classes. Accept academic marks and sports score and display the combined result using multiple inheritance.</p></div>
+
+            <div class="problem-box"><h3>Theory / Concept</h3><p>StudentResult combines information supplied by two independent base classes. This demonstrates multiple inheritance.</p></div>
+
+            <div class="syntax-block"><div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Multiple Inheritance</h3></div><div class="code-window">
+<pre><code>class Base1
+{
+};
+
+class Base2
+{
+};
+
+class Derived : public Base1, public Base2
+{
+};</code></pre>
+            </div></div>
+
+            <div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Create Academic and Sports base classes.</li><li>Declare marks in Academic and sports score in Sports.</li><li>Create StudentResult derived from both.</li><li>Accept both scores.</li><li>Calculate combined score.</li><li>Display the result.</li></ol></div>
+
+            <div class="problem-box"><h3>C++ Program</h3><div class="code-window">
+<pre><code>#include &lt;iostream&gt;
+
+using namespace std;
+
+class Academic
+{
+protected:
+    float academicMarks;
+
+public:
+    void acceptAcademic()
+    {
+        cout &lt;&lt; "Enter Academic Marks: ";
+        cin &gt;&gt; academicMarks;
+    }
+};
+
+class Sports
+{
+protected:
+    float sportsScore;
+
+public:
+    void acceptSports()
+    {
+        cout &lt;&lt; "Enter Sports Score: ";
+        cin &gt;&gt; sportsScore;
+    }
+};
+
+class StudentResult : public Academic, public Sports
+{
+public:
+    void display()
+    {
+        cout &lt;&lt; "\nAcademic Marks: " &lt;&lt; academicMarks &lt;&lt; endl;
+        cout &lt;&lt; "Sports Score: " &lt;&lt; sportsScore &lt;&lt; endl;
+        cout &lt;&lt; "Combined Score: "
+             &lt;&lt; academicMarks + sportsScore &lt;&lt; endl;
+    }
+};
+
+int main()
+{
+    StudentResult s;
+
+    s.acceptAcademic();
+    s.acceptSports();
+    s.display();
+
+    return 0;
+}</code></pre>
+            </div></div>
+
+            <div class="problem-box"><h3>Expected Output</h3><div class="output-box"><pre>Enter Academic Marks: 85
+Enter Sports Score: 10
+
+Academic Marks: 85
+Sports Score: 10
+Combined Score: 95</pre></div></div>
+
+            <div class="visual-card"><span class="section-label">VISUAL EXPLANATION</span><h3>Two Base Classes → One Derived Class</h3><div class="inheritance-flow"><div class="flow-node"><strong>Academic</strong><small>academicMarks</small></div><div class="flow-arrow">↘</div><div class="flow-node"><strong>StudentResult</strong><small>combines both</small></div><div class="flow-arrow">↗</div><div class="flow-node"><strong>Sports</strong><small>sportsScore</small></div></div></div>
+
+            <div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>Academic and Sports are independent base classes.</li><li>StudentResult inherits from both.</li><li>The derived class can use accessible members from both bases.</li><li>The combined score is calculated in StudentResult.</li></ul></div>
+
+            <div class="problem-box"><h3>Real-Life Connection</h3><p>A student profile can combine academic performance and sports performance into one result object.</p></div>
+
+            <div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>One derived class has multiple base classes.</li><li>Each base can provide a different set of features.</li><li>Use access control carefully when combining classes.</li></ul></div>
+
+            <div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Comma Missing</h4><p>Separate multiple base classes with a comma.</p></div><div class="error-card"><h4>Wrong Base</h4><p>StudentResult must inherit from both Academic and Sports.</p></div><div class="error-card"><h4>Name Conflict</h4><p>Ambiguous same-named members from base classes may require qualification.</p></div><div class="error-card"><h4>Access</h4><p>Use protected or public members according to the required design.</p></div></div></div>
+        </div>
+
+
+        <div class="mini-problem" id="mi2">
+            <div class="problem-heading"><span class="section-label">PROBLEM 03.2</span><h2>Personal + Professional → Employee</h2></div>
+
+            <div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to create two base classes <strong>Personal</strong> and <strong>Professional</strong>. Create a derived class <strong>Employee</strong> that inherits from both classes. Accept personal and professional details and display the complete employee profile using multiple inheritance.</p></div>
+
+            <div class="problem-box"><h3>Theory / Concept</h3><p>Employee combines two different categories of information. Personal provides personal details, while Professional provides work-related details.</p></div>
+
+            <div class="syntax-block"><div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Multiple Inheritance</h3></div><div class="code-window">
+<pre><code>class Personal
+{
+};
+
+class Professional
+{
+};
+
+class Employee : public Personal, public Professional
+{
+};</code></pre>
+            </div></div>
+
+            <div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Define Personal.</li><li>Define Professional.</li><li>Derive Employee from both classes.</li><li>Accept personal information.</li><li>Accept professional information.</li><li>Display the complete profile.</li></ol></div>
+
+            <div class="problem-box"><h3>C++ Program</h3><div class="code-window">
+<pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+using namespace std;
+
+class Personal
+{
+protected:
+    string name;
+    int age;
+
+public:
+    void acceptPersonal()
+    {
+        cout &lt;&lt; "Enter Name: ";
+        cin &gt;&gt; name;
+
+        cout &lt;&lt; "Enter Age: ";
+        cin &gt;&gt; age;
+    }
+};
+
+class Professional
+{
+protected:
+    string designation;
+    float salary;
+
+public:
+    void acceptProfessional()
+    {
+        cout &lt;&lt; "Enter Designation: ";
+        cin &gt;&gt; designation;
+
+        cout &lt;&lt; "Enter Salary: ";
+        cin &gt;&gt; salary;
+    }
+};
+
+class Employee : public Personal, public Professional
+{
+public:
+    void display()
+    {
+        cout &lt;&lt; "\nName: " &lt;&lt; name &lt;&lt; endl;
+        cout &lt;&lt; "Age: " &lt;&lt; age &lt;&lt; endl;
+        cout &lt;&lt; "Designation: " &lt;&lt; designation &lt;&lt; endl;
+        cout &lt;&lt; "Salary: " &lt;&lt; salary &lt;&lt; endl;
+    }
+};
+
+int main()
+{
+    Employee e;
+
+    e.acceptPersonal();
+    e.acceptProfessional();
+    e.display();
+
+    return 0;
+}</code></pre>
+            </div></div>
+
+            <div class="problem-box"><h3>Expected Output</h3><div class="output-box"><pre>Enter Name: Riya
+Enter Age: 25
+Enter Designation: Developer
+Enter Salary: 45000
+
+Name: Riya
+Age: 25
+Designation: Developer
+Salary: 45000</pre></div></div>
+
+            <div class="visual-card"><span class="section-label">VISUAL EXPLANATION</span><h3>Personal + Professional → Employee</h3><div class="inheritance-flow"><div class="flow-node"><strong>Personal</strong><small>name, age</small></div><div class="flow-arrow">↘</div><div class="flow-node"><strong>Employee</strong><small>complete profile</small></div><div class="flow-arrow">↗</div><div class="flow-node"><strong>Professional</strong><small>designation, salary</small></div></div></div>
+
+            <div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>Personal and Professional provide different groups of members.</li><li>Employee inherits from both classes.</li><li>The Employee object combines both sets of information.</li></ul></div>
+
+            <div class="problem-box"><h3>Real-Life Connection</h3><p>An employee management system may need to combine personal identity information with professional information.</p></div>
+
+            <div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>Multiple inheritance combines features from multiple bases.</li><li>Each base should represent a meaningful responsibility.</li><li>The derived class integrates the inherited functionality.</li></ul></div>
+
+            <div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Base List</h4><p>Separate Personal and Professional with a comma.</p></div><div class="error-card"><h4>Duplicate Names</h4><p>Resolve ambiguous members using scope qualification when necessary.</p></div><div class="error-card"><h4>Input</h4><p>Use appropriate types for age and salary.</p></div><div class="error-card"><h4>Missing String</h4><p>Include string when using std::string.</p></div></div></div>
+        </div>
+
+
+        <div class="mini-problem" id="mi3">
+            <div class="problem-heading"><span class="section-label">PROBLEM 03.3</span><h2>Theory + Practical → Result</h2></div>
+
+            <div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to create two base classes <strong>Theory</strong> and <strong>Practical</strong>. Create a derived class <strong>Result</strong> that inherits from both classes. Accept theory and practical marks and calculate the total and percentage using multiple inheritance.</p></div>
+
+            <div class="problem-box"><h3>Theory / Concept</h3><p>The Result class receives theory and practical marks from two separate base classes and combines them to calculate the final score.</p></div>
+
+            <div class="syntax-block"><div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Multiple Inheritance</h3></div><div class="code-window">
+<pre><code>class Theory
+{
+};
+
+class Practical
+{
+};
+
+class Result : public Theory, public Practical
+{
+};</code></pre>
+            </div></div>
+
+            <div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Create Theory and Practical classes.</li><li>Declare marks in both classes.</li><li>Derive Result from both classes.</li><li>Accept theory and practical marks.</li><li>Calculate total and percentage.</li><li>Display the result.</li></ol></div>
+
+            <div class="problem-box"><h3>C++ Program</h3><div class="code-window">
+<pre><code>#include &lt;iostream&gt;
+
+using namespace std;
+
+class Theory
+{
+protected:
+    float theoryMarks;
+
+public:
+    void acceptTheory()
+    {
+        cout &lt;&lt; "Enter Theory Marks: ";
+        cin &gt;&gt; theoryMarks;
+    }
+};
+
+class Practical
+{
+protected:
+    float practicalMarks;
+
+public:
+    void acceptPractical()
+    {
+        cout &lt;&lt; "Enter Practical Marks: ";
+        cin &gt;&gt; practicalMarks;
+    }
+};
+
+class Result : public Theory, public Practical
+{
+public:
+    void display()
+    {
+        float total = theoryMarks + practicalMarks;
+        float percentage = total / 2;
+
+        cout &lt;&lt; "\nTheory Marks: " &lt;&lt; theoryMarks &lt;&lt; endl;
+        cout &lt;&lt; "Practical Marks: " &lt;&lt; practicalMarks &lt;&lt; endl;
+        cout &lt;&lt; "Total: " &lt;&lt; total &lt;&lt; endl;
+        cout &lt;&lt; "Average: " &lt;&lt; percentage &lt;&lt; endl;
+    }
+};
+
+int main()
+{
+    Result r;
+
+    r.acceptTheory();
+    r.acceptPractical();
+    r.display();
+
+    return 0;
+}</code></pre>
+            </div></div>
+
+            <div class="problem-box"><h3>Expected Output</h3><div class="output-box"><pre>Enter Theory Marks: 80
+Enter Practical Marks: 90
+
+Theory Marks: 80
+Practical Marks: 90
+Total: 170
+Average: 85</pre></div></div>
+
+            <div class="visual-card"><span class="section-label">VISUAL EXPLANATION</span><h3>Theory + Practical → Result</h3><div class="inheritance-flow"><div class="flow-node"><strong>Theory</strong><small>theoryMarks</small></div><div class="flow-arrow">↘</div><div class="flow-node"><strong>Result</strong><small>total + average</small></div><div class="flow-arrow">↗</div><div class="flow-node"><strong>Practical</strong><small>practicalMarks</small></div></div></div>
+
+            <div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>Theory stores theory marks.</li><li>Practical stores practical marks.</li><li>Result inherits from both.</li><li>The Result class calculates the combined total and average.</li></ul></div>
+
+            <div class="problem-box"><h3>Real-Life Connection</h3><p>An academic result may combine different evaluation components into one final result.</p></div>
+
+            <div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>Multiple independent sources can be combined in one derived class.</li><li>The derived class can operate on accessible inherited data.</li><li>Keep each base class focused on a logical responsibility.</li></ul></div>
+
+            <div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Calculation</h4><p>Use the correct total and average formula.</p></div><div class="error-card"><h4>Inheritance List</h4><p>Use both Theory and Practical in the base-class list.</p></div><div class="error-card"><h4>Access</h4><p>Use protected members for direct access from Result.</p></div><div class="error-card"><h4>Input</h4><p>Enter valid numeric marks.</p></div></div></div>
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         TYPE 4 — HIERARCHICAL
+    ================================================= -->
+
+    <div class="type-panel" id="hierarchical">
+
+        <div class="problem-box">
+            <span class="section-label">TYPE 04</span>
+            <h2>Hierarchical Inheritance</h2>
+            <p>
+                In hierarchical inheritance, multiple derived classes inherit from one base class.
+            </p>
+        </div>
+
+        <div class="mini-problem-selector">
+            <div class="mini-problem-tabs">
+                <button type="button" class="mini-problem-tab active" data-problem="h1"><span>01</span> Employee → Manager / Developer</button>
+                <button type="button" class="mini-problem-tab" data-problem="h2"><span>02</span> Shape → Circle / Rectangle</button>
+                <button type="button" class="mini-problem-tab" data-problem="h3"><span>03</span> Account → Savings / Current</button>
+            </div>
+        </div>
+
+
+        <div class="mini-problem active" id="h1">
+            <div class="problem-heading"><span class="section-label">PROBLEM 04.1</span><h2>Employee → Manager / Developer</h2></div>
+
+            <div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to create a base class <strong>Employee</strong> containing employee ID and name. Derive two classes <strong>Manager</strong> and <strong>Developer</strong> from Employee. Accept and display details specific to each employee type using hierarchical inheritance.</p></div>
+
+            <div class="problem-box"><h3>Theory / Concept</h3><p>Manager and Developer share common Employee information but have different specialized information. Both classes inherit from the same base class.</p></div>
+
+            <div class="syntax-block"><div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Hierarchical Inheritance</h3></div><div class="code-window">
+<pre><code>class Employee
+{
+};
+
+class Manager : public Employee
+{
+};
+
+class Developer : public Employee
+{
+};</code></pre>
+            </div></div>
+
+            <div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Create Employee as the base class.</li><li>Create Manager derived from Employee.</li><li>Create Developer derived from Employee.</li><li>Accept common employee details.</li><li>Accept manager-specific or developer-specific details.</li><li>Display the selected employee information.</li></ol></div>
+
+            <div class="problem-box"><h3>C++ Program</h3><div class="code-window">
+<pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+using namespace std;
+
+class Employee
+{
+protected:
+    int empId;
+    string name;
+
+public:
+    void acceptEmployee()
+    {
+        cout &lt;&lt; "Enter Employee ID: ";
+        cin &gt;&gt; empId;
+
+        cout &lt;&lt; "Enter Name: ";
+        cin &gt;&gt; name;
+    }
+};
+
+class Manager : public Employee
+{
+    int teamSize;
+
+public:
+    void acceptManager()
+    {
+        acceptEmployee();
+
+        cout &lt;&lt; "Enter Team Size: ";
+        cin &gt;&gt; teamSize;
+    }
+
+    void display()
+    {
+        cout &lt;&lt; "\nManager ID: " &lt;&lt; empId &lt;&lt; endl;
+        cout &lt;&lt; "Name: " &lt;&lt; name &lt;&lt; endl;
+        cout &lt;&lt; "Team Size: " &lt;&lt; teamSize &lt;&lt; endl;
+    }
+};
+
+class Developer : public Employee
+{
+    string language;
+
+public:
+    void acceptDeveloper()
+    {
+        acceptEmployee();
+
+        cout &lt;&lt; "Enter Programming Language: ";
+        cin &gt;&gt; language;
+    }
+
+    void display()
+    {
+        cout &lt;&lt; "\nDeveloper ID: " &lt;&lt; empId &lt;&lt; endl;
+        cout &lt;&lt; "Name: " &lt;&lt; name &lt;&lt; endl;
+        cout &lt;&lt; "Language: " &lt;&lt; language &lt;&lt; endl;
+    }
+};
+
+int main()
+{
+    Manager m;
+    Developer d;
+
+    cout &lt;&lt; "--- Manager ---" &lt;&lt; endl;
+    m.acceptManager();
+    m.display();
+
+    cout &lt;&lt; "\n--- Developer ---" &lt;&lt; endl;
+    d.acceptDeveloper();
+    d.display();
+
+    return 0;
+}</code></pre>
+            </div></div>
+
+            <div class="problem-box"><h3>Expected Output</h3><div class="output-box"><pre>--- Manager ---
+Enter Employee ID: 101
+Enter Name: Riya
+Enter Team Size: 8
+
+Manager ID: 101
+Name: Riya
+Team Size: 8
+
+--- Developer ---
+Enter Employee ID: 102
+Enter Name: Rahul
+Enter Programming Language: Cpp
+
+Developer ID: 102
+Name: Rahul
+Language: Cpp</pre></div></div>
+
+            <div class="visual-card"><span class="section-label">VISUAL EXPLANATION</span><h3>One Base → Multiple Derived Classes</h3><div class="inheritance-flow"><div class="flow-node"><strong>Employee</strong><small>empId, name</small></div><div class="flow-arrow">↙</div><div class="flow-node"><strong>Manager</strong><small>teamSize</small></div><div class="flow-arrow">↗</div><div class="flow-node"><strong>Developer</strong><small>language</small></div></div></div>
+
+            <div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>Employee is the common base class.</li><li>Manager and Developer independently inherit Employee.</li><li>Both derived classes reuse employee ID and name.</li><li>Each derived class adds its own specialized member.</li></ul></div>
+
+            <div class="problem-box"><h3>Real-Life Connection</h3><p>An organization can have different employee roles that share common employee information but require role-specific data.</p></div>
+
+            <div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>One base class has multiple derived classes.</li><li>Derived classes are siblings in the hierarchy.</li><li>Each derived class can have different additional members.</li></ul></div>
+
+            <div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Wrong Hierarchy</h4><p>Both Manager and Developer should inherit from Employee.</p></div><div class="error-card"><h4>Shared Data</h4><p>Place common employee information in the base class.</p></div><div class="error-card"><h4>Separate Objects</h4><p>Create the correct derived object for each employee type.</p></div><div class="error-card"><h4>Access</h4><p>Use protected members when direct access from derived classes is required.</p></div></div></div>
+        </div>
+
+
+        <div class="mini-problem" id="h2">
+            <div class="problem-heading"><span class="section-label">PROBLEM 04.2</span><h2>Shape → Circle / Rectangle</h2></div>
+
+            <div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to create a base class <strong>Shape</strong>. Derive two classes <strong>Circle</strong> and <strong>Rectangle</strong> from Shape. Calculate and display the area of a circle and rectangle using hierarchical inheritance.</p></div>
+
+            <div class="problem-box"><h3>Theory / Concept</h3><p>Circle and Rectangle are different specialized shapes. They share the common base class Shape but implement their own area calculations.</p></div>
+
+            <div class="syntax-block"><div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Hierarchical Inheritance</h3></div><div class="code-window">
+<pre><code>class Shape
+{
+};
+
+class Circle : public Shape
+{
+};
+
+class Rectangle : public Shape
+{
+};</code></pre>
+            </div></div>
+
+            <div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Create Shape as the base class.</li><li>Derive Circle and Rectangle from Shape.</li><li>Accept radius for Circle.</li><li>Accept length and breadth for Rectangle.</li><li>Calculate both areas.</li><li>Display the results.</li></ol></div>
+
+            <div class="problem-box"><h3>C++ Program</h3><div class="code-window">
+<pre><code>#include &lt;iostream&gt;
+
+using namespace std;
+
+class Shape
+{
+protected:
+    float pi = 3.14;
+};
+
+class Circle : public Shape
+{
+    float radius;
+
+public:
+    void accept()
+    {
+        cout &lt;&lt; "Enter Radius: ";
+        cin &gt;&gt; radius;
+    }
+
+    void display()
+    {
+        cout &lt;&lt; "Circle Area: " &lt;&lt; pi * radius * radius &lt;&lt; endl;
+    }
+};
+
+class Rectangle : public Shape
+{
+    float length, breadth;
+
+public:
+    void accept()
+    {
+        cout &lt;&lt; "Enter Length and Breadth: ";
+        cin &gt;&gt; length &gt;&gt; breadth;
+    }
+
+    void display()
+    {
+        cout &lt;&lt; "Rectangle Area: "
+             &lt;&lt; length * breadth &lt;&lt; endl;
+    }
+};
+
+int main()
+{
+    Circle c;
+    Rectangle r;
+
+    c.accept();
+    c.display();
+
+    r.accept();
+    r.display();
+
+    return 0;
+}</code></pre>
+            </div></div>
+
+            <div class="problem-box"><h3>Expected Output</h3><div class="output-box"><pre>Enter Radius: 5
+Circle Area: 78.5
+Enter Length and Breadth: 10 4
+Rectangle Area: 40</pre></div></div>
+
+            <div class="visual-card"><span class="section-label">VISUAL EXPLANATION</span><h3>Shape → Circle / Rectangle</h3><div class="inheritance-flow"><div class="flow-node"><strong>Shape</strong><small>common shape feature</small></div><div class="flow-arrow">↙</div><div class="flow-node"><strong>Circle</strong><small>π × r × r</small></div><div class="flow-arrow">↗</div><div class="flow-node"><strong>Rectangle</strong><small>length × breadth</small></div></div></div>
+
+            <div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>Shape is the base class.</li><li>Circle and Rectangle independently inherit Shape.</li><li>Each derived class has its own dimensions and area formula.</li><li>The same base feature can be reused by both shapes.</li></ul></div>
+
+            <div class="problem-box"><h3>Real-Life Connection</h3><p>Graphics and geometry software can define common shape concepts and specialize them into individual shape classes.</p></div>
+
+            <div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>Multiple derived classes share one base.</li><li>Each derived class can implement different behavior.</li><li>Common properties belong in the base class.</li></ul></div>
+
+            <div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Formula</h4><p>Use the correct area formula for each shape.</p></div><div class="error-card"><h4>Inheritance</h4><p>Both Circle and Rectangle should inherit Shape.</p></div><div class="error-card"><h4>Input</h4><p>Provide valid positive dimensions.</p></div><div class="error-card"><h4>Type</h4><p>Use floating-point values when decimal dimensions are required.</p></div></div></div>
+        </div>
+
+
+        <div class="mini-problem" id="h3">
+            <div class="problem-heading"><span class="section-label">PROBLEM 04.3</span><h2>Account → Savings / Current</h2></div>
+
+            <div class="problem-box"><h3>Problem Statement</h3><p>Write a C++ program to create a base class <strong>Account</strong> containing account number and holder name. Derive two classes <strong>SavingsAccount</strong> and <strong>CurrentAccount</strong> from Account. Accept and display account-specific details using hierarchical inheritance.</p></div>
+
+            <div class="problem-box"><h3>Theory / Concept</h3><p>SavingsAccount and CurrentAccount share common account information but can contain different account-specific features.</p></div>
+
+            <div class="syntax-block"><div class="syntax-heading"><span class="section-label">SYNTAX</span><h3>Hierarchical Inheritance</h3></div><div class="code-window">
+<pre><code>class Account
+{
+};
+
+class SavingsAccount : public Account
+{
+};
+
+class CurrentAccount : public Account
+{
+};</code></pre>
+            </div></div>
+
+            <div class="problem-box"><h3>Algorithm</h3><ol class="algorithm-list"><li>Create Account as the base class.</li><li>Derive SavingsAccount and CurrentAccount from Account.</li><li>Accept common account details.</li><li>Accept interest rate for savings account.</li><li>Accept overdraft limit for current account.</li><li>Display the account details.</li></ol></div>
+
+            <div class="problem-box"><h3>C++ Program</h3><div class="code-window">
+<pre><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+using namespace std;
+
+class Account
+{
+protected:
+    long accountNo;
+    string holderName;
+
+public:
+    void acceptAccount()
+    {
+        cout &lt;&lt; "Enter Account No: ";
+        cin &gt;&gt; accountNo;
+
+        cout &lt;&lt; "Enter Holder Name: ";
+        cin &gt;&gt; holderName;
+    }
+};
+
+class SavingsAccount : public Account
+{
+    float interestRate;
+
+public:
+    void accept()
+    {
+        acceptAccount();
+
+        cout &lt;&lt; "Enter Interest Rate: ";
+        cin &gt;&gt; interestRate;
+    }
+
+    void display()
+    {
+        cout &lt;&lt; "\nSavings Account" &lt;&lt; endl;
+        cout &lt;&lt; "Account No: " &lt;&lt; accountNo &lt;&lt; endl;
+        cout &lt;&lt; "Holder: " &lt;&lt; holderName &lt;&lt; endl;
+        cout &lt;&lt; "Interest Rate: " &lt;&lt; interestRate &lt;&lt; "%" &lt;&lt; endl;
+    }
+};
+
+class CurrentAccount : public Account
+{
+    float overdraftLimit;
+
+public:
+    void accept()
+    {
+        acceptAccount();
+
+        cout &lt;&lt; "Enter Overdraft Limit: ";
+        cin &gt;&gt; overdraftLimit;
+    }
+
+    void display()
+    {
+        cout &lt;&lt; "\nCurrent Account" &lt;&lt; endl;
+        cout &lt;&lt; "Account No: " &lt;&lt; accountNo &lt;&lt; endl;
+        cout &lt;&lt; "Holder: " &lt;&lt; holderName &lt;&lt; endl;
+        cout &lt;&lt; "Overdraft Limit: " &lt;&lt; overdraftLimit &lt;&lt; endl;
+    }
+};
+
+int main()
+{
+    SavingsAccount s;
+    CurrentAccount c;
+
+    cout &lt;&lt; "--- Savings Account ---" &lt;&lt; endl;
+    s.accept();
+    s.display();
+
+    cout &lt;&lt; "\n--- Current Account ---" &lt;&lt; endl;
+    c.accept();
+    c.display();
+
+    return 0;
+}</code></pre>
+            </div></div>
+
+            <div class="problem-box"><h3>Expected Output</h3><div class="output-box"><pre>--- Savings Account ---
+Enter Account No: 1001
+Enter Holder Name: Riya
+Enter Interest Rate: 6.5
+
+Savings Account
+Account No: 1001
+Holder: Riya
+Interest Rate: 6.5%
+
+--- Current Account ---
+Enter Account No: 1002
+Enter Holder Name: Rahul
+Enter Overdraft Limit: 50000
+
+Current Account
+Account No: 1002
+Holder: Rahul
+Overdraft Limit: 50000</pre></div></div>
+
+            <div class="visual-card"><span class="section-label">VISUAL EXPLANATION</span><h3>Account → Savings / Current</h3><div class="inheritance-flow"><div class="flow-node"><strong>Account</strong><small>accountNo, holderName</small></div><div class="flow-arrow">↙</div><div class="flow-node"><strong>Savings</strong><small>interest rate</small></div><div class="flow-arrow">↗</div><div class="flow-node"><strong>Current</strong><small>overdraft limit</small></div></div></div>
+
+            <div class="problem-box"><h3>Program Explanation</h3><ul class="key-points"><li>Account contains common account information.</li><li>SavingsAccount and CurrentAccount inherit Account separately.</li><li>Each derived class adds its own account-specific feature.</li></ul></div>
+
+            <div class="problem-box"><h3>Real-Life Connection</h3><p>Banking systems often have several account types that share common account information while applying different rules and features.</p></div>
+
+            <div class="problem-box"><h3>Key Points</h3><ul class="key-points"><li>One base class can have several specialized derived classes.</li><li>Common information should be centralized in the base class.</li><li>Each derived class can provide specialized functionality.</li></ul></div>
+
+            <div class="problem-box"><h3>Common Errors</h3><div class="error-grid"><div class="error-card"><h4>Wrong Hierarchy</h4><p>Both account types should inherit directly from Account.</p></div><div class="error-card"><h4>Access</h4><p>Use protected members for direct access from derived classes.</p></div><div class="error-card"><h4>Input</h4><p>Use appropriate numeric types for rates and limits.</p></div><div class="error-card"><h4>Shared Data</h4><p>Keep common account details in Account instead of duplicating them.</p></div></div></div>
+        </div>
+
+    </div>
+
+</div>
+</section>
+
+
+<section class="content-section">
+<div class="container">
+    <span class="section-label">QUICK SUMMARY</span>
+    <h2>Practical 12 at a Glance</h2>
+
+    <div class="content-card">
+        <ul class="key-points">
+            <li>Inheritance allows a derived class to reuse accessible members of a base class.</li>
+            <li>Single inheritance has one base and one derived class.</li>
+            <li>Multilevel inheritance forms an inheritance chain.</li>
+            <li>Multiple inheritance allows one derived class to inherit from multiple base classes.</li>
+            <li>Hierarchical inheritance has one base class and multiple derived classes.</li>
+            <li>Inheritance promotes code reusability and specialization.</li>
+            <li>Private base-class members cannot be accessed directly by derived classes.</li>
+            <li>The access specifier used in inheritance affects the accessibility of inherited public and protected members.</li>
+        </ul>
+    </div>
+</div>
+</section>
+
+
+<section class="content-section">
+<div class="container">
+    <span class="section-label">VIVA</span>
+    <h2>Viva Questions</h2>
+
+    <div class="viva-list">
+
+        <div class="viva-item">
+            <button type="button" class="viva-question">
+                <span>What is inheritance?</span><span class="viva-icon">+</span>
+            </button>
+            <div class="viva-answer"><p>Inheritance is an object-oriented programming mechanism in which a derived class acquires accessible features of a base class.</p></div>
+        </div>
+
+        <div class="viva-item">
+            <button type="button" class="viva-question">
+                <span>What is a base class?</span><span class="viva-icon">+</span>
+            </button>
+            <div class="viva-answer"><p>A base class is the class whose accessible members are inherited by another class.</p></div>
+        </div>
+
+        <div class="viva-item">
+            <button type="button" class="viva-question">
+                <span>What is a derived class?</span><span class="viva-icon">+</span>
+            </button>
+            <div class="viva-answer"><p>A derived class is a class that inherits accessible members from a base class and can add its own members.</p></div>
+        </div>
+
+        <div class="viva-item">
+            <button type="button" class="viva-question">
+                <span>Why is inheritance used?</span><span class="viva-icon">+</span>
+            </button>
+            <div class="viva-answer"><p>Inheritance is mainly used for code reusability, specialization and representing relationships between classes.</p></div>
+        </div>
+
+        <div class="viva-item">
+            <button type="button" class="viva-question">
+                <span>What is single inheritance?</span><span class="viva-icon">+</span>
+            </button>
+            <div class="viva-answer"><p>Single inheritance occurs when one derived class inherits from one base class.</p></div>
+        </div>
+
+        <div class="viva-item">
+            <button type="button" class="viva-question">
+                <span>What is multilevel inheritance?</span><span class="viva-icon">+</span>
+            </button>
+            <div class="viva-answer"><p>Multilevel inheritance occurs when a class is derived from another derived class, forming a chain.</p></div>
+        </div>
+
+        <div class="viva-item">
+            <button type="button" class="viva-question">
+                <span>What is multiple inheritance?</span><span class="viva-icon">+</span>
+            </button>
+            <div class="viva-answer"><p>Multiple inheritance occurs when one derived class inherits from two or more base classes.</p></div>
+        </div>
+
+        <div class="viva-item">
+            <button type="button" class="viva-question">
+                <span>What is hierarchical inheritance?</span><span class="viva-icon">+</span>
+            </button>
+            <div class="viva-answer"><p>Hierarchical inheritance occurs when multiple derived classes inherit from the same base class.</p></div>
+        </div>
+
+        <div class="viva-item">
+            <button type="button" class="viva-question">
+                <span>What is the syntax of inheritance?</span><span class="viva-icon">+</span>
+            </button>
+            <div class="viva-answer">
+                <div class="code-window"><pre><code>class Derived : public Base
+{
+};</code></pre></div>
+            </div>
+        </div>
+
+        <div class="viva-item">
+            <button type="button" class="viva-question">
+                <span>Can a derived class access private members of the base class directly?</span><span class="viva-icon">+</span>
+            </button>
+            <div class="viva-answer"><p>No. Private members of a base class cannot be accessed directly by the derived class.</p></div>
+        </div>
+
+        <div class="viva-item">
+            <button type="button" class="viva-question">
+                <span>What is the role of public inheritance?</span><span class="viva-icon">+</span>
+            </button>
+            <div class="viva-answer"><p>With public inheritance, public members of the base remain public in the derived class, while protected members remain protected.</p></div>
+        </div>
+
+        <div class="viva-item">
+            <button type="button" class="viva-question">
+                <span>What is the difference between multiple and hierarchical inheritance?</span><span class="viva-icon">+</span>
+            </button>
+            <div class="viva-answer"><p>Multiple inheritance has multiple base classes and one derived class. Hierarchical inheritance has one base class and multiple derived classes.</p></div>
+        </div>
+
+    </div>
+</div>
+</section>
+
+</main>
+
+
+<footer class="footer">
+    <div class="footer-content">
+
+        <div class="footer-brand">
+            <div class="footer-logo">&lt;/&gt;</div>
+
+            <div class="footer-brand-text">
+                <div class="footer-brand-name">
+                    Rasika <span>CodeLab</span>
+                </div>
+
+                <p class="footer-tagline">
+                    Code • Understand • Visualize
+                </p>
+            </div>
+        </div>
+
+        <div class="footer-copy">
+            © 2026 Rasika CodeLab. Built for practical learning.
+        </div>
+
+    </div>
+</footer>
+
+
+<script src="../js/main.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const page = document.querySelector(".practical12-page");
+
+    if (!page) return;
+
+
+    /* =================================================
+       MAIN INHERITANCE TYPE TABS
+    ================================================= */
+
+    const typeTabs = page.querySelectorAll(".main-type-tab");
+    const typePanels = page.querySelectorAll(".type-panel");
+
+    typeTabs.forEach(function (tab) {
+
+        tab.addEventListener("click", function () {
+
+            const target = this.getAttribute("data-type");
+
+            typeTabs.forEach(function (item) {
+                item.classList.remove("active");
+            });
+
+            typePanels.forEach(function (panel) {
+                panel.classList.remove("active");
+            });
+
+            this.classList.add("active");
+
+            const selectedPanel = page.querySelector("#" + target);
+
+            if (selectedPanel) {
+                selectedPanel.classList.add("active");
+
+                selectedPanel.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+            }
+
+        });
+
+    });
+
+
+    /* =================================================
+       MINI PROBLEM TABS
+       Each type panel has its own 3 problems.
+    ================================================= */
+
+    typePanels.forEach(function (panel) {
+
+        const problemTabs =
+            panel.querySelectorAll(".mini-problem-tab");
+
+        const problems =
+            panel.querySelectorAll(".mini-problem");
+
+        problemTabs.forEach(function (tab) {
+
+            tab.addEventListener("click", function () {
+
+                const target =
+                    this.getAttribute("data-problem");
+
+                problemTabs.forEach(function (item) {
+                    item.classList.remove("active");
+                });
+
+                problems.forEach(function (problem) {
+                    problem.classList.remove("active");
+                });
+
+                this.classList.add("active");
+
+                const selectedProblem =
+                    panel.querySelector("#" + target);
+
+                if (selectedProblem) {
+                    selectedProblem.classList.add("active");
+
+                    selectedProblem.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start"
+                    });
+                }
+
+            });
+
+        });
+
+    });
+
+
+    /* =================================================
+       VIVA ACCORDION
+    ================================================= */
+
+    const vivaQuestions =
+        page.querySelectorAll(".viva-question");
+
+    vivaQuestions.forEach(function (question) {
+
+        question.addEventListener("click", function () {
+
+            const currentItem =
+                this.closest(".viva-item");
+
+            currentItem.classList.toggle("active");
+
+        });
+
+    });
+
+});
+</script>
+
+</body>
+</html>
