@@ -38,6 +38,18 @@ const supabase = hasSupabaseConfig()
     ? createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
     : null;
 
+async function redirectIfAuthenticated() {
+    if (!supabase) return;
+
+    const { data } = await supabase.auth.getSession();
+
+    if (data.session) {
+        window.location.replace(redirectTarget || "index.html");
+    }
+}
+
+redirectIfAuthenticated();
+
 switchButton.addEventListener("click", () => {
     isSignUpMode = !isSignUpMode;
     title.innerHTML = isSignUpMode ? "Create your <span>CodeLab</span> account" : "Log in to <span>CodeLab</span>";
@@ -89,5 +101,5 @@ form.addEventListener("submit", async event => {
     }
 
     showStatus("Login successful. Redirecting...");
-    window.location.href = redirectTarget || "index.html";
+    window.location.replace(redirectTarget || "index.html");
 });
