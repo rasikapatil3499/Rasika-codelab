@@ -6,15 +6,24 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 const nav = document.querySelector(".nav-links");
 const isNestedPage = window.location.pathname.includes("/practicals/") ||
-    window.location.pathname.includes("/foundations/");
+    window.location.pathname.includes("/foundations/") ||
+    window.location.pathname.includes("/subjects/");
 const loginPath = isNestedPage ? "../login.html" : "login.html";
 const homePath = isNestedPage ? "../index.html" : "index.html";
+const subjectsPath = isNestedPage ? "../subjects.html" : "subjects.html";
 
 document.querySelectorAll('.nav-links a[href="index.html"]').forEach(link => {
     if (window.location.pathname.includes("/practicals/")) {
         link.href = "../practicals.html";
     }
 });
+
+if (nav && ![...nav.querySelectorAll("a")].some(link => link.textContent.trim().toLowerCase() === "subjects")) {
+    const subjectsLink = document.createElement("a");
+    subjectsLink.href = subjectsPath;
+    subjectsLink.textContent = "Subjects";
+    nav.insertBefore(subjectsLink, nav.firstElementChild?.nextElementSibling || null);
+}
 
 let loginLinks = [...document.querySelectorAll(".nav-links a")].filter(link => {
     const href = link.getAttribute("href") || "";
