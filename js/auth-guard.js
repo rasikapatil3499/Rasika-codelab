@@ -4,7 +4,14 @@ const SUPABASE_URL = "https://runqfwmpkpjruzgzmaxe.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ1bnF3bXBoa3BqcnV6Z3ptYXhlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkyMDc1OTksImV4cCI6MjEwNDc4MzU5OX0.vuWoMDn7tYHSQAaplEc06cTNiGwwoqw_7drHRlf5wVE";
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-const loginUrl = new URL("../login.html", window.location.href);
+const loginRoot = window.location.pathname.includes("/subjects/cpp/practicals/")
+    ? "../../../"
+    : window.location.pathname.includes("/subjects/")
+        ? "../../"
+        : window.location.pathname.includes("/practicals/") || window.location.pathname.includes("/foundations/")
+            ? "../"
+            : "";
+const loginUrl = new URL(`${loginRoot}login.html`, window.location.href);
 loginUrl.searchParams.set("redirect", `${window.location.pathname}${window.location.search}`);
 
 document.documentElement.classList.add("auth-checking");

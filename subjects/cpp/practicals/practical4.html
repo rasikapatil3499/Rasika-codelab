@@ -9,11 +9,11 @@
           content="width=device-width, initial-scale=1.0">
 
     <title>
-        Practical 5 | Functions Outside Class | Rasika CodeLab
+        Practical 4 | Classes & Objects | Rasika CodeLab
     </title>
 
     <link rel="stylesheet"
-          href="../css/style.css">
+          href="../../../css/style.css">
 
 </head>
 
@@ -29,7 +29,7 @@
 
     <div class="nav-container">
 
-        <a href="../index.html"
+        <a href="../../../index.html"
            class="logo">
 
             <span class="logo-icon">
@@ -51,11 +51,11 @@
 
         <nav class="nav-links">
 
-            <a href="../index.html">
+            <a href="../../../index.html">
                 Home
             </a>
 
-            <a href="../foundations/program.html">
+            <a href="../../../foundations/program.html">
                 Foundations
             </a>
 
@@ -64,7 +64,7 @@
                 Practicals
             </a>
 
-            <a href="../index.html#about">
+            <a href="../../../index.html#about">
                 About
             </a>
 
@@ -92,17 +92,16 @@
         <div class="container">
 
             <span class="section-label">
-                C++ PRACTICAL 05
+                C++ PRACTICAL 04
             </span>
 
             <h1>
-                Functions Outside Class
+                Classes & Objects
             </h1>
 
             <p class="practical-subtitle">
-                Implement classes and objects by defining
-                member functions outside the class using
-                the scope resolution operator.
+                Implement classes and objects to define
+                functions inside the class.
             </p>
 
 
@@ -113,11 +112,11 @@
                 </span>
 
                 <span>
-                    📘 Practical 5
+                    📘 Practical 4
                 </span>
 
                 <span>
-                    🎯 LLO 5.1
+                    🎯 LLO 4.1
                 </span>
 
             </div>
@@ -144,9 +143,8 @@
             <div class="content-card">
 
                 <p>
-                    To implement classes and objects and define
-                    member functions outside the class using
-                    the scope resolution operator.
+                    To implement classes and objects in C++
+                    and define member functions inside the class.
                 </p>
 
             </div>
@@ -179,8 +177,8 @@
                     </span>
 
                     <p>
-                        Understand how member functions can be
-                        declared inside a class and defined outside.
+                        Understand the concept of classes
+                        and objects in C++.
                     </p>
 
                 </div>
@@ -193,8 +191,8 @@
                     </span>
 
                     <p>
-                        Use the scope resolution operator
-                        to define class member functions.
+                        Define data members and member
+                        functions inside a class.
                     </p>
 
                 </div>
@@ -207,8 +205,8 @@
                     </span>
 
                     <p>
-                        Create objects and invoke externally
-                        defined member functions.
+                        Create and use objects of a class
+                        in a C++ program.
                     </p>
 
                 </div>
@@ -221,8 +219,8 @@
                     </span>
 
                     <p>
-                        Apply classes and objects to practical
-                        programming problems.
+                        Implement functions inside a class
+                        to perform different operations.
                     </p>
 
                 </div>
@@ -236,7 +234,7 @@
 
 
     <!-- =================================================
-         MAIN CONTENT
+         TOPIC SECTION
          ================================================= -->
 
     <section class="content-section">
@@ -248,13 +246,13 @@
             </span>
 
             <h2>
-                Defining Functions Outside the Class
+                Classes, Objects & Member Functions
             </h2>
 
             <p class="section-description">
-                Learn how a member function can be declared
-                inside a class and its complete definition
-                can be written outside the class.
+                Understand how a class acts as a blueprint
+                and how objects use the data and functions
+                defined inside it.
             </p>
 
 
@@ -270,47 +268,28 @@
                 </h3>
 
                 <p>
-                    In C++, a member function can be declared
-                    inside a class and defined separately
-                    outside the class. The function declaration
-                    remains inside the class, while its complete
-                    definition is written outside the class body.
+                    A <strong>class</strong> is a user-defined
+                    data type that groups data members and
+                    member functions together. It provides a
+                    blueprint for creating objects.
                 </p>
 
                 <p>
-                    The scope resolution operator
-                    <code>::</code> is used to specify that the
-                    function belongs to a particular class.
+                    An <strong>object</strong> is an instance
+                    of a class. Each object can access the
+                    data members and member functions defined
+                    within the class.
                 </p>
 
                 <p>
-                    For example, if <code>display()</code> is
-                    declared inside the <code>Student</code>
-                    class, it can be defined outside as:
+                    In this practical, the member functions
+                    are defined <strong>inside the class</strong>.
+                    This means the function definition is written
+                    within the class body itself.
                 </p>
-
-
-                <div class="syntax-box">
-
-                    <code>
-                        void Student::display()
-                        {
-                            // function body
-                        }
-                    </code>
-
-                </div>
 
 
                 <div class="casting-rule">
-
-                    <span>
-                        Declaration
-                    </span>
-
-                    <strong>
-                        →
-                    </strong>
 
                     <span>
                         Class
@@ -321,7 +300,15 @@
                     </strong>
 
                     <span>
-                        Definition Outside
+                        Object
+                    </span>
+
+                    <strong>
+                        →
+                    </strong>
+
+                    <span>
+                        Function Call
                     </span>
 
                 </div>
@@ -347,13 +334,12 @@
                     </h3>
 
                     <p>
-                        Consider a large college management
-                        application. The Student class may contain
-                        declarations of many functions, while the
-                        detailed implementation of those functions
-                        can be written separately. This keeps the
-                        class declaration easier to read and
-                        organize.
+                        Consider a Student in a college system.
+                        A student has properties such as name,
+                        roll number and marks. A class can represent
+                        the common structure of a student, while
+                        individual students can be represented
+                        using objects.
                     </p>
 
                 </div>
@@ -378,12 +364,13 @@
                     <div>
 
                         <strong>
-                            Large Programs
+                            Student Management
                         </strong>
 
                         <p>
-                            Separating declarations and definitions
-                            makes large programs easier to organize.
+                            A Student class can store student
+                            information and functions can display
+                            or calculate student details.
                         </p>
 
                     </div>
@@ -392,12 +379,13 @@
                     <div>
 
                         <strong>
-                            Class Design
+                            Banking Systems
                         </strong>
 
                         <p>
-                            The class can show its interface while
-                            implementation details are written separately.
+                            An Account class can contain account
+                            data and functions such as deposit
+                            and withdrawal.
                         </p>
 
                     </div>
@@ -406,12 +394,13 @@
                     <div>
 
                         <strong>
-                            Reusable Code
+                            Billing Systems
                         </strong>
 
                         <p>
-                            Separating implementation from the class
-                            declaration supports better program structure.
+                            A Product class can contain product
+                            information and functions to calculate
+                            prices or totals.
                         </p>
 
                     </div>
@@ -423,13 +412,13 @@
 
 
             <!-- =================================================
-                 BASIC SYNTAX
+                 BASIC STRUCTURE
                  ================================================= -->
 
-            <div class="content-block">
+            <div class="content-block practical-class-structure">
 
                 <h4>
-                    Basic Syntax
+                    Basic Structure of a Class
                 </h4>
 
 
@@ -437,15 +426,21 @@
 
 <pre><code>class ClassName
 {
-public:
+    data members;
 
-    returnType functionName();
+    returnType functionName()
+    {
+        // function definition
+    }
 };
 
-
-returnType ClassName::functionName()
+int main()
 {
-    // function definition
+    ClassName object;
+
+    object.functionName();
+
+    return 0;
 }</code></pre>
 
                 </div>
@@ -461,7 +456,7 @@ returnType ClassName::functionName()
             <div class="problem-mini-selector">
 
                 <button class="mini-problem-tab active"
-                        data-problem="outside-problem1">
+                        data-problem="class-problem1">
 
                     Problem 01
 
@@ -469,7 +464,7 @@ returnType ClassName::functionName()
 
 
                 <button class="mini-problem-tab"
-                        data-problem="outside-problem2">
+                        data-problem="class-problem2">
 
                     Problem 02
 
@@ -477,7 +472,7 @@ returnType ClassName::functionName()
 
 
                 <button class="mini-problem-tab"
-                        data-problem="outside-problem3">
+                        data-problem="class-problem3">
 
                     Problem 03
 
@@ -492,7 +487,7 @@ returnType ClassName::functionName()
                  ================================================= -->
 
             <article class="mini-problem active"
-                     id="outside-problem1">
+                     id="class-problem1">
 
 
                 <span class="problem-badge">
@@ -515,9 +510,10 @@ returnType ClassName::functionName()
                     <p>
                         Write a C++ program to create a class
                         Student with data members roll number
-                        and name. Declare member functions inside
-                        the class and define them outside the
-                        class to accept and display student details.
+                        and name. Define a function inside the
+                        class to accept and display student
+                        details. Create an object of the class
+                        and call the function.
                     </p>
 
                 </div>
@@ -546,18 +542,13 @@ returnType ClassName::functionName()
                         </li>
 
                         <li>
-                            Declare accept() and display()
-                            functions inside the class.
+                            Define a function inside the class
+                            to accept student details.
                         </li>
 
                         <li>
-                            Define accept() outside the class
-                            using the scope resolution operator.
-                        </li>
-
-                        <li>
-                            Define display() outside the class
-                            using the scope resolution operator.
+                            Define another function inside the
+                            class to display the details.
                         </li>
 
                         <li>
@@ -598,30 +589,24 @@ class Student
 
 public:
 
-    void accept();
-    void display();
+    void accept()
+    {
+        cout &lt;&lt; "Enter roll number: ";
+        cin &gt;&gt; rollNo;
+
+        cout &lt;&lt; "Enter name: ";
+        cin &gt;&gt; name;
+    }
+
+    void display()
+    {
+        cout &lt;&lt; "\nRoll Number = "
+             &lt;&lt; rollNo &lt;&lt; endl;
+
+        cout &lt;&lt; "Name = "
+             &lt;&lt; name;
+    }
 };
-
-
-void Student::accept()
-{
-    cout &lt;&lt; "Enter roll number: ";
-    cin &gt;&gt; rollNo;
-
-    cout &lt;&lt; "Enter name: ";
-    cin &gt;&gt; name;
-}
-
-
-void Student::display()
-{
-    cout &lt;&lt; "\nRoll Number = "
-         &lt;&lt; rollNo &lt;&lt; endl;
-
-    cout &lt;&lt; "Name = "
-         &lt;&lt; name;
-}
-
 
 int main()
 {
@@ -667,17 +652,17 @@ Name = Rahul</pre>
                     <div class="visualization-header">
 
                         <span class="problem-badge">
-                            FUNCTION VISUALIZATION
+                            CLASS & OBJECT VISUALIZATION
                         </span>
 
                         <h3>
-                            Declaration → Definition → Object Call
+                            Class → Object → Function
                         </h3>
 
                         <p>
-                            The function is declared inside the
-                            class and its implementation is written
-                            outside using <code>::</code>.
+                            The class defines the structure,
+                            the object represents an instance,
+                            and the object calls the functions.
                         </p>
 
                     </div>
@@ -697,33 +682,11 @@ Name = Rahul</pre>
                             </strong>
 
                             <small>
-                                void accept();
+                                rollNo
                             </small>
 
                             <small>
-                                void display();
-                            </small>
-
-                        </div>
-
-
-                        <div class="class-visual-arrow">
-                            →
-                        </div>
-
-
-                        <div class="function-visual-box">
-
-                            <span>
-                                OUTSIDE CLASS
-                            </span>
-
-                            <strong>
-                                Student::display()
-                            </strong>
-
-                            <small>
-                                Function Definition
+                                name
                             </small>
 
                         </div>
@@ -745,7 +708,33 @@ Name = Rahul</pre>
                             </strong>
 
                             <small>
-                                s.display();
+                                rollNo = 101
+                            </small>
+
+                            <small>
+                                name = Rahul
+                            </small>
+
+                        </div>
+
+
+                        <div class="class-visual-arrow">
+                            →
+                        </div>
+
+
+                        <div class="function-visual-box">
+
+                            <span>
+                                FUNCTION
+                            </span>
+
+                            <strong>
+                                display()
+                            </strong>
+
+                            <small>
+                                Displays details
                             </small>
 
                         </div>
@@ -766,49 +755,31 @@ Name = Rahul</pre>
                     <ul class="key-points">
 
                         <li>
-                            <code>Student</code> is the class.
+                            <code>Student</code> is the class
+                            containing student data and functions.
                         </li>
 
                         <li>
-                            <code>accept()</code> and
-                            <code>display()</code> are declared
+                            <code>s</code> is an object of the
+                            Student class.
+                        </li>
+
+                        <li>
+                            <code>accept()</code> accepts the
+                            student's details.
+                        </li>
+
+                        <li>
+                            <code>display()</code> displays the
+                            stored details.
+                        </li>
+
+                        <li>
+                            Both functions are defined directly
                             inside the class.
                         </li>
 
-                        <li>
-                            Their definitions are written outside
-                            the class.
-                        </li>
-
-                        <li>
-                            <code>Student::display()</code>
-                            specifies that display belongs to
-                            the Student class.
-                        </li>
-
-                        <li>
-                            The object <code>s</code> calls the
-                            member functions using the dot operator.
-                        </li>
-
                     </ul>
-
-                </div>
-
-
-
-                <div class="content-block">
-
-                    <h4>
-                        Real-Life Connection
-                    </h4>
-
-                    <p>
-                        In a college management system, the class
-                        declaration can describe student operations
-                        while the detailed implementation of those
-                        operations can be maintained separately.
-                    </p>
 
                 </div>
 
@@ -823,18 +794,21 @@ Name = Rahul</pre>
                     <ul class="key-points">
 
                         <li>
-                            The function declaration is written
+                            A class is a blueprint for objects.
+                        </li>
+
+                        <li>
+                            An object is an instance of a class.
+                        </li>
+
+                        <li>
+                            Member functions can be defined
                             inside the class.
                         </li>
 
                         <li>
-                            The function definition is written
-                            outside the class.
-                        </li>
-
-                        <li>
-                            The scope resolution operator connects
-                            the function definition to its class.
+                            Functions are accessed using the
+                            object and dot operator.
                         </li>
 
                     </ul>
@@ -855,13 +829,13 @@ Name = Rahul</pre>
                         <div class="error-card">
 
                             <strong>
-                                Missing ::
+                                Missing Object
                             </strong>
 
                             <p>
-                                Use <code>Student::functionName()</code>
-                                when defining the function outside
-                                the class.
+                                A member function is generally
+                                called through an object when
+                                working with ordinary class objects.
                             </p>
 
                         </div>
@@ -870,13 +844,12 @@ Name = Rahul</pre>
                         <div class="error-card">
 
                             <strong>
-                                Wrong Declaration
+                                Wrong Function Call
                             </strong>
 
                             <p>
-                                The function declaration and
-                                definition should have matching
-                                return types and parameters.
+                                Use the correct syntax such as
+                                <code>s.display()</code>.
                             </p>
 
                         </div>
@@ -894,7 +867,7 @@ Name = Rahul</pre>
                  ================================================= -->
 
             <article class="mini-problem"
-                     id="outside-problem2">
+                     id="class-problem2">
 
 
                 <span class="problem-badge">
@@ -917,10 +890,9 @@ Name = Rahul</pre>
                     <p>
                         Write a C++ program to create a class
                         Rectangle with data members length and
-                        breadth. Declare functions inside the
-                        class and define the functions outside
-                        the class to calculate and display the
-                        area and perimeter.
+                        breadth. Define functions inside the
+                        class to calculate and display the area
+                        and perimeter of the rectangle.
                     </p>
 
                 </div>
@@ -980,7 +952,7 @@ Name = Rahul</pre>
                         </li>
 
                         <li>
-                            Define a Rectangle class.
+                            Define a class Rectangle.
                         </li>
 
                         <li>
@@ -988,25 +960,24 @@ Name = Rahul</pre>
                         </li>
 
                         <li>
-                            Declare accept() and calculate()
-                            inside the class.
+                            Define a function to accept dimensions.
                         </li>
 
                         <li>
-                            Define the functions outside the
-                            class using the scope resolution operator.
+                            Define a function to calculate area
+                            and perimeter.
                         </li>
 
                         <li>
-                            Create a Rectangle object.
+                            Create an object of Rectangle.
                         </li>
 
                         <li>
-                            Call the functions using the object.
+                            Call the required functions.
                         </li>
 
                         <li>
-                            Display area and perimeter.
+                            Display the results.
                         </li>
 
                         <li>
@@ -1038,35 +1009,29 @@ class Rectangle
 
 public:
 
-    void accept();
-    void calculate();
+    void accept()
+    {
+        cout &lt;&lt; "Enter length: ";
+        cin &gt;&gt; length;
+
+        cout &lt;&lt; "Enter breadth: ";
+        cin &gt;&gt; breadth;
+    }
+
+    void calculate()
+    {
+        float area = length * breadth;
+
+        float perimeter =
+            2 * (length + breadth);
+
+        cout &lt;&lt; "\nArea = "
+             &lt;&lt; area &lt;&lt; endl;
+
+        cout &lt;&lt; "Perimeter = "
+             &lt;&lt; perimeter;
+    }
 };
-
-
-void Rectangle::accept()
-{
-    cout &lt;&lt; "Enter length: ";
-    cin &gt;&gt; length;
-
-    cout &lt;&lt; "Enter breadth: ";
-    cin &gt;&gt; breadth;
-}
-
-
-void Rectangle::calculate()
-{
-    float area = length * breadth;
-
-    float perimeter =
-        2 * (length + breadth);
-
-    cout &lt;&lt; "\nArea = "
-         &lt;&lt; area &lt;&lt; endl;
-
-    cout &lt;&lt; "Perimeter = "
-         &lt;&lt; perimeter;
-}
-
 
 int main()
 {
@@ -1110,12 +1075,18 @@ Perimeter = 30</pre>
                     <div class="visualization-header">
 
                         <span class="problem-badge">
-                            FUNCTION VISUALIZATION
+                            OBJECT VISUALIZATION
                         </span>
 
                         <h3>
-                            Rectangle Class
+                            Rectangle Object
                         </h3>
+
+                        <p>
+                            The object stores the dimensions
+                            and its member function performs
+                            the calculations.
+                        </p>
 
                     </div>
 
@@ -1150,30 +1121,8 @@ Perimeter = 30</pre>
                             </span>
 
                             <span>
-                                r.calculate()
+                                area = 50
                             </span>
-
-                        </div>
-
-
-                        <div class="class-visual-arrow">
-                            →
-                        </div>
-
-
-                        <div class="employee-function">
-
-                            <span>
-                                OUTSIDE CLASS
-                            </span>
-
-                            <strong>
-                                Rectangle::calculate()
-                            </strong>
-
-                            <small>
-                                Area & Perimeter
-                            </small>
 
                         </div>
 
@@ -1192,23 +1141,26 @@ Perimeter = 30</pre>
                     <ul class="key-points">
 
                         <li>
-                            <code>Rectangle</code> contains the
-                            dimensions and function declarations.
+                            <code>Rectangle</code> is the class.
                         </li>
 
                         <li>
-                            <code>accept()</code> is defined outside
-                            the class using <code>Rectangle::</code>.
+                            <code>r</code> is the object.
                         </li>
 
                         <li>
-                            <code>calculate()</code> is also defined
-                            outside the class.
+                            <code>accept()</code> receives the
+                            rectangle dimensions.
                         </li>
 
                         <li>
-                            The object <code>r</code> calls both
-                            functions.
+                            <code>calculate()</code> calculates
+                            area and perimeter.
+                        </li>
+
+                        <li>
+                            The functions are defined inside
+                            the class.
                         </li>
 
                     </ul>
@@ -1224,10 +1176,10 @@ Perimeter = 30</pre>
                     </h4>
 
                     <p>
-                        Engineering and graphics applications can
-                        represent shapes using classes and keep
-                        their calculation functions separately
-                        implemented for better organization.
+                        Similar class-based logic can be used in
+                        architectural and engineering software
+                        to represent shapes and calculate their
+                        dimensions.
                     </p>
 
                 </div>
@@ -1243,18 +1195,13 @@ Perimeter = 30</pre>
                     <ul class="key-points">
 
                         <li>
-                            Function declarations remain inside
-                            the class.
+                            Data and operations related to a
+                            rectangle are grouped inside one class.
                         </li>
 
                         <li>
-                            Function implementations can be written
-                            outside the class.
-                        </li>
-
-                        <li>
-                            The scope resolution operator identifies
-                            the class to which the function belongs.
+                            Member functions operate on the
+                            object's data.
                         </li>
 
                     </ul>
@@ -1275,12 +1222,12 @@ Perimeter = 30</pre>
                         <div class="error-card">
 
                             <strong>
-                                Incorrect Scope
+                                Incorrect Formula
                             </strong>
 
                             <p>
-                                Use the correct class name before
-                                the scope resolution operator.
+                                Check the area and perimeter
+                                formulas carefully.
                             </p>
 
                         </div>
@@ -1289,13 +1236,12 @@ Perimeter = 30</pre>
                         <div class="error-card">
 
                             <strong>
-                                Function Mismatch
+                                Wrong Object Name
                             </strong>
 
                             <p>
-                                The outside definition must match
-                                the function declaration inside
-                                the class.
+                                Use the same object name when
+                                calling member functions.
                             </p>
 
                         </div>
@@ -1313,7 +1259,7 @@ Perimeter = 30</pre>
                  ================================================= -->
 
             <article class="mini-problem"
-                     id="outside-problem3">
+                     id="class-problem3">
 
 
                 <span class="problem-badge">
@@ -1336,10 +1282,26 @@ Perimeter = 30</pre>
                     <p>
                         Write a C++ program to create a class
                         Employee with data members employee ID,
-                        name and basic salary. Declare member
-                        functions inside the class and define
-                        them outside the class to accept employee
+                        name and basic salary. Define functions
+                        inside the class to accept employee
                         details and calculate the gross salary.
+                    </p>
+
+                </div>
+
+
+
+                <div class="content-block">
+
+                    <h4>
+                        Concept
+                    </h4>
+
+                    <p>
+                        A class can combine employee information
+                        with the functions that operate on that
+                        information. The object represents one
+                        employee record.
                     </p>
 
                 </div>
@@ -1359,7 +1321,7 @@ Perimeter = 30</pre>
                         </li>
 
                         <li>
-                            Define the Employee class.
+                            Define an Employee class.
                         </li>
 
                         <li>
@@ -1368,13 +1330,12 @@ Perimeter = 30</pre>
                         </li>
 
                         <li>
-                            Declare accept() and display()
-                            functions inside the class.
+                            Define a function to accept details.
                         </li>
 
                         <li>
-                            Define the functions outside the
-                            class using the scope resolution operator.
+                            Define a function to calculate
+                            gross salary.
                         </li>
 
                         <li>
@@ -1382,11 +1343,12 @@ Perimeter = 30</pre>
                         </li>
 
                         <li>
-                            Accept employee details.
+                            Call the member functions.
                         </li>
 
                         <li>
-                            Calculate and display gross salary.
+                            Display employee information and
+                            gross salary.
                         </li>
 
                         <li>
@@ -1419,45 +1381,39 @@ class Employee
 
 public:
 
-    void accept();
-    void display();
+    void accept()
+    {
+        cout &lt;&lt; "Enter employee ID: ";
+        cin &gt;&gt; empId;
+
+        cout &lt;&lt; "Enter name: ";
+        cin &gt;&gt; name;
+
+        cout &lt;&lt; "Enter basic salary: ";
+        cin &gt;&gt; basicSalary;
+    }
+
+    void display()
+    {
+        float hra = basicSalary * 0.20;
+        float da = basicSalary * 0.10;
+
+        float grossSalary =
+            basicSalary + hra + da;
+
+        cout &lt;&lt; "\nEmployee ID = "
+             &lt;&lt; empId &lt;&lt; endl;
+
+        cout &lt;&lt; "Name = "
+             &lt;&lt; name &lt;&lt; endl;
+
+        cout &lt;&lt; "Basic Salary = "
+             &lt;&lt; basicSalary &lt;&lt; endl;
+
+        cout &lt;&lt; "Gross Salary = "
+             &lt;&lt; grossSalary;
+    }
 };
-
-
-void Employee::accept()
-{
-    cout &lt;&lt; "Enter employee ID: ";
-    cin &gt;&gt; empId;
-
-    cout &lt;&lt; "Enter name: ";
-    cin &gt;&gt; name;
-
-    cout &lt;&lt; "Enter basic salary: ";
-    cin &gt;&gt; basicSalary;
-}
-
-
-void Employee::display()
-{
-    float hra = basicSalary * 0.20;
-    float da = basicSalary * 0.10;
-
-    float grossSalary =
-        basicSalary + hra + da;
-
-    cout &lt;&lt; "\nEmployee ID = "
-         &lt;&lt; empId &lt;&lt; endl;
-
-    cout &lt;&lt; "Name = "
-         &lt;&lt; name &lt;&lt; endl;
-
-    cout &lt;&lt; "Basic Salary = "
-         &lt;&lt; basicSalary &lt;&lt; endl;
-
-    cout &lt;&lt; "Gross Salary = "
-         &lt;&lt; grossSalary;
-}
-
 
 int main()
 {
@@ -1508,7 +1464,7 @@ Gross Salary = 39000</pre>
                         </span>
 
                         <h3>
-                            Employee Object & Outside Function
+                            Employee Object
                         </h3>
 
                     </div>
@@ -1553,11 +1509,11 @@ Gross Salary = 39000</pre>
                         <div class="employee-function">
 
                             <span>
-                                OUTSIDE CLASS
+                                MEMBER FUNCTION
                             </span>
 
                             <strong>
-                                Employee::display()
+                                display()
                             </strong>
 
                             <small>
@@ -1586,25 +1542,23 @@ Gross Salary = 39000</pre>
                         </li>
 
                         <li>
-                            <code>accept()</code> and
-                            <code>display()</code> are declared
+                            <code>e</code> is an object of the
+                            Employee class.
+                        </li>
+
+                        <li>
+                            <code>accept()</code> accepts employee
+                            information.
+                        </li>
+
+                        <li>
+                            <code>display()</code> calculates and
+                            displays the gross salary.
+                        </li>
+
+                        <li>
+                            Both member functions are defined
                             inside the class.
-                        </li>
-
-                        <li>
-                            Their definitions are written outside
-                            the class.
-                        </li>
-
-                        <li>
-                            <code>Employee::display()</code>
-                            identifies the function as a member
-                            of the Employee class.
-                        </li>
-
-                        <li>
-                            The object <code>e</code> calls the
-                            member functions.
                         </li>
 
                     </ul>
@@ -1620,10 +1574,9 @@ Gross Salary = 39000</pre>
                     </h4>
 
                     <p>
-                        Payroll software can use an Employee class
-                        to store employee information while keeping
-                        salary calculation functions separately
-                        implemented outside the class declaration.
+                        Employee classes are commonly used in
+                        payroll systems to store employee details
+                        and perform salary-related calculations.
                     </p>
 
                 </div>
@@ -1639,18 +1592,18 @@ Gross Salary = 39000</pre>
                     <ul class="key-points">
 
                         <li>
-                            Class declarations can be kept concise.
+                            Classes combine related data and
+                            functions.
                         </li>
 
                         <li>
-                            Function implementation can be separated
-                            from the class declaration.
+                            Different objects can represent
+                            different employees.
                         </li>
 
                         <li>
-                            The scope resolution operator associates
-                            the outside function definition with
-                            its class.
+                            Functions defined inside the class
+                            can directly work with its data members.
                         </li>
 
                     </ul>
@@ -1671,12 +1624,12 @@ Gross Salary = 39000</pre>
                         <div class="error-card">
 
                             <strong>
-                                Forgetting Class Name
+                                Incorrect Salary Calculation
                             </strong>
 
                             <p>
-                                The outside definition must use the
-                                class name followed by <code>::</code>.
+                                Verify the HRA, DA and gross
+                                salary calculation.
                             </p>
 
                         </div>
@@ -1685,12 +1638,12 @@ Gross Salary = 39000</pre>
                         <div class="error-card">
 
                             <strong>
-                                Declaration Mismatch
+                                Accessing Private Data
                             </strong>
 
                             <p>
-                                Return type, function name and
-                                parameters must match the declaration.
+                                Private data members should be
+                                accessed through member functions.
                             </p>
 
                         </div>
@@ -1714,7 +1667,7 @@ Gross Salary = 39000</pre>
                 </span>
 
                 <h3>
-                    Inside Declaration → Outside Definition
+                    Class → Object → Function
                 </h3>
 
 
@@ -1728,16 +1681,16 @@ Gross Salary = 39000</pre>
                         </span>
 
                         <h4>
-                            Declare Inside
+                            Class
                         </h4>
 
                         <p>
-                            The member function is declared
-                            inside the class.
+                            A class is a blueprint that contains
+                            data members and member functions.
                         </p>
 
                         <code>
-                            void display();
+                            class Student { };
                         </code>
 
                     </div>
@@ -1751,16 +1704,16 @@ Gross Salary = 39000</pre>
                         </span>
 
                         <h4>
-                            Define Outside
+                            Object
                         </h4>
 
                         <p>
-                            The complete function body is
-                            written outside the class.
+                            An object is an instance of a class
+                            used to access its members.
                         </p>
 
                         <code>
-                            void Student::display() { }
+                            Student s;
                         </code>
 
                     </div>
@@ -1774,16 +1727,16 @@ Gross Salary = 39000</pre>
                         </span>
 
                         <h4>
-                            Scope Resolution
+                            Function Inside Class
                         </h4>
 
                         <p>
-                            The <code>::</code> operator identifies
-                            the class to which the function belongs.
+                            A member function can be defined
+                            directly inside the class body.
                         </p>
 
                         <code>
-                            Student::display()
+                            void display() { }
                         </code>
 
                     </div>
@@ -1797,12 +1750,12 @@ Gross Salary = 39000</pre>
                         </span>
 
                         <h4>
-                            Object Call
+                            Function Call
                         </h4>
 
                         <p>
-                            The object calls the member function
-                            using the dot operator.
+                            The object can call the member
+                            function using the dot operator.
                         </p>
 
                         <code>
@@ -1837,78 +1790,6 @@ Gross Salary = 39000</pre>
                 <div class="viva-group">
 
                     <h3>
-                        Functions Outside Class
-                    </h3>
-
-
-                    <details>
-
-                        <summary>
-                            Can a member function be defined outside a class?
-                        </summary>
-
-                        <p>
-                            Yes. A member function can be declared
-                            inside the class and defined outside
-                            using the scope resolution operator.
-                        </p>
-
-                    </details>
-
-
-                    <details>
-
-                        <summary>
-                            Which operator is used to define a
-                            member function outside the class?
-                        </summary>
-
-                        <p>
-                            The scope resolution operator
-                            <code>::</code> is used.
-                        </p>
-
-                    </details>
-
-
-                    <details>
-
-                        <summary>
-                            What is the syntax for defining a
-                            function outside a class?
-                        </summary>
-
-                        <p>
-                            The syntax is
-                            <code>returnType ClassName::functionName()</code>
-                            followed by the function body.
-                        </p>
-
-                    </details>
-
-
-                    <details>
-
-                        <summary>
-                            Why are functions defined outside the class?
-                        </summary>
-
-                        <p>
-                            Separating the declaration from the
-                            implementation can make class definitions
-                            easier to read and larger programs easier
-                            to organize.
-                        </p>
-
-                    </details>
-
-                </div>
-
-
-
-                <div class="viva-group">
-
-                    <h3>
                         Classes & Objects
                     </h3>
 
@@ -1921,7 +1802,8 @@ Gross Salary = 39000</pre>
 
                         <p>
                             A class is a user-defined data type
-                            that groups related data and functions.
+                            that groups data members and member
+                            functions together.
                         </p>
 
                     </details>
@@ -1943,13 +1825,67 @@ Gross Salary = 39000</pre>
                     <details>
 
                         <summary>
-                            How is an outside member function
-                            called?
+                            What is a member function?
                         </summary>
 
                         <p>
-                            It is called through an object using
-                            the dot operator, for example
+                            A member function is a function that
+                            belongs to a class and operates on
+                            its data members.
+                        </p>
+
+                    </details>
+
+
+                    <details>
+
+                        <summary>
+                            How do you create an object?
+                        </summary>
+
+                        <p>
+                            An object can be created using the
+                            class name followed by the object name,
+                            for example
+                            <code>Student s;</code>.
+                        </p>
+
+                    </details>
+
+                </div>
+
+
+
+                <div class="viva-group">
+
+                    <h3>
+                        Functions Inside Class
+                    </h3>
+
+
+                    <details>
+
+                        <summary>
+                            Where is the function defined in this practical?
+                        </summary>
+
+                        <p>
+                            The member function is defined
+                            directly inside the class body.
+                        </p>
+
+                    </details>
+
+
+                    <details>
+
+                        <summary>
+                            How is a member function called?
+                        </summary>
+
+                        <p>
+                            A member function can be called using
+                            an object and the dot operator, such as
                             <code>s.display()</code>.
                         </p>
 
@@ -1959,15 +1895,28 @@ Gross Salary = 39000</pre>
                     <details>
 
                         <summary>
-                            What is the difference between
-                            declaration and definition?
+                            Why are classes useful?
                         </summary>
 
                         <p>
-                            A declaration specifies the function's
-                            name, return type and parameters, while
-                            a definition contains the actual
-                            implementation of the function.
+                            Classes allow related data and functions
+                            to be grouped together, making programs
+                            easier to organize and maintain.
+                        </p>
+
+                    </details>
+
+
+                    <details>
+
+                        <summary>
+                            Can multiple objects be created from one class?
+                        </summary>
+
+                        <p>
+                            Yes. Multiple objects can be created
+                            from the same class, and each object
+                            can represent a separate instance.
                         </p>
 
                     </details>
@@ -2030,12 +1979,12 @@ Gross Salary = 39000</pre>
      MAIN JS
      ===================================================== -->
 
-<script src="../js/main.js"></script>
+<script src="../../../js/main.js"></script>
 
 
 
 <!-- =====================================================
-     PRACTICAL 5 JS
+     PRACTICAL 4 JS
      ===================================================== -->
 
 <script>
@@ -2098,7 +2047,7 @@ Gross Salary = 39000</pre>
 </script>
 
 
-<script type="module" src="../js/auth-guard.js"></script>
+<script type="module" src="../../../js/auth-guard.js"></script>
 </body>
 
 </html>

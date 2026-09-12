@@ -5373,6 +5373,32 @@ body.protected-page:not(.auth-ready) {
     margin-bottom: 8px;
 }
 
+.cpp-practical-links {
+    max-width: 760px;
+    margin: 55px auto 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.cpp-practical-links a {
+    padding: 18px 20px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    font-size: 13px;
+    text-align: left;
+    transition: var(--transition);
+}
+
+.cpp-practical-links a:hover {
+    border-color: var(--border-hover);
+    background: var(--bg-card-hover);
+    color: var(--text-primary);
+    transform: translateY(-3px);
+}
+
 @media (max-width: 800px) {
     .subject-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -5398,6 +5424,10 @@ body.protected-page:not(.auth-ready) {
     .subject-route {
         grid-template-columns: 1fr;
         flex-direction: column;
+    }
+
+    .cpp-practical-links {
+        grid-template-columns: 1fr;
     }
 
     .subject-actions .btn {

@@ -5,12 +5,16 @@ const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 const nav = document.querySelector(".nav-links");
-const isNestedPage = window.location.pathname.includes("/practicals/") ||
-    window.location.pathname.includes("/foundations/") ||
-    window.location.pathname.includes("/subjects/");
-const loginPath = isNestedPage ? "../login.html" : "login.html";
-const homePath = isNestedPage ? "../index.html" : "index.html";
-const subjectsPath = isNestedPage ? "../subjects.html" : "subjects.html";
+const relativeRoot = window.location.pathname.includes("/subjects/cpp/practicals/")
+    ? "../../../"
+    : window.location.pathname.includes("/subjects/")
+        ? "../../"
+        : window.location.pathname.includes("/practicals/") || window.location.pathname.includes("/foundations/")
+            ? "../"
+            : "";
+const loginPath = `${relativeRoot}login.html`;
+const homePath = `${relativeRoot}index.html`;
+const subjectsPath = `${relativeRoot}subjects.html`;
 
 document.querySelectorAll('.nav-links a[href="index.html"]').forEach(link => {
     if (window.location.pathname.includes("/practicals/")) {
