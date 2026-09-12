@@ -38,7 +38,11 @@ page they originally requested. For this project, add:
 https://rasikapatil3499.github.io/Rasika-codelab/login.html*
 ```
 
-The Google Cloud OAuth client must also allow the Supabase callback URL shown by Supabase in the Google provider settings.
+The Google Cloud OAuth client must allow this Supabase callback URL:
+
+```text
+https://runqfwmpkpjruzgzmaxe.supabase.co/auth/v1/callback
+```
 
 ## 4. Run locally
 
