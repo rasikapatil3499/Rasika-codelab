@@ -3,6 +3,8 @@
 // Main JavaScript
 // =========================================================
 
+import("./auth-nav.js");
+
 document.addEventListener("DOMContentLoaded", () => {
 
     /* =========================================
