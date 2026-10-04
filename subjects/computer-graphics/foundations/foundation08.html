@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Foundation 08 â€” Understand how a graphics object moves from mathematical geometry to transformed, clipped and rasterized pixels.">
+    <meta name="description" content="Foundation 08 — Understand how a graphics object moves from mathematical geometry to transformed, clipped and rasterized pixels.">
     <title>Foundation 08 | How Does an Object Become Pixels? | Rasika CodeLab</title>
     <link rel="stylesheet" href="../css/cgr_style.css">
 <style>body.protected-page:not(.auth-ready){visibility:hidden}</style>
@@ -14,7 +14,7 @@
 <header class="site-header">
     <nav class="navbar">
         <a href="../cgr_index.html" class="logo">
-            <span class="logo-mark">â—ˆ</span>
+            <span class="logo-mark">◈</span>
             Rasika<span class="logo-highlight">CodeLab</span>
         </a>
 
@@ -25,7 +25,7 @@
                         <a href="../../../about.html">About</a>
         </div>
 
-        <button class="menu-btn" type="button" aria-label="Open menu">â˜°</button>
+        <button class="menu-btn" type="button" aria-label="Open menu">☰</button>
     </nav>
 </header>
 
@@ -75,7 +75,7 @@
                     <i></i>
                 </div>
 
-                <div class="hero-transform">â†’</div>
+                <div class="hero-transform">→</div>
 
                 <div class="hero-pixel-grid">
                     <i></i><i></i><i></i><i></i>
@@ -139,7 +139,7 @@
 
     <div class="content-card">
 
-        <span class="eyebrow">01 Â· BIG IDEA</span>
+        <span class="eyebrow">01 · BIG IDEA</span>
 
         <h2>The screen does not directly understand a triangle.</h2>
 
@@ -153,8 +153,8 @@
         <div class="definition-box">
             <strong>Core idea</strong>
             <p>
-                <strong>Object â†’ Coordinates â†’ Transform â†’ View â†’ Clip â†’
-                Rasterize â†’ Pixel</strong>
+                <strong>Object → Coordinates → Transform → View → Clip →
+                Rasterize → Pixel</strong>
             </p>
         </div>
 
@@ -167,7 +167,7 @@
 <section class="section foundation-detail">
 
     <div class="section-heading">
-        <span class="eyebrow">02 Â· COMPLETE FLOW</span>
+        <span class="eyebrow">02 · COMPLETE FLOW</span>
         <h2>Follow every major stage.</h2>
         <p>
             This simplified pipeline connects the foundation topics you have
@@ -185,7 +185,7 @@
                 <small>Vertices, shapes and other geometric data define the object.</small>
             </div>
 
-            <div class="flow-arrow">â†’</div>
+            <div class="flow-arrow">→</div>
 
             <div class="flow-item">
                 <span>02</span>
@@ -193,7 +193,7 @@
                 <small>Positions are represented in a coordinate system.</small>
             </div>
 
-            <div class="flow-arrow">â†’</div>
+            <div class="flow-arrow">→</div>
 
             <div class="flow-item">
                 <span>03</span>
@@ -201,7 +201,7 @@
                 <small>Translation, scaling and rotation modify the geometry.</small>
             </div>
 
-            <div class="flow-arrow">â†’</div>
+            <div class="flow-arrow">→</div>
 
             <div class="flow-item">
                 <span>04</span>
@@ -209,7 +209,7 @@
                 <small>Parts outside the visible region can be discarded.</small>
             </div>
 
-            <div class="flow-arrow">â†’</div>
+            <div class="flow-arrow">→</div>
 
             <div class="flow-item">
                 <span>05</span>
@@ -217,7 +217,7 @@
                 <small>Geometry is mapped to raster-oriented pixel information.</small>
             </div>
 
-            <div class="flow-arrow">â†’</div>
+            <div class="flow-arrow">→</div>
 
             <div class="flow-item">
                 <span>06</span>
@@ -236,7 +236,7 @@
 <section class="section foundation-detail">
 
     <div class="section-heading">
-        <span class="eyebrow">03 Â· COORDINATES</span>
+        <span class="eyebrow">03 · COORDINATES</span>
         <h2>Everything starts with position.</h2>
     </div>
 
@@ -266,7 +266,7 @@
             <h3>Describe its pixel location.</h3>
 
             <div class="formula-box">
-                Pixel = (xâ‚›, yâ‚›)
+                Pixel = (xₛ, yₛ)
             </div>
 
             <p>
@@ -285,7 +285,7 @@
 <section class="section foundation-detail">
 
     <div class="section-heading">
-        <span class="eyebrow">04 Â· TRANSFORMATION</span>
+        <span class="eyebrow">04 · TRANSFORMATION</span>
         <h2>Change the object's position, size or orientation.</h2>
     </div>
 
@@ -336,7 +336,7 @@
 <section class="section foundation-detail">
 
     <div class="section-heading">
-        <span class="eyebrow">05 Â· WORKED CALCULATION</span>
+        <span class="eyebrow">05 · WORKED CALCULATION</span>
         <h2>See a translation mathematically.</h2>
         <p>
             Suppose a point is moved by a translation vector.
@@ -385,7 +385,7 @@
 <section class="section foundation-detail">
 
     <div class="section-heading">
-        <span class="eyebrow">06 Â· CLIPPING</span>
+        <span class="eyebrow">06 · CLIPPING</span>
         <h2>Only the visible part should continue.</h2>
         <p>
             A viewing window defines the region that should be considered for
@@ -403,8 +403,8 @@
             <h3>Visible region</h3>
 
             <div class="formula-box">
-                xmin â‰¤ x â‰¤ xmax<br>
-                ymin â‰¤ y â‰¤ ymax
+                xmin ≤ x ≤ xmax<br>
+                ymin ≤ y ≤ ymax
             </div>
 
             <p>
@@ -439,7 +439,7 @@
 <section class="section foundation-detail">
 
     <div class="section-heading">
-        <span class="eyebrow">07 Â· INTERACTIVE VISUALIZATION</span>
+        <span class="eyebrow">07 · INTERACTIVE VISUALIZATION</span>
         <h2>Move an object through the graphics pipeline.</h2>
         <p>
             Use the controls to translate and scale the object, then step
@@ -493,7 +493,7 @@
 
                 <label for="objectScale">
                     Scale
-                    <output id="objectScaleValue">1.0Ã—</output>
+                    <output id="objectScaleValue">1.0×</output>
                 </label>
 
                 <input id="objectScale" type="range" min="5" max="20" value="10">
@@ -505,7 +505,7 @@
                 <span>Current transformation</span>
 
                 <strong id="transformOutput">
-                    T(0, 0) Â· S(1.0)
+                    T(0, 0) · S(1.0)
                 </strong>
 
             </div>
@@ -525,7 +525,7 @@
 <section class="section foundation-detail">
 
     <div class="section-heading">
-        <span class="eyebrow">08 Â· RASTERIZATION</span>
+        <span class="eyebrow">08 · RASTERIZATION</span>
         <h2>Geometry meets a discrete pixel grid.</h2>
         <p>
             Rasterization determines the raster representation of geometric
@@ -544,7 +544,7 @@
                 <small>Defined by mathematical endpoints.</small>
             </div>
 
-            <div class="flow-arrow">â†’</div>
+            <div class="flow-arrow">→</div>
 
             <div class="flow-item">
                 <span>02</span>
@@ -552,7 +552,7 @@
                 <small>DDA or Bresenham can determine raster positions.</small>
             </div>
 
-            <div class="flow-arrow">â†’</div>
+            <div class="flow-arrow">→</div>
 
             <div class="flow-item">
                 <span>03</span>
@@ -560,7 +560,7 @@
                 <small>Discrete pixels are selected to represent the line.</small>
             </div>
 
-            <div class="flow-arrow">â†’</div>
+            <div class="flow-arrow">→</div>
 
             <div class="flow-item">
                 <span>04</span>
@@ -579,7 +579,7 @@
 <section class="section foundation-detail">
 
     <div class="section-heading">
-        <span class="eyebrow">09 Â· CONNECT THE CONCEPTS</span>
+        <span class="eyebrow">09 · CONNECT THE CONCEPTS</span>
         <h2>These foundations lead directly to your practicals.</h2>
     </div>
 
@@ -648,7 +648,7 @@
 <section class="section foundation-detail">
 
     <div class="section-heading">
-        <span class="eyebrow">10 Â· TERMINOLOGY</span>
+        <span class="eyebrow">10 · TERMINOLOGY</span>
         <h2>Words you should know before starting algorithms.</h2>
     </div>
 
@@ -710,7 +710,7 @@
         </div>
 
         <div class="term-card">
-            <strong>Geometry â‰  Pixel Data</strong>
+            <strong>Geometry ≠ Pixel Data</strong>
             <p>Geometric coordinates describe an object; rasterization connects that geometry to pixels.</p>
         </div>
 
@@ -834,14 +834,14 @@
 <section class="section foundation-navigation">
 
     <a href="foundation07.html" class="nav-card">
-        <span>â†</span>
+        <span>←</span>
         <small>PREVIOUS FOUNDATION</small>
         <strong>How Does a Computer Draw?</strong>
     </a>
 
     <a href="../cgr_practicals.html" class="nav-card next">
         <small>FOUNDATIONS COMPLETE</small>
-        <strong>Start CGR Practicals â†’</strong>
+        <strong>Start CGR Practicals →</strong>
     </a>
 
 </section>
@@ -868,7 +868,7 @@
     </div>
 
     <div class="footer-bottom">
-        Â© 2026 Rasika CodeLab Â· Learn the concept. See the result.
+        © 2026 Rasika CodeLab · Learn the concept. See the result.
     </div>
 
 </footer>
@@ -896,13 +896,13 @@
 
         xValue.textContent = x;
         yValue.textContent = y;
-        scaleValue.textContent = scale.toFixed(1) + "Ã—";
+        scaleValue.textContent = scale.toFixed(1) + "×";
 
         object.style.transform =
             "translate(" + (x * 22) + "px, " + (-y * 22) + "px) scale(" + scale + ")";
 
         transformOutput.textContent =
-            "T(" + x + ", " + y + ") Â· S(" + scale.toFixed(1) + ")";
+            "T(" + x + ", " + y + ") · S(" + scale.toFixed(1) + ")";
 
     }
 

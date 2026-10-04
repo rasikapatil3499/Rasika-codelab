@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>05 â€” How Does DBMS Keep Data Safe? | DBMS Foundation</title>
+    <title>05 — How Does DBMS Keep Data Safe? | DBMS Foundation</title>
     <link rel="stylesheet" href="../../../css/style.css">
     <link rel="stylesheet" href="../css/dbms_foundation.css">
 </head>
@@ -26,7 +26,7 @@
             <a href="../../../login.html">Login</a>
         </nav>
 
-        <button class="menu-btn" aria-label="Open menu">â˜°</button>
+        <button class="menu-btn" aria-label="Open menu">☰</button>
 
     </div>
 </header>
@@ -42,7 +42,7 @@
         <h1>How Does DBMS <span>Keep Data Safe?</span></h1>
 
         <p>
-            Explore buffers, logs, failures, backups and recovery â€”
+            Explore buffers, logs, failures, backups and recovery —
             and understand how a DBMS protects data when systems fail.
         </p>
 
@@ -85,7 +85,7 @@
             </p>
 
             <button class="primary-btn" onclick="startRecovery()">
-                âš¡ Simulate Failure
+                ⚡ Simulate Failure
             </button>
 
         </article>
@@ -116,7 +116,7 @@
                 <small>Normal Operation</small>
             </div>
 
-            <div class="recovery-arrow">â†“</div>
+            <div class="recovery-arrow">↓</div>
 
             <div class="recovery-node" id="logNode">
                 <span>02</span>
@@ -124,7 +124,7 @@
                 <small>Changes Recorded</small>
             </div>
 
-            <div class="recovery-arrow">â†“</div>
+            <div class="recovery-arrow">↓</div>
 
             <div class="recovery-node failure-node" id="failureNode">
                 <span>03</span>
@@ -132,7 +132,7 @@
                 <small>System Crash</small>
             </div>
 
-            <div class="recovery-arrow">â†“</div>
+            <div class="recovery-arrow">↓</div>
 
             <div class="recovery-node" id="recoveryNode">
                 <span>04</span>
@@ -146,11 +146,11 @@
         <div class="recovery-actions">
 
             <button class="secondary-btn" onclick="startRecovery()">
-                â–¶ Start Recovery
+                ▶ Start Recovery
             </button>
 
             <button class="secondary-btn danger" onclick="resetRecovery()">
-                â†» Reset
+                ↻ Reset
             </button>
 
         </div>
@@ -180,11 +180,11 @@
     <nav class="lesson-navigation">
 
         <a href="foundation04.html" class="nav-btn">
-            â† Previous
+            ← Previous
         </a>
 
         <a href="../index.html" class="nav-btn next">
-            Finish Foundations âœ“
+            Finish Foundations ✓
         </a>
 
     </nav>
@@ -217,7 +217,7 @@ function startRecovery() {
         if (index >= nodes.length) {
 
             status.innerHTML =
-                "âœ“ Recovery complete â€” database restored to a consistent state.";
+                "✓ Recovery complete — database restored to a consistent state.";
 
             return;
         }
@@ -229,7 +229,7 @@ function startRecovery() {
         const messages = [
             "Database is operating normally.",
             "DBMS records changes in the transaction log.",
-            "âš  System failure detected!",
+            "⚠ System failure detected!",
             "DBMS uses recovery information to restore consistency."
         ];
 

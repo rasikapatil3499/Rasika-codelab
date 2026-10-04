@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>13 â€” Cohen-Sutherland Line Clipping | Rasika CodeLab</title>
+  <title>13 — Cohen-Sutherland Line Clipping | Rasika CodeLab</title>
   <link rel="stylesheet" href="../css/cgr_style.css">
   <link rel="stylesheet" href="../css/cgr_practicals.css">
 <style>body.protected-page:not(.auth-ready){visibility:hidden}</style>
@@ -22,14 +22,14 @@
         <a href="../cgr_practicals.html" class="active">Practicals</a>
     <a href="../../../about.html">About</a>
   </nav>
-  <button class="menu-btn" aria-label="Open Menu">â˜°</button>
+  <button class="menu-btn" aria-label="Open Menu">☰</button>
 </header>
 
 <main>
 
 <section class="practical-hero">
   <div class="container">
-    <span class="eyebrow">PRACTICAL 13 Â· CLIPPING</span>
+    <span class="eyebrow">PRACTICAL 13 · CLIPPING</span>
     <h1>Cohen-Sutherland Line Clipping</h1>
     <p>Use region codes to determine visible and invisible portions of a line.</p>
     <div class="hero-actions">
@@ -93,10 +93,10 @@
       <article class="theory-card">
         <h3>Four Outside Regions</h3>
         <ul class="clean-list">
-          <li><strong>TOP</strong> â€” point is above the window</li>
-          <li><strong>BOTTOM</strong> â€” point is below the window</li>
-          <li><strong>RIGHT</strong> â€” point is to the right</li>
-          <li><strong>LEFT</strong> â€” point is to the left</li>
+          <li><strong>TOP</strong> — point is above the window</li>
+          <li><strong>BOTTOM</strong> — point is below the window</li>
+          <li><strong>RIGHT</strong> — point is to the right</li>
+          <li><strong>LEFT</strong> — point is to the left</li>
         </ul>
       </article>
     </div>
@@ -134,8 +134,8 @@
 
     <div class="formula-grid">
       <div class="formula-box"><span>Inside</span><strong>0000</strong><p>Point lies inside the window.</p></div>
-      <div class="formula-box"><span>Trivial Accept</span><strong>codeâ‚ OR codeâ‚‚ = 0000</strong><p>Both endpoints are inside.</p></div>
-      <div class="formula-box"><span>Trivial Reject</span><strong>codeâ‚ AND codeâ‚‚ â‰  0000</strong><p>Both endpoints share an outside region.</p></div>
+      <div class="formula-box"><span>Trivial Accept</span><strong>code₁ OR code₂ = 0000</strong><p>Both endpoints are inside.</p></div>
+      <div class="formula-box"><span>Trivial Reject</span><strong>code₁ AND code₂ ≠ 0000</strong><p>Both endpoints share an outside region.</p></div>
     </div>
 
     <div class="note-card">
@@ -165,14 +165,14 @@
 
     <div class="formula-box large-formula">
       <h3>Intersection Equations</h3>
-      <p>For a line from (xâ‚,yâ‚) to (xâ‚‚,yâ‚‚):</p>
+      <p>For a line from (x₁,y₁) to (x₂,y₂):</p>
       <div class="formula-row">
-        <span>y = ymax â†’ x = xâ‚ + (xâ‚‚ âˆ’ xâ‚)(ymax âˆ’ yâ‚)/(yâ‚‚ âˆ’ yâ‚)</span>
-        <span>y = ymin â†’ x = xâ‚ + (xâ‚‚ âˆ’ xâ‚)(ymin âˆ’ yâ‚)/(yâ‚‚ âˆ’ yâ‚)</span>
+        <span>y = ymax → x = x₁ + (x₂ − x₁)(ymax − y₁)/(y₂ − y₁)</span>
+        <span>y = ymin → x = x₁ + (x₂ − x₁)(ymin − y₁)/(y₂ − y₁)</span>
       </div>
       <div class="formula-row">
-        <span>x = xmax â†’ y = yâ‚ + (yâ‚‚ âˆ’ yâ‚)(xmax âˆ’ xâ‚)/(xâ‚‚ âˆ’ xâ‚)</span>
-        <span>x = xmin â†’ y = yâ‚ + (yâ‚‚ âˆ’ yâ‚)(xmin âˆ’ xâ‚)/(xâ‚‚ âˆ’ xâ‚)</span>
+        <span>x = xmax → y = y₁ + (y₂ − y₁)(xmax − x₁)/(x₂ − x₁)</span>
+        <span>x = xmin → y = y₁ + (y₂ − y₁)(xmin − x₁)/(x₂ − x₁)</span>
       </div>
     </div>
   </div>
@@ -189,24 +189,24 @@
     </div>
 
     <div class="calculation-card">
-      <h3>Line: Pâ‚(1, 3) â†’ Pâ‚‚(10, 5)</h3>
+      <h3>Line: P₁(1, 3) → P₂(10, 5)</h3>
       <div class="calculation-grid">
         <div>
-          <span class="calc-label">Pâ‚ outcode</span>
+          <span class="calc-label">P₁ outcode</span>
           <strong>0001</strong>
-          <p>Pâ‚ is left of the window.</p>
+          <p>P₁ is left of the window.</p>
         </div>
         <div>
-          <span class="calc-label">Pâ‚‚ outcode</span>
+          <span class="calc-label">P₂ outcode</span>
           <strong>0010</strong>
-          <p>Pâ‚‚ is right of the window.</p>
+          <p>P₂ is right of the window.</p>
         </div>
       </div>
 
       <div class="calculation-flow">
         <div class="calc-step">
           <span>01</span>
-          <p>AND = 0001 AND 0010 = <strong>0000</strong> â†’ not rejected.</p>
+          <p>AND = 0001 AND 0010 = <strong>0000</strong> → not rejected.</p>
         </div>
         <div class="calc-step">
           <span>02</span>
@@ -214,7 +214,7 @@
         </div>
         <div class="calc-step">
           <span>03</span>
-          <p>At x = 2: y = 3 + (5âˆ’3)(2âˆ’1)/(10âˆ’1) = <strong>3.22</strong>.</p>
+          <p>At x = 2: y = 3 + (5−3)(2−1)/(10−1) = <strong>3.22</strong>.</p>
         </div>
         <div class="calc-step">
           <span>04</span>
@@ -222,11 +222,11 @@
         </div>
         <div class="calc-step">
           <span>05</span>
-          <p>Now clip the right endpoint at x = 8: y = 3 + 2(8âˆ’1)/9 = <strong>4.56</strong>.</p>
+          <p>Now clip the right endpoint at x = 8: y = 3 + 2(8−1)/9 = <strong>4.56</strong>.</p>
         </div>
         <div class="calc-step">
           <span>06</span>
-          <p>Final visible segment â‰ˆ <strong>(2, 3.22) â†’ (8, 4.56)</strong>.</p>
+          <p>Final visible segment ≈ <strong>(2, 3.22) → (8, 4.56)</strong>.</p>
         </div>
       </div>
     </div>
@@ -247,10 +247,10 @@
       <div class="control-panel">
         <div class="control-group">
           <h3>Line Endpoints</h3>
-          <label>Pâ‚ X <input id="p1x" type="number" value="1" step="0.5"></label>
-          <label>Pâ‚ Y <input id="p1y" type="number" value="3" step="0.5"></label>
-          <label>Pâ‚‚ X <input id="p2x" type="number" value="10" step="0.5"></label>
-          <label>Pâ‚‚ Y <input id="p2y" type="number" value="5" step="0.5"></label>
+          <label>P₁ X <input id="p1x" type="number" value="1" step="0.5"></label>
+          <label>P₁ Y <input id="p1y" type="number" value="3" step="0.5"></label>
+          <label>P₂ X <input id="p2x" type="number" value="10" step="0.5"></label>
+          <label>P₂ Y <input id="p2y" type="number" value="5" step="0.5"></label>
         </div>
 
         <div class="control-group">
@@ -278,12 +278,12 @@
 
         <div class="status-grid">
           <div class="status-card">
-            <span>Pâ‚ Code</span>
+            <span>P₁ Code</span>
             <strong id="code1">0001</strong>
             <small id="pos1">LEFT</small>
           </div>
           <div class="status-card">
-            <span>Pâ‚‚ Code</span>
+            <span>P₂ Code</span>
             <strong id="code2">0010</strong>
             <small id="pos2">RIGHT</small>
           </div>
@@ -318,7 +318,7 @@
     </div>
 
     <div class="note-card">
-      <strong>Drag experiment:</strong> Move Pâ‚ or Pâ‚‚ across the rectangle. Watch the four-bit code change as the endpoint crosses LEFT, RIGHT, TOP or BOTTOM boundaries.
+      <strong>Drag experiment:</strong> Move P₁ or P₂ across the rectangle. Watch the four-bit code change as the endpoint crosses LEFT, RIGHT, TOP or BOTTOM boundaries.
     </div>
   </div>
 </section>
@@ -335,21 +335,21 @@
 
     <div class="problem-grid">
       <article class="problem-card">
-        <span class="problem-tag">01 Â· VIEWPORT</span>
+        <span class="problem-tag">01 · VIEWPORT</span>
         <h3>Viewport Rendering</h3>
         <p>A 2D scene contains line segments extending outside the screen. Clip each segment to the viewport before rasterization.</p>
         <button class="btn btn-secondary problem-load" data-p1x="-2" data-p1y="3" data-p2x="11" data-p2y="7">Show in Live Viewer</button>
       </article>
 
       <article class="problem-card">
-        <span class="problem-tag">02 Â· DIGITAL MAP</span>
+        <span class="problem-tag">02 · DIGITAL MAP</span>
         <h3>Map Road Segment</h3>
         <p>A road is represented by a line and only the portion inside the current map viewport should be displayed.</p>
         <button class="btn btn-secondary problem-load" data-p1x="0" data-p1y="8" data-p2x="10" data-p2y="0">Show in Live Viewer</button>
       </article>
 
       <article class="problem-card">
-        <span class="problem-tag">03 Â· GAME UI</span>
+        <span class="problem-tag">03 · GAME UI</span>
         <h3>Game Laser / UI Line</h3>
         <p>A laser or UI guide line can extend beyond the visible game panel. Clip it to the panel before drawing it.</p>
         <button class="btn btn-secondary problem-load" data-p1x="-3" data-p1y="7" data-p2x="12" data-p2y="1">Show in Live Viewer</button>
@@ -423,11 +423,11 @@
   <div class="container">
     <a class="nav-practical prev" href="practical12.html">
       <span>Previous Practical</span>
-      <strong>12 â€” 3D Transformation Visualizer</strong>
+      <strong>12 — 3D Transformation Visualizer</strong>
     </a>
     <a class="nav-practical next" href="practical14.html">
       <span>Next Practical</span>
-      <strong>14 â€” Midpoint Subdivision</strong>
+      <strong>14 — Midpoint Subdivision</strong>
     </a>
   </div>
 </section>
@@ -456,7 +456,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <span>Â© 2026 Rasika CodeLab</span>
+    <span>© 2026 Rasika CodeLab</span>
     <span>Built for practical learning.</span>
   </div>
 </footer>
@@ -594,7 +594,7 @@
       const replacement = { x, y };
       history.push({
         p1: clonePoint(p1), p2: clonePoint(p2), c1, c2,
-        action: `Intersect ${labels(out)} â†’ (${x.toFixed(2)}, ${y.toFixed(2)})`,
+        action: `Intersect ${labels(out)} → (${x.toFixed(2)}, ${y.toFixed(2)})`,
         intersection: replacement
       });
 
@@ -707,8 +707,8 @@
 
     if (frame && frame.p1 && frame.p2) {
       drawSegment(frame.p1, frame.p2, false);
-      drawPoint(frame.p1, "Pâ‚", frame.c1);
-      drawPoint(frame.p2, "Pâ‚‚", frame.c2);
+      drawPoint(frame.p1, "P₁", frame.c1);
+      drawPoint(frame.p2, "P₂", frame.c2);
     }
 
     if (result.accepted && historyIndex < 0) {
@@ -744,7 +744,7 @@
       message.textContent = `Step ${historyIndex + 1} of ${result.history.length}: ${result.history[historyIndex].action}`;
     } else if (result.accepted) {
       decision.textContent = "Accepted";
-      message.textContent = `Visible segment: (${result.p1.x.toFixed(2)}, ${result.p1.y.toFixed(2)}) â†’ (${result.p2.x.toFixed(2)}, ${result.p2.y.toFixed(2)})`;
+      message.textContent = `Visible segment: (${result.p1.x.toFixed(2)}, ${result.p1.y.toFixed(2)}) → (${result.p2.x.toFixed(2)}, ${result.p2.y.toFixed(2)})`;
     } else if (result.rejected) {
       decision.textContent = "Rejected";
       message.textContent = "The endpoints share an outside region, so the line is invisible.";

@@ -93,7 +93,7 @@ loaded = json.loads(text)</code></pre><p>JSON is common for APIs; CSV is useful 
                 </div>
                 <span class="card-toggle">+</span>
             </button>
-            <div class="foundation-card-content"><h3>Database Flow</h3><div class="flow-diagram"><div>Python</div><span>â†’</span><div>Connection</div><span>â†’</span><div>SQL</div><span>â†’</span><div>Database</div></div><p>Understand connections, queries, transactions and persistence.</p></div>
+            <div class="foundation-card-content"><h3>Database Flow</h3><div class="flow-diagram"><div>Python</div><span>→</span><div>Connection</div><span>→</span><div>SQL</div><span>→</span><div>Database</div></div><p>Understand connections, queries, transactions and persistence.</p></div>
         </article>
         <article class="foundation-card">
             <button class="foundation-card-header" type="button" aria-expanded="false">
@@ -155,7 +155,7 @@ DELETE /students/10</code></pre><p>API clients should handle authentication, val
                 </div>
                 <span class="card-toggle">+</span>
             </button>
-            <div class="foundation-card-content"><div class="flow-diagram"><div>Request</div><span>â†’</span><div>Route</div><span>â†’</span><div>Service</div><span>â†’</span><div>Data</div></div><p>Separate transport, business logic and persistence to improve maintainability.</p></div>
+            <div class="foundation-card-content"><div class="flow-diagram"><div>Request</div><span>→</span><div>Route</div><span>→</span><div>Service</div><span>→</span><div>Data</div></div><p>Separate transport, business logic and persistence to improve maintainability.</p></div>
         </article>
         <article class="foundation-card">
             <button class="foundation-card-header" type="button" aria-expanded="false">
@@ -176,7 +176,7 @@ DELETE /students/10</code></pre><p>API clients should handle authentication, val
 
 <nav class="foundation-navigation">
 <a href="foundation03.html" class="foundation-nav-button">
-<span>â†</span><div><small>PREVIOUS FOUNDATION</small><strong>Foundation 3</strong></div>
+<span>←</span><div><small>PREVIOUS FOUNDATION</small><strong>Foundation 3</strong></div>
 </a>
 <div class="foundation-progress">
 <span>FOUNDATION</span><strong>04 / 05</strong>
@@ -184,7 +184,7 @@ DELETE /students/10</code></pre><p>API clients should handle authentication, val
 </div>
 <a href="foundation05.html" class="foundation-nav-button next">
 <div><small>NEXT FOUNDATION</small>
-<strong>Foundation 5</strong></div><span>â†’</span>
+<strong>Foundation 5</strong></div><span>→</span>
 </a>
 </nav>
 </main>
@@ -201,7 +201,7 @@ DELETE /students/10</code></pre><p>API clients should handle authentication, val
 </div>
 </div>
 <div class="footer-bottom">
-<span>Â© 2026 Rasika CodeLab</span><span>Built for practical learning.</span>
+<span>© 2026 Rasika CodeLab</span><span>Built for practical learning.</span>
 </div>
 </footer>
 
@@ -221,7 +221,7 @@ document.querySelectorAll(".foundation-card-header").forEach(button => {
         if (!isOpen) {
             card.classList.add("open");
             button.setAttribute("aria-expanded", "true");
-            button.querySelector(".card-toggle").textContent = "âˆ’";
+            button.querySelector(".card-toggle").textContent = "−";
         }
     });
 });

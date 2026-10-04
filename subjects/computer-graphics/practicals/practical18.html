@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>18 â€” 2D Interactive Graphics | Rasika CodeLab</title>
+  <title>18 — 2D Interactive Graphics | Rasika CodeLab</title>
   <link rel="stylesheet" href="../css/cgr_style.css">
   <link rel="stylesheet" href="../css/cgr_practicals.css">
 <style>body.protected-page:not(.auth-ready){visibility:hidden}</style>
@@ -21,7 +21,7 @@
         <a href="../cgr_practicals.html" class="active">Practicals</a>
     <a href="../../../about.html">About</a>
   </nav>
-  <button class="menu-btn" aria-label="Open Menu">â˜°</button>
+  <button class="menu-btn" aria-label="Open Menu">☰</button>
 </header>
 
 <main>
@@ -64,7 +64,7 @@
     <div class="container">
       <div class="section-heading">
         <span class="section-label">02</span>
-        <h2>Theory â€” Canvas as a 2D Graphics Surface</h2>
+        <h2>Theory — Canvas as a 2D Graphics Surface</h2>
       </div>
       <div class="content-grid">
         <article class="content-card">
@@ -84,7 +84,7 @@ ctx.stroke();</code></pre>
           <p>The Canvas origin is at the top-left corner. X increases toward the right and Y increases downward.</p>
           <div class="formula-box">
             <strong>Canvas Point</strong>
-            <p>(x, y) â†’ horizontal position x, vertical position y</p>
+            <p>(x, y) → horizontal position x, vertical position y</p>
           </div>
           <ul>
             <li>Origin = (0, 0)</li>
@@ -96,11 +96,11 @@ ctx.stroke();</code></pre>
         <article class="content-card">
           <h3>Drawing Primitives</h3>
           <ul>
-            <li><code>moveTo()</code> and <code>lineTo()</code> â€” paths and lines</li>
-            <li><code>stroke()</code> â€” outlines</li>
-            <li><code>fillRect()</code> â€” filled rectangles</li>
-            <li><code>arc()</code> â€” circles and arcs</li>
-            <li><code>fill()</code> â€” fills a closed path</li>
+            <li><code>moveTo()</code> and <code>lineTo()</code> — paths and lines</li>
+            <li><code>stroke()</code> — outlines</li>
+            <li><code>fillRect()</code> — filled rectangles</li>
+            <li><code>arc()</code> — circles and arcs</li>
+            <li><code>fill()</code> — fills a closed path</li>
           </ul>
         </article>
 
@@ -124,15 +124,15 @@ canvas.addEventListener("pointerup", end);</code></pre>
       <div class="content-card">
         <p>Pointer coordinates are measured relative to the browser viewport, while Canvas drawing uses coordinates relative to the Canvas itself. The Canvas bounding rectangle is used to perform the conversion.</p>
         <div class="formula-box">
-          <strong>Pointer â†’ Canvas</strong>
-          <p>x<sub>canvas</sub> = x<sub>pointer</sub> âˆ’ left</p>
-          <p>y<sub>canvas</sub> = y<sub>pointer</sub> âˆ’ top</p>
+          <strong>Pointer → Canvas</strong>
+          <p>x<sub>canvas</sub> = x<sub>pointer</sub> − left</p>
+          <p>y<sub>canvas</sub> = y<sub>pointer</sub> − top</p>
         </div>
         <h3>Worked Calculation</h3>
         <p>Suppose the Canvas begins at browser position <strong>(120, 80)</strong> and the pointer is at <strong>(310, 230)</strong>.</p>
         <div class="calculation-steps">
-          <p><strong>Step 1:</strong> x = 310 âˆ’ 120 = <strong>190</strong></p>
-          <p><strong>Step 2:</strong> y = 230 âˆ’ 80 = <strong>150</strong></p>
+          <p><strong>Step 1:</strong> x = 310 − 120 = <strong>190</strong></p>
+          <p><strong>Step 2:</strong> y = 230 − 80 = <strong>150</strong></p>
           <p><strong>Result:</strong> The drawing point inside Canvas is <strong>(190, 150)</strong>.</p>
         </div>
         <p class="note"><strong>Note:</strong> When the Canvas is visually scaled with CSS, robust applications also account for the ratio between its internal drawing size and displayed size.</p>
@@ -175,7 +175,7 @@ canvas.addEventListener("pointerup", end);</code></pre>
 
         <div class="canvas-stage">
           <canvas id="drawCanvas" width="900" height="500"></canvas>
-          <div class="canvas-coordinates" id="coordinateReadout">Pointer: â€”</div>
+          <div class="canvas-coordinates" id="coordinateReadout">Pointer: —</div>
         </div>
 
         <div class="lab-status">
@@ -241,7 +241,7 @@ requestAnimationFrame(animate);</code></pre>
             <button class="btn" id="animationBtn">Pause Animation</button>
             <button class="btn" id="resetAnimationBtn">Reset</button>
           </div>
-          <p id="animationStatus">Running â€” observe the moving object.</p>
+          <p id="animationStatus">Running — observe the moving object.</p>
         </article>
       </div>
     </div>
@@ -343,8 +343,8 @@ requestAnimationFrame(animate);</code></pre>
 
   <section class="practical-navigation">
     <div class="container">
-      <a href="practical17.html" class="nav-practical prev">â† Practical 17<span>B-Spline Curve Visualizer</span></a>
-      <a href="practical19.html" class="nav-practical next">Practical 19 â†’<span>3D Scene using Three.js</span></a>
+      <a href="practical17.html" class="nav-practical prev">← Practical 17<span>B-Spline Curve Visualizer</span></a>
+      <a href="practical19.html" class="nav-practical next">Practical 19 →<span>3D Scene using Three.js</span></a>
     </div>
   </section>
 </main>
@@ -371,7 +371,7 @@ requestAnimationFrame(animate);</code></pre>
     </div>
   </div>
   <div class="footer-bottom">
-    <span>Â© 2026 Rasika CodeLab</span>
+    <span>© 2026 Rasika CodeLab</span>
     <span>Built for practical learning.</span>
   </div>
 </footer>
@@ -591,7 +591,7 @@ requestAnimationFrame(animate);</code></pre>
       activeObject = [...objects].reverse().find(obj => hitTest(obj, p)) || null;
       if (activeObject) {
         dragOffset = {x: p.x, y: p.y};
-        interactionStatus.textContent = "Selected â€” drag to move";
+        interactionStatus.textContent = "Selected — drag to move";
       } else {
         interactionStatus.textContent = "No object selected";
       }
@@ -602,7 +602,7 @@ requestAnimationFrame(animate);</code></pre>
     drawing = true;
     startPoint = p;
     currentPoint = toolSelect.value === "freehand" ? { ...p, path: [p] } : p;
-    interactionStatus.textContent = "Drawingâ€¦";
+    interactionStatus.textContent = "Drawing…";
   });
 
   canvas.addEventListener("pointermove", event => {
@@ -645,7 +645,7 @@ requestAnimationFrame(animate);</code></pre>
   canvas.addEventListener("pointerup", finishDrawing);
   canvas.addEventListener("pointercancel", finishDrawing);
   canvas.addEventListener("pointerleave", event => {
-    if (!drawing) coordinateReadout.textContent = "Pointer: â€”";
+    if (!drawing) coordinateReadout.textContent = "Pointer: —";
   });
 
   toolSelect.addEventListener("change", () => {
@@ -723,7 +723,7 @@ requestAnimationFrame(animate);</code></pre>
   animationBtn.addEventListener("click", () => {
     paused = !paused;
     animationBtn.textContent = paused ? "Resume Animation" : "Pause Animation";
-    animationStatus.textContent = paused ? "Paused â€” the render loop is still running." : "Running â€” observe the moving object.";
+    animationStatus.textContent = paused ? "Paused — the render loop is still running." : "Running — observe the moving object.";
   });
 
   resetAnimationBtn.addEventListener("click", () => {
@@ -731,7 +731,7 @@ requestAnimationFrame(animate);</code></pre>
     direction = 1;
     paused = false;
     animationBtn.textContent = "Pause Animation";
-    animationStatus.textContent = "Running â€” animation reset.";
+    animationStatus.textContent = "Running — animation reset.";
   });
 
   requestAnimationFrame(animationFrame);

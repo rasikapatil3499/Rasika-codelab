@@ -24,7 +24,7 @@
     <a href="../../../about.html">About</a>
   </nav>
 
-  <button class="menu-btn" aria-label="Open Menu">â˜°</button>
+  <button class="menu-btn" aria-label="Open Menu">☰</button>
 </header>
 
 
@@ -33,7 +33,7 @@
   <!-- HERO -->
   <section class="practical-hero">
     <div class="practical-hero-content">
-      <span class="practical-badge">08 â€¢ 2D TRANSFORMATION</span>
+      <span class="practical-badge">08 • 2D TRANSFORMATION</span>
       <h1>2D Translation &amp; Scaling</h1>
       <p>Apply translation and scaling using equations, matrices and homogeneous coordinates.</p>
 
@@ -73,39 +73,39 @@
     <div class="concept-grid">
 
       <article class="concept-card">
-        <div class="concept-icon">â†—</div>
+        <div class="concept-icon">↗</div>
         <h3>Translation</h3>
         <p>Move every point of an object by the same horizontal and vertical displacement.</p>
       </article>
 
       <article class="concept-card">
-        <div class="concept-icon">â—†</div>
+        <div class="concept-icon">◆</div>
         <h3>Scaling</h3>
         <p>Increase or decrease the size of an object using scale factors along X and Y.</p>
       </article>
 
       <article class="concept-card">
-        <div class="concept-icon">â–£</div>
+        <div class="concept-icon">▣</div>
         <h3>Matrix Form</h3>
         <p>Represent transformations using matrices so they can be applied systematically to vertices.</p>
       </article>
 
       <article class="concept-card">
-        <div class="concept-icon">3Ã—3</div>
+        <div class="concept-icon">3×3</div>
         <h3>Homogeneous Coordinates</h3>
-        <p>Add a third coordinate to represent 2D transformations using 3Ã—3 matrices.</p>
+        <p>Add a third coordinate to represent 2D transformations using 3×3 matrices.</p>
       </article>
     </div>
 
     <div class="transform-flow">
       <span>Object</span>
-      <b>â†’</b>
+      <b>→</b>
       <span>Coordinates</span>
-      <b>â†’</b>
+      <b>→</b>
       <span>Transformation Matrix</span>
-      <b>â†’</b>
+      <b>→</b>
       <span>New Coordinates</span>
-      <b>â†’</b>
+      <b>→</b>
       <span>Transformed Object</span>
     </div>
   </section>
@@ -127,7 +127,7 @@
         <h3>Coordinate Equation</h3>
 
         <div class="big-formula">
-          xâ€² = x + t<sub>x"><br>yâ€² = y + t<sub>y</sub>
+          x′ = x + t<sub>x"><br>y′ = y + t<sub>y</sub>
         </div>
 
         <p>
@@ -142,7 +142,7 @@
 
         <div class="matrix-equation">
           <span>
-            [ xâ€² &nbsp; yâ€² &nbsp; 1 ]<sup>T</sup>
+            [ x′ &nbsp; y′ &nbsp; 1 ]<sup>T</sup>
           </span>
 
           <b>=</b>
@@ -181,8 +181,8 @@
         <h3>Coordinate Equation</h3>
 
         <div class="big-formula">
-          xâ€² = x Ã— s<sub>x</sub><br>
-          yâ€² = y Ã— s<sub>y</sub>
+          x′ = x × s<sub>x</sub><br>
+          y′ = y × s<sub>y</sub>
         </div>
 
         <p>
@@ -197,7 +197,7 @@
 
         <div class="matrix-equation">
           <span>
-            [ xâ€² &nbsp; yâ€² &nbsp; 1 ]<sup>T</sup>
+            [ x′ &nbsp; y′ &nbsp; 1 ]<sup>T</sup>
           </span>
 
           <b>=</b>
@@ -251,20 +251,20 @@
 
         <div class="calc-step">
           <span>01</span>
-          <code>Aâ€² = (2 + 4, 2 + 2)</code>
-          <strong>Aâ€² = (6, 4)</strong>
+          <code>A′ = (2 + 4, 2 + 2)</code>
+          <strong>A′ = (6, 4)</strong>
         </div>
 
         <div class="calc-step">
           <span>02</span>
-          <code>Bâ€² = (5 + 4, 2 + 2)</code>
-          <strong>Bâ€² = (9, 4)</strong>
+          <code>B′ = (5 + 4, 2 + 2)</code>
+          <strong>B′ = (9, 4)</strong>
         </div>
 
         <div class="calc-step">
           <span>03</span>
-          <code>Câ€² = (3 + 4, 5 + 2)</code>
-          <strong>Câ€² = (7, 7)</strong>
+          <code>C′ = (3 + 4, 5 + 2)</code>
+          <strong>C′ = (7, 7)</strong>
         </div>
 
       </div>
@@ -286,20 +286,20 @@
 
         <div class="calc-step">
           <span>01</span>
-          <code>Aâ€² = (2 Ã— 2, 2 Ã— 2)</code>
-          <strong>Aâ€² = (4, 4)</strong>
+          <code>A′ = (2 × 2, 2 × 2)</code>
+          <strong>A′ = (4, 4)</strong>
         </div>
 
         <div class="calc-step">
           <span>02</span>
-          <code>Bâ€² = (5 Ã— 2, 2 Ã— 2)</code>
-          <strong>Bâ€² = (10, 4)</strong>
+          <code>B′ = (5 × 2, 2 × 2)</code>
+          <strong>B′ = (10, 4)</strong>
         </div>
 
         <div class="calc-step">
           <span>03</span>
-          <code>Câ€² = (3 Ã— 2, 5 Ã— 2)</code>
-          <strong>Câ€² = (6, 10)</strong>
+          <code>C′ = (3 × 2, 5 × 2)</code>
+          <strong>C′ = (6, 10)</strong>
         </div>
 
       </div>
@@ -389,7 +389,7 @@
 
         <div class="button-row">
           <button class="primary-btn" id="applyTransform">Apply Transformation</button>
-          <button class="secondary-btn" id="animateTransform">â–¶ Animate</button>
+          <button class="secondary-btn" id="animateTransform">▶ Animate</button>
           <button class="ghost-btn" id="resetTransform">Reset</button>
         </div>
 
@@ -453,18 +453,18 @@
           <strong>(x, y)</strong>
         </div>
 
-        <b>â†’</b>
+        <b>→</b>
 
         <div class="coordinate-card highlighted">
           <span>Homogeneous</span>
           <strong>(x, y, 1)</strong>
         </div>
 
-        <b>â†’</b>
+        <b>→</b>
 
         <div class="coordinate-card">
           <span>Transformation</span>
-          <strong>M Ã— P</strong>
+          <strong>M × P</strong>
         </div>
 
       </div>
@@ -509,15 +509,15 @@
     <div class="problem-tabs">
 
       <button class="problem-tab active" data-problem="ui">
-        ðŸ“± Mobile UI
+        📱 Mobile UI
       </button>
 
       <button class="problem-tab" data-problem="game">
-        ðŸŽ® Game Object
+        🎮 Game Object
       </button>
 
       <button class="problem-tab" data-problem="map">
-        ðŸ—ºï¸ Map Zoom
+        🗺️ Map Zoom
       </button>
 
     </div>
@@ -537,11 +537,11 @@
         </p>
 
         <div class="problem-given" id="problemGiven">
-          Original position = (80, 120) â€¢ Translation = (40, 25)
+          Original position = (80, 120) • Translation = (40, 25)
         </div>
 
         <div class="problem-answer" id="problemAnswer">
-          Apply translation: xâ€² = x + tx and yâ€² = y + ty.
+          Apply translation: x′ = x + tx and y′ = y + ty.
         </div>
 
         <button class="primary-btn" id="showProblem">
@@ -556,7 +556,7 @@
         <canvas id="problemCanvas" width="600" height="390"></canvas>
 
         <div class="viewer-footer">
-          <span id="problemStatus">Original â†’ translated</span>
+          <span id="problemStatus">Original → translated</span>
           <span id="problemReadout">Ready</span>
         </div>
 
@@ -675,7 +675,7 @@
 
       <details>
         <summary>Why are homogeneous coordinates used?</summary>
-        <p>They allow 2D translation to be represented using matrix multiplication with a 3Ã—3 matrix.</p>
+        <p>They allow 2D translation to be represented using matrix multiplication with a 3×3 matrix.</p>
       </details>
 
       <details>
@@ -694,13 +694,13 @@
 
   <nav class="practical-navigation">
     <a href="practical07.html">
-      <span>â† Previous</span>
-      <strong>07 â€” Flood Fill &amp; Boundary Fill</strong>
+      <span>← Previous</span>
+      <strong>07 — Flood Fill &amp; Boundary Fill</strong>
     </a>
 
     <a href="practical09.html">
-      <span>Next â†’</span>
-      <strong>09 â€” 2D Rotation</strong>
+      <span>Next →</span>
+      <strong>09 — 2D Rotation</strong>
     </a>
   </nav>
 
@@ -745,7 +745,7 @@
 
 
   <div class="footer-bottom">
-    <span>Â© 2026 Rasika CodeLab</span>
+    <span>© 2026 Rasika CodeLab</span>
     <span>Built for practical learning.</span>
   </div>
 
@@ -1074,7 +1074,7 @@
     drawTransform();
 
     document.getElementById("transformStatus").textContent =
-      "Transformation applied âœ“";
+      "Transformation applied ✓";
 
   });
 
@@ -1102,7 +1102,7 @@
       animationRunning = false;
 
       document.getElementById("animateTransform").textContent =
-        "â–¶ Animate";
+        "▶ Animate";
 
       return;
 
@@ -1111,7 +1111,7 @@
     animationRunning = true;
 
     document.getElementById("animateTransform").textContent =
-      "âšâš Pause";
+      "❚❚ Pause";
 
     let step = 0;
 
@@ -1160,10 +1160,10 @@
         animationRunning = false;
 
         document.getElementById("animateTransform").textContent =
-          "â–¶ Animate";
+          "▶ Animate";
 
         document.getElementById("transformStatus").textContent =
-          "Animation complete âœ“";
+          "Animation complete ✓";
 
       }
 
@@ -1212,9 +1212,9 @@
       description:
         "A mobile interface needs to move a rectangular button from one screen position to another without changing its size.",
       given:
-        "Original position = (80, 120) â€¢ Translation = (40, 25)",
+        "Original position = (80, 120) • Translation = (40, 25)",
       answer:
-        "Apply translation: xâ€² = x + tx and yâ€² = y + ty.",
+        "Apply translation: x′ = x + tx and y′ = y + ty.",
       mode: "translation",
       tx: 4,
       ty: 3,
@@ -1227,7 +1227,7 @@
       description:
         "A game character's shield must be moved to a new position while preserving its shape and size.",
       given:
-        "Position = (âˆ’3, 2) â€¢ Translation = (6, âˆ’2)",
+        "Position = (−3, 2) • Translation = (6, −2)",
       answer:
         "Translation changes the position of every vertex by the same displacement.",
       mode: "translation",
@@ -1242,7 +1242,7 @@
       description:
         "A digital map needs to enlarge a selected region while keeping its geometry proportional.",
       given:
-        "Original scale = 1 â€¢ Scale factors = sx = 2, sy = 2",
+        "Original scale = 1 • Scale factors = sx = 2, sy = 2",
       answer:
         "Uniform scaling doubles both X and Y coordinates relative to the origin.",
       mode: "scaling",
@@ -1379,8 +1379,8 @@
 
     document.getElementById("problemStatus").textContent =
       p.mode === "translation"
-        ? "Original â†’ translated"
-        : "Original â†’ scaled";
+        ? "Original → translated"
+        : "Original → scaled";
 
     document.getElementById("problemReadout").textContent =
       p.mode === "translation"

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Foundation 07 â€” Learn how a computer draws graphics through graphics hardware, rendering, frame buffers, rasterization and display.">
+    <meta name="description" content="Foundation 07 — Learn how a computer draws graphics through graphics hardware, rendering, frame buffers, rasterization and display.">
     <title>Foundation 07 | How Does a Computer Draw? | Rasika CodeLab</title>
     <link rel="stylesheet" href="../css/cgr_style.css">
 <style>body.protected-page:not(.auth-ready){visibility:hidden}</style>
@@ -14,7 +14,7 @@
 <header class="site-header">
     <nav class="navbar">
         <a href="../cgr_index.html" class="logo">
-            <span class="logo-mark">â—ˆ</span>
+            <span class="logo-mark">◈</span>
             Rasika<span class="logo-highlight">CodeLab</span>
         </a>
 
@@ -25,7 +25,7 @@
                         <a href="../../../about.html">About</a>
         </div>
 
-        <button class="menu-btn" type="button" aria-label="Open menu">â˜°</button>
+        <button class="menu-btn" type="button" aria-label="Open menu">☰</button>
     </nav>
 </header>
 
@@ -75,7 +75,7 @@
                     <small>Geometry</small>
                 </div>
 
-                <div class="draw-arrow">â†’</div>
+                <div class="draw-arrow">→</div>
 
                 <div class="draw-node active">
                     <span>02</span>
@@ -83,7 +83,7 @@
                     <small>Render</small>
                 </div>
 
-                <div class="draw-arrow">â†’</div>
+                <div class="draw-arrow">→</div>
 
                 <div class="draw-node">
                     <span>03</span>
@@ -150,9 +150,9 @@
 
     <div class="content-card">
 
-        <span class="eyebrow">01 Â· CONCEPT</span>
+        <span class="eyebrow">01 · CONCEPT</span>
 
-        <h2>What does â€œdrawingâ€ mean in computer graphics?</h2>
+        <h2>What does “drawing” mean in computer graphics?</h2>
 
         <p>
             A computer does not draw an object in the same way a person
@@ -184,7 +184,7 @@
 <section class="section foundation-detail">
 
     <div class="section-heading">
-        <span class="eyebrow">02 Â· BASIC RENDERING PIPELINE</span>
+        <span class="eyebrow">02 · BASIC RENDERING PIPELINE</span>
         <h2>Follow the journey from object to image.</h2>
         <p>
             The exact pipeline depends on the graphics system, but this
@@ -202,7 +202,7 @@
                 <small>Geometry, coordinates and visual properties are defined.</small>
             </div>
 
-            <div class="flow-arrow">â†’</div>
+            <div class="flow-arrow">→</div>
 
             <div class="flow-item">
                 <span>02</span>
@@ -210,7 +210,7 @@
                 <small>Objects are positioned, scaled and rotated.</small>
             </div>
 
-            <div class="flow-arrow">â†’</div>
+            <div class="flow-arrow">→</div>
 
             <div class="flow-item">
                 <span>03</span>
@@ -218,7 +218,7 @@
                 <small>The visible region is selected for rendering.</small>
             </div>
 
-            <div class="flow-arrow">â†’</div>
+            <div class="flow-arrow">→</div>
 
             <div class="flow-item">
                 <span>04</span>
@@ -226,7 +226,7 @@
                 <small>Geometry is converted into fragments or pixels.</small>
             </div>
 
-            <div class="flow-arrow">â†’</div>
+            <div class="flow-arrow">→</div>
 
             <div class="flow-item">
                 <span>05</span>
@@ -245,7 +245,7 @@
 <section class="section foundation-detail">
 
     <div class="section-heading">
-        <span class="eyebrow">03 Â· CPU & GPU</span>
+        <span class="eyebrow">03 · CPU & GPU</span>
         <h2>Who does the graphics work?</h2>
     </div>
 
@@ -302,7 +302,7 @@
 <section class="section foundation-detail">
 
     <div class="section-heading">
-        <span class="eyebrow">04 Â· GEOMETRY TO PIXELS</span>
+        <span class="eyebrow">04 · GEOMETRY TO PIXELS</span>
         <h2>A triangle is geometry. The screen needs pixels.</h2>
         <p>
             This is the central idea behind raster graphics: continuous
@@ -320,7 +320,7 @@
             <h3>Three vertices</h3>
 
             <div class="formula-box">
-                Pâ‚(xâ‚,yâ‚), Pâ‚‚(xâ‚‚,yâ‚‚), Pâ‚ƒ(xâ‚ƒ,yâ‚ƒ)
+                P₁(x₁,y₁), P₂(x₂,y₂), P₃(x₃,y₃)
             </div>
 
             <p>
@@ -337,7 +337,7 @@
             <h3>Pixel coverage</h3>
 
             <div class="calculation-box">
-                Geometry â†’ rasterization â†’ pixel/fragments<br><br>
+                Geometry → rasterization → pixel/fragments<br><br>
                 Each relevant screen location receives resulting
                 pixel information.
             </div>
@@ -353,7 +353,7 @@
 <section class="section foundation-detail">
 
     <div class="section-heading">
-        <span class="eyebrow">05 Â· FRAME BUFFER</span>
+        <span class="eyebrow">05 · FRAME BUFFER</span>
         <h2>Where is the final pixel information kept?</h2>
     </div>
 
@@ -366,14 +366,14 @@
         </p>
 
         <div class="formula-box">
-            Frame Buffer â‰ˆ Width Ã— Height Ã— Bytes per Pixel
+            Frame Buffer ≈ Width × Height × Bytes per Pixel
         </div>
 
         <div class="definition-box">
             <strong>Worked example</strong>
             <p>
-                For a 1920 Ã— 1080 image with 4 bytes per pixel:
-                1920 Ã— 1080 Ã— 4 = <strong>8,294,400 bytes</strong>,
+                For a 1920 × 1080 image with 4 bytes per pixel:
+                1920 × 1080 × 4 = <strong>8,294,400 bytes</strong>,
                 approximately 7.91 MiB.
             </p>
         </div>
@@ -387,7 +387,7 @@
 <section class="section foundation-detail">
 
     <div class="section-heading">
-        <span class="eyebrow">06 Â· INTERACTIVE VISUALIZATION</span>
+        <span class="eyebrow">06 · INTERACTIVE VISUALIZATION</span>
         <h2>Step through a simplified rendering pipeline.</h2>
         <p>
             Move through each stage to understand what changes as graphics
@@ -428,7 +428,7 @@
         <div class="pipeline-controls">
 
             <button class="btn btn-primary" id="pipelineNext" type="button">
-                Next Stage â†’
+                Next Stage →
             </button>
 
             <button class="btn btn-secondary" id="pipelineReset" type="button">
@@ -456,7 +456,7 @@
 <section class="section foundation-detail">
 
     <div class="section-heading">
-        <span class="eyebrow">07 Â· GRAPHICS APIs</span>
+        <span class="eyebrow">07 · GRAPHICS APIs</span>
         <h2>Programs need a way to communicate with graphics systems.</h2>
     </div>
 
@@ -501,7 +501,7 @@
 <section class="section foundation-detail">
 
     <div class="section-heading">
-        <span class="eyebrow">08 Â· CALCULATE</span>
+        <span class="eyebrow">08 · CALCULATE</span>
         <h2>Estimate basic frame-buffer storage.</h2>
     </div>
 
@@ -511,7 +511,7 @@
 
             <span class="card-label">GIVEN</span>
 
-            <h3>800 Ã— 600, 4 bytes/pixel</h3>
+            <h3>800 × 600, 4 bytes/pixel</h3>
 
             <div class="calculation-box">
                 Width = 800<br>
@@ -526,13 +526,13 @@
             <span class="card-label">CALCULATION</span>
 
             <div class="formula-box">
-                Memory = W Ã— H Ã— B
+                Memory = W × H × B
             </div>
 
             <div class="calculation-box">
-                = 800 Ã— 600 Ã— 4<br>
+                = 800 × 600 × 4<br>
                 = 1,920,000 bytes<br>
-                â‰ˆ 1.83 MiB
+                ≈ 1.83 MiB
             </div>
 
         </div>
@@ -546,7 +546,7 @@
 <section class="section foundation-detail">
 
     <div class="section-heading">
-        <span class="eyebrow">09 Â· TERMINOLOGY</span>
+        <span class="eyebrow">09 · TERMINOLOGY</span>
         <h2>Words you should know.</h2>
     </div>
 
@@ -598,27 +598,27 @@
     <div class="terminology-grid">
 
         <div class="term-card">
-            <strong>CPU â‰  GPU</strong>
+            <strong>CPU ≠ GPU</strong>
             <p>They can cooperate, but they are designed for different types of processing.</p>
         </div>
 
         <div class="term-card">
-            <strong>Rendering â‰  Display</strong>
+            <strong>Rendering ≠ Display</strong>
             <p>Rendering produces image data; the display presents that data visually.</p>
         </div>
 
         <div class="term-card">
-            <strong>Geometry â‰  Pixels</strong>
+            <strong>Geometry ≠ Pixels</strong>
             <p>A geometric object must be rasterized before it becomes a raster image.</p>
         </div>
 
         <div class="term-card">
-            <strong>Frame Buffer â‰  File</strong>
+            <strong>Frame Buffer ≠ File</strong>
             <p>A frame buffer holds image data for rendering/display; a file stores encoded data for persistence or transfer.</p>
         </div>
 
         <div class="term-card">
-            <strong>API â‰  Hardware</strong>
+            <strong>API ≠ Hardware</strong>
             <p>An API provides software interfaces; it is not the physical graphics processor.</p>
         </div>
 
@@ -665,7 +665,7 @@
 
             <div>
                 <span>05</span>
-                <p>Calculate the storage for 1024 Ã— 768 pixels at 4 bytes per pixel.</p>
+                <p>Calculate the storage for 1024 × 768 pixels at 4 bytes per pixel.</p>
             </div>
 
             <div>
@@ -732,14 +732,14 @@
 <section class="section foundation-navigation">
 
     <a href="foundation06.html" class="nav-card">
-        <span>â†</span>
+        <span>←</span>
         <small>PREVIOUS FOUNDATION</small>
         <strong>How are Graphics Stored?</strong>
     </a>
 
     <a href="foundation08.html" class="nav-card next">
         <small>NEXT FOUNDATION</small>
-        <strong>How Does an Object Become Pixels? â†’</strong>
+        <strong>How Does an Object Become Pixels? →</strong>
     </a>
 
 </section>
@@ -766,7 +766,7 @@
     </div>
 
     <div class="footer-bottom">
-        Â© 2026 Rasika CodeLab Â· Learn the concept. See the result.
+        © 2026 Rasika CodeLab · Learn the concept. See the result.
     </div>
 
 </footer>
@@ -836,7 +836,7 @@
         });
 
         next.textContent =
-            index === stages.length - 1 ? "Start Again â†»" : "Next Stage â†’";
+            index === stages.length - 1 ? "Start Again ↻" : "Next Stage →";
     }
 
     next.addEventListener("click", function () {

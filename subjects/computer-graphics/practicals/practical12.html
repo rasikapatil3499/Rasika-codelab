@@ -24,7 +24,7 @@
     <a href="../../../about.html">About</a>
   </nav>
 
-  <button class="menu-btn" aria-label="Open Menu">â˜°</button>
+  <button class="menu-btn" aria-label="Open Menu">☰</button>
 </header>
 
 
@@ -33,7 +33,7 @@
   <!-- HERO -->
   <section class="practical-hero">
     <div class="practical-hero-content">
-      <span class="practical-badge">12 â€¢ 3D GRAPHICS</span>
+      <span class="practical-badge">12 • 3D GRAPHICS</span>
       <h1>3D Transformation Visualizer</h1>
       <p>Transform 3D vertices using translation, scaling and rotation.</p>
 
@@ -79,7 +79,7 @@
       </article>
 
       <article class="concept-card">
-        <div class="concept-icon">â—†</div>
+        <div class="concept-icon">◆</div>
         <h3>3D Vertices</h3>
         <p>Represent an object as a collection of vertices connected by edges and faces.</p>
       </article>
@@ -100,13 +100,13 @@
 
     <div class="transform-flow">
       <span>3D Vertices</span>
-      <b>â†’</b>
+      <b>→</b>
       <span>Transformation</span>
-      <b>â†’</b>
+      <b>→</b>
       <span>New Coordinates</span>
-      <b>â†’</b>
+      <b>→</b>
       <span>Projection</span>
-      <b>â†’</b>
+      <b>→</b>
       <span>Screen</span>
     </div>
   </section>
@@ -174,9 +174,9 @@
         <h3>Coordinate Equations</h3>
 
         <div class="big-formula">
-          xâ€² = x + t<sub>x</sub><br>
-          yâ€² = y + t<sub>y</sub><br>
-          zâ€² = z + t<sub>z</sub>
+          x′ = x + t<sub>x</sub><br>
+          y′ = y + t<sub>y</sub><br>
+          z′ = z + t<sub>z</sub>
         </div>
 
         <p>
@@ -186,7 +186,7 @@
 
 
       <article class="matrix-card">
-        <h3>4Ã—4 Homogeneous Matrix</h3>
+        <h3>4×4 Homogeneous Matrix</h3>
 
         <div class="matrix-box matrix-4x4">
           <i>1</i><i>0</i><i>0</i><i>t<sub>x</sub></i>
@@ -216,9 +216,9 @@
         <h3>Coordinate Equations</h3>
 
         <div class="big-formula">
-          xâ€² = s<sub>x</sub>x<br>
-          yâ€² = s<sub>y</sub>y<br>
-          zâ€² = s<sub>z</sub>z
+          x′ = s<sub>x</sub>x<br>
+          y′ = s<sub>y</sub>y<br>
+          z′ = s<sub>z</sub>z
         </div>
 
         <p>
@@ -228,7 +228,7 @@
 
 
       <article class="matrix-card">
-        <h3>4Ã—4 Scaling Matrix</h3>
+        <h3>4×4 Scaling Matrix</h3>
 
         <div class="matrix-box matrix-4x4">
           <i>s<sub>x</sub></i><i>0</i><i>0</i><i>0</i>
@@ -260,7 +260,7 @@
 
         <div class="matrix-box matrix-4x4">
           <i>1</i><i>0</i><i>0</i><i>0</i>
-          <i>0</i><i>cosÎ¸</i><i>âˆ’sinÎ¸</i><i>0</i>
+          <i>0</i><i>cosÎ¸</i><i>−sinθ</i><i>0</i>
           <i>0</i><i>sinÎ¸</i><i>cosÎ¸</i><i>0</i>
           <i>0</i><i>0</i><i>0</i><i>1</i>
         </div>
@@ -274,7 +274,7 @@
         <div class="matrix-box matrix-4x4">
           <i>cosÎ¸</i><i>0</i><i>sinÎ¸</i><i>0</i>
           <i>0</i><i>1</i><i>0</i><i>0</i>
-          <i>âˆ’sinÎ¸</i><i>0</i><i>cosÎ¸</i><i>0</i>
+          <i>−sinθ</i><i>0</i><i>cosÎ¸</i><i>0</i>
           <i>0</i><i>0</i><i>0</i><i>1</i>
         </div>
       </article>
@@ -285,7 +285,7 @@
         <h3>Rotation About Z</h3>
 
         <div class="matrix-box matrix-4x4">
-          <i>cosÎ¸</i><i>âˆ’sinÎ¸</i><i>0</i><i>0</i>
+          <i>cosÎ¸</i><i>−sinθ</i><i>0</i><i>0</i>
           <i>sinÎ¸</i><i>cosÎ¸</i><i>0</i><i>0</i>
           <i>0</i><i>0</i><i>1</i><i>0</i>
           <i>0</i><i>0</i><i>0</i><i>1</i>
@@ -318,7 +318,7 @@
 
         <div class="given-line">
           <span>Translation</span>
-          <strong>T(3, âˆ’1, 2)</strong>
+          <strong>T(3, −1, 2)</strong>
         </div>
 
         <div class="given-line">
@@ -332,26 +332,26 @@
 
         <div class="calc-step">
           <span>01</span>
-          <code>xâ€² = x + tx = 2 + 3</code>
-          <strong>xâ€² = 5</strong>
+          <code>x′ = x + tx = 2 + 3</code>
+          <strong>x′ = 5</strong>
         </div>
 
         <div class="calc-step">
           <span>02</span>
-          <code>yâ€² = y + ty = 3 âˆ’ 1</code>
-          <strong>yâ€² = 2</strong>
+          <code>y′ = y + ty = 3 − 1</code>
+          <strong>y′ = 2</strong>
         </div>
 
         <div class="calc-step">
           <span>03</span>
-          <code>zâ€² = z + tz = 4 + 2</code>
-          <strong>zâ€² = 6</strong>
+          <code>z′ = z + tz = 4 + 2</code>
+          <strong>z′ = 6</strong>
         </div>
 
         <div class="calc-step result-step">
           <span>04</span>
-          <code>Pâ€² = (xâ€², yâ€², zâ€²)</code>
-          <strong>Pâ€² = (5, 2, 6)</strong>
+          <code>P′ = (x′, y′, z′)</code>
+          <strong>P′ = (5, 2, 6)</strong>
         </div>
 
       </div>
@@ -378,7 +378,7 @@
         <p>Object vertices are defined in local coordinates.</p>
       </article>
 
-      <b>â†’</b>
+      <b>→</b>
 
       <article class="projection-step">
         <span>02</span>
@@ -386,7 +386,7 @@
         <p>Translation, rotation and scaling change the object.</p>
       </article>
 
-      <b>â†’</b>
+      <b>→</b>
 
       <article class="projection-step">
         <span>03</span>
@@ -394,7 +394,7 @@
         <p>3D coordinates are mapped into a 2D view.</p>
       </article>
 
-      <b>â†’</b>
+      <b>→</b>
 
       <article class="projection-step">
         <span>04</span>
@@ -473,19 +473,19 @@
           <label>
             X
             <input id="rotateX" type="range" min="-180" max="180" step="5" value="25">
-            <output id="rotateXValue">25Â°</output>
+            <output id="rotateXValue">25°</output>
           </label>
 
           <label>
             Y
             <input id="rotateY" type="range" min="-180" max="180" step="5" value="35">
-            <output id="rotateYValue">35Â°</output>
+            <output id="rotateYValue">35°</output>
           </label>
 
           <label>
             Z
             <input id="rotateZ" type="range" min="-180" max="180" step="5" value="0">
-            <output id="rotateZValue">0Â°</output>
+            <output id="rotateZValue">0°</output>
           </label>
         </div>
 
@@ -503,7 +503,7 @@
 
         <div class="button-row">
           <button class="primary-btn" id="apply3D">Apply Transformation</button>
-          <button class="secondary-btn" id="animate3D">â–¶ Animate</button>
+          <button class="secondary-btn" id="animate3D">▶ Animate</button>
           <button class="ghost-btn" id="reset3D">Reset</button>
         </div>
 
@@ -522,7 +522,7 @@
 
           <div>
             <span>Rotation</span>
-            <strong id="rotationReadout">(25Â°, 35Â°, 0Â°)</strong>
+            <strong id="rotationReadout">(25°, 35°, 0°)</strong>
           </div>
 
         </div>
@@ -596,15 +596,15 @@
     <div class="problem-tabs">
 
       <button class="problem-tab active" data-problem="game">
-        ðŸŽ® Game Object
+        🎮 Game Object
       </button>
 
       <button class="problem-tab" data-problem="cad">
-        ðŸ—ï¸ CAD Model
+        🏗️ CAD Model
       </button>
 
       <button class="problem-tab" data-problem="vr">
-        ðŸ¥½ VR Object
+        🥽 VR Object
       </button>
 
     </div>
@@ -623,7 +623,7 @@
         </p>
 
         <div class="problem-given" id="problemGiven">
-          Translation = (2, 0, 3) â€¢ Scale = 1.5 â€¢ Rotation Y = 45Â°
+          Translation = (2, 0, 3) • Scale = 1.5 • Rotation Y = 45°
         </div>
 
         <div class="problem-answer" id="problemAnswer">
@@ -642,7 +642,7 @@
 
         <div class="viewer-footer">
           <span id="problemStatus">3D transformation</span>
-          <span id="problemReadout">Model â†’ transformed model</span>
+          <span id="problemReadout">Model → transformed model</span>
         </div>
       </div>
 
@@ -674,12 +674,12 @@
 
       <button class="experiment-card" data-experiment="rotateX">
         <strong>Rotate X</strong>
-        <span>Î¸x = 90Â°</span>
+        <span>Î¸x = 90°</span>
       </button>
 
       <button class="experiment-card" data-experiment="rotateY">
         <strong>Rotate Y</strong>
-        <span>Î¸y = 90Â°</span>
+        <span>Î¸y = 90°</span>
       </button>
 
     </div>
@@ -763,7 +763,7 @@
       </details>
 
       <details>
-        <summary>Why is a 4Ã—4 matrix used?</summary>
+        <summary>Why is a 4×4 matrix used?</summary>
         <p>Homogeneous coordinates allow 3D translation and other transformations to be represented using matrix multiplication.</p>
       </details>
 
@@ -788,13 +788,13 @@
 
   <nav class="practical-navigation">
     <a href="practical11.html">
-      <span>â† Previous</span>
-      <strong>11 â€” Composite 2D Transformation</strong>
+      <span>← Previous</span>
+      <strong>11 — Composite 2D Transformation</strong>
     </a>
 
     <a href="practical13.html">
-      <span>Next â†’</span>
-      <strong>13 â€” Cohen-Sutherland Line Clipping</strong>
+      <span>Next →</span>
+      <strong>13 — Cohen-Sutherland Line Clipping</strong>
     </a>
   </nav>
 
@@ -839,7 +839,7 @@
 
 
   <div class="footer-bottom">
-    <span>Â© 2026 Rasika CodeLab</span>
+    <span>© 2026 Rasika CodeLab</span>
     <span>Built for practical learning.</span>
   </div>
 
@@ -1142,13 +1142,13 @@
       p.sz;
 
     document.getElementById("rotateXValue").textContent =
-      Math.round(p.rx * 180 / Math.PI) + "Â°";
+      Math.round(p.rx * 180 / Math.PI) + "°";
 
     document.getElementById("rotateYValue").textContent =
-      Math.round(p.ry * 180 / Math.PI) + "Â°";
+      Math.round(p.ry * 180 / Math.PI) + "°";
 
     document.getElementById("rotateZValue").textContent =
-      Math.round(p.rz * 180 / Math.PI) + "Â°";
+      Math.round(p.rz * 180 / Math.PI) + "°";
 
     document.getElementById("translationReadout").textContent =
       "(" + p.tx + ", " + p.ty + ", " + p.tz + ")";
@@ -1159,11 +1159,11 @@
     document.getElementById("rotationReadout").textContent =
       "(" +
       Math.round(p.rx * 180 / Math.PI) +
-      "Â°, " +
+      "°, " +
       Math.round(p.ry * 180 / Math.PI) +
-      "Â°, " +
+      "°, " +
       Math.round(p.rz * 180 / Math.PI) +
-      "Â°)";
+      "°)";
 
   }
 
@@ -1279,7 +1279,7 @@
       draw3D();
 
       document.getElementById("threeDStatus").textContent =
-        "Transformation applied âœ“";
+        "Transformation applied ✓";
 
     }
   );
@@ -1320,7 +1320,7 @@
         });
 
       document.getElementById("animate3D").textContent =
-        "â–¶ Animate";
+        "▶ Animate";
 
       draw3D();
 
@@ -1338,7 +1338,7 @@
         animationRunning = false;
 
         document.getElementById("animate3D").textContent =
-          "â–¶ Animate";
+          "▶ Animate";
 
         return;
 
@@ -1348,7 +1348,7 @@
       animationRunning = true;
 
       document.getElementById("animate3D").textContent =
-        "âšâš Pause";
+        "❚❚ Pause";
 
       let rotation = 0;
 
@@ -1380,7 +1380,7 @@
       description:
         "A 3D game character must move forward, become larger and rotate toward the player.",
       given:
-        "Translation = (2, 0, 3) â€¢ Scale = 1.5 â€¢ Rotation Y = 45Â°",
+        "Translation = (2, 0, 3) • Scale = 1.5 • Rotation Y = 45°",
       answer:
         "Apply scaling, rotation and translation to every vertex of the 3D model.",
       tx: 2,
@@ -1397,7 +1397,7 @@
       description:
         "A CAD system moves and rotates a component before placing it into an assembly.",
       given:
-        "Translation = (âˆ’2, 1, 2) â€¢ Scale = 1 â€¢ Rotation X = 90Â°",
+        "Translation = (−2, 1, 2) • Scale = 1 • Rotation X = 90°",
       answer:
         "Transform all model vertices using the required translation and X-axis rotation.",
       tx: -2,
@@ -1414,7 +1414,7 @@
       description:
         "A VR application positions an object in front of the user and changes its orientation.",
       given:
-        "Translation = (1, 0, 4) â€¢ Scale = 0.8 â€¢ Rotation Z = 30Â°",
+        "Translation = (1, 0, 4) • Scale = 0.8 • Rotation Z = 30°",
       answer:
         "Apply the scale, Z-axis rotation and translation to the object's vertices.",
       tx: 1,
@@ -1582,7 +1582,7 @@
       "T(" +
       problem.tx + "," +
       problem.ty + "," +
-      problem.tz + ") â€¢ " +
+      problem.tz + ") • " +
       "R(" +
       problem.rx + "," +
       problem.ry + "," +

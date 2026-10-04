@@ -23,19 +23,19 @@
         <a href="../cgr_practicals.html" class="active">Practicals</a>
     <a href="../../../about.html">About</a>
   </nav>
-  <button class="menu-btn" aria-label="Open Menu">â˜°</button>
+  <button class="menu-btn" aria-label="Open Menu">☰</button>
 </header>
 
 <main class="cgr-practical-page">
 
 <section class="cgr-practical-hero">
   <div>
-    <div class="section-label">COMPUTER GRAPHICS Â· PRACTICAL 03</div>
+    <div class="section-label">COMPUTER GRAPHICS · PRACTICAL 03</div>
     <div class="practical-kicker">FOUNDATION PRACTICAL</div>
     <h1>Graphics Primitives <span>&amp; Geometry</span></h1>
     <p>Work with points, lines, circles, rectangles, triangles and polygons through syntax, geometry calculations and live visualization.</p>
     <div class="practical-flow">
-      <span>Understand</span><b>â†’</b><span>Calculate</span><b>â†’</b><span>Visualize</span><b>â†’</b><span>Experiment</span>
+      <span>Understand</span><b>→</b><span>Calculate</span><b>→</b><span>Visualize</span><b>→</b><span>Experiment</span>
     </div>
   </div>
   <div class="cgr-hero-mini geometry-hero-mini">
@@ -55,7 +55,7 @@
 <section class="practical-section">
   <div class="section-heading">
     <div>
-      <div class="section-label">01 Â· OBJECTIVES</div>
+      <div class="section-label">01 · OBJECTIVES</div>
       <h2>What will you learn?</h2>
       <p>Understand how graphical objects are represented using coordinates and geometric primitives.</p>
     </div>
@@ -71,19 +71,19 @@
 <section class="practical-section">
   <div class="section-heading">
     <div>
-      <div class="section-label">02 Â· PRIMITIVE SYNTAX</div>
+      <div class="section-label">02 · PRIMITIVE SYNTAX</div>
       <h2>How are graphics primitives created?</h2>
       <p>Select a primitive to see its C/C++ graphics syntax, mathematical representation and formula.</p>
     </div>
   </div>
 
   <div class="primitive-tabs" id="primitiveTabs">
-    <button class="primitive-tab active" data-shape="point">â— <span>Point</span></button>
-    <button class="primitive-tab" data-shape="line">â•± <span>Line</span></button>
-    <button class="primitive-tab" data-shape="circle">â—‹ <span>Circle</span></button>
-    <button class="primitive-tab" data-shape="rectangle">â–¡ <span>Rectangle</span></button>
-    <button class="primitive-tab" data-shape="triangle">â–³ <span>Triangle</span></button>
-    <button class="primitive-tab" data-shape="polygon">â¬¡ <span>Polygon</span></button>
+    <button class="primitive-tab active" data-shape="point">● <span>Point</span></button>
+    <button class="primitive-tab" data-shape="line">╱ <span>Line</span></button>
+    <button class="primitive-tab" data-shape="circle">○ <span>Circle</span></button>
+    <button class="primitive-tab" data-shape="rectangle">□ <span>Rectangle</span></button>
+    <button class="primitive-tab" data-shape="triangle">△ <span>Triangle</span></button>
+    <button class="primitive-tab" data-shape="polygon">⬡ <span>Polygon</span></button>
   </div>
 
   <div class="primitive-info" id="primitiveInfo"></div>
@@ -92,7 +92,7 @@
 <section class="practical-section">
   <div class="section-heading">
     <div>
-      <div class="section-label">03 Â· INTERACTIVE GEOMETRY LAB</div>
+      <div class="section-label">03 · INTERACTIVE GEOMETRY LAB</div>
       <h2>Live Geometry Viewer</h2>
       <p>Select a primitive, change its parameters, drag vertices and observe the calculations in real time.</p>
     </div>
@@ -103,18 +103,18 @@
     <aside class="geometry-controls">
       <div class="control-title">SELECT PRIMITIVE</div>
       <div class="shape-selector" id="shapeSelector">
-        <button class="shape-option active" data-shape="point">â— <span>Point</span></button>
-        <button class="shape-option" data-shape="line">â” <span>Line</span></button>
-        <button class="shape-option" data-shape="circle">â—‹ <span>Circle</span></button>
-        <button class="shape-option" data-shape="rectangle">â–¡ <span>Rectangle</span></button>
-        <button class="shape-option" data-shape="triangle">â–³ <span>Triangle</span></button>
-        <button class="shape-option" data-shape="polygon">â¬¡ <span>Polygon</span></button>
+        <button class="shape-option active" data-shape="point">● <span>Point</span></button>
+        <button class="shape-option" data-shape="line">━ <span>Line</span></button>
+        <button class="shape-option" data-shape="circle">○ <span>Circle</span></button>
+        <button class="shape-option" data-shape="rectangle">□ <span>Rectangle</span></button>
+        <button class="shape-option" data-shape="triangle">△ <span>Triangle</span></button>
+        <button class="shape-option" data-shape="polygon">⬡ <span>Polygon</span></button>
       </div>
 
       <div class="control-title">PARAMETERS</div>
       <div id="shapeInputs" class="shape-inputs"></div>
 
-      <button class="draw-btn" id="animateShape">â–¶ Play Construction</button>
+      <button class="draw-btn" id="animateShape">▶ Play Construction</button>
 
       <div class="control-hint">
         <strong>Tip:</strong>
@@ -128,12 +128,12 @@
       <div class="canvas-toolbar">
         <span class="live-dot"></span>
         <strong>LIVE GEOMETRY VIEWER</strong>
-        <span id="viewerStatus">Rectangle Â· W 200 Â· H 120</span>
+        <span id="viewerStatus">Rectangle · W 200 · H 120</span>
       </div>
 
       <div class="geometry-canvas-wrap">
         <canvas id="geometryCanvas" width="760" height="460"></canvas>
-        <div class="mouse-readout" id="mouseReadout">X: â€” &nbsp; Y: â€”</div>
+        <div class="mouse-readout" id="mouseReadout">X: — &nbsp; Y: —</div>
       </div>
 
       <div class="viewer-legend">
@@ -148,7 +148,7 @@
 <section class="practical-section">
   <div class="section-heading">
     <div>
-      <div class="section-label">04 Â· GEOMETRY CALCULATIONS</div>
+      <div class="section-label">04 · GEOMETRY CALCULATIONS</div>
       <h2>Calculate what you see</h2>
       <p>The formulas below update according to the selected primitive.</p>
     </div>
@@ -159,7 +159,7 @@
 <section class="practical-section">
   <div class="section-heading">
     <div>
-      <div class="section-label">05 Â· CONSTRUCTION ANIMATION</div>
+      <div class="section-label">05 · CONSTRUCTION ANIMATION</div>
       <h2>How does the computer build a shape?</h2>
       <p>Watch the primitive appear step by step from coordinates and geometric elements.</p>
     </div>
@@ -177,7 +177,7 @@
 <section class="practical-section">
   <div class="section-heading">
     <div>
-      <div class="section-label">06 Â· REAL-LIFE CHALLENGES</div>
+      <div class="section-label">06 · REAL-LIFE CHALLENGES</div>
       <h2>Apply graphics primitives</h2>
       <p>Click a problem to display its complete problem statement, answer and visualization.</p>
     </div>
@@ -185,35 +185,35 @@
 
   <div class="scenario-grid geometry-scenario-grid">
     <button class="scenario-card active" data-problem="mobile">
-      <span class="scenario-number">P1</span><span class="scenario-icon">ðŸ“±</span>
+      <span class="scenario-number">P1</span><span class="scenario-icon">📱</span>
       <strong>Mobile UI Button Design</strong>
-      <small>Rectangle â†’ vertices, area and perimeter</small>
+      <small>Rectangle → vertices, area and perimeter</small>
     </button>
     <button class="scenario-card" data-problem="game">
-      <span class="scenario-number">P2</span><span class="scenario-icon">ðŸŽ®</span>
+      <span class="scenario-number">P2</span><span class="scenario-icon">🎮</span>
       <strong>Game Character Collision</strong>
-      <small>Circle â†’ radius, diameter and area</small>
+      <small>Circle → radius, diameter and area</small>
     </button>
     <button class="scenario-card" data-problem="map">
-      <span class="scenario-number">P3</span><span class="scenario-icon">ðŸ—ºï¸</span>
+      <span class="scenario-number">P3</span><span class="scenario-icon">🗺️</span>
       <strong>Map / GPS Road</strong>
-      <small>Line â†’ distance between two coordinates</small>
+      <small>Line → distance between two coordinates</small>
     </button>
     <button class="scenario-card" data-problem="floor">
-      <span class="scenario-number">P4</span><span class="scenario-icon">ðŸ </span>
+      <span class="scenario-number">P4</span><span class="scenario-icon">🏠</span>
       <strong>Floor Plan</strong>
-      <small>Rectangle â†’ room area and boundary</small>
+      <small>Rectangle → room area and boundary</small>
     </button>
     <button class="scenario-card" data-problem="gis">
-      <span class="scenario-number">P5</span><span class="scenario-icon">ðŸ›°ï¸</span>
+      <span class="scenario-number">P5</span><span class="scenario-icon">🛰️</span>
       <strong>GIS Land Region</strong>
-      <small>Polygon â†’ vertices, edges and area</small>
+      <small>Polygon → vertices, edges and area</small>
     </button>
   </div>
 
   <div class="problem-split">
     <div class="problem-box geometry-problem-box">
-      <div class="problem-icon" id="problemIcon">ðŸ“±</div>
+      <div class="problem-icon" id="problemIcon">📱</div>
       <div>
         <div class="section-label">PROBLEM STATEMENT</div>
         <h3 id="problemTitle">Mobile UI Button Design</h3>
@@ -231,13 +231,13 @@
       <div class="canvas-toolbar">
         <span class="live-dot"></span>
         <strong>LIVE PROBLEM VIEWER</strong>
-        <span id="problemViewerStatus">P1 Â· Rectangle</span>
+        <span id="problemViewerStatus">P1 · Rectangle</span>
       </div>
       <div class="problem-viewer-canvas-wrap">
         <canvas id="problemCanvas" width="560" height="340"></canvas>
       </div>
       <div class="problem-viewer-caption" id="problemViewerCaption">The selected problem is visualized here.</div>
-      <button class="problem-view-btn" id="viewProblem">Load this problem in Main Viewer â†’</button>
+      <button class="problem-view-btn" id="viewProblem">Load this problem in Main Viewer →</button>
     </div>
   </div>
 </section>
@@ -245,7 +245,7 @@
 <section class="practical-section">
   <div class="section-heading">
     <div>
-      <div class="section-label">07 Â· EXPERIMENT</div>
+      <div class="section-label">07 · EXPERIMENT</div>
       <h2>Change the geometry</h2>
     </div>
   </div>
@@ -260,24 +260,24 @@
 <section class="practical-section">
   <div class="section-heading">
     <div>
-      <div class="section-label">08 Â· VIVA QUICK CHECK</div>
+      <div class="section-label">08 · VIVA QUICK CHECK</div>
       <h2>Can you explain the primitives?</h2>
     </div>
   </div>
   <div class="viva-grid">
     <details><summary>What is a graphics primitive?</summary><p>A basic geometric element used to construct graphical objects, such as a point, line, circle or polygon.</p></details>
     <details><summary>How is a point represented?</summary><p>A point is represented by a coordinate pair (x, y).</p></details>
-    <details><summary>How is line length calculated?</summary><p>Length = âˆš[(xâ‚‚âˆ’xâ‚)Â² + (yâ‚‚âˆ’yâ‚)Â²].</p></details>
+    <details><summary>How is line length calculated?</summary><p>Length = √[(x₂−x₁)² + (y₂−y₁)²].</p></details>
     <details><summary>What is a polygon?</summary><p>A polygon is a closed geometric figure made by connecting a sequence of vertices with straight edges.</p></details>
-    <details><summary>What is the area of a circle?</summary><p>Area = Ï€rÂ².</p></details>
+    <details><summary>What is the area of a circle?</summary><p>Area = Ï€r².</p></details>
     <details><summary>Why are coordinates important in computer graphics?</summary><p>Coordinates define the position and geometry of graphical objects in a coordinate system.</p></details>
   </div>
 </section>
 
 <nav class="practical-next">
-  <a href="practical02.html">â† Previous<br><strong>RGB &amp; CMYK Color Visualizer</strong></a>
+  <a href="practical02.html">← Previous<br><strong>RGB &amp; CMYK Color Visualizer</strong></a>
   <div><span>COMPUTER GRAPHICS</span><strong>PRACTICAL 03 / 21</strong></div>
-  <a href="practical04.html">Next â†’<br><strong>DDA Line Drawing Algorithm</strong></a>
+  <a href="practical04.html">Next →<br><strong>DDA Line Drawing Algorithm</strong></a>
 </nav>
 
 </main>
@@ -293,7 +293,7 @@
       <div><h4>Practice</h4><a href="../cgr_practicals.html">Practicals</a><a href="../../../about.html">About</a></div>
     </div>
   </div>
-  <div class="footer-bottom"><span>Â© 2026 Rasika CodeLab</span><span>Built for practical learning.</span></div>
+  <div class="footer-bottom"><span>© 2026 Rasika CodeLab</span><span>Built for practical learning.</span></div>
 </footer>
 
 <script>
@@ -325,36 +325,36 @@ const primitiveData = {
   line: {
     title: "Line",
     syntax: "line(x1, y1, x2, y2);",
-    representation: "Pâ‚(xâ‚,yâ‚) â†’ Pâ‚‚(xâ‚‚,yâ‚‚)",
-    formula: "Length = âˆš[(xâ‚‚âˆ’xâ‚)Â² + (yâ‚‚âˆ’yâ‚)Â²]",
+    representation: "P₁(x₁,y₁) → P₂(x₂,y₂)",
+    formula: "Length = √[(x₂−x₁)² + (y₂−y₁)²]",
     use: "Roads, edges, boundaries, drawings"
   },
   circle: {
     title: "Circle",
     syntax: "circle(x, y, radius);",
     representation: "Center C = (x,y), radius = r",
-    formula: "Diameter = 2r Â· Circumference = 2Ï€r Â· Area = Ï€rÂ²",
+    formula: "Diameter = 2r · Circumference = 2Ï€r · Area = Ï€r²",
     use: "Buttons, wheels, collision boundaries"
   },
   rectangle: {
     title: "Rectangle",
     syntax: "rectangle(left, top, right, bottom);",
     representation: "Four vertices connected by four edges",
-    formula: "Width = rightâˆ’left Â· Height = bottomâˆ’top Â· Area = WÃ—H",
+    formula: "Width = right−left · Height = bottom−top · Area = W×H",
     use: "Windows, UI cards, rooms, screens"
   },
   triangle: {
     title: "Triangle",
     syntax: "line(x1,y1,x2,y2); line(x2,y2,x3,y3); line(x3,y3,x1,y1);",
-    representation: "T = {Pâ‚, Pâ‚‚, Pâ‚ƒ}",
-    formula: "Area = Â½ Ã— base Ã— height",
+    representation: "T = {P₁, P₂, P₃}",
+    formula: "Area = ½ × base × height",
     use: "Arrows, 3D meshes, icons"
   },
   polygon: {
     title: "Polygon",
     syntax: "drawpoly(n, points);",
-    representation: "P = {Pâ‚, Pâ‚‚, â€¦, Pâ‚™}",
-    formula: "Area = Â½ |Î£(xáµ¢yáµ¢â‚Šâ‚ âˆ’ yáµ¢xáµ¢â‚Šâ‚)|",
+    representation: "P = {P₁, P₂, …, Pₙ}",
+    formula: "Area = ½ |Î£(xáµ¢yáµ¢₊₁ − yáµ¢xáµ¢₊₁)|",
     use: "Maps, regions, models, irregular objects"
   }
 };
@@ -376,7 +376,7 @@ function renderPrimitiveInfo() {
 }
 
 function symbolFor(shape) {
-  return {point:"â—",line:"â•±",circle:"â—‹",rectangle:"â–¡",triangle:"â–³",polygon:"â¬¡"}[shape];
+  return {point:"●",line:"╱",circle:"○",rectangle:"□",triangle:"△",polygon:"⬡"}[shape];
 }
 
 function selectShape(shape) {
@@ -402,7 +402,7 @@ function renderInputs() {
   if (currentShape === "triangle") s = inputRow("A X","x1",data.triangle.x1)+inputRow("A Y","y1",data.triangle.y1)+inputRow("B X","x2",data.triangle.x2)+inputRow("B Y","y2",data.triangle.y2)+inputRow("C X","x3",data.triangle.x3)+inputRow("C Y","y3",data.triangle.y3);
   if (currentShape === "polygon") {
     s = data.polygon.points.map((p,i)=>inputRow(`P${i+1} X`,`px${i}`,p[0])+inputRow(`P${i+1} Y`,`py${i}`,p[1])).join("");
-    s += `<button class="small-action" id="addVertex">+ Add Vertex</button><button class="small-action danger" id="removeVertex">âˆ’ Remove Vertex</button>`;
+    s += `<button class="small-action" id="addVertex">+ Add Vertex</button><button class="small-action danger" id="removeVertex">− Remove Vertex</button>`;
   }
   document.getElementById("shapeInputs").innerHTML = s;
   document.querySelectorAll(".geometry-input input").forEach(input => {
@@ -470,8 +470,8 @@ function drawGrid() {
 
   ctx.fillStyle="#ff9b1a";
   ctx.font="12px Arial";
-  ctx.fillText("X â†’",canvas.width-38,canvas.height-8);
-  ctx.fillText("Y â†“",8,16);
+  ctx.fillText("X →",canvas.width-38,canvas.height-8);
+  ctx.fillText("Y ↓",8,16);
   ctx.fillStyle="#777";
   ctx.fillText("(0,0)",29,canvas.height-30);
 }
@@ -564,22 +564,22 @@ function renderCalculation(){
   const d=primitiveData[currentShape];
   let body="";
   if(currentShape==="point") body=`<div class="calc-highlight">P = (${data.point.x}, ${data.point.y})</div><div class="calc-grid"><div><span>Coordinates</span><strong>X = ${data.point.x}, Y = ${data.point.y}</strong></div><div><span>Geometry</span><strong>Position only</strong></div></div>`;
-  if(currentShape==="line"){const l=lineLength(data.line);body=`<div class="formula-line">Length = âˆš[(xâ‚‚âˆ’xâ‚)Â² + (yâ‚‚âˆ’yâ‚)Â²]</div><div class="calc-steps">Î”X = ${data.line.x2} âˆ’ ${data.line.x1} = ${data.line.x2-data.line.x1}<br>Î”Y = ${data.line.y2} âˆ’ ${data.line.y1} = ${data.line.y2-data.line.y1}<br>Length = âˆš[${(data.line.x2-data.line.x1)**2} + ${(data.line.y2-data.line.y1)**2}] = <strong>${l.toFixed(2)}</strong></div>`;}
-  if(currentShape==="circle"){const r=data.circle.r;body=`<div class="formula-line">Diameter = 2r &nbsp; | &nbsp; Circumference = 2Ï€r &nbsp; | &nbsp; Area = Ï€rÂ²</div><div class="calc-grid"><div><span>Diameter</span><strong>${(2*r).toFixed(2)}</strong></div><div><span>Circumference</span><strong>${(2*Math.PI*r).toFixed(2)}</strong></div><div><span>Area</span><strong>${(Math.PI*r*r).toFixed(2)}</strong></div></div>`;}
-  if(currentShape==="rectangle"){const {w,h}=data.rectangle;body=`<div class="formula-line">Area = W Ã— H &nbsp; | &nbsp; Perimeter = 2(W + H)</div><div class="calc-grid"><div><span>Area</span><strong>${(w*h).toFixed(2)}</strong></div><div><span>Perimeter</span><strong>${(2*(w+h)).toFixed(2)}</strong></div></div>`;}
-  if(currentShape==="triangle"){const a=triangleArea(data.triangle);body=`<div class="formula-line">Area = Â½ Ã— base Ã— height</div><div class="calc-highlight">Coordinate-based triangle area = ${a.toFixed(2)} square units</div>`;}
-  if(currentShape==="polygon"){const a=polygonArea(data.polygon.points);body=`<div class="formula-line">Area = Â½ |Î£(xáµ¢yáµ¢â‚Šâ‚ âˆ’ yáµ¢xáµ¢â‚Šâ‚)|</div><div class="calc-grid"><div><span>Vertices</span><strong>${data.polygon.points.length}</strong></div><div><span>Edges</span><strong>${data.polygon.points.length}</strong></div><div><span>Area</span><strong>${a.toFixed(2)}</strong></div></div>`;}
+  if(currentShape==="line"){const l=lineLength(data.line);body=`<div class="formula-line">Length = √[(x₂−x₁)² + (y₂−y₁)²]</div><div class="calc-steps">Î”X = ${data.line.x2} − ${data.line.x1} = ${data.line.x2-data.line.x1}<br>Î”Y = ${data.line.y2} − ${data.line.y1} = ${data.line.y2-data.line.y1}<br>Length = √[${(data.line.x2-data.line.x1)**2} + ${(data.line.y2-data.line.y1)**2}] = <strong>${l.toFixed(2)}</strong></div>`;}
+  if(currentShape==="circle"){const r=data.circle.r;body=`<div class="formula-line">Diameter = 2r &nbsp; | &nbsp; Circumference = 2Ï€r &nbsp; | &nbsp; Area = Ï€r²</div><div class="calc-grid"><div><span>Diameter</span><strong>${(2*r).toFixed(2)}</strong></div><div><span>Circumference</span><strong>${(2*Math.PI*r).toFixed(2)}</strong></div><div><span>Area</span><strong>${(Math.PI*r*r).toFixed(2)}</strong></div></div>`;}
+  if(currentShape==="rectangle"){const {w,h}=data.rectangle;body=`<div class="formula-line">Area = W × H &nbsp; | &nbsp; Perimeter = 2(W + H)</div><div class="calc-grid"><div><span>Area</span><strong>${(w*h).toFixed(2)}</strong></div><div><span>Perimeter</span><strong>${(2*(w+h)).toFixed(2)}</strong></div></div>`;}
+  if(currentShape==="triangle"){const a=triangleArea(data.triangle);body=`<div class="formula-line">Area = ½ × base × height</div><div class="calc-highlight">Coordinate-based triangle area = ${a.toFixed(2)} square units</div>`;}
+  if(currentShape==="polygon"){const a=polygonArea(data.polygon.points);body=`<div class="formula-line">Area = ½ |Î£(xáµ¢yáµ¢₊₁ − yáµ¢xáµ¢₊₁)|</div><div class="calc-grid"><div><span>Vertices</span><strong>${data.polygon.points.length}</strong></div><div><span>Edges</span><strong>${data.polygon.points.length}</strong></div><div><span>Area</span><strong>${a.toFixed(2)}</strong></div></div>`;}
   document.getElementById("calculationCard").innerHTML=`<div class="calculation-heading"><div class="primitive-symbol">${symbolFor(currentShape)}</div><div><span class="section-label">LIVE CALCULATION</span><h3>${d.title}</h3></div></div>${body}`;
 }
 
 function updateViewerStatus(){
   let text=primitiveData[currentShape].title;
-  if(currentShape==="point") text+=` Â· (${data.point.x},${data.point.y})`;
-  if(currentShape==="line") text+=` Â· L ${lineLength(data.line).toFixed(1)}`;
-  if(currentShape==="circle") text+=` Â· r ${data.circle.r}`;
-  if(currentShape==="rectangle") text+=` Â· W ${data.rectangle.w} Â· H ${data.rectangle.h}`;
-  if(currentShape==="triangle") text+=` Â· 3 vertices`;
-  if(currentShape==="polygon") text+=` Â· ${data.polygon.points.length} vertices`;
+  if(currentShape==="point") text+=` · (${data.point.x},${data.point.y})`;
+  if(currentShape==="line") text+=` · L ${lineLength(data.line).toFixed(1)}`;
+  if(currentShape==="circle") text+=` · r ${data.circle.r}`;
+  if(currentShape==="rectangle") text+=` · W ${data.rectangle.w} · H ${data.rectangle.h}`;
+  if(currentShape==="triangle") text+=` · 3 vertices`;
+  if(currentShape==="polygon") text+=` · ${data.polygon.points.length} vertices`;
   document.getElementById("viewerStatus").textContent=text;
 }
 
@@ -628,38 +628,38 @@ document.getElementById("resetGeometry").addEventListener("click",()=>selectShap
 
 const problems = {
   mobile:{
-    icon:"ðŸ“±", title:"Mobile UI Button Design",
+    icon:"📱", title:"Mobile UI Button Design",
     text:"A mobile application needs a rectangular Login button starting at (100,80) with width 220 units and height 60 units. Find its four vertices, area and perimeter.",
-    answer:`Vertices:\nP1 = (100,80)\nP2 = (320,80)\nP3 = (320,140)\nP4 = (100,140)\n\nArea = W Ã— H\n     = 220 Ã— 60\n     = 13,200 square units\n\nPerimeter = 2(W + H)\n          = 2(220 + 60)\n          = 560 units`,
-    result:"Rectangle â†’ Area = 13,200 Â· Perimeter = 560",
+    answer:`Vertices:\nP1 = (100,80)\nP2 = (320,80)\nP3 = (320,140)\nP4 = (100,140)\n\nArea = W × H\n     = 220 × 60\n     = 13,200 square units\n\nPerimeter = 2(W + H)\n          = 2(220 + 60)\n          = 560 units`,
+    result:"Rectangle → Area = 13,200 · Perimeter = 560",
     apply(){currentShape="rectangle";data=structuredClone(defaults);data.rectangle={x:100,y:80,w:220,h:60};syncSelection();updateAll();}
   },
   game:{
-    icon:"ðŸŽ®", title:"Game Character Collision",
+    icon:"🎮", title:"Game Character Collision",
     text:"A game character uses a circular collision boundary with centre (250,200) and radius 50 units. Find the diameter, circumference and area.",
-    answer:`Diameter = 2r\n         = 2 Ã— 50\n         = 100 units\n\nCircumference = 2Ï€r\n              = 2Ï€ Ã— 50\n              â‰ˆ 314.16 units\n\nArea = Ï€rÂ²\n     = Ï€ Ã— 50Â²\n     â‰ˆ 7853.98 square units`,
-    result:"Circle â†’ Diameter = 100 Â· Circumference â‰ˆ 314.16 Â· Area â‰ˆ 7853.98",
+    answer:`Diameter = 2r\n         = 2 × 50\n         = 100 units\n\nCircumference = 2Ï€r\n              = 2Ï€ × 50\n              ≈ 314.16 units\n\nArea = Ï€r²\n     = Ï€ × 50²\n     ≈ 7853.98 square units`,
+    result:"Circle → Diameter = 100 · Circumference ≈ 314.16 · Area ≈ 7853.98",
     apply(){currentShape="circle";data=structuredClone(defaults);data.circle={x:250,y:200,r:50};syncSelection();updateAll();}
   },
   map:{
-    icon:"ðŸ—ºï¸", title:"Map / GPS Road",
+    icon:"🗺️", title:"Map / GPS Road",
     text:"A map application represents a road between A=(80,100) and B=(300,220). Calculate the length of the road segment.",
-    answer:`Î”X = 300 âˆ’ 80 = 220\nÎ”Y = 220 âˆ’ 100 = 120\n\nLength = âˆš(Î”XÂ² + Î”YÂ²)\n       = âˆš(220Â² + 120Â²)\n       â‰ˆ 250.60 units`,
-    result:"Line â†’ Road length â‰ˆ 250.60 units",
+    answer:`Î”X = 300 − 80 = 220\nÎ”Y = 220 − 100 = 120\n\nLength = √(ΔX² + Î”Y²)\n       = √(220² + 120²)\n       ≈ 250.60 units`,
+    result:"Line → Road length ≈ 250.60 units",
     apply(){currentShape="line";data=structuredClone(defaults);data.line={x1:80,y1:100,x2:300,y2:220};syncSelection();updateAll();}
   },
   floor:{
-    icon:"ðŸ ", title:"Floor Plan",
+    icon:"🏠", title:"Floor Plan",
     text:"A floor-plan application represents a room as a rectangle with width 400 units and height 250 units. Find its area and boundary length.",
-    answer:`Area = W Ã— H\n     = 400 Ã— 250\n     = 100,000 square units\n\nPerimeter = 2(W + H)\n          = 2(400 + 250)\n          = 1,300 units`,
-    result:"Rectangle â†’ Area = 100,000 Â· Perimeter = 1,300",
+    answer:`Area = W × H\n     = 400 × 250\n     = 100,000 square units\n\nPerimeter = 2(W + H)\n          = 2(400 + 250)\n          = 1,300 units`,
+    result:"Rectangle → Area = 100,000 · Perimeter = 1,300",
     apply(){currentShape="rectangle";data=structuredClone(defaults);data.rectangle={x:140,y:90,w:400,h:250};syncSelection();updateAll();}
   },
   gis:{
-    icon:"ðŸ›°ï¸", title:"GIS Land Region",
+    icon:"🛰️", title:"GIS Land Region",
     text:"A GIS application represents a land region using five vertices: (100,100), (250,70), (350,160), (280,280), (130,240). Find the number of vertices, edges and area.",
-    answer:`Vertices = 5\nEdges = 5\n\nUsing the Shoelace Formula:\nArea = Â½ |Î£(xáµ¢yáµ¢â‚Šâ‚ âˆ’ yáµ¢xáµ¢â‚Šâ‚)|\n\nArea = 57,500 square units`,
-    result:"Polygon â†’ 5 vertices Â· 5 edges Â· Area = 57,500",
+    answer:`Vertices = 5\nEdges = 5\n\nUsing the Shoelace Formula:\nArea = ½ |Î£(xáµ¢yáµ¢₊₁ − yáµ¢xáµ¢₊₁)|\n\nArea = 57,500 square units`,
+    result:"Polygon → 5 vertices · 5 edges · Area = 57,500",
     apply(){currentShape="polygon";data=structuredClone(defaults);data.polygon={points:[[100,100],[250,70],[350,160],[280,280],[130,240]]};syncSelection();updateAll();}
   }
 };
@@ -680,37 +680,37 @@ function drawProblemViewer(key){
   x.strokeStyle="rgba(255,138,0,.35)";
   x.beginPath();x.moveTo(0,c.height-25);x.lineTo(c.width,c.height-25);x.stroke();
   x.beginPath();x.moveTo(25,0);x.lineTo(25,c.height);x.stroke();
-  x.fillStyle="#ff9a19";x.font="11px Arial";x.fillText("X â†’",c.width-35,c.height-8);x.fillText("Y â†“",7,15);
+  x.fillStyle="#ff9a19";x.font="11px Arial";x.fillText("X →",c.width-35,c.height-8);x.fillText("Y ↓",7,15);
   const dot=(px,py,label)=>{x.fillStyle="#ff8a00";x.beginPath();x.arc(px,py,5,0,Math.PI*2);x.fill();x.fillStyle="#ffd09a";x.font="bold 11px Arial";x.fillText(label,px+8,py-7);};
   const line=(a,b)=>{x.strokeStyle="#ff8a00";x.lineWidth=3;x.beginPath();x.moveTo(a[0],a[1]);x.lineTo(b[0],b[1]);x.stroke();};
   if(key==="mobile"){
     const d=problems.mobile.viewer={x:100,y:80,w:220,h:60};
     x.fillStyle="rgba(255,138,0,.12)";x.strokeStyle="#ff8a00";x.lineWidth=3;x.fillRect(d.x,d.y,d.w,d.h);x.strokeRect(d.x,d.y,d.w,d.h);
     [[d.x,d.y],[d.x+d.w,d.y],[d.x+d.w,d.y+d.h],[d.x,d.y+d.h]].forEach((q,i)=>dot(q[0],q[1],"P"+(i+1)));
-    x.fillStyle="#ffb45c";x.font="12px Arial";x.fillText("220 Ã— 60",d.x+75,d.y+35);
+    x.fillStyle="#ffb45c";x.font="12px Arial";x.fillText("220 × 60",d.x+75,d.y+35);
     document.getElementById("problemViewerCaption").textContent="Rectangle: four vertices, width 220 and height 60.";
-    document.getElementById("problemViewerStatus").textContent="P1 Â· Rectangle";
+    document.getElementById("problemViewerStatus").textContent="P1 · Rectangle";
   }
   if(key==="game"){
     const d={x:280,y:170,r:50};x.fillStyle="rgba(255,138,0,.10)";x.strokeStyle="#ff8a00";x.lineWidth=3;x.beginPath();x.arc(d.x,d.y,d.r,0,Math.PI*2);x.fill();x.stroke();dot(d.x,d.y,"C");
     line([d.x,d.y],[d.x+d.r,d.y]);x.fillStyle="#ffb45c";x.font="12px Arial";x.fillText("r = 50",d.x+20,d.y-8);
     document.getElementById("problemViewerCaption").textContent="Circular collision boundary: centre (250,200), radius 50.";
-    document.getElementById("problemViewerStatus").textContent="P2 Â· Circle";
+    document.getElementById("problemViewerStatus").textContent="P2 · Circle";
   }
   if(key==="map"){
-    const a=[100,110],b=[390,250];line(a,b);dot(a[0],a[1],"A");dot(b[0],b[1],"B");x.fillStyle="#ffb45c";x.font="12px Arial";x.fillText("Length â‰ˆ 250.60",205,165);
+    const a=[100,110],b=[390,250];line(a,b);dot(a[0],a[1],"A");dot(b[0],b[1],"B");x.fillStyle="#ffb45c";x.font="12px Arial";x.fillText("Length ≈ 250.60",205,165);
     document.getElementById("problemViewerCaption").textContent="Road segment between A(80,100) and B(300,220).";
-    document.getElementById("problemViewerStatus").textContent="P3 Â· Line";
+    document.getElementById("problemViewerStatus").textContent="P3 · Line";
   }
   if(key==="floor"){
-    const d={x:90,y:45,w:400,h:250};x.fillStyle="rgba(255,138,0,.10)";x.strokeStyle="#ff8a00";x.lineWidth=3;x.fillRect(d.x,d.y,d.w,d.h);x.strokeRect(d.x,d.y,d.w,d.h);dot(d.x,d.y,"P1");dot(d.x+d.w,d.y,"P2");dot(d.x+d.w,d.y+d.h,"P3");dot(d.x,d.y+d.h,"P4");x.fillStyle="#ffb45c";x.font="12px Arial";x.fillText("400 Ã— 250",250,180);
+    const d={x:90,y:45,w:400,h:250};x.fillStyle="rgba(255,138,0,.10)";x.strokeStyle="#ff8a00";x.lineWidth=3;x.fillRect(d.x,d.y,d.w,d.h);x.strokeRect(d.x,d.y,d.w,d.h);dot(d.x,d.y,"P1");dot(d.x+d.w,d.y,"P2");dot(d.x+d.w,d.y+d.h,"P3");dot(d.x,d.y+d.h,"P4");x.fillStyle="#ffb45c";x.font="12px Arial";x.fillText("400 × 250",250,180);
     document.getElementById("problemViewerCaption").textContent="Room rectangle: width 400 and height 250.";
-    document.getElementById("problemViewerStatus").textContent="P4 Â· Rectangle";
+    document.getElementById("problemViewerStatus").textContent="P4 · Rectangle";
   }
   if(key==="gis"){
     const pts=[[90,90],[240,60],[390,150],[320,270],[120,230]];x.fillStyle="rgba(255,138,0,.10)";x.strokeStyle="#ff8a00";x.lineWidth=3;x.beginPath();x.moveTo(pts[0][0],pts[0][1]);pts.slice(1).forEach(q=>x.lineTo(q[0],q[1]));x.closePath();x.fill();x.stroke();pts.forEach((q,i)=>dot(q[0],q[1],"P"+(i+1)));x.fillStyle="#ffb45c";x.font="12px Arial";x.fillText("Area = 57,500",225,170);
     document.getElementById("problemViewerCaption").textContent="GIS polygon with 5 vertices. Shoelace area = 57,500 square units.";
-    document.getElementById("problemViewerStatus").textContent="P5 Â· Polygon";
+    document.getElementById("problemViewerStatus").textContent="P5 · Polygon";
   }
 }
 
@@ -733,7 +733,7 @@ document.querySelectorAll(".geometry-scenario-grid .scenario-card").forEach(card
 function constructionSteps(){
   return {
     point:["Place coordinate","Mark the point","Point created"],
-    line:["Place P1","Place P2","Connect P1 â†’ P2","Line created"],
+    line:["Place P1","Place P2","Connect P1 → P2","Line created"],
     circle:["Place centre","Set radius","Draw circumference","Circle created"],
     rectangle:["Place P1","Create width","Create height","Connect final edge","Rectangle created"],
     triangle:["Place A","Place B","Place C","Connect vertices","Triangle created"],

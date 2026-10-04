@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>15 â€” Sutherland-Hodgman Polygon Clipping | Rasika CodeLab</title>
+  <title>15 — Sutherland-Hodgman Polygon Clipping | Rasika CodeLab</title>
   <link rel="stylesheet" href="../css/cgr_style.css">
   <link rel="stylesheet" href="../css/cgr_practicals.css">
 <style>body.protected-page:not(.auth-ready){visibility:hidden}</style>
@@ -22,14 +22,14 @@
         <a href="../cgr_practicals.html" class="active">Practicals</a>
     <a href="../../../about.html">About</a>
   </nav>
-  <button class="menu-btn" aria-label="Open Menu">â˜°</button>
+  <button class="menu-btn" aria-label="Open Menu">☰</button>
 </header>
 
 <main>
 
 <section class="practical-hero">
   <div class="container">
-    <span class="eyebrow">PRACTICAL 15 Â· CLIPPING</span>
+    <span class="eyebrow">PRACTICAL 15 · CLIPPING</span>
     <h1>Sutherland-Hodgman Polygon Clipping</h1>
     <p>Clip a polygon against a rectangular window by processing one boundary at a time.</p>
     <div class="hero-actions">
@@ -117,27 +117,27 @@
     <div class="case-grid">
       <article class="case-card">
         <span class="case-number">01</span>
-        <h3>Inside â†’ Inside</h3>
+        <h3>Inside → Inside</h3>
         <p>Add P to the output list.</p>
         <div class="formula-box"><strong>Output: P</strong></div>
       </article>
       <article class="case-card">
         <span class="case-number">02</span>
-        <h3>Inside â†’ Outside</h3>
+        <h3>Inside → Outside</h3>
         <p>Add the intersection point only.</p>
         <div class="formula-box"><strong>Output: I</strong></div>
       </article>
       <article class="case-card">
         <span class="case-number">03</span>
-        <h3>Outside â†’ Inside</h3>
+        <h3>Outside → Inside</h3>
         <p>Add the intersection point followed by P.</p>
         <div class="formula-box"><strong>Output: I, P</strong></div>
       </article>
       <article class="case-card">
         <span class="case-number">04</span>
-        <h3>Outside â†’ Outside</h3>
+        <h3>Outside → Outside</h3>
         <p>Add nothing.</p>
-        <div class="formula-box"><strong>Output: â€”</strong></div>
+        <div class="formula-box"><strong>Output: —</strong></div>
       </article>
     </div>
 
@@ -161,12 +161,12 @@
       <div class="formula-box">
         <span>Vertical Boundary</span>
         <strong>x = xb</strong>
-        <p>y = yâ‚ + (yâ‚‚ âˆ’ yâ‚)(xb âˆ’ xâ‚)/(xâ‚‚ âˆ’ xâ‚)</p>
+        <p>y = y₁ + (y₂ − y₁)(xb − x₁)/(x₂ − x₁)</p>
       </div>
       <div class="formula-box">
         <span>Horizontal Boundary</span>
         <strong>y = yb</strong>
-        <p>x = xâ‚ + (xâ‚‚ âˆ’ xâ‚)(yb âˆ’ yâ‚)/(yâ‚‚ âˆ’ yâ‚)</p>
+        <p>x = x₁ + (x₂ − x₁)(yb − y₁)/(y₂ − y₁)</p>
       </div>
     </div>
 
@@ -193,20 +193,20 @@
 
     <div class="calculation-card">
       <h3>Example Polygon</h3>
-      <p>Consider the triangle Pâ‚(1,3), Pâ‚‚(6,8), Pâ‚ƒ(10,3).</p>
+      <p>Consider the triangle P₁(1,3), P₂(6,8), P₃(10,3).</p>
 
       <div class="calculation-flow">
         <div class="calc-step">
           <span>01</span>
-          <p>Against the <strong>LEFT</strong> boundary x = 2, edge Pâ‚â†’Pâ‚‚ crosses the boundary.</p>
+          <p>Against the <strong>LEFT</strong> boundary x = 2, edge P₁→P₂ crosses the boundary.</p>
         </div>
         <div class="calc-step">
           <span>02</span>
-          <p>Intersection y = 3 + (8âˆ’3)(2âˆ’1)/(6âˆ’1) = <strong>4</strong>. New point: <strong>(2,4)</strong>.</p>
+          <p>Intersection y = 3 + (8−3)(2−1)/(6−1) = <strong>4</strong>. New point: <strong>(2,4)</strong>.</p>
         </div>
         <div class="calc-step">
           <span>03</span>
-          <p>Edge Pâ‚ƒâ†’Pâ‚ also crosses x = 2. Intersection gives approximately <strong>(2,3)</strong>.</p>
+          <p>Edge P₃→P₁ also crosses x = 2. Intersection gives approximately <strong>(2,3)</strong>.</p>
         </div>
         <div class="calc-step">
           <span>04</span>
@@ -342,21 +342,21 @@
 
     <div class="problem-grid">
       <article class="problem-card">
-        <span class="problem-tag">01 Â· GAME</span>
+        <span class="problem-tag">01 · GAME</span>
         <h3>Game Object Visibility</h3>
         <p>A character or obstacle is represented by a polygon that extends outside the camera viewport. Clip it before rendering.</p>
         <button class="btn btn-secondary problem-load" data-shape="star">Show in Live Viewer</button>
       </article>
 
       <article class="problem-card">
-        <span class="problem-tag">02 Â· CAD</span>
+        <span class="problem-tag">02 · CAD</span>
         <h3>CAD Drawing Window</h3>
         <p>A filled CAD component crosses the active drawing window. Display only the polygon portion inside the viewport.</p>
         <button class="btn btn-secondary problem-load" data-shape="quad">Show in Live Viewer</button>
       </article>
 
       <article class="problem-card">
-        <span class="problem-tag">03 Â· MAP</span>
+        <span class="problem-tag">03 · MAP</span>
         <h3>Map Region</h3>
         <p>A geographic region is stored as a polygon and must be clipped to the current map viewport before display.</p>
         <button class="btn btn-secondary problem-load" data-shape="pentagon">Show in Live Viewer</button>
@@ -426,7 +426,7 @@
           <tr><td>Input</td><td>Two endpoints</td><td>Ordered list of vertices</td></tr>
           <tr><td>Output</td><td>Visible line segment</td><td>New visible polygon</td></tr>
           <tr><td>Core operation</td><td>Classify endpoints / find intersections</td><td>Process vertex transitions / find intersections</td></tr>
-          <tr><td>This practical</td><td>â€”</td><td>Sutherland-Hodgman</td></tr>
+          <tr><td>This practical</td><td>—</td><td>Sutherland-Hodgman</td></tr>
         </tbody>
       </table>
     </div>
@@ -446,9 +446,9 @@
     <div class="viva-list">
       <details><summary>What is polygon clipping?</summary><p>It is the process of removing portions of a polygon that lie outside a specified clipping window.</p></details>
       <details><summary>What is the Sutherland-Hodgman algorithm?</summary><p>It is a polygon clipping algorithm that processes a polygon against each clipping boundary sequentially.</p></details>
-      <details><summary>What are the four vertex cases?</summary><p>Insideâ†’Inside, Insideâ†’Outside, Outsideâ†’Inside and Outsideâ†’Outside.</p></details>
-      <details><summary>What is produced for Insideâ†’Outside?</summary><p>The intersection point with the clipping boundary is added.</p></details>
-      <details><summary>What is produced for Outsideâ†’Inside?</summary><p>The intersection point is added first, followed by the inside vertex.</p></details>
+      <details><summary>What are the four vertex cases?</summary><p>Inside→Inside, Inside→Outside, Outside→Inside and Outside→Outside.</p></details>
+      <details><summary>What is produced for Inside→Outside?</summary><p>The intersection point with the clipping boundary is added.</p></details>
+      <details><summary>What is produced for Outside→Inside?</summary><p>The intersection point is added first, followed by the inside vertex.</p></details>
       <details><summary>Why are multiple passes required?</summary><p>A rectangular clipping window has four boundaries, and the polygon is progressively clipped against each one.</p></details>
       <details><summary>Can clipping create new vertices?</summary><p>Yes. Intersections between polygon edges and clipping boundaries become new output vertices.</p></details>
       <details><summary>What happens if the entire polygon is outside?</summary><p>The output list can become empty after the appropriate clipping passes.</p></details>
@@ -460,11 +460,11 @@
   <div class="container">
     <a class="nav-practical prev" href="practical14.html">
       <span>Previous Practical</span>
-      <strong>14 â€” Midpoint Subdivision</strong>
+      <strong>14 — Midpoint Subdivision</strong>
     </a>
     <a class="nav-practical next" href="practical16.html">
       <span>Next Practical</span>
-      <strong>16 â€” Bezier Curve Generator</strong>
+      <strong>16 — Bezier Curve Generator</strong>
     </a>
   </div>
 </section>
@@ -493,7 +493,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <span>Â© 2026 Rasika CodeLab</span>
+    <span>© 2026 Rasika CodeLab</span>
     <span>Built for practical learning.</span>
   </div>
 </footer>
@@ -793,7 +793,7 @@
     if (!display.output.length) {
       message.textContent = `${display.active} clipping removed the polygon. Output vertex list is empty.`;
     } else {
-      message.textContent = `${display.active} pass: ${display.input.length} input vertices â†’ ${display.output.length} output vertices.`;
+      message.textContent = `${display.active} pass: ${display.input.length} input vertices → ${display.output.length} output vertices.`;
     }
   }
 

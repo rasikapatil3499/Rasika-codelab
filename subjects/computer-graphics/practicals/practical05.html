@@ -21,22 +21,22 @@
     <a href="../cgr_practicals.html" class="active">Practicals</a>
     <a href="../../../about.html">About</a>
   </nav>
-  <button class="menu-btn" aria-label="Open Menu">â˜°</button>
+  <button class="menu-btn" aria-label="Open Menu">☰</button>
 </header>
 
 <main class="cgr-practical-page">
 
 <section class="practical-hero">
   <div class="container">
-    <div class="hero-badge">05 Â· RASTER SCAN</div>
+    <div class="hero-badge">05 · RASTER SCAN</div>
     <h1>Bresenham Line Drawing</h1>
     <p>Understand the decision parameter and generate a raster line using efficient integer-based pixel selection.</p>
     <div class="hero-flow">
-      <div>Coordinates</div><span>â†’</span>
-      <div>Î”x, Î”y</div><span>â†’</span>
-      <div>Decision P</div><span>â†’</span>
-      <div>E / NE</div><span>â†’</span>
-      <div>Pixels</div><span>â†’</span>
+      <div>Coordinates</div><span>→</span>
+      <div>Î”x, Î”y</div><span>→</span>
+      <div>Decision P</div><span>→</span>
+      <div>E / NE</div><span>→</span>
+      <div>Pixels</div><span>→</span>
       <div>Raster Line</div>
     </div>
   </div>
@@ -53,7 +53,7 @@
 
     <div class="concept-grid">
       <article class="concept-card">
-        <div class="concept-icon">â–«</div>
+        <div class="concept-icon">▫</div>
         <h3>Raster Display</h3>
         <p>A screen is a grid of discrete pixels. A line must therefore be converted into a sequence of pixel positions.</p>
       </article>
@@ -75,13 +75,13 @@
         <h3>Continuous Geometry</h3>
         <p>The required line exists mathematically between two endpoints.</p>
       </div>
-      <div class="decision-flow-arrow">â†’</div>
+      <div class="decision-flow-arrow">→</div>
       <div class="decision-flow-card highlight">
         <span class="decision-flow-label">DECISION</span>
         <h3>Choose E or NE</h3>
         <p>The decision parameter determines the better next pixel.</p>
       </div>
-      <div class="decision-flow-arrow">â†’</div>
+      <div class="decision-flow-arrow">→</div>
       <div class="decision-flow-card">
         <span class="decision-flow-label">RASTER RESULT</span>
         <h3>Selected Pixels</h3>
@@ -104,13 +104,13 @@
       <div class="algorithm-card">
         <h3>Algorithm Steps</h3>
         <ol class="algorithm-steps">
-          <li>Read the starting point <strong>(xâ‚, yâ‚)</strong> and ending point <strong>(xâ‚‚, yâ‚‚)</strong>.</li>
-          <li>Calculate <strong>Î”x = xâ‚‚ âˆ’ xâ‚</strong> and <strong>Î”y = yâ‚‚ âˆ’ yâ‚</strong>.</li>
-          <li>For the basic case, take <strong>0 â‰¤ m â‰¤ 1</strong> and move from left to right.</li>
-          <li>Initialize the decision parameter using <strong>pâ‚€ = 2Î”y âˆ’ Î”x</strong>.</li>
+          <li>Read the starting point <strong>(x₁, y₁)</strong> and ending point <strong>(x₂, y₂)</strong>.</li>
+          <li>Calculate <strong>Î”x = x₂ − x₁</strong> and <strong>Î”y = y₂ − y₁</strong>.</li>
+          <li>For the basic case, take <strong>0 ≤ m ≤ 1</strong> and move from left to right.</li>
+          <li>Initialize the decision parameter using <strong>p₀ = 2Î”y − Î”x</strong>.</li>
           <li>Plot the current pixel.</li>
           <li>If <strong>p &lt; 0</strong>, choose the East pixel and update the decision parameter.</li>
-          <li>If <strong>p â‰¥ 0</strong>, choose the North-East pixel and update the decision parameter.</li>
+          <li>If <strong>p ≥ 0</strong>, choose the North-East pixel and update the decision parameter.</li>
           <li>Repeat until the endpoint is reached.</li>
           <li>For other slope directions, the coordinate update rules are adapted to the octant.</li>
         </ol>
@@ -118,11 +118,11 @@
 
       <div class="formula-card">
         <span class="formula-kicker">CORE FORMULAS</span>
-        <div class="formula-row"><span>Î”x</span><strong>xâ‚‚ âˆ’ xâ‚</strong></div>
-        <div class="formula-row"><span>Î”y</span><strong>yâ‚‚ âˆ’ yâ‚</strong></div>
-        <div class="formula-row"><span>Initial P</span><strong>2Î”y âˆ’ Î”x</strong></div>
+        <div class="formula-row"><span>Î”x</span><strong>x₂ − x₁</strong></div>
+        <div class="formula-row"><span>Î”y</span><strong>y₂ − y₁</strong></div>
+        <div class="formula-row"><span>Initial P</span><strong>2Î”y − Î”x</strong></div>
         <div class="formula-row"><span>If P &lt; 0</span><strong>P + 2Î”y</strong></div>
-        <div class="formula-row"><span>If P â‰¥ 0</span><strong>P + 2Î”y âˆ’ 2Î”x</strong></div>
+        <div class="formula-row"><span>If P ≥ 0</span><strong>P + 2Î”y − 2Î”x</strong></div>
       </div>
     </div>
 
@@ -131,7 +131,7 @@
         <strong>How the decision works</strong>
         <span>E vs NE</span>
       </div>
-      <div class="decision-equation">P &lt; 0 â†’ choose E &nbsp;&nbsp; | &nbsp;&nbsp; P â‰¥ 0 â†’ choose NE</div>
+      <div class="decision-equation">P &lt; 0 → choose E &nbsp;&nbsp; | &nbsp;&nbsp; P ≥ 0 → choose NE</div>
     </div>
 
     <div class="algorithm-reference">
@@ -157,11 +157,11 @@
       <div class="calculation-card">
         <span class="example-tag">EXAMPLE</span>
         <h3>Draw a line from (2, 3) to (10, 7)</h3>
-        <div class="calculation-step"><span>Î”x</span><strong>10 âˆ’ 2 = 8</strong></div>
-        <div class="calculation-step"><span>Î”y</span><strong>7 âˆ’ 3 = 4</strong></div>
-        <div class="calculation-step"><span>Initial decision parameter</span><strong>pâ‚€ = 2(4) âˆ’ 8 = 0</strong></div>
+        <div class="calculation-step"><span>Î”x</span><strong>10 − 2 = 8</strong></div>
+        <div class="calculation-step"><span>Î”y</span><strong>7 − 3 = 4</strong></div>
+        <div class="calculation-step"><span>Initial decision parameter</span><strong>p₀ = 2(4) − 8 = 0</strong></div>
         <div class="calculation-step"><span>E update</span><strong>p = p + 2Î”y</strong></div>
-        <div class="calculation-step"><span>NE update</span><strong>p = p + 2Î”y âˆ’ 2Î”x</strong></div>
+        <div class="calculation-step"><span>NE update</span><strong>p = p + 2Î”y − 2Î”x</strong></div>
       </div>
 
       <div class="pixel-table-card">
@@ -201,24 +201,24 @@
         <div class="control-group">
           <h3>Start Point</h3>
           <div class="input-row">
-            <label>Xâ‚<input type="number" id="x1" value="2"></label>
-            <label>Yâ‚<input type="number" id="y1" value="3"></label>
+            <label>X₁<input type="number" id="x1" value="2"></label>
+            <label>Y₁<input type="number" id="y1" value="3"></label>
           </div>
         </div>
 
         <div class="control-group">
           <h3>End Point</h3>
           <div class="input-row">
-            <label>Xâ‚‚<input type="number" id="x2" value="18"></label>
-            <label>Yâ‚‚<input type="number" id="y2" value="10"></label>
+            <label>X₂<input type="number" id="x2" value="18"></label>
+            <label>Y₂<input type="number" id="y2" value="10"></label>
           </div>
         </div>
 
         <div class="lab-buttons">
           <button class="primary-btn" id="generateBtn">Generate Line</button>
-          <button class="outline-btn" id="stepBtn">â†’ Next Pixel</button>
-          <button class="outline-btn" id="playBtn">â–¶ Play Bresenham</button>
-          <button class="text-btn" id="resetBtn">â†» Reset</button>
+          <button class="outline-btn" id="stepBtn">→ Next Pixel</button>
+          <button class="outline-btn" id="playBtn">▶ Play Bresenham</button>
+          <button class="text-btn" id="resetBtn">↻ Reset</button>
         </div>
 
         <div class="speed-control">
@@ -256,9 +256,9 @@
         </div>
         <div class="viewer-info">
           <div><span>STEP</span><strong id="currentStep">0 / 0</strong></div>
-          <div><span>CURRENT PIXEL</span><strong id="currentPixel">â€”</strong></div>
-          <div><span>DECISION</span><strong id="currentDecision">â€”</strong></div>
-          <div><span>SELECTED</span><strong id="currentSelection">â€”</strong></div>
+          <div><span>CURRENT PIXEL</span><strong id="currentPixel">—</strong></div>
+          <div><span>DECISION</span><strong id="currentDecision">—</strong></div>
+          <div><span>SELECTED</span><strong id="currentSelection">—</strong></div>
         </div>
       </div>
     </div>
@@ -279,21 +279,21 @@
         <span class="animation-number" id="animationNumber">01 / 06</span>
         <h3 id="animationTitle">Start Point</h3>
         <p id="animationDescription">Begin with the starting coordinate.</p>
-        <div class="animation-formula" id="animationFormula">Pâ‚ = (xâ‚, yâ‚)</div>
+        <div class="animation-formula" id="animationFormula">P₁ = (x₁, y₁)</div>
       </div>
 
       <div class="animation-track">
         <div class="animation-step active" data-stage="0">Start</div>
         <div class="animation-step" data-stage="1">Î”x</div>
         <div class="animation-step" data-stage="2">Î”y</div>
-        <div class="animation-step" data-stage="3">Pâ‚€</div>
+        <div class="animation-step" data-stage="3">P₀</div>
         <div class="animation-step" data-stage="4">E / NE</div>
         <div class="animation-step" data-stage="5">Plot</div>
       </div>
 
       <div class="animation-actions">
-        <button class="primary-btn" id="animationPlay">â–¶ Play Algorithm</button>
-        <button class="outline-btn" id="animationNext">Next Stage â†’</button>
+        <button class="primary-btn" id="animationPlay">▶ Play Algorithm</button>
+        <button class="outline-btn" id="animationNext">Next Stage →</button>
       </div>
     </div>
   </div>
@@ -313,7 +313,7 @@
         <p>The ideal line is closer to the East candidate, so the algorithm selects E and advances horizontally.</p>
       </article>
       <article class="decision-explanation-card highlight">
-        <h3>When P â‰¥ 0</h3>
+        <h3>When P ≥ 0</h3>
         <p>The ideal line is closer to the North-East candidate, so the algorithm selects NE and advances in both X and Y.</p>
       </article>
     </div>
@@ -369,9 +369,9 @@
     </div>
 
     <div class="problem-tabs">
-      <button class="problem-tab active" data-problem="game">P1 Â· Game Movement</button>
-      <button class="problem-tab" data-problem="display">P2 Â· LED Display</button>
-      <button class="problem-tab" data-problem="map">P3 Â· Map Route</button>
+      <button class="problem-tab active" data-problem="game">P1 · Game Movement</button>
+      <button class="problem-tab" data-problem="display">P2 · LED Display</button>
+      <button class="problem-tab" data-problem="map">P3 · Map Route</button>
     </div>
 
     <div class="problem-layout">
@@ -387,17 +387,17 @@
 
         <div class="problem-answer">
           <span>ANSWER</span>
-          <div id="problemAnswer">Î”x = 14, Î”y = 6, Pâ‚€ = -2. Bresenham selects a sequence of integer pixels between the character and target.</div>
+          <div id="problemAnswer">Î”x = 14, Î”y = 6, P₀ = -2. Bresenham selects a sequence of integer pixels between the character and target.</div>
         </div>
 
-        <button class="primary-btn" id="visualizeProblem">â–¶ Visualize Pixel Plot</button>
+        <button class="primary-btn" id="visualizeProblem">▶ Visualize Pixel Plot</button>
       </article>
 
       <article class="problem-viewer">
         <div class="viewer-toolbar">
           <span class="live-dot"></span>
           <strong>LIVE PROBLEM VIEWER</strong>
-          <span class="viewer-status" id="problemViewerStatus">P1 Â· GAME MOVEMENT</span>
+          <span class="viewer-status" id="problemViewerStatus">P1 · GAME MOVEMENT</span>
         </div>
         <div class="problem-canvas-wrap">
           <canvas id="problemCanvas" width="700" height="390"></canvas>
@@ -482,7 +482,7 @@
       <details><summary>What are E and NE?</summary><p>For the basic positive-slope case, E is the horizontal candidate and NE is the diagonal candidate.</p></details>
       <details><summary>What happens when P is negative?</summary><p>The basic rule selects E and updates the decision parameter with the corresponding incremental term.</p></details>
       <details><summary>How is Bresenham different from DDA?</summary><p>DDA uses coordinate increments and rounding, while Bresenham uses a decision parameter to choose raster pixels.</p></details>
-      <details><summary>What is the initial decision parameter?</summary><p>For the basic case 0 â‰¤ m â‰¤ 1, pâ‚€ = 2Î”y âˆ’ Î”x.</p></details>
+      <details><summary>What is the initial decision parameter?</summary><p>For the basic case 0 ≤ m ≤ 1, p₀ = 2Î”y − Î”x.</p></details>
       <details><summary>Why are octants important?</summary><p>The basic derivation assumes a particular direction and slope range, so other line directions require adapted update rules.</p></details>
     </div>
   </div>
@@ -493,12 +493,12 @@
   <div class="container">
     <div class="nav-cards">
       <a class="nav-card" href="practical04.html">
-        <span>â† PREVIOUS PRACTICAL</span>
-        <strong>04 Â· DDA Line Drawing</strong>
+        <span>← PREVIOUS PRACTICAL</span>
+        <strong>04 · DDA Line Drawing</strong>
       </a>
       <a class="nav-card next" href="practical06.html">
-        <span>NEXT PRACTICAL â†’</span>
-        <strong>06 Â· Circle Drawing</strong>
+        <span>NEXT PRACTICAL →</span>
+        <strong>06 · Circle Drawing</strong>
       </a>
     </div>
   </div>
@@ -528,8 +528,8 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>Â© 2026 Rasika CodeLab</span>
-      <span>Learn Â· Calculate Â· Implement Â· Visualize Â· Experiment</span>
+      <span>© 2026 Rasika CodeLab</span>
+      <span>Learn · Calculate · Implement · Visualize · Experiment</span>
     </div>
   </div>
 </footer>
@@ -644,7 +644,7 @@
     ctx.beginPath();ctx.arc(sx,sy,5,0,Math.PI*2);ctx.fill();
     ctx.beginPath();ctx.arc(ex,ey,5,0,Math.PI*2);ctx.fill();
     ctx.font='bold 12px Arial';
-    ctx.fillText('Pâ‚',sx+8,sy-8);ctx.fillText('Pâ‚‚',ex+8,ey-8);
+    ctx.fillText('P₁',sx+8,sy-8);ctx.fillText('P₂',ex+8,ey-8);
 
     const shown=Math.min(count,pixels.length);
     for(let i=0;i<shown;i++){
@@ -668,9 +668,9 @@
       updateDecisionPanel(p);
     } else {
       $('currentStep').textContent=`0 / ${Math.max(0,pixels.length-1)}`;
-      $('currentPixel').textContent='â€”';
-      $('currentDecision').textContent='â€”';
-      $('currentSelection').textContent='â€”';
+      $('currentPixel').textContent='—';
+      $('currentDecision').textContent='—';
+      $('currentSelection').textContent='—';
     }
   }
 
@@ -718,7 +718,7 @@
   function stop(){
     if(timer) clearInterval(timer);
     timer=null;
-    $('playBtn').textContent='â–¶ Play Bresenham';
+    $('playBtn').textContent='▶ Play Bresenham';
   }
 
   function resetView(){
@@ -744,7 +744,7 @@
     if(!pixels.length) metrics();
     if(currentIndex>=pixels.length) currentIndex=0;
     stop();
-    $('playBtn').textContent='âšâš Pause';
+    $('playBtn').textContent='❚❚ Pause';
     $('viewerStatus').textContent='PLOTTING PIXELS';
     timer=setInterval(()=>{
       currentIndex++;
@@ -764,12 +764,12 @@
   $('speed').oninput=e=>$('speedValue').textContent=`${e.target.value} ms`;
 
   const stages=[
-    ['Start Point','Begin with the starting coordinate.','Pâ‚ = (xâ‚, yâ‚)'],
-    ['Calculate Î”x','Find the horizontal difference between the endpoints.','Î”x = xâ‚‚ âˆ’ xâ‚'],
-    ['Calculate Î”y','Find the vertical difference between the endpoints.','Î”y = yâ‚‚ âˆ’ yâ‚'],
-    ['Initial P','Initialize the decision parameter for the basic case.','pâ‚€ = 2Î”y âˆ’ Î”x'],
-    ['Choose E / NE','Compare the decision parameter and select the better candidate pixel.','P < 0 â†’ E  |  P â‰¥ 0 â†’ NE'],
-    ['Plot Pixel','Advance to the selected coordinate and repeat.','Plot â†’ Update P â†’ Repeat']
+    ['Start Point','Begin with the starting coordinate.','P₁ = (x₁, y₁)'],
+    ['Calculate Î”x','Find the horizontal difference between the endpoints.','Î”x = x₂ − x₁'],
+    ['Calculate Î”y','Find the vertical difference between the endpoints.','Î”y = y₂ − y₁'],
+    ['Initial P','Initialize the decision parameter for the basic case.','p₀ = 2Î”y − Î”x'],
+    ['Choose E / NE','Compare the decision parameter and select the better candidate pixel.','P < 0 → E  |  P ≥ 0 → NE'],
+    ['Plot Pixel','Advance to the selected coordinate and repeat.','Plot → Update P → Repeat']
   ];
   let ai=0,at=null;
   const ast=[...document.querySelectorAll('.animation-step')];
@@ -784,10 +784,10 @@
   ast.forEach((e,i)=>e.onclick=()=>showStage(i));
   $('animationNext').onclick=()=>showStage((ai+1)%stages.length);
   $('animationPlay').onclick=()=>{
-    if(at){clearInterval(at);at=null;$('animationPlay').textContent='â–¶ Play Algorithm';return;}
-    showStage(0);$('animationPlay').textContent='âšâš Pause';
+    if(at){clearInterval(at);at=null;$('animationPlay').textContent='▶ Play Algorithm';return;}
+    showStage(0);$('animationPlay').textContent='❚❚ Pause';
     at=setInterval(()=>{
-      if(ai>=stages.length-1){clearInterval(at);at=null;$('animationPlay').textContent='â–¶ Play Algorithm';return;}
+      if(ai>=stages.length-1){clearInterval(at);at=null;$('animationPlay').textContent='▶ Play Algorithm';return;}
       showStage(ai+1);
     },1200);
   };
@@ -825,7 +825,7 @@
     document.querySelectorAll('.problem-tab').forEach(t=>t.classList.toggle('active',t.dataset.problem===key));
     $('problemTag').textContent=p.tag;$('problemTitle').textContent=p.title;$('problemText').textContent=p.text;
     $('problemStart').textContent=p.start;$('problemEnd').textContent=p.end;$('problemAnswer').textContent=p.answer;$('problemCaption').textContent=p.caption;
-    $('problemViewerStatus').textContent=`${p.tag.replace('PROBLEM ','P')} Â· ${p.title.toUpperCase()}`;
+    $('problemViewerStatus').textContent=`${p.tag.replace('PROBLEM ','P')} · ${p.title.toUpperCase()}`;
     problemProgress=0;if(problemTimer)clearInterval(problemTimer);drawProblem(key,0);
   }
 

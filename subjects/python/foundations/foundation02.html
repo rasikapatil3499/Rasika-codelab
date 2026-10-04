@@ -59,7 +59,7 @@
             <div class="foundation-card-content"><h3>Function</h3><p>A function packages a task into a reusable unit.</p><pre><code>def greet(name):
     return f"Hello, {name}"
 
-print(greet("Rasika"))</code></pre><div class="concept-box"><span>IDEA</span><strong>Define â†’ Call â†’ Return</strong></div></div>
+print(greet("Rasika"))</code></pre><div class="concept-box"><span>IDEA</span><strong>Define → Call → Return</strong></div></div>
         </article>
         <article class="foundation-card">
             <button class="foundation-card-header" type="button" aria-expanded="false">
@@ -132,7 +132,7 @@ def add(a, b):
 
 # app.py
 from math_tools import add
-print(add(2, 3))</code></pre><div class="concept-box"><span>DESIGN</span><strong>Small modules â†’ reusable systems</strong></div></div>
+print(add(2, 3))</code></pre><div class="concept-box"><span>DESIGN</span><strong>Small modules → reusable systems</strong></div></div>
         </article>
         <article class="foundation-card">
             <button class="foundation-card-header" type="button" aria-expanded="false">
@@ -165,7 +165,7 @@ for n in count_up_to(3):
                 </div>
                 <span class="card-toggle">+</span>
             </button>
-            <div class="foundation-card-content"><div class="flow-diagram"><div>Problem</div><span>â†’</span><div>Functions</div><span>â†’</span><div>Modules</div><span>â†’</span><div>Program</div></div><p>Separate input, processing and output so each part can be understood and tested independently.</p></div>
+            <div class="foundation-card-content"><div class="flow-diagram"><div>Problem</div><span>→</span><div>Functions</div><span>→</span><div>Modules</div><span>→</span><div>Program</div></div><p>Separate input, processing and output so each part can be understood and tested independently.</p></div>
         </article>
         <article class="foundation-card">
             <button class="foundation-card-header" type="button" aria-expanded="false">
@@ -186,7 +186,7 @@ for n in count_up_to(3):
 
 <nav class="foundation-navigation">
 <a href="foundation01.html" class="foundation-nav-button">
-<span>â†</span><div><small>PREVIOUS FOUNDATION</small><strong>Foundation 1</strong></div>
+<span>←</span><div><small>PREVIOUS FOUNDATION</small><strong>Foundation 1</strong></div>
 </a>
 <div class="foundation-progress">
 <span>FOUNDATION</span><strong>02 / 05</strong>
@@ -194,7 +194,7 @@ for n in count_up_to(3):
 </div>
 <a href="foundation03.html" class="foundation-nav-button next">
 <div><small>NEXT FOUNDATION</small>
-<strong>Foundation 3</strong></div><span>â†’</span>
+<strong>Foundation 3</strong></div><span>→</span>
 </a>
 </nav>
 </main>
@@ -211,7 +211,7 @@ for n in count_up_to(3):
 </div>
 </div>
 <div class="footer-bottom">
-<span>Â© 2026 Rasika CodeLab</span><span>Built for practical learning.</span>
+<span>© 2026 Rasika CodeLab</span><span>Built for practical learning.</span>
 </div>
 </footer>
 
@@ -231,7 +231,7 @@ document.querySelectorAll(".foundation-card-header").forEach(button => {
         if (!isOpen) {
             card.classList.add("open");
             button.setAttribute("aria-expanded", "true");
-            button.querySelector(".card-toggle").textContent = "âˆ’";
+            button.querySelector(".card-toggle").textContent = "−";
         }
     });
 });

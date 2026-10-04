@@ -22,14 +22,14 @@
         <a href="../cgr_practicals.html" class="active">Practicals</a>
     <a href="../../../about.html">About</a>
   </nav>
-  <button class="menu-btn" aria-label="Open Menu">â˜°</button>
+  <button class="menu-btn" aria-label="Open Menu">☰</button>
 </header>
 
 <main class="cgr-practical-page">
 
   <section class="practical-hero">
     <div class="practical-hero-content">
-      <span class="practical-badge">06 â€¢ RASTER SCAN</span>
+      <span class="practical-badge">06 • RASTER SCAN</span>
       <h1>Bresenham Circle Drawing</h1>
       <p>Generate a circle using a decision parameter and eight-way symmetry.</p>
       <div class="practical-tags">
@@ -54,12 +54,12 @@
       <div><h2>Why Bresenham Circle?</h2><p>Convert a continuous mathematical circle into a clean raster pattern.</p></div>
     </div>
     <div class="concept-grid">
-      <article class="concept-card"><div class="concept-icon">â­•</div><h3>Ideal Circle</h3><p>A mathematical circle contains infinitely many points. A raster display can only illuminate discrete pixels.</p></article>
-      <article class="concept-card"><div class="concept-icon">ðŸŽ¯</div><h3>Decision Based</h3><p>The algorithm chooses the next pixel using an integer decision parameter instead of repeatedly evaluating the circle equation.</p></article>
-      <article class="concept-card"><div class="concept-icon">âœ¦</div><h3>Eight-Way Symmetry</h3><p>Only one octant needs to be calculated. Each point can generate up to eight symmetric pixels.</p></article>
+      <article class="concept-card"><div class="concept-icon">⭕</div><h3>Ideal Circle</h3><p>A mathematical circle contains infinitely many points. A raster display can only illuminate discrete pixels.</p></article>
+      <article class="concept-card"><div class="concept-icon">🎯</div><h3>Decision Based</h3><p>The algorithm chooses the next pixel using an integer decision parameter instead of repeatedly evaluating the circle equation.</p></article>
+      <article class="concept-card"><div class="concept-icon">✦</div><h3>Eight-Way Symmetry</h3><p>Only one octant needs to be calculated. Each point can generate up to eight symmetric pixels.</p></article>
     </div>
     <div class="circle-flow">
-      <span>Center + Radius</span><b>â†’</b><span>Calculate One Octant</span><b>â†’</b><span>Decision P</span><b>â†’</b><span>8-Way Symmetry</span><b>â†’</b><span>Raster Circle</span>
+      <span>Center + Radius</span><b>→</b><span>Calculate One Octant</span><b>→</b><span>Decision P</span><b>→</b><span>8-Way Symmetry</span><b>→</b><span>Raster Circle</span>
     </div>
   </section>
 
@@ -72,7 +72,7 @@
     <div class="formula-layout">
       <div class="formula-card">
         <h3>Mathematical Circle</h3>
-        <div class="big-formula">xÂ² + yÂ² = rÂ²</div>
+        <div class="big-formula">x² + y² = r²</div>
         <p>For a circle centered at <strong>(x<sub>c</sub>, y<sub>c</sub>)</strong>, a calculated point <strong>(x, y)</strong> produces:</p>
         <div class="symmetry-list">
           <code>(xc + x, yc + y)</code>
@@ -111,9 +111,9 @@
         <div><b>03</b><p>Initialize the decision parameter <code>p = 3 - 2r</code>.</p></div>
         <div><b>04</b><p>Plot the eight symmetric points for <code>(x, y)</code>.</p></div>
         <div><b>05</b><p>If <code>p &lt; 0</code>, choose E and update <code>p = p + 4x + 6</code>.</p></div>
-        <div><b>06</b><p>If <code>p â‰¥ 0</code>, choose SE, decrement <code>y</code>, and update <code>p = p + 4(x-y) + 10</code>.</p></div>
+        <div><b>06</b><p>If <code>p ≥ 0</code>, choose SE, decrement <code>y</code>, and update <code>p = p + 4(x-y) + 10</code>.</p></div>
         <div><b>07</b><p>Increment <code>x</code>.</p></div>
-        <div><b>08</b><p>Repeat while <code>x â‰¤ y</code>.</p></div>
+        <div><b>08</b><p>Repeat while <code>x ≤ y</code>.</p></div>
       </div>
     </div>
   </section>
@@ -129,13 +129,13 @@
         <div class="calc-line"><span>Given</span><strong>xc = 0, yc = 0, r = 5</strong></div>
         <div class="calc-line"><span>Initial x</span><strong>0</strong></div>
         <div class="calc-line"><span>Initial y</span><strong>5</strong></div>
-        <div class="calc-line"><span>Initial P</span><strong>3 âˆ’ 2(5) = âˆ’7</strong></div>
-        <div class="calc-highlight">P &lt; 0 â†’ choose E â†’ P = P + 4x + 6</div>
+        <div class="calc-line"><span>Initial P</span><strong>3 − 2(5) = −7</strong></div>
+        <div class="calc-highlight">P &lt; 0 → choose E → P = P + 4x + 6</div>
       </div>
       <div class="calculation-note">
         <h3>What matters?</h3>
         <p>The algorithm calculates only the first octant. The symmetry operation copies every valid point to the other seven octants.</p>
-        <div class="mini-equation">8 symmetric pixels â† 1 calculated pixel</div>
+        <div class="mini-equation">8 symmetric pixels ← 1 calculated pixel</div>
       </div>
     </div>
 
@@ -169,7 +169,7 @@
         <div class="button-row">
           <button class="primary-btn" id="circleGenerate">Generate Circle</button>
           <button class="secondary-btn" id="circleNext">Next Pixel</button>
-          <button class="secondary-btn" id="circlePlay">â–¶ Play Symmetry</button>
+          <button class="secondary-btn" id="circlePlay">▶ Play Symmetry</button>
           <button class="ghost-btn" id="circleReset">Reset</button>
         </div>
         <label class="speed-control">Animation Speed <input id="circleSpeed" type="range" min="80" max="700" value="300"><span id="circleSpeedValue">300 ms</span></label>
@@ -200,7 +200,7 @@
   <section class="practical-section">
     <div class="section-heading">
       <span>06</span>
-      <div><h2>Circle Symmetry Animation</h2><p>See the complete process: calculate one point â†’ mirror it eight ways â†’ plot.</p></div>
+      <div><h2>Circle Symmetry Animation</h2><p>See the complete process: calculate one point → mirror it eight ways → plot.</p></div>
     </div>
 
     <div class="animation-demo">
@@ -213,11 +213,11 @@
         <span class="animation-caption" id="animationCaption">Press Start Animation</span>
       </div>
       <div class="animation-actions">
-        <button class="primary-btn" id="startSymmetryAnimation">â–¶ Start Animation</button>
+        <button class="primary-btn" id="startSymmetryAnimation">▶ Start Animation</button>
         <button class="ghost-btn" id="resetSymmetryAnimation">Reset</button>
       </div>
       <div class="animation-track">
-        <span class="active">Calculate</span><i>â†’</i><span>Decision</span><i>â†’</i><span>Mirror Ã—8</span><i>â†’</i><span>Plot</span>
+        <span class="active">Calculate</span><i>→</i><span>Decision</span><i>→</i><span>Mirror ×8</span><i>→</i><span>Plot</span>
       </div>
     </div>
   </section>
@@ -236,7 +236,7 @@
         </div>
         <div class="decision-option">
           <span class="decision-letter">SE</span>
-          <div><h3>P â‰¥ 0</h3><p>The midpoint is outside or on the boundary, so move diagonally downward.</p></div>
+          <div><h3>P ≥ 0</h3><p>The midpoint is outside or on the boundary, so move diagonally downward.</p></div>
         </div>
       </div>
       <div class="decision-canvas-wrap">
@@ -252,9 +252,9 @@
     </div>
 
     <div class="problem-tabs circle-problem-tabs">
-      <button class="problem-tab active" data-problem="radar">ðŸŽ® Game Radar</button>
-      <button class="problem-tab" data-problem="signal">ðŸ“¡ Signal Coverage</button>
-      <button class="problem-tab" data-problem="map">ðŸ›°ï¸ Circular Map Region</button>
+      <button class="problem-tab active" data-problem="radar">🎮 Game Radar</button>
+      <button class="problem-tab" data-problem="signal">📡 Signal Coverage</button>
+      <button class="problem-tab" data-problem="map">🛰️ Circular Map Region</button>
     </div>
 
     <div class="circle-problem-layout">
@@ -296,7 +296,7 @@
     </div>
 
     <div class="pros-cons-grid">
-      <div class="pros-card"><h3>âœ“ Advantages</h3><ul><li>Uses integer arithmetic.</li><li>Efficient for raster displays.</li><li>Eight-way symmetry reduces computation.</li><li>Easy to visualize pixel-by-pixel.</li></ul></div>
+      <div class="pros-card"><h3>✓ Advantages</h3><ul><li>Uses integer arithmetic.</li><li>Efficient for raster displays.</li><li>Eight-way symmetry reduces computation.</li><li>Easy to visualize pixel-by-pixel.</li></ul></div>
       <div class="cons-card"><h3>! Limitations</h3><ul><li>Produces a raster approximation, not a continuous circle.</li><li>Pixel quality depends on resolution.</li><li>Basic teaching form focuses on one octant and symmetry.</li></ul></div>
     </div>
   </section>
@@ -312,14 +312,14 @@
       <details><summary>What is the decision parameter?</summary><p>It is an integer value used to decide whether the next raster pixel should move E or SE.</p></details>
       <details><summary>Why calculate only one octant?</summary><p>The remaining octants can be obtained through symmetry, reducing computation.</p></details>
       <details><summary>What happens when P &lt; 0?</summary><p>The algorithm selects E and updates the decision parameter accordingly.</p></details>
-      <details><summary>What happens when P â‰¥ 0?</summary><p>The algorithm selects SE, decreases y, and updates P.</p></details>
+      <details><summary>What happens when P ≥ 0?</summary><p>The algorithm selects SE, decreases y, and updates P.</p></details>
       <details><summary>Why is Bresenham suitable for raster graphics?</summary><p>Its decision process can be implemented using efficient integer arithmetic.</p></details>
     </div>
   </section>
 
   <nav class="practical-navigation">
-    <a href="practical05.html"><span>â† Previous</span><strong>05 â€” Bresenham Line</strong></a>
-    <a href="practical07.html"><span>Next â†’</span><strong>07 â€” Flood Fill & Boundary Fill</strong></a>
+    <a href="practical05.html"><span>← Previous</span><strong>05 — Bresenham Line</strong></a>
+    <a href="practical07.html"><span>Next →</span><strong>07 — Flood Fill & Boundary Fill</strong></a>
   </nav>
 
 </main>
@@ -335,7 +335,7 @@
       <div><h4>Practice</h4><a href="../cgr_practicals.html">Practicals</a><a href="../../../about.html">About</a></div>
     </div>
   </div>
-  <div class="footer-bottom"><span>Â© 2026 Rasika CodeLab</span><span>Built for practical learning.</span></div>
+  <div class="footer-bottom"><span>© 2026 Rasika CodeLab</span><span>Built for practical learning.</span></div>
 </footer>
 
 <script>
@@ -457,7 +457,7 @@
       decision.textContent = 3 - 2 * state.r;
       choice.textContent = "Ready";
       count.textContent = "0 / 8";
-      status.textContent = "Ready â€” click Generate Circle";
+      status.textContent = "Ready — click Generate Circle";
       pixels.textContent = "Pixels: 0";
       grid.innerHTML = "";
       return;
@@ -468,7 +468,7 @@
     decision.textContent = item.p;
     choice.textContent = item.decision;
     count.textContent = "8 / 8";
-    status.textContent = "Step " + (state.index + 1) + " / " + state.points.length + " â€” " + item.decision;
+    status.textContent = "Step " + (state.index + 1) + " / " + state.points.length + " — " + item.decision;
     const all = state.points.slice(0, state.index + 1).flatMap(v => v.sym);
     const unique = new Set(all.map(p => p.join(",")));
     pixels.textContent = "Pixels: " + unique.size;
@@ -488,7 +488,7 @@
     if (!state.points.length) generate();
     if (state.index >= state.points.length - 1) state.index = -1;
     state.playing = true;
-    document.getElementById("circlePlay").textContent = "âšâš Pause";
+    document.getElementById("circlePlay").textContent = "❚❚ Pause";
     tick();
   }
 
@@ -505,7 +505,7 @@
   function stop() {
     state.playing = false;
     clearTimeout(state.timer);
-    document.getElementById("circlePlay").textContent = "â–¶ Play Symmetry";
+    document.getElementById("circlePlay").textContent = "▶ Play Symmetry";
   }
 
   document.getElementById("circleGenerate").addEventListener("click", generate);
@@ -523,13 +523,13 @@
     stage.classList.remove("animate-symmetry");
     void stage.offsetWidth;
     stage.classList.add("animate-symmetry");
-    const captions = ["Calculate one point", "Check decision parameter", "Mirror the point Ã— 8", "Plot the symmetric pixels"];
+    const captions = ["Calculate one point", "Check decision parameter", "Mirror the point × 8", "Plot the symmetric pixels"];
     let i = 0;
     caption.textContent = captions[i];
     animTimer = setInterval(() => {
       i++;
       if (i < captions.length) caption.textContent = captions[i];
-      else { clearInterval(animTimer); caption.textContent = "Eight-way symmetry complete âœ“"; }
+      else { clearInterval(animTimer); caption.textContent = "Eight-way symmetry complete ✓"; }
     }, 850);
   });
   document.getElementById("resetSymmetryAnimation").addEventListener("click", function () {
@@ -604,7 +604,7 @@
     all.forEach(q=>{pctx.fillStyle="#ff8a00";pctx.fillRect(ox+q[0]*scale-3,oy-q[1]*scale-3,6,6);});
     pctx.fillStyle="#fff"; pctx.beginPath();pctx.arc(ox,oy,5,0,Math.PI*2);pctx.fill();
     document.getElementById("problemPixels").textContent=all.length+" pixels";
-    document.getElementById("problemStatus").textContent="Center ("+xc+","+yc+") â€¢ Radius "+r;
+    document.getElementById("problemStatus").textContent="Center ("+xc+","+yc+") • Radius "+r;
   }
 
   document.querySelectorAll(".problem-tab").forEach(btn => btn.addEventListener("click", () => {

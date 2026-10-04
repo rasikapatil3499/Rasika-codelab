@@ -22,19 +22,19 @@
                 <a href="../cgr_practicals.html" class="active">Practicals</a>
         <a href="../../../about.html">About</a>
     </nav>
-    <button class="menu-btn" aria-label="Open Menu">â˜°</button>
+    <button class="menu-btn" aria-label="Open Menu">☰</button>
 </header>
 
 <main class="cgr-practical-page">
 
     <section class="cgr-practical-hero">
         <div>
-            <div class="section-label">COMPUTER GRAPHICS Â· PRACTICAL 01</div>
+            <div class="section-label">COMPUTER GRAPHICS · PRACTICAL 01</div>
             <div class="practical-kicker">FOUNDATION PRACTICAL</div>
             <h1>Pixel, Resolution <span>&amp; Coordinate System</span></h1>
             <p>Understand pixels, resolution, screen coordinates and coordinate mapping through real-life problems and a live visual laboratory.</p>
             <div class="practical-flow">
-                <span>Coordinate</span><b>â†’</b><span>Map</span><b>â†’</b><span>Pixel</span><b>â†’</b><span>Visualize</span>
+                <span>Coordinate</span><b>→</b><span>Map</span><b>→</b><span>Pixel</span><b>→</b><span>Visualize</span>
             </div>
         </div>
         <div class="cgr-hero-mini">
@@ -62,34 +62,34 @@
 
         <div class="scenario-grid" id="scenarioGrid">
             <button class="scenario-card active" data-scenario="mobile">
-                <span class="scenario-number">P1</span><span class="scenario-icon">ðŸ“±</span>
+                <span class="scenario-number">P1</span><span class="scenario-icon">📱</span>
                 <strong>Mobile Screen Touch Detection</strong>
-                <small>Touch coordinate â†’ screen pixel</small>
+                <small>Touch coordinate → screen pixel</small>
             </button>
             <button class="scenario-card" data-scenario="game">
-                <span class="scenario-number">P2</span><span class="scenario-icon">ðŸŽ®</span>
+                <span class="scenario-number">P2</span><span class="scenario-icon">🎮</span>
                 <strong>Game Character Position</strong>
-                <small>Character coordinate â†’ screen position</small>
+                <small>Character coordinate → screen position</small>
             </button>
             <button class="scenario-card" data-scenario="traffic">
-                <span class="scenario-number">P3</span><span class="scenario-icon">ðŸš¦</span>
+                <span class="scenario-number">P3</span><span class="scenario-icon">🚦</span>
                 <strong>Traffic Monitoring System</strong>
-                <small>Vehicle position â†’ image pixel</small>
+                <small>Vehicle position → image pixel</small>
             </button>
             <button class="scenario-card" data-scenario="satellite">
-                <span class="scenario-number">P4</span><span class="scenario-icon">ðŸ›°ï¸</span>
+                <span class="scenario-number">P4</span><span class="scenario-icon">🛰️</span>
                 <strong>Satellite Image</strong>
-                <small>Normalized point â†’ image pixel</small>
+                <small>Normalized point → image pixel</small>
             </button>
             <button class="scenario-card" data-scenario="desktop">
-                <span class="scenario-number">P5</span><span class="scenario-icon">ðŸ–¥ï¸</span>
+                <span class="scenario-number">P5</span><span class="scenario-icon">🖥️</span>
                 <strong>Desktop Coordinate Mapping</strong>
-                <small>Mouse position â†’ screen pixel</small>
+                <small>Mouse position → screen pixel</small>
             </button>
         </div>
 
         <div class="problem-box">
-            <div class="problem-icon" id="problemIcon">ðŸ“±</div>
+            <div class="problem-icon" id="problemIcon">📱</div>
             <div>
                 <div class="section-label">PROBLEM STATEMENT</div>
                 <h3 id="problemTitle">Mobile Screen Touch Detection</h3>
@@ -102,7 +102,7 @@
         <div class="section-heading">
             <div>
                 <div class="section-label">LIVE INTERACTIVE LAB</div>
-                <h2>Coordinate â†’ Pixel</h2>
+                <h2>Coordinate → Pixel</h2>
                 <p>Move your mouse over the canvas, click to place a point, or change the coordinates. Everything updates instantly.</p>
             </div>
             <button class="lab-reset" id="resetLab">Reset Lab</button>
@@ -114,7 +114,7 @@
                     <label>Canvas Resolution</label>
                     <div class="two-inputs">
                         <input id="canvasW" type="number" min="200" max="1600" value="800" aria-label="Canvas width">
-                        <span>Ã—</span>
+                        <span>×</span>
                         <input id="canvasH" type="number" min="150" max="1000" value="500" aria-label="Canvas height">
                     </div>
                 </div>
@@ -128,7 +128,7 @@
                     </div>
                 </div>
 
-                <button class="draw-btn" id="plotPoint">Plot Point <span>â†’</span></button>
+                <button class="draw-btn" id="plotPoint">Plot Point <span>→</span></button>
 
                 <div class="control-hint">
                     <strong>Try it:</strong>
@@ -136,7 +136,7 @@
                 </div>
 
                 <div class="lab-stats">
-                    <div><span>Resolution</span><strong id="readResolution">800 Ã— 500</strong></div>
+                    <div><span>Resolution</span><strong id="readResolution">800 × 500</strong></div>
                     <div><span>Pixel</span><strong id="readPixel">(320, 180)</strong></div>
                     <div><span>Normalized X</span><strong id="readNormX">0.400</strong></div>
                     <div><span>Normalized Y</span><strong id="readNormY">0.360</strong></div>
@@ -205,19 +205,19 @@
         <h2>Can you explain it?</h2>
         <div class="viva-grid">
             <details><summary>What is a pixel?</summary><p>A pixel is a discrete picture element used to represent an image on a raster display.</p></details>
-            <details><summary>What does resolution mean?</summary><p>Resolution describes the number of pixels available horizontally and vertically, such as 1920 Ã— 1080.</p></details>
+            <details><summary>What does resolution mean?</summary><p>Resolution describes the number of pixels available horizontally and vertically, such as 1920 × 1080.</p></details>
             <details><summary>What is a coordinate system?</summary><p>It is a numerical system used to specify the position of points in a space.</p></details>
             <details><summary>Why is screen Y often downward?</summary><p>Many raster displays use the top-left corner as the origin, so Y increases toward the bottom.</p></details>
         </div>
     </section>
 
     <section class="practical-next">
-        <a href="../cgr_foundations.html">â† Foundations</a>
+        <a href="../cgr_foundations.html">← Foundations</a>
         <div>
             <span>COMPLETED PRACTICAL 01</span>
-            <strong>Next: Basic Shapes &amp; Drawing Primitives â†’</strong>
+            <strong>Next: Basic Shapes &amp; Drawing Primitives →</strong>
         </div>
-        <a href="practical02.html">Practical 02 â†’</a>
+        <a href="practical02.html">Practical 02 →</a>
     </section>
 </main>
 
@@ -232,7 +232,7 @@
             <div><h4>Practice</h4><a href="../cgr_practicals.html">Practicals</a><a href="../../../about.html">About</a></div>
         </div>
     </div>
-    <div class="footer-bottom"><span>Â© 2026 Rasika CodeLab</span><span>Built for practical learning.</span></div>
+    <div class="footer-bottom"><span>© 2026 Rasika CodeLab</span><span>Built for practical learning.</span></div>
 </footer>
 
 <script>
@@ -241,27 +241,27 @@ const ctx = canvas.getContext("2d");
 
 const scenarios = {
     mobile: {
-        icon: "ðŸ“±",
+        icon: "📱",
         title: "Mobile Screen Touch Detection",
         text: "A mobile application needs to identify the exact location where a user touches the screen. Given the screen resolution and touch coordinates, determine the corresponding pixel position and highlight it visually."
     },
     game: {
-        icon: "ðŸŽ®",
+        icon: "🎮",
         title: "Game Character Position",
         text: "A 2D game represents a character using X-Y coordinates. Given the game-screen resolution and character position, determine the corresponding screen location and display the character at that position."
     },
     traffic: {
-        icon: "ðŸš¦",
+        icon: "🚦",
         title: "Traffic Monitoring System",
         text: "A traffic-monitoring camera detects vehicles at different positions in an image. Given the image resolution and vehicle coordinates, determine the corresponding pixel position and highlight the detected vehicle."
     },
     satellite: {
-        icon: "ðŸ›°ï¸",
+        icon: "🛰️",
         title: "Satellite Image",
         text: "A satellite image is represented as a rectangular grid of pixels. Given a normalized position within the image, calculate its corresponding pixel coordinate and mark the location on the image."
     },
     desktop: {
-        icon: "ðŸ–¥ï¸",
+        icon: "🖥️",
         title: "Computer Desktop Coordinate Mapping",
         text: "A desktop application needs to identify the exact position of a mouse click. Given the screen resolution and mouse coordinates, determine the corresponding pixel position and display the coordinates dynamically."
     }
@@ -359,7 +359,7 @@ function draw(showPoint = true) {
 
 function updateReadout() {
     const nx = px / W, ny = py / H;
-    document.getElementById("readResolution").textContent = `${W} Ã— ${H}`;
+    document.getElementById("readResolution").textContent = `${W} × ${H}`;
     document.getElementById("readPixel").textContent = `(${px}, ${py})`;
     document.getElementById("readNormX").textContent = nx.toFixed(3);
     document.getElementById("readNormY").textContent = ny.toFixed(3);

@@ -11,7 +11,7 @@
 
     <style>
         /* =====================================================
-           PRACTICAL 02 â€” DATA CLEANING & TRANSFORMATION
+           PRACTICAL 02 — DATA CLEANING & TRANSFORMATION
         ===================================================== */
 
         .da-p2-page{
@@ -560,7 +560,7 @@
         }
 
         .p2-check::before{
-            content:"âœ“";
+            content:"✓";
             margin-right:9px;
             color:var(--orange);
             font-weight:900;
@@ -767,7 +767,7 @@
         </nav>
 
         <button class="menu-btn" aria-label="Open menu">
-            â˜°
+            ☰
         </button>
 
     </div>
@@ -788,9 +788,9 @@
 
         <div class="p2-breadcrumb">
             DATA ANALYTICS
-            <span>â€º</span>
+            <span>›</span>
             PRACTICALS
-            <span>â€º</span>
+            <span>›</span>
             PRACTICAL 02
         </div>
 
@@ -838,7 +838,7 @@
         <div class="p2-heading">
 
             <div class="p2-section-label">
-                01 â€” LEARNING OBJECTIVE
+                01 — LEARNING OBJECTIVE
             </div>
 
             <h2>
@@ -937,11 +937,11 @@
         <div class="p2-heading">
 
             <div class="p2-section-label">
-                02 â€” DATA CLEANING PIPELINE
+                02 — DATA CLEANING PIPELINE
             </div>
 
             <h2>
-                Raw data â†’
+                Raw data →
                 <span>analysis-ready data</span>
             </h2>
 
@@ -1014,7 +1014,7 @@
         <div class="p2-heading">
 
             <div class="p2-section-label">
-                03 â€” DATA QUALITY
+                03 — DATA QUALITY
             </div>
 
             <h2>
@@ -1046,7 +1046,7 @@
 
                 <div class="p2-example">
                     <span class="bad">Age: NaN</span>
-                    â†’
+                    →
                     <span class="good">Age: 21</span>
                 </div>
 
@@ -1067,9 +1067,9 @@
                 </p>
 
                 <div class="p2-example">
-                    <span class="bad">Customer 101 Ã— 2</span>
-                    â†’
-                    <span class="good">Customer 101 Ã— 1</span>
+                    <span class="bad">Customer 101 × 2</span>
+                    →
+                    <span class="good">Customer 101 × 1</span>
                 </div>
 
             </div>
@@ -1091,7 +1091,7 @@
                     <span class="bad">
                         Mumbai / mumbai / MUMBAI
                     </span>
-                    â†’
+                    →
                     <span class="good">Mumbai</span>
                 </div>
 
@@ -1112,7 +1112,7 @@
 
                 <div class="p2-example">
                     <span class="bad">"45000"</span>
-                    â†’
+                    →
                     <span class="good">45000.0</span>
                 </div>
 
@@ -1133,7 +1133,7 @@
 
                 <div class="p2-example">
                     <span class="bad">Age = 250</span>
-                    â†’
+                    →
                     <span class="good">Investigate</span>
                 </div>
 
@@ -1154,9 +1154,9 @@
                 </p>
 
                 <div class="p2-example">
-                    Normal Salary: â‚¹40Kâ€“â‚¹80K
+                    Normal Salary: ₹40K–₹80K
                     <br>
-                    Outlier: â‚¹9L
+                    Outlier: ₹9L
                 </div>
 
             </div>
@@ -1179,7 +1179,7 @@
         <div class="p2-heading">
 
             <div class="p2-section-label">
-                04 â€” REAL-WORLD PROBLEMS
+                04 — REAL-WORLD PROBLEMS
             </div>
 
             <h2>
@@ -1542,7 +1542,7 @@
         <div class="p2-heading">
 
             <div class="p2-section-label">
-                05 â€” DATA TRANSFORMATION
+                05 — DATA TRANSFORMATION
             </div>
 
             <h2>
@@ -1575,7 +1575,7 @@ Age     Salary     Date
 
 
             <div class="p2-arrow">
-                â†’
+                →
             </div>
 
 
@@ -1605,7 +1605,7 @@ Age Group    Salary Band    Month
 
                 <p>
                     Convert numerical age into meaningful groups such as
-                    18â€“25, 26â€“35 and 36â€“50.
+                    18–25, 26–35 and 36–50.
                 </p>
 
             </div>
@@ -1670,7 +1670,7 @@ Age Group    Salary Band    Month
         <div class="p2-heading">
 
             <div class="p2-section-label">
-                06 â€” VISUAL VALIDATION
+                06 — VISUAL VALIDATION
             </div>
 
             <h2>
@@ -1759,7 +1759,7 @@ Age Group    Salary Band    Month
         <div class="p2-heading">
 
             <div class="p2-section-label">
-                07 â€” SUBMISSION CHECKLIST
+                07 — SUBMISSION CHECKLIST
             </div>
 
             <h2>
@@ -1887,11 +1887,11 @@ Age Group    Salary Band    Month
 <div class="p2-navigation">
 
     <a href="practical01.html" class="p2-nav">
-        â† Practical 01
+        ← Practical 01
     </a>
 
     <a href="practical03.html" class="p2-nav next">
-        Practical 03 â†’
+        Practical 03 →
     </a>
 
 </div>
@@ -1922,7 +1922,7 @@ function p2Answer(button,result){
             "rgba(82,199,122,.10)";
 
         answer.innerHTML =
-            "âœ“ Correct. Always investigate a duplicate before deleting it. Two identical-looking records may represent a legitimate repeated transaction.";
+            "✓ Correct. Always investigate a duplicate before deleting it. Two identical-looking records may represent a legitimate repeated transaction.";
 
         answer.style.color = "#76e39b";
 
@@ -1933,7 +1933,7 @@ function p2Answer(button,result){
             "rgba(230,95,95,.08)";
 
         answer.innerHTML =
-            "âœ• Not the best first step. First investigate why the record is duplicated.";
+            "✕ Not the best first step. First investigate why the record is duplicated.";
 
         answer.style.color = "#ff8a8a";
     }

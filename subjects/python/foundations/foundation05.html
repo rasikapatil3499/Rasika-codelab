@@ -62,7 +62,7 @@ async def work():
     await asyncio.sleep(1)
     return "done"
 
-result = asyncio.run(work())</code></pre><div class="concept-box"><span>MODEL</span><strong>Coroutine â†’ Event Loop â†’ Concurrent I/O</strong></div></div>
+result = asyncio.run(work())</code></pre><div class="concept-box"><span>MODEL</span><strong>Coroutine → Event Loop → Concurrent I/O</strong></div></div>
         </article>
         <article class="foundation-card">
             <button class="foundation-card-header" type="button" aria-expanded="false">
@@ -76,7 +76,7 @@ result = asyncio.run(work())</code></pre><div class="concept-box"><span>MODEL</s
                 </div>
                 <span class="card-toggle">+</span>
             </button>
-            <div class="foundation-card-content"><div class="mini-list"><span>I/O-bound â†’ Threads / Async</span><span>CPU-bound â†’ Processes</span><span>Shared state â†’ Synchronization</span></div><p>Concurrency is a design decision, not simply a performance switch.</p></div>
+            <div class="foundation-card-content"><div class="mini-list"><span>I/O-bound → Threads / Async</span><span>CPU-bound → Processes</span><span>Shared state → Synchronization</span></div><p>Concurrency is a design decision, not simply a performance switch.</p></div>
         </article>
         <article class="foundation-card">
             <button class="foundation-card-header" type="button" aria-expanded="false">
@@ -90,7 +90,7 @@ result = asyncio.run(work())</code></pre><div class="concept-box"><span>MODEL</s
                 </div>
                 <span class="card-toggle">+</span>
             </button>
-            <div class="foundation-card-content"><div class="flow-diagram"><div>Measure</div><span>â†’</span><div>Profile</div><span>â†’</span><div>Optimize</div><span>â†’</span><div>Benchmark</div></div><p>Focus on algorithmic complexity, I/O, memory and repeated work.</p></div>
+            <div class="foundation-card-content"><div class="flow-diagram"><div>Measure</div><span>→</span><div>Profile</div><span>→</span><div>Optimize</div><span>→</span><div>Benchmark</div></div><p>Focus on algorithmic complexity, I/O, memory and repeated work.</p></div>
         </article>
         <article class="foundation-card">
             <button class="foundation-card-header" type="button" aria-expanded="false">
@@ -119,10 +119,10 @@ result = asyncio.run(work())</code></pre><div class="concept-box"><span>MODEL</s
                 <span class="card-toggle">+</span>
             </button>
             <div class="foundation-card-content"><pre><code>project/
-â”œâ”€â”€ pyproject.toml
-â”œâ”€â”€ src/
-â”‚   â””â”€â”€ app/
-â””â”€â”€ tests/</code></pre><p>Use project metadata, isolated environments and explicit dependencies.</p></div>
+├── pyproject.toml
+├── src/
+│   └── app/
+└── tests/</code></pre><p>Use project metadata, isolated environments and explicit dependencies.</p></div>
         </article>
         <article class="foundation-card">
             <button class="foundation-card-header" type="button" aria-expanded="false">
@@ -150,7 +150,7 @@ result = asyncio.run(work())</code></pre><div class="concept-box"><span>MODEL</s
                 </div>
                 <span class="card-toggle">+</span>
             </button>
-            <div class="foundation-card-content"><div class="flow-diagram"><div>Data</div><span>â†’</span><div>Processing</div><span>â†’</span><div>Model / API</div><span>â†’</span><div>Application</div></div><p>Python can orchestrate data pipelines, model inference and AI-enabled applications.</p></div>
+            <div class="foundation-card-content"><div class="flow-diagram"><div>Data</div><span>→</span><div>Processing</div><span>→</span><div>Model / API</div><span>→</span><div>Application</div></div><p>Python can orchestrate data pipelines, model inference and AI-enabled applications.</p></div>
         </article>
         <article class="foundation-card">
             <button class="foundation-card-header" type="button" aria-expanded="false">
@@ -171,7 +171,7 @@ result = asyncio.run(work())</code></pre><div class="concept-box"><span>MODEL</s
 
 <nav class="foundation-navigation">
 <a href="foundation04.html" class="foundation-nav-button">
-<span>â†</span><div><small>PREVIOUS FOUNDATION</small><strong>Foundation 4</strong></div>
+<span>←</span><div><small>PREVIOUS FOUNDATION</small><strong>Foundation 4</strong></div>
 </a>
 <div class="foundation-progress">
 <span>FOUNDATION</span><strong>05 / 05</strong>
@@ -179,7 +179,7 @@ result = asyncio.run(work())</code></pre><div class="concept-box"><span>MODEL</s
 </div>
 <a href="../practicals.html" class="foundation-nav-button next">
 <div><small>GO TO</small>
-<strong>Practicals</strong></div><span>â†’</span>
+<strong>Practicals</strong></div><span>→</span>
 </a>
 </nav>
 </main>
@@ -196,7 +196,7 @@ result = asyncio.run(work())</code></pre><div class="concept-box"><span>MODEL</s
 </div>
 </div>
 <div class="footer-bottom">
-<span>Â© 2026 Rasika CodeLab</span><span>Built for practical learning.</span>
+<span>© 2026 Rasika CodeLab</span><span>Built for practical learning.</span>
 </div>
 </footer>
 
@@ -216,7 +216,7 @@ document.querySelectorAll(".foundation-card-header").forEach(button => {
         if (!isOpen) {
             card.classList.add("open");
             button.setAttribute("aria-expanded", "true");
-            button.querySelector(".card-toggle").textContent = "âˆ’";
+            button.querySelector(".card-toggle").textContent = "−";
         }
     });
 });

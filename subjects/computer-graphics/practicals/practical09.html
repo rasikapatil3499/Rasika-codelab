@@ -25,7 +25,7 @@
     <a href="../../../about.html">About</a>
   </nav>
 
-  <button class="menu-btn" aria-label="Open Menu">â˜°</button>
+  <button class="menu-btn" aria-label="Open Menu">☰</button>
 </header>
 
 
@@ -34,7 +34,7 @@
   <!-- HERO -->
   <section class="practical-hero">
     <div class="practical-hero-content">
-      <span class="practical-badge">09 â€¢ 2D TRANSFORMATION</span>
+      <span class="practical-badge">09 • 2D TRANSFORMATION</span>
       <h1>2D Rotation</h1>
       <p>Rotate objects around the origin or a selected pivot using transformation matrices.</p>
 
@@ -70,7 +70,7 @@
     <div class="concept-grid">
 
       <article class="concept-card">
-        <div class="concept-icon">â†»</div>
+        <div class="concept-icon">↻</div>
         <h3>Rotation</h3>
         <p>Turn an object through a specified angle while preserving its size and shape.</p>
       </article>
@@ -88,7 +88,7 @@
       </article>
 
       <article class="concept-card">
-        <div class="concept-icon">âœ¦</div>
+        <div class="concept-icon">✦</div>
         <h3>Pivot Point</h3>
         <p>A selected pivot can be used when the object must rotate around a point other than the origin.</p>
       </article>
@@ -97,13 +97,13 @@
 
     <div class="transform-flow">
       <span>Original Object</span>
-      <b>â†’</b>
+      <b>→</b>
       <span>Choose Pivot</span>
-      <b>â†’</b>
+      <b>→</b>
       <span>Choose Angle</span>
-      <b>â†’</b>
+      <b>→</b>
       <span>Rotation Matrix</span>
-      <b>â†’</b>
+      <b>→</b>
       <span>Rotated Object</span>
     </div>
   </section>
@@ -125,8 +125,8 @@
         <h3>Coordinate Equations</h3>
 
         <div class="big-formula">
-          xâ€² = x cosÎ¸ âˆ’ y sinÎ¸<br>
-          yâ€² = x sinÎ¸ + y cosÎ¸
+          x′ = x cosÎ¸ − y sinÎ¸<br>
+          y′ = x sinÎ¸ + y cosÎ¸
         </div>
 
         <p>
@@ -140,13 +140,13 @@
 
         <div class="matrix-equation">
           <span>
-            [ xâ€² &nbsp; yâ€² &nbsp; 1 ]<sup>T</sup>
+            [ x′ &nbsp; y′ &nbsp; 1 ]<sup>T</sup>
           </span>
 
           <b>=</b>
 
           <span class="matrix-box">
-            <i>cosÎ¸</i><i>âˆ’sinÎ¸</i><i>0</i>
+            <i>cosÎ¸</i><i>−sinθ</i><i>0</i>
             <i>sinÎ¸</i><i>cosÎ¸</i><i>0</i>
             <i>0</i><i>0</i><i>1</i>
           </span>
@@ -157,7 +157,7 @@
         </div>
 
         <p>
-          The 3Ã—3 homogeneous form keeps the transformation compatible with other 2D matrix operations.
+          The 3×3 homogeneous form keeps the transformation compatible with other 2D matrix operations.
         </p>
       </article>
 
@@ -179,20 +179,20 @@
 
       <article class="direction-card">
         <div class="direction-visual counter-clockwise">
-          <span>â†º</span>
+          <span>↺</span>
         </div>
         <h3>Positive Angle</h3>
         <p>+Î¸ produces counter-clockwise rotation.</p>
-        <code>Î¸ = +45Â°</code>
+        <code>Î¸ = +45°</code>
       </article>
 
       <article class="direction-card">
         <div class="direction-visual clockwise">
-          <span>â†»</span>
+          <span>↻</span>
         </div>
         <h3>Negative Angle</h3>
-        <p>âˆ’Î¸ produces clockwise rotation.</p>
-        <code>Î¸ = âˆ’45Â°</code>
+        <p>−θ produces clockwise rotation.</p>
+        <code>Î¸ = −45°</code>
       </article>
 
     </div>
@@ -214,7 +214,7 @@
       <div class="given-card">
         <h3>Given</h3>
         <div class="given-line"><span>Point</span><strong>P(4, 2)</strong></div>
-        <div class="given-line"><span>Angle</span><strong>90Â°</strong></div>
+        <div class="given-line"><span>Angle</span><strong>90°</strong></div>
         <div class="given-line"><span>Pivot</span><strong>Origin (0, 0)</strong></div>
       </div>
 
@@ -222,20 +222,20 @@
 
         <div class="calc-step">
           <span>01</span>
-          <code>xâ€² = x cos90Â° âˆ’ y sin90Â°</code>
-          <strong>xâ€² = 0 âˆ’ 2 = âˆ’2</strong>
+          <code>x′ = x cos90° − y sin90°</code>
+          <strong>x′ = 0 − 2 = −2</strong>
         </div>
 
         <div class="calc-step">
           <span>02</span>
-          <code>yâ€² = x sin90Â° + y cos90Â°</code>
-          <strong>yâ€² = 4 + 0 = 4</strong>
+          <code>y′ = x sin90° + y cos90°</code>
+          <strong>y′ = 4 + 0 = 4</strong>
         </div>
 
         <div class="calc-step result-step">
           <span>03</span>
-          <code>Pâ€² = (xâ€², yâ€²)</code>
-          <strong>Pâ€² = (âˆ’2, 4)</strong>
+          <code>P′ = (x′, y′)</code>
+          <strong>P′ = (−2, 4)</strong>
         </div>
 
       </div>
@@ -244,7 +244,7 @@
 
     <div class="calculation-note">
       <strong>Result:</strong>
-      Point P(4, 2) becomes Pâ€²(âˆ’2, 4) after a 90Â° counter-clockwise rotation about the origin.
+      Point P(4, 2) becomes P′(−2, 4) after a 90° counter-clockwise rotation about the origin.
     </div>
   </section>
 
@@ -265,10 +265,10 @@
         <span>01</span>
         <h3>Translate</h3>
         <p>Move the pivot point to the origin.</p>
-        <code>T(âˆ’px, âˆ’py)</code>
+        <code>T(−px, −py)</code>
       </article>
 
-      <b>â†’</b>
+      <b>→</b>
 
       <article class="pivot-step-card">
         <span>02</span>
@@ -277,7 +277,7 @@
         <code>R(Î¸)</code>
       </article>
 
-      <b>â†’</b>
+      <b>→</b>
 
       <article class="pivot-step-card">
         <span>03</span>
@@ -290,7 +290,7 @@
 
     <div class="pivot-matrix">
       <strong>Combined transformation:</strong>
-      <code>T(px, py) Â· R(Î¸) Â· T(âˆ’px, âˆ’py)</code>
+      <code>T(px, py) · R(Î¸) · T(−px, −py)</code>
     </div>
   </section>
 
@@ -325,15 +325,15 @@
           <label>
             Angle
             <input id="rotationAngle" type="range" min="-180" max="180" step="5" value="45">
-            <output id="rotationAngleValue">45Â°</output>
+            <output id="rotationAngleValue">45°</output>
           </label>
 
           <div class="angle-presets">
-            <button data-angle="-90">âˆ’90Â°</button>
-            <button data-angle="-45">âˆ’45Â°</button>
-            <button data-angle="45">45Â°</button>
-            <button data-angle="90">90Â°</button>
-            <button data-angle="180">180Â°</button>
+            <button data-angle="-90">−90°</button>
+            <button data-angle="-45">−45°</button>
+            <button data-angle="45">45°</button>
+            <button data-angle="90">90°</button>
+            <button data-angle="180">180°</button>
           </div>
         </div>
 
@@ -368,7 +368,7 @@
 
         <div class="button-row">
           <button class="primary-btn" id="applyRotation">Apply Rotation</button>
-          <button class="secondary-btn" id="animateRotation">â–¶ Animate</button>
+          <button class="secondary-btn" id="animateRotation">▶ Animate</button>
           <button class="ghost-btn" id="resetRotation">Reset</button>
         </div>
 
@@ -377,7 +377,7 @@
 
           <div>
             <span>Angle</span>
-            <strong id="rotationReadout">45Â°</strong>
+            <strong id="rotationReadout">45°</strong>
           </div>
 
           <div>
@@ -387,7 +387,7 @@
 
           <div>
             <span>Matrix</span>
-            <code id="rotationMatrixReadout">[ 0.707 âˆ’0.707 ; 0.707 0.707 ]</code>
+            <code id="rotationMatrixReadout">[ 0.707 −0.707 ; 0.707 0.707 ]</code>
           </div>
 
         </div>
@@ -434,14 +434,14 @@
         <div class="angle-radius"></div>
         <div class="angle-arc"></div>
         <div class="angle-point"></div>
-        <span class="angle-zero">0Â°</span>
+        <span class="angle-zero">0°</span>
         <span class="angle-theta">Î¸</span>
       </div>
 
       <div class="angle-explanation">
         <div class="angle-value-box">
           <span>Current Angle</span>
-          <strong id="angleVisualValue">45Â°</strong>
+          <strong id="angleVisualValue">45°</strong>
         </div>
 
         <p>
@@ -450,9 +450,9 @@
         </p>
 
         <div class="angle-properties">
-          <span>âœ“ Shape preserved</span>
-          <span>âœ“ Size preserved</span>
-          <span>âœ“ Distance from pivot preserved</span>
+          <span>✓ Shape preserved</span>
+          <span>✓ Size preserved</span>
+          <span>✓ Distance from pivot preserved</span>
         </div>
       </div>
 
@@ -473,15 +473,15 @@
     <div class="problem-tabs">
 
       <button class="problem-tab active" data-problem="compass">
-        ðŸ§­ Compass
+        🧭 Compass
       </button>
 
       <button class="problem-tab" data-problem="game">
-        ðŸŽ® Game Character
+        🎮 Game Character
       </button>
 
       <button class="problem-tab" data-problem="clock">
-        ðŸ• Clock Hand
+        🕐 Clock Hand
       </button>
 
     </div>
@@ -501,11 +501,11 @@
         </p>
 
         <div class="problem-given" id="problemGiven">
-          Original angle = 0Â° â€¢ Required rotation = 45Â° counter-clockwise
+          Original angle = 0° • Required rotation = 45° counter-clockwise
         </div>
 
         <div class="problem-answer" id="problemAnswer">
-          Apply the rotation matrix with Î¸ = 45Â° to every vertex of the needle.
+          Apply the rotation matrix with Î¸ = 45° to every vertex of the needle.
         </div>
 
         <button class="primary-btn" id="showProblem">
@@ -520,8 +520,8 @@
         <canvas id="problemCanvas" width="600" height="390"></canvas>
 
         <div class="viewer-footer">
-          <span id="problemStatus">Original â†’ rotated</span>
-          <span id="problemReadout">Î¸ = 45Â°</span>
+          <span id="problemStatus">Original → rotated</span>
+          <span id="problemReadout">Î¸ = 45°</span>
         </div>
 
       </div>
@@ -544,22 +544,22 @@
 
       <button class="experiment-card" data-experiment="quarter">
         <strong>Quarter Turn</strong>
-        <span>Î¸ = 90Â°</span>
+        <span>Î¸ = 90°</span>
       </button>
 
       <button class="experiment-card" data-experiment="half">
         <strong>Half Turn</strong>
-        <span>Î¸ = 180Â°</span>
+        <span>Î¸ = 180°</span>
       </button>
 
       <button class="experiment-card" data-experiment="clockwise">
         <strong>Clockwise</strong>
-        <span>Î¸ = âˆ’45Â°</span>
+        <span>Î¸ = −45°</span>
       </button>
 
       <button class="experiment-card" data-experiment="full">
         <strong>Full Turn</strong>
-        <span>Î¸ = 360Â° concept</span>
+        <span>Î¸ = 360° concept</span>
       </button>
 
     </div>
@@ -649,7 +649,7 @@
 
       <details>
         <summary>How do you rotate around a custom pivot?</summary>
-        <p>Translate the pivot to the origin, rotate, and translate the object back using T(p) Â· R(Î¸) Â· T(âˆ’p).</p>
+        <p>Translate the pivot to the origin, rotate, and translate the object back using T(p) · R(Î¸) · T(−p).</p>
       </details>
 
     </div>
@@ -658,13 +658,13 @@
 
   <nav class="practical-navigation">
     <a href="practical08.html">
-      <span>â† Previous</span>
-      <strong>08 â€” 2D Translation &amp; Scaling</strong>
+      <span>← Previous</span>
+      <strong>08 — 2D Translation &amp; Scaling</strong>
     </a>
 
     <a href="practical10.html">
-      <span>Next â†’</span>
-      <strong>10 â€” Reflection &amp; Shearing</strong>
+      <span>Next →</span>
+      <strong>10 — Reflection &amp; Shearing</strong>
     </a>
   </nav>
 
@@ -709,7 +709,7 @@
 
 
   <div class="footer-bottom">
-    <span>Â© 2026 Rasika CodeLab</span>
+    <span>© 2026 Rasika CodeLab</span>
     <span>Built for practical learning.</span>
   </div>
 
@@ -987,7 +987,7 @@
     const sin = Math.sin(theta).toFixed(3);
 
     document.getElementById("rotationAngleValue").textContent =
-      angle + "Â°";
+      angle + "°";
 
     document.getElementById("pivotXValue").textContent =
       pivot.x;
@@ -996,7 +996,7 @@
       pivot.y;
 
     document.getElementById("rotationReadout").textContent =
-      angle + "Â°";
+      angle + "°";
 
     document.getElementById("pivotReadout").textContent =
       "(" + pivot.x + ", " + pivot.y + ")";
@@ -1006,13 +1006,13 @@
       " ; " + sin + "  " + cos + " ]";
 
     document.getElementById("rotationStatus").textContent =
-      "Rotation applied: " + angle + "Â°";
+      "Rotation applied: " + angle + "°";
 
     document.getElementById("rotationVertices").textContent =
       "Vertices: " + rotated.length;
 
     document.getElementById("angleVisualValue").textContent =
-      angle + "Â°";
+      angle + "°";
 
     document.documentElement.style.setProperty(
       "--rotation-angle",
@@ -1106,7 +1106,7 @@
       drawTransform();
 
       document.getElementById("rotationStatus").textContent =
-        "Rotation applied âœ“";
+        "Rotation applied ✓";
 
     }
   );
@@ -1151,7 +1151,7 @@
         animationRunning = false;
 
         document.getElementById("animateRotation").textContent =
-          "â–¶ Animate";
+          "▶ Animate";
 
         return;
 
@@ -1160,7 +1160,7 @@
       animationRunning = true;
 
       document.getElementById("animateRotation").textContent =
-        "âšâš Pause";
+        "❚❚ Pause";
 
       const target =
         Number(document.getElementById("rotationAngle").value);
@@ -1190,10 +1190,10 @@
           animationRunning = false;
 
           document.getElementById("animateRotation").textContent =
-            "â–¶ Animate";
+            "▶ Animate";
 
           document.getElementById("rotationStatus").textContent =
-            "Rotation animation complete âœ“";
+            "Rotation animation complete ✓";
 
         }
 
@@ -1212,9 +1212,9 @@
       description:
         "A digital compass displays a needle that must rotate according to the direction detected by the device.",
       given:
-        "Original angle = 0Â° â€¢ Required rotation = 45Â° counter-clockwise",
+        "Original angle = 0° • Required rotation = 45° counter-clockwise",
       answer:
-        "Apply the rotation matrix with Î¸ = 45Â° to every vertex of the needle.",
+        "Apply the rotation matrix with Î¸ = 45° to every vertex of the needle.",
       angle: 45
     },
 
@@ -1223,9 +1223,9 @@
       description:
         "A game character changes its facing direction when the player moves the control stick.",
       given:
-        "Current orientation = 0Â° â€¢ New orientation = âˆ’90Â°",
+        "Current orientation = 0° • New orientation = −90°",
       answer:
-        "Use a âˆ’90Â° rotation to turn the character clockwise while preserving its shape.",
+        "Use a −90° rotation to turn the character clockwise while preserving its shape.",
       angle: -90
     },
 
@@ -1234,7 +1234,7 @@
       description:
         "A graphical clock rotates its hand around a fixed center point as time changes.",
       given:
-        "Pivot = clock center â€¢ Rotation = 120Â°",
+        "Pivot = clock center • Rotation = 120°",
       answer:
         "Rotate the hand vertices around the clock center using the selected angle.",
       angle: 120
@@ -1374,7 +1374,7 @@
     pctx.fillText("Rotated", 20, 45);
 
     document.getElementById("problemStatus").textContent =
-      "Î¸ = " + p.angle + "Â°";
+      "Î¸ = " + p.angle + "°";
 
     document.getElementById("problemReadout").textContent =
       "Pivot: (0, 0)";
@@ -1470,7 +1470,7 @@
 
       document.getElementById("experimentResult").textContent =
         "Loaded: Î¸ = " + angle +
-        "Â°. A full 360Â° rotation returns the object to its original orientation.";
+        "°. A full 360° rotation returns the object to its original orientation.";
 
       document
         .querySelector(".rotation-live-section")

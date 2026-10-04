@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Foundation 04 â€” Learn how graphics primitives and geometric shapes are represented using points, lines, vertices and coordinates.">
+    <meta name="description" content="Foundation 04 — Learn how graphics primitives and geometric shapes are represented using points, lines, vertices and coordinates.">
     <title>Foundation 04 | How are Shapes Created? | Rasika CodeLab</title>
     <link rel="stylesheet" href="../css/cgr_style.css">
 <style>body.protected-page:not(.auth-ready){visibility:hidden}</style>
@@ -14,7 +14,7 @@
 <header class="site-header">
     <nav class="navbar">
         <a href="../cgr_index.html" class="logo">
-            <span class="logo-mark">â—ˆ</span>
+            <span class="logo-mark">◈</span>
             Rasika<span class="logo-highlight">CodeLab</span>
         </a>
 
@@ -25,7 +25,7 @@
                         <a href="../../../about.html">About</a>
         </div>
 
-        <button class="menu-btn" type="button" aria-label="Open menu">â˜°</button>
+        <button class="menu-btn" type="button" aria-label="Open menu">☰</button>
     </nav>
 </header>
 
@@ -149,7 +149,7 @@
 
     <div class="content-card">
 
-        <span class="eyebrow">01 Â· CONCEPT</span>
+        <span class="eyebrow">01 · CONCEPT</span>
 
         <h2>What is a Graphics Primitive?</h2>
 
@@ -188,7 +188,7 @@
 
     <div class="section-heading">
 
-        <span class="eyebrow">02 Â· GRAPHICS PRIMITIVES</span>
+        <span class="eyebrow">02 · GRAPHICS PRIMITIVES</span>
 
         <h2>Start with simple geometric elements.</h2>
 
@@ -215,7 +215,7 @@
             <h3>Line</h3>
             <p>
                 Defined by two endpoints such as
-                <strong>Pâ‚(xâ‚,yâ‚)</strong> and <strong>Pâ‚‚(xâ‚‚,yâ‚‚)</strong>.
+                <strong>P₁(x₁,y₁)</strong> and <strong>P₂(x₂,y₂)</strong>.
             </p>
         </div>
 
@@ -247,7 +247,7 @@
 
     <div class="section-heading">
 
-        <span class="eyebrow">03 Â· REPRESENTATION</span>
+        <span class="eyebrow">03 · REPRESENTATION</span>
 
         <h2>Every shape needs geometric information.</h2>
 
@@ -262,13 +262,13 @@
             <h3>Two endpoints define a line.</h3>
 
             <div class="formula-box">
-                Pâ‚ = (xâ‚, yâ‚)<br>
-                Pâ‚‚ = (xâ‚‚, yâ‚‚)
+                P₁ = (x₁, y₁)<br>
+                P₂ = (x₂, y₂)
             </div>
 
             <div class="calculation-box">
-                Î”x = xâ‚‚ âˆ’ xâ‚<br>
-                Î”y = yâ‚‚ âˆ’ yâ‚
+                Î”x = x₂ − x₁<br>
+                Î”y = y₂ − y₁
             </div>
 
         </div>
@@ -280,7 +280,7 @@
             <h3>Centre and radius define a circle.</h3>
 
             <div class="formula-box">
-                (x âˆ’ h)Â² + (y âˆ’ k)Â² = rÂ²
+                (x − h)² + (y − k)² = r²
             </div>
 
             <div class="calculation-box">
@@ -300,7 +300,7 @@
 
     <div class="section-heading">
 
-        <span class="eyebrow">04 Â· CALCULATE</span>
+        <span class="eyebrow">04 · CALCULATE</span>
 
         <h2>Calculate the length of a line.</h2>
 
@@ -317,13 +317,13 @@
 
             <span class="card-label">GIVEN</span>
 
-            <h3>Pâ‚(2, 3) and Pâ‚‚(8, 11)</h3>
+            <h3>P₁(2, 3) and P₂(8, 11)</h3>
 
             <div class="calculation-box">
-                xâ‚ = 2<br>
-                yâ‚ = 3<br>
-                xâ‚‚ = 8<br>
-                yâ‚‚ = 11
+                x₁ = 2<br>
+                y₁ = 3<br>
+                x₂ = 8<br>
+                y₂ = 11
             </div>
 
         </div>
@@ -335,14 +335,14 @@
             <h3>Distance formula</h3>
 
             <div class="formula-box">
-                d = âˆš[(xâ‚‚ âˆ’ xâ‚)Â² + (yâ‚‚ âˆ’ yâ‚)Â²]
+                d = √[(x₂ − x₁)² + (y₂ − y₁)²]
             </div>
 
             <div class="calculation-box">
-                d = âˆš[(8 âˆ’ 2)Â² + (11 âˆ’ 3)Â²]<br>
-                d = âˆš[6Â² + 8Â²]<br>
-                d = âˆš[36 + 64]<br>
-                d = âˆš100<br>
+                d = √[(8 − 2)² + (11 − 3)²]<br>
+                d = √[6² + 8²]<br>
+                d = √[36 + 64]<br>
+                d = √100<br>
                 d = <strong>10 units</strong>
             </div>
 
@@ -358,7 +358,7 @@
 
     <div class="section-heading">
 
-        <span class="eyebrow">05 Â· INTERACTIVE VISUALIZATION</span>
+        <span class="eyebrow">05 · INTERACTIVE VISUALIZATION</span>
 
         <h2>Build a shape from coordinates.</h2>
 
@@ -453,7 +453,7 @@
 
     <div class="section-heading">
 
-        <span class="eyebrow">06 Â· POLYGON GEOMETRY</span>
+        <span class="eyebrow">06 · POLYGON GEOMETRY</span>
 
         <h2>Vertices create the shape.</h2>
 
@@ -467,7 +467,7 @@
     <div class="content-card">
 
         <div class="formula-box">
-            Polygon = {Pâ‚, Pâ‚‚, Pâ‚ƒ, ... Pâ‚™}
+            Polygon = {P₁, P₂, P₃, ... Pₙ}
         </div>
 
         <div class="graphics-flow">
@@ -478,7 +478,7 @@
                 <small>Store each point as an (x,y) coordinate.</small>
             </div>
 
-            <div class="flow-arrow">â†’</div>
+            <div class="flow-arrow">→</div>
 
             <div class="flow-item">
                 <span>02</span>
@@ -486,7 +486,7 @@
                 <small>Draw edges between consecutive points.</small>
             </div>
 
-            <div class="flow-arrow">â†’</div>
+            <div class="flow-arrow">→</div>
 
             <div class="flow-item">
                 <span>03</span>
@@ -494,7 +494,7 @@
                 <small>Connect the final vertex back to the first.</small>
             </div>
 
-            <div class="flow-arrow">â†’</div>
+            <div class="flow-arrow">→</div>
 
             <div class="flow-item">
                 <span>04</span>
@@ -514,7 +514,7 @@
 
     <div class="section-heading">
 
-        <span class="eyebrow">07 Â· BASIC GEOMETRY</span>
+        <span class="eyebrow">07 · BASIC GEOMETRY</span>
 
         <h2>Geometry gives graphics measurable properties.</h2>
 
@@ -524,12 +524,12 @@
 
         <div class="term-card">
             <strong>Rectangle Area</strong>
-            <p>Area = width Ã— height</p>
+            <p>Area = width × height</p>
         </div>
 
         <div class="term-card">
             <strong>Circle Area</strong>
-            <p>Area = Ï€rÂ²</p>
+            <p>Area = Ï€r²</p>
         </div>
 
         <div class="term-card">
@@ -539,17 +539,17 @@
 
         <div class="term-card">
             <strong>Triangle Area</strong>
-            <p>Area = Â½ Ã— base Ã— height</p>
+            <p>Area = ½ × base × height</p>
         </div>
 
         <div class="term-card">
             <strong>Line Length</strong>
-            <p>d = âˆš[(xâ‚‚âˆ’xâ‚)Â² + (yâ‚‚âˆ’yâ‚)Â²]</p>
+            <p>d = √[(x₂−x₁)² + (y₂−y₁)²]</p>
         </div>
 
         <div class="term-card">
             <strong>Midpoint</strong>
-            <p>M = ((xâ‚+xâ‚‚)/2, (yâ‚+yâ‚‚)/2)</p>
+            <p>M = ((x₁+x₂)/2, (y₁+y₂)/2)</p>
         </div>
 
     </div>
@@ -562,7 +562,7 @@
 
     <div class="section-heading">
 
-        <span class="eyebrow">08 Â· FROM GEOMETRY TO PIXELS</span>
+        <span class="eyebrow">08 · FROM GEOMETRY TO PIXELS</span>
 
         <h2>How does a shape finally appear on screen?</h2>
 
@@ -578,7 +578,7 @@
                 <small>Describe where the object exists.</small>
             </div>
 
-            <div class="flow-arrow">â†’</div>
+            <div class="flow-arrow">→</div>
 
             <div class="flow-item">
                 <span>02</span>
@@ -586,7 +586,7 @@
                 <small>Choose a line, circle, polygon or other shape.</small>
             </div>
 
-            <div class="flow-arrow">â†’</div>
+            <div class="flow-arrow">→</div>
 
             <div class="flow-item">
                 <span>03</span>
@@ -594,7 +594,7 @@
                 <small>Determine which pixels represent the geometry.</small>
             </div>
 
-            <div class="flow-arrow">â†’</div>
+            <div class="flow-arrow">→</div>
 
             <div class="flow-item">
                 <span>04</span>
@@ -687,7 +687,7 @@
 
             <div>
                 <span>05</span>
-                <p>Find the distance between Pâ‚(0,0) and Pâ‚‚(6,8).</p>
+                <p>Find the distance between P₁(0,0) and P₂(6,8).</p>
             </div>
 
             <div>
@@ -740,7 +740,7 @@
             <div>
                 <span>05</span>
                 <strong>Everything connects</strong>
-                <p>Coordinates â†’ primitives â†’ algorithms â†’ pixels â†’ visual output.</p>
+                <p>Coordinates → primitives → algorithms → pixels → visual output.</p>
             </div>
 
         </div>
@@ -754,14 +754,14 @@
 <section class="section foundation-navigation">
 
     <a href="foundation03.html" class="nav-card">
-        <span>â†</span>
+        <span>←</span>
         <small>PREVIOUS FOUNDATION</small>
         <strong>How Do Coordinates Work?</strong>
     </a>
 
     <a href="foundation05.html" class="nav-card next">
         <small>NEXT FOUNDATION</small>
-        <strong>How Does Color Work? â†’</strong>
+        <strong>How Does Color Work? →</strong>
     </a>
 
 </section>
@@ -788,7 +788,7 @@
     </div>
 
     <div class="footer-bottom">
-        Â© 2026 Rasika CodeLab Â· Learn the concept. See the result.
+        © 2026 Rasika CodeLab · Learn the concept. See the result.
     </div>
 
 </footer>
@@ -883,31 +883,31 @@
 
         if (type === "line") {
 
-            geometryOutput.textContent = "Pâ‚(" + x + "," + y + ") â†’ Pâ‚‚(" + (x + size) + "," + (y + height) + ")";
+            geometryOutput.textContent = "P₁(" + x + "," + y + ") → P₂(" + (x + size) + "," + (y + height) + ")";
 
             shapeFormula.textContent =
-                "d = âˆš[(xâ‚‚ âˆ’ xâ‚)Â² + (yâ‚‚ âˆ’ yâ‚)Â²]";
+                "d = √[(x₂ − x₁)² + (y₂ − y₁)²]";
 
         } else if (type === "rectangle") {
 
             geometryOutput.textContent = "W = " + size + ", H = " + height;
 
             shapeFormula.textContent =
-                "Area = width Ã— height = " + (size * height) + " unitsÂ²";
+                "Area = width × height = " + (size * height) + " units²";
 
         } else if (type === "circle") {
 
             geometryOutput.textContent = "Centre(" + x + "," + y + "), r = " + size;
 
             shapeFormula.textContent =
-                "Area = Ï€rÂ² = " + (Math.PI * size * size).toFixed(2) + " unitsÂ²";
+                "Area = Ï€r² = " + (Math.PI * size * size).toFixed(2) + " units²";
 
         } else {
 
             geometryOutput.textContent = "Base = " + size + ", Height = " + height;
 
             shapeFormula.textContent =
-                "Area = Â½ Ã— base Ã— height = " + (0.5 * size * height) + " unitsÂ²";
+                "Area = ½ × base × height = " + (0.5 * size * height) + " units²";
         }
 
     }
@@ -953,8 +953,8 @@
             drawPoint(px, py);
             drawPoint(x2, y2);
 
-            drawLabel("Pâ‚", px + 9, py - 9);
-            drawLabel("Pâ‚‚", x2 + 9, y2 - 9);
+            drawLabel("P₁", px + 9, py - 9);
+            drawLabel("P₂", x2 + 9, y2 - 9);
 
         } else if (type === "rectangle") {
 

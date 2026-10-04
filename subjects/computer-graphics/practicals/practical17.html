@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>17 â€” B-Spline Curve Visualizer | Rasika CodeLab</title>
+  <title>17 — B-Spline Curve Visualizer | Rasika CodeLab</title>
   <link rel="stylesheet" href="../css/cgr_style.css">
   <link rel="stylesheet" href="../css/cgr_practicals.css">
 <style>body.protected-page:not(.auth-ready){visibility:hidden}</style>
@@ -22,14 +22,14 @@
         <a href="../cgr_practicals.html" class="active">Practicals</a>
     <a href="../../../about.html">About</a>
   </nav>
-  <button class="menu-btn" aria-label="Open Menu">â˜°</button>
+  <button class="menu-btn" aria-label="Open Menu">☰</button>
 </header>
 
 <main>
 
 <section class="practical-hero">
   <div class="container">
-    <span class="eyebrow">PRACTICAL 17 Â· CURVES</span>
+    <span class="eyebrow">PRACTICAL 17 · CURVES</span>
     <h1>B-Spline Curve Visualizer</h1>
     <p>Generate smooth piecewise polynomial curves using control points, degree and knot vectors.</p>
     <div class="hero-actions">
@@ -95,7 +95,7 @@
         <h3>Why Use B-Splines?</h3>
         <p>A high-degree Bezier curve can make every control point influence the entire curve. B-Splines provide local control: changing a control point generally affects only a portion of the curve.</p>
         <div class="formula-box">
-          <strong>C(u) = Î£ Náµ¢,â‚š(u) Páµ¢</strong>
+          <strong>C(u) = Î£ Náµ¢,ₚ(u) Páµ¢</strong>
         </div>
       </article>
     </div>
@@ -121,7 +121,7 @@
       <div class="formula-box">
         <span>Control Points</span>
         <strong>n + 1</strong>
-        <p>Indexed Pâ‚€ through Pâ‚™.</p>
+        <p>Indexed P₀ through Pₙ.</p>
       </div>
       <div class="formula-box">
         <span>Knot Count</span>
@@ -141,9 +141,9 @@
         </thead>
         <tbody>
           <tr><td>p</td><td>Degree</td><td>2 = quadratic</td></tr>
-          <tr><td>Páµ¢</td><td>Control point</td><td>Pâ‚€, Pâ‚, Pâ‚‚...</td></tr>
+          <tr><td>Páµ¢</td><td>Control point</td><td>P₀, P₁, P₂...</td></tr>
           <tr><td>U</td><td>Knot vector</td><td>[0,0,0,1,2,2,2]</td></tr>
-          <tr><td>Náµ¢,â‚š(u)</td><td>Basis function</td><td>Weight for Páµ¢</td></tr>
+          <tr><td>Náµ¢,ₚ(u)</td><td>Basis function</td><td>Weight for Páµ¢</td></tr>
         </tbody>
       </table>
     </div>
@@ -162,13 +162,13 @@
 
     <div class="formula-box large-formula">
       <h3>Degree 0</h3>
-      <p>Náµ¢,â‚€(u) = 1 when uáµ¢ â‰¤ u &lt; uáµ¢â‚Šâ‚, otherwise 0.</p>
+      <p>Náµ¢,₀(u) = 1 when uáµ¢ ≤ u &lt; uáµ¢₊₁, otherwise 0.</p>
     </div>
 
     <div class="formula-box large-formula">
       <h3>Degree p</h3>
-      <p>Náµ¢,â‚š(u) = ((u âˆ’ uáµ¢)/(uáµ¢â‚Šâ‚š âˆ’ uáµ¢))Náµ¢,â‚šâ‚‹â‚(u)</p>
-      <p>+ ((uáµ¢â‚Šâ‚šâ‚Šâ‚ âˆ’ u)/(uáµ¢â‚Šâ‚šâ‚Šâ‚ âˆ’ uáµ¢â‚Šâ‚))Náµ¢â‚Šâ‚,â‚šâ‚‹â‚(u)</p>
+      <p>Náµ¢,ₚ(u) = ((u − uáµ¢)/(uáµ¢₊ₚ − uáµ¢))Náµ¢,ₚ₋₁(u)</p>
+      <p>+ ((uáµ¢₊ₚ₊₁ − u)/(uáµ¢₊ₚ₊₁ − uáµ¢₊₁))Nᵢ₊₁,ₚ₋₁(u)</p>
     </div>
 
     <div class="note-card">
@@ -189,7 +189,7 @@
 
     <div class="calculation-card">
       <h3>Control Points and Knots</h3>
-      <p>Let Pâ‚€(0,0), Pâ‚(2,4), Pâ‚‚(5,4), Pâ‚ƒ(7,0), degree p = 2 and knot vector U = [0,0,0,1,2,2,2].</p>
+      <p>Let P₀(0,0), P₁(2,4), P₂(5,4), P₃(7,0), degree p = 2 and knot vector U = [0,0,0,1,2,2,2].</p>
 
       <div class="calculation-flow">
         <div class="calc-step">
@@ -202,7 +202,7 @@
         </div>
         <div class="calc-step">
           <span>03</span>
-          <p>Evaluate the quadratic basis functions Nâ‚€,â‚‚(0.5), Nâ‚,â‚‚(0.5), Nâ‚‚,â‚‚(0.5) and Nâ‚ƒ,â‚‚(0.5) using Cox-de Boor recursion.</p>
+          <p>Evaluate the quadratic basis functions N₀,₂(0.5), N₁,₂(0.5), N₂,₂(0.5) and N₃,₂(0.5) using Cox-de Boor recursion.</p>
         </div>
         <div class="calc-step">
           <span>04</span>
@@ -249,9 +249,9 @@
           </label>
           <label>Degree
             <select id="degree">
-              <option value="1">1 â€” Linear</option>
-              <option value="2" selected>2 â€” Quadratic</option>
-              <option value="3">3 â€” Cubic</option>
+              <option value="1">1 — Linear</option>
+              <option value="2" selected>2 — Quadratic</option>
+              <option value="3">3 — Cubic</option>
             </select>
           </label>
         </div>
@@ -290,7 +290,7 @@
           </div>
           <div class="status-card">
             <span>Curve Point</span>
-            <strong id="curvePoint">(â€”)</strong>
+            <strong id="curvePoint">(—)</strong>
             <small>C(u)</small>
           </div>
           <div class="status-card">
@@ -316,7 +316,7 @@
 
     <div class="formula-box">
       <h3>Current Knot Vector</h3>
-      <strong id="knotDisplay">â€”</strong>
+      <strong id="knotDisplay">—</strong>
       <p>The active knot vector is regenerated when the number of points or degree changes.</p>
     </div>
   </div>
@@ -395,21 +395,21 @@
 
     <div class="problem-grid">
       <article class="problem-card">
-        <span class="problem-tag">01 Â· CAD</span>
+        <span class="problem-tag">01 · CAD</span>
         <h3>Vehicle Body Profile</h3>
         <p>Create a smooth vehicle profile where modifying one section should not drastically change the complete outline.</p>
         <button class="btn btn-secondary problem-load" data-preset="vehicle">Show in Live Viewer</button>
       </article>
 
       <article class="problem-card">
-        <span class="problem-tag">02 Â· FONT</span>
+        <span class="problem-tag">02 · FONT</span>
         <h3>Letterform Design</h3>
         <p>Model a smooth section of a digital character or font outline using local control points.</p>
         <button class="btn btn-secondary problem-load" data-preset="font">Show in Live Viewer</button>
       </article>
 
       <article class="problem-card">
-        <span class="problem-tag">03 Â· ANIMATION</span>
+        <span class="problem-tag">03 · ANIMATION</span>
         <h3>Camera Path</h3>
         <p>Create a smooth camera or object path and adjust one region without rebuilding the complete path.</p>
         <button class="btn btn-secondary problem-load" data-preset="camera">Show in Live Viewer</button>
@@ -483,11 +483,11 @@
   <div class="container">
     <a class="nav-practical prev" href="practical16.html">
       <span>Previous Practical</span>
-      <strong>16 â€” Bezier Curve Generator</strong>
+      <strong>16 — Bezier Curve Generator</strong>
     </a>
     <a class="nav-practical next" href="practical18.html">
       <span>Next Practical</span>
-      <strong>18 â€” Interactive Graphics using HTML Canvas</strong>
+      <strong>18 — Interactive Graphics using HTML Canvas</strong>
     </a>
   </div>
 </section>
@@ -516,7 +516,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <span>Â© 2026 Rasika CodeLab</span>
+    <span>© 2026 Rasika CodeLab</span>
     <span>Built for practical learning.</span>
   </div>
 </footer>

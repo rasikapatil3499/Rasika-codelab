@@ -24,14 +24,14 @@
     <a href="../../../about.html">About</a>
   </nav>
 
-  <button class="menu-btn" aria-label="Open Menu">â˜°</button>
+  <button class="menu-btn" aria-label="Open Menu">☰</button>
 </header>
 
 <main class="cgr-practical-page practical-07-page">
 
   <section class="practical-hero">
     <div class="practical-hero-content">
-      <span class="practical-badge">07 â€¢ FILLING</span>
+      <span class="practical-badge">07 • FILLING</span>
       <h1>Flood Fill &amp; Boundary Fill</h1>
       <p>Explore seed-based region filling and understand their differences.</p>
 
@@ -48,7 +48,7 @@
       <div class="fill-hero-boundary"></div>
       <div class="fill-hero-inner"></div>
       <div class="fill-hero-seed"></div>
-      <span>SEED â†’ FILL</span>
+      <span>SEED → FILL</span>
     </div>
   </section>
 
@@ -65,19 +65,19 @@
     <div class="concept-grid">
 
       <article class="concept-card">
-        <div class="concept-icon">ðŸŒ±</div>
+        <div class="concept-icon">🌱</div>
         <h3>Seed Point</h3>
         <p>The filling process begins from a selected pixel inside the region.</p>
       </article>
 
       <article class="concept-card">
-        <div class="concept-icon">ðŸŽ¨</div>
+        <div class="concept-icon">🎨</div>
         <h3>Flood Fill</h3>
         <p>Replaces a connected region having the same target or old color.</p>
       </article>
 
       <article class="concept-card">
-        <div class="concept-icon">â­•</div>
+        <div class="concept-icon">⭕</div>
         <h3>Boundary Fill</h3>
         <p>Fills a region until the specified boundary color is encountered.</p>
       </article>
@@ -86,13 +86,13 @@
 
     <div class="fill-flow">
       <span>Choose Seed</span>
-      <b>â†’</b>
+      <b>→</b>
       <span>Check Pixel</span>
-      <b>â†’</b>
+      <b>→</b>
       <span>Fill Pixel</span>
-      <b>â†’</b>
+      <b>→</b>
       <span>Check Neighbours</span>
-      <b>â†’</b>
+      <b>→</b>
       <span>Repeat</span>
     </div>
   </section>
@@ -220,18 +220,18 @@
 
         <div class="neighbor-grid four">
           <span></span>
-          <span>â†‘</span>
+          <span>↑</span>
           <span></span>
-          <span>â†</span>
-          <strong>â—</strong>
-          <span>â†’</span>
+          <span>←</span>
+          <strong>●</strong>
+          <span>→</span>
           <span></span>
-          <span>â†“</span>
+          <span>↓</span>
           <span></span>
         </div>
 
         <p>Checks the four direct neighbours.</p>
-        <code>Left â€¢ Right â€¢ Up â€¢ Down</code>
+        <code>Left • Right • Up • Down</code>
       </article>
 
 
@@ -239,15 +239,15 @@
         <h3>8-Connected</h3>
 
         <div class="neighbor-grid eight">
-          <span>â†–</span>
-          <span>â†‘</span>
-          <span>â†—</span>
-          <span>â†</span>
-          <strong>â—</strong>
-          <span>â†’</span>
-          <span>â†˜</span>
-          <span>â†“</span>
-          <span>â†™</span>
+          <span>↖</span>
+          <span>↑</span>
+          <span>↗</span>
+          <span>←</span>
+          <strong>●</strong>
+          <span>→</span>
+          <span>↘</span>
+          <span>↓</span>
+          <span>↙</span>
         </div>
 
         <p>Checks direct and diagonal neighbours.</p>
@@ -322,7 +322,7 @@
         <div class="button-row">
           <button class="primary-btn" id="generateFill">Generate Region</button>
           <button class="secondary-btn" id="nextFill">Next Pixel</button>
-          <button class="secondary-btn" id="playFill">â–¶ Play Fill</button>
+          <button class="secondary-btn" id="playFill">▶ Play Fill</button>
           <button class="ghost-btn" id="resetFill">Reset</button>
         </div>
 
@@ -354,7 +354,7 @@
         </div>
 
         <div class="seed-help">
-          <strong>ðŸ’¡ Select a Seed</strong>
+          <strong>💡 Select a Seed</strong>
           <p>Click anywhere inside the region on the canvas to choose a different starting pixel.</p>
         </div>
 
@@ -365,7 +365,7 @@
         <canvas id="fillCanvas" width="600" height="440"></canvas>
 
         <div class="viewer-footer">
-          <span id="fillMessage">Ready â€” click Generate Region</span>
+          <span id="fillMessage">Ready — click Generate Region</span>
           <span id="fillCount">Filled: 0</span>
         </div>
       </div>
@@ -387,43 +387,43 @@
 
       <article class="fill-step-card active">
         <span>01</span>
-        <div>ðŸŒ±</div>
+        <div>🌱</div>
         <h3>Seed</h3>
         <p>Select the starting pixel.</p>
       </article>
 
-      <b>â†’</b>
+      <b>→</b>
 
       <article class="fill-step-card">
         <span>02</span>
-        <div>ðŸ”</div>
+        <div>🔍</div>
         <h3>Check</h3>
         <p>Test the pixel condition.</p>
       </article>
 
-      <b>â†’</b>
+      <b>→</b>
 
       <article class="fill-step-card">
         <span>03</span>
-        <div>ðŸŽ¨</div>
+        <div>🎨</div>
         <h3>Fill</h3>
         <p>Apply the new color.</p>
       </article>
 
-      <b>â†’</b>
+      <b>→</b>
 
       <article class="fill-step-card">
         <span>04</span>
-        <div>â†—</div>
+        <div>↗</div>
         <h3>Neighbours</h3>
         <p>Visit connected pixels.</p>
       </article>
 
-      <b>â†’</b>
+      <b>→</b>
 
       <article class="fill-step-card">
         <span>05</span>
-        <div>âœ“</div>
+        <div>✓</div>
         <h3>Complete</h3>
         <p>Stop when no valid pixels remain.</p>
       </article>
@@ -440,7 +440,7 @@
     </div>
 
     <div class="center-actions">
-      <button class="primary-btn" id="playProcess">â–¶ Play Process</button>
+      <button class="primary-btn" id="playProcess">▶ Play Process</button>
       <button class="ghost-btn" id="resetProcess">Reset</button>
     </div>
   </section>
@@ -531,9 +531,9 @@
 
       <div class="worked-grid">
         <span></span><span></span><span></span><span></span><span></span>
-        <span></span><i>â—</i><i>â—</i><span></span><span></span>
-        <span></span><i>â—</i><strong>ðŸŒ±</strong><i>â—</i><span></span>
-        <span></span><i>â—</i><i>â—</i><span></span><span></span>
+        <span></span><i>●</i><i>●</i><span></span><span></span>
+        <span></span><i>●</i><strong>🌱</strong><i>●</i><span></span>
+        <span></span><i>●</i><i>●</i><span></span><span></span>
         <span></span><span></span><span></span><span></span><span></span>
       </div>
 
@@ -563,9 +563,9 @@
     </div>
 
     <div class="problem-tabs">
-      <button class="problem-tab active" data-problem="paint">ðŸŽ¨ Paint Bucket</button>
-      <button class="problem-tab" data-problem="map">ðŸ—ºï¸ Map Region</button>
-      <button class="problem-tab" data-problem="game">ðŸŽ® Game Area</button>
+      <button class="problem-tab active" data-problem="paint">🎨 Paint Bucket</button>
+      <button class="problem-tab" data-problem="map">🗺️ Map Region</button>
+      <button class="problem-tab" data-problem="game">🎮 Game Area</button>
     </div>
 
 
@@ -583,7 +583,7 @@
         </p>
 
         <div class="problem-given" id="problemGiven">
-          Seed = (12, 10) â€¢ Target = Blue â€¢ Fill = Orange
+          Seed = (12, 10) • Target = Blue • Fill = Orange
         </div>
 
         <div class="problem-answer" id="problemAnswer">
@@ -662,19 +662,19 @@
     <div class="difference-grid">
 
       <article class="difference-card">
-        <span>ðŸŽ¨</span>
+        <span>🎨</span>
         <h3>Flood Fill asks</h3>
-        <p><strong>â€œDoes this pixel have the target color?â€</strong></p>
+        <p><strong>“Does this pixel have the target color?”</strong></p>
       </article>
 
       <article class="difference-card">
-        <span>â­•</span>
+        <span>⭕</span>
         <h3>Boundary Fill asks</h3>
-        <p><strong>â€œHas this pixel reached the boundary color?â€</strong></p>
+        <p><strong>“Has this pixel reached the boundary color?”</strong></p>
       </article>
 
       <article class="difference-card">
-        <span>ðŸŒ±</span>
+        <span>🌱</span>
         <h3>Both require</h3>
         <p>A seed point, neighbourhood rule and stopping condition.</p>
       </article>
@@ -730,13 +730,13 @@
 
   <nav class="practical-navigation">
     <a href="practical06.html">
-      <span>â† Previous</span>
-      <strong>06 â€” Bresenham Circle</strong>
+      <span>← Previous</span>
+      <strong>06 — Bresenham Circle</strong>
     </a>
 
     <a href="practical08.html">
-      <span>Next â†’</span>
-      <strong>08 â€” 2D Translation &amp; Scaling</strong>
+      <span>Next →</span>
+      <strong>08 — 2D Translation &amp; Scaling</strong>
     </a>
   </nav>
 
@@ -774,7 +774,7 @@
   </div>
 
   <div class="footer-bottom">
-    <span>Â© 2026 Rasika CodeLab</span>
+    <span>© 2026 Rasika CodeLab</span>
     <span>Built for practical learning.</span>
   </div>
 </footer>
@@ -883,7 +883,7 @@
     filledCount = 0;
 
     render();
-    updateStatus("Ready â€” choose a seed and generate the region.");
+    updateStatus("Ready — choose a seed and generate the region.");
   }
 
 
@@ -985,7 +985,7 @@
     }
 
     stopFill();
-    updateStatus("Region fill complete âœ“");
+    updateStatus("Region fill complete ✓");
     return false;
   }
 
@@ -1106,7 +1106,7 @@
     }
 
     playing = true;
-    document.getElementById("playFill").textContent = "âšâš Pause";
+    document.getElementById("playFill").textContent = "❚❚ Pause";
     runFillAnimation();
   }
 
@@ -1130,7 +1130,7 @@
   function stopFill() {
     playing = false;
     clearTimeout(timer);
-    document.getElementById("playFill").textContent = "â–¶ Play Fill";
+    document.getElementById("playFill").textContent = "▶ Play Fill";
   }
 
 
@@ -1256,7 +1256,7 @@
     "2. Check the current pixel",
     "3. Apply the fill color",
     "4. Visit neighbouring pixels",
-    "5. Complete the connected region âœ“"
+    "5. Complete the connected region ✓"
   ];
 
 
@@ -1283,7 +1283,7 @@
         clearInterval(processTimer);
 
         document.getElementById("processText").textContent =
-          "Fill process complete âœ“";
+          "Fill process complete ✓";
 
         return;
       }
@@ -1317,7 +1317,7 @@
       description:
         "A drawing application needs to replace a connected area of the same color when the user clicks inside it with a paint bucket.",
       given:
-        "Seed = (12, 10) â€¢ Target = Blue â€¢ Fill = Orange",
+        "Seed = (12, 10) • Target = Blue • Fill = Orange",
       answer:
         "Flood Fill is suitable because the connected region is identified by its target color.",
       algorithm: "flood"
@@ -1328,7 +1328,7 @@
       description:
         "A map interface highlights a bounded region selected by the user. The region is represented by a closed boundary.",
       given:
-        "Seed = (15, 11) â€¢ Boundary = White â€¢ Fill = Orange",
+        "Seed = (15, 11) • Boundary = White • Fill = Orange",
       answer:
         "Boundary Fill is suitable because the fill should continue until the closed boundary is reached.",
       algorithm: "boundary"
@@ -1339,7 +1339,7 @@
       description:
         "A game uses connected pixel regions to mark an area controlled by a player after a seed location is selected.",
       given:
-        "Seed = (10, 10) â€¢ Target = Region Color â€¢ Fill = Orange",
+        "Seed = (10, 10) • Target = Region Color • Fill = Orange",
       answer:
         "Flood Fill can replace the connected region while respecting different-colored obstacles.",
       algorithm: "flood"

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>16 â€” Bezier Curve Generator | Rasika CodeLab</title>
+  <title>16 — Bezier Curve Generator | Rasika CodeLab</title>
   <link rel="stylesheet" href="../css/cgr_style.css">
   <link rel="stylesheet" href="../css/cgr_practicals.css">
 <style>body.protected-page:not(.auth-ready){visibility:hidden}</style>
@@ -22,14 +22,14 @@
         <a href="../cgr_practicals.html" class="active">Practicals</a>
     <a href="../../../about.html">About</a>
   </nav>
-  <button class="menu-btn" aria-label="Open Menu">â˜°</button>
+  <button class="menu-btn" aria-label="Open Menu">☰</button>
 </header>
 
 <main>
 
 <section class="practical-hero">
   <div class="container">
-    <span class="eyebrow">PRACTICAL 16 Â· CURVES</span>
+    <span class="eyebrow">PRACTICAL 16 · CURVES</span>
     <h1>Bezier Curve Generator</h1>
     <p>Generate smooth curves from control points and understand how Bernstein polynomials shape the curve.</p>
     <div class="hero-actions">
@@ -85,7 +85,7 @@
         <h3>Control Points</h3>
         <p>Control points determine the position and direction of the curve. The curve generally starts at the first point and ends at the last point.</p>
         <div class="formula-box">
-          <strong>0 â‰¤ t â‰¤ 1</strong><br>
+          <strong>0 ≤ t ≤ 1</strong><br>
           <span>t is the curve parameter.</span>
         </div>
       </article>
@@ -94,9 +94,9 @@
         <h3>Degree</h3>
         <p>For n + 1 control points, the Bezier curve has degree n.</p>
         <ul class="clean-list">
-          <li>2 points â†’ Linear â†’ degree 1</li>
-          <li>3 points â†’ Quadratic â†’ degree 2</li>
-          <li>4 points â†’ Cubic â†’ degree 3</li>
+          <li>2 points → Linear → degree 1</li>
+          <li>3 points → Quadratic → degree 2</li>
+          <li>4 points → Cubic → degree 3</li>
         </ul>
       </article>
     </div>
@@ -116,17 +116,17 @@
     <div class="formula-grid">
       <div class="formula-box">
         <span>Linear</span>
-        <strong>B(t) = (1âˆ’t)Pâ‚€ + tPâ‚</strong>
+        <strong>B(t) = (1−t)P₀ + tP₁</strong>
         <p>Degree 1 curve.</p>
       </div>
       <div class="formula-box">
         <span>Quadratic</span>
-        <strong>B(t) = (1âˆ’t)Â²Pâ‚€ + 2(1âˆ’t)tPâ‚ + tÂ²Pâ‚‚</strong>
+        <strong>B(t) = (1−t)²P₀ + 2(1−t)tP₁ + t²P₂</strong>
         <p>Degree 2 curve.</p>
       </div>
       <div class="formula-box">
         <span>Cubic</span>
-        <strong>B(t) = (1âˆ’t)Â³Pâ‚€ + 3(1âˆ’t)Â²tPâ‚ + 3(1âˆ’t)tÂ²Pâ‚‚ + tÂ³Pâ‚ƒ</strong>
+        <strong>B(t) = (1−t)³P₀ + 3(1−t)²tP₁ + 3(1−t)t²P₂ + t³P₃</strong>
         <p>Degree 3 curve.</p>
       </div>
     </div>
@@ -134,7 +134,7 @@
     <div class="formula-box large-formula">
       <h3>General Bezier Equation</h3>
       <p>For n + 1 control points:</p>
-      <strong>B(t) = Î£ [C(n,i)(1âˆ’t)â¿â»â±tâ±Páµ¢], &nbsp; 0 â‰¤ t â‰¤ 1</strong>
+      <strong>B(t) = Î£ [C(n,i)(1−t)ⁿ⁻ⁱtⁱPᵢ], &nbsp; 0 ≤ t ≤ 1</strong>
       <p>where C(n,i) is the binomial coefficient.</p>
     </div>
   </div>
@@ -160,9 +160,9 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td>1</td><td>Bâ‚€,â‚ = 1âˆ’t; Bâ‚,â‚ = t</td><td>2</td></tr>
-          <tr><td>2</td><td>Bâ‚€,â‚‚ = (1âˆ’t)Â²; Bâ‚,â‚‚ = 2(1âˆ’t)t; Bâ‚‚,â‚‚ = tÂ²</td><td>3</td></tr>
-          <tr><td>3</td><td>(1âˆ’t)Â³, 3(1âˆ’t)Â²t, 3(1âˆ’t)tÂ², tÂ³</td><td>4</td></tr>
+          <tr><td>1</td><td>B₀,₁ = 1−t; B₁,₁ = t</td><td>2</td></tr>
+          <tr><td>2</td><td>B₀,₂ = (1−t)²; B₁,₂ = 2(1−t)t; B₂,₂ = t²</td><td>3</td></tr>
+          <tr><td>3</td><td>(1−t)³, 3(1−t)²t, 3(1−t)t², t³</td><td>4</td></tr>
         </tbody>
       </table>
     </div>
@@ -184,12 +184,12 @@
     </div>
 
     <div class="calculation-card">
-      <h3>Control Points: Pâ‚€(0,0), Pâ‚(4,6), Pâ‚‚(8,0)</h3>
+      <h3>Control Points: P₀(0,0), P₁(4,6), P₂(8,0)</h3>
 
       <div class="calculation-flow">
         <div class="calc-step">
           <span>01</span>
-          <p>Use the quadratic equation: B(t) = (1âˆ’t)Â²Pâ‚€ + 2(1âˆ’t)tPâ‚ + tÂ²Pâ‚‚.</p>
+          <p>Use the quadratic equation: B(t) = (1−t)²P₀ + 2(1−t)tP₁ + t²P₂.</p>
         </div>
         <div class="calc-step">
           <span>02</span>
@@ -197,7 +197,7 @@
         </div>
         <div class="calc-step">
           <span>03</span>
-          <p>Weights are: (1âˆ’0.5)Â² = 0.25, 2(0.5)(0.5) = 0.50, and 0.5Â² = 0.25.</p>
+          <p>Weights are: (1−0.5)² = 0.25, 2(0.5)(0.5) = 0.50, and 0.5² = 0.25.</p>
         </div>
         <div class="calc-step">
           <span>04</span>
@@ -232,9 +232,9 @@
           <h3>Curve Type</h3>
           <label>Degree
             <select id="degree">
-              <option value="1">Linear â€” 2 Points</option>
-              <option value="2">Quadratic â€” 3 Points</option>
-              <option value="3" selected>Cubic â€” 4 Points</option>
+              <option value="1">Linear — 2 Points</option>
+              <option value="2">Quadratic — 3 Points</option>
+              <option value="3" selected>Cubic — 4 Points</option>
             </select>
           </label>
         </div>
@@ -268,7 +268,7 @@
           <div class="status-card">
             <span>Current t</span>
             <strong id="currentT">0.50</strong>
-            <small>0 â†’ 1</small>
+            <small>0 → 1</small>
           </div>
           <div class="status-card">
             <span>Curve Point</span>
@@ -323,7 +323,7 @@
     <div class="concept-grid">
       <article class="theory-card">
         <h3>Endpoint Interpolation</h3>
-        <p>B(0) = Pâ‚€ and B(1) = Pâ‚™. The curve starts at the first control point and ends at the last.</p>
+        <p>B(0) = P₀ and B(1) = Pₙ. The curve starts at the first control point and ends at the last.</p>
       </article>
       <article class="theory-card">
         <h3>Convex Hull Property</h3>
@@ -353,21 +353,21 @@
 
     <div class="problem-grid">
       <article class="problem-card">
-        <span class="problem-tag">01 Â· UI DESIGN</span>
+        <span class="problem-tag">01 · UI DESIGN</span>
         <h3>Logo Curve</h3>
         <p>Create a smooth curve for a logo or icon using four control points and adjust its shape interactively.</p>
         <button class="btn btn-secondary problem-load" data-preset="logo">Show in Live Viewer</button>
       </article>
 
       <article class="problem-card">
-        <span class="problem-tag">02 Â· ANIMATION</span>
+        <span class="problem-tag">02 · ANIMATION</span>
         <h3>Motion Path</h3>
         <p>Define a smooth path for a game object or animation element to travel from a start point to an end point.</p>
         <button class="btn btn-secondary problem-load" data-preset="motion">Show in Live Viewer</button>
       </article>
 
       <article class="problem-card">
-        <span class="problem-tag">03 Â· CAD</span>
+        <span class="problem-tag">03 · CAD</span>
         <h3>Product Profile</h3>
         <p>Use a Bezier curve to model a smooth product outline such as part of a vehicle, bottle or interface shape.</p>
         <button class="btn btn-secondary problem-load" data-preset="product">Show in Live Viewer</button>
@@ -387,7 +387,7 @@
     </div>
 
     <div class="experiment-list">
-      <div class="experiment-item"><span>01</span><p>Move Pâ‚ of a quadratic curve vertically. Observe how the curve bends.</p></div>
+      <div class="experiment-item"><span>01</span><p>Move P₁ of a quadratic curve vertically. Observe how the curve bends.</p></div>
       <div class="experiment-item"><span>02</span><p>Set t = 0, 0.25, 0.5, 0.75 and 1. Compare the generated coordinates.</p></div>
       <div class="experiment-item"><span>03</span><p>Change a cubic curve into a quadratic curve and compare the control polygon.</p></div>
       <div class="experiment-item"><span>04</span><p>Move an interior control point outside the original convex hull and observe the new curve shape.</p></div>
@@ -426,7 +426,7 @@
 
     <div class="viva-list">
       <details><summary>What is a Bezier curve?</summary><p>A parametric curve defined by a set of control points and Bernstein basis functions.</p></details>
-      <details><summary>What is the range of t?</summary><p>For the standard Bezier curve, 0 â‰¤ t â‰¤ 1.</p></details>
+      <details><summary>What is the range of t?</summary><p>For the standard Bezier curve, 0 ≤ t ≤ 1.</p></details>
       <details><summary>What determines the degree?</summary><p>If there are n + 1 control points, the degree is n.</p></details>
       <details><summary>Does a Bezier curve pass through every control point?</summary><p>It passes through the first and last control points. Interior control points generally influence the curve without necessarily lying on it.</p></details>
       <details><summary>What is the convex hull property?</summary><p>The curve lies inside the convex hull formed by its control points.</p></details>
@@ -441,11 +441,11 @@
   <div class="container">
     <a class="nav-practical prev" href="practical15.html">
       <span>Previous Practical</span>
-      <strong>15 â€” Sutherland-Hodgman Polygon Clipping</strong>
+      <strong>15 — Sutherland-Hodgman Polygon Clipping</strong>
     </a>
     <a class="nav-practical next" href="practical17.html">
       <span>Next Practical</span>
-      <strong>17 â€” B-Spline Curve Visualizer</strong>
+      <strong>17 — B-Spline Curve Visualizer</strong>
     </a>
   </div>
 </section>
@@ -474,7 +474,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <span>Â© 2026 Rasika CodeLab</span>
+    <span>© 2026 Rasika CodeLab</span>
     <span>Built for practical learning.</span>
   </div>
 </footer>

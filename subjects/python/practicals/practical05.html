@@ -317,23 +317,23 @@
 
 <pre>
 User Input
-    â”‚
-    â–¼
+    │
+    ▼
 Validation
-    â”‚
-    â–¼
+    │
+    ▼
 Application Logic
-    â”‚
-    â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–º Functions
-    â”‚
-    â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–º Classes / Objects
-    â”‚
-    â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–º Data Processing
-                         â”‚
-                         â–¼
+    │
+    ├──────────────► Functions
+    │
+    ├──────────────► Classes / Objects
+    │
+    └──────────────► Data Processing
+                         │
+                         ▼
                  File / Database
-                         â”‚
-                         â–¼
+                         │
+                         ▼
                     Result / Report
 </pre>
 
@@ -615,14 +615,14 @@ Application Logic
 
 
             <!-- =================================================
-                 PROBLEM 01 â€” EXPENSE TRACKER
+                 PROBLEM 01 — EXPENSE TRACKER
                  ================================================= -->
 
             <section class="practical-section">
 
                 <div class="section-title">
                     <span>06</span>
-                    <h2>Problem 01 â€” Expense Tracker</h2>
+                    <h2>Problem 01 — Expense Tracker</h2>
                 </div>
 
 
@@ -875,7 +875,7 @@ def display_expenses():
             expense["category"],
             "|",
             expense["description"],
-            "| â‚¹",
+            "| ₹",
             expense["amount"]
         )
 
@@ -905,12 +905,12 @@ add_expense(
 display_expenses()
 
 print(
-    "\nTotal Spending: â‚¹",
+    "\nTotal Spending: ₹",
     calculate_total()
 )
 
 print(
-    "Food Spending: â‚¹",
+    "Food Spending: ₹",
     category_total("Food")
 )
 </code></pre>
@@ -949,12 +949,12 @@ print(
 <pre>
 --- Expense Report ---
 
-20-09-2026 | Food | Lunch | â‚¹ 180
-20-09-2026 | Travel | Bus | â‚¹ 40
-21-09-2026 | Education | Book | â‚¹ 450
+20-09-2026 | Food | Lunch | ₹ 180
+20-09-2026 | Travel | Bus | ₹ 40
+21-09-2026 | Education | Book | ₹ 450
 
-Total Spending: â‚¹ 670
-Food Spending: â‚¹ 180
+Total Spending: ₹ 670
+Food Spending: ₹ 180
 </pre>
 
                 </div>
@@ -1015,7 +1015,7 @@ Food Spending: â‚¹ 180
                     <div class="callout">
 
                         <div class="callout-icon">
-                            ðŸ’¡
+                            💡
                         </div>
 
                         <div class="callout-content">
@@ -1040,7 +1040,7 @@ Food Spending: â‚¹ 180
 
 
             <!-- =================================================
-                 PROBLEM 02 â€” PERFORMANCE DASHBOARD
+                 PROBLEM 02 — PERFORMANCE DASHBOARD
                  ================================================= -->
 
             <section class="practical-section">
@@ -1048,7 +1048,7 @@ Food Spending: â‚¹ 180
                 <div class="section-title">
                     <span>10</span>
                     <h2>
-                        Problem 02 â€” Student Performance Dashboard
+                        Problem 02 — Student Performance Dashboard
                     </h2>
                 </div>
 
@@ -1344,7 +1344,7 @@ Pass Percentage:
 
 
             <!-- =================================================
-                 PROBLEM 03 â€” MINI APPLICATION
+                 PROBLEM 03 — MINI APPLICATION
                  ================================================= -->
 
             <section class="practical-section">
@@ -1352,7 +1352,7 @@ Pass Percentage:
                 <div class="section-title">
                     <span>11</span>
                     <h2>
-                        Problem 03 â€” Mini Python Application
+                        Problem 03 — Mini Python Application
                     </h2>
                 </div>
 
@@ -1371,7 +1371,7 @@ Pass Percentage:
 
 
                     <h4>
-                        Step 01 â€” Identify the Problem
+                        Step 01 — Identify the Problem
                     </h4>
 
                     <p>
@@ -1381,7 +1381,7 @@ Pass Percentage:
 
 
                     <h4>
-                        Step 02 â€” Identify Entities
+                        Step 02 — Identify Entities
                     </h4>
 
                     <p>
@@ -1391,7 +1391,7 @@ Pass Percentage:
 
 
                     <h4>
-                        Step 03 â€” Design Classes and Functions
+                        Step 03 — Design Classes and Functions
                     </h4>
 
                     <p>
@@ -1401,7 +1401,7 @@ Pass Percentage:
 
 
                     <h4>
-                        Step 04 â€” Select Data Storage
+                        Step 04 — Select Data Storage
                     </h4>
 
                     <p>
@@ -1411,7 +1411,7 @@ Pass Percentage:
 
 
                     <h4>
-                        Step 05 â€” Implement CRUD Operations
+                        Step 05 — Implement CRUD Operations
                     </h4>
 
                     <div class="concept-list">
@@ -1436,7 +1436,7 @@ Pass Percentage:
 
 
                     <h4>
-                        Step 06 â€” Generate Output
+                        Step 06 — Generate Output
                     </h4>
 
                     <p>
@@ -1688,36 +1688,36 @@ Pass Percentage:
 
 <pre>
                 USER
-                  â”‚
-                  â–¼
-          â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-          â”‚  Input Layer  â”‚
-          â””â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜
-                  â”‚
-                  â–¼
-          â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-          â”‚ Application   â”‚
-          â”‚    Logic      â”‚
-          â””â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜
-                  â”‚
-          â”Œâ”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”
-          â”‚       â”‚        â”‚
-          â–¼       â–¼        â–¼
+                  │
+                  ▼
+          ┌───────────────┐
+          │  Input Layer  │
+          └───────┬───────┘
+                  │
+                  ▼
+          ┌───────────────┐
+          │ Application   │
+          │    Logic      │
+          └───────┬───────┘
+                  │
+          ┌───────┼────────┐
+          │       │        │
+          ▼       ▼        ▼
       Functions  OOP     Validation
-          â”‚       â”‚        â”‚
-          â””â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-                  â”‚
-                  â–¼
-          â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-          â”‚ Data Storage  â”‚
-          â”‚ File / DB     â”‚
-          â””â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜
-                  â”‚
-                  â–¼
-          â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-          â”‚ Output /      â”‚
-          â”‚ Reports       â”‚
-          â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+          │       │        │
+          └───────┼────────┘
+                  │
+                  ▼
+          ┌───────────────┐
+          │ Data Storage  │
+          │ File / DB     │
+          └───────┬───────┘
+                  │
+                  ▼
+          ┌───────────────┐
+          │ Output /      │
+          │ Reports       │
+          └───────────────┘
 </pre>
 
                 </div>
@@ -2074,24 +2074,24 @@ Pass Percentage:
 <pre>
 Practical 01
 Python Problem Solving
-        â”‚
-        â–¼
+        │
+        ▼
 Practical 02
 Data & Functions
-        â”‚
-        â–¼
+        │
+        ▼
 Practical 03
 OOP & Application Design
-        â”‚
-        â–¼
+        │
+        ▼
 Practical 04
 APIs, Files & Databases
-        â”‚
-        â–¼
+        │
+        ▼
 Practical 05
 Modern Python Application
-        â”‚
-        â–¼
+        │
+        ▼
    REAL-WORLD
    APPLICATION
 </pre>
@@ -2117,7 +2117,7 @@ Modern Python Application
                     </small>
 
                     <strong>
-                        â† APIs, Files & Databases
+                        ← APIs, Files & Databases
                     </strong>
 
                 </a>
@@ -2132,7 +2132,7 @@ Modern Python Application
                     </small>
 
                     <strong>
-                        All Practicals â†’
+                        All Practicals →
                     </strong>
 
                 </a>
@@ -2221,7 +2221,7 @@ Modern Python Application
         <div class="footer-bottom">
 
             <span>
-                Â© 2026 Rasika CodeLab
+                © 2026 Rasika CodeLab
             </span>
 
             <span>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>20 â€” 3D Transformation, Lighting &amp; Texture | Rasika CodeLab</title>
+  <title>20 — 3D Transformation, Lighting &amp; Texture | Rasika CodeLab</title>
   <link rel="stylesheet" href="../css/cgr_style.css">
   <link rel="stylesheet" href="../css/cgr_practicals.css">
 <style>body.protected-page:not(.auth-ready){visibility:hidden}</style>
@@ -21,7 +21,7 @@
         <a href="../cgr_practicals.html" class="active">Practicals</a>
     <a href="../../../about.html">About</a>
   </nav>
-  <button class="menu-btn" aria-label="Open Menu">â˜°</button>
+  <button class="menu-btn" aria-label="Open Menu">☰</button>
 </header>
 
 <main>
@@ -50,7 +50,7 @@
         <p><strong>Aim:</strong> To apply 3D transformations and understand the visual effects of lighting, materials and texture mapping in a 3D graphics scene.</p>
         <ul>
           <li>Apply translation, scaling and rotation to 3D objects.</li>
-          <li>Understand homogeneous coordinates and 4Ã—4 transformation matrices.</li>
+          <li>Understand homogeneous coordinates and 4×4 transformation matrices.</li>
           <li>Understand ambient, directional and point lighting.</li>
           <li>Study material properties such as roughness and metalness.</li>
           <li>Understand texture coordinates and texture mapping.</li>
@@ -72,9 +72,9 @@
           <h3>Translation</h3>
           <p>Translation changes the position of an object without changing its shape or orientation.</p>
           <div class="formula-box">
-            <p>xâ€² = x + t<sub>x</sub></p>
-            <p>yâ€² = y + t<sub>y</sub></p>
-            <p>zâ€² = z + t<sub>z</sub></p>
+            <p>x′ = x + t<sub>x</sub></p>
+            <p>y′ = y + t<sub>y</sub></p>
+            <p>z′ = z + t<sub>z</sub></p>
           </div>
         </article>
 
@@ -82,9 +82,9 @@
           <h3>Scaling</h3>
           <p>Scaling changes the dimensions of an object along the three axes.</p>
           <div class="formula-box">
-            <p>xâ€² = s<sub>x</sub>x</p>
-            <p>yâ€² = s<sub>y</sub>y</p>
-            <p>zâ€² = s<sub>z</sub>z</p>
+            <p>x′ = s<sub>x</sub>x</p>
+            <p>y′ = s<sub>y</sub>y</p>
+            <p>z′ = s<sub>z</sub>z</p>
           </div>
         </article>
 
@@ -92,13 +92,13 @@
           <h3>Rotation</h3>
           <p>An object can rotate around the X, Y or Z axis. In Three.js, rotation values are represented in radians.</p>
           <div class="formula-box">
-            <p>Î¸<sub>rad</sub> = Î¸<sub>deg</sub> Ã— Ãâ‚¬ / 180</p>
+            <p>Î¸<sub>rad</sub> = Î¸<sub>deg</sub> × Ï€ / 180</p>
           </div>
         </article>
 
         <article class="content-card">
           <h3>Homogeneous Coordinates</h3>
-          <p>A 3D point can be represented as <strong>[x y z 1]<sup>T</sup></strong>. A 4Ã—4 matrix allows translation, rotation and scaling to be represented in a common matrix framework.</p>
+          <p>A 3D point can be represented as <strong>[x y z 1]<sup>T</sup></strong>. A 4×4 matrix allows translation, rotation and scaling to be represented in a common matrix framework.</p>
         </article>
       </div>
     </div>
@@ -108,7 +108,7 @@
     <div class="container">
       <div class="section-heading">
         <span class="section-label">03</span>
-        <h2>4Ã—4 Transformation Matrices</h2>
+        <h2>4×4 Transformation Matrices</h2>
       </div>
 
       <div class="content-card">
@@ -183,7 +183,7 @@
         <p>Texture mapping places a 2D image or procedural pattern onto the surface of a 3D object. Each surface vertex can contain texture coordinates, commonly called <strong>UV coordinates</strong>.</p>
         <div class="formula-box">
           <strong>Texture coordinate</strong>
-          <p>(u, v) â†’ location inside a 2D texture</p>
+          <p>(u, v) → location inside a 2D texture</p>
         </div>
 
         <div class="content-grid">
@@ -218,16 +218,16 @@
         </div>
 
         <div class="calculation-steps">
-          <p><strong>Step 1:</strong> xâ€² = 2 Ã— 2 = <strong>4</strong></p>
-          <p><strong>Step 2:</strong> yâ€² = 3 Ã— 1 = <strong>3</strong></p>
-          <p><strong>Step 3:</strong> zâ€² = 4 Ã— 0.5 = <strong>2</strong></p>
-          <p><strong>Result:</strong> Pâ€² = <strong>(4, 3, 2)</strong></p>
+          <p><strong>Step 1:</strong> x′ = 2 × 2 = <strong>4</strong></p>
+          <p><strong>Step 2:</strong> y′ = 3 × 1 = <strong>3</strong></p>
+          <p><strong>Step 3:</strong> z′ = 4 × 0.5 = <strong>2</strong></p>
+          <p><strong>Result:</strong> P′ = <strong>(4, 3, 2)</strong></p>
         </div>
 
         <h3>Rotation Conversion Example</h3>
-        <p>For a rotation of 90Â°:</p>
+        <p>For a rotation of 90°:</p>
         <div class="formula-box">
-          <p>Î¸ = 90 Ã— Ãâ‚¬ / 180 = <strong>Ãâ‚¬/2 radians</strong></p>
+          <p>Î¸ = 90 × Ï€ / 180 = <strong>Ï€/2 radians</strong></p>
         </div>
       </div>
     </div>
@@ -253,17 +253,17 @@
 
           <label>Rotation X
             <input type="range" id="rotX" min="-180" max="180" value="20">
-            <span id="rotXValue">20Â°</span>
+            <span id="rotXValue">20°</span>
           </label>
 
           <label>Rotation Y
             <input type="range" id="rotY" min="-180" max="180" value="35">
-            <span id="rotYValue">35Â°</span>
+            <span id="rotYValue">35°</span>
           </label>
 
           <label>Scale
             <input type="range" id="scaleRange" min="0.5" max="2" step="0.1" value="1">
-            <span id="scaleValue">1.0Ã—</span>
+            <span id="scaleValue">1.0×</span>
           </label>
         </div>
 
@@ -325,7 +325,7 @@
     <div class="container">
       <div class="section-heading">
         <span class="section-label">08</span>
-        <h2>Transformation â†’ Lighting â†’ Texture â†’ Rendering</h2>
+        <h2>Transformation → Lighting → Texture → Rendering</h2>
       </div>
 
       <div class="process-grid">
@@ -430,7 +430,7 @@
 
       <div class="viva-list">
         <details><summary>What is a 3D transformation?</summary><p>A mathematical operation that changes an object's position, size or orientation in three-dimensional space.</p></details>
-        <details><summary>Why are 4Ã—4 matrices used in 3D graphics?</summary><p>Homogeneous 4Ã—4 matrices provide a common representation for translation, rotation, scaling and combinations of transformations.</p></details>
+        <details><summary>Why are 4×4 matrices used in 3D graphics?</summary><p>Homogeneous 4×4 matrices provide a common representation for translation, rotation, scaling and combinations of transformations.</p></details>
         <details><summary>What is lighting in computer graphics?</summary><p>Lighting models the interaction between light sources and surfaces to determine their visible appearance.</p></details>
         <details><summary>What is a texture?</summary><p>A texture is image or procedural data mapped onto a surface to provide additional visual detail.</p></details>
         <details><summary>What are UV coordinates?</summary><p>UV coordinates identify positions in a 2D texture that correspond to locations on a 3D surface.</p></details>
@@ -442,8 +442,8 @@
 
   <section class="practical-navigation">
     <div class="container">
-      <a href="practical19.html" class="nav-practical prev">â† Practical 19<span>3D Scene using Three.js</span></a>
-      <a href="practical21.html" class="nav-practical next">Practical 21 â†’<span>Interactive Graphics Application</span></a>
+      <a href="practical19.html" class="nav-practical prev">← Practical 19<span>3D Scene using Three.js</span></a>
+      <a href="practical21.html" class="nav-practical next">Practical 21 →<span>Interactive Graphics Application</span></a>
     </div>
   </section>
 </main>
@@ -470,7 +470,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <span>Â© 2026 Rasika CodeLab</span>
+    <span>© 2026 Rasika CodeLab</span>
     <span>Built for practical learning.</span>
   </div>
 </footer>
@@ -652,9 +652,9 @@ function updateTransform() {
   mesh.rotation.y = Number(rotY.value) * Math.PI / 180 + rotationOffset;
   mesh.scale.setScalar(Number(scaleRange.value));
 
-  rotXValue.textContent = rotX.value + "Â°";
-  rotYValue.textContent = rotY.value + "Â°";
-  scaleValue.textContent = Number(scaleRange.value).toFixed(1) + "Ã—";
+  rotXValue.textContent = rotX.value + "°";
+  rotYValue.textContent = rotY.value + "°";
+  scaleValue.textContent = Number(scaleRange.value).toFixed(1) + "×";
 }
 
 function resize() {

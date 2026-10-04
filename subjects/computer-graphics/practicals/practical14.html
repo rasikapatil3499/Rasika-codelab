@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>14 â€” Midpoint Subdivision | Rasika CodeLab</title>
+  <title>14 — Midpoint Subdivision | Rasika CodeLab</title>
   <link rel="stylesheet" href="../css/cgr_style.css">
   <link rel="stylesheet" href="../css/cgr_practicals.css">
 <style>body.protected-page:not(.auth-ready){visibility:hidden}</style>
@@ -22,14 +22,14 @@
         <a href="../cgr_practicals.html" class="active">Practicals</a>
     <a href="../../../about.html">About</a>
   </nav>
-  <button class="menu-btn" aria-label="Open Menu">â˜°</button>
+  <button class="menu-btn" aria-label="Open Menu">☰</button>
 </header>
 
 <main>
 
 <section class="practical-hero">
   <div class="container">
-    <span class="eyebrow">PRACTICAL 14 Â· CLIPPING</span>
+    <span class="eyebrow">PRACTICAL 14 · CLIPPING</span>
     <h1>Midpoint Subdivision</h1>
     <p>Clip a line by repeatedly dividing it at its midpoint and testing the resulting segments.</p>
     <div class="hero-actions">
@@ -84,8 +84,8 @@
       <article class="theory-card">
         <h3>Midpoint Formula</h3>
         <div class="formula-box">
-          <strong>Xm = (xâ‚ + xâ‚‚) / 2</strong><br>
-          <strong>Ym = (yâ‚ + yâ‚‚) / 2</strong>
+          <strong>Xm = (x₁ + x₂) / 2</strong><br>
+          <strong>Ym = (y₁ + y₂) / 2</strong>
         </div>
         <p>The midpoint lies exactly halfway between the two endpoints.</p>
       </article>
@@ -119,9 +119,9 @@
     <div class="formula-grid">
       <div class="formula-box">
         <span>Inside Test</span>
-        <strong>xmin â‰¤ x â‰¤ xmax</strong>
+        <strong>xmin ≤ x ≤ xmax</strong>
         <p>and</p>
-        <strong>ymin â‰¤ y â‰¤ ymax</strong>
+        <strong>ymin ≤ y ≤ ymax</strong>
       </div>
       <div class="formula-box">
         <span>Trivial Accept</span>
@@ -152,11 +152,11 @@
     </div>
 
     <div class="algorithm-steps">
-      <div class="algorithm-step"><span>01</span><div><h3>Start with Pâ‚ and Pâ‚‚</h3><p>Take the two endpoints of the original line.</p></div></div>
+      <div class="algorithm-step"><span>01</span><div><h3>Start with P₁ and P₂</h3><p>Take the two endpoints of the original line.</p></div></div>
       <div class="algorithm-step"><span>02</span><div><h3>Classify endpoints</h3><p>Check whether each endpoint is inside or outside the clipping window.</p></div></div>
       <div class="algorithm-step"><span>03</span><div><h3>Accept or reject</h3><p>If the segment is clearly inside, accept it. If it is clearly outside on the same side, reject it.</p></div></div>
-      <div class="algorithm-step"><span>04</span><div><h3>Calculate midpoint</h3><p>Compute M = ((xâ‚+xâ‚‚)/2, (yâ‚+yâ‚‚)/2).</p></div></div>
-      <div class="algorithm-step"><span>05</span><div><h3>Subdivide</h3><p>Test Pâ‚â†’M and Mâ†’Pâ‚‚ separately.</p></div></div>
+      <div class="algorithm-step"><span>04</span><div><h3>Calculate midpoint</h3><p>Compute M = ((x₁+x₂)/2, (y₁+y₂)/2).</p></div></div>
+      <div class="algorithm-step"><span>05</span><div><h3>Subdivide</h3><p>Test P₁→M and M→P₂ separately.</p></div></div>
       <div class="algorithm-step"><span>06</span><div><h3>Repeat</h3><p>Continue until the visible portion is determined or the maximum subdivision depth is reached.</p></div></div>
     </div>
   </div>
@@ -173,12 +173,12 @@
     </div>
 
     <div class="calculation-card">
-      <h3>Line: Pâ‚(1,3) â†’ Pâ‚‚(10,5)</h3>
+      <h3>Line: P₁(1,3) → P₂(10,5)</h3>
 
       <div class="calculation-flow">
         <div class="calc-step">
           <span>01</span>
-          <p>Pâ‚(1,3) is outside on the LEFT. Pâ‚‚(10,5) is outside on the RIGHT.</p>
+          <p>P₁(1,3) is outside on the LEFT. P₂(10,5) is outside on the RIGHT.</p>
         </div>
         <div class="calc-step">
           <span>02</span>
@@ -190,7 +190,7 @@
         </div>
         <div class="calc-step">
           <span>04</span>
-          <p>Subdivide Pâ‚â†’M and Mâ†’Pâ‚‚. Continue halving the outside/inside transitions.</p>
+          <p>Subdivide P₁→M and M→P₂. Continue halving the outside/inside transitions.</p>
         </div>
         <div class="calc-step">
           <span>05</span>
@@ -202,7 +202,7 @@
         </div>
         <div class="calc-step">
           <span>07</span>
-          <p>Final visible segment â‰ˆ <strong>(2,3.22) â†’ (8,4.56)</strong>.</p>
+          <p>Final visible segment ≈ <strong>(2,3.22) → (8,4.56)</strong>.</p>
         </div>
       </div>
     </div>
@@ -223,10 +223,10 @@
       <div class="control-panel">
         <div class="control-group">
           <h3>Line Endpoints</h3>
-          <label>Pâ‚ X <input id="p1x" type="number" value="1" step="0.5"></label>
-          <label>Pâ‚ Y <input id="p1y" type="number" value="3" step="0.5"></label>
-          <label>Pâ‚‚ X <input id="p2x" type="number" value="10" step="0.5"></label>
-          <label>Pâ‚‚ Y <input id="p2y" type="number" value="5" step="0.5"></label>
+          <label>P₁ X <input id="p1x" type="number" value="1" step="0.5"></label>
+          <label>P₁ Y <input id="p1y" type="number" value="3" step="0.5"></label>
+          <label>P₂ X <input id="p2x" type="number" value="10" step="0.5"></label>
+          <label>P₂ Y <input id="p2y" type="number" value="5" step="0.5"></label>
         </div>
 
         <div class="control-group">
@@ -256,12 +256,12 @@
         <div class="status-grid">
           <div class="status-card">
             <span>Current Segment</span>
-            <strong id="segmentStatus">Pâ‚ â†’ Pâ‚‚</strong>
+            <strong id="segmentStatus">P₁ → P₂</strong>
             <small id="segmentDecision">Pending</small>
           </div>
           <div class="status-card">
             <span>Midpoint</span>
-            <strong id="midpoint">â€”</strong>
+            <strong id="midpoint">—</strong>
             <small>Calculated point</small>
           </div>
           <div class="status-card">
@@ -312,21 +312,21 @@
 
     <div class="problem-grid">
       <article class="problem-card">
-        <span class="problem-tag">01 Â· VIEWPORT</span>
+        <span class="problem-tag">01 · VIEWPORT</span>
         <h3>Viewport Line</h3>
         <p>A CAD viewport contains a long construction line. Determine the portion that should be displayed inside the active viewport.</p>
         <button class="btn btn-secondary problem-load" data-p1x="-1" data-p1y="3" data-p2x="11" data-p2y="7">Show in Live Viewer</button>
       </article>
 
       <article class="problem-card">
-        <span class="problem-tag">02 Â· MAP</span>
+        <span class="problem-tag">02 · MAP</span>
         <h3>Road Segment</h3>
         <p>A digital map stores roads as line segments. Clip a road to the current map window before rendering it.</p>
         <button class="btn btn-secondary problem-load" data-p1x="0" data-p1y="8" data-p2x="10" data-p2y="0">Show in Live Viewer</button>
       </article>
 
       <article class="problem-card">
-        <span class="problem-tag">03 Â· GAME</span>
+        <span class="problem-tag">03 · GAME</span>
         <h3>Laser Beam</h3>
         <p>A game laser can cross the edge of the game panel. Find the portion that remains visible inside the panel.</p>
         <button class="btn btn-secondary problem-load" data-p1x="-3" data-p1y="7" data-p2x="12" data-p2y="1">Show in Live Viewer</button>
@@ -415,7 +415,7 @@
 
     <div class="viva-list">
       <details><summary>What is midpoint subdivision?</summary><p>It is a line-clipping approach that repeatedly divides a line segment at its midpoint and classifies the resulting segments.</p></details>
-      <details><summary>What is the midpoint formula?</summary><p>M = ((xâ‚+xâ‚‚)/2, (yâ‚+yâ‚‚)/2).</p></details>
+      <details><summary>What is the midpoint formula?</summary><p>M = ((x₁+x₂)/2, (y₁+y₂)/2).</p></details>
       <details><summary>Why is recursion useful here?</summary><p>Each uncertain segment can be divided into smaller segments and processed using the same clipping logic.</p></details>
       <details><summary>When can a segment be accepted?</summary><p>When it is completely inside the clipping window.</p></details>
       <details><summary>When can a segment be rejected?</summary><p>When it is completely outside and cannot intersect the clipping window.</p></details>
@@ -430,11 +430,11 @@
   <div class="container">
     <a class="nav-practical prev" href="practical13.html">
       <span>Previous Practical</span>
-      <strong>13 â€” Cohen-Sutherland Line Clipping</strong>
+      <strong>13 — Cohen-Sutherland Line Clipping</strong>
     </a>
     <a class="nav-practical next" href="practical15.html">
       <span>Next Practical</span>
-      <strong>15 â€” Sutherland-Hodgman Polygon Clipping</strong>
+      <strong>15 — Sutherland-Hodgman Polygon Clipping</strong>
     </a>
   </div>
 </section>
@@ -463,7 +463,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <span>Â© 2026 Rasika CodeLab</span>
+    <span>© 2026 Rasika CodeLab</span>
     <span>Built for practical learning.</span>
   </div>
 </footer>
@@ -551,7 +551,7 @@
 
   function buildFrames(r) {
     const result = [];
-    const queue = [{ a: r.p1, b: r.p2, depth: 0, path: "Pâ‚ â†’ Pâ‚‚" }];
+    const queue = [{ a: r.p1, b: r.p2, depth: 0, path: "P₁ → P₂" }];
 
     while (queue.length && result.length < 180) {
       const current = queue.shift();
@@ -572,12 +572,12 @@
       result.push({
         a, b, depth, path, decision,
         mid: m,
-        action: `Midpoint ${pointText(m)} â†’ subdivide into two segments.`
+        action: `Midpoint ${pointText(m)} → subdivide into two segments.`
       });
 
       if (depth < r.maxDepth) {
-        queue.push({ a, b: m, depth: depth + 1, path: `${path.split(" â†’ ")[0]} â†’ M` });
-        queue.push({ a: m, b, depth: depth + 1, path: `M â†’ ${path.split(" â†’ ").slice(-1)[0]}` });
+        queue.push({ a, b: m, depth: depth + 1, path: `${path.split(" → ")[0]} → M` });
+        queue.push({ a: m, b, depth: depth + 1, path: `M → ${path.split(" → ").slice(-1)[0]}` });
       }
     }
 
@@ -655,8 +655,8 @@
     const frame = frames[Math.min(frameIndex, Math.max(0, frames.length - 1))];
 
     if (!frame) {
-      point(r.p1, "Pâ‚");
-      point(r.p2, "Pâ‚‚");
+      point(r.p1, "P₁");
+      point(r.p2, "P₂");
       return;
     }
 
@@ -679,7 +679,7 @@
 
     segmentStatus.textContent = frame.path;
     segmentDecision.textContent = frame.decision;
-    midpointText.textContent = frame.mid ? pointText(frame.mid) : "â€”";
+    midpointText.textContent = frame.mid ? pointText(frame.mid) : "—";
     stepCount.textContent = String(frameIndex + 1);
     depthStatus.textContent = `Depth ${frame.depth}`;
     message.textContent = `Step ${frameIndex + 1} of ${frames.length}: ${frame.action}`;
