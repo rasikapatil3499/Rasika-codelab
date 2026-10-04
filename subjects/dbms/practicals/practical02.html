@@ -1,0 +1,203 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practical 02 â€” Tables, Data Types & Constraints | DBMS</title>
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../css/dbms_practical.css">
+</head>
+
+<body class="protected-page">
+
+<header class="navbar">
+    <div class="nav-container">
+
+        <a href="../../../index.html" class="logo">
+            <span class="logo-mark">&lt;/&gt;</span>
+            <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="../../../index.html">Home</a>
+            <a href="../../../subjects.html" class="active">Subjects</a>
+            <a href="../foundations.html">Foundations</a>
+            <a href="../practicals.html">Practicals</a>
+            <a href="../../../about.html">About</a>
+            <a href="../../../login.html">Login</a>
+        </nav>
+
+        <button class="menu-btn" aria-label="Open menu">â˜°</button>
+
+    </div>
+</header>
+
+<main class="practical-page">
+
+    <section class="practical-hero">
+        <div class="hero-number">P02</div>
+        <div>
+            <div class="eyebrow">DBMS PRACTICAL 02</div>
+            <h1>Tables, Data Types & Constraints</h1>
+            <p>Design a structured relational table</p>
+            <div class="tag-row"><span>Tables</span><span>Data Types</span><span>Primary Key</span><span>Constraints</span></div>
+        </div>
+    </section>
+
+    <section class="practical-workspace">
+
+        <aside class="practical-panel learn-panel">
+            <div class="panel-label">LEARN / BUILD</div>
+            <h2>What you'll do</h2>
+            <p>Create columns, choose data types and apply constraints such as PRIMARY KEY, NOT NULL, UNIQUE and CHECK.</p>
+            <ul class="learning-list">
+                <li>Create a table schema from scratch.</li><li>Select suitable SQL data types.</li><li>Apply common column constraints.</li><li>Preview the resulting table structure.</li>
+            </ul>
+
+            <div class="interactive-controls">
+                
+            <div class="control-group">
+                <label for="columnName">Column Name</label>
+                <input id="columnName" type="text" placeholder="e.g. student_id">
+            </div>
+            <div class="control-group">
+                <label for="dataType">Data Type</label>
+                <select id="dataType">
+                    <option>INT</option>
+                    <option>VARCHAR(100)</option>
+                    <option>DATE</option>
+                    <option>DECIMAL(10,2)</option>
+                    <option>BOOLEAN</option>
+                </select>
+            </div>
+            <div class="check-row">
+                <label><input type="checkbox"> PRIMARY KEY</label>
+                <label><input type="checkbox"> NOT NULL</label>
+                <label><input type="checkbox"> UNIQUE</label>
+            </div>
+            <button class="action-btn" type="button">+ Add Column</button>
+        
+            </div>
+        </aside>
+
+        <section class="practical-panel visual-panel">
+            <div class="panel-header">
+                <div>
+                    <div class="panel-label">LIVE VISUALIZATION</div>
+                    <h2>See the concept</h2>
+                </div>
+                <span class="live-indicator"><i></i> LIVE</span>
+            </div>
+
+            <div class="schema-builder">
+                
+            <div class="live-table">
+                <div class="table-heading">students</div>
+                <table class="data-table">
+                    <thead><tr><th>Column</th><th>Type</th><th>Constraint</th></tr></thead>
+                    <tbody>
+                        <tr><td>student_id</td><td>INT</td><td>PRIMARY KEY</td></tr>
+                        <tr><td>name</td><td>VARCHAR(100)</td><td>NOT NULL</td></tr>
+                        <tr><td>email</td><td>VARCHAR(150)</td><td>UNIQUE</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        
+            </div>
+        </section>
+
+    </section>
+
+    <section class="status-bar">
+        <span class="status-dot"></span>
+        <span>Status:</span>
+        <strong>Ready to start</strong>
+        <span class="status-message">Use the controls to explore this practical.</span>
+    </section>
+
+    <nav class="practical-navigation">
+        <a href="practical01.html" class="nav-btn">â† Practical 01</a>
+        <span>Practical 02 / 10</span>
+        <a href="practical03.html" class="nav-btn next">Next Practical â†’</a>
+    </nav>
+
+</main>
+
+<!-- ==================== FOOTER ==================== -->
+
+<footer class="site-footer">
+
+    <div class="footer-main">
+
+        <!-- BRAND -->
+
+        <div class="footer-brand">
+
+            <a href="../../../index.html" class="logo">
+                <span class="logo-mark">&lt;/&gt;</span>
+                <span>
+                    Rasika<span class="logo-highlight">CodeLab</span>
+                </span>
+            </a>
+
+            <p>
+                Interactive database learning through concepts,
+                SQL, design and practical applications.
+            </p>
+
+        </div>
+
+
+        <!-- LEARN -->
+
+        <div class="footer-links">
+
+            <h4>Learn</h4>
+
+            <a href="../foundations.html">
+                Foundations
+            </a>
+
+
+        </div>
+
+
+        <!-- EXPLORE -->
+
+        <div class="footer-links">
+
+            <h4>Explore</h4>
+
+            <a href="../../../about.html">
+                About
+            </a>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- BOTTOM -->
+
+    <div class="footer-bottom">
+
+        <span>
+            Â© 2026 Rasika CodeLab
+        </span>
+
+        <span>
+            Built for practical learning.
+        </span>
+
+    </div>
+
+</footer>
+
+
+<script src="../js/dbms_practical.js"></script>
+
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

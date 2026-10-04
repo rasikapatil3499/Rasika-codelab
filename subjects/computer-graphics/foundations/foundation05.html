@@ -1,0 +1,930 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Foundation 05 â€” Learn RGB, CMYK, grayscale, alpha, color depth and how digital graphics represent color.">
+    <title>Foundation 05 | How Does Color Work? | Rasika CodeLab</title>
+    <link rel="stylesheet" href="../css/cgr_style.css">
+<style>body.protected-page:not(.auth-ready){visibility:hidden}</style>
+</head>
+
+<body class="protected-page">
+
+<header class="site-header">
+    <nav class="navbar">
+        <a href="../cgr_index.html" class="logo">
+            <span class="logo-mark">â—ˆ</span>
+            Rasika<span class="logo-highlight">CodeLab</span>
+        </a>
+
+        <div class="nav-links">
+            <a href="../cgr_index.html">Home</a>
+            <a href="../cgr_foundations.html" class="active">Foundations</a>
+            <a href="../cgr_practicals.html">Practicals</a>
+                        <a href="../../../about.html">About</a>
+        </div>
+
+        <button class="menu-btn" type="button" aria-label="Open menu">â˜°</button>
+    </nav>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero foundation-detail-hero">
+
+    <div class="hero-content">
+
+        <span class="eyebrow">FOUNDATION 05</span>
+
+        <h1>How Does <span>Color Work?</span></h1>
+
+        <p class="hero-description">
+            A pixel is more than a position. It also stores color information.
+            Learn how RGB, CMYK, grayscale, alpha and color depth turn
+            numerical values into visible colors.
+        </p>
+
+        <div class="foundation-meta">
+            <span>RGB</span>
+            <span>CMYK</span>
+            <span>Grayscale</span>
+            <span>Alpha</span>
+            <span>Color Depth</span>
+        </div>
+
+    </div>
+
+    <div class="hero-visual">
+
+        <div class="graphics-window foundation-visual-window">
+
+            <div class="window-header">
+
+                <div class="window-dots">
+                    <span></span><span></span><span></span>
+                </div>
+
+                <span class="window-title">rgb-color-model</span>
+
+            </div>
+
+            <div class="color-hero">
+
+                <div class="color-orb orb-red"></div>
+                <div class="color-orb orb-green"></div>
+                <div class="color-orb orb-blue"></div>
+
+                <div class="color-center">
+                    <strong>RGB</strong>
+                    <span>255 Â· 255 Â· 255</span>
+                </div>
+
+                <div class="color-code">
+                    <span>R</span> 255
+                    <span>G</span> 255
+                    <span>B</span> 255
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- OBJECTIVES -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+
+        <span class="eyebrow">LEARNING OBJECTIVES</span>
+
+        <h2>By the end of this foundation, you should be able to...</h2>
+
+    </div>
+
+    <div class="foundation-objectives">
+
+        <div class="objective-card">
+            <span>01</span>
+            <strong>Explain RGB</strong>
+            <p>Describe how red, green and blue components combine to create colors.</p>
+        </div>
+
+        <div class="objective-card">
+            <span>02</span>
+            <strong>Understand Color Depth</strong>
+            <p>Calculate the number of possible colors represented by a bit depth.</p>
+        </div>
+
+        <div class="objective-card">
+            <span>03</span>
+            <strong>Compare Color Models</strong>
+            <p>Distinguish between RGB, CMYK and grayscale representations.</p>
+        </div>
+
+        <div class="objective-card">
+            <span>04</span>
+            <strong>Understand Alpha</strong>
+            <p>Explain transparency and the role of the alpha channel.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CONCEPT -->
+<section class="section foundation-detail">
+
+    <div class="content-card">
+
+        <span class="eyebrow">01 Â· CONCEPT</span>
+
+        <h2>How is a color stored?</h2>
+
+        <p>
+            Digital graphics represent color using numerical values.
+            Instead of storing a color as a name such as "orange", a
+            graphics system stores component values that describe the color.
+        </p>
+
+        <p>
+            In the commonly used <strong>RGB model</strong>, a color is
+            represented using three channels: <strong>Red, Green and Blue</strong>.
+        </p>
+
+        <div class="definition-box">
+
+            <strong>RGB representation</strong>
+
+            <p>
+                RGB = (R, G, B), where each component commonly ranges from
+                <strong>0 to 255</strong> in an 8-bit-per-channel representation.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- RGB -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+
+        <span class="eyebrow">02 Â· RGB COLOR MODEL</span>
+
+        <h2>Three channels create millions of colors.</h2>
+
+        <p>
+            Each RGB channel contributes a different amount of light.
+            Combining their intensities produces the final color.
+        </p>
+
+    </div>
+
+    <div class="coordinate-parts">
+
+        <div class="coordinate-part-card">
+            <span>R</span>
+            <h3>Red</h3>
+            <p>
+                Controls the intensity of red light.
+                0 means none and 255 represents maximum intensity in an
+                8-bit channel.
+            </p>
+        </div>
+
+        <div class="coordinate-part-card">
+            <span>G</span>
+            <h3>Green</h3>
+            <p>
+                Controls the intensity of green light from 0 to 255
+                in an 8-bit channel.
+            </p>
+        </div>
+
+        <div class="coordinate-part-card">
+            <span>B</span>
+            <h3>Blue</h3>
+            <p>
+                Controls the intensity of blue light from 0 to 255
+                in an 8-bit channel.
+            </p>
+        </div>
+
+        <div class="coordinate-part-card">
+            <span>RGB</span>
+            <h3>Combination</h3>
+            <p>
+                Different channel values combine to produce the final
+                displayed color.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- COLOR VALUES -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+
+        <span class="eyebrow">03 Â· COLOR VALUES</span>
+
+        <h2>Understand the extremes first.</h2>
+
+    </div>
+
+    <div class="comparison-grid">
+
+        <div class="content-card">
+
+            <span class="card-label">BLACK</span>
+
+            <h3>All channels are zero.</h3>
+
+            <div class="formula-box">
+                RGB = (0, 0, 0)
+            </div>
+
+            <div class="calculation-box">
+                R = 0<br>
+                G = 0<br>
+                B = 0
+            </div>
+
+        </div>
+
+        <div class="content-card">
+
+            <span class="card-label">WHITE</span>
+
+            <h3>All channels are maximum.</h3>
+
+            <div class="formula-box">
+                RGB = (255, 255, 255)
+            </div>
+
+            <div class="calculation-box">
+                R = 255<br>
+                G = 255<br>
+                B = 255
+            </div>
+
+        </div>
+
+        <div class="content-card">
+
+            <span class="card-label">PURE RED</span>
+
+            <h3>Only red is maximum.</h3>
+
+            <div class="formula-box">
+                RGB = (255, 0, 0)
+            </div>
+
+        </div>
+
+        <div class="content-card">
+
+            <span class="card-label">PURE BLUE</span>
+
+            <h3>Only blue is maximum.</h3>
+
+            <div class="formula-box">
+                RGB = (0, 0, 255)
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- INTERACTIVE COLOR LAB -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+
+        <span class="eyebrow">04 Â· INTERACTIVE VISUALIZATION</span>
+
+        <h2>Mix RGB values and create a color.</h2>
+
+        <p>
+            Move the three channel controls. The preview and RGB values
+            update immediately.
+        </p>
+
+    </div>
+
+    <div class="color-lab">
+
+        <div class="color-preview-panel">
+
+            <div id="colorPreview" class="color-preview"></div>
+
+            <div class="color-preview-info">
+
+                <span>Current RGB</span>
+
+                <strong id="rgbOutput">RGB(255, 120, 0)</strong>
+
+                <span>Hexadecimal</span>
+
+                <strong id="hexOutput">#FF7800</strong>
+
+            </div>
+
+        </div>
+
+        <div class="color-controls">
+
+            <div class="color-control">
+
+                <label for="redRange">
+                    <span>Red</span>
+                    <output id="redOutput">255</output>
+                </label>
+
+                <input id="redRange"
+                       type="range"
+                       min="0"
+                       max="255"
+                       value="255">
+
+            </div>
+
+            <div class="color-control">
+
+                <label for="greenRange">
+                    <span>Green</span>
+                    <output id="greenOutput">120</output>
+                </label>
+
+                <input id="greenRange"
+                       type="range"
+                       min="0"
+                       max="255"
+                       value="120">
+
+            </div>
+
+            <div class="color-control">
+
+                <label for="blueRange">
+                    <span>Blue</span>
+                    <output id="blueOutput">0</output>
+                </label>
+
+                <input id="blueRange"
+                       type="range"
+                       min="0"
+                       max="255"
+                       value="0">
+
+            </div>
+
+            <div class="coordinate-formula">
+                Color = RGB(R, G, B)
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- COLOR DEPTH -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+
+        <span class="eyebrow">05 Â· COLOR DEPTH</span>
+
+        <h2>How many colors can a pixel store?</h2>
+
+        <p>
+            Color depth describes how many bits are available to represent
+            color information.
+        </p>
+
+    </div>
+
+    <div class="comparison-grid">
+
+        <div class="content-card">
+
+            <span class="card-label">GENERAL FORMULA</span>
+
+            <h3>Number of possible values</h3>
+
+            <div class="formula-box">
+                Number of values = 2â¿
+            </div>
+
+            <div class="calculation-box">
+                n = number of bits
+            </div>
+
+        </div>
+
+        <div class="content-card">
+
+            <span class="card-label">24-BIT RGB</span>
+
+            <h3>Three 8-bit channels</h3>
+
+            <div class="calculation-box">
+                Red   = 8 bits<br>
+                Green = 8 bits<br>
+                Blue  = 8 bits<br><br>
+                Total = 8 + 8 + 8<br>
+                Total = 24 bits
+            </div>
+
+            <div class="definition-box">
+
+                <strong>Possible colors</strong>
+
+                <p>
+                    2Â²â´ = <strong>16,777,216 colors</strong>
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- GRAYSCALE -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+
+        <span class="eyebrow">06 Â· GRAYSCALE</span>
+
+        <h2>Color is not always three-channel.</h2>
+
+        <p>
+            A grayscale image represents intensity from black through
+            shades of gray to white.
+        </p>
+
+    </div>
+
+    <div class="terminology-grid">
+
+        <div class="term-card">
+            <strong>Black</strong>
+            <p>Minimum intensity.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Gray</strong>
+            <p>Intermediate intensity.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>White</strong>
+            <p>Maximum intensity.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>8-bit grayscale</strong>
+            <p>2â¸ = 256 possible intensity levels.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Single channel</strong>
+            <p>Grayscale can use one intensity value per pixel.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Useful for</strong>
+            <p>Scanning, image processing, thresholding and scientific images.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CMYK -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+
+        <span class="eyebrow">07 Â· RGB VS CMYK</span>
+
+        <h2>Different systems are designed for different purposes.</h2>
+
+    </div>
+
+    <div class="comparison-table-wrap">
+
+        <table class="graphics-comparison">
+
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>RGB</th>
+                    <th>CMYK</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>Full form</td>
+                    <td>Red, Green, Blue</td>
+                    <td>Cyan, Magenta, Yellow, Key/Black</td>
+                </tr>
+
+                <tr>
+                    <td>Model</td>
+                    <td>Additive</td>
+                    <td>Subtractive</td>
+                </tr>
+
+                <tr>
+                    <td>Common use</td>
+                    <td>Screens and digital displays</td>
+                    <td>Printing</td>
+                </tr>
+
+                <tr>
+                    <td>Basic idea</td>
+                    <td>Combines light</td>
+                    <td>Uses inks that absorb light</td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<!-- ALPHA -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+
+        <span class="eyebrow">08 Â· ALPHA CHANNEL</span>
+
+        <h2>Color can also contain transparency.</h2>
+
+        <p>
+            An alpha channel stores transparency information separately
+            from the RGB color channels.
+        </p>
+
+    </div>
+
+    <div class="comparison-grid">
+
+        <div class="content-card">
+
+            <h3>RGBA</h3>
+
+            <div class="formula-box">
+                RGBA = (R, G, B, A)
+            </div>
+
+            <div class="calculation-box">
+                R = Red<br>
+                G = Green<br>
+                B = Blue<br>
+                A = Alpha / transparency
+            </div>
+
+        </div>
+
+        <div class="content-card">
+
+            <h3>Example</h3>
+
+            <div class="calculation-box">
+                RGB = (255, 138, 0)<br>
+                Alpha = 128
+            </div>
+
+            <div class="definition-box">
+                <strong>Meaning</strong>
+                <p>
+                    The color is orange with partial transparency when
+                    represented using a conventional 8-bit alpha channel.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- COLOR PIPELINE -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+
+        <span class="eyebrow">09 Â· FROM VALUE TO PIXEL</span>
+
+        <h2>How does a color reach the screen?</h2>
+
+    </div>
+
+    <div class="content-card">
+
+        <div class="graphics-flow">
+
+            <div class="flow-item">
+                <span>01</span>
+                <strong>Color values</strong>
+                <small>RGB or another color representation is specified.</small>
+            </div>
+
+            <div class="flow-arrow">â†’</div>
+
+            <div class="flow-item">
+                <span>02</span>
+                <strong>Pixel data</strong>
+                <small>The color is associated with a pixel or image element.</small>
+            </div>
+
+            <div class="flow-arrow">â†’</div>
+
+            <div class="flow-item">
+                <span>03</span>
+                <strong>Frame buffer</strong>
+                <small>Pixel information is stored for display.</small>
+            </div>
+
+            <div class="flow-arrow">â†’</div>
+
+            <div class="flow-item">
+                <span>04</span>
+                <strong>Display</strong>
+                <small>The display converts the values into visible light.</small>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- COMMON ERRORS -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+        <span class="eyebrow">COMMON ERRORS</span>
+        <h2>Watch out for these mistakes.</h2>
+    </div>
+
+    <div class="terminology-grid">
+
+        <div class="term-card">
+            <strong>Confusing RGB with CMYK</strong>
+            <p>RGB is commonly associated with screens, while CMYK is commonly used for printing.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Wrong Channel Range</strong>
+            <p>For standard 8-bit RGB, each channel ranges from 0 to 255.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Forgetting Color Depth</strong>
+            <p>Total possible combinations depend on the number of bits available.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Alpha Is Not a Color</strong>
+            <p>Alpha represents transparency information rather than red, green or blue intensity.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Mixing Bits and Bytes</strong>
+            <p>Remember that 8 bits make 1 byte.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Ignoring Representation</strong>
+            <p>The same visual color can be represented using different numerical formats.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- QUICK CHECK -->
+<section class="section foundation-detail">
+
+    <div class="content-card quick-check">
+
+        <span class="eyebrow">QUICK CHECK</span>
+
+        <h2>Test your understanding.</h2>
+
+        <div class="question-list">
+
+            <div>
+                <span>01</span>
+                <p>What are the three channels in the RGB color model?</p>
+            </div>
+
+            <div>
+                <span>02</span>
+                <p>What is the RGB value for black in an 8-bit-per-channel model?</p>
+            </div>
+
+            <div>
+                <span>03</span>
+                <p>How many colors can be represented using 24-bit RGB?</p>
+            </div>
+
+            <div>
+                <span>04</span>
+                <p>What is the purpose of an alpha channel?</p>
+            </div>
+
+            <div>
+                <span>05</span>
+                <p>Why is RGB commonly used for digital displays?</p>
+            </div>
+
+            <div>
+                <span>06</span>
+                <p>How is grayscale different from RGB color representation?</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SUMMARY -->
+<section class="section foundation-detail">
+
+    <div class="summary-box">
+
+        <span class="eyebrow">QUICK SUMMARY</span>
+
+        <h2>Remember these five ideas.</h2>
+
+        <div class="summary-grid">
+
+            <div>
+                <span>01</span>
+                <strong>RGB uses three channels</strong>
+                <p>Red, green and blue values combine to produce colors.</p>
+            </div>
+
+            <div>
+                <span>02</span>
+                <strong>8-bit channel = 0â€“255</strong>
+                <p>Each channel has 256 possible values in standard 8-bit RGB.</p>
+            </div>
+
+            <div>
+                <span>03</span>
+                <strong>24-bit RGB = 2Â²â´</strong>
+                <p>That gives 16,777,216 possible RGB combinations.</p>
+            </div>
+
+            <div>
+                <span>04</span>
+                <strong>Alpha controls transparency</strong>
+                <p>RGBA adds an alpha channel to RGB.</p>
+            </div>
+
+            <div>
+                <span>05</span>
+                <strong>Color becomes pixel data</strong>
+                <p>Numerical color values are ultimately represented as pixel information.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- NAVIGATION -->
+<section class="section foundation-navigation">
+
+    <a href="foundation04.html" class="nav-card">
+        <span>â†</span>
+        <small>PREVIOUS FOUNDATION</small>
+        <strong>How are Shapes Created?</strong>
+    </a>
+
+    <a href="foundation06.html" class="nav-card next">
+        <small>NEXT FOUNDATION</small>
+        <strong>How are Graphics Stored? â†’</strong>
+    </a>
+
+</section>
+
+</main>
+
+
+<footer class="site-footer">
+
+    <div class="footer-content">
+
+        <div class="footer-brand">
+            <strong>Rasika<span class="logo-highlight">CodeLab</span></strong>
+            <p>Computer Graphics Practical Learning</p>
+        </div>
+
+        <div class="footer-links">
+            <a href="../../../index.html">Home</a>
+            <a href="../cgr_foundations.html">Foundations</a>
+            <a href="../cgr_practicals.html">Practicals</a>
+                        <a href="../../../about.html">About</a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        Â© 2026 Rasika CodeLab Â· Learn the concept. See the result.
+    </div>
+
+</footer>
+
+
+<script>
+(function () {
+
+    const red = document.getElementById("redRange");
+    const green = document.getElementById("greenRange");
+    const blue = document.getElementById("blueRange");
+
+    const redOutput = document.getElementById("redOutput");
+    const greenOutput = document.getElementById("greenOutput");
+    const blueOutput = document.getElementById("blueOutput");
+
+    const colorPreview = document.getElementById("colorPreview");
+    const rgbOutput = document.getElementById("rgbOutput");
+    const hexOutput = document.getElementById("hexOutput");
+
+    function toHex(value) {
+        return Number(value).toString(16).padStart(2, "0").toUpperCase();
+    }
+
+    function updateColor() {
+
+        const r = Number(red.value);
+        const g = Number(green.value);
+        const b = Number(blue.value);
+
+        const hex = "#" + toHex(r) + toHex(g) + toHex(b);
+
+        redOutput.value = r;
+        greenOutput.value = g;
+        blueOutput.value = b;
+
+        colorPreview.style.background = "rgb(" + r + ", " + g + ", " + b + ")";
+
+        rgbOutput.textContent = "RGB(" + r + ", " + g + ", " + b + ")";
+        hexOutput.textContent = hex;
+
+    }
+
+    [red, green, blue].forEach(function (control) {
+        control.addEventListener("input", updateColor);
+    });
+
+    updateColor();
+
+})();
+</script>
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

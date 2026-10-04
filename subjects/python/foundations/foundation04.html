@@ -1,0 +1,231 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Foundation 4 | Python 2030 | RasikaCodeLab</title>
+<link rel="stylesheet" href="../../../css/style.css">
+<link rel="stylesheet" href="../css/python.css">
+<link rel="stylesheet" href="../css/python_foundation.css">
+</head>
+<body class="protected-page">
+
+<header class="header">
+<div class="header-inner">
+<a href="../../../index.html" class="logo">
+<span class="logo-mark">&lt;/&gt;</span>
+<span>Rasika<span class="logo-highlight">CodeLab</span></span>
+</a>
+<nav class="nav">
+<a href="../../../index.html">Home</a>
+<a href="../../../subjects.html">Subjects</a>
+<a href="../foundations.html" class="active">Foundations</a>
+<a href="../../../about.html">About</a>
+</nav>
+</div>
+</header>
+
+<main class="python-foundation-page">
+<div class="foundation-breadcrumb">
+<a href="../index.html">Python 2030</a><span>/</span>
+<a href="../foundations.html">Foundations</a><span>/</span>
+<span>Foundation 4</span>
+</div>
+
+<section class="foundation-hero">
+<span class="foundation-label">FOUNDATION 04</span>
+<h1>Data, APIs & Application Development</h1>
+<p>Connect Python programs to files, databases, HTTP services and application backends.</p>
+<div class="foundation-meta">
+<span>8 Sections</span><span>Core Foundation</span><span>Python 2030</span>
+</div>
+</section>
+
+<section class="foundation-content">
+<div class="foundation-grid">
+
+        <article class="foundation-card">
+            <button class="foundation-card-header" type="button" aria-expanded="false">
+                <div class="card-title">
+                    <span class="card-number">01</span>
+                    <div>
+                        <span class="card-category">FOUNDATION</span>
+                        <h2>File Handling</h2>
+                        <p>Read and write persistent data.</p>
+                    </div>
+                </div>
+                <span class="card-toggle">+</span>
+            </button>
+            <div class="foundation-card-content"><pre><code>from pathlib import Path
+
+path = Path("notes.txt")
+path.write_text("Python 2030")
+text = path.read_text()
+print(text)</code></pre><div class="rule-box"><strong>Key Rule</strong><p>Use context managers or high-level path/file APIs to manage resources safely.</p></div></div>
+        </article>
+        <article class="foundation-card">
+            <button class="foundation-card-header" type="button" aria-expanded="false">
+                <div class="card-title">
+                    <span class="card-number">02</span>
+                    <div>
+                        <span class="card-category">FOUNDATION</span>
+                        <h2>JSON & CSV</h2>
+                        <p>Exchange and process structured data.</p>
+                    </div>
+                </div>
+                <span class="card-toggle">+</span>
+            </button>
+            <div class="foundation-card-content"><pre><code>import json
+
+data = {"name": "Riya", "score": 92}
+text = json.dumps(data)
+loaded = json.loads(text)</code></pre><p>JSON is common for APIs; CSV is useful for tabular data exchange.</p></div>
+        </article>
+        <article class="foundation-card">
+            <button class="foundation-card-header" type="button" aria-expanded="false">
+                <div class="card-title">
+                    <span class="card-number">03</span>
+                    <div>
+                        <span class="card-category">FOUNDATION</span>
+                        <h2>Databases</h2>
+                        <p>Store data beyond the lifetime of a program.</p>
+                    </div>
+                </div>
+                <span class="card-toggle">+</span>
+            </button>
+            <div class="foundation-card-content"><h3>Database Flow</h3><div class="flow-diagram"><div>Python</div><span>â†’</span><div>Connection</div><span>â†’</span><div>SQL</div><span>â†’</span><div>Database</div></div><p>Understand connections, queries, transactions and persistence.</p></div>
+        </article>
+        <article class="foundation-card">
+            <button class="foundation-card-header" type="button" aria-expanded="false">
+                <div class="card-title">
+                    <span class="card-number">04</span>
+                    <div>
+                        <span class="card-category">FOUNDATION</span>
+                        <h2>SQL + Python</h2>
+                        <p>Perform CRUD operations safely.</p>
+                    </div>
+                </div>
+                <span class="card-toggle">+</span>
+            </button>
+            <div class="foundation-card-content"><pre><code>cursor.execute(
+    "SELECT name FROM students WHERE score &gt; ?",
+    (80,)
+)</code></pre><div class="rule-box"><strong>Security</strong><p>Use parameterized queries instead of constructing SQL from untrusted input.</p></div></div>
+        </article>
+        <article class="foundation-card">
+            <button class="foundation-card-header" type="button" aria-expanded="false">
+                <div class="card-title">
+                    <span class="card-number">05</span>
+                    <div>
+                        <span class="card-category">FOUNDATION</span>
+                        <h2>HTTP</h2>
+                        <p>Understand web requests and responses.</p>
+                    </div>
+                </div>
+                <span class="card-toggle">+</span>
+            </button>
+            <div class="foundation-card-content"><div class="mini-list"><span>GET</span><span>POST</span><span>PUT</span><span>PATCH</span><span>DELETE</span></div><p>HTTP communicates through requests, responses, headers, status codes and bodies.</p></div>
+        </article>
+        <article class="foundation-card">
+            <button class="foundation-card-header" type="button" aria-expanded="false">
+                <div class="card-title">
+                    <span class="card-number">06</span>
+                    <div>
+                        <span class="card-category">FOUNDATION</span>
+                        <h2>REST APIs</h2>
+                        <p>Consume and design resource-oriented APIs.</p>
+                    </div>
+                </div>
+                <span class="card-toggle">+</span>
+            </button>
+            <div class="foundation-card-content"><pre><code>GET /students
+GET /students/10
+POST /students
+DELETE /students/10</code></pre><p>API clients should handle authentication, validation, errors and response formats.</p></div>
+        </article>
+        <article class="foundation-card">
+            <button class="foundation-card-header" type="button" aria-expanded="false">
+                <div class="card-title">
+                    <span class="card-number">07</span>
+                    <div>
+                        <span class="card-category">FOUNDATION</span>
+                        <h2>Application Design</h2>
+                        <p>Organize backend applications into clear layers.</p>
+                    </div>
+                </div>
+                <span class="card-toggle">+</span>
+            </button>
+            <div class="foundation-card-content"><div class="flow-diagram"><div>Request</div><span>â†’</span><div>Route</div><span>â†’</span><div>Service</div><span>â†’</span><div>Data</div></div><p>Separate transport, business logic and persistence to improve maintainability.</p></div>
+        </article>
+        <article class="foundation-card">
+            <button class="foundation-card-header" type="button" aria-expanded="false">
+                <div class="card-title">
+                    <span class="card-number">08</span>
+                    <div>
+                        <span class="card-category">FOUNDATION</span>
+                        <h2>Mini Application</h2>
+                        <p>Build a data-driven API application.</p>
+                    </div>
+                </div>
+                <span class="card-toggle">+</span>
+            </button>
+            <div class="foundation-card-content"><h3>Problem: Student API</h3><p>Create an application that stores student records and exposes CRUD operations through an API.</p><div class="mini-list"><span>JSON</span><span>SQL</span><span>HTTP</span><span>REST</span><span>Validation</span></div></div>
+        </article>
+</div>
+</section>
+
+<nav class="foundation-navigation">
+<a href="foundation03.html" class="foundation-nav-button">
+<span>â†</span><div><small>PREVIOUS FOUNDATION</small><strong>Foundation 3</strong></div>
+</a>
+<div class="foundation-progress">
+<span>FOUNDATION</span><strong>04 / 05</strong>
+<div class="progress-bar"><span style="width:80%"></span></div>
+</div>
+<a href="foundation05.html" class="foundation-nav-button next">
+<div><small>NEXT FOUNDATION</small>
+<strong>Foundation 5</strong></div><span>â†’</span>
+</a>
+</nav>
+</main>
+
+<footer class="footer">
+<div class="footer-main">
+<div class="footer-brand">
+<div class="logo"><span class="logo-mark">&lt;/&gt;</span><span>Rasika<span class="logo-highlight">CodeLab</span></span></div>
+<p>Interactive practical learning through concepts, code and visualization.</p>
+</div>
+<div class="footer-links">
+<div><h4>Learn</h4><a href="../../../subjects.html">Subjects</a><a href="../../../about.html">About</a></div>
+<div><h4>Subjects</h4><a href="../../cpp/index.html">C++</a><a href="../../computer-graphics/cgr_index.html">Computer Graphics</a></div>
+</div>
+</div>
+<div class="footer-bottom">
+<span>Â© 2026 Rasika CodeLab</span><span>Built for practical learning.</span>
+</div>
+</footer>
+
+<script src="../../../js/main.js"></script>
+<script>
+document.querySelectorAll(".foundation-card-header").forEach(button => {
+    button.addEventListener("click", () => {
+        const card = button.closest(".foundation-card");
+        const isOpen = card.classList.contains("open");
+
+        document.querySelectorAll(".foundation-card").forEach(item => {
+            item.classList.remove("open");
+            item.querySelector(".foundation-card-header").setAttribute("aria-expanded", "false");
+            item.querySelector(".card-toggle").textContent = "+";
+        });
+
+        if (!isOpen) {
+            card.classList.add("open");
+            button.setAttribute("aria-expanded", "true");
+            button.querySelector(".card-toggle").textContent = "âˆ’";
+        }
+    });
+});
+</script>
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

@@ -1,0 +1,268 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03 â€” How Does DBMS Find Data? | DBMS Foundation</title>
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../css/dbms_foundation.css">
+</head>
+
+<body class="protected-page">
+
+<header class="navbar">
+    <div class="nav-container">
+
+        <a href="../../../index.html" class="logo">
+            <span class="logo-mark">&lt;/&gt;</span>
+            <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="../../../index.html">Home</a>
+            <a href="../../../subjects.html" class="active">Subjects</a>
+            <a href="../foundations.html">Foundations</a>
+            <a href="../../../about.html">About</a>
+            <a href="../../../login.html">Login</a>
+        </nav>
+
+        <button class="menu-btn" aria-label="Open menu">â˜°</button>
+
+    </div>
+</header>
+
+
+
+<main class="lesson-page">
+
+    <section class="lesson-hero">
+
+        <span class="lesson-number">FOUNDATION 03</span>
+
+        <h1>How Does DBMS <span>Find Data?</span></h1>
+
+        <p>
+            Compare a sequential search with an indexed search
+            and understand why database indexes make queries faster.
+        </p>
+
+    </section>
+
+
+    <section class="lesson-grid">
+
+        <article class="info-card">
+
+            <span class="card-label">WHAT STUDENT LEARNS</span>
+
+            <h2>Search & Data Location</h2>
+
+            <p>
+                Learn how the DBMS locates records and how an index
+                reduces the amount of data that needs to be examined.
+            </p>
+
+            <div class="concept-list">
+                <span>Search</span>
+                <span>Index</span>
+                <span>Data Location</span>
+                <span>Query</span>
+            </div>
+
+        </article>
+
+
+        <article class="output-card">
+
+            <span class="card-label">PRACTICAL OUTPUT</span>
+
+            <h2>Compare Search Methods</h2>
+
+            <p>
+                Search for a record using both sequential and indexed
+                methods and compare the number of records examined.
+            </p>
+
+            <button class="primary-btn" onclick="runSearch()">
+                ðŸ”Ž Run Search
+            </button>
+
+        </article>
+
+    </section>
+
+
+    <section class="visual-section">
+
+        <div class="section-heading">
+
+            <span class="section-tag">VISUAL / INTERACTIVE</span>
+
+            <h2>Search Visualization</h2>
+
+            <p>
+                Watch the difference between sequential and indexed search.
+            </p>
+
+        </div>
+
+
+        <div class="search-demo">
+
+            <div class="search-method">
+
+                <div class="method-header">
+                    <strong>WITHOUT INDEX</strong>
+                    <span>Sequential Search</span>
+                </div>
+
+                <div class="search-records" id="sequentialRecords">
+
+                    <span>101</span>
+                    <span>102</span>
+                    <span>103</span>
+                    <span>104</span>
+                    <span>105</span>
+                    <span>106</span>
+                    <span>107</span>
+                    <span>108</span>
+                    <span>109</span>
+                    <span>110</span>
+
+                </div>
+
+                <div class="search-count" id="sequentialCount">
+                    Records checked: 0
+                </div>
+
+            </div>
+
+
+            <div class="search-method">
+
+                <div class="method-header">
+                    <strong>WITH INDEX</strong>
+                    <span>Indexed Search</span>
+                </div>
+
+                <div class="index-visual">
+
+                    <div class="index-box">
+                        INDEX
+                    </div>
+
+                    <div class="index-line"></div>
+
+                    <div class="target-box">
+                        107
+                    </div>
+
+                </div>
+
+                <div class="search-count" id="indexedCount">
+                    Records checked: 0
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="flow-status" id="searchStatus">
+            Ready â€” search for record 107.
+        </div>
+
+    </section>
+
+
+    <section class="takeaway">
+
+        <span class="card-label">KEY IDEA</span>
+
+        <h2>An index helps the DBMS locate data faster.</h2>
+
+        <p>
+            Without an index, the DBMS may examine many records.
+            With an appropriate index, it can navigate directly toward
+            the required data.
+        </p>
+
+    </section>
+
+
+    <nav class="lesson-navigation">
+
+        <a href="foundation02.html" class="nav-btn">
+            â† Previous
+        </a>
+
+        <a href="foundation04.html" class="nav-btn next">
+            Next Foundation â†’
+        </a>
+
+    </nav>
+
+</main>
+
+
+<script>
+
+function runSearch() {
+
+    const records =
+        document.querySelectorAll("#sequentialRecords span");
+
+    const sequentialCount =
+        document.getElementById("sequentialCount");
+
+    const indexedCount =
+        document.getElementById("indexedCount");
+
+    const status =
+        document.getElementById("searchStatus");
+
+    records.forEach(record => {
+        record.classList.remove("searching");
+        record.classList.remove("found");
+    });
+
+    let index = 0;
+
+    function searchNext() {
+
+        if (index >= records.length) {
+            return;
+        }
+
+        records[index].classList.add("searching");
+
+        sequentialCount.innerHTML =
+            `Records checked: <strong>${index + 1}</strong>`;
+
+        if (records[index].textContent === "107") {
+
+            records[index].classList.remove("searching");
+            records[index].classList.add("found");
+
+            indexedCount.innerHTML =
+                `Records checked: <strong>1</strong>`;
+
+            status.innerHTML =
+                `âœ“ Both methods found <strong>107</strong> â€” but the index avoided scanning every record.`;
+
+            return;
+        }
+
+        index++;
+
+        setTimeout(searchNext, 300);
+    }
+
+    searchNext();
+}
+
+</script>
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

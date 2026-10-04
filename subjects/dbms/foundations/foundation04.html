@@ -1,0 +1,252 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>04 â€” How Does DBMS Handle Changes? | DBMS Foundation</title>
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../css/dbms_foundation.css">
+</head>
+
+<body class="protected-page">
+
+<header class="navbar">
+    <div class="nav-container">
+
+        <a href="../../../index.html" class="logo">
+            <span class="logo-mark">&lt;/&gt;</span>
+            <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="../../../index.html">Home</a>
+            <a href="../../../subjects.html" class="active">Subjects</a>
+            <a href="../foundations.html">Foundations</a>
+            <a href="../../../about.html">About</a>
+            <a href="../../../login.html">Login</a>
+        </nav>
+
+        <button class="menu-btn" aria-label="Open menu">â˜°</button>
+
+    </div>
+</header>
+
+
+
+<main class="lesson-page">
+
+    <section class="lesson-hero">
+
+        <span class="lesson-number">FOUNDATION 04</span>
+
+        <h1>How Does DBMS <span>Handle Changes?</span></h1>
+
+        <p>
+            Understand transactions, COMMIT, ROLLBACK and ACID
+            through a simple bank transfer simulation.
+        </p>
+
+    </section>
+
+
+    <section class="lesson-grid">
+
+        <article class="info-card">
+
+            <span class="card-label">WHAT STUDENT LEARNS</span>
+
+            <h2>Transactions & ACID</h2>
+
+            <p>
+                Learn how a DBMS groups multiple operations into a
+                transaction and protects data when something goes wrong.
+            </p>
+
+            <div class="concept-list">
+                <span>Transaction</span>
+                <span>COMMIT</span>
+                <span>ROLLBACK</span>
+                <span>ACID</span>
+            </div>
+
+        </article>
+
+
+        <article class="output-card">
+
+            <span class="card-label">PRACTICAL OUTPUT</span>
+
+            <h2>Bank Transaction Simulation</h2>
+
+            <p>
+                Transfer money between two accounts and observe the
+                difference between COMMIT and ROLLBACK.
+            </p>
+
+            <button class="primary-btn" onclick="startTransaction()">
+                â‚¹ Start Transaction
+            </button>
+
+        </article>
+
+    </section>
+
+
+    <section class="visual-section">
+
+        <div class="section-heading">
+
+            <span class="section-tag">VISUAL / INTERACTIVE</span>
+
+            <h2>Transaction Animation</h2>
+
+            <p>
+                A transaction either completes successfully or can be rolled back.
+            </p>
+
+        </div>
+
+
+        <div class="bank-demo">
+
+            <div class="account-card" id="accountA">
+
+                <span>ACCOUNT A</span>
+
+                <strong id="balanceA">â‚¹10,000</strong>
+
+                <small>Sender</small>
+
+            </div>
+
+
+            <div class="transaction-center">
+
+                <div class="transaction-icon">â‚¹</div>
+
+                <div id="transactionStatus">
+                    READY
+                </div>
+
+            </div>
+
+
+            <div class="account-card" id="accountB">
+
+                <span>ACCOUNT B</span>
+
+                <strong id="balanceB">â‚¹5,000</strong>
+
+                <small>Receiver</small>
+
+            </div>
+
+        </div>
+
+
+        <div class="transaction-controls">
+
+            <button class="secondary-btn" onclick="commitTransaction()">
+                âœ“ COMMIT
+            </button>
+
+            <button class="secondary-btn danger" onclick="rollbackTransaction()">
+                â†© ROLLBACK
+            </button>
+
+        </div>
+
+
+        <div class="flow-status" id="transactionMessage">
+            Transaction ready. Transfer â‚¹1,000.
+        </div>
+
+    </section>
+
+
+    <section class="takeaway">
+
+        <span class="card-label">KEY IDEA</span>
+
+        <h2>Transactions protect the consistency of data.</h2>
+
+        <p>
+            A transaction should leave the database in a valid state.
+            COMMIT makes changes permanent, while ROLLBACK cancels them.
+        </p>
+
+    </section>
+
+
+    <nav class="lesson-navigation">
+
+        <a href="foundation03.html" class="nav-btn">
+            â† Previous
+        </a>
+
+        <a href="foundation05.html" class="nav-btn next">
+            Next Foundation â†’
+        </a>
+
+    </nav>
+
+</main>
+
+
+<script>
+
+let transactionStarted = false;
+
+function startTransaction() {
+
+    transactionStarted = true;
+
+    document.getElementById("transactionStatus").textContent =
+        "PROCESSING";
+
+    document.getElementById("transactionMessage").innerHTML =
+        "Transaction started â€” â‚¹1,000 is being transferred.";
+
+    document.getElementById("accountA").classList.add("active");
+    document.getElementById("accountB").classList.add("active");
+}
+
+
+function commitTransaction() {
+
+    if (!transactionStarted) return;
+
+    document.getElementById("balanceA").textContent = "â‚¹9,000";
+    document.getElementById("balanceB").textContent = "â‚¹6,000";
+
+    document.getElementById("transactionStatus").textContent =
+        "COMMITTED";
+
+    document.getElementById("transactionMessage").innerHTML =
+        "âœ“ Transaction committed successfully. Changes are now permanent.";
+
+    transactionStarted = false;
+}
+
+
+function rollbackTransaction() {
+
+    if (!transactionStarted) return;
+
+    document.getElementById("balanceA").textContent = "â‚¹10,000";
+    document.getElementById("balanceB").textContent = "â‚¹5,000";
+
+    document.getElementById("transactionStatus").textContent =
+        "ROLLED BACK";
+
+    document.getElementById("transactionMessage").innerHTML =
+        "â†© Transaction rolled back. Database returned to its previous state.";
+
+    transactionStarted = false;
+}
+
+</script>
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

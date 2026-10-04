@@ -1,0 +1,2277 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Practical 05 | Modern Python Application | RasikaCodeLab</title>
+
+    <!-- Common CSS -->
+    <link rel="stylesheet" href="../css/python_practicals.css">
+
+    <!-- Python Practical CSS -->
+    <link rel="stylesheet" href="../css/python.css">
+<style>body.protected-page:not(.auth-ready){visibility:hidden}</style>
+</head>
+
+<body class="protected-page">
+
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <header class="header">
+
+        <div class="header-inner">
+
+            <a href="../../../index.html" class="logo">
+
+                <span class="logo-mark">&lt;/&gt;</span>
+
+                <span>
+                    Rasika<span class="logo-highlight">CodeLab</span>
+                </span>
+
+            </a>
+
+
+            <nav class="nav">
+
+                <a href="../../../index.html">
+                    Home
+                </a>
+
+                <a href="../../../subjects.html" class="active">
+                    Subjects
+                </a>
+ <a href="../practicals.html">Practicals</a>
+                <a href="../foundations.html">
+                    Foundations
+                </a>
+
+                <a href="../../../about.html">
+                    About
+                </a>
+
+                <a href="../../../login.html">
+                    Login
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <main class="python-page">
+
+
+        <!-- =================================================
+             HERO
+             ================================================= -->
+
+        <section class="python-hero compact">
+
+            <span class="subject-label">
+                PYTHON 2030
+            </span>
+
+            <h1>
+                Practical 05
+            </h1>
+
+            <p>
+                Modern Python Application
+            </p>
+
+        </section>
+
+
+        <!-- =================================================
+             PRACTICAL CONTENT
+             ================================================= -->
+
+        <div class="practical-container">
+
+
+            <!-- =================================================
+                 PRACTICAL HEADER
+                 ================================================= -->
+
+            <section class="practical-header">
+
+                <span class="practical-number">
+                    05
+                </span>
+
+                <h1>
+                    Modern Python Application
+                </h1>
+
+                <p>
+                    Combine Python programming, functions,
+                    object-oriented programming, data processing,
+                    files and databases to design a complete
+                    real-world application workflow.
+                </p>
+
+            </section>
+
+
+            <!-- =================================================
+                 AIM
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>01</span>
+                    <h2>Aim</h2>
+                </div>
+
+                <div class="aim-box">
+
+                    <h3>
+                        Practical Aim
+                    </h3>
+
+                    <p>
+                        To integrate Python programming concepts
+                        into a small real-world application by
+                        combining data processing, functions,
+                        object-oriented programming, persistent
+                        storage and user interaction.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 LEARNING OBJECTIVES
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>02</span>
+                    <h2>Learning Objectives</h2>
+                </div>
+
+
+                <div class="objectives-grid">
+
+
+                    <div class="objective-card">
+
+                        <span class="objective-number">
+                            LO 01
+                        </span>
+
+                        <p>
+                            Integrate multiple Python concepts
+                            to solve a real-world problem.
+                        </p>
+
+                    </div>
+
+
+                    <div class="objective-card">
+
+                        <span class="objective-number">
+                            LO 02
+                        </span>
+
+                        <p>
+                            Design an application using functions,
+                            classes and structured data.
+                        </p>
+
+                    </div>
+
+
+                    <div class="objective-card">
+
+                        <span class="objective-number">
+                            LO 03
+                        </span>
+
+                        <p>
+                            Store and retrieve application data
+                            using files or databases.
+                        </p>
+
+                    </div>
+
+
+                    <div class="objective-card">
+
+                        <span class="objective-number">
+                            LO 04
+                        </span>
+
+                        <p>
+                            Develop a modular application workflow
+                            that can be extended with additional
+                            features.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 FOUNDATION CONCEPTS
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>03</span>
+                    <h2>Foundation Concepts</h2>
+                </div>
+
+
+                <div class="content-card">
+
+                    <div class="concept-list">
+
+                        <span class="concept-tag">
+                            Variables
+                        </span>
+
+                        <span class="concept-tag">
+                            Conditions
+                        </span>
+
+                        <span class="concept-tag">
+                            Loops
+                        </span>
+
+                        <span class="concept-tag">
+                            Collections
+                        </span>
+
+                        <span class="concept-tag">
+                            Functions
+                        </span>
+
+                        <span class="concept-tag">
+                            Classes
+                        </span>
+
+                        <span class="concept-tag">
+                            Objects
+                        </span>
+
+                        <span class="concept-tag">
+                            File Handling
+                        </span>
+
+                        <span class="concept-tag">
+                            Database
+                        </span>
+
+                        <span class="concept-tag">
+                            CRUD
+                        </span>
+
+                        <span class="concept-tag">
+                            Exception Handling
+                        </span>
+
+                        <span class="concept-tag">
+                            Data Processing
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 APPLICATION WORKFLOW
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>04</span>
+                    <h2>Application Workflow</h2>
+                </div>
+
+
+                <div class="content-card">
+
+<pre>
+User Input
+    â”‚
+    â–¼
+Validation
+    â”‚
+    â–¼
+Application Logic
+    â”‚
+    â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–º Functions
+    â”‚
+    â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–º Classes / Objects
+    â”‚
+    â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–º Data Processing
+                         â”‚
+                         â–¼
+                 File / Database
+                         â”‚
+                         â–¼
+                    Result / Report
+</pre>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 PROBLEM STATEMENTS
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>05</span>
+                    <h2>Problem Statements</h2>
+                </div>
+
+
+                <div class="problem-grid">
+
+
+                    <!-- =================================================
+                         PROBLEM 01
+                         ================================================= -->
+
+                    <article class="problem-card">
+
+                        <span class="problem-number">
+                            01
+                        </span>
+
+                        <h3>
+                            Expense Tracker
+                        </h3>
+
+                        <p>
+                            Build a Python application that allows
+                            users to record, manage and analyze
+                            their daily expenses.
+                        </p>
+
+                        <h4>
+                            Requirements
+                        </h4>
+
+                        <ul class="practical-list">
+
+                            <li>
+                                Add an expense.
+                            </li>
+
+                            <li>
+                                Select an expense category.
+                            </li>
+
+                            <li>
+                                Store the amount and date.
+                            </li>
+
+                            <li>
+                                Display all expenses.
+                            </li>
+
+                            <li>
+                                Calculate total spending.
+                            </li>
+
+                            <li>
+                                Calculate category-wise spending.
+                            </li>
+
+                            <li>
+                                Search or filter expenses.
+                            </li>
+
+                        </ul>
+
+                        <h4>
+                            Concepts
+                        </h4>
+
+                        <div class="concept-list">
+
+                            <span class="concept-tag">
+                                Functions
+                            </span>
+
+                            <span class="concept-tag">
+                                Classes
+                            </span>
+
+                            <span class="concept-tag">
+                                Lists
+                            </span>
+
+                            <span class="concept-tag">
+                                Dictionaries
+                            </span>
+
+                            <span class="concept-tag">
+                                File / Database
+                            </span>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- =================================================
+                         PROBLEM 02
+                         ================================================= -->
+
+                    <article class="problem-card">
+
+                        <span class="problem-number">
+                            02
+                        </span>
+
+                        <h3>
+                            Student Performance Dashboard
+                        </h3>
+
+                        <p>
+                            Build an application that processes
+                            student marks and generates useful
+                            academic performance statistics.
+                        </p>
+
+                        <h4>
+                            Requirements
+                        </h4>
+
+                        <ul class="practical-list">
+
+                            <li>
+                                Store student marks.
+                            </li>
+
+                            <li>
+                                Calculate average marks.
+                            </li>
+
+                            <li>
+                                Find highest and lowest scorers.
+                            </li>
+
+                            <li>
+                                Calculate pass percentage.
+                            </li>
+
+                            <li>
+                                Generate grade distribution.
+                            </li>
+
+                            <li>
+                                Display subject-wise performance.
+                            </li>
+
+                        </ul>
+
+                        <h4>
+                            Concepts
+                        </h4>
+
+                        <div class="concept-list">
+
+                            <span class="concept-tag">
+                                Data Processing
+                            </span>
+
+                            <span class="concept-tag">
+                                Functions
+                            </span>
+
+                            <span class="concept-tag">
+                                Collections
+                            </span>
+
+                            <span class="concept-tag">
+                                Statistics
+                            </span>
+
+                            <span class="concept-tag">
+                                Visualization
+                            </span>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- =================================================
+                         PROBLEM 03
+                         ================================================= -->
+
+                    <article class="problem-card">
+
+                        <span class="problem-number">
+                            03
+                        </span>
+
+                        <h3>
+                            Mini Python Application
+                        </h3>
+
+                        <p>
+                            Design and develop a small real-world
+                            application by combining the concepts
+                            learned throughout the Python practicals.
+                        </p>
+
+                        <h4>
+                            Requirements
+                        </h4>
+
+                        <ul class="practical-list">
+
+                            <li>
+                                Identify a real-world problem.
+                            </li>
+
+                            <li>
+                                Identify application entities.
+                            </li>
+
+                            <li>
+                                Design suitable classes/functions.
+                            </li>
+
+                            <li>
+                                Store application data.
+                            </li>
+
+                            <li>
+                                Implement core operations.
+                            </li>
+
+                            <li>
+                                Generate useful output.
+                            </li>
+
+                        </ul>
+
+                        <h4>
+                            Possible Applications
+                        </h4>
+
+                        <div class="concept-list">
+
+                            <span class="concept-tag">
+                                Library
+                            </span>
+
+                            <span class="concept-tag">
+                                Attendance
+                            </span>
+
+                            <span class="concept-tag">
+                                Inventory
+                            </span>
+
+                            <span class="concept-tag">
+                                Quiz
+                            </span>
+
+                            <span class="concept-tag">
+                                Course Management
+                            </span>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 PROBLEM 01 â€” EXPENSE TRACKER
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>06</span>
+                    <h2>Problem 01 â€” Expense Tracker</h2>
+                </div>
+
+
+                <div class="problem-detail">
+
+                    <h3>
+                        Problem Description
+                    </h3>
+
+                    <p>
+                        Develop an expense tracking application
+                        that allows users to record expenses and
+                        analyze their spending patterns.
+                    </p>
+
+
+                    <h4>
+                        Suggested Data Structure
+                    </h4>
+
+                    <div class="code-container">
+
+                        <div class="code-header">
+
+                            <span>
+                                expense.py
+                            </span>
+
+                            <button
+                                class="copy-btn"
+                                onclick="copyCode(this)">
+                                Copy
+                            </button>
+
+                        </div>
+
+<pre><code>
+expenses = [
+
+    {
+        "date": "20-09-2026",
+        "category": "Food",
+        "description": "Lunch",
+        "amount": 180
+    },
+
+    {
+        "date": "20-09-2026",
+        "category": "Travel",
+        "description": "Bus",
+        "amount": 40
+    },
+
+    {
+        "date": "21-09-2026",
+        "category": "Education",
+        "description": "Book",
+        "amount": 450
+    }
+
+]
+</code></pre>
+
+                    </div>
+
+
+                    <h4>
+                        Algorithm
+                    </h4>
+
+                    <div class="steps">
+
+
+                        <div class="step">
+
+                            <span class="step-number">
+                                01
+                            </span>
+
+                            <p>
+                                Create a collection to store expense
+                                records.
+                            </p>
+
+                        </div>
+
+
+                        <div class="step">
+
+                            <span class="step-number">
+                                02
+                            </span>
+
+                            <p>
+                                Accept expense details from the user.
+                            </p>
+
+                        </div>
+
+
+                        <div class="step">
+
+                            <span class="step-number">
+                                03
+                            </span>
+
+                            <p>
+                                Validate the entered amount and
+                                category.
+                            </p>
+
+                        </div>
+
+
+                        <div class="step">
+
+                            <span class="step-number">
+                                04
+                            </span>
+
+                            <p>
+                                Store the expense record.
+                            </p>
+
+                        </div>
+
+
+                        <div class="step">
+
+                            <span class="step-number">
+                                05
+                            </span>
+
+                            <p>
+                                Calculate total spending.
+                            </p>
+
+                        </div>
+
+
+                        <div class="step">
+
+                            <span class="step-number">
+                                06
+                            </span>
+
+                            <p>
+                                Calculate category-wise spending.
+                            </p>
+
+                        </div>
+
+
+                        <div class="step">
+
+                            <span class="step-number">
+                                07
+                            </span>
+
+                            <p>
+                                Display the expense summary.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 EXPENSE CODE
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>07</span>
+                    <h2>Python Code</h2>
+                </div>
+
+
+                <div class="code-container">
+
+                    <div class="code-header">
+
+                        <span>
+                            expense_tracker.py
+                        </span>
+
+                        <button
+                            class="copy-btn"
+                            onclick="copyCode(this)">
+                            Copy
+                        </button>
+
+                    </div>
+
+<pre><code>
+expenses = []
+
+
+def add_expense(
+    date,
+    category,
+    description,
+    amount
+):
+
+    expense = {
+
+        "date": date,
+        "category": category,
+        "description": description,
+        "amount": amount
+
+    }
+
+    expenses.append(expense)
+
+
+def calculate_total():
+
+    return sum(
+        expense["amount"]
+        for expense in expenses
+    )
+
+
+def category_total(category):
+
+    return sum(
+        expense["amount"]
+        for expense in expenses
+        if expense["category"] == category
+    )
+
+
+def display_expenses():
+
+    print("\n--- Expense Report ---")
+
+    for expense in expenses:
+
+        print(
+            expense["date"],
+            "|",
+            expense["category"],
+            "|",
+            expense["description"],
+            "| â‚¹",
+            expense["amount"]
+        )
+
+
+add_expense(
+    "20-09-2026",
+    "Food",
+    "Lunch",
+    180
+)
+
+add_expense(
+    "20-09-2026",
+    "Travel",
+    "Bus",
+    40
+)
+
+add_expense(
+    "21-09-2026",
+    "Education",
+    "Book",
+    450
+)
+
+
+display_expenses()
+
+print(
+    "\nTotal Spending: â‚¹",
+    calculate_total()
+)
+
+print(
+    "Food Spending: â‚¹",
+    category_total("Food")
+)
+</code></pre>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 OUTPUT
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>08</span>
+                    <h2>Expected Output</h2>
+                </div>
+
+
+                <div class="terminal">
+
+                    <div class="terminal-header">
+
+                        <span class="terminal-dot"></span>
+                        <span class="terminal-dot"></span>
+                        <span class="terminal-dot"></span>
+
+                        <span class="terminal-title">
+                            Python Output
+                        </span>
+
+                    </div>
+
+<pre>
+--- Expense Report ---
+
+20-09-2026 | Food | Lunch | â‚¹ 180
+20-09-2026 | Travel | Bus | â‚¹ 40
+21-09-2026 | Education | Book | â‚¹ 450
+
+Total Spending: â‚¹ 670
+Food Spending: â‚¹ 180
+</pre>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 EXPENSE CHALLENGE
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>09</span>
+                    <h2>Try It Yourself</h2>
+                </div>
+
+
+                <div class="try-it">
+
+                    <h3>
+                        Challenge
+                    </h3>
+
+                    <p>
+                        Extend the Expense Tracker so that expenses
+                        are saved permanently in a file or SQLite
+                        database.
+                    </p>
+
+
+                    <ul class="practical-list">
+
+                        <li>
+                            Add an expense.
+                        </li>
+
+                        <li>
+                            Delete an expense.
+                        </li>
+
+                        <li>
+                            Search by category.
+                        </li>
+
+                        <li>
+                            Calculate monthly spending.
+                        </li>
+
+                        <li>
+                            Display the highest expense.
+                        </li>
+
+                    </ul>
+
+
+                    <div class="callout">
+
+                        <div class="callout-icon">
+                            ðŸ’¡
+                        </div>
+
+                        <div class="callout-content">
+
+                            <h4>
+                                Think Beyond the Program
+                            </h4>
+
+                            <p>
+                                Ask yourself: what happens to the
+                                expenses when the program closes?
+                                Persistent storage solves this problem.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 PROBLEM 02 â€” PERFORMANCE DASHBOARD
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>10</span>
+                    <h2>
+                        Problem 02 â€” Student Performance Dashboard
+                    </h2>
+                </div>
+
+
+                <div class="problem-detail">
+
+                    <h3>
+                        Problem Description
+                    </h3>
+
+                    <p>
+                        Develop a Python application that processes
+                        student marks and generates meaningful
+                        academic performance information.
+                    </p>
+
+
+                    <h4>
+                        Required Analysis
+                    </h4>
+
+                    <div class="table-wrapper">
+
+                        <table class="practical-table">
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        Metric
+                                    </th>
+
+                                    <th>
+                                        Description
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                                <tr>
+
+                                    <td>
+                                        Average
+                                    </td>
+
+                                    <td>
+                                        Average marks of all students.
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <td>
+                                        Highest
+                                    </td>
+
+                                    <td>
+                                        Highest scoring student.
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <td>
+                                        Lowest
+                                    </td>
+
+                                    <td>
+                                        Lowest scoring student.
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <td>
+                                        Pass Percentage
+                                    </td>
+
+                                    <td>
+                                        Percentage of students who passed.
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <td>
+                                        Grade Distribution
+                                    </td>
+
+                                    <td>
+                                        Number of students in each grade.
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+
+                    <h4>
+                        Example Code
+                    </h4>
+
+
+                    <div class="code-container">
+
+                        <div class="code-header">
+
+                            <span>
+                                performance.py
+                            </span>
+
+                            <button
+                                class="copy-btn"
+                                onclick="copyCode(this)">
+                                Copy
+                            </button>
+
+                        </div>
+
+<pre><code>
+students = [
+
+    {
+        "name": "Aarav",
+        "marks": 82
+    },
+
+    {
+        "name": "Priya",
+        "marks": 91
+    },
+
+    {
+        "name": "Rahul",
+        "marks": 68
+    },
+
+    {
+        "name": "Sneha",
+        "marks": 76
+    },
+
+    {
+        "name": "Amit",
+        "marks": 54
+    }
+
+]
+
+
+def average_marks(data):
+
+    total = sum(
+        student["marks"]
+        for student in data
+    )
+
+    return total / len(data)
+
+
+def highest_scorer(data):
+
+    return max(
+        data,
+        key=lambda student:
+        student["marks"]
+    )
+
+
+def lowest_scorer(data):
+
+    return min(
+        data,
+        key=lambda student:
+        student["marks"]
+    )
+
+
+def pass_percentage(data):
+
+    passed = sum(
+        1
+        for student in data
+        if student["marks"] >= 40
+    )
+
+    return (
+        passed / len(data)
+    ) * 100
+
+
+print(
+    "Average:",
+    average_marks(students)
+)
+
+print(
+    "Highest:",
+    highest_scorer(students)
+)
+
+print(
+    "Lowest:",
+    lowest_scorer(students)
+)
+
+print(
+    "Pass Percentage:",
+    pass_percentage(students)
+)
+</code></pre>
+
+                    </div>
+
+
+                    <h4>
+                        Expected Output
+                    </h4>
+
+<pre>
+Average: 74.2
+
+Highest:
+{'name': 'Priya', 'marks': 91}
+
+Lowest:
+{'name': 'Amit', 'marks': 54}
+
+Pass Percentage:
+100.0
+</pre>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 DASHBOARD CHALLENGE
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="try-it">
+
+                    <h3>
+                        Dashboard Challenge
+                    </h3>
+
+                    <p>
+                        Extend the application by generating a
+                        graphical representation of student
+                        performance using a Python visualization
+                        library.
+                    </p>
+
+
+                    <div class="concept-list">
+
+                        <span class="concept-tag">
+                            Data Processing
+                        </span>
+
+                        <span class="concept-tag">
+                            Statistics
+                        </span>
+
+                        <span class="concept-tag">
+                            Charts
+                        </span>
+
+                        <span class="concept-tag">
+                            Visualization
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 PROBLEM 03 â€” MINI APPLICATION
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>11</span>
+                    <h2>
+                        Problem 03 â€” Mini Python Application
+                    </h2>
+                </div>
+
+
+                <div class="problem-detail">
+
+                    <h3>
+                        Application Development Challenge
+                    </h3>
+
+                    <p>
+                        Design and develop a small real-world
+                        application using the concepts learned
+                        throughout Practical 01 to Practical 04.
+                    </p>
+
+
+                    <h4>
+                        Step 01 â€” Identify the Problem
+                    </h4>
+
+                    <p>
+                        Select a real-world problem that can be
+                        solved using a Python application.
+                    </p>
+
+
+                    <h4>
+                        Step 02 â€” Identify Entities
+                    </h4>
+
+                    <p>
+                        Identify the important objects or entities
+                        involved in the application.
+                    </p>
+
+
+                    <h4>
+                        Step 03 â€” Design Classes and Functions
+                    </h4>
+
+                    <p>
+                        Decide which classes, methods and functions
+                        are required to implement the application.
+                    </p>
+
+
+                    <h4>
+                        Step 04 â€” Select Data Storage
+                    </h4>
+
+                    <p>
+                        Decide whether the application should use
+                        a file or database to store information.
+                    </p>
+
+
+                    <h4>
+                        Step 05 â€” Implement CRUD Operations
+                    </h4>
+
+                    <div class="concept-list">
+
+                        <span class="concept-tag">
+                            Create
+                        </span>
+
+                        <span class="concept-tag">
+                            Read
+                        </span>
+
+                        <span class="concept-tag">
+                            Update
+                        </span>
+
+                        <span class="concept-tag">
+                            Delete
+                        </span>
+
+                    </div>
+
+
+                    <h4>
+                        Step 06 â€” Generate Output
+                    </h4>
+
+                    <p>
+                        Display useful information, reports,
+                        summaries or visualizations to the user.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 PROJECT OPTIONS
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>12</span>
+                    <h2>Suggested Mini Applications</h2>
+                </div>
+
+
+                <div class="problem-grid">
+
+
+                    <article class="problem-card">
+
+                        <span class="problem-number">
+                            01
+                        </span>
+
+                        <h3>
+                            Library Management
+                        </h3>
+
+                        <p>
+                            Manage books, members, issue and return
+                            operations.
+                        </p>
+
+                        <div class="concept-list">
+
+                            <span class="concept-tag">
+                                OOP
+                            </span>
+
+                            <span class="concept-tag">
+                                Database
+                            </span>
+
+                            <span class="concept-tag">
+                                CRUD
+                            </span>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="problem-card">
+
+                        <span class="problem-number">
+                            02
+                        </span>
+
+                        <h3>
+                            Attendance Management
+                        </h3>
+
+                        <p>
+                            Record attendance and generate student
+                            attendance reports.
+                        </p>
+
+                        <div class="concept-list">
+
+                            <span class="concept-tag">
+                                Functions
+                            </span>
+
+                            <span class="concept-tag">
+                                File
+                            </span>
+
+                            <span class="concept-tag">
+                                Data Analysis
+                            </span>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="problem-card">
+
+                        <span class="problem-number">
+                            03
+                        </span>
+
+                        <h3>
+                            Inventory Management
+                        </h3>
+
+                        <p>
+                            Manage products, stock levels,
+                            purchases and sales.
+                        </p>
+
+                        <div class="concept-list">
+
+                            <span class="concept-tag">
+                                OOP
+                            </span>
+
+                            <span class="concept-tag">
+                                Database
+                            </span>
+
+                            <span class="concept-tag">
+                                Reports
+                            </span>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="problem-card">
+
+                        <span class="problem-number">
+                            04
+                        </span>
+
+                        <h3>
+                            Quiz Application
+                        </h3>
+
+                        <p>
+                            Create a quiz system with questions,
+                            scoring and result generation.
+                        </p>
+
+                        <div class="concept-list">
+
+                            <span class="concept-tag">
+                                Functions
+                            </span>
+
+                            <span class="concept-tag">
+                                OOP
+                            </span>
+
+                            <span class="concept-tag">
+                                Data
+                            </span>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="problem-card">
+
+                        <span class="problem-number">
+                            05
+                        </span>
+
+                        <h3>
+                            Course Management
+                        </h3>
+
+                        <p>
+                            Manage students, courses, enrollment
+                            and academic information.
+                        </p>
+
+                        <div class="concept-list">
+
+                            <span class="concept-tag">
+                                OOP
+                            </span>
+
+                            <span class="concept-tag">
+                                Database
+                            </span>
+
+                            <span class="concept-tag">
+                                CRUD
+                            </span>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="problem-card">
+
+                        <span class="problem-number">
+                            06
+                        </span>
+
+                        <h3>
+                            Personal Finance Manager
+                        </h3>
+
+                        <p>
+                            Track income, expenses, categories
+                            and financial summaries.
+                        </p>
+
+                        <div class="concept-list">
+
+                            <span class="concept-tag">
+                                Functions
+                            </span>
+
+                            <span class="concept-tag">
+                                Database
+                            </span>
+
+                            <span class="concept-tag">
+                                Analytics
+                            </span>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 PROJECT ARCHITECTURE
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>13</span>
+                    <h2>Application Architecture</h2>
+                </div>
+
+
+                <div class="content-card">
+
+<pre>
+                USER
+                  â”‚
+                  â–¼
+          â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+          â”‚  Input Layer  â”‚
+          â””â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜
+                  â”‚
+                  â–¼
+          â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+          â”‚ Application   â”‚
+          â”‚    Logic      â”‚
+          â””â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜
+                  â”‚
+          â”Œâ”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”
+          â”‚       â”‚        â”‚
+          â–¼       â–¼        â–¼
+      Functions  OOP     Validation
+          â”‚       â”‚        â”‚
+          â””â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                  â”‚
+                  â–¼
+          â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+          â”‚ Data Storage  â”‚
+          â”‚ File / DB     â”‚
+          â””â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜
+                  â”‚
+                  â–¼
+          â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+          â”‚ Output /      â”‚
+          â”‚ Reports       â”‚
+          â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+</pre>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 PROJECT REQUIREMENTS
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>14</span>
+                    <h2>Mini Project Requirements</h2>
+                </div>
+
+
+                <div class="content-card">
+
+                    <ul class="practical-list">
+
+                        <li>
+                            Problem statement and objective.
+                        </li>
+
+                        <li>
+                            Identification of users or actors.
+                        </li>
+
+                        <li>
+                            Identification of application entities.
+                        </li>
+
+                        <li>
+                            Functions and classes.
+                        </li>
+
+                        <li>
+                            Data storage mechanism.
+                        </li>
+
+                        <li>
+                            CRUD operations where applicable.
+                        </li>
+
+                        <li>
+                            Input validation.
+                        </li>
+
+                        <li>
+                            Exception handling.
+                        </li>
+
+                        <li>
+                            Meaningful output or reports.
+                        </li>
+
+                        <li>
+                            Test cases.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 INTEGRATED CHALLENGE
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>15</span>
+                    <h2>Final Challenge</h2>
+                </div>
+
+
+                <div class="try-it">
+
+                    <h3>
+                        Build It. Test It. Improve It.
+                    </h3>
+
+                    <p>
+                        Build a working Python application that
+                        solves a clearly defined real-world problem.
+                        Your application should combine concepts
+                        from the complete practical sequence.
+                    </p>
+
+
+                    <div class="steps">
+
+
+                        <div class="step">
+
+                            <span class="step-number">
+                                01
+                            </span>
+
+                            <p>
+                                Define the problem.
+                            </p>
+
+                        </div>
+
+
+                        <div class="step">
+
+                            <span class="step-number">
+                                02
+                            </span>
+
+                            <p>
+                                Design the solution.
+                            </p>
+
+                        </div>
+
+
+                        <div class="step">
+
+                            <span class="step-number">
+                                03
+                            </span>
+
+                            <p>
+                                Implement the Python application.
+                            </p>
+
+                        </div>
+
+
+                        <div class="step">
+
+                            <span class="step-number">
+                                04
+                            </span>
+
+                            <p>
+                                Store and retrieve data.
+                            </p>
+
+                        </div>
+
+
+                        <div class="step">
+
+                            <span class="step-number">
+                                05
+                            </span>
+
+                            <p>
+                                Test the application.
+                            </p>
+
+                        </div>
+
+
+                        <div class="step">
+
+                            <span class="step-number">
+                                06
+                            </span>
+
+                            <p>
+                                Improve the application based on
+                                testing results.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 LEARNING OUTCOME
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>16</span>
+                    <h2>Learning Outcome</h2>
+                </div>
+
+
+                <div class="outcome-box">
+
+                    <h3>
+                        After completing this practical
+                    </h3>
+
+                    <p>
+                        Students will be able to integrate Python
+                        programming concepts and develop a small
+                        real-world application involving structured
+                        data, reusable logic and persistent storage.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 VIVA QUESTIONS
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>17</span>
+                    <h2>Viva Questions</h2>
+                </div>
+
+
+                <div class="viva-list">
+
+
+                    <div class="viva-item">
+
+                        <div class="viva-question">
+                            1. Why should a large program be divided
+                            into functions?
+                        </div>
+
+                        <div class="viva-answer">
+                            Functions divide a program into smaller
+                            reusable units, making the application
+                            easier to understand, test and maintain.
+                        </div>
+
+                    </div>
+
+
+                    <div class="viva-item">
+
+                        <div class="viva-question">
+                            2. Why are classes useful in a real-world
+                            application?
+                        </div>
+
+                        <div class="viva-answer">
+                            Classes allow related data and behavior
+                            to be organized into reusable objects.
+                        </div>
+
+                    </div>
+
+
+                    <div class="viva-item">
+
+                        <div class="viva-question">
+                            3. Why is persistent storage required?
+                        </div>
+
+                        <div class="viva-answer">
+                            Persistent storage allows application
+                            data to remain available after the
+                            program terminates.
+                        </div>
+
+                    </div>
+
+
+                    <div class="viva-item">
+
+                        <div class="viva-question">
+                            4. What is CRUD?
+                        </div>
+
+                        <div class="viva-answer">
+                            CRUD represents Create, Read, Update
+                            and Delete operations.
+                        </div>
+
+                    </div>
+
+
+                    <div class="viva-item">
+
+                        <div class="viva-question">
+                            5. What is exception handling?
+                        </div>
+
+                        <div class="viva-answer">
+                            Exception handling provides a structured
+                            way to detect and handle runtime errors.
+                        </div>
+
+                    </div>
+
+
+                    <div class="viva-item">
+
+                        <div class="viva-question">
+                            6. What makes an application modular?
+                        </div>
+
+                        <div class="viva-answer">
+                            Separating an application into logical
+                            functions, classes and components makes
+                            it more modular and maintainable.
+                        </div>
+
+                    </div>
+
+
+                    <div class="viva-item">
+
+                        <div class="viva-question">
+                            7. How can a Python application be
+                            extended in the future?
+                        </div>
+
+                        <div class="viva-answer">
+                            New functions, classes, database tables,
+                            interfaces or external services can be
+                            added without rewriting the entire
+                            application.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 COURSE COMPLETION
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>18</span>
+                    <h2>Python Practical Journey</h2>
+                </div>
+
+
+                <div class="content-card">
+
+<pre>
+Practical 01
+Python Problem Solving
+        â”‚
+        â–¼
+Practical 02
+Data & Functions
+        â”‚
+        â–¼
+Practical 03
+OOP & Application Design
+        â”‚
+        â–¼
+Practical 04
+APIs, Files & Databases
+        â”‚
+        â–¼
+Practical 05
+Modern Python Application
+        â”‚
+        â–¼
+   REAL-WORLD
+   APPLICATION
+</pre>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 NAVIGATION
+                 ================================================= -->
+
+            <div class="practical-navigation">
+
+
+                <a
+                    href="practical04.html"
+                    class="practical-nav-btn">
+
+                    <small>
+                        Previous Practical
+                    </small>
+
+                    <strong>
+                        â† APIs, Files & Databases
+                    </strong>
+
+                </a>
+
+
+                <a
+                    href="../practicals.html"
+                    class="practical-nav-btn next">
+
+                    <small>
+                        Completed
+                    </small>
+
+                    <strong>
+                        All Practicals â†’
+                    </strong>
+
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="footer">
+
+        <div class="footer-main">
+
+
+            <div class="footer-brand">
+
+                <div class="logo">
+
+                    <span class="logo-mark">
+                        &lt;/&gt;
+                    </span>
+
+                    <span>
+                        Rasika<span class="logo-highlight">
+                            CodeLab
+                        </span>
+                    </span>
+
+                </div>
+
+                <p>
+                    Interactive practical learning through
+                    concepts, code and visualization.
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <div>
+
+                    <h4>
+                        Learn
+                    </h4>
+
+                    <a href="../../../subjects.html">
+                        Subjects
+                    </a>
+
+                    <a href="../../../about.html">
+                        About
+                    </a>
+
+                </div>
+
+
+                <div>
+
+                    <h4>
+                        Subjects
+                    </h4>
+
+                    <a href="../../cpp/index.html">
+                        C++
+                    </a>
+
+                    <a href="../../computer-graphics/cgr_index.html">
+                        Computer Graphics
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <span>
+                Â© 2026 Rasika CodeLab
+            </span>
+
+            <span>
+                Built for practical learning.
+            </span>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
+<script src="../../../js/main.js"></script>
+
+
+    <script>
+
+        function copyCode(button) {
+
+            const container =
+                button.closest(".code-container");
+
+            const code =
+                container.querySelector("code").innerText;
+
+            navigator.clipboard
+                .writeText(code)
+                .then(() => {
+
+                    const original =
+                        button.innerText;
+
+                    button.innerText = "Copied!";
+
+                    setTimeout(() => {
+
+                        button.innerText =
+                            original;
+
+                    }, 1500);
+
+                });
+
+        }
+
+    </script>
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+
+</html>

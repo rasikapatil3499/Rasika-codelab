@@ -1,0 +1,2460 @@
+/* =========================================================
+   DBMS FOUNDATION
+   Dark + Orange Theme
+   Shared CSS
+   ========================================================= */
+
+
+/* =========================================================
+   01. VARIABLES
+   ========================================================= */
+
+:root {
+    --bg: #080b15;
+    --bg-soft: #0c0f1a;
+
+    --surface: #111522;
+    --surface-2: #151a29;
+    --surface-3: #1b2030;
+
+    --border: #282e3d;
+    --border-light: #353c4d;
+
+    --orange: #ff6b2c;
+    --orange-light: #ff8148;
+    --orange-dark: #df521b;
+
+    --text: #f5f7fb;
+    --text-soft: #aab1c0;
+    --text-muted: #687082;
+
+    --green: #55d68a;
+    --red: #ff6262;
+
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 17px;
+
+    --shadow:
+        0 18px 45px rgba(0, 0, 0, 0.25);
+
+    --transition: 0.25s ease;
+}
+
+
+/* =========================================================
+   02. RESET
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(255, 107, 44, 0.055),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 90% 0%,
+            rgba(255, 107, 44, 0.035),
+            transparent 25%
+        ),
+        var(--bg);
+
+    color: var(--text);
+
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+
+    line-height: 1.6;
+
+    overflow-x: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font: inherit;
+}
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+/* =========================================================
+   03. SCROLLBAR
+   ========================================================= */
+
+::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #303646;
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--orange);
+}
+
+::selection {
+    background: var(--orange);
+    color: #111;
+}
+
+
+/* =========================================================
+   04. TOP BAR
+   ========================================================= */
+
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    min-height: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 5%;
+
+    background: rgba(8, 11, 21, 0.92);
+
+    border-bottom: 1px solid #292e3b;
+
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+
+/* Brand */
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    color: #f5f7fb;
+
+    font-size: 14px;
+    font-weight: 800;
+
+    letter-spacing: -0.02em;
+}
+
+.brand-mark {
+    width: 38px;
+    height: 38px;
+
+    display: grid;
+    place-items: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff7050,
+            #ff6240
+        );
+
+    color: #fff;
+
+    border-radius: 10px;
+
+    font-size: 13px;
+    font-weight: 900;
+}
+
+.back-link {
+    color: var(--text-soft);
+
+    font-size: 13px;
+    font-weight: 600;
+
+    transition: var(--transition);
+}
+
+.back-link:hover {
+    color: var(--orange);
+}
+
+
+/* =========================================================
+   05. MAIN CONTAINER
+   ========================================================= */
+
+.lesson-page {
+    width: min(1180px, 90%);
+
+    margin: 0 auto;
+
+    padding: 65px 0 75px;
+}
+
+
+/* =========================================================
+   06. HERO
+   ========================================================= */
+
+.lesson-hero {
+    position: relative;
+
+    max-width: 850px;
+
+    margin-bottom: 42px;
+
+    padding-left: 20px;
+}
+
+.lesson-hero::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 3px;
+
+    width: 3px;
+    height: 75px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            var(--orange),
+            transparent
+        );
+
+    border-radius: 10px;
+}
+
+.lesson-number {
+    display: inline-block;
+
+    margin-bottom: 12px;
+
+    color: var(--orange);
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 0.17em;
+
+    text-transform: uppercase;
+}
+
+.lesson-hero h1 {
+    margin-bottom: 14px;
+
+    color: var(--text);
+
+    font-size: clamp(38px, 5vw, 62px);
+
+    line-height: 1.04;
+
+    letter-spacing: -0.045em;
+
+    font-weight: 800;
+}
+
+.lesson-hero h1 span {
+    color: var(--orange);
+}
+
+.lesson-hero p {
+    max-width: 720px;
+
+    color: var(--text-soft);
+
+    font-size: 14px;
+
+    line-height: 1.75;
+}
+
+
+/* =========================================================
+   07. COMMON CARDS
+   ========================================================= */
+
+.info-card,
+.output-card {
+    position: relative;
+
+    padding: 28px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.018),
+            transparent
+        ),
+        var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius-lg);
+
+    box-shadow: var(--shadow);
+
+    transition:
+        transform var(--transition),
+        border-color var(--transition);
+}
+
+.info-card:hover,
+.output-card:hover {
+    transform: translateY(-3px);
+
+    border-color:
+        rgba(255, 107, 44, 0.3);
+}
+
+.card-label {
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: var(--orange);
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 0.17em;
+
+    text-transform: uppercase;
+}
+
+.info-card h2,
+.output-card h2 {
+    margin-bottom: 10px;
+
+    color: var(--text);
+
+    font-size: 22px;
+
+    line-height: 1.25;
+
+    letter-spacing: -0.025em;
+}
+
+.info-card p,
+.output-card p {
+    color: var(--text-soft);
+
+    font-size: 12px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   08. LESSON INFORMATION GRID
+   ========================================================= */
+
+.lesson-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 16px;
+
+    margin-bottom: 20px;
+}
+
+
+/* =========================================================
+   09. CONCEPT TAGS
+   ========================================================= */
+
+.concept-list {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    margin-top: 18px;
+}
+
+.concept-list span {
+    padding: 5px 9px;
+
+    background: var(--surface-2);
+
+    color: #858c9b;
+
+    border: 1px solid var(--border);
+
+    border-radius: 6px;
+
+    font-size: 9px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   10. BUTTONS
+   ========================================================= */
+
+.primary-btn,
+.secondary-btn {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 42px;
+
+    padding: 0 16px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    transition:
+        transform var(--transition),
+        background var(--transition),
+        border-color var(--transition),
+        color var(--transition);
+}
+
+.primary-btn {
+    margin-top: 20px;
+
+    background: var(--orange);
+
+    color: #111;
+
+    border: 1px solid var(--orange);
+}
+
+.primary-btn:hover {
+    background: var(--orange-light);
+
+    transform: translateY(-2px);
+}
+
+.secondary-btn {
+    background: var(--surface-2);
+
+    color: var(--text-soft);
+
+    border: 1px solid var(--border);
+}
+
+.secondary-btn:hover {
+    color: var(--orange);
+
+    border-color: var(--orange);
+
+    background:
+        rgba(255, 107, 44, 0.06);
+}
+
+.secondary-btn.danger {
+    color: var(--red);
+}
+
+.secondary-btn.danger:hover {
+    border-color: var(--red);
+}
+
+button:focus-visible,
+a:focus-visible {
+    outline: 2px solid var(--orange);
+
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   11. VISUAL / INTERACTIVE SECTION
+   ========================================================= */
+
+.visual-section {
+    padding: 30px;
+
+    margin-bottom: 20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 107, 44, 0.025),
+            transparent
+        ),
+        var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius-lg);
+
+    box-shadow: var(--shadow);
+}
+
+.section-heading {
+    margin-bottom: 28px;
+}
+
+.section-tag {
+    display: inline-block;
+
+    margin-bottom: 7px;
+
+    color: var(--orange);
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 0.17em;
+
+    text-transform: uppercase;
+}
+
+.section-heading h2 {
+    margin-bottom: 5px;
+
+    color: var(--text);
+
+    font-size: 26px;
+
+    line-height: 1.2;
+
+    letter-spacing: -0.03em;
+}
+
+.section-heading p {
+    color: var(--text-muted);
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   12. STATUS BOX
+   ========================================================= */
+
+.flow-status {
+    margin-top: 20px;
+
+    padding: 12px 15px;
+
+    background: var(--bg-soft);
+
+    color: var(--text-soft);
+
+    border: 1px solid var(--border);
+
+    border-radius: 8px;
+
+    font-size: 11px;
+
+    text-align: center;
+}
+
+.flow-status strong {
+    color: var(--orange);
+}
+
+
+/* =========================================================
+   13. FOUNDATION INDEX — INTRO
+   ========================================================= */
+
+.foundation-intro {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+
+    width: 100%;
+
+    margin-bottom: 35px;
+
+    padding: 24px 26px;
+
+    background:
+        linear-gradient(
+            110deg,
+            rgba(255, 107, 44, 0.07),
+            rgba(255, 107, 44, 0.015)
+        ),
+        var(--surface);
+
+    border: 1px solid
+        rgba(255, 107, 44, 0.18);
+
+    border-radius: var(--radius-lg);
+}
+
+.foundation-intro h2 {
+    margin-bottom: 6px;
+
+    color: var(--text);
+
+    font-size: 21px;
+
+    line-height: 1.25;
+}
+
+.foundation-intro p {
+    color: var(--text-soft);
+
+    font-size: 11px;
+
+    line-height: 1.6;
+}
+
+.foundation-progress {
+    flex: 0 0 76px;
+
+    width: 76px;
+    height: 76px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #10131c;
+
+    border: 1px solid #303543;
+
+    border-radius: 50%;
+}
+
+.foundation-progress strong {
+    color: var(--orange);
+
+    font-size: 25px;
+
+    line-height: 1;
+}
+
+.foundation-progress span {
+    margin-top: 4px;
+
+    color: #606878;
+
+    font-size: 7px;
+
+    letter-spacing: 0.1em;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   14. FOUNDATION INDEX — SECTION
+   ========================================================= */
+
+.foundation-section {
+    margin-bottom: 20px;
+}
+
+.foundation-section .section-heading {
+    display: flex;
+
+    align-items: baseline;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 20px;
+}
+
+.foundation-section .section-heading h2 {
+    margin: 0;
+
+    font-size: 27px;
+}
+
+.foundation-section .section-heading p {
+    margin: 0;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   15. FOUNDATION GRID
+   ========================================================= */
+
+.foundation-list {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 14px;
+}
+
+
+/* =========================================================
+   16. FOUNDATION CARD
+   ========================================================= */
+
+.foundation-card {
+    position: relative;
+
+    width: 100%;
+    height: 245px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    padding: 25px 26px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.018),
+            transparent
+        ),
+        var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: 17px;
+
+    overflow: hidden;
+
+    transition:
+        transform var(--transition),
+        border-color var(--transition),
+        background var(--transition),
+        box-shadow var(--transition);
+}
+
+.foundation-card::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 2px;
+    height: 0;
+
+    background: var(--orange);
+
+    transition: height 0.3s ease;
+}
+
+.foundation-card:first-child {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 107, 44, 0.07),
+            rgba(255, 255, 255, 0.012)
+        ),
+        var(--surface);
+}
+
+.foundation-card:hover {
+    transform: translateY(-4px);
+
+    border-color:
+        rgba(255, 107, 44, 0.4);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 107, 44, 0.055),
+            transparent
+        ),
+        var(--surface);
+
+    box-shadow:
+        0 16px 35px rgba(0, 0, 0, 0.28);
+}
+
+.foundation-card:hover::before {
+    height: 100%;
+}
+
+
+/* =========================================================
+   17. FOUNDATION CARD NUMBER
+   ========================================================= */
+
+.foundation-number {
+    width: auto;
+    height: auto;
+
+    margin-bottom: 18px;
+
+    color: var(--orange);
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.04em;
+}
+
+
+/* =========================================================
+   18. FOUNDATION CARD CONTENT
+   ========================================================= */
+
+.foundation-content {
+    display: flex;
+
+    flex-direction: column;
+
+    flex: 1;
+
+    min-width: 0;
+}
+
+.foundation-label {
+    margin-bottom: 7px;
+
+    color: #606878;
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.16em;
+
+    text-transform: uppercase;
+}
+
+.foundation-content h3 {
+    margin-bottom: 9px;
+
+    color: var(--text);
+
+    font-size: 19px;
+
+    line-height: 1.22;
+
+    letter-spacing: -0.025em;
+}
+
+.foundation-content p {
+    color: #979eae;
+
+    font-size: 11px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   19. FOUNDATION CARD TAGS
+   ========================================================= */
+
+.foundation-tags {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 6px;
+
+    margin-top: auto;
+
+    padding-top: 15px;
+}
+
+.foundation-tags span {
+    padding: 4px 7px;
+
+    background: #151923;
+
+    color: #777f90;
+
+    border: 1px solid #282e3c;
+
+    border-radius: 5px;
+
+    font-size: 8px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   20. FOUNDATION CARD ARROW
+   ========================================================= */
+
+.foundation-arrow {
+    position: absolute;
+
+    right: 18px;
+    bottom: 18px;
+
+    width: 31px;
+    height: 31px;
+
+    display: grid;
+
+    place-items: center;
+
+    background: #151923;
+
+    color: #687082;
+
+    border: 1px solid #2b3140;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    transition:
+        color var(--transition),
+        background var(--transition),
+        border-color var(--transition),
+        transform var(--transition);
+}
+
+.foundation-card:hover .foundation-arrow {
+    color: var(--orange);
+
+    background:
+        rgba(255, 107, 44, 0.07);
+
+    border-color:
+        rgba(255, 107, 44, 0.35);
+
+    transform: translateX(3px);
+}
+
+
+/* =========================================================
+   21. FOUNDATION JOURNEY
+   ========================================================= */
+
+.foundation-journey {
+    width: 100%;
+
+    margin-top: 20px;
+
+    padding: 18px 24px;
+
+    background: #10131b;
+
+    border: 1px solid var(--border);
+
+    border-radius: 15px;
+}
+
+.journey-line {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    margin-top: 12px;
+}
+
+.journey-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+}
+
+.journey-item strong {
+    width: 30px;
+    height: 30px;
+
+    display: grid;
+
+    place-items: center;
+
+    background:
+        rgba(255, 107, 44, 0.06);
+
+    color: var(--orange);
+
+    border: 1px solid
+        rgba(255, 107, 44, 0.22);
+
+    border-radius: 7px;
+
+    font-size: 8px;
+}
+
+.journey-item span {
+    color: #687082;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.04em;
+
+    text-transform: uppercase;
+}
+
+.journey-connector {
+    color: #424857;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   22. FOUNDATION START
+   ========================================================= */
+
+.foundation-start {
+    width: 100%;
+
+    margin-top: 16px;
+
+    padding: 20px 24px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 25px;
+
+    background:
+        linear-gradient(
+            110deg,
+            rgba(255, 107, 44, 0.06),
+            rgba(255, 107, 44, 0.012)
+        ),
+        var(--surface);
+
+    border: 1px solid
+        rgba(255, 107, 44, 0.18);
+
+    border-radius: 15px;
+}
+
+.foundation-start h2 {
+    margin-bottom: 3px;
+
+    color: var(--text);
+
+    font-size: 18px;
+}
+
+.foundation-start p {
+    color: #777f90;
+
+    font-size: 10px;
+}
+
+.foundation-start .primary-btn {
+    flex: 0 0 auto;
+
+    margin-top: 0;
+}
+
+
+
+
+/* =========================================================
+   FOUNDATION 01 — ANIMATED DATA FLOW
+   ========================================================= */
+
+.data-flow {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 14px;
+
+    padding: 25px 10px;
+
+    overflow-x: auto;
+}
+
+
+/* ---------------------------------------------------------
+   FLOW NODE
+   --------------------------------------------------------- */
+
+.flow-node {
+    position: relative;
+
+    flex: 0 0 145px;
+
+    min-height: 120px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 5px;
+
+    background: #0c101b;
+
+    border: 1px solid #2b3140;
+
+    border-radius: 14px;
+
+    opacity: 0.65;
+
+    transform: scale(1);
+
+    transition:
+        opacity 0.35s ease,
+        transform 0.45s ease,
+        border-color 0.45s ease,
+        background 0.45s ease,
+        box-shadow 0.45s ease;
+}
+
+
+/* ---------------------------------------------------------
+   NODE ICON
+   --------------------------------------------------------- */
+
+.node-icon {
+    width: 42px;
+    height: 42px;
+
+    display: grid;
+    place-items: center;
+
+    margin-bottom: 5px;
+
+    background: #171c29;
+
+    color: #727b8d;
+
+    border: 1px solid #303746;
+
+    border-radius: 10px;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    transition:
+        color 0.35s ease,
+        background 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+
+/* ---------------------------------------------------------
+   TEXT
+   --------------------------------------------------------- */
+
+.flow-node strong {
+    color: #d9dde5;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.08em;
+
+    transition: color 0.35s ease;
+}
+
+
+.flow-node small {
+    color: #626a7a;
+
+    font-size: 9px;
+
+    transition: color 0.35s ease;
+}
+
+
+/* =========================================================
+   ACTIVE NODE
+   ========================================================= */
+
+.flow-node.active {
+    opacity: 1;
+
+    transform:
+        translateY(-8px)
+        scale(1.04);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 107, 44, 0.14),
+            rgba(255, 107, 44, 0.035)
+        );
+
+    border-color: var(--orange);
+
+    box-shadow:
+        0 0 0 1px rgba(255, 107, 44, 0.08),
+        0 0 30px rgba(255, 107, 44, 0.16);
+}
+
+
+/* Active icon */
+
+.flow-node.active .node-icon {
+    color: var(--orange);
+
+    background:
+        rgba(255, 107, 44, 0.10);
+
+    border-color:
+        rgba(255, 107, 44, 0.45);
+
+    box-shadow:
+        0 0 18px rgba(255, 107, 44, 0.12);
+}
+
+
+/* Active text */
+
+.flow-node.active strong {
+    color: #ffffff;
+}
+
+.flow-node.active small {
+    color: #aeb4c0;
+}
+
+
+/* =========================================================
+   ACTIVE PULSE
+   ========================================================= */
+
+.flow-node.active .node-icon {
+    animation: nodePulse 1s ease-in-out;
+}
+
+@keyframes nodePulse {
+
+    0% {
+        transform: scale(0.85);
+        box-shadow:
+            0 0 0 rgba(255, 107, 44, 0);
+    }
+
+    50% {
+        transform: scale(1.12);
+        box-shadow:
+            0 0 25px rgba(255, 107, 44, 0.25);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow:
+            0 0 18px rgba(255, 107, 44, 0.12);
+    }
+}
+
+
+/* =========================================================
+   FLOW ARROW
+   ========================================================= */
+
+.flow-arrow {
+    position: relative;
+
+    flex: 0 0 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #414958;
+
+    font-size: 22px;
+
+    transition:
+        color 0.35s ease,
+        transform 0.35s ease;
+}
+
+
+/* Arrow becomes orange after previous node activates */
+
+.flow-node.active + .flow-arrow {
+    color: var(--orange);
+
+    transform: translateX(4px);
+
+    animation: arrowPulse 0.8s ease-in-out;
+}
+
+
+@keyframes arrowPulse {
+
+    0% {
+        opacity: 0.3;
+        transform: translateX(0);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateX(7px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(4px);
+    }
+}
+
+
+/* =========================================================
+   MOVING DATA DOT
+   ========================================================= */
+
+.flow-node.active::after {
+    content: "";
+
+    position: absolute;
+
+    top: 50%;
+    right: -25px;
+
+    width: 7px;
+    height: 7px;
+
+    background: var(--orange);
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 10px var(--orange),
+        0 0 20px rgba(255, 107, 44, 0.5);
+
+    transform: translateY(-50%);
+
+    animation: dataDot 0.8s ease forwards;
+}
+
+
+@keyframes dataDot {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translate(-8px, -50%)
+            scale(0.5);
+    }
+
+    30% {
+        opacity: 1;
+
+        transform:
+            translate(0, -50%)
+            scale(1);
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translate(20px, -50%)
+            scale(0.6);
+    }
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.flow-status {
+    margin-top: 15px;
+
+    min-height: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px 15px;
+
+    background: #0b0e17;
+
+    color: #858d9d;
+
+    border: 1px solid #272d3a;
+
+    border-radius: 8px;
+
+    font-size: 11px;
+
+    text-align: center;
+
+    transition:
+        border-color 0.3s ease,
+        color 0.3s ease;
+}
+
+.flow-status strong {
+    color: var(--orange);
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .data-flow {
+        justify-content: flex-start;
+
+        padding-bottom: 20px;
+    }
+
+    .flow-node {
+        flex-basis: 125px;
+
+        min-height: 105px;
+    }
+
+    .flow-arrow {
+        flex-basis: 25px;
+
+        font-size: 18px;
+    }
+
+    .flow-node.active {
+        transform:
+            translateY(-5px)
+            scale(1.02);
+    }
+
+}
+/* =========================================================
+   24. FOUNDATION 02 — STORAGE
+   ========================================================= */
+
+.storage-demo {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        auto
+        minmax(0, 1fr);
+
+    align-items: center;
+
+    gap: 18px;
+}
+
+.table-area,
+.page-area {
+    min-height: 280px;
+
+    padding: 18px;
+
+    background: var(--bg-soft);
+
+    border: 1px solid var(--border);
+
+    border-radius: 12px;
+}
+
+.demo-title {
+    margin-bottom: 13px;
+
+    color: var(--orange);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.14em;
+}
+
+.table-header,
+.data-row {
+    display: grid;
+
+    grid-template-columns: 60px 1fr;
+
+    gap: 10px;
+
+    padding: 9px 10px;
+}
+
+.table-header {
+    background: var(--surface-2);
+
+    color: #70788a;
+
+    border-radius: 6px;
+
+    font-size: 9px;
+
+    font-weight: 800;
+}
+
+.data-row {
+    margin-top: 5px;
+
+    background: #141823;
+
+    color: #c4c9d3;
+
+    border: 1px solid #242a38;
+
+    border-radius: 6px;
+
+    font-size: 10px;
+
+    animation: rowAppear 0.3s ease both;
+}
+
+.database-page {
+    min-height: 215px;
+
+    padding: 10px;
+
+    background:
+        repeating-linear-gradient(
+            0deg,
+            #10131b 0px,
+            #10131b 38px,
+            #151923 39px,
+            #151923 40px
+        );
+
+    border: 1px solid #272d3a;
+
+    border-radius: 7px;
+}
+
+.empty-page {
+    height: 190px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: #4e5665;
+
+    font-size: 10px;
+}
+
+.page-row {
+    display: grid;
+
+    grid-template-columns: 45px 1fr;
+
+    gap: 7px;
+
+    padding: 7px;
+
+    margin-bottom: 4px;
+
+    background:
+        rgba(255, 107, 44, 0.055);
+
+    color: #c0c5ce;
+
+    border-left: 2px solid var(--orange);
+
+    border-radius: 4px;
+
+    font-size: 9px;
+
+    animation: pageAppear 0.35s ease both;
+}
+
+.page-arrow {
+    color: var(--orange);
+
+    font-size: 25px;
+}
+
+@keyframes rowAppear {
+    from {
+        opacity: 0;
+        transform: translateX(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pageAppear {
+    from {
+        opacity: 0;
+        transform: translateX(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+/* =========================================================
+   25. FOUNDATION 03 — SEARCH
+   ========================================================= */
+
+.search-demo {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 15px;
+}
+
+.search-method {
+    padding: 20px;
+
+    background: var(--bg-soft);
+
+    border: 1px solid var(--border);
+
+    border-radius: 12px;
+}
+
+.method-header {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 10px;
+
+    padding-bottom: 13px;
+
+    border-bottom: 1px solid #222836;
+}
+
+.method-header strong {
+    color: var(--text);
+
+    font-size: 10px;
+
+    letter-spacing: 0.08em;
+}
+
+.method-header span {
+    color: #626a7a;
+
+    font-size: 9px;
+}
+
+.search-records {
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    gap: 6px;
+
+    padding: 18px 0;
+}
+
+.search-records span {
+    height: 40px;
+
+    display: grid;
+
+    place-items: center;
+
+    background: var(--surface-2);
+
+    color: #858c9b;
+
+    border: 1px solid #282e3b;
+
+    border-radius: 6px;
+
+    font-size: 10px;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.search-records span.searching {
+    background:
+        rgba(255, 107, 44, 0.1);
+
+    color: var(--orange);
+
+    border-color: var(--orange);
+
+    transform: scale(1.04);
+}
+
+.search-records span.found {
+    background:
+        rgba(85, 214, 138, 0.08);
+
+    color: var(--green);
+
+    border-color: var(--green);
+}
+
+.search-count {
+    padding-top: 11px;
+
+    color: #646c7c;
+
+    border-top: 1px solid #222836;
+
+    font-size: 10px;
+}
+
+.search-count strong {
+    color: var(--orange);
+}
+
+.index-visual {
+    min-height: 130px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+}
+
+.index-box,
+.target-box {
+    min-width: 90px;
+    min-height: 58px;
+
+    display: grid;
+
+    place-items: center;
+
+    padding: 8px;
+
+    border-radius: 8px;
+
+    font-size: 10px;
+
+    font-weight: 800;
+}
+
+.index-box {
+    background:
+        rgba(255, 107, 44, 0.06);
+
+    color: var(--orange);
+
+    border: 1px solid
+        rgba(255, 107, 44, 0.35);
+}
+
+.target-box {
+    background:
+        rgba(85, 214, 138, 0.06);
+
+    color: var(--green);
+
+    border: 1px solid
+        rgba(85, 214, 138, 0.3);
+}
+
+.index-line {
+    width: 35px;
+
+    height: 1px;
+
+    background: #4b5260;
+}
+
+
+/* =========================================================
+   26. FOUNDATION 04 — TRANSACTION
+   ========================================================= */
+
+.bank-demo {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        100px
+        minmax(0, 1fr);
+
+    align-items: center;
+
+    gap: 18px;
+}
+
+.account-card {
+    min-height: 170px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    background: var(--bg-soft);
+
+    border: 1px solid var(--border);
+
+    border-radius: 13px;
+
+    transition:
+        border-color 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.account-card.active {
+    border-color: var(--orange);
+
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 0 25px rgba(255, 107, 44, 0.1);
+}
+
+.account-card span {
+    color: #626a7a;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.12em;
+}
+
+.account-card strong {
+    color: var(--text);
+
+    font-size: 28px;
+
+    letter-spacing: -0.04em;
+}
+
+.account-card small {
+    color: #4f5766;
+
+    font-size: 9px;
+}
+
+.transaction-center {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 8px;
+
+    text-align: center;
+}
+
+.transaction-icon {
+    width: 52px;
+    height: 52px;
+
+    display: grid;
+
+    place-items: center;
+
+    background:
+        rgba(255, 107, 44, 0.07);
+
+    color: var(--orange);
+
+    border: 1px solid
+        rgba(255, 107, 44, 0.3);
+
+    border-radius: 50%;
+
+    font-weight: 900;
+}
+
+#transactionStatus {
+    color: #626a7a;
+
+    font-size: 8px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.1em;
+}
+
+.transaction-controls,
+.recovery-actions {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    margin-top: 20px;
+}
+
+
+/* =========================================================
+   27. FOUNDATION 05 — RECOVERY
+   ========================================================= */
+
+.recovery-flow {
+    max-width: 650px;
+
+    margin: 0 auto;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+}
+
+.recovery-node {
+    width: min(100%, 340px);
+
+    min-height: 90px;
+
+    display: grid;
+
+    grid-template-columns: 42px 1fr;
+
+    grid-template-rows: 1fr 1fr;
+
+    align-items: center;
+
+    padding: 15px 18px;
+
+    background: var(--bg-soft);
+
+    border: 1px solid var(--border);
+
+    border-radius: 11px;
+
+    transition:
+        border-color 0.3s ease,
+        background 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.recovery-node.active {
+    background:
+        rgba(255, 107, 44, 0.06);
+
+    border-color: var(--orange);
+
+    transform: translateX(4px);
+
+    box-shadow:
+        0 0 22px rgba(255, 107, 44, 0.08);
+}
+
+.recovery-node > span {
+    grid-row: 1 / 3;
+
+    width: 30px;
+    height: 30px;
+
+    display: grid;
+
+    place-items: center;
+
+    background: var(--surface-2);
+
+    color: var(--orange);
+
+    border-radius: 7px;
+
+    font-size: 8px;
+
+    font-weight: 900;
+}
+
+.recovery-node strong {
+    color: var(--text);
+
+    font-size: 10px;
+
+    letter-spacing: 0.08em;
+}
+
+.recovery-node small {
+    color: #626a7a;
+
+    font-size: 9px;
+}
+
+.recovery-node.failure-node.active {
+    background:
+        rgba(255, 98, 98, 0.05);
+
+    border-color: var(--red);
+
+    box-shadow:
+        0 0 22px rgba(255, 98, 98, 0.08);
+}
+
+.recovery-node.failure-node.active > span {
+    color: var(--red);
+}
+
+.recovery-arrow {
+    height: 35px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: #454c5b;
+
+    font-size: 17px;
+}
+
+
+/* =========================================================
+   28. KEY TAKEAWAY
+   ========================================================= */
+
+.takeaway {
+    position: relative;
+
+    margin-top: 20px;
+
+    padding: 25px 28px;
+
+    background:
+        linear-gradient(
+            110deg,
+            rgba(255, 107, 44, 0.06),
+            rgba(255, 107, 44, 0.01)
+        ),
+        var(--surface);
+
+    border: 1px solid
+        rgba(255, 107, 44, 0.18);
+
+    border-radius: var(--radius-lg);
+}
+
+.takeaway::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 2px;
+    height: 100%;
+
+    background: var(--orange);
+}
+
+.takeaway h2 {
+    margin-bottom: 7px;
+
+    color: var(--text);
+
+    font-size: 20px;
+
+    line-height: 1.25;
+}
+
+.takeaway p {
+    max-width: 760px;
+
+    color: var(--text-soft);
+
+    font-size: 11px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   29. LESSON NAVIGATION
+   ========================================================= */
+
+.lesson-navigation {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+
+    margin-top: 20px;
+}
+
+.nav-btn {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 40px;
+
+    padding: 0 14px;
+
+    background: var(--surface);
+
+    color: #7d8595;
+
+    border: 1px solid var(--border);
+
+    border-radius: 8px;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    transition: var(--transition);
+}
+
+.nav-btn:hover {
+    color: var(--text);
+
+    border-color: var(--border-light);
+
+    transform: translateY(-2px);
+}
+
+.nav-btn.next {
+    color: var(--orange);
+
+    border-color:
+        rgba(255, 107, 44, 0.25);
+}
+
+.nav-btn.next:hover {
+    background:
+        rgba(255, 107, 44, 0.05);
+
+    border-color: var(--orange);
+}
+
+
+/* =========================================================
+   30. TABLET
+   ========================================================= */
+
+@media (max-width: 950px) {
+
+    .lesson-page {
+        width: min(92%, 800px);
+
+        padding-top: 50px;
+    }
+
+    .foundation-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .storage-demo {
+        grid-template-columns: 1fr;
+    }
+
+    .page-arrow {
+        transform: rotate(90deg);
+
+        margin: -4px 0;
+    }
+
+    .search-demo {
+        grid-template-columns: 1fr;
+    }
+
+    .bank-demo {
+        grid-template-columns: 1fr;
+    }
+
+    .transaction-center {
+        order: 2;
+    }
+
+    #accountB {
+        order: 3;
+    }
+}
+
+
+/* =========================================================
+   31. MOBILE
+   ========================================================= */
+
+@media (max-width: 650px) {
+
+    .topbar {
+        min-height: 62px;
+
+        padding: 0 4%;
+    }
+
+    .brand {
+        font-size: 11px;
+    }
+
+    .brand-mark {
+        width: 34px;
+        height: 34px;
+
+        font-size: 11px;
+    }
+
+    .back-link {
+        font-size: 10px;
+    }
+
+    .lesson-page {
+        width: 92%;
+
+        padding: 40px 0 55px;
+    }
+
+    .lesson-hero {
+        padding-left: 17px;
+
+        margin-bottom: 30px;
+    }
+
+    .lesson-hero::before {
+        height: 65px;
+    }
+
+    .lesson-hero h1 {
+        font-size: 38px;
+    }
+
+    .lesson-hero p {
+        font-size: 12px;
+    }
+
+    .lesson-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .info-card,
+    .output-card {
+        padding: 23px;
+    }
+
+    .visual-section {
+        padding: 22px;
+    }
+
+    .section-heading h2 {
+        font-size: 22px;
+    }
+
+    /* Foundation index */
+
+    .foundation-intro {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        padding: 20px;
+    }
+
+    .foundation-progress {
+        width: 65px;
+        height: 65px;
+    }
+
+    .foundation-progress strong {
+        font-size: 21px;
+    }
+
+    .foundation-list {
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+    }
+
+    .foundation-card {
+        height: 220px;
+
+        padding: 22px;
+    }
+
+    .foundation-content h3 {
+        font-size: 18px;
+    }
+
+    .foundation-content p {
+        font-size: 11px;
+    }
+
+    .foundation-section .section-heading {
+        display: block;
+    }
+
+    .foundation-section .section-heading p {
+        margin-top: 5px;
+    }
+
+    .foundation-start {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+    .foundation-start .primary-btn {
+        width: 100%;
+    }
+
+    .journey-line {
+        justify-content: flex-start;
+
+        overflow-x: auto;
+
+        padding-bottom: 3px;
+    }
+
+    /* Lesson visualizations */
+
+    .data-flow {
+        justify-content: flex-start;
+    }
+
+    .search-records {
+        grid-template-columns:
+            repeat(5, minmax(35px, 1fr));
+    }
+
+    .search-records span {
+        height: 36px;
+
+        font-size: 9px;
+    }
+
+    .transaction-controls,
+    .recovery-actions {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .transaction-controls .secondary-btn,
+    .recovery-actions .secondary-btn {
+        width: 100%;
+    }
+
+    .lesson-navigation {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .nav-btn {
+        width: 100%;
+    }
+}
+
+
+/* =========================================================
+   32. SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+    .lesson-hero h1 {
+        font-size: 33px;
+    }
+
+    .foundation-card {
+        height: 210px;
+    }
+
+    .foundation-content h3 {
+        font-size: 16px;
+    }
+
+    .foundation-content p {
+        font-size: 10px;
+    }
+
+    .foundation-tags span {
+        font-size: 7px;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+        width: 100%;
+    }
+}
+
+
+/* =========================================================
+   33. REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+
+        animation-duration: 0.01ms !important;
+
+        animation-iteration-count: 1 !important;
+
+        transition-duration: 0.01ms !important;
+    }
+}

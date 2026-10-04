@@ -1,0 +1,920 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Foundation 08 â€” Understand how a graphics object moves from mathematical geometry to transformed, clipped and rasterized pixels.">
+    <title>Foundation 08 | How Does an Object Become Pixels? | Rasika CodeLab</title>
+    <link rel="stylesheet" href="../css/cgr_style.css">
+<style>body.protected-page:not(.auth-ready){visibility:hidden}</style>
+</head>
+
+<body class="protected-page">
+
+<header class="site-header">
+    <nav class="navbar">
+        <a href="../cgr_index.html" class="logo">
+            <span class="logo-mark">â—ˆ</span>
+            Rasika<span class="logo-highlight">CodeLab</span>
+        </a>
+
+        <div class="nav-links">
+            <a href="../cgr_index.html">Home</a>
+            <a href="../cgr_foundations.html" class="active">Foundations</a>
+            <a href="../cgr_practicals.html">Practicals</a>
+                        <a href="../../../about.html">About</a>
+        </div>
+
+        <button class="menu-btn" type="button" aria-label="Open menu">â˜°</button>
+    </nav>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero foundation-detail-hero">
+
+    <div class="hero-content">
+
+        <span class="eyebrow">FOUNDATION 08</span>
+
+        <h1>How Does an <span>Object Become Pixels?</span></h1>
+
+        <p class="hero-description">
+            Graphics begin as mathematical descriptions of objects.
+            Before we see them on a screen, they pass through coordinates,
+            transformations, viewing, clipping and rasterization.
+        </p>
+
+        <div class="foundation-meta">
+            <span>Geometry</span>
+            <span>Transform</span>
+            <span>Viewing</span>
+            <span>Clipping</span>
+            <span>Rasterization</span>
+        </div>
+
+    </div>
+
+    <div class="hero-visual">
+
+        <div class="graphics-window foundation-visual-window">
+
+            <div class="window-header">
+                <div class="window-dots">
+                    <span></span><span></span><span></span>
+                </div>
+                <span class="window-title">object-to-pixel.pipeline</span>
+            </div>
+
+            <div class="object-pixel-hero">
+
+                <div class="hero-geometry">
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                </div>
+
+                <div class="hero-transform">â†’</div>
+
+                <div class="hero-pixel-grid">
+                    <i></i><i></i><i></i><i></i>
+                    <i></i><i></i><i></i><i></i>
+                    <i></i><i></i><i></i><i></i>
+                    <i></i><i></i><i></i><i></i>
+                </div>
+
+                <div class="hero-pixel-label">PIXELS</div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- OBJECTIVES -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+        <span class="eyebrow">LEARNING OBJECTIVES</span>
+        <h2>By the end of this foundation, you should be able to...</h2>
+    </div>
+
+    <div class="foundation-objectives">
+
+        <div class="objective-card">
+            <span>01</span>
+            <strong>Trace the Graphics Pipeline</strong>
+            <p>Explain the major stages between an object definition and final pixel output.</p>
+        </div>
+
+        <div class="objective-card">
+            <span>02</span>
+            <strong>Understand Transformations</strong>
+            <p>Explain how translation, scaling and rotation change an object's position or size.</p>
+        </div>
+
+        <div class="objective-card">
+            <span>03</span>
+            <strong>Understand Clipping</strong>
+            <p>Explain why portions outside the viewing region may be removed.</p>
+        </div>
+
+        <div class="objective-card">
+            <span>04</span>
+            <strong>Connect Geometry to Pixels</strong>
+            <p>Understand how continuous geometric descriptions become discrete raster output.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- BIG IDEA -->
+<section class="section foundation-detail">
+
+    <div class="content-card">
+
+        <span class="eyebrow">01 Â· BIG IDEA</span>
+
+        <h2>The screen does not directly understand a triangle.</h2>
+
+        <p>
+            A graphics program may describe a triangle using three vertices.
+            Those vertices are mathematical coordinates. The graphics system
+            must process the geometry and determine how it maps onto the
+            discrete pixel grid of the final image.
+        </p>
+
+        <div class="definition-box">
+            <strong>Core idea</strong>
+            <p>
+                <strong>Object â†’ Coordinates â†’ Transform â†’ View â†’ Clip â†’
+                Rasterize â†’ Pixel</strong>
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- COMPLETE PIPELINE -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+        <span class="eyebrow">02 Â· COMPLETE FLOW</span>
+        <h2>Follow every major stage.</h2>
+        <p>
+            This simplified pipeline connects the foundation topics you have
+            learned so far with the algorithms that come later.
+        </p>
+    </div>
+
+    <div class="content-card">
+
+        <div class="graphics-flow">
+
+            <div class="flow-item">
+                <span>01</span>
+                <strong>Object</strong>
+                <small>Vertices, shapes and other geometric data define the object.</small>
+            </div>
+
+            <div class="flow-arrow">â†’</div>
+
+            <div class="flow-item">
+                <span>02</span>
+                <strong>Coordinates</strong>
+                <small>Positions are represented in a coordinate system.</small>
+            </div>
+
+            <div class="flow-arrow">â†’</div>
+
+            <div class="flow-item">
+                <span>03</span>
+                <strong>Transform</strong>
+                <small>Translation, scaling and rotation modify the geometry.</small>
+            </div>
+
+            <div class="flow-arrow">â†’</div>
+
+            <div class="flow-item">
+                <span>04</span>
+                <strong>Clip</strong>
+                <small>Parts outside the visible region can be discarded.</small>
+            </div>
+
+            <div class="flow-arrow">â†’</div>
+
+            <div class="flow-item">
+                <span>05</span>
+                <strong>Rasterize</strong>
+                <small>Geometry is mapped to raster-oriented pixel information.</small>
+            </div>
+
+            <div class="flow-arrow">â†’</div>
+
+            <div class="flow-item">
+                <span>06</span>
+                <strong>Display</strong>
+                <small>The resulting image is presented on the screen.</small>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- COORDINATES -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+        <span class="eyebrow">03 Â· COORDINATES</span>
+        <h2>Everything starts with position.</h2>
+    </div>
+
+    <div class="comparison-grid">
+
+        <div class="content-card">
+
+            <span class="card-label">OBJECT SPACE</span>
+
+            <h3>Describe the object.</h3>
+
+            <div class="formula-box">
+                P = (x, y)
+            </div>
+
+            <p>
+                A point or vertex can be described using coordinates. A
+                collection of vertices can define a line, triangle or polygon.
+            </p>
+
+        </div>
+
+        <div class="content-card">
+
+            <span class="card-label">SCREEN SPACE</span>
+
+            <h3>Describe its pixel location.</h3>
+
+            <div class="formula-box">
+                Pixel = (xâ‚›, yâ‚›)
+            </div>
+
+            <p>
+                After viewing and mapping, the geometry is related to the
+                coordinate system used by the final raster image.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- TRANSFORM -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+        <span class="eyebrow">04 Â· TRANSFORMATION</span>
+        <h2>Change the object's position, size or orientation.</h2>
+    </div>
+
+    <div class="coordinate-parts">
+
+        <div class="coordinate-part-card">
+            <span>T</span>
+            <h3>Translation</h3>
+            <p>
+                Moves an object from one location to another without changing
+                its basic size or orientation.
+            </p>
+        </div>
+
+        <div class="coordinate-part-card">
+            <span>S</span>
+            <h3>Scaling</h3>
+            <p>
+                Changes the size of an object by multiplying coordinate values
+                by scale factors.
+            </p>
+        </div>
+
+        <div class="coordinate-part-card">
+            <span>R</span>
+            <h3>Rotation</h3>
+            <p>
+                Changes the orientation of an object around a selected origin
+                or pivot.
+            </p>
+        </div>
+
+        <div class="coordinate-part-card">
+            <span>C</span>
+            <h3>Composite</h3>
+            <p>
+                Combines multiple transformations. The order of operations can
+                affect the final result.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- TRANSFORMATION CALCULATION -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+        <span class="eyebrow">05 Â· WORKED CALCULATION</span>
+        <h2>See a translation mathematically.</h2>
+        <p>
+            Suppose a point is moved by a translation vector.
+        </p>
+    </div>
+
+    <div class="comparison-grid">
+
+        <div class="content-card">
+
+            <span class="card-label">GIVEN</span>
+
+            <h3>P(3, 4)</h3>
+
+            <div class="calculation-box">
+                Translation = (5, 2)<br><br>
+                Tx = 5<br>
+                Ty = 2
+            </div>
+
+        </div>
+
+        <div class="content-card">
+
+            <span class="card-label">CALCULATE</span>
+
+            <div class="formula-box">
+                x' = x + Tx<br>
+                y' = y + Ty
+            </div>
+
+            <div class="calculation-box">
+                x' = 3 + 5 = 8<br>
+                y' = 4 + 2 = 6<br><br>
+                P' = <strong>(8, 6)</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CLIPPING -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+        <span class="eyebrow">06 Â· CLIPPING</span>
+        <h2>Only the visible part should continue.</h2>
+        <p>
+            A viewing window defines the region that should be considered for
+            the final image. Clipping determines which parts of graphical
+            primitives lie inside or outside that region.
+        </p>
+    </div>
+
+    <div class="comparison-grid">
+
+        <div class="content-card">
+
+            <span class="card-label">WINDOW</span>
+
+            <h3>Visible region</h3>
+
+            <div class="formula-box">
+                xmin â‰¤ x â‰¤ xmax<br>
+                ymin â‰¤ y â‰¤ ymax
+            </div>
+
+            <p>
+                A point satisfying these conditions lies inside a rectangular
+                clipping window.
+            </p>
+
+        </div>
+
+        <div class="content-card">
+
+            <span class="card-label">OUTSIDE</span>
+
+            <h3>Discard or clip the portion</h3>
+
+            <div class="definition-box">
+                <strong>Why?</strong>
+                <p>
+                    Processing invisible geometry is unnecessary for the final
+                    view. Clipping reduces the geometry considered for display.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- INTERACTIVE PIPELINE -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+        <span class="eyebrow">07 Â· INTERACTIVE VISUALIZATION</span>
+        <h2>Move an object through the graphics pipeline.</h2>
+        <p>
+            Use the controls to translate and scale the object, then step
+            through the simplified pipeline.
+        </p>
+    </div>
+
+    <div class="object-pipeline-lab">
+
+        <div class="object-stage">
+
+            <div class="object-stage-grid"></div>
+
+            <div id="interactiveObject" class="interactive-object">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <div class="view-window"></div>
+
+            <span class="window-label">VIEW WINDOW</span>
+
+        </div>
+
+        <div class="object-controls">
+
+            <div class="object-control">
+
+                <label for="objectX">
+                    Translation X
+                    <output id="objectXValue">0</output>
+                </label>
+
+                <input id="objectX" type="range" min="-8" max="8" value="0">
+
+            </div>
+
+            <div class="object-control">
+
+                <label for="objectY">
+                    Translation Y
+                    <output id="objectYValue">0</output>
+                </label>
+
+                <input id="objectY" type="range" min="-6" max="6" value="0">
+
+            </div>
+
+            <div class="object-control">
+
+                <label for="objectScale">
+                    Scale
+                    <output id="objectScaleValue">1.0Ã—</output>
+                </label>
+
+                <input id="objectScale" type="range" min="5" max="20" value="10">
+
+            </div>
+
+            <div class="coordinate-readout">
+
+                <span>Current transformation</span>
+
+                <strong id="transformOutput">
+                    T(0, 0) Â· S(1.0)
+                </strong>
+
+            </div>
+
+            <div class="coordinate-formula">
+                P' = S(P) + T
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- RASTERIZATION -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+        <span class="eyebrow">08 Â· RASTERIZATION</span>
+        <h2>Geometry meets a discrete pixel grid.</h2>
+        <p>
+            Rasterization determines the raster representation of geometric
+            primitives. This is where the mathematical object is connected
+            to individual screen locations.
+        </p>
+    </div>
+
+    <div class="content-card">
+
+        <div class="graphics-flow">
+
+            <div class="flow-item">
+                <span>01</span>
+                <strong>Geometric line</strong>
+                <small>Defined by mathematical endpoints.</small>
+            </div>
+
+            <div class="flow-arrow">â†’</div>
+
+            <div class="flow-item">
+                <span>02</span>
+                <strong>Line algorithm</strong>
+                <small>DDA or Bresenham can determine raster positions.</small>
+            </div>
+
+            <div class="flow-arrow">â†’</div>
+
+            <div class="flow-item">
+                <span>03</span>
+                <strong>Pixel decisions</strong>
+                <small>Discrete pixels are selected to represent the line.</small>
+            </div>
+
+            <div class="flow-arrow">â†’</div>
+
+            <div class="flow-item">
+                <span>04</span>
+                <strong>Visible line</strong>
+                <small>The selected pixels form the displayed raster line.</small>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CONNECTION TO PRACTICALS -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+        <span class="eyebrow">09 Â· CONNECT THE CONCEPTS</span>
+        <h2>These foundations lead directly to your practicals.</h2>
+    </div>
+
+    <div class="application-grid">
+
+        <div class="application-card">
+            <div class="application-icon">DDA</div>
+            <h3>Line Rasterization</h3>
+            <p>
+                Converts a mathematical line into a sequence of raster
+                positions using incremental calculations.
+            </p>
+        </div>
+
+        <div class="application-card">
+            <div class="application-icon">BRE</div>
+            <h3>Bresenham</h3>
+            <p>
+                Uses an efficient decision approach to select pixels for
+                rasterizing lines and circles.
+            </p>
+        </div>
+
+        <div class="application-card">
+            <div class="application-icon">2D</div>
+            <h3>Transformations</h3>
+            <p>
+                Translation, scaling, rotation, reflection and shear modify
+                object coordinates.
+            </p>
+        </div>
+
+        <div class="application-card">
+            <div class="application-icon">CLIP</div>
+            <h3>Clipping</h3>
+            <p>
+                Cohen-Sutherland and other algorithms determine visible
+                portions of graphical primitives.
+            </p>
+        </div>
+
+        <div class="application-card">
+            <div class="application-icon">3D</div>
+            <h3>3D Graphics</h3>
+            <p>
+                3D objects pass through transformations and viewing before
+                appearing as a 2D image.
+            </p>
+        </div>
+
+        <div class="application-card">
+            <div class="application-icon">CURVE</div>
+            <h3>Curves</h3>
+            <p>
+                Bezier and B-Spline representations define smooth geometric
+                curves that can ultimately be rasterized.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- TERMINOLOGY -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+        <span class="eyebrow">10 Â· TERMINOLOGY</span>
+        <h2>Words you should know before starting algorithms.</h2>
+    </div>
+
+    <div class="terminology-grid">
+
+        <div class="term-card">
+            <strong>Object</strong>
+            <p>A graphical entity represented by geometry and visual properties.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Transformation</strong>
+            <p>A mathematical operation that changes an object's position, size or orientation.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Viewing Window</strong>
+            <p>The region of the scene selected for viewing.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Clipping</strong>
+            <p>Removing or limiting portions outside the visible region.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Rasterization</strong>
+            <p>Converting geometric information into raster-oriented image data.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Pixel</strong>
+            <p>A discrete picture element used in a raster image.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- COMMON ERRORS -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+        <span class="eyebrow">COMMON ERRORS</span>
+        <h2>Keep the pipeline clear.</h2>
+    </div>
+
+    <div class="terminology-grid">
+
+        <div class="term-card">
+            <strong>Wrong Transformation Order</strong>
+            <p>Composite transformations may produce different results when their order changes.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Confusing Window and Viewport</strong>
+            <p>A window selects a region of the scene; a viewport defines where it is displayed.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Geometry â‰  Pixel Data</strong>
+            <p>Geometric coordinates describe an object; rasterization connects that geometry to pixels.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Ignoring Clipping</strong>
+            <p>Not every part of a scene is necessarily inside the visible region.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Coordinate-System Confusion</strong>
+            <p>Keep mathematical, world, view and screen coordinate conventions distinct.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Skipping the Mathematics</strong>
+            <p>The algorithms that follow depend heavily on coordinate and geometric reasoning.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- QUICK CHECK -->
+<section class="section foundation-detail">
+
+    <div class="content-card quick-check">
+
+        <span class="eyebrow">QUICK CHECK</span>
+
+        <h2>Test your understanding.</h2>
+
+        <div class="question-list">
+
+            <div>
+                <span>01</span>
+                <p>What are the major stages between an object and its final raster representation?</p>
+            </div>
+
+            <div>
+                <span>02</span>
+                <p>What does translation do to a point P(x,y)?</p>
+            </div>
+
+            <div>
+                <span>03</span>
+                <p>Why is clipping required in a graphics system?</p>
+            </div>
+
+            <div>
+                <span>04</span>
+                <p>What is rasterization?</p>
+            </div>
+
+            <div>
+                <span>05</span>
+                <p>How are DDA and Bresenham related to the object-to-pixel pipeline?</p>
+            </div>
+
+            <div>
+                <span>06</span>
+                <p>Why can changing transformation order change the final result?</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SUMMARY -->
+<section class="section foundation-detail">
+
+    <div class="summary-box">
+
+        <span class="eyebrow">FOUNDATIONS COMPLETE</span>
+
+        <h2>You now have the base for CGR algorithms.</h2>
+
+        <div class="summary-grid">
+
+            <div>
+                <span>01</span>
+                <strong>Coordinates</strong>
+                <p>Objects begin as mathematical positions and geometry.</p>
+            </div>
+
+            <div>
+                <span>02</span>
+                <strong>Primitives</strong>
+                <p>Points, lines, circles and polygons build graphical objects.</p>
+            </div>
+
+            <div>
+                <span>03</span>
+                <strong>Color & Storage</strong>
+                <p>Pixel values and file representations store visual information.</p>
+            </div>
+
+            <div>
+                <span>04</span>
+                <strong>Rendering Pipeline</strong>
+                <p>Objects pass through transformation, viewing and rasterization.</p>
+            </div>
+
+            <div>
+                <span>05</span>
+                <strong>Ready for Algorithms</strong>
+                <p>Next comes DDA, Bresenham, filling, transformations, clipping and curves.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- NAVIGATION -->
+<section class="section foundation-navigation">
+
+    <a href="foundation07.html" class="nav-card">
+        <span>â†</span>
+        <small>PREVIOUS FOUNDATION</small>
+        <strong>How Does a Computer Draw?</strong>
+    </a>
+
+    <a href="../cgr_practicals.html" class="nav-card next">
+        <small>FOUNDATIONS COMPLETE</small>
+        <strong>Start CGR Practicals â†’</strong>
+    </a>
+
+</section>
+
+</main>
+
+
+<footer class="site-footer">
+
+    <div class="footer-content">
+
+        <div class="footer-brand">
+            <strong>Rasika<span class="logo-highlight">CodeLab</span></strong>
+            <p>Computer Graphics Practical Learning</p>
+        </div>
+
+        <div class="footer-links">
+            <a href="../../../index.html">Home</a>
+            <a href="../cgr_foundations.html">Foundations</a>
+            <a href="../cgr_practicals.html">Practicals</a>
+                        <a href="../../../about.html">About</a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        Â© 2026 Rasika CodeLab Â· Learn the concept. See the result.
+    </div>
+
+</footer>
+
+
+<script>
+(function () {
+
+    const xControl = document.getElementById("objectX");
+    const yControl = document.getElementById("objectY");
+    const scaleControl = document.getElementById("objectScale");
+
+    const xValue = document.getElementById("objectXValue");
+    const yValue = document.getElementById("objectYValue");
+    const scaleValue = document.getElementById("objectScaleValue");
+
+    const object = document.getElementById("interactiveObject");
+    const transformOutput = document.getElementById("transformOutput");
+
+    function updateObject() {
+
+        const x = Number(xControl.value);
+        const y = Number(yControl.value);
+        const scale = Number(scaleControl.value) / 10;
+
+        xValue.textContent = x;
+        yValue.textContent = y;
+        scaleValue.textContent = scale.toFixed(1) + "Ã—";
+
+        object.style.transform =
+            "translate(" + (x * 22) + "px, " + (-y * 22) + "px) scale(" + scale + ")";
+
+        transformOutput.textContent =
+            "T(" + x + ", " + y + ") Â· S(" + scale.toFixed(1) + ")";
+
+    }
+
+    [xControl, yControl, scaleControl].forEach(function (control) {
+        control.addEventListener("input", updateObject);
+    });
+
+    updateObject();
+
+})();
+</script>
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

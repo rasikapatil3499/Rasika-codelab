@@ -1,4 +1,484 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>DBMS | Rasika CodeLab</title><link rel="stylesheet" href="../../css/style.css"></head>
-<body class="subject-page subject-detail-page"><header class="navbar"><div class="nav-container"><a href="../../index.html" class="logo"><span class="logo-mark">&lt;/&gt;</span><span>Rasika<span class="logo-highlight">CodeLab</span></span></a><nav class="nav-links"><a href="../../index.html">Home</a><a href="../../subjects.html" class="active">Subjects</a><a href="../../foundations.html">Foundations</a><a href="../../about.html">About</a><a href="../../login.html">Login</a></nav><button class="menu-btn" aria-label="Open menu">☰</button></div></header><main class="subject-detail-main"><div class="subject-detail-kicker">SUBJECT 02</div><h1>Database <span>Management Systems</span></h1><p class="subject-detail-lead">A structured place for DBMS concepts, SQL practice and database design practicals.</p><section class="coming-soon"><strong>Practicals are being prepared.</strong><span>This subject structure is ready for lessons and practical content.</span></section></main><script src="../../js/main.js"></script></body></html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DBMS | Rasika CodeLab</title>
+<link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="css/dbms_style.css">
+</head>
+
+<body class="subject-page subject-detail-page">
+
+<!-- ==================== NAVBAR ==================== -->
+
+<header class="navbar">
+    <div class="nav-container">
+
+        <a href="../../index.html" class="logo">
+            <span class="logo-mark">&lt;/&gt;</span>
+            <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="../../index.html">Home</a>
+            <a href="../../subjects.html" class="active">Subjects</a>
+            <a href="foundations.html">Foundations</a>
+            <a href="practicals.html">Practicals</a>
+            <a href="../../about.html">About</a>
+            <a href="../../login.html">Login</a>
+        </nav>
+
+        <button class="menu-btn" aria-label="Open menu">☰</button>
+
+    </div>
+</header>
+
+
+<!-- ==================== HERO ==================== -->
+
+<main class="subject-detail-main">
+
+    <div class="subject-detail-kicker">
+        DATABASE MANAGEMENT SYSTEM
+    </div>
+
+    <h1>
+        Learn Databases.
+        <span>Understand the Data.</span>
+    </h1>
+
+    <p class="subject-detail-lead">
+        Understand how data is stored, organized, related and managed —
+        from database foundations to SQL, database design and NoSQL.
+    </p>
+
+
+    <div class="hero-actions">
+
+        <a href="foundations.html" class="btn btn-primary">
+            Start Learning →
+        </a>
+
+        <a href="practicals.html" class="btn btn-secondary">
+            Explore Practicals
+        </a>
+
+    </div>
+
+
+    <!-- ==================== DATABASE VISUAL ==================== -->
+
+    <section class="code-demo">
+
+        <div class="code-window">
+
+            <div class="code-header">
+                <span>database.sql</span>
+            </div>
+
+            <pre><code>CREATE TABLE Student (
+    student_id INT PRIMARY KEY,
+    name VARCHAR(50),
+    branch VARCHAR(30),
+    marks INT
+);</code></pre>
+
+        </div>
+
+
+        <div class="database-output">
+
+            <div class="output-label">
+                TABLE : Student
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>student_id</th>
+                        <th>name</th>
+                        <th>branch</th>
+                        <th>marks</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>101</td>
+                        <td>Rahul</td>
+                        <td>CSE</td>
+                        <td>85</td>
+                    </tr>
+
+                    <tr>
+                        <td>102</td>
+                        <td>Priya</td>
+                        <td>IT</td>
+                        <td>91</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==================== WHY RASIKA CODELAB ==================== -->
+
+    <section class="why-section">
+
+        <div class="section-kicker">
+            WHY RASIKA CODELAB?
+        </div>
+
+        <h2>
+            Don't just write SQL.
+            <span>Understand how data works.</span>
+        </h2>
+
+        <p class="section-lead">
+            Learn database concepts through simple explanations,
+            database design and practical SQL instead of memorizing commands.
+        </p>
+
+
+        <div class="feature-grid">
+
+            <!-- FEATURE 01 -->
+
+            <article class="feature-card">
+
+                <div class="feature-number">01</div>
+
+                <div class="feature-icon">🗂️</div>
+
+                <h3>
+                    Understand the Data
+                </h3>
+
+                <p>
+                    Learn data, fields, records, tables and how information
+                    is organized inside a database.
+                </p>
+
+                <a href="foundations.html">
+                    Explore Foundations →
+                </a>
+
+            </article>
+
+
+            <!-- FEATURE 02 -->
+
+            <article class="feature-card">
+
+                <div class="feature-number">02</div>
+
+                <div class="feature-icon">◇</div>
+
+                <h3>
+                    Design the Database
+                </h3>
+
+                <p>
+                    Understand entities, relationships, ER diagrams,
+                    keys and database structure.
+                </p>
+
+                <a href="foundations.html">
+                    Explore Database Design →
+                </a>
+
+            </article>
+
+
+            <!-- FEATURE 03 -->
+
+            <article class="feature-card">
+
+                <div class="feature-number">03</div>
+
+                <div class="feature-icon">💻</div>
+
+                <h3>
+                    Practice SQL
+                </h3>
+
+                <p>
+                    Create, retrieve, update and analyze data using
+                    practical SQL queries.
+                </p>
+
+                <a href="practicals.html">
+                    View Practicals →
+                </a>
+
+            </article>
+
+
+            <!-- FEATURE 04 -->
+
+            <article class="feature-card">
+
+                <div class="feature-number">04</div>
+
+                <div class="feature-icon">⚙️</div>
+
+                <h3>
+                    Understand the Database
+                </h3>
+
+                <p>
+                    Learn transactions, indexes, performance, security
+                    and modern NoSQL databases.
+                </p>
+
+                <a href="practicals.html">
+                    Explore Practicals →
+                </a>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==================== FOUNDATIONS ==================== -->
+
+    <section class="foundations-section">
+
+        <div class="section-header">
+
+            <div>
+                <div class="section-kicker">
+                    BEFORE YOU WRITE SQL
+                </div>
+
+                <h2>
+                    Database Foundations
+                </h2>
+
+                <p>
+                    Build the basic understanding you need before
+                    designing and working with databases.
+                </p>
+            </div>
+
+            <a href="foundations.html" class="section-link">
+                View All Foundations →
+            </a>
+
+        </div>
+
+
+        <div class="foundation-grid">
+
+            <a href="foundations/foundation01.html" class="foundation-card">
+
+                <span class="foundation-number">01</span>
+
+                <div>
+                    <h3>What is Data?</h3>
+
+                    <p>
+                        Understand data, information, fields,
+                        records and tables.
+                    </p>
+                </div>
+
+                <span class="foundation-arrow">→</span>
+
+            </a>
+
+
+            <a href="foundations/foundation02.html" class="foundation-card">
+
+                <span class="foundation-number">02</span>
+
+                <div>
+                    <h3>How is Data Stored?</h3>
+
+                    <p>
+                        See how data is organized through
+                        databases, tables, rows and columns.
+                    </p>
+                </div>
+
+                <span class="foundation-arrow">→</span>
+
+            </a>
+
+
+            <a href="foundations/foundation03.html" class="foundation-card">
+
+                <span class="foundation-number">03</span>
+
+                <div>
+                    <h3>Files vs Database</h3>
+
+                    <p>
+                        Understand why storing data in separate
+                        files becomes difficult.
+                    </p>
+                </div>
+
+                <span class="foundation-arrow">→</span>
+
+            </a>
+
+
+            <a href="foundations/foundation04.html" class="foundation-card">
+
+                <span class="foundation-number">04</span>
+
+                <div>
+                    <h3>Entities & Relationships</h3>
+
+                    <p>
+                        Learn how real-world objects and their
+                        relationships become database structures.
+                    </p>
+                </div>
+
+                <span class="foundation-arrow">→</span>
+
+            </a>
+
+
+            <a href="foundations/foundation05.html" class="foundation-card">
+
+                <span class="foundation-number">05</span>
+
+                <div>
+                    <h3>CRUD & DBMS</h3>
+
+                    <p>
+                        Understand Create, Read, Update and Delete
+                        and how a DBMS manages data.
+                    </p>
+                </div>
+
+                <span class="foundation-arrow">→</span>
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==================== PRACTICAL LAB ==================== -->
+
+    <section class="practical-cta">
+
+        <div class="section-kicker">
+            DBMS PRACTICAL LAB
+        
+        </div>
+
+
+        <h2>
+            Ready to build your
+            <span>first database?</span>
+        </h2>
+ <p>
+            Follow practicals from database design and SQL
+            to transactions, security and NoSQL.</p>
+        </p>
+
+        <a href="practicals.html" class="btn btn-primary">
+            Explore DBMS Practicals →
+        </a>
+
+    </section>
+
+</main>
+
+
+<!-- ==================== FOOTER ==================== -->
+
+<footer class="site-footer">
+
+    <div class="footer-main">
+
+        <!-- BRAND -->
+
+        <div class="footer-brand">
+
+            <a href="../../index.html" class="logo">
+                <span class="logo-mark">&lt;/&gt;</span>
+                <span>
+                    Rasika<span class="logo-highlight">CodeLab</span>
+                </span>
+            </a>
+
+            <p>
+                Interactive database learning through concepts,
+                SQL, design and practical applications.
+            </p>
+
+        </div>
+
+
+        <!-- LEARN -->
+
+        <div class="footer-links">
+
+            <h4>Learn</h4>
+
+            <a href="foundations.html">
+                Foundations
+            </a>
+
+            <a href="practicals.html">
+                Practicals
+            </a>
+
+        </div>
+
+
+        <!-- EXPLORE -->
+
+        <div class="footer-links">
+
+            <h4>Explore</h4>
+
+            <a href="../../about.html">
+                About
+            </a>
+
+            <a href="practicals.html">
+                DBMS Lab
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- BOTTOM -->
+
+    <div class="footer-bottom">
+
+        <span>
+            © 2026 Rasika CodeLab
+        </span>
+
+        <span>
+            Built for practical learning.
+        </span>
+
+    </div>
+
+</footer>
+
+
+
+<script src="../../js/main.js"></script>
+
+</body>
+</html>

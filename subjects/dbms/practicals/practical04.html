@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practical 04 â€” Filtering, Sorting & SQL Functions | DBMS</title>
+   <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../css/dbms_practical.css">
+</head>
+
+<body class="protected-page">
+
+<header class="navbar">
+    <div class="nav-container">
+
+        <a href="../../../index.html" class="logo">
+            <span class="logo-mark">&lt;/&gt;</span>
+            <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="../../../index.html">Home</a>
+            <a href="../../../subjects.html" class="active">Subjects</a>
+            <a href="../foundations.html">Foundations</a>
+            <a href="../practicals.html">Practicals</a>
+            <a href="../../../about.html">About</a>
+            <a href="../../../login.html">Login</a>
+        </nav>
+
+        <button class="menu-btn" aria-label="Open menu">â˜°</button>
+
+    </div>
+</header>
+
+<main class="practical-page">
+
+    <section class="practical-hero">
+        <div class="hero-number">P04</div>
+        <div>
+            <div class="eyebrow">DBMS PRACTICAL 04</div>
+            <h1>Filtering, Sorting & SQL Functions</h1>
+            <p>WHERE â†’ ORDER BY â†’ Functions</p>
+            <div class="tag-row"><span>WHERE</span><span>ORDER BY</span><span>Operators</span><span>Functions</span></div>
+        </div>
+    </section>
+
+    <section class="practical-workspace">
+
+        <aside class="practical-panel learn-panel">
+            <div class="panel-label">LEARN / BUILD</div>
+            <h2>What you'll do</h2>
+            <p>Build meaningful queries using conditions, sorting, operators and common SQL functions.</p>
+            <ul class="learning-list">
+                <li>Filter rows using WHERE conditions.</li><li>Sort query results with ORDER BY.</li><li>Use comparison and logical operators.</li><li>Apply aggregate and scalar SQL functions.</li>
+            </ul>
+
+            <div class="interactive-controls">
+                
+            <label class="editor-label" for="sqlQuery">SQL Query</label>
+            <textarea id="sqlQuery" class="sql-editor" spellcheck="false">SELECT name, marks
+FROM students
+WHERE marks &gt; 70
+ORDER BY marks DESC;</textarea>
+            <div class="button-row">
+                <button class="action-btn" type="button">â–¶ Run Query</button>
+                <button class="secondary-btn" type="button">Reset</button>
+            </div>
+        
+            </div>
+        </aside>
+
+        <section class="practical-panel visual-panel">
+            <div class="panel-header">
+                <div>
+                    <div class="panel-label">LIVE VISUALIZATION</div>
+                    <h2>See the concept</h2>
+                </div>
+                <span class="live-indicator"><i></i> LIVE</span>
+            </div>
+
+            <div class="query-editor">
+                
+            <div class="query-flow">
+                <div class="query-stage active">SQL</div><span class="flow-arrow">â†’</span>
+                <div class="query-stage">FILTER</div><span class="flow-arrow">â†’</span>
+                <div class="query-stage">SORT</div><span class="flow-arrow">â†’</span>
+                <div class="query-stage">RESULT</div>
+            </div>
+            <div class="query-result">
+                <table class="data-table">
+                    <thead><tr><th>name</th><th>marks</th></tr></thead>
+                    <tbody><tr><td>Asha</td><td>92</td></tr><tr><td>Riya</td><td>84</td></tr><tr><td>Neha</td><td>76</td></tr></tbody>
+                </table>
+            </div>
+        
+            </div>
+        </section>
+
+    </section>
+
+    <section class="status-bar">
+        <span class="status-dot"></span>
+        <span>Status:</span>
+        <strong>Ready to start</strong>
+        <span class="status-message">Use the controls to explore this practical.</span>
+    </section>
+
+    <nav class="practical-navigation">
+        <a href="practical03.html" class="nav-btn">â† Practical 03</a>
+        <span>Practical 04 / 10</span>
+        <a href="practical05.html" class="nav-btn next">Next Practical â†’</a>
+    </nav>
+
+</main>
+
+<!-- ==================== FOOTER ==================== -->
+
+<footer class="site-footer">
+
+    <div class="footer-main">
+
+        <!-- BRAND -->
+
+        <div class="footer-brand">
+
+            <a href="../../../index.html" class="logo">
+                <span class="logo-mark">&lt;/&gt;</span>
+                <span>
+                    Rasika<span class="logo-highlight">CodeLab</span>
+                </span>
+            </a>
+
+            <p>
+                Interactive database learning through concepts,
+                SQL, design and practical applications.
+            </p>
+
+        </div>
+
+
+        <!-- LEARN -->
+
+        <div class="footer-links">
+
+            <h4>Learn</h4>
+
+            <a href="../foundations.html">
+                Foundations
+            </a>
+
+
+        </div>
+
+
+        <!-- EXPLORE -->
+
+        <div class="footer-links">
+
+            <h4>Explore</h4>
+
+            <a href="../../../about.html">
+                About
+            </a>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- BOTTOM -->
+
+    <div class="footer-bottom">
+
+        <span>
+            Â© 2026 Rasika CodeLab
+        </span>
+
+        <span>
+            Built for practical learning.
+        </span>
+
+    </div>
+
+</footer>
+
+
+<script src="../js/dbms_practical.js"></script>
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

@@ -1,0 +1,226 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01 â€” Where Does Data Live? | DBMS Foundation</title>
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../css/dbms_foundation.css">
+</head>
+
+<body class="protected-page">
+
+<header class="navbar">
+    <div class="nav-container">
+
+        <a href="../../../index.html" class="logo">
+            <span class="logo-mark">&lt;/&gt;</span>
+            <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="../../../index.html">Home</a>
+            <a href="../../../subjects.html" class="active">Subjects</a>
+            <a href="../foundations.html">Foundations</a>
+            <a href="../../../about.html">About</a>
+            <a href="../../../login.html">Login</a>
+        </nav>
+
+        <button class="menu-btn" aria-label="Open menu">â˜°</button>
+
+    </div>
+</header>
+
+<main class="lesson-page">
+
+    <section class="lesson-hero">
+        <span class="lesson-number">FOUNDATION 01</span>
+
+        <h1>Where Does <span>Data Live?</span></h1>
+
+        <p>
+            Follow the journey of data from memory to permanent storage
+            and understand why persistence matters in a database system.
+        </p>
+    </section>
+
+    <section class="lesson-grid">
+
+        <article class="info-card">
+            <span class="card-label">WHAT STUDENT LEARNS</span>
+
+            <h2>From RAM to Database</h2>
+
+            <p>
+                Understand RAM, storage, database files, DBMS and
+                persistence â€” and how data moves between them.
+            </p>
+
+            <div class="concept-list">
+                <span>RAM</span>
+                <span>Storage</span>
+                <span>Database</span>
+                <span>DBMS</span>
+                <span>Persistence</span>
+            </div>
+        </article>
+
+        <article class="output-card">
+            <span class="card-label">PRACTICAL OUTPUT</span>
+
+            <h2>Trace Where Data Goes</h2>
+
+            <p>
+                Enter a piece of data and trace its journey through
+                memory, DBMS processing and permanent storage.
+            </p>
+
+            <button class="primary-btn" onclick="startDataFlow()">
+                â–¶ Start Data Flow
+            </button>
+        </article>
+
+    </section>
+
+
+    <section class="visual-section">
+
+        <div class="section-heading">
+            <span class="section-tag">VISUAL / INTERACTIVE</span>
+            <h2>Animated Data Flow</h2>
+            <p>Watch how a database stores a piece of information.</p>
+        </div>
+
+        <div class="data-flow">
+
+            <div class="flow-node" id="node-input">
+                <div class="node-icon">âŒ¨</div>
+                <strong>INPUT</strong>
+                <small>User Data</small>
+            </div>
+
+            <div class="flow-arrow">â†’</div>
+
+            <div class="flow-node" id="node-ram">
+                <div class="node-icon">RAM</div>
+                <strong>RAM</strong>
+                <small>Temporary Memory</small>
+            </div>
+
+            <div class="flow-arrow">â†’</div>
+
+            <div class="flow-node" id="node-dbms">
+                <div class="node-icon">DB</div>
+                <strong>DBMS</strong>
+                <small>Database Manager</small>
+            </div>
+
+            <div class="flow-arrow">â†’</div>
+
+            <div class="flow-node" id="node-storage">
+                <div class="node-icon">â–£</div>
+                <strong>STORAGE</strong>
+                <small>Permanent Data</small>
+            </div>
+
+        </div>
+
+        <div class="flow-status" id="flowStatus">
+            Ready â€” click <strong>Start Data Flow</strong>
+        </div>
+
+    </section>
+
+
+    <section class="takeaway">
+
+        <span class="card-label">KEY IDEA</span>
+
+        <h2>RAM is temporary. Storage is persistent.</h2>
+
+        <p>
+            A DBMS manages the movement of data between memory and
+            permanent storage while maintaining consistency and reliability.
+        </p>
+
+    </section>
+
+
+    <nav class="lesson-navigation">
+
+        <a href="../index.html" class="nav-btn">
+            â† DBMS Home
+        </a>
+
+        <a href="foundation02.html" class="nav-btn next">
+            Next Foundation â†’
+        </a>
+
+    </nav>
+
+</main>
+
+
+<script>
+function startDataFlow() {
+
+    const nodes = [
+        {
+            id: "node-input",
+            text: "Data entered by user"
+        },
+        {
+            id: "node-ram",
+            text: "Data temporarily exists in RAM"
+        },
+        {
+            id: "node-dbms",
+            text: "DBMS processes the data"
+        },
+        {
+            id: "node-storage",
+            text: "Data is written to permanent storage"
+        }
+    ];
+
+    const status = document.getElementById("flowStatus");
+
+    nodes.forEach(node => {
+        document.getElementById(node.id).classList.remove("active");
+    });
+
+    let index = 0;
+
+    function animateNode() {
+
+        if (index >= nodes.length) {
+            status.innerHTML = "âœ“ Data successfully reached <strong>permanent storage</strong>";
+            return;
+        }
+
+       const current = nodes[index];
+
+nodes.forEach(node => {
+    document
+        .getElementById(node.id)
+        .classList.remove("active");
+});
+
+document
+    .getElementById(current.id)
+    .classList.add("active");
+
+status.innerHTML = current.text;
+
+        index++;
+
+        setTimeout(animateNode, 900);
+    }
+
+    animateNode();
+}
+</script>
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

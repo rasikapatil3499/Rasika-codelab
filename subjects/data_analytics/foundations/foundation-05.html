@@ -1,0 +1,1168 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Foundation 05 | Data Analytics | Rasika CodeLab</title>
+
+    <style>
+        :root {
+            --bg: #080808;
+            --bg-soft: #101010;
+            --card: #151515;
+            --card-hover: #1c1c1c;
+            --border: rgba(255,255,255,.09);
+            --text: #f5f5f5;
+            --muted: #a8a8a8;
+            --orange: #ff7a00;
+            --orange-light: #ff9d42;
+            --green: #35d07f;
+            --blue: #4da6ff;
+            --red: #ff5c5c;
+            --yellow: #ffd166;
+            --shadow: 0 18px 45px rgba(0,0,0,.35);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(circle at 10% 5%, rgba(255,122,0,.08), transparent 25%),
+                radial-gradient(circle at 90% 25%, rgba(77,166,255,.05), transparent 25%),
+                var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(8,8,8,.94);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            min-height: 70px;
+            margin: auto;
+            padding: 0 24px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .logo-mark {
+            color: var(--orange);
+        }
+
+        .logo-highlight {
+            color: var(--orange);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 26px;
+        }
+
+        .nav-links a {
+            color: #c7c7c7;
+            font-size: 14px;
+            transition: .25s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--orange);
+        }
+
+        .menu-btn {
+            display: none;
+            background: transparent;
+            color: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+        /* ================= PAGE ================= */
+
+        .page {
+            max-width: 1180px;
+            margin: auto;
+            padding: 55px 24px 80px;
+        }
+
+        /* ================= BREADCRUMB ================= */
+
+        .breadcrumb {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            color: var(--muted);
+            font-size: 13px;
+            margin-bottom: 32px;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--orange);
+        }
+
+        .breadcrumb span {
+            color: #555;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            padding: 45px;
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255,122,0,.13),
+                    rgba(255,255,255,.025)
+                );
+            box-shadow: var(--shadow);
+            margin-bottom: 45px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 7px 14px;
+            border-radius: 30px;
+            background: rgba(255,122,0,.12);
+            border: 1px solid rgba(255,122,0,.25);
+            color: var(--orange-light);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 {
+            font-size: clamp(32px, 5vw, 56px);
+            line-height: 1.15;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 span {
+            color: var(--orange);
+        }
+
+        .hero p {
+            max-width: 850px;
+            color: #bdbdbd;
+            font-size: 17px;
+        }
+
+        /* ================= SECTION ================= */
+
+        .section {
+            margin-bottom: 48px;
+        }
+
+        .section-heading {
+            margin-bottom: 20px;
+        }
+
+        .section-heading small {
+            display: block;
+            color: var(--orange);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .section-heading h2 {
+            font-size: 28px;
+            margin-top: 3px;
+        }
+
+        .section-heading p {
+            color: var(--muted);
+            margin-top: 4px;
+        }
+
+        /* ================= GRID ================= */
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            padding: 25px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            transition: .25s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            background: var(--card-hover);
+            border-color: rgba(255,122,0,.35);
+            box-shadow: var(--shadow);
+        }
+
+        .icon {
+            width: 44px;
+            height: 44px;
+            display: grid;
+            place-items: center;
+            border-radius: 12px;
+            background: rgba(255,122,0,.12);
+            color: var(--orange);
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        /* ================= INSIGHT FORMULA ================= */
+
+        .formula {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr auto 1fr;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .formula-box {
+            min-height: 130px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 20px;
+        }
+
+        .formula-box strong {
+            font-size: 18px;
+            color: var(--orange);
+            margin-bottom: 5px;
+        }
+
+        .formula-box span {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .formula-arrow {
+            color: var(--orange);
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        /* ================= DATA STORY ================= */
+
+        .story {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .story-step {
+            position: relative;
+            padding: 25px 18px;
+            text-align: center;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+        }
+
+        .story-number {
+            width: 36px;
+            height: 36px;
+            margin: 0 auto 12px;
+
+            display: grid;
+            place-items: center;
+
+            background: var(--orange);
+            color: #111;
+            border-radius: 50%;
+            font-weight: 800;
+        }
+
+        .story-step h3 {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .story-step p {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        /* ================= CHART ================= */
+
+        .chart-card {
+            padding: 30px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .chart-header h3 {
+            font-size: 18px;
+        }
+
+        .chart-header span {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .chart {
+            height: 280px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            gap: 18px;
+
+            padding: 20px 10px 0;
+            border-bottom: 1px solid #333;
+        }
+
+        .chart-item {
+            flex: 1;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+
+        .bar {
+            width: 60%;
+            max-width: 65px;
+            min-height: 10px;
+            background: linear-gradient(
+                to top,
+                var(--orange),
+                var(--orange-light)
+            );
+            border-radius: 8px 8px 0 0;
+            transition: .3s;
+        }
+
+        .bar:hover {
+            transform: scaleX(1.08);
+        }
+
+        .chart-label {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        /* ================= INSIGHT BOX ================= */
+
+        .insight {
+            border-left: 4px solid var(--orange);
+            padding: 24px 25px;
+            background: rgba(255,122,0,.06);
+            border-radius: 0 15px 15px 0;
+        }
+
+        .insight h3 {
+            color: var(--orange-light);
+            margin-bottom: 8px;
+        }
+
+        .insight p {
+            color: #c3c3c3;
+        }
+
+        /* ================= DO / DON'T ================= */
+
+        .do-card {
+            border-top: 3px solid var(--green);
+        }
+
+        .dont-card {
+            border-top: 3px solid var(--red);
+        }
+
+        .list {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .list li {
+            padding: 9px 0;
+            border-bottom: 1px solid rgba(255,255,255,.06);
+            color: #c5c5c5;
+            font-size: 14px;
+        }
+
+        .list li:last-child {
+            border-bottom: none;
+        }
+
+        .do-card .list li::before {
+            content: "âœ“";
+            color: var(--green);
+            font-weight: bold;
+            margin-right: 9px;
+        }
+
+        .dont-card .list li::before {
+            content: "âœ•";
+            color: var(--red);
+            font-weight: bold;
+            margin-right: 9px;
+        }
+
+        /* ================= KEY TERMS ================= */
+
+        .terms {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .term {
+            padding: 8px 13px;
+            border-radius: 20px;
+            background: #181818;
+            border: 1px solid var(--border);
+            color: #d5d5d5;
+            font-size: 13px;
+        }
+
+        .term:hover {
+            border-color: rgba(255,122,0,.4);
+            color: var(--orange-light);
+        }
+
+        /* ================= NAVIGATION ================= */
+
+        .page-navigation {
+            margin-top: 55px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 13px 20px;
+            border-radius: 12px;
+
+            border: 1px solid var(--border);
+            background: var(--card);
+            color: #ddd;
+
+            font-size: 14px;
+            transition: .25s;
+        }
+
+        .nav-button:hover {
+            border-color: var(--orange);
+            color: var(--orange);
+            transform: translateY(-2px);
+        }
+
+        .nav-button.primary {
+            background: var(--orange);
+            color: #111;
+            border-color: var(--orange);
+            font-weight: 700;
+        }
+
+        .nav-button.primary:hover {
+            background: var(--orange-light);
+            color: #111;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 30px 24px;
+            text-align: center;
+            color: #777;
+            font-size: 13px;
+        }
+
+        footer strong {
+            color: var(--orange);
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 900px) {
+
+            .grid,
+            .grid-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .story {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .formula {
+                grid-template-columns: 1fr;
+            }
+
+            .formula-arrow {
+                transform: rotate(90deg);
+                text-align: center;
+            }
+
+            .flow-step:not(:last-child)::after {
+                display: none;
+            }
+        }
+
+        @media (max-width: 700px) {
+
+            .nav-links {
+                display: none;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .page {
+                padding: 35px 16px 60px;
+            }
+
+            .hero {
+                padding: 28px 22px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .grid,
+            .grid-2,
+            .story {
+                grid-template-columns: 1fr;
+            }
+
+            .chart-card {
+                padding: 20px;
+            }
+
+            .chart {
+                gap: 8px;
+            }
+
+            .bar {
+                width: 70%;
+            }
+
+            .page-navigation {
+                flex-direction: column;
+            }
+
+            .nav-button {
+                justify-content: center;
+            }
+        }
+    </style>
+<style>body.protected-page:not(.auth-ready){visibility:hidden}</style>
+</head>
+
+<body class="protected-page">
+
+<!-- =========================================================
+     NAVBAR
+========================================================= -->
+
+<header class="navbar">
+    <div class="nav-container">
+
+        <a href="../../../index.html" class="logo">
+            <span class="logo-mark">&lt;/&gt;</span>
+            <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="../../../index.html">Home</a>
+            <a href="../../../subjects.html">Subjects</a>
+            <a href="../data_analytics_foundations.html" class="active">
+                Foundations
+            </a>
+            <a href="../practicals/data_analytics_practicals.html">
+                Practicals
+            </a>
+            <a href="../../../about.html">About</a>
+        </nav>
+
+        <button class="menu-btn">â˜°</button>
+
+    </div>
+</header>
+
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
+
+<main class="page">
+
+    <!-- Breadcrumb -->
+
+    <div class="breadcrumb">
+        <a href="../index.html">Data Analytics</a>
+        <span>/</span>
+        <a href="data_analytics_foundations.html">Foundations</a>
+        <span>/</span>
+        <strong>Foundation 05</strong>
+    </div>
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="badge">
+            Foundation 05
+        </div>
+
+        <h1>
+            From Data to <span>Insights</span>
+        </h1>
+
+        <p>
+            Learn how analysts transform numbers and charts into meaningful
+            insights, communicate findings clearly, and support real-world
+            decision making.
+        </p>
+
+    </section>
+
+
+    <!-- LEARNING OBJECTIVES -->
+
+    <section class="section">
+
+        <div class="section-heading">
+            <small>What You Will Learn</small>
+            <h2>Learning Objectives</h2>
+            <p>
+                By the end of this foundation, you should be able to think
+                like a data analyst.
+            </p>
+        </div>
+
+        <div class="grid">
+
+            <div class="card">
+                <div class="icon">ðŸ”Ž</div>
+                <h3>Find Insights</h3>
+                <p>
+                    Identify meaningful patterns, trends, comparisons,
+                    relationships and unusual observations in data.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">ðŸ“Š</div>
+                <h3>Explain Visuals</h3>
+                <p>
+                    Read charts correctly and understand what the data is
+                    actually communicating.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">ðŸ’¡</div>
+                <h3>Make Decisions</h3>
+                <p>
+                    Convert analytical findings into useful recommendations
+                    for real-world situations.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- DATA TO DECISION -->
+
+    <section class="section">
+
+        <div class="section-heading">
+            <small>Core Concept</small>
+            <h2>Data â†’ Insight â†’ Decision</h2>
+            <p>
+                Data analytics is not just about creating charts.
+                The goal is to make information useful.
+            </p>
+        </div>
+
+        <div class="formula">
+
+            <div class="formula-box">
+                <strong>DATA</strong>
+                <span>
+                    Raw observations, transactions,
+                    measurements and records.
+                </span>
+            </div>
+
+            <div class="formula-arrow">â†’</div>
+
+            <div class="formula-box">
+                <strong>INSIGHT</strong>
+                <span>
+                    A meaningful finding discovered
+                    through analysis.
+                </span>
+            </div>
+
+            <div class="formula-arrow">â†’</div>
+
+            <div class="formula-box">
+                <strong>DECISION</strong>
+                <span>
+                    An action or recommendation
+                    based on evidence.
+                </span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- DATA STORYTELLING -->
+
+    <section class="section">
+
+        <div class="section-heading">
+            <small>Data Storytelling</small>
+            <h2>How an Analyst Explains Data</h2>
+            <p>
+                A good analysis should answer a question, not simply display
+                a collection of charts.
+            </p>
+        </div>
+
+        <div class="story">
+
+            <div class="story-step">
+                <div class="story-number">1</div>
+                <h3>Question</h3>
+                <p>
+                    What problem are we trying to understand?
+                </p>
+            </div>
+
+            <div class="story-step">
+                <div class="story-number">2</div>
+                <h3>Evidence</h3>
+                <p>
+                    What does the available data tell us?
+                </p>
+            </div>
+
+            <div class="story-step">
+                <div class="story-number">3</div>
+                <h3>Insight</h3>
+                <p>
+                    What important pattern or relationship exists?
+                </p>
+            </div>
+
+            <div class="story-step">
+                <div class="story-number">4</div>
+                <h3>Action</h3>
+                <p>
+                    What should we do based on the finding?
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- REAL ANALYTICS EXAMPLE -->
+
+    <section class="section">
+
+        <div class="section-heading">
+            <small>Real-World Example</small>
+            <h2>Monthly Sales Analysis</h2>
+            <p>
+                Suppose a company wants to understand its monthly sales.
+            </p>
+        </div>
+
+        <div class="chart-card">
+
+            <div class="chart-header">
+                <h3>Sales Performance</h3>
+                <span>Example Data</span>
+            </div>
+
+            <div class="chart">
+
+                <div class="chart-item">
+                    <div class="bar" style="height:35%;"></div>
+                    <span class="chart-label">Jan</span>
+                </div>
+
+                <div class="chart-item">
+                    <div class="bar" style="height:45%;"></div>
+                    <span class="chart-label">Feb</span>
+                </div>
+
+                <div class="chart-item">
+                    <div class="bar" style="height:52%;"></div>
+                    <span class="chart-label">Mar</span>
+                </div>
+
+                <div class="chart-item">
+                    <div class="bar" style="height:62%;"></div>
+                    <span class="chart-label">Apr</span>
+                </div>
+
+                <div class="chart-item">
+                    <div class="bar" style="height:72%;"></div>
+                    <span class="chart-label">May</span>
+                </div>
+
+                <div class="chart-item">
+                    <div class="bar" style="height:90%;"></div>
+                    <span class="chart-label">Jun</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- INTERPRETING CHART -->
+
+    <section class="section">
+
+        <div class="section-heading">
+            <small>Think Like an Analyst</small>
+            <h2>What Can We Say?</h2>
+        </div>
+
+        <div class="insight">
+
+            <h3>ðŸ’¡ Example Insight</h3>
+
+            <p>
+                Sales show a consistent upward trend from January to June.
+                June has the highest sales value, indicating that the business
+                may be experiencing increasing demand or that a successful
+                campaign or seasonal factor influenced performance.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- TYPES OF INSIGHTS -->
+
+    <section class="section">
+
+        <div class="section-heading">
+            <small>Insight Types</small>
+            <h2>What Should You Look For?</h2>
+        </div>
+
+        <div class="grid">
+
+            <div class="card">
+                <div class="icon">ðŸ“ˆ</div>
+                <h3>Trend</h3>
+                <p>
+                    Is something increasing, decreasing or remaining stable
+                    over time?
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">âš–ï¸</div>
+                <h3>Comparison</h3>
+                <p>
+                    Which product, region, department or category performs
+                    better?
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">ðŸ”—</div>
+                <h3>Relationship</h3>
+                <p>
+                    Are two variables related to each other?
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">ðŸš¨</div>
+                <h3>Outlier</h3>
+                <p>
+                    Is there an unusual value that requires investigation?
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">ðŸŽ¯</div>
+                <h3>Performance</h3>
+                <p>
+                    Is the organization meeting its target or KPI?
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">â±ï¸</div>
+                <h3>Change</h3>
+                <p>
+                    What changed compared with the previous period?
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- GOOD VS BAD ANALYSIS -->
+
+    <section class="section">
+
+        <div class="section-heading">
+            <small>Best Practices</small>
+            <h2>Good Analysis vs Poor Analysis</h2>
+        </div>
+
+        <div class="grid-2">
+
+            <div class="card do-card">
+
+                <h3>âœ“ Good Analysis</h3>
+
+                <ul class="list">
+                    <li>Starts with a clear question.</li>
+                    <li>Uses appropriate data.</li>
+                    <li>Chooses the correct visualization.</li>
+                    <li>Explains the important pattern.</li>
+                    <li>Provides evidence for conclusions.</li>
+                    <li>Ends with a useful recommendation.</li>
+                </ul>
+
+            </div>
+
+            <div class="card dont-card">
+
+                <h3>âœ• Poor Analysis</h3>
+
+                <ul class="list">
+                    <li>Creates charts without a purpose.</li>
+                    <li>Uses misleading visualizations.</li>
+                    <li>Confuses correlation with causation.</li>
+                    <li>Ignores unusual values.</li>
+                    <li>Focuses only on numbers.</li>
+                    <li>Provides conclusions without evidence.</li>
+                </ul>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- KEY TERMS -->
+
+    <section class="section">
+
+        <div class="section-heading">
+            <small>Vocabulary</small>
+            <h2>Important Terms</h2>
+        </div>
+
+        <div class="terms">
+
+            <span class="term">Insight</span>
+            <span class="term">Data Storytelling</span>
+            <span class="term">KPI</span>
+            <span class="term">Trend</span>
+            <span class="term">Pattern</span>
+            <span class="term">Outlier</span>
+            <span class="term">Correlation</span>
+            <span class="term">Recommendation</span>
+            <span class="term">Dashboard</span>
+            <span class="term">Decision Making</span>
+
+        </div>
+
+    </section>
+
+
+    <!-- WHAT NEXT -->
+
+    <section class="section">
+
+        <div class="section-heading">
+            <small>Next Step</small>
+            <h2>Now Start Working With Real Problems</h2>
+            <p>
+                You have completed the five foundations. The next step is to
+                apply these concepts to practical datasets.
+            </p>
+        </div>
+
+        <div class="insight">
+
+            <h3>ðŸš€ From Learning to Building</h3>
+
+            <p>
+                In the practicals, you will work with real-life scenarios,
+                clean datasets, perform analysis, create visualizations,
+                identify insights and present your findings.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- NAVIGATION -->
+
+    <div class="page-navigation">
+
+        <a
+            href="foundation-04.html"
+            class="nav-button">
+            â† Foundation 04
+        </a>
+
+        <a
+            href="data_analytics_foundations.html"
+            class="nav-button">
+            All Foundations
+        </a>
+
+        <a
+            href="../practicals/data_analytics_practicals.html"
+            class="nav-button primary">
+            Start Practicals â†’
+        </a>
+
+    </div>
+
+</main>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer>
+    <strong>Rasika CodeLab</strong> Â· Data Analytics
+    <br>
+    Learn Data â†’ Analyze â†’ Visualize â†’ Understand â†’ Decide
+</footer>
+
+
+<script>
+    const menuBtn = document.querySelector(".menu-btn");
+    const navLinks = document.querySelector(".nav-links");
+
+    if (menuBtn) {
+        menuBtn.addEventListener("click", () => {
+            if (navLinks.style.display === "flex") {
+                navLinks.style.display = "";
+            } else {
+                navLinks.style.display = "flex";
+                navLinks.style.flexDirection = "column";
+                navLinks.style.position = "absolute";
+                navLinks.style.top = "70px";
+                navLinks.style.right = "20px";
+                navLinks.style.padding = "20px";
+                navLinks.style.background = "#101010";
+                navLinks.style.border = "1px solid rgba(255,255,255,.1)";
+                navLinks.style.borderRadius = "12px";
+            }
+        });
+    }
+</script>
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

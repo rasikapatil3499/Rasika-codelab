@@ -1,0 +1,611 @@
+
+/* =========================================================
+   RASIKA CODELAB — DBMS
+   Database Management Systems Subject Styles
+   ========================================================= */
+
+
+/* ==================== SUBJECT PAGE ==================== */
+
+.subject-detail-page {
+    --dbms-border: rgba(0, 0, 0, 0.10);
+    --dbms-soft: rgba(0, 0, 0, 0.035);
+    --dbms-muted: #6b7280;
+    --dbms-dark: #111827;
+}
+
+
+/* ==================== HERO ==================== */
+
+.subject-detail-main {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 90px 24px 80px;
+}
+
+.subject-detail-kicker {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    opacity: 0.65;
+}
+
+.subject-detail-main h1 {
+    max-width: 850px;
+    margin: 0;
+    font-size: clamp(42px, 6vw, 76px);
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+}
+
+.subject-detail-main h1 span {
+    display: block;
+}
+
+.subject-detail-lead {
+    max-width: 700px;
+    margin: 28px 0 30px;
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--dbms-muted);
+}
+
+
+/* ==================== HERO BUTTONS ==================== */
+
+.hero-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 70px;
+}
+
+.hero-actions .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    padding: 0 20px;
+    text-decoration: none;
+}
+
+
+/* ==================== DATABASE DEMO ==================== */
+
+.code-demo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    margin-bottom: 120px;
+}
+
+.code-window,
+.database-output {
+    border: 1px solid var(--dbms-border);
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--dbms-soft);
+}
+
+.code-header {
+    display: flex;
+    align-items: center;
+    min-height: 46px;
+    padding: 0 18px;
+    border-bottom: 1px solid var(--dbms-border);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.code-window pre {
+    margin: 0;
+    padding: 24px;
+    overflow-x: auto;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.code-window code {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono",
+        Menlo, monospace;
+}
+
+.database-output {
+    background: transparent;
+}
+
+.output-label {
+    padding: 15px 18px;
+    border-bottom: 1px solid var(--dbms-border);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.database-output table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.database-output th,
+.database-output td {
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--dbms-border);
+}
+
+.database-output th {
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.database-output tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* ==================== SECTION COMMON ==================== */
+
+.why-section,
+.foundations-section,
+.practical-cta {
+    margin-bottom: 120px;
+}
+
+.section-kicker {
+    margin-bottom: 14px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.6;
+}
+
+.why-section h2,
+.foundations-section h2,
+.practical-cta h2 {
+    margin: 0;
+    font-size: clamp(30px, 4vw, 48px);
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+}
+
+.why-section h2 span,
+.practical-cta h2 span {
+    display: block;
+}
+
+.section-lead {
+    max-width: 650px;
+    margin: 20px 0 48px;
+    color: var(--dbms-muted);
+    line-height: 1.7;
+}
+
+
+/* ==================== WHY SECTION ==================== */
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.feature-card {
+    position: relative;
+    min-height: 270px;
+    padding: 26px;
+    border: 1px solid var(--dbms-border);
+    border-radius: 16px;
+    background: transparent;
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        background 0.2s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(0, 0, 0, 0.22);
+    background: var(--dbms-soft);
+}
+
+.feature-number {
+    position: absolute;
+    top: 20px;
+    right: 22px;
+    font-size: 12px;
+    font-weight: 700;
+    opacity: 0.35;
+}
+
+.feature-icon {
+    margin-bottom: 30px;
+    font-size: 25px;
+}
+
+.feature-card h3 {
+    margin: 0 0 12px;
+    font-size: 20px;
+    letter-spacing: -0.02em;
+}
+
+.feature-card p {
+    margin: 0 0 22px;
+    color: var(--dbms-muted);
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+.feature-card a {
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+
+/* ==================== FOUNDATIONS ==================== */
+
+.section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.section-header p {
+    max-width: 600px;
+    margin: 16px 0 0;
+    color: var(--dbms-muted);
+    line-height: 1.6;
+}
+
+.section-link {
+    flex-shrink: 0;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.foundation-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.foundation-card {
+    display: grid;
+    grid-template-columns: 42px 1fr 24px;
+    align-items: center;
+    gap: 15px;
+    min-height: 110px;
+    padding: 20px 22px;
+    border: 1px solid var(--dbms-border);
+    border-radius: 14px;
+    text-decoration: none;
+    color: inherit;
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.foundation-card:hover {
+    transform: translateX(4px);
+    background: var(--dbms-soft);
+    border-color: rgba(0, 0, 0, 0.20);
+}
+
+.foundation-card:last-child {
+    grid-column: span 2;
+}
+
+.foundation-number {
+    font-size: 12px;
+    font-weight: 700;
+    opacity: 0.45;
+}
+
+.foundation-card h3 {
+    margin: 0 0 6px;
+    font-size: 17px;
+    letter-spacing: -0.015em;
+}
+
+.foundation-card p {
+    margin: 0;
+    color: var(--dbms-muted);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.foundation-arrow {
+    font-size: 18px;
+    opacity: 0.5;
+    transition: transform 0.2s ease;
+}
+
+.foundation-card:hover .foundation-arrow {
+    transform: translateX(3px);
+    opacity: 1;
+}
+
+
+/* ==================== PRACTICAL CTA ==================== */
+
+.practical-cta {
+    padding: 70px 30px;
+    text-align: center;
+    border-top: 1px solid var(--dbms-border);
+    border-bottom: 1px solid var(--dbms-border);
+}
+
+.practical-cta p {
+    max-width: 600px;
+    margin: 20px auto 30px;
+    color: var(--dbms-muted);
+    line-height: 1.7;
+}
+
+.practical-cta .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    padding: 0 22px;
+    text-decoration: none;
+}
+
+
+/* ==================== DATABASE THEME DETAILS ==================== */
+
+.database-output td:first-child,
+.database-output th:first-child {
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono",
+        Menlo, monospace;
+}
+
+.database-output td:last-child,
+.database-output th:last-child {
+    font-variant-numeric: tabular-nums;
+}
+
+
+/* ==================== DARK MODE ==================== */
+
+@media (prefers-color-scheme: dark) {
+
+    .subject-detail-page {
+        --dbms-border: rgba(255, 255, 255, 0.12);
+        --dbms-soft: rgba(255, 255, 255, 0.045);
+        --dbms-muted: #9ca3af;
+        --dbms-dark: #f9fafb;
+    }
+
+    .feature-card:hover,
+    .foundation-card:hover {
+        border-color: rgba(255, 255, 255, 0.25);
+    }
+}
+
+
+/* ==================== RESPONSIVE ==================== */
+
+@media (max-width: 900px) {
+
+    .subject-detail-main {
+        padding-top: 65px;
+    }
+
+    .code-demo {
+        grid-template-columns: 1fr;
+        margin-bottom: 90px;
+    }
+
+    .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .section-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .why-section,
+    .foundations-section,
+    .practical-cta {
+        margin-bottom: 90px;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .subject-detail-main {
+        padding: 50px 18px 60px;
+    }
+
+    .subject-detail-main h1 {
+        font-size: 42px;
+    }
+
+    .subject-detail-lead {
+        font-size: 16px;
+    }
+
+    .hero-actions {
+        margin-bottom: 50px;
+    }
+
+    .hero-actions .btn {
+        width: 100%;
+    }
+
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .feature-card {
+        min-height: auto;
+    }
+
+    .foundation-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .foundation-card:last-child {
+        grid-column: span 1;
+    }
+
+    .foundation-card {
+        grid-template-columns: 35px 1fr 20px;
+        padding: 18px;
+    }
+
+    .practical-cta {
+        padding: 50px 20px;
+    }
+
+    .database-output {
+        overflow-x: auto;
+    }
+
+    .database-output table {
+        min-width: 520px;
+    }
+
+}
+
+```css
+/* =========================================================
+   DBMS FOOTER
+   ========================================================= */
+
+.site-footer {
+    width: 100%;
+    border-top: 1px solid var(--dbms-border);
+    margin-top: 40px;
+}
+
+.footer-main {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 60px 24px 50px;
+
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 60px;
+}
+
+
+/* BRAND */
+
+.footer-brand .logo {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+.footer-brand p {
+    max-width: 330px;
+    margin: 18px 0 0;
+
+    color: var(--dbms-muted);
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+
+/* LINKS */
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+}
+
+.footer-links h4 {
+    margin: 0 0 8px;
+
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.footer-links a {
+    width: fit-content;
+
+    color: var(--dbms-muted);
+    font-size: 13px;
+    text-decoration: none;
+
+    transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+    color: inherit;
+}
+
+
+/* BOTTOM */
+
+.footer-bottom {
+    max-width: 1180px;
+    margin: 0 auto;
+
+    padding: 18px 24px 25px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border-top: 1px solid var(--dbms-border);
+
+    color: var(--dbms-muted);
+    font-size: 12px;
+}
+
+
+/* ==================== RESPONSIVE ==================== */
+
+@media (max-width: 700px) {
+
+    .footer-main {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        padding: 50px 20px 40px;
+    }
+
+    .footer-brand {
+        grid-column: span 2;
+    }
+
+    .footer-bottom {
+        padding: 18px 20px 22px;
+
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+}
+
+
+@media (max-width: 450px) {
+
+    .footer-main {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-brand {
+        grid-column: span 1;
+    }
+
+}
+```

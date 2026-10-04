@@ -1,0 +1,226 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Foundation 5 | Python 2030 | RasikaCodeLab</title>
+<link rel="stylesheet" href="../../../css/style.css">
+<link rel="stylesheet" href="../css/python.css">
+<link rel="stylesheet" href="../css/python_foundation.css">
+</head>
+<body class="protected-page">
+
+<header class="header">
+<div class="header-inner">
+<a href="../../../index.html" class="logo">
+<span class="logo-mark">&lt;/&gt;</span>
+<span>Rasika<span class="logo-highlight">CodeLab</span></span>
+</a>
+<nav class="nav">
+<a href="../../../index.html">Home</a>
+<a href="../../../subjects.html">Subjects</a>
+<a href="../foundations.html" class="active">Foundations</a>
+<a href="../../../about.html">About</a>
+</nav>
+</div>
+</header>
+
+<main class="python-foundation-page">
+<div class="foundation-breadcrumb">
+<a href="../index.html">Python 2030</a><span>/</span>
+<a href="../foundations.html">Foundations</a><span>/</span>
+<span>Foundation 5</span>
+</div>
+
+<section class="foundation-hero">
+<span class="foundation-label">FOUNDATION 05</span>
+<h1>Modern Python Engineering</h1>
+<p>Develop production-oriented Python using async programming, security, packaging, data and AI.</p>
+<div class="foundation-meta">
+<span>8 Sections</span><span>Core Foundation</span><span>Python 2030</span>
+</div>
+</section>
+
+<section class="foundation-content">
+<div class="foundation-grid">
+
+        <article class="foundation-card">
+            <button class="foundation-card-header" type="button" aria-expanded="false">
+                <div class="card-title">
+                    <span class="card-number">01</span>
+                    <div>
+                        <span class="card-category">FOUNDATION</span>
+                        <h2>Async Python</h2>
+                        <p>Handle concurrent I/O with async/await.</p>
+                    </div>
+                </div>
+                <span class="card-toggle">+</span>
+            </button>
+            <div class="foundation-card-content"><pre><code>import asyncio
+
+async def work():
+    await asyncio.sleep(1)
+    return "done"
+
+result = asyncio.run(work())</code></pre><div class="concept-box"><span>MODEL</span><strong>Coroutine â†’ Event Loop â†’ Concurrent I/O</strong></div></div>
+        </article>
+        <article class="foundation-card">
+            <button class="foundation-card-header" type="button" aria-expanded="false">
+                <div class="card-title">
+                    <span class="card-number">02</span>
+                    <div>
+                        <span class="card-category">FOUNDATION</span>
+                        <h2>Concurrency</h2>
+                        <p>Choose threads or processes based on workload.</p>
+                    </div>
+                </div>
+                <span class="card-toggle">+</span>
+            </button>
+            <div class="foundation-card-content"><div class="mini-list"><span>I/O-bound â†’ Threads / Async</span><span>CPU-bound â†’ Processes</span><span>Shared state â†’ Synchronization</span></div><p>Concurrency is a design decision, not simply a performance switch.</p></div>
+        </article>
+        <article class="foundation-card">
+            <button class="foundation-card-header" type="button" aria-expanded="false">
+                <div class="card-title">
+                    <span class="card-number">03</span>
+                    <div>
+                        <span class="card-category">FOUNDATION</span>
+                        <h2>Performance</h2>
+                        <p>Measure before optimizing.</p>
+                    </div>
+                </div>
+                <span class="card-toggle">+</span>
+            </button>
+            <div class="foundation-card-content"><div class="flow-diagram"><div>Measure</div><span>â†’</span><div>Profile</div><span>â†’</span><div>Optimize</div><span>â†’</span><div>Benchmark</div></div><p>Focus on algorithmic complexity, I/O, memory and repeated work.</p></div>
+        </article>
+        <article class="foundation-card">
+            <button class="foundation-card-header" type="button" aria-expanded="false">
+                <div class="card-title">
+                    <span class="card-number">04</span>
+                    <div>
+                        <span class="card-category">FOUNDATION</span>
+                        <h2>Security</h2>
+                        <p>Protect applications and data.</p>
+                    </div>
+                </div>
+                <span class="card-toggle">+</span>
+            </button>
+            <div class="foundation-card-content"><div class="mini-list"><span>Validate input</span><span>Protect secrets</span><span>Parameterized SQL</span><span>Secure dependencies</span><span>Authentication</span></div><div class="rule-box"><strong>Principle</strong><p>Never treat external input or configuration as trusted by default.</p></div></div>
+        </article>
+        <article class="foundation-card">
+            <button class="foundation-card-header" type="button" aria-expanded="false">
+                <div class="card-title">
+                    <span class="card-number">05</span>
+                    <div>
+                        <span class="card-category">FOUNDATION</span>
+                        <h2>Packaging</h2>
+                        <p>Turn Python code into maintainable projects.</p>
+                    </div>
+                </div>
+                <span class="card-toggle">+</span>
+            </button>
+            <div class="foundation-card-content"><pre><code>project/
+â”œâ”€â”€ pyproject.toml
+â”œâ”€â”€ src/
+â”‚   â””â”€â”€ app/
+â””â”€â”€ tests/</code></pre><p>Use project metadata, isolated environments and explicit dependencies.</p></div>
+        </article>
+        <article class="foundation-card">
+            <button class="foundation-card-header" type="button" aria-expanded="false">
+                <div class="card-title">
+                    <span class="card-number">06</span>
+                    <div>
+                        <span class="card-category">FOUNDATION</span>
+                        <h2>Git & CI/CD</h2>
+                        <p>Use repeatable engineering workflows.</p>
+                    </div>
+                </div>
+                <span class="card-toggle">+</span>
+            </button>
+            <div class="foundation-card-content"><div class="mini-list"><span>Commit</span><span>Branch</span><span>Review</span><span>Test</span><span>Build</span><span>Deploy</span></div><p>Automated checks reduce regressions and make collaboration predictable.</p></div>
+        </article>
+        <article class="foundation-card">
+            <button class="foundation-card-header" type="button" aria-expanded="false">
+                <div class="card-title">
+                    <span class="card-number">07</span>
+                    <div>
+                        <span class="card-category">FOUNDATION</span>
+                        <h2>Data & AI</h2>
+                        <p>Connect Python with modern data and AI workflows.</p>
+                    </div>
+                </div>
+                <span class="card-toggle">+</span>
+            </button>
+            <div class="foundation-card-content"><div class="flow-diagram"><div>Data</div><span>â†’</span><div>Processing</div><span>â†’</span><div>Model / API</div><span>â†’</span><div>Application</div></div><p>Python can orchestrate data pipelines, model inference and AI-enabled applications.</p></div>
+        </article>
+        <article class="foundation-card">
+            <button class="foundation-card-header" type="button" aria-expanded="false">
+                <div class="card-title">
+                    <span class="card-number">08</span>
+                    <div>
+                        <span class="card-category">FOUNDATION</span>
+                        <h2>Capstone Problem</h2>
+                        <p>Combine modern engineering practices.</p>
+                    </div>
+                </div>
+                <span class="card-toggle">+</span>
+            </button>
+            <div class="foundation-card-content"><h3>Problem: Intelligent Data Service</h3><p>Build a small service that accepts data, validates it, stores it, processes it asynchronously and exposes useful results through an API.</p><div class="mini-list"><span>Async</span><span>API</span><span>Database</span><span>Testing</span><span>Security</span><span>AI Integration</span></div></div>
+        </article>
+</div>
+</section>
+
+<nav class="foundation-navigation">
+<a href="foundation04.html" class="foundation-nav-button">
+<span>â†</span><div><small>PREVIOUS FOUNDATION</small><strong>Foundation 4</strong></div>
+</a>
+<div class="foundation-progress">
+<span>FOUNDATION</span><strong>05 / 05</strong>
+<div class="progress-bar"><span style="width:100%"></span></div>
+</div>
+<a href="../practicals.html" class="foundation-nav-button next">
+<div><small>GO TO</small>
+<strong>Practicals</strong></div><span>â†’</span>
+</a>
+</nav>
+</main>
+
+<footer class="footer">
+<div class="footer-main">
+<div class="footer-brand">
+<div class="logo"><span class="logo-mark">&lt;/&gt;</span><span>Rasika<span class="logo-highlight">CodeLab</span></span></div>
+<p>Interactive practical learning through concepts, code and visualization.</p>
+</div>
+<div class="footer-links">
+<div><h4>Learn</h4><a href="../../../subjects.html">Subjects</a><a href="../../../about.html">About</a></div>
+<div><h4>Subjects</h4><a href="../../cpp/index.html">C++</a><a href="../../computer-graphics/cgr_index.html">Computer Graphics</a></div>
+</div>
+</div>
+<div class="footer-bottom">
+<span>Â© 2026 Rasika CodeLab</span><span>Built for practical learning.</span>
+</div>
+</footer>
+
+<script src="../../../js/main.js"></script>
+<script>
+document.querySelectorAll(".foundation-card-header").forEach(button => {
+    button.addEventListener("click", () => {
+        const card = button.closest(".foundation-card");
+        const isOpen = card.classList.contains("open");
+
+        document.querySelectorAll(".foundation-card").forEach(item => {
+            item.classList.remove("open");
+            item.querySelector(".foundation-card-header").setAttribute("aria-expanded", "false");
+            item.querySelector(".card-toggle").textContent = "+";
+        });
+
+        if (!isOpen) {
+            card.classList.add("open");
+            button.setAttribute("aria-expanded", "true");
+            button.querySelector(".card-toggle").textContent = "âˆ’";
+        }
+    });
+});
+</script>
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

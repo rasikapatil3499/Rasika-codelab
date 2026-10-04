@@ -1,0 +1,1641 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Practical 07 | Flood Fill &amp; Boundary Fill | Rasika CodeLab</title>
+  <link rel="stylesheet" href="../css/cgr_style.css">
+  <link rel="stylesheet" href="../css/cgr_practicals.css">
+<style>body.protected-page:not(.auth-ready){visibility:hidden}</style>
+</head>
+
+<body class="cgr-practical-body practical-07 protected-page">
+
+<header class="navbar">
+  <div class="logo">
+    <span class="logo-mark">&lt;/&gt;</span>
+    <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+  </div>
+
+  <nav class="nav-links">
+    <a href="../cgr_index.html">Home</a>
+    <a href="../cgr_foundations.html">Foundations</a>
+        <a href="../cgr_practicals.html" class="active">Practicals</a>
+    <a href="../../../about.html">About</a>
+  </nav>
+
+  <button class="menu-btn" aria-label="Open Menu">â˜°</button>
+</header>
+
+<main class="cgr-practical-page practical-07-page">
+
+  <section class="practical-hero">
+    <div class="practical-hero-content">
+      <span class="practical-badge">07 â€¢ FILLING</span>
+      <h1>Flood Fill &amp; Boundary Fill</h1>
+      <p>Explore seed-based region filling and understand their differences.</p>
+
+      <div class="practical-tags">
+        <span>Flood Fill</span>
+        <span>Boundary Fill</span>
+        <span>Recursion</span>
+        <span>Seed Point</span>
+      </div>
+    </div>
+
+    <div class="fill-hero-visual" aria-hidden="true">
+      <div class="fill-hero-grid"></div>
+      <div class="fill-hero-boundary"></div>
+      <div class="fill-hero-inner"></div>
+      <div class="fill-hero-seed"></div>
+      <span>SEED â†’ FILL</span>
+    </div>
+  </section>
+
+
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>01</span>
+      <div>
+        <h2>Why Region Filling?</h2>
+        <p>Raster graphics often need to fill a connected area starting from a selected pixel.</p>
+      </div>
+    </div>
+
+    <div class="concept-grid">
+
+      <article class="concept-card">
+        <div class="concept-icon">ðŸŒ±</div>
+        <h3>Seed Point</h3>
+        <p>The filling process begins from a selected pixel inside the region.</p>
+      </article>
+
+      <article class="concept-card">
+        <div class="concept-icon">ðŸŽ¨</div>
+        <h3>Flood Fill</h3>
+        <p>Replaces a connected region having the same target or old color.</p>
+      </article>
+
+      <article class="concept-card">
+        <div class="concept-icon">â­•</div>
+        <h3>Boundary Fill</h3>
+        <p>Fills a region until the specified boundary color is encountered.</p>
+      </article>
+
+    </div>
+
+    <div class="fill-flow">
+      <span>Choose Seed</span>
+      <b>â†’</b>
+      <span>Check Pixel</span>
+      <b>â†’</b>
+      <span>Fill Pixel</span>
+      <b>â†’</b>
+      <span>Check Neighbours</span>
+      <b>â†’</b>
+      <span>Repeat</span>
+    </div>
+  </section>
+
+
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>02</span>
+      <div>
+        <h2>Flood Fill vs Boundary Fill</h2>
+        <p>Both use a seed point, but their stopping conditions are different.</p>
+      </div>
+    </div>
+
+    <div class="fill-algorithm-grid">
+
+      <article class="fill-algorithm-card">
+        <div class="algorithm-card-top">
+          <span>01</span>
+          <h3>Flood Fill</h3>
+        </div>
+
+        <p>
+          Flood Fill replaces connected pixels that match the
+          <strong>target color</strong>.
+        </p>
+
+        <div class="rule-box">
+          <span>Condition</span>
+          <code>currentColor == targetColor</code>
+        </div>
+
+        <ol>
+          <li>Select a seed pixel.</li>
+          <li>Read its current color.</li>
+          <li>Replace the target color with the fill color.</li>
+          <li>Visit neighbouring pixels.</li>
+          <li>Stop when the color does not match.</li>
+        </ol>
+      </article>
+
+
+      <article class="fill-algorithm-card">
+        <div class="algorithm-card-top">
+          <span>02</span>
+          <h3>Boundary Fill</h3>
+        </div>
+
+        <p>
+          Boundary Fill replaces pixels until a specified
+          <strong>boundary color</strong> is reached.
+        </p>
+
+        <div class="rule-box">
+          <span>Condition</span>
+          <code>currentColor != boundaryColor</code>
+        </div>
+
+        <ol>
+          <li>Select a seed pixel.</li>
+          <li>Check whether it is a boundary pixel.</li>
+          <li>Fill the current pixel.</li>
+          <li>Visit neighbouring pixels.</li>
+          <li>Stop when the boundary is reached.</li>
+        </ol>
+      </article>
+
+    </div>
+
+    <div class="comparison-table-wrap">
+      <table class="fill-comparison-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Flood Fill</th>
+            <th>Boundary Fill</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>Primary check</td>
+            <td>Target / old color</td>
+            <td>Boundary color</td>
+          </tr>
+          <tr>
+            <td>Stops when</td>
+            <td>Pixel is not target color</td>
+            <td>Pixel reaches boundary color</td>
+          </tr>
+          <tr>
+            <td>Seed point</td>
+            <td>Required</td>
+            <td>Required</td>
+          </tr>
+          <tr>
+            <td>Connectivity</td>
+            <td>4 or 8</td>
+            <td>4 or 8</td>
+          </tr>
+          <tr>
+            <td>Typical use</td>
+            <td>Replace a connected color region</td>
+            <td>Fill a bounded region</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>03</span>
+      <div>
+        <h2>4-Connected &amp; 8-Connected</h2>
+        <p>The neighbourhood determines which pixels can be reached from the seed.</p>
+      </div>
+    </div>
+
+    <div class="connectivity-grid">
+
+      <article class="connectivity-card">
+        <h3>4-Connected</h3>
+
+        <div class="neighbor-grid four">
+          <span></span>
+          <span>â†‘</span>
+          <span></span>
+          <span>â†</span>
+          <strong>â—</strong>
+          <span>â†’</span>
+          <span></span>
+          <span>â†“</span>
+          <span></span>
+        </div>
+
+        <p>Checks the four direct neighbours.</p>
+        <code>Left â€¢ Right â€¢ Up â€¢ Down</code>
+      </article>
+
+
+      <article class="connectivity-card">
+        <h3>8-Connected</h3>
+
+        <div class="neighbor-grid eight">
+          <span>â†–</span>
+          <span>â†‘</span>
+          <span>â†—</span>
+          <span>â†</span>
+          <strong>â—</strong>
+          <span>â†’</span>
+          <span>â†˜</span>
+          <span>â†“</span>
+          <span>â†™</span>
+        </div>
+
+        <p>Checks direct and diagonal neighbours.</p>
+        <code>4 direct + 4 diagonal</code>
+      </article>
+
+    </div>
+  </section>
+
+
+  <section class="practical-section fill-live-section">
+    <div class="section-heading">
+      <span>04</span>
+      <div>
+        <h2>Interactive Fill Lab</h2>
+        <p>Choose the algorithm, select a seed and watch the region fill pixel-by-pixel.</p>
+      </div>
+    </div>
+
+    <div class="fill-lab">
+
+      <div class="fill-controls">
+
+        <div class="control-group">
+          <h3>Algorithm</h3>
+
+          <div class="algorithm-toggle">
+            <button class="algorithm-choice active" data-algorithm="flood">
+              Flood Fill
+            </button>
+            <button class="algorithm-choice" data-algorithm="boundary">
+              Boundary Fill
+            </button>
+          </div>
+        </div>
+
+
+        <div class="control-group">
+          <h3>Connectivity</h3>
+
+          <div class="connectivity-toggle">
+            <button class="connectivity-choice active" data-connectivity="4">
+              4-Connected
+            </button>
+            <button class="connectivity-choice" data-connectivity="8">
+              8-Connected
+            </button>
+          </div>
+        </div>
+
+
+        <div class="color-controls">
+          <h3>Colors</h3>
+
+          <label>
+            Fill Color
+            <input id="fillColor" type="color" value="#ff8a00">
+          </label>
+
+          <label id="targetColorLabel">
+            Target Color
+            <input id="targetColor" type="color" value="#24303d">
+          </label>
+
+          <label id="boundaryColorLabel">
+            Boundary Color
+            <input id="boundaryColor" type="color" value="#ffffff">
+          </label>
+        </div>
+
+
+        <div class="button-row">
+          <button class="primary-btn" id="generateFill">Generate Region</button>
+          <button class="secondary-btn" id="nextFill">Next Pixel</button>
+          <button class="secondary-btn" id="playFill">â–¶ Play Fill</button>
+          <button class="ghost-btn" id="resetFill">Reset</button>
+        </div>
+
+
+        <label class="speed-control">
+          Animation Speed
+          <input id="fillSpeed" type="range" min="30" max="600" value="100">
+          <span id="fillSpeedText">100 ms</span>
+        </label>
+
+
+        <div class="fill-status-grid">
+          <div>
+            <span>Algorithm</span>
+            <strong id="statusAlgorithm">Flood Fill</strong>
+          </div>
+          <div>
+            <span>Connectivity</span>
+            <strong id="statusConnectivity">4-Connected</strong>
+          </div>
+          <div>
+            <span>Seed</span>
+            <strong id="statusSeed">(14, 10)</strong>
+          </div>
+          <div>
+            <span>Filled</span>
+            <strong id="statusFilled">0</strong>
+          </div>
+        </div>
+
+        <div class="seed-help">
+          <strong>ðŸ’¡ Select a Seed</strong>
+          <p>Click anywhere inside the region on the canvas to choose a different starting pixel.</p>
+        </div>
+
+      </div>
+
+
+      <div class="fill-viewer">
+        <canvas id="fillCanvas" width="600" height="440"></canvas>
+
+        <div class="viewer-footer">
+          <span id="fillMessage">Ready â€” click Generate Region</span>
+          <span id="fillCount">Filled: 0</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>05</span>
+      <div>
+        <h2>Step-by-Step Filling</h2>
+        <p>Follow the complete seed-based process before implementing the algorithm.</p>
+      </div>
+    </div>
+
+    <div class="fill-step-row">
+
+      <article class="fill-step-card active">
+        <span>01</span>
+        <div>ðŸŒ±</div>
+        <h3>Seed</h3>
+        <p>Select the starting pixel.</p>
+      </article>
+
+      <b>â†’</b>
+
+      <article class="fill-step-card">
+        <span>02</span>
+        <div>ðŸ”</div>
+        <h3>Check</h3>
+        <p>Test the pixel condition.</p>
+      </article>
+
+      <b>â†’</b>
+
+      <article class="fill-step-card">
+        <span>03</span>
+        <div>ðŸŽ¨</div>
+        <h3>Fill</h3>
+        <p>Apply the new color.</p>
+      </article>
+
+      <b>â†’</b>
+
+      <article class="fill-step-card">
+        <span>04</span>
+        <div>â†—</div>
+        <h3>Neighbours</h3>
+        <p>Visit connected pixels.</p>
+      </article>
+
+      <b>â†’</b>
+
+      <article class="fill-step-card">
+        <span>05</span>
+        <div>âœ“</div>
+        <h3>Complete</h3>
+        <p>Stop when no valid pixels remain.</p>
+      </article>
+
+    </div>
+
+
+    <div class="process-animation">
+      <div class="process-grid"></div>
+      <div class="process-region"></div>
+      <div class="process-seed"></div>
+      <div class="process-pulse"></div>
+      <span id="processText">Press Play Process</span>
+    </div>
+
+    <div class="center-actions">
+      <button class="primary-btn" id="playProcess">â–¶ Play Process</button>
+      <button class="ghost-btn" id="resetProcess">Reset</button>
+    </div>
+  </section>
+
+
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>06</span>
+      <div>
+        <h2>Recursion in Filling</h2>
+        <p>A valid pixel can lead the algorithm to its neighbouring pixels.</p>
+      </div>
+    </div>
+
+    <div class="recursion-layout">
+
+      <div class="recursion-visual">
+        <div class="recursion-node root">Seed</div>
+        <div class="recursion-connector"></div>
+
+        <div class="recursion-branches">
+          <div>
+            <span>Left</span>
+            <span>Right</span>
+          </div>
+          <div>
+            <span>Up</span>
+            <span>Down</span>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="recursion-content">
+
+        <div class="recursion-rule">
+          <span>IF</span>
+          <code>pixel satisfies condition</code>
+        </div>
+
+        <div class="recursion-rule">
+          <span>THEN</span>
+          <code>fill(pixel)</code>
+        </div>
+
+        <div class="recursion-rule">
+          <span>AND</span>
+          <code>process(neighbour)</code>
+        </div>
+
+        <div class="recursion-rule">
+          <span>STOP</span>
+          <code>when condition is false</code>
+        </div>
+
+        <p>
+          A recursive implementation calls the same fill operation for valid
+          neighbouring pixels. For large regions, an explicit stack or queue
+          can be used to avoid excessive call-stack depth.
+        </p>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>07</span>
+      <div>
+        <h2>Worked Example</h2>
+        <p>Trace a small region from one seed point.</p>
+      </div>
+    </div>
+
+    <div class="worked-example">
+
+      <div class="worked-given">
+        <h3>Given</h3>
+
+        <div><span>Seed</span><strong>(2, 2)</strong></div>
+        <div><span>Target</span><strong>Blue</strong></div>
+        <div><span>Fill</span><strong>Orange</strong></div>
+        <div><span>Connectivity</span><strong>4-connected</strong></div>
+      </div>
+
+
+      <div class="worked-grid">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><i>â—</i><i>â—</i><span></span><span></span>
+        <span></span><i>â—</i><strong>ðŸŒ±</strong><i>â—</i><span></span>
+        <span></span><i>â—</i><i>â—</i><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+
+
+      <div class="worked-result">
+        <h3>Trace</h3>
+        <ol>
+          <li>Start at seed (2,2).</li>
+          <li>Check the target color.</li>
+          <li>Fill the current pixel.</li>
+          <li>Check four neighbours.</li>
+          <li>Continue through connected target pixels.</li>
+        </ol>
+      </div>
+
+    </div>
+  </section>
+
+
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>08</span>
+      <div>
+        <h2>Real-Life Problem Statements</h2>
+        <p>See where region filling algorithms are useful in graphics systems.</p>
+      </div>
+    </div>
+
+    <div class="problem-tabs">
+      <button class="problem-tab active" data-problem="paint">ðŸŽ¨ Paint Bucket</button>
+      <button class="problem-tab" data-problem="map">ðŸ—ºï¸ Map Region</button>
+      <button class="problem-tab" data-problem="game">ðŸŽ® Game Area</button>
+    </div>
+
+
+    <div class="fill-problem-layout">
+
+      <article class="problem-statement">
+
+        <span class="problem-label">PROBLEM</span>
+
+        <h3 id="problemTitle">Paint Bucket Tool</h3>
+
+        <p id="problemDescription">
+          A drawing application needs to replace a connected area of the same
+          color when the user clicks inside it with a paint bucket.
+        </p>
+
+        <div class="problem-given" id="problemGiven">
+          Seed = (12, 10) â€¢ Target = Blue â€¢ Fill = Orange
+        </div>
+
+        <div class="problem-answer" id="problemAnswer">
+          Flood Fill is suitable because the connected region is identified
+          by its target color.
+        </div>
+
+        <button class="primary-btn" id="showProblem">
+          Show This Problem
+        </button>
+
+      </article>
+
+
+      <div class="problem-viewer">
+        <canvas id="problemCanvas" width="600" height="430"></canvas>
+
+        <div class="viewer-footer">
+          <span id="problemStatus">Paint bucket region</span>
+          <span id="problemPixels">Pixels: 0</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>09</span>
+      <div>
+        <h2>Experiment</h2>
+        <p>Compare algorithms and neighbourhood definitions.</p>
+      </div>
+    </div>
+
+    <div class="experiment-grid">
+
+      <button class="experiment-card" data-mode="flood4">
+        <strong>Flood Fill</strong>
+        <span>4-Connected</span>
+      </button>
+
+      <button class="experiment-card" data-mode="flood8">
+        <strong>Flood Fill</strong>
+        <span>8-Connected</span>
+      </button>
+
+      <button class="experiment-card" data-mode="boundary4">
+        <strong>Boundary Fill</strong>
+        <span>4-Connected</span>
+      </button>
+
+      <button class="experiment-card" data-mode="boundary8">
+        <strong>Boundary Fill</strong>
+        <span>8-Connected</span>
+      </button>
+
+    </div>
+
+    <div class="experiment-result" id="experimentResult">
+      Select an experiment to load its configuration.
+    </div>
+  </section>
+
+
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>10</span>
+      <div>
+        <h2>Key Difference</h2>
+        <p>Use these questions to remember how the two algorithms work.</p>
+      </div>
+    </div>
+
+    <div class="difference-grid">
+
+      <article class="difference-card">
+        <span>ðŸŽ¨</span>
+        <h3>Flood Fill asks</h3>
+        <p><strong>â€œDoes this pixel have the target color?â€</strong></p>
+      </article>
+
+      <article class="difference-card">
+        <span>â­•</span>
+        <h3>Boundary Fill asks</h3>
+        <p><strong>â€œHas this pixel reached the boundary color?â€</strong></p>
+      </article>
+
+      <article class="difference-card">
+        <span>ðŸŒ±</span>
+        <h3>Both require</h3>
+        <p>A seed point, neighbourhood rule and stopping condition.</p>
+      </article>
+
+    </div>
+  </section>
+
+
+  <section class="practical-section viva-section">
+    <div class="section-heading">
+      <span>11</span>
+      <div>
+        <h2>Viva Questions</h2>
+        <p>Check your understanding before implementing the practical.</p>
+      </div>
+    </div>
+
+    <div class="viva-grid">
+
+      <details>
+        <summary>What is a seed point?</summary>
+        <p>The starting pixel from which the filling process begins.</p>
+      </details>
+
+      <details>
+        <summary>What is Flood Fill?</summary>
+        <p>An algorithm that replaces a connected region of pixels having a specified target color.</p>
+      </details>
+
+      <details>
+        <summary>What is Boundary Fill?</summary>
+        <p>An algorithm that fills a region until its specified boundary color is reached.</p>
+      </details>
+
+      <details>
+        <summary>What is 4-connected filling?</summary>
+        <p>It considers the left, right, top and bottom neighbours.</p>
+      </details>
+
+      <details>
+        <summary>What is 8-connected filling?</summary>
+        <p>It considers the four direct neighbours and four diagonal neighbours.</p>
+      </details>
+
+      <details>
+        <summary>Why can recursive filling become expensive?</summary>
+        <p>A large connected region may create many recursive calls and increase stack usage.</p>
+      </details>
+
+    </div>
+  </section>
+
+
+  <nav class="practical-navigation">
+    <a href="practical06.html">
+      <span>â† Previous</span>
+      <strong>06 â€” Bresenham Circle</strong>
+    </a>
+
+    <a href="practical08.html">
+      <span>Next â†’</span>
+      <strong>08 â€” 2D Translation &amp; Scaling</strong>
+    </a>
+  </nav>
+
+</main>
+
+
+<footer class="footer">
+  <div class="footer-main">
+
+    <div class="footer-brand">
+      <div class="logo">
+        <span class="logo-mark">&lt;/&gt;</span>
+        <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+      </div>
+
+      <p>
+        Interactive Computer Graphics practical learning through concepts,
+        calculations and visualization.
+      </p>
+    </div>
+
+    <div class="footer-links">
+      <div>
+        <h4>Learn</h4>
+        <a href="../cgr_foundations.html">Foundations</a>
+              </div>
+
+      <div>
+        <h4>Practice</h4>
+        <a href="../cgr_practicals.html">Practicals</a>
+        <a href="../../../about.html">About</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <span>Â© 2026 Rasika CodeLab</span>
+    <span>Built for practical learning.</span>
+  </div>
+</footer>
+
+
+<script>
+(function () {
+  "use strict";
+
+  const canvas = document.getElementById("fillCanvas");
+  const ctx = canvas.getContext("2d");
+
+  const COLS = 30;
+  const ROWS = 22;
+  const CELL = 20;
+
+  let algorithm = "flood";
+  let connectivity = 4;
+
+  let fillColor = "#ff8a00";
+  let targetColor = "#24303d";
+  let boundaryColor = "#ffffff";
+
+  let seed = { x: 14, y: 10 };
+
+  let grid = [];
+  let workQueue = [];
+  let visited = new Set();
+  let filledCount = 0;
+  let timer = null;
+  let playing = false;
+
+
+  function key(x, y) {
+    return x + "," + y;
+  }
+
+
+  function createGrid() {
+    const g = Array.from(
+      { length: ROWS },
+      () => Array.from({ length: COLS }, () => "#0c1117")
+    );
+
+    /* Main bounded region */
+    for (let y = 4; y <= 17; y++) {
+      for (let x = 5; x <= 24; x++) {
+        g[y][x] = targetColor;
+      }
+    }
+
+    /* Boundary */
+    for (let x = 5; x <= 24; x++) {
+      g[4][x] = boundaryColor;
+      g[17][x] = boundaryColor;
+    }
+
+    for (let y = 4; y <= 17; y++) {
+      g[y][5] = boundaryColor;
+      g[y][24] = boundaryColor;
+    }
+
+    /* Inner obstacle */
+    for (let y = 9; y <= 12; y++) {
+      for (let x = 13; x <= 16; x++) {
+        g[y][x] = "#596574";
+      }
+    }
+
+    return g;
+  }
+
+
+  function getNeighbours(x, y) {
+    const result = [
+      [x - 1, y],
+      [x + 1, y],
+      [x, y - 1],
+      [x, y + 1]
+    ];
+
+    if (connectivity === 8) {
+      result.push(
+        [x - 1, y - 1],
+        [x + 1, y - 1],
+        [x - 1, y + 1],
+        [x + 1, y + 1]
+      );
+    }
+
+    return result.filter(([nx, ny]) =>
+      nx >= 0 &&
+      nx < COLS &&
+      ny >= 0 &&
+      ny < ROWS
+    );
+  }
+
+
+  function resetRegion() {
+    stopFill();
+
+    grid = createGrid();
+    workQueue = [];
+    visited = new Set();
+    filledCount = 0;
+
+    render();
+    updateStatus("Ready â€” choose a seed and generate the region.");
+  }
+
+
+  function prepareFill() {
+    stopFill();
+
+    workQueue = [];
+    visited = new Set();
+    filledCount = 0;
+
+    if (seed.x < 0 || seed.x >= COLS || seed.y < 0 || seed.y >= ROWS) {
+      seed = { x: 14, y: 10 };
+    }
+
+    const seedColor = grid[seed.y][seed.x];
+
+    if (algorithm === "flood") {
+      if (seedColor !== targetColor) {
+        updateStatus("Flood Fill needs a seed on the target-color region.");
+        render();
+        return false;
+      }
+    }
+
+    if (algorithm === "boundary") {
+      if (seedColor === boundaryColor) {
+        updateStatus("Boundary Fill cannot start on the boundary.");
+        render();
+        return false;
+      }
+    }
+
+    workQueue.push({ x: seed.x, y: seed.y });
+
+    updateStatus(
+      "Seed selected at (" + seed.x + ", " + seed.y + ")."
+    );
+
+    render();
+
+    return true;
+  }
+
+
+  function canFill(x, y) {
+    const color = grid[y][x];
+
+    if (algorithm === "flood") {
+      return color === targetColor;
+    }
+
+    return color !== boundaryColor && color !== fillColor;
+  }
+
+
+  function processOnePixel() {
+    while (workQueue.length) {
+
+      const current = workQueue.shift();
+      const currentKey = key(current.x, current.y);
+
+      if (visited.has(currentKey)) {
+        continue;
+      }
+
+      visited.add(currentKey);
+
+      if (!canFill(current.x, current.y)) {
+        continue;
+      }
+
+      grid[current.y][current.x] = fillColor;
+      filledCount++;
+
+      const neighbours = getNeighbours(current.x, current.y);
+
+      neighbours.forEach(([nx, ny]) => {
+        const neighbourKey = key(nx, ny);
+
+        if (
+          !visited.has(neighbourKey) &&
+          canFill(nx, ny)
+        ) {
+          workQueue.push({ x: nx, y: ny });
+        }
+      });
+
+      render();
+
+      updateStatus(
+        "Processing pixel (" +
+        current.x +
+        ", " +
+        current.y +
+        ")"
+      );
+
+      return true;
+    }
+
+    stopFill();
+    updateStatus("Region fill complete âœ“");
+    return false;
+  }
+
+
+  function render() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "#080b0f";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    for (let y = 0; y < ROWS; y++) {
+      for (let x = 0; x < COLS; x++) {
+
+        ctx.fillStyle = grid[y][x];
+
+        ctx.fillRect(
+          x * CELL + 1,
+          y * CELL + 1,
+          CELL - 2,
+          CELL - 2
+        );
+      }
+    }
+
+    /* Grid */
+    ctx.strokeStyle = "rgba(255,255,255,.07)";
+    ctx.lineWidth = 1;
+
+    for (let x = 0; x <= COLS; x++) {
+      ctx.beginPath();
+      ctx.moveTo(x * CELL, 0);
+      ctx.lineTo(x * CELL, ROWS * CELL);
+      ctx.stroke();
+    }
+
+    for (let y = 0; y <= ROWS; y++) {
+      ctx.beginPath();
+      ctx.moveTo(0, y * CELL);
+      ctx.lineTo(COLS * CELL, y * CELL);
+      ctx.stroke();
+    }
+
+    /* Seed */
+    const sx = seed.x * CELL + CELL / 2;
+    const sy = seed.y * CELL + CELL / 2;
+
+    ctx.strokeStyle = "#ffffff";
+    ctx.lineWidth = 2;
+
+    ctx.beginPath();
+    ctx.arc(sx, sy, 6, 0, Math.PI * 2);
+    ctx.stroke();
+
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "10px Arial";
+    ctx.fillText("S", sx + 7, sy - 7);
+
+    /* Next queued pixel */
+    if (workQueue.length) {
+      const next = workQueue[0];
+
+      ctx.strokeStyle = "#ffb24a";
+      ctx.lineWidth = 2;
+
+      ctx.strokeRect(
+        next.x * CELL + 3,
+        next.y * CELL + 3,
+        CELL - 6,
+        CELL - 6
+      );
+    }
+  }
+
+
+  function updateStatus(message) {
+    document.getElementById("statusAlgorithm").textContent =
+      algorithm === "flood" ? "Flood Fill" : "Boundary Fill";
+
+    document.getElementById("statusConnectivity").textContent =
+      connectivity + "-Connected";
+
+    document.getElementById("statusSeed").textContent =
+      "(" + seed.x + ", " + seed.y + ")";
+
+    document.getElementById("statusFilled").textContent =
+      filledCount;
+
+    document.getElementById("fillMessage").textContent = message;
+
+    document.getElementById("fillCount").textContent =
+      "Filled: " + filledCount;
+  }
+
+
+  function generate() {
+    grid = createGrid();
+    prepareFill();
+  }
+
+
+  function nextPixel() {
+    if (!workQueue.length) {
+      if (!prepareFill()) return;
+    }
+
+    processOnePixel();
+  }
+
+
+  function playFill() {
+    if (playing) {
+      stopFill();
+      return;
+    }
+
+    if (!workQueue.length) {
+      if (!prepareFill()) return;
+    }
+
+    playing = true;
+    document.getElementById("playFill").textContent = "âšâš Pause";
+    runFillAnimation();
+  }
+
+
+  function runFillAnimation() {
+    if (!playing) return;
+
+    const more = processOnePixel();
+
+    if (more && workQueue.length) {
+      timer = setTimeout(
+        runFillAnimation,
+        Number(document.getElementById("fillSpeed").value)
+      );
+    } else {
+      stopFill();
+    }
+  }
+
+
+  function stopFill() {
+    playing = false;
+    clearTimeout(timer);
+    document.getElementById("playFill").textContent = "â–¶ Play Fill";
+  }
+
+
+  /* Algorithm controls */
+
+  document.querySelectorAll(".algorithm-choice").forEach(button => {
+    button.addEventListener("click", () => {
+
+      document
+        .querySelectorAll(".algorithm-choice")
+        .forEach(item => item.classList.remove("active"));
+
+      button.classList.add("active");
+
+      algorithm = button.dataset.algorithm;
+
+      document.getElementById("targetColorLabel").hidden =
+        algorithm !== "flood";
+
+      document.getElementById("boundaryColorLabel").hidden =
+        algorithm !== "boundary";
+
+      generate();
+    });
+  });
+
+
+  /* Connectivity controls */
+
+  document.querySelectorAll(".connectivity-choice").forEach(button => {
+    button.addEventListener("click", () => {
+
+      document
+        .querySelectorAll(".connectivity-choice")
+        .forEach(item => item.classList.remove("active"));
+
+      button.classList.add("active");
+
+      connectivity = Number(button.dataset.connectivity);
+
+      generate();
+    });
+  });
+
+
+  document.getElementById("fillColor").addEventListener("input", event => {
+    fillColor = event.target.value;
+  });
+
+
+  document.getElementById("targetColor").addEventListener("input", event => {
+    targetColor = event.target.value;
+    resetRegion();
+  });
+
+
+  document.getElementById("boundaryColor").addEventListener("input", event => {
+    boundaryColor = event.target.value;
+    resetRegion();
+  });
+
+
+  document.getElementById("generateFill").addEventListener("click", generate);
+  document.getElementById("nextFill").addEventListener("click", nextPixel);
+  document.getElementById("playFill").addEventListener("click", playFill);
+
+
+  document.getElementById("resetFill").addEventListener("click", () => {
+    seed = { x: 14, y: 10 };
+    resetRegion();
+  });
+
+
+  document.getElementById("fillSpeed").addEventListener("input", event => {
+    document.getElementById("fillSpeedText").textContent =
+      event.target.value + " ms";
+  });
+
+
+  /* Canvas seed selection */
+
+  canvas.addEventListener("click", event => {
+
+    const rect = canvas.getBoundingClientRect();
+
+    const x = Math.floor(
+      ((event.clientX - rect.left) / rect.width) * COLS
+    );
+
+    const y = Math.floor(
+      ((event.clientY - rect.top) / rect.height) * ROWS
+    );
+
+    if (
+      x >= 0 &&
+      x < COLS &&
+      y >= 0 &&
+      y < ROWS
+    ) {
+      seed = { x, y };
+
+      stopFill();
+      workQueue = [];
+      visited = new Set();
+      filledCount = 0;
+
+      render();
+
+      updateStatus(
+        "Seed selected at (" + x + ", " + y + ")."
+      );
+    }
+  });
+
+
+  /* Process animation */
+
+  let processTimer;
+  let processIndex = 0;
+
+  const processMessages = [
+    "1. Choose a seed point",
+    "2. Check the current pixel",
+    "3. Apply the fill color",
+    "4. Visit neighbouring pixels",
+    "5. Complete the connected region âœ“"
+  ];
+
+
+  document.getElementById("playProcess").addEventListener("click", () => {
+
+    clearInterval(processTimer);
+
+    processIndex = 0;
+
+    const box = document.querySelector(".process-animation");
+
+    box.classList.remove("playing");
+    void box.offsetWidth;
+    box.classList.add("playing");
+
+    document.getElementById("processText").textContent =
+      processMessages[0];
+
+    processTimer = setInterval(() => {
+
+      processIndex++;
+
+      if (processIndex >= processMessages.length) {
+        clearInterval(processTimer);
+
+        document.getElementById("processText").textContent =
+          "Fill process complete âœ“";
+
+        return;
+      }
+
+      document.getElementById("processText").textContent =
+        processMessages[processIndex];
+
+    }, 850);
+  });
+
+
+  document.getElementById("resetProcess").addEventListener("click", () => {
+
+    clearInterval(processTimer);
+
+    document
+      .querySelector(".process-animation")
+      .classList.remove("playing");
+
+    document.getElementById("processText").textContent =
+      "Press Play Process";
+  });
+
+
+  /* Problems */
+
+  const problems = {
+
+    paint: {
+      title: "Paint Bucket Tool",
+      description:
+        "A drawing application needs to replace a connected area of the same color when the user clicks inside it with a paint bucket.",
+      given:
+        "Seed = (12, 10) â€¢ Target = Blue â€¢ Fill = Orange",
+      answer:
+        "Flood Fill is suitable because the connected region is identified by its target color.",
+      algorithm: "flood"
+    },
+
+    map: {
+      title: "Digital Map Region",
+      description:
+        "A map interface highlights a bounded region selected by the user. The region is represented by a closed boundary.",
+      given:
+        "Seed = (15, 11) â€¢ Boundary = White â€¢ Fill = Orange",
+      answer:
+        "Boundary Fill is suitable because the fill should continue until the closed boundary is reached.",
+      algorithm: "boundary"
+    },
+
+    game: {
+      title: "Game Area Filling",
+      description:
+        "A game uses connected pixel regions to mark an area controlled by a player after a seed location is selected.",
+      given:
+        "Seed = (10, 10) â€¢ Target = Region Color â€¢ Fill = Orange",
+      answer:
+        "Flood Fill can replace the connected region while respecting different-colored obstacles.",
+      algorithm: "flood"
+    }
+
+  };
+
+
+  let selectedProblem = "paint";
+
+  const problemCanvas = document.getElementById("problemCanvas");
+  const problemCtx = problemCanvas.getContext("2d");
+
+
+  function drawProblem() {
+
+    const problem = problems[selectedProblem];
+
+    const W = problemCanvas.width;
+    const H = problemCanvas.height;
+
+    problemCtx.clearRect(0, 0, W, H);
+
+    problemCtx.fillStyle = "#080b0f";
+    problemCtx.fillRect(0, 0, W, H);
+
+    const cols = 30;
+    const rows = 20;
+    const cell = 18;
+
+    const ox = (W - cols * cell) / 2;
+    const oy = (H - rows * cell) / 2;
+
+    for (let y = 0; y < rows; y++) {
+
+      for (let x = 0; x < cols; x++) {
+
+        let color = "#0d1117";
+
+        if (
+          x >= 6 &&
+          x <= 23 &&
+          y >= 4 &&
+          y <= 15
+        ) {
+          color = "#263341";
+        }
+
+        if (
+          x >= 6 &&
+          x <= 23 &&
+          (y === 4 || y === 15)
+        ) {
+          color = "#ffffff";
+        }
+
+        if (
+          y >= 4 &&
+          y <= 15 &&
+          (x === 6 || x === 23)
+        ) {
+          color = "#ffffff";
+        }
+
+        if (
+          x >= 13 &&
+          x <= 16 &&
+          y >= 8 &&
+          y <= 11
+        ) {
+          color = "#5a6675";
+        }
+
+        problemCtx.fillStyle = color;
+
+        problemCtx.fillRect(
+          ox + x * cell + 1,
+          oy + y * cell + 1,
+          cell - 2,
+          cell - 2
+        );
+      }
+    }
+
+    /* Representative filled pixels */
+
+    const fill =
+      problem.algorithm === "boundary"
+        ? "#ff9f32"
+        : "#ff8a00";
+
+    problemCtx.globalAlpha = 0.55;
+
+    for (let y = 5; y <= 14; y++) {
+
+      for (let x = 7; x <= 22; x++) {
+
+        if (
+          x >= 13 &&
+          x <= 16 &&
+          y >= 8 &&
+          y <= 11
+        ) {
+          continue;
+        }
+
+        problemCtx.fillStyle = fill;
+
+        problemCtx.fillRect(
+          ox + x * cell + 4,
+          oy + y * cell + 4,
+          cell - 8,
+          cell - 8
+        );
+      }
+    }
+
+    problemCtx.globalAlpha = 1;
+
+    const sx = 12;
+    const sy = 10;
+
+    problemCtx.strokeStyle = "#ffffff";
+    problemCtx.lineWidth = 3;
+
+    problemCtx.beginPath();
+
+    problemCtx.arc(
+      ox + sx * cell + cell / 2,
+      oy + sy * cell + cell / 2,
+      7,
+      0,
+      Math.PI * 2
+    );
+
+    problemCtx.stroke();
+
+    document.getElementById("problemStatus").textContent =
+      problem.algorithm === "flood"
+        ? "Flood Fill region"
+        : "Boundary Fill region";
+
+    document.getElementById("problemPixels").textContent =
+      "Region pixels: 144";
+  }
+
+
+  document.querySelectorAll(".problem-tab").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      document
+        .querySelectorAll(".problem-tab")
+        .forEach(item => item.classList.remove("active"));
+
+      button.classList.add("active");
+
+      selectedProblem = button.dataset.problem;
+
+      const problem = problems[selectedProblem];
+
+      document.getElementById("problemTitle").textContent =
+        problem.title;
+
+      document.getElementById("problemDescription").textContent =
+        problem.description;
+
+      document.getElementById("problemGiven").textContent =
+        problem.given;
+
+      document.getElementById("problemAnswer").textContent =
+        problem.answer;
+
+      drawProblem();
+    });
+
+  });
+
+
+  document.getElementById("showProblem").addEventListener("click", () => {
+
+    const problem = problems[selectedProblem];
+
+    algorithm = problem.algorithm;
+
+    document
+      .querySelectorAll(".algorithm-choice")
+      .forEach(button => {
+        button.classList.toggle(
+          "active",
+          button.dataset.algorithm === algorithm
+        );
+      });
+
+    document.getElementById("targetColorLabel").hidden =
+      algorithm !== "flood";
+
+    document.getElementById("boundaryColorLabel").hidden =
+      algorithm !== "boundary";
+
+    generate();
+
+    document
+      .querySelector(".fill-live-section")
+      .scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+
+  });
+
+
+  /* Experiment buttons */
+
+  document.querySelectorAll(".experiment-card").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      const mode = button.dataset.mode;
+
+      if (mode === "flood4") {
+        algorithm = "flood";
+        connectivity = 4;
+      }
+
+      if (mode === "flood8") {
+        algorithm = "flood";
+        connectivity = 8;
+      }
+
+      if (mode === "boundary4") {
+        algorithm = "boundary";
+        connectivity = 4;
+      }
+
+      if (mode === "boundary8") {
+        algorithm = "boundary";
+        connectivity = 8;
+      }
+
+      document
+        .querySelectorAll(".algorithm-choice")
+        .forEach(item => {
+          item.classList.toggle(
+            "active",
+            item.dataset.algorithm === algorithm
+          );
+        });
+
+      document
+        .querySelectorAll(".connectivity-choice")
+        .forEach(item => {
+          item.classList.toggle(
+            "active",
+            Number(item.dataset.connectivity) === connectivity
+          );
+        });
+
+      document.getElementById("targetColorLabel").hidden =
+        algorithm !== "flood";
+
+      document.getElementById("boundaryColorLabel").hidden =
+        algorithm !== "boundary";
+
+      generate();
+
+      document.getElementById("experimentResult").textContent =
+        "Loaded: " +
+        (algorithm === "flood" ? "Flood Fill" : "Boundary Fill") +
+        " + " +
+        connectivity +
+        "-Connected. Use Next Pixel or Play Fill to observe the algorithm.";
+
+      document
+        .querySelector(".fill-live-section")
+        .scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+    });
+
+  });
+
+
+  /* Initial state */
+
+  document.getElementById("targetColorLabel").hidden = false;
+  document.getElementById("boundaryColorLabel").hidden = true;
+
+  resetRegion();
+  drawProblem();
+
+})();
+</script>
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

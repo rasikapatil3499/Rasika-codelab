@@ -1,0 +1,189 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practical 06 â€” Advanced SQL | DBMS</title>
+ <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../css/dbms_practical.css">
+</head>
+
+<body class="protected-page">
+
+<header class="navbar">
+    <div class="nav-container">
+
+        <a href="../../../index.html" class="logo">
+            <span class="logo-mark">&lt;/&gt;</span>
+            <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="../../../index.html">Home</a>
+            <a href="../../../subjects.html" class="active">Subjects</a>
+            <a href="../foundations.html">Foundations</a>
+            <a href="../practicals.html">Practicals</a>
+            <a href="../../../about.html">About</a>
+            <a href="../../../login.html">Login</a>
+        </nav>
+
+        <button class="menu-btn" aria-label="Open menu">â˜°</button>
+
+    </div>
+</header>
+
+<main class="practical-page">
+
+    <section class="practical-hero">
+        <div class="hero-number">P06</div>
+        <div>
+            <div class="eyebrow">DBMS PRACTICAL 06</div>
+            <h1>Advanced SQL</h1>
+            <p>Solve application-level query problems</p>
+            <div class="tag-row"><span>Set Operations</span><span>Complex Queries</span><span>UNION</span><span>INTERSECT</span></div>
+        </div>
+    </section>
+
+    <section class="practical-workspace">
+
+        <aside class="practical-panel learn-panel">
+            <div class="panel-label">LEARN / BUILD</div>
+            <h2>What you'll do</h2>
+            <p>Practice set operations and complex SQL queries while following the stages of query execution.</p>
+            <ul class="learning-list">
+                <li>Use set operations to combine query results.</li><li>Construct multi-condition SQL queries.</li><li>Break complex problems into query steps.</li><li>Follow the conceptual SQL execution flow.</li>
+            </ul>
+
+            <div class="interactive-controls">
+                
+            <label class="editor-label" for="advancedQuery">Advanced Query</label>
+            <textarea id="advancedQuery" class="sql-editor" spellcheck="false">SELECT name FROM students
+WHERE marks &gt; 80
+UNION
+SELECT name FROM toppers;</textarea>
+            <button class="action-btn" type="button">â–¶ Execute Query</button>
+        
+            </div>
+        </aside>
+
+        <section class="practical-panel visual-panel">
+            <div class="panel-header">
+                <div>
+                    <div class="panel-label">LIVE VISUALIZATION</div>
+                    <h2>See the concept</h2>
+                </div>
+                <span class="live-indicator"><i></i> LIVE</span>
+            </div>
+
+            <div class="advanced-sql">
+                
+            <div class="execution-flow">
+                <div class="execution-node active"><strong>01</strong><span>SQL Query</span></div>
+                <span class="flow-arrow">â†’</span>
+                <div class="execution-node"><strong>02</strong><span>Parser</span></div>
+                <span class="flow-arrow">â†’</span>
+                <div class="execution-node"><strong>03</strong><span>Planner</span></div>
+                <span class="flow-arrow">â†’</span>
+                <div class="execution-node"><strong>04</strong><span>Execute</span></div>
+                <span class="flow-arrow">â†’</span>
+                <div class="execution-node"><strong>05</strong><span>Result</span></div>
+            </div>
+        
+            </div>
+        </section>
+
+    </section>
+
+    <section class="status-bar">
+        <span class="status-dot"></span>
+        <span>Status:</span>
+        <strong>Ready to start</strong>
+        <span class="status-message">Use the controls to explore this practical.</span>
+    </section>
+
+    <nav class="practical-navigation">
+        <a href="practical05.html" class="nav-btn">â† Practical 05</a>
+        <span>Practical 06 / 10</span>
+        <a href="practical07.html" class="nav-btn next">Next Practical â†’</a>
+    </nav>
+
+</main>
+
+<!-- ==================== FOOTER ==================== -->
+
+<footer class="site-footer">
+
+    <div class="footer-main">
+
+        <!-- BRAND -->
+
+        <div class="footer-brand">
+
+            <a href="../../../index.html" class="logo">
+                <span class="logo-mark">&lt;/&gt;</span>
+                <span>
+                    Rasika<span class="logo-highlight">CodeLab</span>
+                </span>
+            </a>
+
+            <p>
+                Interactive database learning through concepts,
+                SQL, design and practical applications.
+            </p>
+
+        </div>
+
+
+        <!-- LEARN -->
+
+        <div class="footer-links">
+
+            <h4>Learn</h4>
+
+            <a href="../foundations.html">
+                Foundations
+            </a>
+
+
+        </div>
+
+
+        <!-- EXPLORE -->
+
+        <div class="footer-links">
+
+            <h4>Explore</h4>
+
+            <a href="../../../about.html">
+                About
+            </a>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- BOTTOM -->
+
+    <div class="footer-bottom">
+
+        <span>
+            Â© 2026 Rasika CodeLab
+        </span>
+
+        <span>
+            Built for practical learning.
+        </span>
+
+    </div>
+
+</footer>
+
+
+<script src="../js/dbms_practical.js"></script>
+
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

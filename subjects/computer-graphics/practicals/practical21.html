@@ -1,0 +1,751 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>21 â€” Interactive Graphics Application | Rasika CodeLab</title>
+  <link rel="stylesheet" href="../css/cgr_style.css">
+  <link rel="stylesheet" href="../css/cgr_practicals.css">
+<style>body.protected-page:not(.auth-ready){visibility:hidden}</style>
+</head>
+<body class="cgr-practical-body practical-21 protected-page">
+
+<header class="navbar">
+  <div class="logo">
+    <span class="logo-mark">&lt;/&gt;</span>
+    <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+  </div>
+  <nav class="nav-links">
+    <a href="../cgr_index.html">Home</a>
+    <a href="../cgr_foundations.html">Foundations</a>
+        <a href="../cgr_practicals.html" class="active">Practicals</a>
+    <a href="../../../about.html">About</a>
+  </nav>
+  <button class="menu-btn" aria-label="Open Menu">â˜°</button>
+</header>
+
+<main>
+  <section class="practical-hero">
+    <div class="container">
+      <div class="breadcrumb">Practicals / 21</div>
+      <span class="practical-number">P21</span>
+      <h1>Interactive Graphics Application</h1>
+      <p>Combine computer graphics concepts into a complete interactive application with drawing, transformation, animation and visual feedback.</p>
+      <div class="hero-tags">
+        <span>Mini Project</span>
+        <span>Canvas</span>
+        <span>Interaction</span>
+        <span>Animation</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">01</span>
+        <h2>Project Aim &amp; Objectives</h2>
+      </div>
+      <div class="content-card">
+        <p><strong>Aim:</strong> To design and implement an interactive computer graphics application by combining the concepts studied throughout the practical series.</p>
+        <ul>
+          <li>Combine geometric primitives and coordinate systems.</li>
+          <li>Apply 2D transformations such as translation, scaling, rotation, reflection and shearing.</li>
+          <li>Use clipping, curves or other graphics algorithms where appropriate.</li>
+          <li>Implement user interaction through mouse, pointer or keyboard events.</li>
+          <li>Create animation using a continuous rendering loop.</li>
+          <li>Organize graphics into reusable objects and application states.</li>
+          <li>Present a complete, usable graphics application rather than an isolated algorithm.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">02</span>
+        <h2>Project Concept</h2>
+      </div>
+
+      <div class="content-card">
+        <p>A graphics application is built by combining several smaller graphics operations. The final application should accept user input, update a graphical model and render the new state immediately.</p>
+
+        <div class="process-grid">
+          <div class="process-card"><span>1</span><h3>Input</h3><p>Mouse, pointer, keyboard or UI controls.</p></div>
+          <div class="process-card"><span>2</span><h3>Model</h3><p>Store shapes, coordinates, colors and transformations.</p></div>
+          <div class="process-card"><span>3</span><h3>Algorithm</h3><p>Apply drawing or graphics operations to the model.</p></div>
+          <div class="process-card"><span>4</span><h3>Render</h3><p>Convert the current state into visible graphics.</p></div>
+          <div class="process-card"><span>5</span><h3>Feedback</h3><p>Show the result and allow another interaction.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">03</span>
+        <h2>Foundation Concepts Used</h2>
+      </div>
+
+      <div class="content-grid">
+        <article class="content-card">
+          <h3>Coordinates</h3>
+          <p>Every graphical object needs a coordinate representation. A consistent coordinate system makes movement, selection and transformation easier.</p>
+        </article>
+
+        <article class="content-card">
+          <h3>Primitives</h3>
+          <p>Lines, circles, rectangles, polygons and paths form the basic visual components of the application.</p>
+        </article>
+
+        <article class="content-card">
+          <h3>Transformations</h3>
+          <p>Translation, scaling and rotation allow the same object to be repositioned, resized and oriented dynamically.</p>
+        </article>
+
+        <article class="content-card">
+          <h3>Interaction</h3>
+          <p>Events connect the user's actions to changes in the graphics model.</p>
+        </article>
+
+        <article class="content-card">
+          <h3>Animation</h3>
+          <p>A render loop repeatedly updates the model and redraws the scene to create motion.</p>
+        </article>
+
+        <article class="content-card">
+          <h3>Visualization</h3>
+          <p>The application should make the effect of graphics operations immediately visible to the user.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">04</span>
+        <h2>Application Architecture</h2>
+      </div>
+
+      <div class="content-card">
+        <pre><code>Application
+â”‚
+â”œâ”€â”€ User Interface
+â”‚   â”œâ”€â”€ Tools
+â”‚   â”œâ”€â”€ Controls
+â”‚   â””â”€â”€ Status
+â”‚
+â”œâ”€â”€ Graphics Model
+â”‚   â”œâ”€â”€ Objects
+â”‚   â”œâ”€â”€ Coordinates
+â”‚   â””â”€â”€ Properties
+â”‚
+â”œâ”€â”€ Graphics Operations
+â”‚   â”œâ”€â”€ Draw
+â”‚   â”œâ”€â”€ Transform
+â”‚   â””â”€â”€ Animate
+â”‚
+â””â”€â”€ Renderer
+    â””â”€â”€ Canvas / WebGL</code></pre>
+
+        <p>The important design principle is to keep the <strong>graphics data</strong> separate from the code that draws it. This makes selection, editing, undo, animation and future features easier to implement.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">05</span>
+        <h2>Worked Calculation â€” 2D Transformation</h2>
+      </div>
+
+      <div class="content-card">
+        <p>Consider a point <strong>P(2, 3)</strong>. Apply translation <strong>T(4, âˆ’1)</strong> followed by scaling <strong>S(2, 2)</strong>.</p>
+
+        <div class="calculation-steps">
+          <p><strong>Step 1 â€” Translation:</strong></p>
+          <p>xâ‚ = 2 + 4 = <strong>6</strong></p>
+          <p>yâ‚ = 3 âˆ’ 1 = <strong>2</strong></p>
+          <p>So Pâ‚ = <strong>(6, 2)</strong>.</p>
+
+          <p><strong>Step 2 â€” Scaling:</strong></p>
+          <p>xâ‚‚ = 6 Ã— 2 = <strong>12</strong></p>
+          <p>yâ‚‚ = 2 Ã— 2 = <strong>4</strong></p>
+          <p><strong>Final point = (12, 4)</strong></p>
+        </div>
+
+        <div class="formula-box">
+          <strong>Important:</strong>
+          <p>Changing the transformation order can produce a different result. A composite graphics application must therefore define its transformation order explicitly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">06</span>
+        <h2>Live Mini Graphics Application</h2>
+      </div>
+
+      <div class="interactive-lab content-card">
+        <div class="lab-controls">
+          <label>Shape
+            <select id="shapeSelect">
+              <option value="triangle">Triangle</option>
+              <option value="square">Square</option>
+              <option value="circle">Circle</option>
+              <option value="star">Star</option>
+            </select>
+          </label>
+
+          <label>Move X
+            <input type="range" id="moveX" min="-180" max="180" value="0">
+            <span id="moveXValue">0</span>
+          </label>
+
+          <label>Move Y
+            <input type="range" id="moveY" min="-120" max="120" value="0">
+            <span id="moveYValue">0</span>
+          </label>
+
+          <label>Scale
+            <input type="range" id="scaleRange" min="0.5" max="2" step="0.1" value="1">
+            <span id="scaleValue">1.0Ã—</span>
+          </label>
+        </div>
+
+        <div class="lab-controls">
+          <label>Rotation
+            <input type="range" id="rotationRange" min="-180" max="180" value="0">
+            <span id="rotationValue">0Â°</span>
+          </label>
+
+          <label>Mode
+            <select id="modeSelect">
+              <option value="static">Static</option>
+              <option value="bounce">Bounce Animation</option>
+              <option value="orbit">Orbit Animation</option>
+            </select>
+          </label>
+
+          <label>Color
+            <input type="color" id="colorPicker" value="#ff7a18">
+          </label>
+
+          <button class="btn" id="applyBtn">Apply</button>
+          <button class="btn" id="resetBtn">Reset</button>
+        </div>
+
+        <div class="canvas-stage">
+          <canvas id="projectCanvas" width="900" height="500"></canvas>
+        </div>
+
+        <div class="lab-status">
+          <span id="shapeStatus">Shape: Triangle</span>
+          <span id="transformStatus">Position: (0, 0)</span>
+          <span id="modeStatus">Mode: Static</span>
+        </div>
+      </div>
+
+      <div class="content-card">
+        <h3>What This Demonstrates</h3>
+        <ul>
+          <li>Object selection through a user interface.</li>
+          <li>Translation, scaling and rotation applied to the selected object.</li>
+          <li>Rendering the same object from a stored state.</li>
+          <li>Animation modes driven by the same graphics model.</li>
+          <li>Real-time visual feedback after changing parameters.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">07</span>
+        <h2>Suggested Mini-Project Options</h2>
+      </div>
+
+      <div class="problem-grid">
+        <article class="problem-card">
+          <span class="problem-number">01</span>
+          <h3>2D Drawing &amp; Paint App</h3>
+          <p>Create a simple paint application with drawing tools, colors, brush sizes, eraser, undo and save functionality.</p>
+          <div class="mini-viewer" data-project="paint">
+            <canvas class="project-preview" width="420" height="190"></canvas>
+            <button class="btn project-action">Preview</button>
+          </div>
+        </article>
+
+        <article class="problem-card">
+          <span class="problem-number">02</span>
+          <h3>Interactive Shape Editor</h3>
+          <p>Create an editor where users add shapes and manipulate their position, scale, rotation, color and layer order.</p>
+          <div class="mini-viewer" data-project="editor">
+            <canvas class="project-preview" width="420" height="190"></canvas>
+            <button class="btn project-action">Preview</button>
+          </div>
+        </article>
+
+        <article class="problem-card">
+          <span class="problem-number">03</span>
+          <h3>2D Game / Simulation</h3>
+          <p>Build a small interactive game or simulation using collision detection, transformations, animation and score/state management.</p>
+          <div class="mini-viewer" data-project="game">
+            <canvas class="project-preview" width="420" height="190"></canvas>
+            <button class="btn project-action">Preview</button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">08</span>
+        <h2>Minimum Project Features</h2>
+      </div>
+
+      <div class="content-card">
+        <div class="content-grid">
+          <article>
+            <h3>Required</h3>
+            <ul>
+              <li>At least three graphical object types.</li>
+              <li>At least two transformation operations.</li>
+              <li>At least one direct user interaction.</li>
+              <li>Clear visual feedback.</li>
+              <li>Reset or clear functionality.</li>
+            </ul>
+          </article>
+
+          <article>
+            <h3>Recommended</h3>
+            <ul>
+              <li>Undo / redo.</li>
+              <li>Object selection and movement.</li>
+              <li>Animation.</li>
+              <li>Keyboard shortcuts.</li>
+              <li>Data or scene export.</li>
+            </ul>
+          </article>
+
+          <article>
+            <h3>Advanced</h3>
+            <ul>
+              <li>Clipping.</li>
+              <li>Bezier or B-Spline paths.</li>
+              <li>Collision detection.</li>
+              <li>Layer management.</li>
+              <li>Three.js 3D extension.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">09</span>
+        <h2>Project Development Steps</h2>
+      </div>
+
+      <div class="content-card">
+        <ol>
+          <li><strong>Define the problem:</strong> Decide what the application should allow the user to create or control.</li>
+          <li><strong>Design the scene:</strong> Identify objects, coordinates, controls and states.</li>
+          <li><strong>Implement primitives:</strong> Draw the basic shapes first.</li>
+          <li><strong>Add transformations:</strong> Implement movement, scaling and rotation.</li>
+          <li><strong>Add interaction:</strong> Connect pointer or keyboard events to the graphics model.</li>
+          <li><strong>Add animation:</strong> Update changing properties inside a render loop.</li>
+          <li><strong>Test:</strong> Check boundary conditions, unusual inputs and repeated interactions.</li>
+          <li><strong>Polish:</strong> Improve controls, labels, feedback and usability.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">10</span>
+        <h2>Experiments &amp; Evaluation</h2>
+      </div>
+
+      <div class="content-card">
+        <h3>Experiments</h3>
+        <ol>
+          <li>Create a shape editor with translation, scaling and rotation.</li>
+          <li>Add a second object and implement independent transformations.</li>
+          <li>Implement an animation mode using <code>requestAnimationFrame()</code>.</li>
+          <li>Add keyboard controls for moving the selected object.</li>
+          <li>Add an undo operation by storing previous application states.</li>
+          <li>Extend the project with a curve, clipping algorithm or collision detection.</li>
+        </ol>
+
+        <h3>Evaluation Checklist</h3>
+        <ul>
+          <li>Does the application respond correctly to user input?</li>
+          <li>Are transformations mathematically correct?</li>
+          <li>Are objects rendered consistently after every update?</li>
+          <li>Does animation remain stable during interaction?</li>
+          <li>Is the interface understandable without explaining every control?</li>
+          <li>Can the student explain the graphics concepts used in the implementation?</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">11</span>
+        <h2>Common Mistakes</h2>
+      </div>
+
+      <div class="content-card">
+        <ul>
+          <li>Writing all drawing logic directly inside event handlers instead of maintaining a graphics state.</li>
+          <li>Changing an object but forgetting to redraw the scene.</li>
+          <li>Using inconsistent coordinate systems between the interface and Canvas.</li>
+          <li>Applying transformations in an unintended order.</li>
+          <li>Creating multiple animation loops for the same scene.</li>
+          <li>Not validating object positions at the Canvas boundaries.</li>
+          <li>Making the project visually complex without having a clear underlying graphics model.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">12</span>
+        <h2>Viva Questions</h2>
+      </div>
+
+      <div class="viva-list">
+        <details><summary>What is the difference between a graphics algorithm and a graphics application?</summary><p>A graphics algorithm performs a specific computational operation, while an application combines algorithms, data, interaction and rendering to solve a complete user problem.</p></details>
+        <details><summary>Why should graphical objects be stored as data?</summary><p>Storing object data makes selection, transformation, undo, animation and repeated rendering possible without losing the application's state.</p></details>
+        <details><summary>What is the graphics rendering loop?</summary><p>It is the repeated process of updating application state and drawing the current scene, commonly synchronized with the browser using requestAnimationFrame().</p></details>
+        <details><summary>Why does transformation order matter?</summary><p>Matrix multiplication is generally not commutative, so applying the same transformations in a different order can produce a different result.</p></details>
+        <details><summary>How can user interaction be added to a graphics application?</summary><p>Input events such as pointer, mouse and keyboard events can update the graphics state, followed by a redraw.</p></details>
+        <details><summary>How can this project be extended to 3D?</summary><p>The application can move from a 2D Canvas model to a 3D scene using concepts such as 3D coordinates, cameras, lights, materials, textures and a WebGL-based renderer such as Three.js.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-navigation">
+    <div class="container">
+      <a href="practical20.html" class="nav-practical prev">â† Practical 20<span>3D Transformation, Lighting &amp; Texture</span></a>
+      <a href="../cgr_practicals.html" class="nav-practical next">Back to Practicals â†’<span>View Complete Practical List</span></a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer-main">
+    <div class="footer-brand">
+      <div class="logo">
+        <span class="logo-mark">&lt;/&gt;</span>
+        <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+      </div>
+      <p>Interactive Computer Graphics practical learning through concepts, calculations and visualization.</p>
+    </div>
+    <div class="footer-links">
+      <div>
+        <h4>Learn</h4>
+        <a href="../cgr_foundations.html">Foundations</a>
+              </div>
+      <div>
+        <h4>Practice</h4>
+        <a href="../cgr_practicals.html">Practicals</a>
+        <a href="../../../about.html">About</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>Â© 2026 Rasika CodeLab</span>
+    <span>Built for practical learning.</span>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const canvas = document.getElementById("projectCanvas");
+  const ctx = canvas.getContext("2d");
+
+  const shapeSelect = document.getElementById("shapeSelect");
+  const moveX = document.getElementById("moveX");
+  const moveY = document.getElementById("moveY");
+  const scaleRange = document.getElementById("scaleRange");
+  const rotationRange = document.getElementById("rotationRange");
+  const modeSelect = document.getElementById("modeSelect");
+  const colorPicker = document.getElementById("colorPicker");
+
+  const moveXValue = document.getElementById("moveXValue");
+  const moveYValue = document.getElementById("moveYValue");
+  const scaleValue = document.getElementById("scaleValue");
+  const rotationValue = document.getElementById("rotationValue");
+  const shapeStatus = document.getElementById("shapeStatus");
+  const transformStatus = document.getElementById("transformStatus");
+  const modeStatus = document.getElementById("modeStatus");
+
+  let state = {
+    shape: "triangle",
+    x: 0,
+    y: 0,
+    scale: 1,
+    rotation: 0,
+    color: "#ff7a18",
+    mode: "static"
+  };
+
+  let time = 0;
+
+  function polygon(points) {
+    ctx.beginPath();
+    points.forEach((p, i) => {
+      if (i === 0) ctx.moveTo(p.x, p.y);
+      else ctx.lineTo(p.x, p.y);
+    });
+    ctx.closePath();
+  }
+
+  function drawShape() {
+    const cx = canvas.width / 2 + state.x;
+    const cy = canvas.height / 2 + state.y;
+
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.rotate(state.rotation * Math.PI / 180);
+    ctx.scale(state.scale, state.scale);
+
+    ctx.strokeStyle = state.color;
+    ctx.fillStyle = state.color;
+    ctx.lineWidth = 4;
+    ctx.lineJoin = "round";
+
+    if (state.shape === "triangle") {
+      polygon([
+        {x: 0, y: -85},
+        {x: 85, y: 65},
+        {x: -85, y: 65}
+      ]);
+      ctx.stroke();
+      ctx.globalAlpha = 0.14;
+      ctx.fill();
+    }
+
+    if (state.shape === "square") {
+      ctx.strokeRect(-70, -70, 140, 140);
+      ctx.globalAlpha = 0.14;
+      ctx.fillRect(-70, -70, 140, 140);
+    }
+
+    if (state.shape === "circle") {
+      ctx.beginPath();
+      ctx.arc(0, 0, 78, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.globalAlpha = 0.14;
+      ctx.fill();
+    }
+
+    if (state.shape === "star") {
+      const points = [];
+      for (let i = 0; i < 10; i++) {
+        const radius = i % 2 === 0 ? 90 : 38;
+        const angle = -Math.PI / 2 + i * Math.PI / 5;
+        points.push({
+          x: Math.cos(angle) * radius,
+          y: Math.sin(angle) * radius
+        });
+      }
+      ctx.globalAlpha = 1;
+      polygon(points);
+      ctx.stroke();
+      ctx.globalAlpha = 0.14;
+      ctx.fill();
+    }
+
+    ctx.restore();
+  }
+
+  function drawReference() {
+    ctx.save();
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    ctx.strokeStyle = "rgba(128,128,128,0.16)";
+    ctx.lineWidth = 1;
+
+    for (let x = 0; x <= canvas.width; x += 30) {
+      ctx.beginPath();
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, canvas.height);
+      ctx.stroke();
+    }
+
+    for (let y = 0; y <= canvas.height; y += 30) {
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      ctx.lineTo(canvas.width, y);
+      ctx.stroke();
+    }
+
+    ctx.strokeStyle = "rgba(128,128,128,0.35)";
+    ctx.beginPath();
+    ctx.moveTo(canvas.width / 2, 0);
+    ctx.lineTo(canvas.width / 2, canvas.height);
+    ctx.moveTo(0, canvas.height / 2);
+    ctx.lineTo(canvas.width, canvas.height / 2);
+    ctx.stroke();
+
+    ctx.restore();
+  }
+
+  function render() {
+    if (state.mode === "bounce") {
+      state.y = Math.sin(time * 0.0025) * 90;
+    }
+
+    if (state.mode === "orbit") {
+      state.x = Math.cos(time * 0.0018) * 150;
+      state.y = Math.sin(time * 0.0018) * 80;
+      state.rotation += 0.7;
+    }
+
+    drawReference();
+    drawShape();
+
+    shapeStatus.textContent = "Shape: " + shapeSelect.options[shapeSelect.selectedIndex].text;
+    transformStatus.textContent =
+      "Position: (" + Math.round(state.x) + ", " + Math.round(state.y) + ")";
+    modeStatus.textContent =
+      "Mode: " + modeSelect.options[modeSelect.selectedIndex].text;
+
+    requestAnimationFrame(render);
+    time += 16;
+  }
+
+  function syncState() {
+    state.shape = shapeSelect.value;
+    state.x = Number(moveX.value);
+    state.y = Number(moveY.value);
+    state.scale = Number(scaleRange.value);
+    state.rotation = Number(rotationRange.value);
+    state.color = colorPicker.value;
+    state.mode = modeSelect.value;
+
+    moveXValue.textContent = moveX.value;
+    moveYValue.textContent = moveY.value;
+    scaleValue.textContent = Number(scaleRange.value).toFixed(1) + "Ã—";
+    rotationValue.textContent = rotationRange.value + "Â°";
+  }
+
+  [shapeSelect, moveX, moveY, scaleRange, rotationRange, modeSelect, colorPicker]
+    .forEach(el => el.addEventListener("input", syncState));
+  [shapeSelect, modeSelect].forEach(el => el.addEventListener("change", syncState));
+
+  document.getElementById("applyBtn").addEventListener("click", () => {
+    syncState();
+    state.mode = modeSelect.value;
+  });
+
+  document.getElementById("resetBtn").addEventListener("click", () => {
+    shapeSelect.value = "triangle";
+    moveX.value = "0";
+    moveY.value = "0";
+    scaleRange.value = "1";
+    rotationRange.value = "0";
+    modeSelect.value = "static";
+    colorPicker.value = "#ff7a18";
+    syncState();
+  });
+
+  syncState();
+  requestAnimationFrame(render);
+
+  document.querySelectorAll(".mini-viewer").forEach(viewer => {
+    const canvas = viewer.querySelector(".project-preview");
+    const button = viewer.querySelector(".project-action");
+    const ctx = canvas.getContext("2d");
+    const type = viewer.dataset.project;
+    let running = false;
+    let frame = 0;
+
+    function drawPreview() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.lineWidth = 3;
+
+      if (type === "paint") {
+        ctx.beginPath();
+        ctx.moveTo(35, 140);
+        for (let x = 35; x <= 380; x += 12) {
+          ctx.lineTo(x, 105 + Math.sin(x * 0.07) * 28);
+        }
+        ctx.stroke();
+        ctx.strokeRect(65, 45, 80, 42);
+        ctx.beginPath();
+        ctx.arc(225, 70, 25, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+
+      if (type === "editor") {
+        const angle = frame * 0.025;
+        ctx.save();
+        ctx.translate(210, 95);
+        ctx.rotate(angle);
+        ctx.strokeRect(-65, -45, 130, 90);
+        ctx.beginPath();
+        ctx.moveTo(-65, -45);
+        ctx.lineTo(0, -75);
+        ctx.lineTo(65, -45);
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      if (type === "game") {
+        const x = 65 + (frame % 250);
+        ctx.strokeRect(35, 120, 55, 35);
+        ctx.strokeRect(170, 80, 55, 75);
+        ctx.beginPath();
+        ctx.arc(x, 55, 16, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(90, 137);
+        ctx.lineTo(170, 120);
+        ctx.stroke();
+      }
+
+      if (running) frame++;
+    }
+
+    function loop() {
+      drawPreview();
+      if (running) requestAnimationFrame(loop);
+    }
+
+    button.addEventListener("click", () => {
+      running = !running;
+      button.textContent = running ? "Pause Preview" : "Preview";
+      if (running) requestAnimationFrame(loop);
+    });
+
+    drawPreview();
+  });
+})();
+</script>
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

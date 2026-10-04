@@ -1,0 +1,1750 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Practical 04 | APIs, Files & Databases | RasikaCodeLab</title>
+
+        <!-- Common CSS -->
+    <link rel="stylesheet" href="../css/python_practicals.css">
+
+    <!-- Python Practical CSS -->
+    <link rel="stylesheet" href="../css/python.css">
+<style>body.protected-page:not(.auth-ready){visibility:hidden}</style>
+</head>
+
+<body class="protected-page">
+
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <header class="header">
+
+        <div class="header-inner">
+
+            <a href="../../../index.html" class="logo">
+
+                <span class="logo-mark">&lt;/&gt;</span>
+
+                <span>
+                    Rasika<span class="logo-highlight">CodeLab</span>
+                </span>
+
+            </a>
+
+
+            <nav class="nav">
+
+                <a href="../../../index.html">
+                    Home
+                </a>
+
+                <a href="../../../subjects.html" class="active">
+                    Subjects
+                </a>
+ <a href="../practicals.html">Practicals</a>
+                <a href="../foundations.html">
+                    Foundations
+                </a>
+
+                <a href="../../../about.html">
+                    About
+                </a>
+
+                <a href="../../../login.html">
+                    Login
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <main class="python-page">
+
+
+        <!-- =================================================
+             HERO
+             ================================================= -->
+
+        <section class="python-hero compact">
+
+            <span class="subject-label">
+                PYTHON 2030
+            </span>
+
+            <h1>
+                Practical 04
+            </h1>
+
+            <p>
+                APIs, Files & Databases
+            </p>
+
+        </section>
+
+
+        <!-- =================================================
+             PRACTICAL CONTENT
+             ================================================= -->
+
+        <div class="practical-container">
+
+
+            <!-- =================================================
+                 PRACTICAL HEADER
+                 ================================================= -->
+
+            <section class="practical-header">
+
+                <span class="practical-number">
+                    04
+                </span>
+
+                <h1>
+                    APIs, Files & Databases
+                </h1>
+
+                <p>
+                    Work with external data, files, APIs and
+                    databases to build Python programs that can
+                    store, retrieve, process and exchange data.
+                </p>
+
+            </section>
+
+
+            <!-- =================================================
+                 AIM
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>01</span>
+                    <h2>Aim</h2>
+                </div>
+
+                <div class="aim-box">
+
+                    <h3>
+                        Practical Aim
+                    </h3>
+
+                    <p>
+                        To develop Python applications that work
+                        with files, external APIs and databases
+                        for storing, retrieving and processing
+                        structured data.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 LEARNING OBJECTIVES
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>02</span>
+                    <h2>Learning Objectives</h2>
+                </div>
+
+
+                <div class="objectives-grid">
+
+
+                    <div class="objective-card">
+
+                        <span class="objective-number">
+                            LO 01
+                        </span>
+
+                        <p>
+                            Read and write structured data using
+                            Python file-handling techniques.
+                        </p>
+
+                    </div>
+
+
+                    <div class="objective-card">
+
+                        <span class="objective-number">
+                            LO 02
+                        </span>
+
+                        <p>
+                            Work with JSON data and process
+                            information received from APIs.
+                        </p>
+
+                    </div>
+
+
+                    <div class="objective-card">
+
+                        <span class="objective-number">
+                            LO 03
+                        </span>
+
+                        <p>
+                            Connect Python applications with a
+                            relational database.
+                        </p>
+
+                    </div>
+
+
+                    <div class="objective-card">
+
+                        <span class="objective-number">
+                            LO 04
+                        </span>
+
+                        <p>
+                            Perform CRUD operations and handle
+                            common data-access errors.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 FOUNDATION CONCEPTS
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>03</span>
+                    <h2>Foundation Concepts</h2>
+                </div>
+
+
+                <div class="content-card">
+
+                    <div class="concept-list">
+
+                        <span class="concept-tag">
+                            File Handling
+                        </span>
+
+                        <span class="concept-tag">
+                            open()
+                        </span>
+
+                        <span class="concept-tag">
+                            read()
+                        </span>
+
+                        <span class="concept-tag">
+                            write()
+                        </span>
+
+                        <span class="concept-tag">
+                            CSV
+                        </span>
+
+                        <span class="concept-tag">
+                            JSON
+                        </span>
+
+                        <span class="concept-tag">
+                            APIs
+                        </span>
+
+                        <span class="concept-tag">
+                            HTTP Requests
+                        </span>
+
+                        <span class="concept-tag">
+                            JSON Response
+                        </span>
+
+                        <span class="concept-tag">
+                            SQL
+                        </span>
+
+                        <span class="concept-tag">
+                            CRUD
+                        </span>
+
+                        <span class="concept-tag">
+                            Database Connectivity
+                        </span>
+
+                        <span class="concept-tag">
+                            Exception Handling
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 DATA FLOW
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>04</span>
+                    <h2>Data Flow</h2>
+                </div>
+
+
+                <div class="content-card">
+
+<pre>
+Python Application
+        â”‚
+        â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–º File
+        â”‚                  â”‚
+        â”‚                  â–¼
+        â”‚              Stored Data
+        â”‚
+        â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–º API
+        â”‚                  â”‚
+        â”‚                  â–¼
+        â”‚              JSON Data
+        â”‚
+        â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–º Database
+                           â”‚
+                           â–¼
+                      SQL / CRUD
+</pre>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 PROBLEM STATEMENTS
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>05</span>
+                    <h2>Problem Statements</h2>
+                </div>
+
+
+                <div class="problem-grid">
+
+
+                    <!-- =================================================
+                         PROBLEM 01
+                         ================================================= -->
+
+                    <article class="problem-card">
+
+                        <span class="problem-number">
+                            01
+                        </span>
+
+                        <h3>
+                            Student File Management
+                        </h3>
+
+                        <p>
+                            Create a Python application that stores
+                            student information in a file and
+                            provides basic file-based operations.
+                        </p>
+
+                        <h4>
+                            Requirements
+                        </h4>
+
+                        <ul class="practical-list">
+
+                            <li>
+                                Add student information.
+                            </li>
+
+                            <li>
+                                Display student records.
+                            </li>
+
+                            <li>
+                                Search for a student.
+                            </li>
+
+                            <li>
+                                Update student information.
+                            </li>
+
+                            <li>
+                                Delete a student record.
+                            </li>
+
+                        </ul>
+
+                        <h4>
+                            Concepts
+                        </h4>
+
+                        <div class="concept-list">
+
+                            <span class="concept-tag">
+                                Files
+                            </span>
+
+                            <span class="concept-tag">
+                                CSV
+                            </span>
+
+                            <span class="concept-tag">
+                                Functions
+                            </span>
+
+                            <span class="concept-tag">
+                                Exceptions
+                            </span>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- =================================================
+                         PROBLEM 02
+                         ================================================= -->
+
+                    <article class="problem-card">
+
+                        <span class="problem-number">
+                            02
+                        </span>
+
+                        <h3>
+                            API Data Explorer
+                        </h3>
+
+                        <p>
+                            Create a Python program that retrieves
+                            data from a public API and processes
+                            the returned JSON information.
+                        </p>
+
+                        <h4>
+                            Requirements
+                        </h4>
+
+                        <ul class="practical-list">
+
+                            <li>
+                                Send an API request.
+                            </li>
+
+                            <li>
+                                Receive JSON data.
+                            </li>
+
+                            <li>
+                                Parse the response.
+                            </li>
+
+                            <li>
+                                Extract selected fields.
+                            </li>
+
+                            <li>
+                                Display formatted information.
+                            </li>
+
+                        </ul>
+
+                        <h4>
+                            Concepts
+                        </h4>
+
+                        <div class="concept-list">
+
+                            <span class="concept-tag">
+                                API
+                            </span>
+
+                            <span class="concept-tag">
+                                HTTP
+                            </span>
+
+                            <span class="concept-tag">
+                                JSON
+                            </span>
+
+                            <span class="concept-tag">
+                                requests
+                            </span>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- =================================================
+                         PROBLEM 03
+                         ================================================= -->
+
+                    <article class="problem-card">
+
+                        <span class="problem-number">
+                            03
+                        </span>
+
+                        <h3>
+                            Student Database
+                        </h3>
+
+                        <p>
+                            Create a Python application connected
+                            to a database and implement basic
+                            student record operations.
+                        </p>
+
+                        <h4>
+                            Requirements
+                        </h4>
+
+                        <ul class="practical-list">
+
+                            <li>
+                                Create a student table.
+                            </li>
+
+                            <li>
+                                Insert student records.
+                            </li>
+
+                            <li>
+                                Display student records.
+                            </li>
+
+                            <li>
+                                Search student records.
+                            </li>
+
+                            <li>
+                                Update student information.
+                            </li>
+
+                            <li>
+                                Delete student records.
+                            </li>
+
+                        </ul>
+
+                        <h4>
+                            Concepts
+                        </h4>
+
+                        <div class="concept-list">
+
+                            <span class="concept-tag">
+                                SQL
+                            </span>
+
+                            <span class="concept-tag">
+                                Database
+                            </span>
+
+                            <span class="concept-tag">
+                                CRUD
+                            </span>
+
+                            <span class="concept-tag">
+                                Python DB
+                            </span>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 PROBLEM 01 â€” FILE MANAGEMENT
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>06</span>
+                    <h2>Problem 01 â€” Student File Management</h2>
+                </div>
+
+
+                <div class="problem-detail">
+
+                    <h3>
+                        Problem Description
+                    </h3>
+
+                    <p>
+                        Create a Python application that stores
+                        student records in a CSV file. The program
+                        should allow the user to add and display
+                        student records.
+                    </p>
+
+
+                    <h4>
+                        File Structure
+                    </h4>
+
+<pre>
+students.csv
+
+ID,Name,Department,Marks
+ST101,Riya,Computer,82
+ST102,Aarav,IT,76
+ST103,Sneha,Computer,91
+</pre>
+
+
+                    <h4>
+                        Algorithm
+                    </h4>
+
+                    <div class="steps">
+
+
+                        <div class="step">
+
+                            <span class="step-number">
+                                01
+                            </span>
+
+                            <p>
+                                Import the CSV module.
+                            </p>
+
+                        </div>
+
+
+                        <div class="step">
+
+                            <span class="step-number">
+                                02
+                            </span>
+
+                            <p>
+                                Open the CSV file in append mode.
+                            </p>
+
+                        </div>
+
+
+                        <div class="step">
+
+                            <span class="step-number">
+                                03
+                            </span>
+
+                            <p>
+                                Accept student information.
+                            </p>
+
+                        </div>
+
+
+                        <div class="step">
+
+                            <span class="step-number">
+                                04
+                            </span>
+
+                            <p>
+                                Write the record into the file.
+                            </p>
+
+                        </div>
+
+
+                        <div class="step">
+
+                            <span class="step-number">
+                                05
+                            </span>
+
+                            <p>
+                                Open the file in read mode.
+                            </p>
+
+                        </div>
+
+
+                        <div class="step">
+
+                            <span class="step-number">
+                                06
+                            </span>
+
+                            <p>
+                                Read and display all records.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 FILE CODE
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>07</span>
+                    <h2>Python Code</h2>
+                </div>
+
+
+                <div class="code-container">
+
+                    <div class="code-header">
+
+                        <span>
+                            student_file.py
+                        </span>
+
+                        <button
+                            class="copy-btn"
+                            onclick="copyCode(this)">
+                            Copy
+                        </button>
+
+                    </div>
+
+<pre><code>
+import csv
+
+filename = "students.csv"
+
+
+def add_student():
+
+    student_id = input("Student ID: ")
+    name = input("Name: ")
+    department = input("Department: ")
+    marks = input("Marks: ")
+
+    with open(
+        filename,
+        "a",
+        newline=""
+    ) as file:
+
+        writer = csv.writer(file)
+
+        writer.writerow([
+            student_id,
+            name,
+            department,
+            marks
+        ])
+
+    print("Student added successfully.")
+
+
+def display_students():
+
+    try:
+
+        with open(
+            filename,
+            "r"
+        ) as file:
+
+            reader = csv.reader(file)
+
+            print("\nStudent Records")
+            print("----------------")
+
+            for row in reader:
+
+                print(row)
+
+    except FileNotFoundError:
+
+        print("File not found.")
+
+
+add_student()
+
+display_students()
+</code></pre>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 OUTPUT
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>08</span>
+                    <h2>Expected Output</h2>
+                </div>
+
+
+                <div class="terminal">
+
+                    <div class="terminal-header">
+
+                        <span class="terminal-dot"></span>
+                        <span class="terminal-dot"></span>
+                        <span class="terminal-dot"></span>
+
+                        <span class="terminal-title">
+                            Python Output
+                        </span>
+
+                    </div>
+
+<pre>
+Student ID: ST104
+Name: Rahul
+Department: Computer
+Marks: 79
+
+Student added successfully.
+
+Student Records
+----------------
+['ST101', 'Riya', 'Computer', '82']
+['ST102', 'Aarav', 'IT', '76']
+['ST103', 'Sneha', 'Computer', '91']
+['ST104', 'Rahul', 'Computer', '79']
+</pre>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 FILE CHALLENGE
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>09</span>
+                    <h2>Try It Yourself</h2>
+                </div>
+
+
+                <div class="try-it">
+
+                    <h3>
+                        Challenge
+                    </h3>
+
+                    <p>
+                        Extend the application by adding functions
+                        to search, update and delete a student
+                        record from the CSV file.
+                    </p>
+
+
+                    <div class="callout">
+
+                        <div class="callout-icon">
+                            ðŸ’¡
+                        </div>
+
+                        <div class="callout-content">
+
+                            <h4>
+                                Think Before You Code
+                            </h4>
+
+                            <p>
+                                Read the existing records into a
+                                collection, modify the required
+                                record and then write the updated
+                                collection back to the file.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 PROBLEM 02 â€” API
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>10</span>
+                    <h2>Problem 02 â€” API Data Explorer</h2>
+                </div>
+
+
+                <div class="problem-detail">
+
+                    <h3>
+                        Problem Description
+                    </h3>
+
+                    <p>
+                        Develop a Python program that retrieves
+                        structured data from a public API, converts
+                        the response into Python data structures
+                        and displays selected information.
+                    </p>
+
+
+                    <h4>
+                        Data Flow
+                    </h4>
+
+<pre>
+Python Program
+      â†“
+HTTP Request
+      â†“
+API Server
+      â†“
+JSON Response
+      â†“
+Python Dictionary / List
+      â†“
+Data Processing
+      â†“
+Formatted Output
+</pre>
+
+
+                    <h4>
+                        Example Code Structure
+                    </h4>
+
+
+                    <div class="code-container">
+
+                        <div class="code-header">
+
+                            <span>
+                                api_data.py
+                            </span>
+
+                            <button
+                                class="copy-btn"
+                                onclick="copyCode(this)">
+                                Copy
+                            </button>
+
+                        </div>
+
+<pre><code>
+import requests
+
+
+url = "https://jsonplaceholder.typicode.com/users"
+
+response = requests.get(url)
+
+
+if response.status_code == 200:
+
+    users = response.json()
+
+    for user in users:
+
+        print(
+            user["name"],
+            "-",
+            user["email"]
+        )
+
+else:
+
+    print(
+        "Unable to retrieve data."
+    )
+</code></pre>
+
+                    </div>
+
+
+                    <h4>
+                        Expected Output
+                    </h4>
+
+<pre>
+Leanne Graham - Sincere@april.biz
+Ervin Howell - Shanna@melissa.tv
+Clementine Bauch - Nathan@yesenia.net
+...
+</pre>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 API CHALLENGE
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="try-it">
+
+                    <h3>
+                        API Challenge
+                    </h3>
+
+                    <p>
+                        Modify the program to display only users
+                        whose email addresses belong to a particular
+                        domain.
+                    </p>
+
+                    <div class="concept-list">
+
+                        <span class="concept-tag">
+                            requests.get()
+                        </span>
+
+                        <span class="concept-tag">
+                            status_code
+                        </span>
+
+                        <span class="concept-tag">
+                            response.json()
+                        </span>
+
+                        <span class="concept-tag">
+                            Dictionaries
+                        </span>
+
+                        <span class="concept-tag">
+                            Filtering
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 PROBLEM 03 â€” DATABASE
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>11</span>
+                    <h2>Problem 03 â€” Student Database</h2>
+                </div>
+
+
+                <div class="problem-detail">
+
+                    <h3>
+                        Problem Description
+                    </h3>
+
+                    <p>
+                        Create a Python application that stores
+                        student records in a relational database
+                        and performs basic CRUD operations.
+                    </p>
+
+
+                    <h4>
+                        Database Table
+                    </h4>
+
+                    <div class="table-wrapper">
+
+                        <table class="practical-table">
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        Field
+                                    </th>
+
+                                    <th>
+                                        Data Type
+                                    </th>
+
+                                    <th>
+                                        Description
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                                <tr>
+
+                                    <td>
+                                        id
+                                    </td>
+
+                                    <td>
+                                        INTEGER
+                                    </td>
+
+                                    <td>
+                                        Student identifier
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <td>
+                                        name
+                                    </td>
+
+                                    <td>
+                                        TEXT
+                                    </td>
+
+                                    <td>
+                                        Student name
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <td>
+                                        department
+                                    </td>
+
+                                    <td>
+                                        TEXT
+                                    </td>
+
+                                    <td>
+                                        Department name
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <td>
+                                        marks
+                                    </td>
+
+                                    <td>
+                                        REAL
+                                    </td>
+
+                                    <td>
+                                        Student marks
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+
+                    <h4>
+                        CRUD Operations
+                    </h4>
+
+                    <div class="concept-list">
+
+                        <span class="concept-tag">
+                            CREATE
+                        </span>
+
+                        <span class="concept-tag">
+                            READ
+                        </span>
+
+                        <span class="concept-tag">
+                            UPDATE
+                        </span>
+
+                        <span class="concept-tag">
+                            DELETE
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 DATABASE CODE
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>12</span>
+                    <h2>Python Database Code</h2>
+                </div>
+
+
+                <div class="code-container">
+
+                    <div class="code-header">
+
+                        <span>
+                            student_database.py
+                        </span>
+
+                        <button
+                            class="copy-btn"
+                            onclick="copyCode(this)">
+                            Copy
+                        </button>
+
+                    </div>
+
+<pre><code>
+import sqlite3
+
+
+connection = sqlite3.connect(
+    "students.db"
+)
+
+cursor = connection.cursor()
+
+
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS students (
+    id INTEGER PRIMARY KEY,
+    name TEXT,
+    department TEXT,
+    marks REAL
+)
+""")
+
+
+cursor.execute("""
+INSERT INTO students
+VALUES (?, ?, ?, ?)
+""", (
+    101,
+    "Riya",
+    "Computer",
+    82
+))
+
+
+connection.commit()
+
+
+cursor.execute(
+    "SELECT * FROM students"
+)
+
+
+students = cursor.fetchall()
+
+
+for student in students:
+
+    print(student)
+
+
+connection.close()
+</code></pre>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 DATABASE OUTPUT
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>13</span>
+                    <h2>Expected Output</h2>
+                </div>
+
+
+                <div class="terminal">
+
+                    <div class="terminal-header">
+
+                        <span class="terminal-dot"></span>
+                        <span class="terminal-dot"></span>
+                        <span class="terminal-dot"></span>
+
+                        <span class="terminal-title">
+                            Database Output
+                        </span>
+
+                    </div>
+
+<pre>
+(101, 'Riya', 'Computer', 82.0)
+</pre>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 INTEGRATED CHALLENGE
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>14</span>
+                    <h2>Integrated Challenge</h2>
+                </div>
+
+
+                <div class="try-it">
+
+                    <h3>
+                        Build a Student Data Application
+                    </h3>
+
+                    <p>
+                        Combine file handling, functions and
+                        database concepts to create a student
+                        data application.
+                    </p>
+
+
+                    <ul class="practical-list">
+
+                        <li>
+                            Import student records from a CSV file.
+                        </li>
+
+                        <li>
+                            Validate the data.
+                        </li>
+
+                        <li>
+                            Store valid records in a database.
+                        </li>
+
+                        <li>
+                            Search students from the database.
+                        </li>
+
+                        <li>
+                            Generate a simple performance report.
+                        </li>
+
+                    </ul>
+
+
+                    <div class="callout">
+
+                        <div class="callout-icon">
+                            ðŸ’¡
+                        </div>
+
+                        <div class="callout-content">
+
+                            <h4>
+                                Application Thinking
+                            </h4>
+
+                            <p>
+                                Think about how information moves
+                                from a file into your Python program
+                                and finally into permanent database
+                                storage.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 LEARNING OUTCOME
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>15</span>
+                    <h2>Learning Outcome</h2>
+                </div>
+
+
+                <div class="outcome-box">
+
+                    <h3>
+                        After completing this practical
+                    </h3>
+
+                    <p>
+                        Students will be able to develop Python
+                        programs that work with files, external
+                        APIs and databases and perform structured
+                        data storage and retrieval operations.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 VIVA QUESTIONS
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>16</span>
+                    <h2>Viva Questions</h2>
+                </div>
+
+
+                <div class="viva-list">
+
+
+                    <div class="viva-item">
+
+                        <div class="viva-question">
+                            1. What is file handling?
+                        </div>
+
+                        <div class="viva-answer">
+                            File handling allows a Python program
+                            to create, read, write and modify files.
+                        </div>
+
+                    </div>
+
+
+                    <div class="viva-item">
+
+                        <div class="viva-question">
+                            2. What is JSON?
+                        </div>
+
+                        <div class="viva-answer">
+                            JSON is a structured text format commonly
+                            used for exchanging data between systems.
+                        </div>
+
+                    </div>
+
+
+                    <div class="viva-item">
+
+                        <div class="viva-question">
+                            3. What is an API?
+                        </div>
+
+                        <div class="viva-answer">
+                            An API provides a defined way for one
+                            software system to communicate with
+                            another.
+                        </div>
+
+                    </div>
+
+
+                    <div class="viva-item">
+
+                        <div class="viva-question">
+                            4. What is CRUD?
+                        </div>
+
+                        <div class="viva-answer">
+                            CRUD stands for Create, Read, Update
+                            and Delete.
+                        </div>
+
+                    </div>
+
+
+                    <div class="viva-item">
+
+                        <div class="viva-question">
+                            5. Why is exception handling useful?
+                        </div>
+
+                        <div class="viva-answer">
+                            It allows a program to handle runtime
+                            errors without terminating unexpectedly.
+                        </div>
+
+                    </div>
+
+
+                    <div class="viva-item">
+
+                        <div class="viva-question">
+                            6. What is a database?
+                        </div>
+
+                        <div class="viva-answer">
+                            A database is an organized collection
+                            of data that can be stored and retrieved
+                            efficiently.
+                        </div>
+
+                    </div>
+
+
+                    <div class="viva-item">
+
+                        <div class="viva-question">
+                            7. What is the purpose of SQL?
+                        </div>
+
+                        <div class="viva-answer">
+                            SQL is used to create, retrieve, modify
+                            and manage data in relational databases.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 NAVIGATION
+                 ================================================= -->
+
+            <div class="practical-navigation">
+
+
+                <a
+                    href="practical03.html"
+                    class="practical-nav-btn">
+
+                    <small>
+                        Previous Practical
+                    </small>
+
+                    <strong>
+                        â† OOP & Application Design
+                    </strong>
+
+                </a>
+
+
+                <a
+                    href="practical05.html"
+                    class="practical-nav-btn next">
+
+                    <small>
+                        Next Practical
+                    </small>
+
+                    <strong>
+                        Modern Python Application â†’
+                    </strong>
+
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="footer">
+
+        <div class="footer-main">
+
+
+            <div class="footer-brand">
+
+                <div class="logo">
+
+                    <span class="logo-mark">
+                        &lt;/&gt;
+                    </span>
+
+                    <span>
+                        Rasika<span class="logo-highlight">
+                            CodeLab
+                        </span>
+                    </span>
+
+                </div>
+
+                <p>
+                    Interactive practical learning through
+                    concepts, code and visualization.
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <div>
+
+                    <h4>
+                        Learn
+                    </h4>
+
+                    <a href="../../../subjects.html">
+                        Subjects
+                    </a>
+
+                    <a href="../../../about.html">
+                        About
+                    </a>
+
+                </div>
+
+
+                <div>
+
+                    <h4>
+                        Subjects
+                    </h4>
+
+                    <a href="../../cpp/index.html">
+                        C++
+                    </a>
+
+                    <a href="../../computer-graphics/cgr_index.html">
+                        Computer Graphics
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <span>
+                Â© 2026 Rasika CodeLab
+            </span>
+
+            <span>
+                Built for practical learning.
+            </span>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
+<script src="../../../js/main.js"></script>
+
+
+    <script>
+
+        function copyCode(button) {
+
+            const container =
+                button.closest(".code-container");
+
+            const code =
+                container.querySelector("code").innerText;
+
+            navigator.clipboard
+                .writeText(code)
+                .then(() => {
+
+                    const original =
+                        button.innerText;
+
+                    button.innerText = "Copied!";
+
+                    setTimeout(() => {
+
+                        button.innerText =
+                            original;
+
+                    }, 1500);
+
+                });
+
+        }
+
+    </script>
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+
+</html>

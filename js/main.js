@@ -28,13 +28,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         });
 
-        // Close menu when a link is clicked
         navLinks.querySelectorAll("a").forEach(link => {
 
             link.addEventListener("click", () => {
 
                 navLinks.classList.remove("mobile-active");
-
                 menuBtn.innerHTML = "☰";
 
             });
@@ -54,13 +52,9 @@ document.addEventListener("DOMContentLoaded", () => {
         window.addEventListener("scroll", () => {
 
             if (window.scrollY > 30) {
-
                 navbar.classList.add("scrolled");
-
             } else {
-
                 navbar.classList.remove("scrolled");
-
             }
 
         });
@@ -81,9 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
             link.getAttribute("href").split("/").pop();
 
         if (linkPage === currentPage) {
-
             link.classList.add("active");
-
         }
 
     });
@@ -144,9 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
             this.appendChild(ripple);
 
             setTimeout(() => {
-
                 ripple.remove();
-
             }, 600);
 
         });

@@ -1,0 +1,816 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Foundation 03 â€” Learn Cartesian and screen coordinate systems, axes, origin, quadrants and coordinate mapping in Computer Graphics.">
+    <title>Foundation 03 | How Do Coordinates Work? | Rasika CodeLab</title>
+     <link rel="stylesheet" href="../css/cgr_style.css">
+<style>body.protected-page:not(.auth-ready){visibility:hidden}</style>
+</head>
+
+<body class="protected-page">
+
+<header class="site-header">
+    <nav class="navbar">
+        <a href="../cgr_index.html" class="logo">
+            <span class="logo-mark">â—ˆ</span>
+            Rasika<span class="logo-highlight">CodeLab</span>
+        </a>
+
+        <div class="nav-links">
+            <a href="../cgr_index.html">Home</a>
+            <a href="../cgr_foundations.html" class="active">Foundations</a>
+            <a href="../cgr_practicals.html">Practicals</a>
+                        <a href="../../../about.html">About</a>
+        </div>
+
+        <button class="menu-btn" type="button" aria-label="Open menu">â˜°</button>
+    </nav>
+</header>
+
+<main>
+
+<section class="hero foundation-detail-hero">
+    <div class="hero-content">
+        <span class="eyebrow">FOUNDATION 03</span>
+
+        <h1>How Do <span>Coordinates Work?</span></h1>
+
+        <p class="hero-description">
+            Every point, line, circle and polygon needs a position.
+            Coordinate systems give graphics algorithms a mathematical
+            way to describe where objects exist.
+        </p>
+
+        <div class="foundation-meta">
+            <span>Cartesian Coordinates</span>
+            <span>Screen Coordinates</span>
+            <span>Origin</span>
+            <span>Axes</span>
+            <span>Coordinate Mapping</span>
+        </div>
+    </div>
+
+    <div class="hero-visual">
+        <div class="graphics-window foundation-visual-window">
+            <div class="window-header">
+                <div class="window-dots">
+                    <span></span><span></span><span></span>
+                </div>
+                <span class="window-title">coordinate-system</span>
+            </div>
+
+            <div class="coordinate-hero">
+                <div class="hero-axis hero-axis-x"></div>
+                <div class="hero-axis hero-axis-y"></div>
+
+                <span class="hero-origin">O (0,0)</span>
+
+                <span class="hero-point hp-one"></span>
+                <span class="hero-point hp-two"></span>
+
+                <span class="hero-point-label hpl-one">Pâ‚ (3,4)</span>
+                <span class="hero-point-label hpl-two">Pâ‚‚ (-2,-3)</span>
+
+                <span class="hero-axis-label hx">+X</span>
+                <span class="hero-axis-label hy">+Y</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="section foundation-detail">
+    <div class="section-heading">
+        <span class="eyebrow">LEARNING OBJECTIVES</span>
+        <h2>By the end of this foundation, you should be able to...</h2>
+    </div>
+
+    <div class="foundation-objectives">
+        <div class="objective-card">
+            <span>01</span>
+            <strong>Explain Coordinates</strong>
+            <p>Describe how a coordinate identifies the position of a point.</p>
+        </div>
+
+        <div class="objective-card">
+            <span>02</span>
+            <strong>Read the Axes</strong>
+            <p>Identify the X-axis, Y-axis and origin in a coordinate system.</p>
+        </div>
+
+        <div class="objective-card">
+            <span>03</span>
+            <strong>Identify Quadrants</strong>
+            <p>Determine the quadrant of a point from its X and Y values.</p>
+        </div>
+
+        <div class="objective-card">
+            <span>04</span>
+            <strong>Map Coordinates</strong>
+            <p>Understand the difference between mathematical and screen coordinates.</p>
+        </div>
+    </div>
+</section>
+
+
+<section class="section foundation-detail">
+    <div class="content-card concept-card">
+        <span class="eyebrow">01 Â· CONCEPT</span>
+        <h2>What is a Coordinate?</h2>
+
+        <p>
+            A coordinate is a numerical description of the position of
+            a point. In two-dimensional graphics, a point is commonly
+            represented as <strong>(x, y)</strong>.
+        </p>
+
+        <p>
+            The first value represents the horizontal position and the
+            second value represents the vertical position. Together,
+            they identify a point within the coordinate system.
+        </p>
+
+        <div class="definition-box">
+            <strong>Basic representation</strong>
+            <p>Point P = <strong>(x, y)</strong></p>
+        </div>
+    </div>
+</section>
+
+
+<section class="section foundation-detail">
+    <div class="section-heading">
+        <span class="eyebrow">02 Â· COORDINATE SYSTEM</span>
+        <h2>Start with the origin and axes.</h2>
+
+        <p>
+            A standard Cartesian coordinate system uses an origin and
+            two perpendicular axes to describe positions on a plane.
+        </p>
+    </div>
+
+    <div class="coordinate-parts">
+
+        <div class="coordinate-part-card">
+            <span>01</span>
+            <h3>Origin</h3>
+            <p>
+                The point where the X-axis and Y-axis intersect.
+                It is represented by <strong>(0, 0)</strong>.
+            </p>
+        </div>
+
+        <div class="coordinate-part-card">
+            <span>02</span>
+            <h3>X-axis</h3>
+            <p>
+                The horizontal axis. Positive X values move to the
+                right and negative X values move to the left.
+            </p>
+        </div>
+
+        <div class="coordinate-part-card">
+            <span>03</span>
+            <h3>Y-axis</h3>
+            <p>
+                The vertical axis. In the standard Cartesian system,
+                positive Y moves upward and negative Y moves downward.
+            </p>
+        </div>
+
+        <div class="coordinate-part-card">
+            <span>04</span>
+            <h3>Quadrants</h3>
+            <p>
+                The two axes divide the plane into four regions,
+                called Quadrants I, II, III and IV.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+
+<section class="section foundation-detail">
+    <div class="section-heading">
+        <span class="eyebrow">03 Â· QUADRANTS</span>
+        <h2>Use the signs of x and y.</h2>
+
+        <p>
+            The signs of the X and Y coordinates tell us which quadrant
+            contains a point.
+        </p>
+    </div>
+
+    <div class="quadrant-grid">
+
+        <div class="quadrant-card">
+            <span class="quadrant-number">I</span>
+            <strong>(+, +)</strong>
+            <p>x is positive and y is positive.</p>
+        </div>
+
+        <div class="quadrant-card">
+            <span class="quadrant-number">II</span>
+            <strong>(âˆ’, +)</strong>
+            <p>x is negative and y is positive.</p>
+        </div>
+
+        <div class="quadrant-card">
+            <span class="quadrant-number">III</span>
+            <strong>(âˆ’, âˆ’)</strong>
+            <p>x is negative and y is negative.</p>
+        </div>
+
+        <div class="quadrant-card">
+            <span class="quadrant-number">IV</span>
+            <strong>(+, âˆ’)</strong>
+            <p>x is positive and y is negative.</p>
+        </div>
+
+    </div>
+</section>
+
+
+<section class="section foundation-detail">
+    <div class="section-heading">
+        <span class="eyebrow">04 Â· CALCULATE</span>
+        <h2>Find the quadrant of a point.</h2>
+        <p>
+            The signs of the coordinates provide a quick way to locate a point.
+        </p>
+    </div>
+
+    <div class="comparison-grid">
+
+        <div class="content-card">
+            <span class="card-label">WORKED EXAMPLE</span>
+            <h3>P(âˆ’5, 3)</h3>
+
+            <div class="calculation-box">
+                x = âˆ’5 â†’ negative<br>
+                y = 3 â†’ positive<br><br>
+                Sign pattern = (âˆ’, +)
+            </div>
+
+            <div class="definition-box">
+                <strong>Answer</strong>
+                <p>P(âˆ’5, 3) lies in <strong>Quadrant II</strong>.</p>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <span class="card-label">SECOND EXAMPLE</span>
+            <h3>Q(4, âˆ’6)</h3>
+
+            <div class="calculation-box">
+                x = 4 â†’ positive<br>
+                y = âˆ’6 â†’ negative<br><br>
+                Sign pattern = (+, âˆ’)
+            </div>
+
+            <div class="definition-box">
+                <strong>Answer</strong>
+                <p>Q(4, âˆ’6) lies in <strong>Quadrant IV</strong>.</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<section class="section foundation-detail">
+    <div class="section-heading">
+        <span class="eyebrow">05 Â· INTERACTIVE VISUALIZATION</span>
+        <h2>Place a point on the coordinate plane.</h2>
+
+        <p>
+            Change X and Y values and observe exactly where the point moves.
+            The quadrant and distance from the origin update automatically.
+        </p>
+    </div>
+
+    <div class="coordinate-lab">
+
+        <div class="coordinate-canvas-wrap">
+            <canvas id="coordinateCanvas"
+                    class="coordinate-canvas"
+                    aria-label="Interactive Cartesian coordinate plane">
+            </canvas>
+        </div>
+
+        <div class="coordinate-controls">
+
+            <div class="coordinate-control">
+                <label for="coordX">
+                    <span>X coordinate</span>
+                    <output id="coordXOutput">3</output>
+                </label>
+
+                <input id="coordX" type="range" min="-10" max="10" value="3">
+            </div>
+
+            <div class="coordinate-control">
+                <label for="coordY">
+                    <span>Y coordinate</span>
+                    <output id="coordYOutput">4</output>
+                </label>
+
+                <input id="coordY" type="range" min="-10" max="10" value="4">
+            </div>
+
+            <div class="coordinate-readout">
+                <span>Current point</span>
+                <strong id="pointOutput">P(3, 4)</strong>
+            </div>
+
+            <div class="coordinate-readout">
+                <span>Quadrant</span>
+                <strong id="quadrantOutput">Quadrant I</strong>
+            </div>
+
+            <div class="coordinate-readout">
+                <span>Distance from origin</span>
+                <strong id="distanceOutput">5.00 units</strong>
+            </div>
+
+            <div class="coordinate-formula">
+                d = âˆš(xÂ² + yÂ²)
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<section class="section foundation-detail">
+    <div class="section-heading">
+        <span class="eyebrow">06 Â· SCREEN COORDINATES</span>
+        <h2>Why does the screen feel different?</h2>
+
+        <p>
+            Graphics systems often use a screen coordinate system in which
+            the origin is at the top-left and Y increases downward.
+        </p>
+    </div>
+
+    <div class="comparison-table-wrap">
+        <table class="graphics-comparison">
+
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Cartesian Coordinates</th>
+                    <th>Typical Screen Coordinates</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>Origin</td>
+                    <td>Usually at the center</td>
+                    <td>Usually at the top-left</td>
+                </tr>
+
+                <tr>
+                    <td>Positive X</td>
+                    <td>Moves right</td>
+                    <td>Moves right</td>
+                </tr>
+
+                <tr>
+                    <td>Positive Y</td>
+                    <td>Moves upward</td>
+                    <td>Usually moves downward</td>
+                </tr>
+
+                <tr>
+                    <td>Common use</td>
+                    <td>Mathematics and geometry</td>
+                    <td>Pixels, windows and screen drawing</td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+</section>
+
+
+<section class="section foundation-detail">
+    <div class="section-heading">
+        <span class="eyebrow">07 Â· COORDINATE MAPPING</span>
+        <h2>Convert mathematical coordinates to screen positions.</h2>
+
+        <p>
+            A graphics program may need to map a mathematical coordinate
+            system onto a screen whose origin and Y direction are different.
+        </p>
+    </div>
+
+    <div class="content-card">
+
+        <h3>Simple Y-axis conversion</h3>
+
+        <p>
+            Suppose a screen has height <strong>H</strong> and a mathematical
+            point has vertical coordinate <strong>y</strong>. A simple
+            top-left screen mapping can be expressed as:
+        </p>
+
+        <div class="formula-box">
+            screenY = H âˆ’ y
+        </div>
+
+        <div class="calculation-box">
+            Given:<br>
+            H = 500<br>
+            y = 120<br><br>
+
+            screenY = 500 âˆ’ 120<br>
+            screenY = 380
+        </div>
+
+        <div class="definition-box">
+            <strong>Why?</strong>
+            <p>
+                The conversion reverses the vertical direction so that
+                mathematical positive Y can correspond to upward movement
+                while screen Y increases downward.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+
+<section class="section foundation-detail">
+    <div class="section-heading">
+        <span class="eyebrow">COMMON ERRORS</span>
+        <h2>Watch out for these mistakes.</h2>
+    </div>
+
+    <div class="terminology-grid">
+
+        <div class="term-card">
+            <strong>Mixing X and Y</strong>
+            <p>Remember: (x, y) means horizontal position first, vertical position second.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Forgetting the Origin</strong>
+            <p>Coordinates are interpreted relative to the coordinate system's origin.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Ignoring Y Direction</strong>
+            <p>Check whether your graphics system increases Y upward or downward.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Wrong Quadrant</strong>
+            <p>Determine the signs of both coordinates before identifying the quadrant.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Off-by-One Errors</strong>
+            <p>Pixel indices and geometric coordinates do not always use the same conventions.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Incorrect Mapping</strong>
+            <p>Keep coordinate-system transformation separate from the drawing algorithm.</p>
+        </div>
+
+    </div>
+</section>
+
+
+<section class="section foundation-detail">
+    <div class="content-card quick-check">
+
+        <span class="eyebrow">QUICK CHECK</span>
+        <h2>Test your understanding.</h2>
+
+        <div class="question-list">
+
+            <div>
+                <span>01</span>
+                <p>What is the coordinate of the origin?</p>
+            </div>
+
+            <div>
+                <span>02</span>
+                <p>In which quadrant does P(âˆ’4, 7) lie?</p>
+            </div>
+
+            <div>
+                <span>03</span>
+                <p>What is the sign pattern of Quadrant IV?</p>
+            </div>
+
+            <div>
+                <span>04</span>
+                <p>How is a typical screen coordinate system different from Cartesian coordinates?</p>
+            </div>
+
+            <div>
+                <span>05</span>
+                <p>Find the distance of P(3, 4) from the origin.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<section class="section foundation-detail">
+    <div class="summary-box">
+
+        <span class="eyebrow">QUICK SUMMARY</span>
+        <h2>Remember these five ideas.</h2>
+
+        <div class="summary-grid">
+
+            <div>
+                <span>01</span>
+                <strong>Point = (x, y)</strong>
+                <p>A 2D point is represented by horizontal and vertical coordinates.</p>
+            </div>
+
+            <div>
+                <span>02</span>
+                <strong>Origin = (0, 0)</strong>
+                <p>The origin is the reference point of the coordinate system.</p>
+            </div>
+
+            <div>
+                <span>03</span>
+                <strong>Signs identify quadrants</strong>
+                <p>The signs of x and y determine the quadrant.</p>
+            </div>
+
+            <div>
+                <span>04</span>
+                <strong>Screen Y may be inverted</strong>
+                <p>Typical screen coordinates increase downward.</p>
+            </div>
+
+            <div>
+                <span>05</span>
+                <strong>Coordinates drive graphics</strong>
+                <p>Algorithms use coordinates to position and construct graphics.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<section class="section foundation-navigation">
+
+    <a href="foundation02.html" class="nav-card">
+        <span>â†</span>
+        <small>PREVIOUS FOUNDATION</small>
+        <strong>What is a Pixel?</strong>
+    </a>
+
+    <a href="foundation04.html" class="nav-card next">
+        <small>NEXT FOUNDATION</small>
+        <strong>How are Shapes Created? â†’</strong>
+    </a>
+
+</section>
+
+</main>
+
+
+<footer class="site-footer">
+
+    <div class="footer-content">
+
+        <div class="footer-brand">
+            <strong>Rasika<span class="logo-highlight">CodeLab</span></strong>
+            <p>Computer Graphics Practical Learning</p>
+        </div>
+
+        <div class="footer-links">
+            <a href="../../../index.html">Home</a>
+            <a href="../cgr_foundations.html">Foundations</a>
+            <a href="../cgr_practicals.html">Practicals</a>
+                        <a href="../../../about.html">About</a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        Â© 2026 Rasika CodeLab Â· Learn the concept. See the result.
+    </div>
+
+</footer>
+
+
+<script>
+(function () {
+
+    const canvas = document.getElementById("coordinateCanvas");
+    const xRange = document.getElementById("coordX");
+    const yRange = document.getElementById("coordY");
+
+    const xOutput = document.getElementById("coordXOutput");
+    const yOutput = document.getElementById("coordYOutput");
+    const pointOutput = document.getElementById("pointOutput");
+    const quadrantOutput = document.getElementById("quadrantOutput");
+    const distanceOutput = document.getElementById("distanceOutput");
+
+    const ctx = canvas.getContext("2d");
+
+    function resizeCanvas() {
+
+        const rect = canvas.getBoundingClientRect();
+        const dpr = window.devicePixelRatio || 1;
+
+        canvas.width = rect.width * dpr;
+        canvas.height = rect.height * dpr;
+
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        draw();
+    }
+
+    function getQuadrant(x, y) {
+
+        if (x === 0 && y === 0) return "Origin";
+        if (x === 0) return "On Y-axis";
+        if (y === 0) return "On X-axis";
+
+        if (x > 0 && y > 0) return "Quadrant I";
+        if (x < 0 && y > 0) return "Quadrant II";
+        if (x < 0 && y < 0) return "Quadrant III";
+
+        return "Quadrant IV";
+    }
+
+    function update() {
+
+        const x = Number(xRange.value);
+        const y = Number(yRange.value);
+
+        xOutput.value = x;
+        yOutput.value = y;
+
+        pointOutput.textContent = "P(" + x + ", " + y + ")";
+        quadrantOutput.textContent = getQuadrant(x, y);
+
+        const distance = Math.sqrt((x * x) + (y * y));
+        distanceOutput.textContent = distance.toFixed(2) + " units";
+
+        draw();
+    }
+
+    function draw() {
+
+        const width = canvas.clientWidth;
+        const height = canvas.clientHeight;
+
+        ctx.clearRect(0, 0, width, height);
+
+        ctx.fillStyle = "#080b0e";
+        ctx.fillRect(0, 0, width, height);
+
+        const padding = 34;
+        const scale = Math.min(
+            (width - padding * 2) / 20,
+            (height - padding * 2) / 20
+        );
+
+        const originX = width / 2;
+        const originY = height / 2;
+
+        const x = Number(xRange.value);
+        const y = Number(yRange.value);
+
+        /* Grid */
+
+        ctx.lineWidth = 1;
+
+        for (let i = -10; i <= 10; i++) {
+
+            const px = originX + i * scale;
+            const py = originY - i * scale;
+
+            ctx.strokeStyle = "rgba(255,255,255,0.07)";
+
+            ctx.beginPath();
+            ctx.moveTo(px, padding);
+            ctx.lineTo(px, height - padding);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(padding, py);
+            ctx.lineTo(width - padding, py);
+            ctx.stroke();
+        }
+
+        /* Axes */
+
+        ctx.strokeStyle = "rgba(255,138,0,0.65)";
+        ctx.lineWidth = 1.5;
+
+        ctx.beginPath();
+        ctx.moveTo(padding, originY);
+        ctx.lineTo(width - padding, originY);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(originX, padding);
+        ctx.lineTo(originX, height - padding);
+        ctx.stroke();
+
+        /* Axis labels */
+
+        ctx.fillStyle = "#8d949d";
+        ctx.font = "12px monospace";
+
+        ctx.fillText("+X", width - padding - 20, originY - 8);
+        ctx.fillText("+Y", originX + 8, padding + 12);
+        ctx.fillText("0", originX + 6, originY + 16);
+
+        /* Tick labels */
+
+        for (let i = -10; i <= 10; i++) {
+
+            if (i === 0) continue;
+
+            const px = originX + i * scale;
+            const py = originY - i * scale;
+
+            ctx.fillStyle = "rgba(255,255,255,0.35)";
+            ctx.font = "9px monospace";
+
+            ctx.fillText(String(i), px - 4, originY + 14);
+            ctx.fillText(String(i), originX + 7, py + 3);
+        }
+
+        /* Projection lines */
+
+        const pointX = originX + x * scale;
+        const pointY = originY - y * scale;
+
+        ctx.setLineDash([4, 4]);
+        ctx.strokeStyle = "rgba(255,138,0,0.35)";
+        ctx.lineWidth = 1;
+
+        ctx.beginPath();
+        ctx.moveTo(pointX, pointY);
+        ctx.lineTo(pointX, originY);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(pointX, pointY);
+        ctx.lineTo(originX, pointY);
+        ctx.stroke();
+
+        ctx.setLineDash([]);
+
+        /* Point */
+
+        ctx.fillStyle = "#ff8a00";
+
+        ctx.beginPath();
+        ctx.arc(pointX, pointY, 6, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.strokeStyle = "#ffd19a";
+        ctx.lineWidth = 2;
+
+        ctx.beginPath();
+        ctx.arc(pointX, pointY, 10, 0, Math.PI * 2);
+        ctx.stroke();
+
+        /* Point label */
+
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "12px monospace";
+
+        ctx.fillText(
+            "P(" + x + "," + y + ")",
+            pointX + 12,
+            pointY - 10
+        );
+    }
+
+    xRange.addEventListener("input", update);
+    yRange.addEventListener("input", update);
+    window.addEventListener("resize", resizeCanvas);
+
+    update();
+    resizeCanvas();
+
+})();
+</script>
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

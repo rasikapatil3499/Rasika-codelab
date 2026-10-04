@@ -1,0 +1,1742 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Practical 12 | 3D Transformation Visualizer | Rasika CodeLab</title>
+  <link rel="stylesheet" href="../css/cgr_style.css">
+  <link rel="stylesheet" href="../css/cgr_practicals.css">
+<style>body.protected-page:not(.auth-ready){visibility:hidden}</style>
+</head>
+
+<body class="cgr-practical-body practical-12 protected-page">
+
+<header class="navbar">
+  <div class="logo">
+    <span class="logo-mark">&lt;/&gt;</span>
+    <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+  </div>
+
+  <nav class="nav-links">
+    <a href="../cgr_index.html">Home</a>
+    <a href="../cgr_foundations.html">Foundations</a>
+        <a href="../cgr_practicals.html" class="active">Practicals</a>
+    <a href="../../../about.html">About</a>
+  </nav>
+
+  <button class="menu-btn" aria-label="Open Menu">â˜°</button>
+</header>
+
+
+<main class="cgr-practical-page practical-12-page">
+
+  <!-- HERO -->
+  <section class="practical-hero">
+    <div class="practical-hero-content">
+      <span class="practical-badge">12 â€¢ 3D GRAPHICS</span>
+      <h1>3D Transformation Visualizer</h1>
+      <p>Transform 3D vertices using translation, scaling and rotation.</p>
+
+      <div class="practical-tags">
+        <span>3D Coordinates</span>
+        <span>Vertices</span>
+        <span>Transformation</span>
+        <span>Homogeneous Matrix</span>
+      </div>
+    </div>
+
+    <div class="three-d-hero-visual" aria-hidden="true">
+      <div class="hero-cube">
+        <span></span><span></span><span></span><span></span>
+        <span></span><span></span>
+      </div>
+      <div class="hero-3d-axis hero-axis-x"></div>
+      <div class="hero-3d-axis hero-axis-y"></div>
+      <div class="hero-3d-axis hero-axis-z"></div>
+      <span class="hero-axis-label x">X</span>
+      <span class="hero-axis-label y">Y</span>
+      <span class="hero-axis-label z">Z</span>
+    </div>
+  </section>
+
+
+  <!-- OBJECTIVES -->
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>01</span>
+      <div>
+        <h2>What Will You Learn?</h2>
+        <p>Move from 2D transformation matrices to transformation of objects in three-dimensional space.</p>
+      </div>
+    </div>
+
+    <div class="concept-grid">
+
+      <article class="concept-card">
+        <div class="concept-icon">XYZ</div>
+        <h3>3D Coordinates</h3>
+        <p>Represent a point using three coordinates: X, Y and Z.</p>
+      </article>
+
+      <article class="concept-card">
+        <div class="concept-icon">â—†</div>
+        <h3>3D Vertices</h3>
+        <p>Represent an object as a collection of vertices connected by edges and faces.</p>
+      </article>
+
+      <article class="concept-card">
+        <div class="concept-icon">T</div>
+        <h3>Translation</h3>
+        <p>Move an object through 3D space by changing its X, Y and Z coordinates.</p>
+      </article>
+
+      <article class="concept-card">
+        <div class="concept-icon">R</div>
+        <h3>Rotation</h3>
+        <p>Rotate an object around the X, Y or Z axis.</p>
+      </article>
+
+    </div>
+
+    <div class="transform-flow">
+      <span>3D Vertices</span>
+      <b>â†’</b>
+      <span>Transformation</span>
+      <b>â†’</b>
+      <span>New Coordinates</span>
+      <b>â†’</b>
+      <span>Projection</span>
+      <b>â†’</b>
+      <span>Screen</span>
+    </div>
+  </section>
+
+
+  <!-- 3D COORDINATE SYSTEM -->
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>02</span>
+      <div>
+        <h2>3D Coordinate System</h2>
+        <p>A 3D point needs an additional Z coordinate to represent depth.</p>
+      </div>
+    </div>
+
+    <div class="coordinate-3d-layout">
+
+      <article class="coordinate-3d-card">
+        <h3>Point Representation</h3>
+
+        <div class="point-equation">
+          P = (x, y, z)
+        </div>
+
+        <p>
+          X controls horizontal position, Y controls vertical position and Z represents depth.
+        </p>
+
+        <div class="coordinate-list">
+          <span><strong>X</strong> Horizontal axis</span>
+          <span><strong>Y</strong> Vertical axis</span>
+          <span><strong>Z</strong> Depth axis</span>
+        </div>
+      </article>
+
+
+      <div class="coordinate-3d-visual">
+        <div class="axis-3d x-axis"></div>
+        <div class="axis-3d y-axis"></div>
+        <div class="axis-3d z-axis"></div>
+        <div class="axis-origin"></div>
+        <span class="axis-text x-text">X</span>
+        <span class="axis-text y-text">Y</span>
+        <span class="axis-text z-text">Z</span>
+        <span class="axis-text origin-text">O(0,0,0)</span>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- 3D TRANSLATION -->
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>03</span>
+      <div>
+        <h2>3D Translation</h2>
+        <p>Translation moves every vertex by the same distance in X, Y and Z directions.</p>
+      </div>
+    </div>
+
+    <div class="formula-layout">
+
+      <article class="formula-card">
+        <h3>Coordinate Equations</h3>
+
+        <div class="big-formula">
+          xâ€² = x + t<sub>x</sub><br>
+          yâ€² = y + t<sub>y</sub><br>
+          zâ€² = z + t<sub>z</sub>
+        </div>
+
+        <p>
+          The shape and orientation remain unchanged; only the position changes.
+        </p>
+      </article>
+
+
+      <article class="matrix-card">
+        <h3>4Ã—4 Homogeneous Matrix</h3>
+
+        <div class="matrix-box matrix-4x4">
+          <i>1</i><i>0</i><i>0</i><i>t<sub>x</sub></i>
+          <i>0</i><i>1</i><i>0</i><i>t<sub>y</sub></i>
+          <i>0</i><i>0</i><i>1</i><i>t<sub>z</sub></i>
+          <i>0</i><i>0</i><i>0</i><i>1</i>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+
+  <!-- 3D SCALING -->
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>04</span>
+      <div>
+        <h2>3D Scaling</h2>
+        <p>Scaling changes the size of an object along the three coordinate axes.</p>
+      </div>
+    </div>
+
+    <div class="formula-layout">
+
+      <article class="formula-card">
+        <h3>Coordinate Equations</h3>
+
+        <div class="big-formula">
+          xâ€² = s<sub>x</sub>x<br>
+          yâ€² = s<sub>y</sub>y<br>
+          zâ€² = s<sub>z</sub>z
+        </div>
+
+        <p>
+          Equal scale factors create uniform scaling. Different factors create non-uniform scaling.
+        </p>
+      </article>
+
+
+      <article class="matrix-card">
+        <h3>4Ã—4 Scaling Matrix</h3>
+
+        <div class="matrix-box matrix-4x4">
+          <i>s<sub>x</sub></i><i>0</i><i>0</i><i>0</i>
+          <i>0</i><i>s<sub>y</sub></i><i>0</i><i>0</i>
+          <i>0</i><i>0</i><i>s<sub>z</sub></i><i>0</i>
+          <i>0</i><i>0</i><i>0</i><i>1</i>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+
+  <!-- 3D ROTATION -->
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>05</span>
+      <div>
+        <h2>3D Rotation</h2>
+        <p>Unlike 2D rotation, a 3D object can rotate independently around three principal axes.</p>
+      </div>
+    </div>
+
+    <div class="rotation-axis-grid">
+
+      <article class="axis-rotation-card">
+        <span>RX</span>
+        <h3>Rotation About X</h3>
+
+        <div class="matrix-box matrix-4x4">
+          <i>1</i><i>0</i><i>0</i><i>0</i>
+          <i>0</i><i>cosÎ¸</i><i>âˆ’sinÎ¸</i><i>0</i>
+          <i>0</i><i>sinÎ¸</i><i>cosÎ¸</i><i>0</i>
+          <i>0</i><i>0</i><i>0</i><i>1</i>
+        </div>
+      </article>
+
+
+      <article class="axis-rotation-card">
+        <span>RY</span>
+        <h3>Rotation About Y</h3>
+
+        <div class="matrix-box matrix-4x4">
+          <i>cosÎ¸</i><i>0</i><i>sinÎ¸</i><i>0</i>
+          <i>0</i><i>1</i><i>0</i><i>0</i>
+          <i>âˆ’sinÎ¸</i><i>0</i><i>cosÎ¸</i><i>0</i>
+          <i>0</i><i>0</i><i>0</i><i>1</i>
+        </div>
+      </article>
+
+
+      <article class="axis-rotation-card">
+        <span>RZ</span>
+        <h3>Rotation About Z</h3>
+
+        <div class="matrix-box matrix-4x4">
+          <i>cosÎ¸</i><i>âˆ’sinÎ¸</i><i>0</i><i>0</i>
+          <i>sinÎ¸</i><i>cosÎ¸</i><i>0</i><i>0</i>
+          <i>0</i><i>0</i><i>1</i><i>0</i>
+          <i>0</i><i>0</i><i>0</i><i>1</i>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+
+  <!-- WORKED CALCULATION -->
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>06</span>
+      <div>
+        <h2>Worked Calculation</h2>
+        <p>Translate a 3D point and calculate its new coordinates.</p>
+      </div>
+    </div>
+
+    <div class="calculation-panel">
+
+      <div class="given-card">
+        <h3>Given</h3>
+
+        <div class="given-line">
+          <span>Point</span>
+          <strong>P(2, 3, 4)</strong>
+        </div>
+
+        <div class="given-line">
+          <span>Translation</span>
+          <strong>T(3, âˆ’1, 2)</strong>
+        </div>
+
+        <div class="given-line">
+          <span>Operation</span>
+          <strong>3D Translation</strong>
+        </div>
+      </div>
+
+
+      <div class="calculation-steps">
+
+        <div class="calc-step">
+          <span>01</span>
+          <code>xâ€² = x + tx = 2 + 3</code>
+          <strong>xâ€² = 5</strong>
+        </div>
+
+        <div class="calc-step">
+          <span>02</span>
+          <code>yâ€² = y + ty = 3 âˆ’ 1</code>
+          <strong>yâ€² = 2</strong>
+        </div>
+
+        <div class="calc-step">
+          <span>03</span>
+          <code>zâ€² = z + tz = 4 + 2</code>
+          <strong>zâ€² = 6</strong>
+        </div>
+
+        <div class="calc-step result-step">
+          <span>04</span>
+          <code>Pâ€² = (xâ€², yâ€², zâ€²)</code>
+          <strong>Pâ€² = (5, 2, 6)</strong>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- PROJECTION -->
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>07</span>
+      <div>
+        <h2>From 3D Coordinates to the Screen</h2>
+        <p>A 3D object must eventually be projected onto a 2D display.</p>
+      </div>
+    </div>
+
+    <div class="projection-flow">
+
+      <article class="projection-step">
+        <span>01</span>
+        <h3>Model</h3>
+        <p>Object vertices are defined in local coordinates.</p>
+      </article>
+
+      <b>â†’</b>
+
+      <article class="projection-step">
+        <span>02</span>
+        <h3>Transform</h3>
+        <p>Translation, rotation and scaling change the object.</p>
+      </article>
+
+      <b>â†’</b>
+
+      <article class="projection-step">
+        <span>03</span>
+        <h3>Project</h3>
+        <p>3D coordinates are mapped into a 2D view.</p>
+      </article>
+
+      <b>â†’</b>
+
+      <article class="projection-step">
+        <span>04</span>
+        <h3>Rasterize</h3>
+        <p>The final geometry becomes pixels on the display.</p>
+      </article>
+
+    </div>
+  </section>
+
+
+  <!-- LIVE LAB -->
+  <section class="practical-section three-d-live-section">
+    <div class="section-heading">
+      <span>08</span>
+      <div>
+        <h2>Live 3D Transformation Visualizer</h2>
+        <p>Change translation, scale and rotation values and watch a 3D cube transform in real time.</p>
+      </div>
+    </div>
+
+
+    <div class="three-d-lab">
+
+      <div class="three-d-controls">
+
+        <div class="control-block">
+          <h3>Translation</h3>
+
+          <label>
+            X
+            <input id="translateX" type="range" min="-5" max="5" step="0.5" value="0">
+            <output id="translateXValue">0</output>
+          </label>
+
+          <label>
+            Y
+            <input id="translateY" type="range" min="-5" max="5" step="0.5" value="0">
+            <output id="translateYValue">0</output>
+          </label>
+
+          <label>
+            Z
+            <input id="translateZ" type="range" min="-5" max="5" step="0.5" value="0">
+            <output id="translateZValue">0</output>
+          </label>
+        </div>
+
+
+        <div class="control-block">
+          <h3>Scaling</h3>
+
+          <label>
+            X
+            <input id="scaleX" type="range" min="0.5" max="2.5" step="0.1" value="1">
+            <output id="scaleXValue">1</output>
+          </label>
+
+          <label>
+            Y
+            <input id="scaleY" type="range" min="0.5" max="2.5" step="0.1" value="1">
+            <output id="scaleYValue">1</output>
+          </label>
+
+          <label>
+            Z
+            <input id="scaleZ" type="range" min="0.5" max="2.5" step="0.1" value="1">
+            <output id="scaleZValue">1</output>
+          </label>
+        </div>
+
+
+        <div class="control-block">
+          <h3>Rotation</h3>
+
+          <label>
+            X
+            <input id="rotateX" type="range" min="-180" max="180" step="5" value="25">
+            <output id="rotateXValue">25Â°</output>
+          </label>
+
+          <label>
+            Y
+            <input id="rotateY" type="range" min="-180" max="180" step="5" value="35">
+            <output id="rotateYValue">35Â°</output>
+          </label>
+
+          <label>
+            Z
+            <input id="rotateZ" type="range" min="-180" max="180" step="5" value="0">
+            <output id="rotateZValue">0Â°</output>
+          </label>
+        </div>
+
+
+        <div class="control-block">
+          <h3>View</h3>
+
+          <div class="object-choice">
+            <button class="object-btn active" data-object="cube">Cube</button>
+            <button class="object-btn" data-object="pyramid">Pyramid</button>
+            <button class="object-btn" data-object="diamond">Diamond</button>
+          </div>
+        </div>
+
+
+        <div class="button-row">
+          <button class="primary-btn" id="apply3D">Apply Transformation</button>
+          <button class="secondary-btn" id="animate3D">â–¶ Animate</button>
+          <button class="ghost-btn" id="reset3D">Reset</button>
+        </div>
+
+
+        <div class="three-d-readout">
+
+          <div>
+            <span>Translation</span>
+            <strong id="translationReadout">(0, 0, 0)</strong>
+          </div>
+
+          <div>
+            <span>Scale</span>
+            <strong id="scaleReadout">(1, 1, 1)</strong>
+          </div>
+
+          <div>
+            <span>Rotation</span>
+            <strong id="rotationReadout">(25Â°, 35Â°, 0Â°)</strong>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="three-d-viewer">
+
+        <canvas id="threeDCanvas" width="760" height="560"></canvas>
+
+        <div class="three-d-legend">
+          <span><i class="legend-original"></i> Original</span>
+          <span><i class="legend-transformed"></i> Transformed</span>
+          <span><i class="legend-axis"></i> Axes</span>
+        </div>
+
+        <div class="viewer-footer">
+          <span id="threeDStatus">3D transformation ready</span>
+          <span id="threeDVertices">Vertices: 8</span>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- VERTEX TABLE -->
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>09</span>
+      <div>
+        <h2>Vertex Coordinates</h2>
+        <p>Inspect how each vertex changes after the selected 3D transformation.</p>
+      </div>
+    </div>
+
+    <div class="vertex-table-wrapper">
+
+      <table class="vertex-table">
+        <thead>
+          <tr>
+            <th>Vertex</th>
+            <th>Original X</th>
+            <th>Original Y</th>
+            <th>Original Z</th>
+            <th>Transformed X</th>
+            <th>Transformed Y</th>
+            <th>Transformed Z</th>
+          </tr>
+        </thead>
+
+        <tbody id="vertexTableBody"></tbody>
+      </table>
+
+    </div>
+  </section>
+
+
+  <!-- REAL LIFE PROBLEMS -->
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>10</span>
+      <div>
+        <h2>Real-Life Problem Statements</h2>
+        <p>Connect 3D transformations with games, CAD and virtual environments.</p>
+      </div>
+    </div>
+
+    <div class="problem-tabs">
+
+      <button class="problem-tab active" data-problem="game">
+        ðŸŽ® Game Object
+      </button>
+
+      <button class="problem-tab" data-problem="cad">
+        ðŸ—ï¸ CAD Model
+      </button>
+
+      <button class="problem-tab" data-problem="vr">
+        ðŸ¥½ VR Object
+      </button>
+
+    </div>
+
+
+    <div class="three-d-problem-layout">
+
+      <article class="problem-statement">
+
+        <span class="problem-label">PROBLEM</span>
+
+        <h3 id="problemTitle">Game Object Movement</h3>
+
+        <p id="problemDescription">
+          A 3D game character must move forward, become larger and rotate toward the player.
+        </p>
+
+        <div class="problem-given" id="problemGiven">
+          Translation = (2, 0, 3) â€¢ Scale = 1.5 â€¢ Rotation Y = 45Â°
+        </div>
+
+        <div class="problem-answer" id="problemAnswer">
+          Apply scaling, rotation and translation to every vertex of the 3D model.
+        </div>
+
+        <button class="primary-btn" id="showProblem">
+          Show in Live Viewer
+        </button>
+
+      </article>
+
+
+      <div class="problem-mini-viewer">
+        <canvas id="problemCanvas" width="600" height="420"></canvas>
+
+        <div class="viewer-footer">
+          <span id="problemStatus">3D transformation</span>
+          <span id="problemReadout">Model â†’ transformed model</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- EXPERIMENTS -->
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>11</span>
+      <div>
+        <h2>Experiments</h2>
+        <p>Change one transformation at a time and observe how the 3D geometry responds.</p>
+      </div>
+    </div>
+
+    <div class="experiment-grid">
+
+      <button class="experiment-card" data-experiment="translate">
+        <strong>Move in Z</strong>
+        <span>tz = 3</span>
+      </button>
+
+      <button class="experiment-card" data-experiment="scale">
+        <strong>Uniform Scale</strong>
+        <span>s = 1.8</span>
+      </button>
+
+      <button class="experiment-card" data-experiment="rotateX">
+        <strong>Rotate X</strong>
+        <span>Î¸x = 90Â°</span>
+      </button>
+
+      <button class="experiment-card" data-experiment="rotateY">
+        <strong>Rotate Y</strong>
+        <span>Î¸y = 90Â°</span>
+      </button>
+
+    </div>
+
+    <div class="experiment-result" id="experimentResult">
+      Select an experiment to load its 3D transformation.
+    </div>
+  </section>
+
+
+  <!-- COMMON MISTAKES -->
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>12</span>
+      <div>
+        <h2>Common Mistakes</h2>
+        <p>3D transformation introduces another coordinate and multiple possible rotation axes.</p>
+      </div>
+    </div>
+
+    <div class="mistake-grid">
+
+      <article class="mistake-card">
+        <span>01</span>
+        <h3>Ignoring Z</h3>
+        <p>A 3D point requires X, Y and Z. Removing Z loses depth information.</p>
+      </article>
+
+      <article class="mistake-card">
+        <span>02</span>
+        <h3>Wrong Rotation Axis</h3>
+        <p>Rotation about X, Y and Z produces different results.</p>
+      </article>
+
+      <article class="mistake-card">
+        <span>03</span>
+        <h3>Wrong Matrix Order</h3>
+        <p>When several 3D transformations are combined, their order affects the final coordinates.</p>
+      </article>
+
+      <article class="mistake-card">
+        <span>04</span>
+        <h3>Forgetting Projection</h3>
+        <p>A 3D object still needs a projection step before it can be represented on a 2D screen.</p>
+      </article>
+
+    </div>
+  </section>
+
+
+  <!-- VIVA -->
+  <section class="practical-section viva-section">
+    <div class="section-heading">
+      <span>13</span>
+      <div>
+        <h2>Viva Questions</h2>
+        <p>Test your understanding of 3D transformations.</p>
+      </div>
+    </div>
+
+    <div class="viva-grid">
+
+      <details>
+        <summary>What is a 3D coordinate?</summary>
+        <p>A 3D coordinate represents a point using X, Y and Z values.</p>
+      </details>
+
+      <details>
+        <summary>What is 3D translation?</summary>
+        <p>It moves an object by tx, ty and tz along the X, Y and Z axes.</p>
+      </details>
+
+      <details>
+        <summary>What is 3D scaling?</summary>
+        <p>It changes the object's size along the X, Y and Z axes using scale factors.</p>
+      </details>
+
+      <details>
+        <summary>How many principal rotation axes are used in 3D?</summary>
+        <p>Three principal axes are used: X, Y and Z.</p>
+      </details>
+
+      <details>
+        <summary>Why is a 4Ã—4 matrix used?</summary>
+        <p>Homogeneous coordinates allow 3D translation and other transformations to be represented using matrix multiplication.</p>
+      </details>
+
+      <details>
+        <summary>What is the difference between 2D and 3D transformation?</summary>
+        <p>3D transformation includes the additional Z coordinate and supports movement, scaling and rotation through three spatial axes.</p>
+      </details>
+
+      <details>
+        <summary>What is projection?</summary>
+        <p>Projection maps a 3D scene into a 2D representation suitable for display.</p>
+      </details>
+
+      <details>
+        <summary>What is a vertex?</summary>
+        <p>A vertex is a point used to define the geometry of a 3D object.</p>
+      </details>
+
+    </div>
+  </section>
+
+
+  <nav class="practical-navigation">
+    <a href="practical11.html">
+      <span>â† Previous</span>
+      <strong>11 â€” Composite 2D Transformation</strong>
+    </a>
+
+    <a href="practical13.html">
+      <span>Next â†’</span>
+      <strong>13 â€” Cohen-Sutherland Line Clipping</strong>
+    </a>
+  </nav>
+
+</main>
+
+
+<footer class="footer">
+
+  <div class="footer-main">
+
+    <div class="footer-brand">
+
+      <div class="logo">
+        <span class="logo-mark">&lt;/&gt;</span>
+        <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+      </div>
+
+      <p>
+        Interactive Computer Graphics practical learning through concepts,
+        calculations and visualization.
+      </p>
+
+    </div>
+
+
+    <div class="footer-links">
+
+      <div>
+        <h4>Learn</h4>
+        <a href="../cgr_foundations.html">Foundations</a>
+              </div>
+
+      <div>
+        <h4>Practice</h4>
+        <a href="../cgr_practicals.html">Practicals</a>
+        <a href="../../../about.html">About</a>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="footer-bottom">
+    <span>Â© 2026 Rasika CodeLab</span>
+    <span>Built for practical learning.</span>
+  </div>
+
+</footer>
+
+
+<script>
+(function () {
+  "use strict";
+
+  const canvas = document.getElementById("threeDCanvas");
+  const ctx = canvas.getContext("2d");
+
+  let selectedObject = "cube";
+  let animationTimer = null;
+  let animationRunning = false;
+
+
+  const objects = {
+
+    cube: {
+      vertices: [
+        { x: -2, y: -2, z: -2 },
+        { x:  2, y: -2, z: -2 },
+        { x:  2, y:  2, z: -2 },
+        { x: -2, y:  2, z: -2 },
+        { x: -2, y: -2, z:  2 },
+        { x:  2, y: -2, z:  2 },
+        { x:  2, y:  2, z:  2 },
+        { x: -2, y:  2, z:  2 }
+      ],
+      edges: [
+        [0,1],[1,2],[2,3],[3,0],
+        [4,5],[5,6],[6,7],[7,4],
+        [0,4],[1,5],[2,6],[3,7]
+      ]
+    },
+
+    pyramid: {
+      vertices: [
+        { x: -2, y: -2, z: -2 },
+        { x:  2, y: -2, z: -2 },
+        { x:  2, y: -2, z:  2 },
+        { x: -2, y: -2, z:  2 },
+        { x:  0, y:  3, z:  0 }
+      ],
+      edges: [
+        [0,1],[1,2],[2,3],[3,0],
+        [0,4],[1,4],[2,4],[3,4]
+      ]
+    },
+
+    diamond: {
+      vertices: [
+        { x: 0, y: 3, z: 0 },
+        { x: 2, y: 0, z: 0 },
+        { x: 0, y: 0, z: 2 },
+        { x: -2, y: 0, z: 0 },
+        { x: 0, y: 0, z: -2 },
+        { x: 0, y: -3, z: 0 }
+      ],
+      edges: [
+        [0,1],[0,2],[0,3],[0,4],
+        [5,1],[5,2],[5,3],[5,4],
+        [1,2],[2,3],[3,4],[4,1]
+      ]
+    }
+
+  };
+
+
+  function value(id) {
+    return Number(document.getElementById(id).value);
+  }
+
+
+  function getParameters() {
+
+    return {
+      tx: value("translateX"),
+      ty: value("translateY"),
+      tz: value("translateZ"),
+
+      sx: value("scaleX"),
+      sy: value("scaleY"),
+      sz: value("scaleZ"),
+
+      rx: value("rotateX") * Math.PI / 180,
+      ry: value("rotateY") * Math.PI / 180,
+      rz: value("rotateZ") * Math.PI / 180
+    };
+
+  }
+
+
+  function transformPoint(point, p) {
+
+    let x = point.x * p.sx;
+    let y = point.y * p.sy;
+    let z = point.z * p.sz;
+
+
+    const cosX = Math.cos(p.rx);
+    const sinX = Math.sin(p.rx);
+
+    let y1 = y * cosX - z * sinX;
+    let z1 = y * sinX + z * cosX;
+
+    y = y1;
+    z = z1;
+
+
+    const cosY = Math.cos(p.ry);
+    const sinY = Math.sin(p.ry);
+
+    let x2 = x * cosY + z * sinY;
+    let z2 = -x * sinY + z * cosY;
+
+    x = x2;
+    z = z2;
+
+
+    const cosZ = Math.cos(p.rz);
+    const sinZ = Math.sin(p.rz);
+
+    let x3 = x * cosZ - y * sinZ;
+    let y3 = x * sinZ + y * cosZ;
+
+    x = x3;
+    y = y3;
+
+
+    return {
+      x: x + p.tx,
+      y: y + p.ty,
+      z: z + p.tz
+    };
+
+  }
+
+
+  function project(point) {
+
+    const cameraDistance = 13;
+    const depth = cameraDistance + point.z;
+
+    const perspective = 330 / Math.max(3, depth);
+
+    return {
+      x: canvas.width / 2 + point.x * perspective,
+      y: canvas.height / 2 - point.y * perspective
+    };
+
+  }
+
+
+  function drawBackground() {
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "#080b0f";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.strokeStyle = "rgba(255,255,255,.045)";
+    ctx.lineWidth = 1;
+
+    for (let x = 0; x < canvas.width; x += 28) {
+      ctx.beginPath();
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, canvas.height);
+      ctx.stroke();
+    }
+
+    for (let y = 0; y < canvas.height; y += 28) {
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      ctx.lineTo(canvas.width, y);
+      ctx.stroke();
+    }
+
+  }
+
+
+  function drawAxes() {
+
+    const origin = project({ x: 0, y: 0, z: 0 });
+
+    const xEnd = project({ x: 5, y: 0, z: 0 });
+    const yEnd = project({ x: 0, y: 5, z: 0 });
+    const zEnd = project({ x: 0, y: 0, z: 5 });
+
+
+    ctx.lineWidth = 1.5;
+
+    ctx.strokeStyle = "rgba(255,138,0,.65)";
+    ctx.beginPath();
+    ctx.moveTo(origin.x, origin.y);
+    ctx.lineTo(xEnd.x, xEnd.y);
+    ctx.stroke();
+
+    ctx.strokeStyle = "rgba(255,255,255,.5)";
+    ctx.beginPath();
+    ctx.moveTo(origin.x, origin.y);
+    ctx.lineTo(yEnd.x, yEnd.y);
+    ctx.stroke();
+
+    ctx.strokeStyle = "rgba(180,190,205,.55)";
+    ctx.beginPath();
+    ctx.moveTo(origin.x, origin.y);
+    ctx.lineTo(zEnd.x, zEnd.y);
+    ctx.stroke();
+
+
+    ctx.font = "12px Arial";
+    ctx.fillStyle = "#ffb24a";
+    ctx.fillText("X", xEnd.x + 7, xEnd.y);
+
+    ctx.fillStyle = "#ffffff";
+    ctx.fillText("Y", yEnd.x + 7, yEnd.y);
+
+    ctx.fillStyle = "#c4cbd4";
+    ctx.fillText("Z", zEnd.x + 7, zEnd.y);
+
+  }
+
+
+  function drawObject(vertices, edges, type) {
+
+    const projected = vertices.map(project);
+
+    ctx.lineWidth = type === "original" ? 2 : 3;
+
+    if (type === "original") {
+      ctx.strokeStyle = "rgba(145,155,170,.7)";
+      ctx.setLineDash([7, 6]);
+    } else {
+      ctx.strokeStyle = "#ff8a00";
+      ctx.setLineDash([]);
+    }
+
+
+    edges.forEach(edge => {
+
+      const a = projected[edge[0]];
+      const b = projected[edge[1]];
+
+      ctx.beginPath();
+      ctx.moveTo(a.x, a.y);
+      ctx.lineTo(b.x, b.y);
+      ctx.stroke();
+
+    });
+
+    ctx.setLineDash([]);
+
+
+    projected.forEach((point, index) => {
+
+      ctx.beginPath();
+      ctx.arc(point.x, point.y, 4, 0, Math.PI * 2);
+
+      ctx.fillStyle =
+        type === "original"
+          ? "#858f9e"
+          : "#ffb24a";
+
+      ctx.fill();
+
+      ctx.fillStyle = "#dfe4eb";
+      ctx.font = "11px Arial";
+      ctx.fillText(
+        "V" + index,
+        point.x + 7,
+        point.y - 7
+      );
+
+    });
+
+  }
+
+
+  function updateReadout(p) {
+
+    document.getElementById("translateXValue").textContent =
+      p.tx;
+
+    document.getElementById("translateYValue").textContent =
+      p.ty;
+
+    document.getElementById("translateZValue").textContent =
+      p.tz;
+
+    document.getElementById("scaleXValue").textContent =
+      p.sx;
+
+    document.getElementById("scaleYValue").textContent =
+      p.sy;
+
+    document.getElementById("scaleZValue").textContent =
+      p.sz;
+
+    document.getElementById("rotateXValue").textContent =
+      Math.round(p.rx * 180 / Math.PI) + "Â°";
+
+    document.getElementById("rotateYValue").textContent =
+      Math.round(p.ry * 180 / Math.PI) + "Â°";
+
+    document.getElementById("rotateZValue").textContent =
+      Math.round(p.rz * 180 / Math.PI) + "Â°";
+
+    document.getElementById("translationReadout").textContent =
+      "(" + p.tx + ", " + p.ty + ", " + p.tz + ")";
+
+    document.getElementById("scaleReadout").textContent =
+      "(" + p.sx + ", " + p.sy + ", " + p.sz + ")";
+
+    document.getElementById("rotationReadout").textContent =
+      "(" +
+      Math.round(p.rx * 180 / Math.PI) +
+      "Â°, " +
+      Math.round(p.ry * 180 / Math.PI) +
+      "Â°, " +
+      Math.round(p.rz * 180 / Math.PI) +
+      "Â°)";
+
+  }
+
+
+  function updateVertexTable(original, transformed) {
+
+    const body = document.getElementById("vertexTableBody");
+
+    body.innerHTML = "";
+
+    transformed.forEach((point, index) => {
+
+      const source = original[index];
+
+      const row = document.createElement("tr");
+
+      row.innerHTML =
+        "<td>V" + index + "</td>" +
+        "<td>" + source.x.toFixed(2) + "</td>" +
+        "<td>" + source.y.toFixed(2) + "</td>" +
+        "<td>" + source.z.toFixed(2) + "</td>" +
+        "<td>" + point.x.toFixed(2) + "</td>" +
+        "<td>" + point.y.toFixed(2) + "</td>" +
+        "<td>" + point.z.toFixed(2) + "</td>";
+
+      body.appendChild(row);
+
+    });
+
+  }
+
+
+  function draw3D() {
+
+    const p = getParameters();
+    const object = objects[selectedObject];
+
+    const original = object.vertices;
+    const transformed = original.map(point =>
+      transformPoint(point, p)
+    );
+
+    drawBackground();
+    drawAxes();
+
+    drawObject(
+      original,
+      object.edges,
+      "original"
+    );
+
+    drawObject(
+      transformed,
+      object.edges,
+      "transformed"
+    );
+
+    updateReadout(p);
+    updateVertexTable(original, transformed);
+
+    document.getElementById("threeDStatus").textContent =
+      "3D transformation applied";
+
+    document.getElementById("threeDVertices").textContent =
+      "Vertices: " + original.length;
+
+  }
+
+
+  [
+    "translateX",
+    "translateY",
+    "translateZ",
+    "scaleX",
+    "scaleY",
+    "scaleZ",
+    "rotateX",
+    "rotateY",
+    "rotateZ"
+  ].forEach(id => {
+
+    document.getElementById(id).addEventListener(
+      "input",
+      draw3D
+    );
+
+  });
+
+
+  document.querySelectorAll(".object-btn").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      document
+        .querySelectorAll(".object-btn")
+        .forEach(item => item.classList.remove("active"));
+
+      button.classList.add("active");
+
+      selectedObject = button.dataset.object;
+
+      draw3D();
+
+    });
+
+  });
+
+
+  document.getElementById("apply3D").addEventListener(
+    "click",
+    () => {
+
+      draw3D();
+
+      document.getElementById("threeDStatus").textContent =
+        "Transformation applied âœ“";
+
+    }
+  );
+
+
+  document.getElementById("reset3D").addEventListener(
+    "click",
+    () => {
+
+      clearInterval(animationTimer);
+      animationRunning = false;
+
+      const defaults = {
+        translateX: 0,
+        translateY: 0,
+        translateZ: 0,
+        scaleX: 1,
+        scaleY: 1,
+        scaleZ: 1,
+        rotateX: 25,
+        rotateY: 35,
+        rotateZ: 0
+      };
+
+      Object.keys(defaults).forEach(id => {
+        document.getElementById(id).value = defaults[id];
+      });
+
+      selectedObject = "cube";
+
+      document
+        .querySelectorAll(".object-btn")
+        .forEach(button => {
+          button.classList.toggle(
+            "active",
+            button.dataset.object === "cube"
+          );
+        });
+
+      document.getElementById("animate3D").textContent =
+        "â–¶ Animate";
+
+      draw3D();
+
+    }
+  );
+
+
+  document.getElementById("animate3D").addEventListener(
+    "click",
+    () => {
+
+      if (animationRunning) {
+
+        clearInterval(animationTimer);
+        animationRunning = false;
+
+        document.getElementById("animate3D").textContent =
+          "â–¶ Animate";
+
+        return;
+
+      }
+
+
+      animationRunning = true;
+
+      document.getElementById("animate3D").textContent =
+        "âšâš Pause";
+
+      let rotation = 0;
+
+      animationTimer = setInterval(() => {
+
+        rotation += 5;
+
+        if (rotation > 360) {
+          rotation = 0;
+        }
+
+        document.getElementById("rotateY").value =
+          rotation;
+
+        draw3D();
+
+      }, 80);
+
+    }
+  );
+
+
+  /* Problem visualizer */
+
+  const problems = {
+
+    game: {
+      title: "Game Object Movement",
+      description:
+        "A 3D game character must move forward, become larger and rotate toward the player.",
+      given:
+        "Translation = (2, 0, 3) â€¢ Scale = 1.5 â€¢ Rotation Y = 45Â°",
+      answer:
+        "Apply scaling, rotation and translation to every vertex of the 3D model.",
+      tx: 2,
+      ty: 0,
+      tz: 3,
+      scale: 1.5,
+      rx: 0,
+      ry: 45,
+      rz: 0
+    },
+
+    cad: {
+      title: "CAD Model Positioning",
+      description:
+        "A CAD system moves and rotates a component before placing it into an assembly.",
+      given:
+        "Translation = (âˆ’2, 1, 2) â€¢ Scale = 1 â€¢ Rotation X = 90Â°",
+      answer:
+        "Transform all model vertices using the required translation and X-axis rotation.",
+      tx: -2,
+      ty: 1,
+      tz: 2,
+      scale: 1,
+      rx: 90,
+      ry: 0,
+      rz: 0
+    },
+
+    vr: {
+      title: "Virtual Reality Object",
+      description:
+        "A VR application positions an object in front of the user and changes its orientation.",
+      given:
+        "Translation = (1, 0, 4) â€¢ Scale = 0.8 â€¢ Rotation Z = 30Â°",
+      answer:
+        "Apply the scale, Z-axis rotation and translation to the object's vertices.",
+      tx: 1,
+      ty: 0,
+      tz: 4,
+      scale: 0.8,
+      rx: 0,
+      ry: 0,
+      rz: 30
+    }
+
+  };
+
+
+  let selectedProblem = "game";
+
+
+  function drawProblem() {
+
+    const problem = problems[selectedProblem];
+
+    const pc = document.getElementById("problemCanvas");
+    const pctx = pc.getContext("2d");
+
+    pctx.clearRect(0, 0, pc.width, pc.height);
+
+    pctx.fillStyle = "#080b0f";
+    pctx.fillRect(0, 0, pc.width, pc.height);
+
+    const object = objects.cube;
+
+    const params = {
+      tx: problem.tx,
+      ty: problem.ty,
+      tz: problem.tz,
+      sx: problem.scale,
+      sy: problem.scale,
+      sz: problem.scale,
+      rx: problem.rx * Math.PI / 180,
+      ry: problem.ry * Math.PI / 180,
+      rz: problem.rz * Math.PI / 180
+    };
+
+
+    function transform(point) {
+
+      let x = point.x * params.sx;
+      let y = point.y * params.sy;
+      let z = point.z * params.sz;
+
+      const cx = Math.cos(params.rx);
+      const sx = Math.sin(params.rx);
+
+      let yy = y * cx - z * sx;
+      let zz = y * sx + z * cx;
+
+      y = yy;
+      z = zz;
+
+      const cy = Math.cos(params.ry);
+      const sy = Math.sin(params.ry);
+
+      let xx = x * cy + z * sy;
+      zz = -x * sy + z * cy;
+
+      x = xx;
+      z = zz;
+
+      const cz = Math.cos(params.rz);
+      const sz = Math.sin(params.rz);
+
+      xx = x * cz - y * sz;
+      yy = x * sz + y * cz;
+
+      x = xx;
+      y = yy;
+
+      return {
+        x: x + params.tx,
+        y: y + params.ty,
+        z: z + params.tz
+      };
+
+    }
+
+
+    function project(point) {
+
+      const depth = 12 + point.z;
+      const scale = 260 / Math.max(3, depth);
+
+      return {
+        x: pc.width / 2 + point.x * scale,
+        y: pc.height / 2 - point.y * scale
+      };
+
+    }
+
+
+    const original = object.vertices;
+    const transformed = original.map(transform);
+
+    const originalProjected = original.map(project);
+    const transformedProjected = transformed.map(project);
+
+
+    pctx.strokeStyle = "rgba(255,255,255,.045)";
+    pctx.lineWidth = 1;
+
+    for (let x = 0; x < pc.width; x += 27) {
+      pctx.beginPath();
+      pctx.moveTo(x, 0);
+      pctx.lineTo(x, pc.height);
+      pctx.stroke();
+    }
+
+    for (let y = 0; y < pc.height; y += 27) {
+      pctx.beginPath();
+      pctx.moveTo(0, y);
+      pctx.lineTo(pc.width, y);
+      pctx.stroke();
+    }
+
+
+    function drawEdges(projected, type) {
+
+      pctx.lineWidth = type === "original" ? 2 : 3;
+
+      if (type === "original") {
+        pctx.strokeStyle = "#7f8997";
+        pctx.setLineDash([6, 5]);
+      } else {
+        pctx.strokeStyle = "#ff8a00";
+        pctx.setLineDash([]);
+      }
+
+      object.edges.forEach(edge => {
+
+        const a = projected[edge[0]];
+        const b = projected[edge[1]];
+
+        pctx.beginPath();
+        pctx.moveTo(a.x, a.y);
+        pctx.lineTo(b.x, b.y);
+        pctx.stroke();
+
+      });
+
+      pctx.setLineDash([]);
+
+    }
+
+
+    drawEdges(originalProjected, "original");
+    drawEdges(transformedProjected, "transformed");
+
+    pctx.fillStyle = "#cbd2dc";
+    pctx.font = "12px Arial";
+    pctx.fillText("Original", 18, 24);
+
+    pctx.fillStyle = "#ffb24a";
+    pctx.fillText("Transformed", 18, 44);
+
+    document.getElementById("problemStatus").textContent =
+      "T(" +
+      problem.tx + "," +
+      problem.ty + "," +
+      problem.tz + ") â€¢ " +
+      "R(" +
+      problem.rx + "," +
+      problem.ry + "," +
+      problem.rz + ")";
+
+    document.getElementById("problemReadout").textContent =
+      "Scale = " + problem.scale;
+
+  }
+
+
+  document.querySelectorAll(".problem-tab").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      document
+        .querySelectorAll(".problem-tab")
+        .forEach(item => item.classList.remove("active"));
+
+      button.classList.add("active");
+
+      selectedProblem = button.dataset.problem;
+
+      const problem = problems[selectedProblem];
+
+      document.getElementById("problemTitle").textContent =
+        problem.title;
+
+      document.getElementById("problemDescription").textContent =
+        problem.description;
+
+      document.getElementById("problemGiven").textContent =
+        problem.given;
+
+      document.getElementById("problemAnswer").textContent =
+        problem.answer;
+
+      drawProblem();
+
+    });
+
+  });
+
+
+  document.getElementById("showProblem").addEventListener(
+    "click",
+    () => {
+
+      const problem = problems[selectedProblem];
+
+      document.getElementById("translateX").value =
+        problem.tx;
+
+      document.getElementById("translateY").value =
+        problem.ty;
+
+      document.getElementById("translateZ").value =
+        problem.tz;
+
+      document.getElementById("scaleX").value =
+        problem.scale;
+
+      document.getElementById("scaleY").value =
+        problem.scale;
+
+      document.getElementById("scaleZ").value =
+        problem.scale;
+
+      document.getElementById("rotateX").value =
+        problem.rx;
+
+      document.getElementById("rotateY").value =
+        problem.ry;
+
+      document.getElementById("rotateZ").value =
+        problem.rz;
+
+      draw3D();
+
+      document
+        .querySelector(".three-d-live-section")
+        .scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+    }
+  );
+
+
+  /* Experiments */
+
+  document.querySelectorAll(".experiment-card").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      const type = button.dataset.experiment;
+
+      document.getElementById("translateX").value = 0;
+      document.getElementById("translateY").value = 0;
+      document.getElementById("translateZ").value = 0;
+
+      document.getElementById("scaleX").value = 1;
+      document.getElementById("scaleY").value = 1;
+      document.getElementById("scaleZ").value = 1;
+
+      document.getElementById("rotateX").value = 0;
+      document.getElementById("rotateY").value = 0;
+      document.getElementById("rotateZ").value = 0;
+
+
+      if (type === "translate") {
+        document.getElementById("translateZ").value = 3;
+      }
+
+      if (type === "scale") {
+        document.getElementById("scaleX").value = 1.8;
+        document.getElementById("scaleY").value = 1.8;
+        document.getElementById("scaleZ").value = 1.8;
+      }
+
+      if (type === "rotateX") {
+        document.getElementById("rotateX").value = 90;
+      }
+
+      if (type === "rotateY") {
+        document.getElementById("rotateY").value = 90;
+      }
+
+      draw3D();
+
+      document.getElementById("experimentResult").textContent =
+        "Loaded experiment: " +
+        button.querySelector("strong").textContent +
+        ". Observe the vertex table and 3D wireframe.";
+
+      document
+        .querySelector(".three-d-live-section")
+        .scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+    });
+
+  });
+
+
+  draw3D();
+  drawProblem();
+
+})();
+</script>
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

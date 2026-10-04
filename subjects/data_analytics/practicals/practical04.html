@@ -1,0 +1,2347 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Practical 04 | Data Visualization & Dashboard | Rasika CodeLab</title>
+
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../css/data_analytics_foundation.css">
+
+    <style>
+
+        /* =====================================================
+           PRACTICAL 04
+           DATA VISUALIZATION & DASHBOARD DESIGN
+        ===================================================== */
+
+        .da-p4-page{
+            --orange:#ff8a2a;
+            --bg:#070a10;
+            --card:#111722;
+            --card2:#151c28;
+            --text:#f5f6f8;
+            --muted:#969daa;
+            --soft:#cdd1d8;
+            --border:rgba(255,255,255,.09);
+
+            background:var(--bg);
+            color:var(--text);
+        }
+
+        .da-p4-page *{
+            box-sizing:border-box;
+        }
+
+        .p4-container{
+            width:min(1180px,calc(100% - 48px));
+            margin:auto;
+        }
+
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .p4-hero{
+            padding:90px 24px 75px;
+            border-bottom:1px solid var(--border);
+
+            background:
+                radial-gradient(
+                    circle at 82% 15%,
+                    rgba(255,138,42,.15),
+                    transparent 31%
+                ),
+                linear-gradient(135deg,#080b12,#151016);
+        }
+
+        .p4-breadcrumb{
+            margin-bottom:25px;
+            color:var(--muted);
+            font-size:10px;
+            letter-spacing:1px;
+        }
+
+        .p4-breadcrumb span{
+            color:var(--orange);
+            margin:0 7px;
+        }
+
+        .p4-label{
+            color:var(--orange);
+            font-size:10px;
+            font-weight:800;
+            letter-spacing:2px;
+        }
+
+        .p4-hero h1{
+            max-width:950px;
+            margin:15px 0;
+            font-size:clamp(42px,6vw,70px);
+            line-height:1;
+            letter-spacing:-3px;
+        }
+
+        .p4-hero h1 span{
+            color:var(--orange);
+        }
+
+        .p4-description{
+            max-width:790px;
+            color:var(--soft);
+            font-size:14px;
+            line-height:1.85;
+        }
+
+        .p4-tags{
+            display:flex;
+            flex-wrap:wrap;
+            gap:8px;
+            margin-top:25px;
+        }
+
+        .p4-tags span{
+            padding:7px 11px;
+            border:1px solid var(--border);
+            border-radius:50px;
+            color:var(--soft);
+            font-size:9px;
+        }
+
+
+        /* =====================================================
+           SECTIONS
+        ===================================================== */
+
+        .p4-section{
+            padding:80px 24px;
+        }
+
+        .p4-section.dark{
+            background:#090c13;
+            border-block:1px solid rgba(255,255,255,.04);
+        }
+
+        .p4-heading{
+            margin-bottom:38px;
+        }
+
+        .p4-section-label{
+            color:var(--orange);
+            font-size:9px;
+            font-weight:800;
+            letter-spacing:2px;
+            text-transform:uppercase;
+        }
+
+        .p4-heading h2{
+            margin:11px 0;
+            font-size:clamp(29px,4vw,45px);
+            line-height:1.1;
+        }
+
+        .p4-heading h2 span{
+            color:var(--orange);
+        }
+
+        .p4-heading p{
+            max-width:720px;
+            margin:0;
+            color:var(--muted);
+            font-size:12px;
+            line-height:1.8;
+        }
+
+
+        /* =====================================================
+           VISUALIZATION MINDSET
+        ===================================================== */
+
+        .p4-mindset-grid{
+            display:grid;
+            grid-template-columns:repeat(4,1fr);
+            gap:15px;
+        }
+
+        .p4-mindset-card{
+            min-height:190px;
+            padding:24px;
+
+            background:var(--card);
+            border:1px solid var(--border);
+            border-radius:16px;
+
+            transition:.25s ease;
+        }
+
+        .p4-mindset-card:hover{
+            transform:translateY(-5px);
+            border-color:rgba(255,138,42,.4);
+        }
+
+        .p4-mindset-card strong{
+            color:var(--orange);
+            font-size:9px;
+            letter-spacing:1px;
+        }
+
+        .p4-mindset-card h3{
+            margin:12px 0 8px;
+            font-size:17px;
+        }
+
+        .p4-mindset-card p{
+            margin:0;
+            color:var(--muted);
+            font-size:10px;
+            line-height:1.7;
+        }
+
+
+        /* =====================================================
+           CHART SELECTION
+        ===================================================== */
+
+        .p4-chart-grid{
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:16px;
+        }
+
+        .p4-chart-card{
+            padding:25px;
+
+            background:var(--card);
+            border:1px solid var(--border);
+            border-radius:16px;
+
+            transition:.25s ease;
+        }
+
+        .p4-chart-card:hover{
+            transform:translateY(-4px);
+            border-color:rgba(255,138,42,.4);
+        }
+
+        .p4-chart-icon{
+            width:48px;
+            height:48px;
+
+            display:flex;
+            align-items:center;
+            justify-content:center;
+
+            border-radius:12px;
+            background:rgba(255,138,42,.08);
+
+            color:var(--orange);
+            font-size:22px;
+            font-weight:900;
+        }
+
+        .p4-chart-card h3{
+            margin:17px 0 8px;
+            font-size:17px;
+        }
+
+        .p4-chart-card p{
+            color:var(--muted);
+            font-size:10px;
+            line-height:1.7;
+        }
+
+        .p4-use{
+            margin-top:15px;
+            padding-top:13px;
+            border-top:1px solid var(--border);
+
+            color:var(--soft);
+            font-size:9px;
+        }
+
+        .p4-use span{
+            color:var(--orange);
+            font-weight:800;
+        }
+
+
+        /* =====================================================
+           CHART DECISION TABLE
+        ===================================================== */
+
+        .p4-table-wrap{
+            overflow:hidden;
+
+            border:1px solid var(--border);
+            border-radius:15px;
+        }
+
+        .p4-row{
+            display:grid;
+            grid-template-columns:1.1fr 1.2fr 1.5fr 1fr;
+
+            border-bottom:1px solid var(--border);
+        }
+
+        .p4-row:last-child{
+            border-bottom:0;
+        }
+
+        .p4-row span{
+            padding:13px;
+            color:var(--soft);
+            font-size:9px;
+            line-height:1.5;
+        }
+
+        .p4-row.head{
+            background:rgba(255,138,42,.07);
+        }
+
+        .p4-row.head span{
+            color:var(--orange);
+            font-weight:800;
+        }
+
+
+        /* =====================================================
+           VISUAL DEMOS
+        ===================================================== */
+
+        .p4-demo-grid{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:20px;
+        }
+
+        .p4-demo-card{
+            padding:28px;
+
+            background:var(--card);
+            border:1px solid var(--border);
+            border-radius:17px;
+        }
+
+        .p4-demo-card h3{
+            margin:0 0 7px;
+            font-size:18px;
+        }
+
+        .p4-demo-card > p{
+            margin:0 0 25px;
+            color:var(--muted);
+            font-size:10px;
+        }
+
+
+        /* BAR CHART */
+
+        .p4-bar-chart{
+            display:flex;
+            align-items:flex-end;
+            justify-content:space-around;
+
+            height:210px;
+            padding:20px 10px 0;
+
+            border-bottom:1px solid var(--border);
+        }
+
+        .p4-column{
+            width:12%;
+            height:100%;
+
+            display:flex;
+            flex-direction:column;
+            justify-content:flex-end;
+            align-items:center;
+            gap:7px;
+        }
+
+        .p4-column .value{
+            color:var(--soft);
+            font-size:8px;
+        }
+
+        .p4-column .bar{
+            width:100%;
+            min-height:8px;
+
+            background:var(--orange);
+            border-radius:6px 6px 0 0;
+        }
+
+        .p4-column label{
+            color:var(--muted);
+            font-size:8px;
+        }
+
+
+        /* LINE CHART */
+
+        .p4-line-chart{
+            position:relative;
+            height:210px;
+
+            border-left:1px solid var(--border);
+            border-bottom:1px solid var(--border);
+
+            background:
+                repeating-linear-gradient(
+                    to top,
+                    transparent 0,
+                    transparent 40px,
+                    rgba(255,255,255,.05) 41px
+                );
+        }
+
+        .p4-line{
+            position:absolute;
+            left:5%;
+            right:5%;
+            top:20%;
+            height:55%;
+
+            border-top:3px solid var(--orange);
+
+            transform:skewY(-13deg);
+        }
+
+        .p4-dot{
+            position:absolute;
+
+            width:10px;
+            height:10px;
+
+            border-radius:50%;
+            background:var(--orange);
+
+            transform:translate(-50%,-50%);
+        }
+
+        .p4-dot.d1{left:8%;top:75%}
+        .p4-dot.d2{left:25%;top:65%}
+        .p4-dot.d3{left:43%;top:57%}
+        .p4-dot.d4{left:61%;top:43%}
+        .p4-dot.d5{left:78%;top:30%}
+        .p4-dot.d6{left:94%;top:18%}
+
+        .p4-line-labels{
+            display:flex;
+            justify-content:space-between;
+
+            margin-top:10px;
+            color:var(--muted);
+            font-size:8px;
+        }
+
+
+        /* =====================================================
+           DASHBOARD
+        ===================================================== */
+
+        .p4-dashboard{
+            padding:25px;
+
+            background:#0b0f17;
+            border:1px solid var(--border);
+            border-radius:18px;
+        }
+
+        .p4-dashboard-top{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            gap:15px;
+            margin-bottom:20px;
+        }
+
+        .p4-dashboard-top h3{
+            margin:0;
+            font-size:18px;
+        }
+
+        .p4-filter{
+            padding:8px 12px;
+
+            background:#121722;
+            border:1px solid var(--border);
+            border-radius:7px;
+
+            color:var(--soft);
+            font-size:9px;
+        }
+
+        .p4-dashboard-kpis{
+            display:grid;
+            grid-template-columns:repeat(4,1fr);
+            gap:12px;
+            margin-bottom:15px;
+        }
+
+        .p4-dashboard-kpi{
+            padding:17px;
+
+            background:var(--card);
+            border:1px solid var(--border);
+            border-radius:11px;
+        }
+
+        .p4-dashboard-kpi small{
+            color:var(--muted);
+            font-size:8px;
+        }
+
+        .p4-dashboard-kpi strong{
+            display:block;
+            margin-top:8px;
+            font-size:21px;
+        }
+
+        .p4-dashboard-charts{
+            display:grid;
+            grid-template-columns:1.2fr .8fr;
+            gap:12px;
+        }
+
+        .p4-dashboard-chart{
+            min-height:220px;
+            padding:18px;
+
+            background:var(--card);
+            border:1px solid var(--border);
+            border-radius:11px;
+        }
+
+        .p4-dashboard-chart h4{
+            margin:0 0 18px;
+            font-size:11px;
+        }
+
+
+        /* MINI DONUT */
+
+        .p4-donut-area{
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            height:160px;
+        }
+
+        .p4-donut{
+            width:125px;
+            height:125px;
+
+            display:flex;
+            align-items:center;
+            justify-content:center;
+
+            border-radius:50%;
+
+            background:
+                conic-gradient(
+                    var(--orange) 0 48%,
+                    #59606d 48% 73%,
+                    #303743 73% 100%
+                );
+        }
+
+        .p4-donut::after{
+            content:"48%";
+
+            width:72px;
+            height:72px;
+
+            display:flex;
+            align-items:center;
+            justify-content:center;
+
+            border-radius:50%;
+
+            background:var(--card);
+
+            color:var(--soft);
+            font-size:15px;
+            font-weight:800;
+        }
+
+
+        /* =====================================================
+           REAL WORLD PROBLEMS
+        ===================================================== */
+
+        .p4-problem-grid{
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:18px;
+        }
+
+        .p4-problem{
+            display:flex;
+            flex-direction:column;
+
+            min-height:640px;
+            padding:26px;
+
+            background:linear-gradient(145deg,#121722,#0d111a);
+            border:1px solid var(--border);
+            border-radius:18px;
+
+            transition:.25s ease;
+        }
+
+        .p4-problem:hover{
+            transform:translateY(-6px);
+            border-color:rgba(255,138,42,.4);
+        }
+
+        .p4-problem-number{
+            color:var(--orange);
+            font-size:9px;
+            font-weight:900;
+            letter-spacing:1.5px;
+        }
+
+        .p4-problem h3{
+            margin:13px 0 10px;
+            font-size:20px;
+        }
+
+        .p4-problem > p{
+            color:var(--muted);
+            font-size:10px;
+            line-height:1.75;
+        }
+
+        .p4-block{
+            margin-top:18px;
+        }
+
+        .p4-block strong{
+            display:block;
+            margin-bottom:8px;
+
+            color:var(--orange);
+            font-size:9px;
+            letter-spacing:1px;
+            text-transform:uppercase;
+        }
+
+        .p4-block ul{
+            margin:0;
+            padding-left:17px;
+            color:var(--soft);
+        }
+
+        .p4-block li{
+            margin:6px 0;
+            font-size:10px;
+            line-height:1.5;
+        }
+
+        .p4-problem .p4-bottom{
+            margin-top:auto;
+            padding-top:20px;
+        }
+
+
+        /* =====================================================
+           STORYTELLING
+        ===================================================== */
+
+        .p4-story-grid{
+            display:grid;
+            grid-template-columns:repeat(4,1fr);
+            gap:15px;
+        }
+
+        .p4-story-card{
+            position:relative;
+            padding:25px;
+
+            background:var(--card);
+            border:1px solid var(--border);
+            border-radius:15px;
+        }
+
+        .p4-story-number{
+            position:absolute;
+            right:18px;
+            top:15px;
+
+            color:rgba(255,138,42,.2);
+            font-size:35px;
+            font-weight:900;
+        }
+
+        .p4-story-card h3{
+            margin:0 0 10px;
+            font-size:17px;
+        }
+
+        .p4-story-card p{
+            margin:0;
+            color:var(--muted);
+            font-size:10px;
+            line-height:1.7;
+        }
+
+
+        /* =====================================================
+           DESIGN RULES
+        ===================================================== */
+
+        .p4-rules{
+            display:grid;
+            grid-template-columns:repeat(2,1fr);
+            gap:10px;
+        }
+
+        .p4-rule{
+            padding:15px 17px;
+
+            background:var(--card);
+            border:1px solid var(--border);
+            border-radius:10px;
+
+            color:var(--soft);
+            font-size:10px;
+            line-height:1.5;
+        }
+
+        .p4-rule::before{
+            content:"âœ“";
+            margin-right:9px;
+            color:var(--orange);
+            font-weight:900;
+        }
+
+
+        /* =====================================================
+           MINI CHALLENGE
+        ===================================================== */
+
+        .p4-challenge{
+            max-width:850px;
+            margin:auto;
+            padding:30px;
+
+            background:var(--card);
+            border:1px solid var(--border);
+            border-radius:20px;
+        }
+
+        .p4-challenge h3{
+            margin:0 0 15px;
+            font-size:19px;
+        }
+
+        .p4-challenge h3 span{
+            color:var(--orange);
+        }
+
+        .p4-challenge p{
+            color:var(--muted);
+            font-size:11px;
+            line-height:1.7;
+        }
+
+        .p4-options{
+            display:grid;
+            gap:8px;
+            margin-top:18px;
+        }
+
+        .p4-options button{
+            padding:13px 15px;
+
+            text-align:left;
+
+            background:#0c1018;
+            border:1px solid var(--border);
+            border-radius:9px;
+
+            color:var(--soft);
+            cursor:pointer;
+            font-size:10px;
+        }
+
+        .p4-options button:hover{
+            border-color:rgba(255,138,42,.4);
+        }
+
+        .p4-answer{
+            min-height:20px;
+            margin-top:15px;
+            font-size:10px;
+        }
+
+
+        /* =====================================================
+           NAVIGATION
+        ===================================================== */
+
+        .p4-navigation{
+            width:min(1180px,calc(100% - 48px));
+            margin:0 auto 80px;
+
+            display:flex;
+            justify-content:space-between;
+            gap:12px;
+        }
+
+        .p4-nav{
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+
+            min-height:44px;
+            padding:11px 17px;
+
+            border:1px solid var(--border);
+            border-radius:10px;
+
+            color:var(--soft);
+            font-size:10px;
+        }
+
+        .p4-nav.next{
+            background:var(--orange);
+            border-color:var(--orange);
+            color:#111;
+            font-weight:900;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media(max-width:1050px){
+
+            .p4-mindset-grid,
+            .p4-story-grid{
+                grid-template-columns:repeat(2,1fr);
+            }
+
+            .p4-chart-grid{
+                grid-template-columns:repeat(2,1fr);
+            }
+
+            .p4-problem-grid{
+                grid-template-columns:1fr;
+            }
+
+            .p4-problem{
+                min-height:auto;
+            }
+        }
+
+
+        @media(max-width:800px){
+
+            .p4-demo-grid,
+            .p4-dashboard-charts{
+                grid-template-columns:1fr;
+            }
+
+            .p4-dashboard-kpis{
+                grid-template-columns:repeat(2,1fr);
+            }
+
+            .p4-rules{
+                grid-template-columns:1fr;
+            }
+        }
+
+
+        @media(max-width:650px){
+
+            .p4-container,
+            .p4-navigation{
+                width:calc(100% - 32px);
+            }
+
+            .p4-hero,
+            .p4-section{
+                padding-left:16px;
+                padding-right:16px;
+            }
+
+            .p4-hero{
+                padding-top:70px;
+            }
+
+            .p4-hero h1{
+                font-size:40px;
+                letter-spacing:-2px;
+            }
+
+            .p4-mindset-grid,
+            .p4-chart-grid,
+            .p4-story-grid{
+                grid-template-columns:1fr;
+            }
+
+            .p4-dashboard-kpis{
+                grid-template-columns:1fr 1fr;
+            }
+
+            .p4-dashboard-top{
+                align-items:flex-start;
+                flex-direction:column;
+            }
+
+            .p4-row{
+                grid-template-columns:1fr 1fr;
+            }
+
+            .p4-row span{
+                padding:10px;
+            }
+
+            .p4-navigation{
+                flex-direction:column;
+            }
+
+            .p4-nav{
+                width:100%;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body class="da-p4-page protected-page">
+
+
+<!-- =====================================================
+     NAVBAR
+====================================================== -->
+
+<header class="navbar">
+
+    <div class="nav-container">
+
+        <a href="../../../index.html" class="logo">
+
+            <span class="logo-mark">
+                &lt;/&gt;
+            </span>
+
+            <span>
+                Rasika<span class="logo-highlight">CodeLab</span>
+            </span>
+
+        </a>
+
+
+        <nav class="nav-links">
+
+            <a href="../../../index.html">
+                Home
+            </a>
+
+            <a href="../../../subjects.html" class="active">
+                Subjects
+            </a>
+
+            <a href="../../../about.html">
+                About
+            </a>
+
+            <a href="../../../login.html">
+                Login
+            </a>
+
+        </nav>
+
+
+        <button class="menu-btn" aria-label="Open menu">
+            â˜°
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<main>
+
+
+<!-- =====================================================
+     HERO
+====================================================== -->
+
+<section class="p4-hero">
+
+    <div class="p4-container">
+
+        <div class="p4-breadcrumb">
+
+            DATA ANALYTICS
+            <span>â€º</span>
+            PRACTICALS
+            <span>â€º</span>
+            PRACTICAL 04
+
+        </div>
+
+
+        <div class="p4-label">
+            PRACTICAL 04
+        </div>
+
+
+        <h1>
+            Turn Data Into
+            <span>Visual Stories</span>
+        </h1>
+
+
+        <p class="p4-description">
+
+            Numbers alone do not communicate insights effectively.
+            In this practical, you will select appropriate charts,
+            build visualizations, design dashboards, add filters,
+            and communicate analytical findings through visual
+            storytelling.
+
+        </p>
+
+
+        <div class="p4-tags">
+
+            <span>Data Visualization</span>
+            <span>Chart Selection</span>
+            <span>Bar Chart</span>
+            <span>Line Chart</span>
+            <span>Scatter Plot</span>
+            <span>Histogram</span>
+            <span>Dashboard</span>
+            <span>Data Storytelling</span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     VISUALIZATION MINDSET
+====================================================== -->
+
+<section class="p4-section">
+
+    <div class="p4-container">
+
+        <div class="p4-heading">
+
+            <div class="p4-section-label">
+                01 â€” VISUALIZATION MINDSET
+            </div>
+
+            <h2>
+                Choose the visual
+                <span>for the question</span>
+            </h2>
+
+            <p>
+                A good visualization is not decoration. It should make
+                a relationship, comparison, trend or distribution easier
+                to understand.
+            </p>
+
+        </div>
+
+
+        <div class="p4-mindset-grid">
+
+
+            <div class="p4-mindset-card">
+
+                <strong>01 â€” COMPARE</strong>
+
+                <h3>
+                    Which is higher?
+                </h3>
+
+                <p>
+                    Use visualizations to compare products, departments,
+                    categories, cities or groups.
+                </p>
+
+            </div>
+
+
+            <div class="p4-mindset-card">
+
+                <strong>02 â€” TREND</strong>
+
+                <h3>
+                    How is it changing?
+                </h3>
+
+                <p>
+                    Show increases, decreases, seasonality and changes
+                    across time.
+                </p>
+
+            </div>
+
+
+            <div class="p4-mindset-card">
+
+                <strong>03 â€” DISTRIBUTION</strong>
+
+                <h3>
+                    How is data spread?
+                </h3>
+
+                <p>
+                    Understand frequency, range, skewness, clusters
+                    and unusual observations.
+                </p>
+
+            </div>
+
+
+            <div class="p4-mindset-card">
+
+                <strong>04 â€” RELATIONSHIP</strong>
+
+                <h3>
+                    Are variables related?
+                </h3>
+
+                <p>
+                    Visualize relationships between numerical variables
+                    using scatter plots and similar techniques.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CHART SELECTION
+====================================================== -->
+
+<section class="p4-section dark">
+
+    <div class="p4-container">
+
+        <div class="p4-heading">
+
+            <div class="p4-section-label">
+                02 â€” CHART SELECTION
+            </div>
+
+            <h2>
+                The right chart for the
+                <span>right question</span>
+            </h2>
+
+            <p>
+                Students should learn to select a chart based on the
+                analytical purpose rather than using the same chart
+                for every dataset.
+            </p>
+
+        </div>
+
+
+        <div class="p4-chart-grid">
+
+
+            <div class="p4-chart-card">
+
+                <div class="p4-chart-icon">
+                    â–®
+                </div>
+
+                <h3>
+                    Bar Chart
+                </h3>
+
+                <p>
+                    Compare values across discrete categories.
+                </p>
+
+                <div class="p4-use">
+                    <span>Use for:</span>
+                    Product sales, departments, cities
+                </div>
+
+            </div>
+
+
+            <div class="p4-chart-card">
+
+                <div class="p4-chart-icon">
+                    â•±
+                </div>
+
+                <h3>
+                    Line Chart
+                </h3>
+
+                <p>
+                    Show trends and changes across continuous time.
+                </p>
+
+                <div class="p4-use">
+                    <span>Use for:</span>
+                    Monthly sales, temperature, traffic
+                </div>
+
+            </div>
+
+
+            <div class="p4-chart-card">
+
+                <div class="p4-chart-icon">
+                    â€¢
+                </div>
+
+                <h3>
+                    Scatter Plot
+                </h3>
+
+                <p>
+                    Examine relationships between two numerical variables.
+                </p>
+
+                <div class="p4-use">
+                    <span>Use for:</span>
+                    Study hours vs marks
+                </div>
+
+            </div>
+
+
+            <div class="p4-chart-card">
+
+                <div class="p4-chart-icon">
+                    â–¥
+                </div>
+
+                <h3>
+                    Histogram
+                </h3>
+
+                <p>
+                    Understand the distribution of a numerical variable.
+                </p>
+
+                <div class="p4-use">
+                    <span>Use for:</span>
+                    Age, salary, marks
+                </div>
+
+            </div>
+
+
+            <div class="p4-chart-card">
+
+                <div class="p4-chart-icon">
+                    %
+                </div>
+
+                <h3>
+                    Pie / Donut Chart
+                </h3>
+
+                <p>
+                    Show simple part-to-whole relationships when categories
+                    are limited.
+                </p>
+
+                <div class="p4-use">
+                    <span>Use for:</span>
+                    Market share, category share
+                </div>
+
+            </div>
+
+
+            <div class="p4-chart-card">
+
+                <div class="p4-chart-icon">
+                    â–¤
+                </div>
+
+                <h3>
+                    Heatmap
+                </h3>
+
+                <p>
+                    Display intensity or relationships across a matrix.
+                </p>
+
+                <div class="p4-use">
+                    <span>Use for:</span>
+                    Correlation matrix, attendance
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CHART DECISION TABLE
+====================================================== -->
+
+<section class="p4-section">
+
+    <div class="p4-container">
+
+        <div class="p4-heading">
+
+            <div class="p4-section-label">
+                03 â€” DECISION GUIDE
+            </div>
+
+            <h2>
+                Question â†’
+                <span>Visualization</span>
+            </h2>
+
+        </div>
+
+
+        <div class="p4-table-wrap">
+
+
+            <div class="p4-row head">
+
+                <span>Question</span>
+                <span>Data Type</span>
+                <span>Recommended Chart</span>
+                <span>Example</span>
+
+            </div>
+
+
+            <div class="p4-row">
+
+                <span>Which category is largest?</span>
+
+                <span>Categorical + Numerical</span>
+
+                <span>Bar Chart</span>
+
+                <span>Product Sales</span>
+
+            </div>
+
+
+            <div class="p4-row">
+
+                <span>How did it change over time?</span>
+
+                <span>Date + Numerical</span>
+
+                <span>Line Chart</span>
+
+                <span>Monthly Revenue</span>
+
+            </div>
+
+
+            <div class="p4-row">
+
+                <span>How is the data distributed?</span>
+
+                <span>Numerical</span>
+
+                <span>Histogram</span>
+
+                <span>Employee Salary</span>
+
+            </div>
+
+
+            <div class="p4-row">
+
+                <span>Are two variables related?</span>
+
+                <span>Numerical + Numerical</span>
+
+                <span>Scatter Plot</span>
+
+                <span>Hours vs Marks</span>
+
+            </div>
+
+
+            <div class="p4-row">
+
+                <span>What percentage does each category contribute?</span>
+
+                <span>Categorical + Numerical</span>
+
+                <span>Donut Chart</span>
+
+                <span>Market Share</span>
+
+            </div>
+
+
+            <div class="p4-row">
+
+                <span>Where are values concentrated?</span>
+
+                <span>Matrix / Numerical</span>
+
+                <span>Heatmap</span>
+
+                <span>Correlation</span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     VISUAL DEMONSTRATIONS
+====================================================== -->
+
+<section class="p4-section dark">
+
+    <div class="p4-container">
+
+        <div class="p4-heading">
+
+            <div class="p4-section-label">
+                04 â€” VISUAL INTERPRETATION
+            </div>
+
+            <h2>
+                Don't just create a chart.
+                <span>Read it.</span>
+            </h2>
+
+            <p>
+                Every visualization should lead to an observation,
+                comparison or question.
+            </p>
+
+        </div>
+
+
+        <div class="p4-demo-grid">
+
+
+            <!-- BAR -->
+
+            <div class="p4-demo-card">
+
+                <h3>
+                    Monthly Sales
+                </h3>
+
+                <p>
+                    Example of category/time comparison.
+                </p>
+
+
+                <div class="p4-bar-chart">
+
+
+                    <div class="p4-column">
+
+                        <div class="value">
+                            42K
+                        </div>
+
+                        <div class="bar" style="height:42%"></div>
+
+                        <label>Jan</label>
+
+                    </div>
+
+
+                    <div class="p4-column">
+
+                        <div class="value">
+                            51K
+                        </div>
+
+                        <div class="bar" style="height:51%"></div>
+
+                        <label>Feb</label>
+
+                    </div>
+
+
+                    <div class="p4-column">
+
+                        <div class="value">
+                            58K
+                        </div>
+
+                        <div class="bar" style="height:58%"></div>
+
+                        <label>Mar</label>
+
+                    </div>
+
+
+                    <div class="p4-column">
+
+                        <div class="value">
+                            72K
+                        </div>
+
+                        <div class="bar" style="height:72%"></div>
+
+                        <label>Apr</label>
+
+                    </div>
+
+
+                    <div class="p4-column">
+
+                        <div class="value">
+                            84K
+                        </div>
+
+                        <div class="bar" style="height:84%"></div>
+
+                        <label>May</label>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- LINE -->
+
+            <div class="p4-demo-card">
+
+                <h3>
+                    Website Traffic
+                </h3>
+
+                <p>
+                    Example of a trend visualization.
+                </p>
+
+
+                <div class="p4-line-chart">
+
+                    <div class="p4-line"></div>
+
+                    <div class="p4-dot d1"></div>
+                    <div class="p4-dot d2"></div>
+                    <div class="p4-dot d3"></div>
+                    <div class="p4-dot d4"></div>
+                    <div class="p4-dot d5"></div>
+                    <div class="p4-dot d6"></div>
+
+                </div>
+
+
+                <div class="p4-line-labels">
+
+                    <span>Jan</span>
+                    <span>Feb</span>
+                    <span>Mar</span>
+                    <span>Apr</span>
+                    <span>May</span>
+                    <span>Jun</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     DASHBOARD
+====================================================== -->
+
+<section class="p4-section">
+
+    <div class="p4-container">
+
+        <div class="p4-heading">
+
+            <div class="p4-section-label">
+                05 â€” DASHBOARD DESIGN
+            </div>
+
+            <h2>
+                Combine multiple visuals into
+                <span>one decision view</span>
+            </h2>
+
+            <p>
+                A dashboard should answer the most important questions
+                quickly without forcing the user to inspect every row
+                of the dataset.
+            </p>
+
+        </div>
+
+
+        <div class="p4-dashboard">
+
+
+            <div class="p4-dashboard-top">
+
+                <h3>
+                    E-Commerce Sales Dashboard
+                </h3>
+
+                <div class="p4-filter">
+                    Year: 2026 â–¾
+                </div>
+
+            </div>
+
+
+            <div class="p4-dashboard-kpis">
+
+
+                <div class="p4-dashboard-kpi">
+
+                    <small>
+                        REVENUE
+                    </small>
+
+                    <strong>
+                        â‚¹12.8L
+                    </strong>
+
+                </div>
+
+
+                <div class="p4-dashboard-kpi">
+
+                    <small>
+                        ORDERS
+                    </small>
+
+                    <strong>
+                        4,280
+                    </strong>
+
+                </div>
+
+
+                <div class="p4-dashboard-kpi">
+
+                    <small>
+                        AOV
+                    </small>
+
+                    <strong>
+                        â‚¹2,990
+                    </strong>
+
+                </div>
+
+
+                <div class="p4-dashboard-kpi">
+
+                    <small>
+                        RETENTION
+                    </small>
+
+                    <strong>
+                        74%
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="p4-dashboard-charts">
+
+
+                <div class="p4-dashboard-chart">
+
+                    <h4>
+                        Revenue Trend
+                    </h4>
+
+                    <div class="p4-line-chart">
+
+                        <div class="p4-line"></div>
+
+                        <div class="p4-dot d1"></div>
+                        <div class="p4-dot d2"></div>
+                        <div class="p4-dot d3"></div>
+                        <div class="p4-dot d4"></div>
+                        <div class="p4-dot d5"></div>
+                        <div class="p4-dot d6"></div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="p4-dashboard-chart">
+
+                    <h4>
+                        Category Contribution
+                    </h4>
+
+                    <div class="p4-donut-area">
+
+                        <div class="p4-donut"></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     REAL WORLD PROBLEMS
+====================================================== -->
+
+<section class="p4-section dark">
+
+    <div class="p4-container">
+
+        <div class="p4-heading">
+
+            <div class="p4-section-label">
+                06 â€” REAL-WORLD PROBLEMS
+            </div>
+
+            <h2>
+                Build visualizations for
+                <span>real decisions</span>
+            </h2>
+
+            <p>
+                Complete all three problems. Each problem should contain
+                multiple visualizations and a short written interpretation.
+            </p>
+
+        </div>
+
+
+        <div class="p4-problem-grid">
+
+
+            <!-- PROBLEM 01 -->
+
+            <article class="p4-problem">
+
+                <div class="p4-problem-number">
+                    PROBLEM 01
+                </div>
+
+                <h3>
+                    E-Commerce Dashboard
+                </h3>
+
+                <p>
+                    Management wants a dashboard to understand product
+                    performance and monthly revenue.
+                </p>
+
+
+                <div class="p4-block">
+
+                    <strong>Visualizations</strong>
+
+                    <ul>
+
+                        <li>Monthly revenue â†’ Line Chart</li>
+
+                        <li>Product sales â†’ Bar Chart</li>
+
+                        <li>Category contribution â†’ Donut Chart</li>
+
+                        <li>Order value distribution â†’ Histogram</li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="p4-block">
+
+                    <strong>Dashboard KPIs</strong>
+
+                    <ul>
+
+                        <li>Total Revenue</li>
+
+                        <li>Total Orders</li>
+
+                        <li>Average Order Value</li>
+
+                        <li>Top Product</li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="p4-block">
+
+                    <strong>Answer</strong>
+
+                    <ul>
+
+                        <li>Which product performs best?</li>
+
+                        <li>Which month generated highest revenue?</li>
+
+                        <li>What percentage of sales comes from the top category?</li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="p4-bottom">
+
+                    <div class="p4-rule">
+                        Add at least one filter.
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PROBLEM 02 -->
+
+            <article class="p4-problem">
+
+                <div class="p4-problem-number">
+                    PROBLEM 02
+                </div>
+
+                <h3>
+                    Student Performance Dashboard
+                </h3>
+
+                <p>
+                    A college wants to identify academic performance
+                    patterns across divisions and attendance levels.
+                </p>
+
+
+                <div class="p4-block">
+
+                    <strong>Visualizations</strong>
+
+                    <ul>
+
+                        <li>Average marks by subject â†’ Bar Chart</li>
+
+                        <li>Attendance vs marks â†’ Scatter Plot</li>
+
+                        <li>Marks distribution â†’ Histogram</li>
+
+                        <li>Division performance â†’ Bar Chart</li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="p4-block">
+
+                    <strong>Dashboard KPIs</strong>
+
+                    <ul>
+
+                        <li>Average Marks</li>
+
+                        <li>Pass Percentage</li>
+
+                        <li>Average Attendance</li>
+
+                        <li>Highest Score</li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="p4-block">
+
+                    <strong>Answer</strong>
+
+                    <ul>
+
+                        <li>Which division performs best?</li>
+
+                        <li>Is attendance associated with marks?</li>
+
+                        <li>Which subject needs attention?</li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="p4-bottom">
+
+                    <div class="p4-rule">
+                        Include a correlation visualization.
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PROBLEM 03 -->
+
+            <article class="p4-problem">
+
+                <div class="p4-problem-number">
+                    PROBLEM 03
+                </div>
+
+                <h3>
+                    Employee Analytics Dashboard
+                </h3>
+
+                <p>
+                    HR wants to understand employee performance, salary
+                    distribution and departmental differences.
+                </p>
+
+
+                <div class="p4-block">
+
+                    <strong>Visualizations</strong>
+
+                    <ul>
+
+                        <li>Salary by department â†’ Bar Chart</li>
+
+                        <li>Experience vs salary â†’ Scatter Plot</li>
+
+                        <li>Salary distribution â†’ Histogram</li>
+
+                        <li>Employee count â†’ Donut Chart</li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="p4-block">
+
+                    <strong>Dashboard KPIs</strong>
+
+                    <ul>
+
+                        <li>Total Employees</li>
+
+                        <li>Average Salary</li>
+
+                        <li>Average Experience</li>
+
+                        <li>Average Performance</li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="p4-block">
+
+                    <strong>Answer</strong>
+
+                    <ul>
+
+                        <li>Which department has the highest salary?</li>
+
+                        <li>Does experience relate to salary?</li>
+
+                        <li>Where are performance gaps visible?</li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="p4-bottom">
+
+                    <div class="p4-rule">
+                        Explain at least three insights.
+                    </div>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     DATA STORYTELLING
+====================================================== -->
+
+<section class="p4-section">
+
+    <div class="p4-container">
+
+        <div class="p4-heading">
+
+            <div class="p4-section-label">
+                07 â€” DATA STORYTELLING
+            </div>
+
+            <h2>
+                From chart to
+                <span>decision</span>
+            </h2>
+
+            <p>
+                A dashboard becomes useful when the analyst can explain
+                what happened, why it matters and what should happen next.
+            </p>
+
+        </div>
+
+
+        <div class="p4-story-grid">
+
+
+            <div class="p4-story-card">
+
+                <div class="p4-story-number">
+                    01
+                </div>
+
+                <h3>
+                    What?
+                </h3>
+
+                <p>
+                    Describe the important observation visible in the
+                    data or visualization.
+                </p>
+
+            </div>
+
+
+            <div class="p4-story-card">
+
+                <div class="p4-story-number">
+                    02
+                </div>
+
+                <h3>
+                    So What?
+                </h3>
+
+                <p>
+                    Explain why the observation is important to the
+                    business, organization or user.
+                </p>
+
+            </div>
+
+
+            <div class="p4-story-card">
+
+                <div class="p4-story-number">
+                    03
+                </div>
+
+                <h3>
+                    Why?
+                </h3>
+
+                <p>
+                    Investigate possible factors or relationships that
+                    could explain the observation.
+                </p>
+
+            </div>
+
+
+            <div class="p4-story-card">
+
+                <div class="p4-story-number">
+                    04
+                </div>
+
+                <h3>
+                    Now What?
+                </h3>
+
+                <p>
+                    Suggest a practical action, recommendation or next
+                    analytical step.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     DESIGN RULES
+====================================================== -->
+
+<section class="p4-section dark">
+
+    <div class="p4-container">
+
+        <div class="p4-heading">
+
+            <div class="p4-section-label">
+                08 â€” VISUAL DESIGN RULES
+            </div>
+
+            <h2>
+                Make your dashboard
+                <span>easy to read</span>
+            </h2>
+
+        </div>
+
+
+        <div class="p4-rules">
+
+            <div class="p4-rule">
+                Give every chart a meaningful title.
+            </div>
+
+            <div class="p4-rule">
+                Do not use a chart when a simple number is enough.
+            </div>
+
+            <div class="p4-rule">
+                Avoid unnecessary 3D effects.
+            </div>
+
+            <div class="p4-rule">
+                Keep colours consistent across the dashboard.
+            </div>
+
+            <div class="p4-rule">
+                Highlight important values rather than everything.
+            </div>
+
+            <div class="p4-rule">
+                Use labels and units clearly.
+            </div>
+
+            <div class="p4-rule">
+                Avoid overcrowding the dashboard.
+            </div>
+
+            <div class="p4-rule">
+                Every visual should support a question or decision.
+            </div>
+
+            <div class="p4-rule">
+                Use filters only when they provide analytical value.
+            </div>
+
+            <div class="p4-rule">
+                Always write the important insights below the visuals.
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     MINI CHALLENGE
+====================================================== -->
+
+<section class="p4-section">
+
+    <div class="p4-container">
+
+        <div class="p4-challenge">
+
+            <h3>
+                Quick Challenge:
+                <span>Choose the chart</span>
+            </h3>
+
+            <p>
+                You want to determine whether the number of hours students
+                study is related to their examination marks. Which
+                visualization would be most appropriate?
+            </p>
+
+
+            <div class="p4-options">
+
+                <button onclick="p4Answer(this,'wrong')">
+                    A. Pie Chart
+                </button>
+
+                <button onclick="p4Answer(this,'wrong')">
+                    B. Bar Chart
+                </button>
+
+                <button onclick="p4Answer(this,'correct')">
+                    C. Scatter Plot
+                </button>
+
+                <button onclick="p4Answer(this,'wrong')">
+                    D. Donut Chart
+                </button>
+
+            </div>
+
+
+            <div class="p4-answer" id="p4Answer"></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     NAVIGATION
+====================================================== -->
+
+<div class="p4-navigation">
+
+    <a href="practical03.html" class="p4-nav">
+        â† Practical 03
+    </a>
+
+    <a href="practical05.html" class="p4-nav next">
+        Practical 05 â†’
+    </a>
+
+</div>
+
+
+</main>
+
+
+
+<script>
+
+function p4Answer(button,result){
+
+    const buttons =
+        document.querySelectorAll(".p4-options button");
+
+    buttons.forEach(btn => {
+
+        btn.style.borderColor = "";
+        btn.style.background = "";
+
+    });
+
+
+    const answer =
+        document.getElementById("p4Answer");
+
+
+    if(result === "correct"){
+
+        button.style.borderColor = "#52c77a";
+
+        button.style.background =
+            "rgba(82,199,122,.10)";
+
+        answer.innerHTML =
+            "âœ“ Correct. A scatter plot is appropriate for examining the relationship between two numerical variables such as study hours and examination marks.";
+
+        answer.style.color =
+            "#76e39b";
+
+    }
+    else{
+
+        button.style.borderColor =
+            "#e65f5f";
+
+        button.style.background =
+            "rgba(230,95,95,.08)";
+
+        answer.innerHTML =
+            "âœ• Not the best choice. Ask yourself: are we comparing categories, showing a trend, or examining a relationship between two numerical variables?";
+
+        answer.style.color =
+            "#ff8a8a";
+
+    }
+
+}
+
+</script>
+
+
+<script src="../../../js/main.js"></script>
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

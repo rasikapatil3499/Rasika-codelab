@@ -1,0 +1,2564 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Practical 05 | End-to-End Analytics Project | Rasika CodeLab</title>
+
+    <link rel="stylesheet" href="../../../css/style.css">
+   
+
+    <style>
+
+        /* =====================================================
+           PRACTICAL 05
+           END-TO-END DATA ANALYTICS PROJECT
+        ===================================================== */
+
+        .da-p5-page{
+            --orange:#ff8a2a;
+            --bg:#070a10;
+            --card:#111722;
+            --card2:#151c28;
+            --text:#f5f6f8;
+            --muted:#969daa;
+            --soft:#cdd1d8;
+            --border:rgba(255,255,255,.09);
+
+            background:var(--bg);
+            color:var(--text);
+        }
+
+        .da-p5-page *{
+            box-sizing:border-box;
+        }
+
+        .p5-container{
+            width:min(1180px,calc(100% - 48px));
+            margin:auto;
+        }
+
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .p5-hero{
+            padding:90px 24px 80px;
+
+            border-bottom:1px solid var(--border);
+
+            background:
+                radial-gradient(
+                    circle at 82% 15%,
+                    rgba(255,138,42,.16),
+                    transparent 32%
+                ),
+                radial-gradient(
+                    circle at 15% 80%,
+                    rgba(255,138,42,.06),
+                    transparent 30%
+                ),
+                linear-gradient(135deg,#080b12,#151016);
+        }
+
+        .p5-breadcrumb{
+            margin-bottom:25px;
+
+            color:var(--muted);
+            font-size:10px;
+            letter-spacing:1px;
+        }
+
+        .p5-breadcrumb span{
+            margin:0 7px;
+            color:var(--orange);
+        }
+
+        .p5-label{
+            color:var(--orange);
+            font-size:10px;
+            font-weight:800;
+            letter-spacing:2px;
+        }
+
+        .p5-hero h1{
+            max-width:950px;
+            margin:15px 0;
+
+            font-size:clamp(42px,6vw,70px);
+            line-height:1;
+            letter-spacing:-3px;
+        }
+
+        .p5-hero h1 span{
+            color:var(--orange);
+        }
+
+        .p5-description{
+            max-width:790px;
+
+            color:var(--soft);
+
+            font-size:14px;
+            line-height:1.85;
+        }
+
+        .p5-tags{
+            display:flex;
+            flex-wrap:wrap;
+            gap:8px;
+            margin-top:25px;
+        }
+
+        .p5-tags span{
+            padding:7px 11px;
+
+            border:1px solid var(--border);
+            border-radius:50px;
+
+            color:var(--soft);
+            font-size:9px;
+        }
+
+
+        /* =====================================================
+           SECTIONS
+        ===================================================== */
+
+        .p5-section{
+            padding:80px 24px;
+        }
+
+        .p5-section.dark{
+            background:#090c13;
+            border-block:1px solid rgba(255,255,255,.04);
+        }
+
+        .p5-heading{
+            margin-bottom:38px;
+        }
+
+        .p5-section-label{
+            color:var(--orange);
+            font-size:9px;
+            font-weight:800;
+            letter-spacing:2px;
+        }
+
+        .p5-heading h2{
+            margin:11px 0;
+
+            font-size:clamp(29px,4vw,45px);
+            line-height:1.1;
+        }
+
+        .p5-heading h2 span{
+            color:var(--orange);
+        }
+
+        .p5-heading p{
+            max-width:750px;
+
+            margin:0;
+
+            color:var(--muted);
+            font-size:12px;
+            line-height:1.8;
+        }
+
+
+        /* =====================================================
+           ANALYTICS PIPELINE
+        ===================================================== */
+
+        .p5-pipeline{
+            display:grid;
+            grid-template-columns:repeat(6,1fr);
+            gap:10px;
+        }
+
+        .p5-pipeline-step{
+            position:relative;
+
+            min-height:155px;
+            padding:22px 18px;
+
+            background:var(--card);
+            border:1px solid var(--border);
+            border-radius:15px;
+
+            transition:.25s ease;
+        }
+
+        .p5-pipeline-step:hover{
+            transform:translateY(-5px);
+            border-color:rgba(255,138,42,.4);
+        }
+
+        .p5-step-number{
+            color:var(--orange);
+
+            font-size:9px;
+            font-weight:900;
+            letter-spacing:1px;
+        }
+
+        .p5-pipeline-step h3{
+            margin:13px 0 8px;
+            font-size:15px;
+        }
+
+        .p5-pipeline-step p{
+            margin:0;
+
+            color:var(--muted);
+            font-size:9px;
+            line-height:1.65;
+        }
+
+
+        /* =====================================================
+           PROJECT OBJECTIVE
+        ===================================================== */
+
+        .p5-objective{
+            display:grid;
+            grid-template-columns:1.2fr .8fr;
+            gap:20px;
+        }
+
+        .p5-objective-main,
+        .p5-objective-side{
+            padding:28px;
+
+            background:var(--card);
+            border:1px solid var(--border);
+            border-radius:17px;
+        }
+
+        .p5-objective-main h3,
+        .p5-objective-side h3{
+            margin:0 0 13px;
+            font-size:20px;
+        }
+
+        .p5-objective-main h3 span{
+            color:var(--orange);
+        }
+
+        .p5-objective-main p{
+            color:var(--muted);
+            font-size:11px;
+            line-height:1.8;
+        }
+
+        .p5-objective-side ul{
+            margin:0;
+            padding-left:17px;
+        }
+
+        .p5-objective-side li{
+            margin:9px 0;
+
+            color:var(--soft);
+            font-size:10px;
+        }
+
+
+        /* =====================================================
+           DATASET
+        ===================================================== */
+
+        .p5-dataset-grid{
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:17px;
+        }
+
+        .p5-dataset-card{
+            padding:24px;
+
+            background:var(--card);
+            border:1px solid var(--border);
+            border-radius:16px;
+        }
+
+        .p5-dataset-card strong{
+            color:var(--orange);
+            font-size:9px;
+            letter-spacing:1px;
+            text-transform:uppercase;
+        }
+
+        .p5-dataset-card h3{
+            margin:12px 0 8px;
+            font-size:17px;
+        }
+
+        .p5-dataset-card p{
+            margin:0;
+
+            color:var(--muted);
+            font-size:10px;
+            line-height:1.7;
+        }
+
+
+        /* =====================================================
+           PROJECT OPTIONS
+        ===================================================== */
+
+        .p5-project-grid{
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:18px;
+        }
+
+        .p5-project{
+            display:flex;
+            flex-direction:column;
+
+            min-height:530px;
+            padding:27px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #121722,
+                    #0d1119
+                );
+
+            border:1px solid var(--border);
+            border-radius:18px;
+
+            transition:.25s ease;
+        }
+
+        .p5-project:hover{
+            transform:translateY(-6px);
+            border-color:rgba(255,138,42,.4);
+        }
+
+        .p5-project-number{
+            color:var(--orange);
+
+            font-size:9px;
+            font-weight:900;
+            letter-spacing:1.5px;
+        }
+
+        .p5-project h3{
+            margin:14px 0 10px;
+            font-size:21px;
+        }
+
+        .p5-project > p{
+            color:var(--muted);
+            font-size:10px;
+            line-height:1.75;
+        }
+
+        .p5-project-block{
+            margin-top:18px;
+        }
+
+        .p5-project-block strong{
+            display:block;
+            margin-bottom:8px;
+
+            color:var(--orange);
+            font-size:8px;
+            letter-spacing:1px;
+            text-transform:uppercase;
+        }
+
+        .p5-project-block ul{
+            margin:0;
+            padding-left:17px;
+        }
+
+        .p5-project-block li{
+            margin:6px 0;
+
+            color:var(--soft);
+            font-size:10px;
+            line-height:1.5;
+        }
+
+        .p5-project-bottom{
+            margin-top:auto;
+            padding-top:20px;
+        }
+
+
+        /* =====================================================
+           KPI GRID
+        ===================================================== */
+
+        .p5-kpi-grid{
+            display:grid;
+            grid-template-columns:repeat(4,1fr);
+            gap:13px;
+        }
+
+        .p5-kpi{
+            padding:22px;
+
+            background:var(--card);
+            border:1px solid var(--border);
+            border-radius:13px;
+        }
+
+        .p5-kpi small{
+            color:var(--muted);
+            font-size:8px;
+        }
+
+        .p5-kpi strong{
+            display:block;
+            margin-top:9px;
+
+            font-size:23px;
+        }
+
+        .p5-kpi span{
+            display:block;
+            margin-top:6px;
+
+            color:var(--orange);
+            font-size:8px;
+        }
+
+
+        /* =====================================================
+           ANALYSIS REQUIREMENTS
+        ===================================================== */
+
+        .p5-analysis-grid{
+            display:grid;
+            grid-template-columns:repeat(2,1fr);
+            gap:15px;
+        }
+
+        .p5-analysis-card{
+            padding:23px;
+
+            background:var(--card);
+            border:1px solid var(--border);
+            border-radius:15px;
+        }
+
+        .p5-analysis-card h3{
+            margin:0 0 13px;
+            font-size:16px;
+        }
+
+        .p5-analysis-card ul{
+            margin:0;
+            padding-left:17px;
+        }
+
+        .p5-analysis-card li{
+            margin:7px 0;
+
+            color:var(--muted);
+            font-size:10px;
+            line-height:1.5;
+        }
+
+
+        /* =====================================================
+           DASHBOARD STRUCTURE
+        ===================================================== */
+
+        .p5-dashboard{
+            padding:25px;
+
+            background:#0b0f17;
+            border:1px solid var(--border);
+            border-radius:18px;
+        }
+
+        .p5-dashboard-header{
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+
+            margin-bottom:20px;
+        }
+
+        .p5-dashboard-header h3{
+            margin:0;
+            font-size:18px;
+        }
+
+        .p5-filter{
+            padding:8px 12px;
+
+            background:#121722;
+            border:1px solid var(--border);
+            border-radius:7px;
+
+            color:var(--soft);
+            font-size:9px;
+        }
+
+        .p5-dashboard-kpis{
+            display:grid;
+            grid-template-columns:repeat(4,1fr);
+            gap:11px;
+            margin-bottom:14px;
+        }
+
+        .p5-dashboard-kpi{
+            padding:17px;
+
+            background:var(--card);
+            border:1px solid var(--border);
+            border-radius:11px;
+        }
+
+        .p5-dashboard-kpi small{
+            color:var(--muted);
+            font-size:8px;
+        }
+
+        .p5-dashboard-kpi strong{
+            display:block;
+            margin-top:8px;
+            font-size:20px;
+        }
+
+        .p5-dashboard-content{
+            display:grid;
+            grid-template-columns:1.2fr .8fr;
+            gap:12px;
+        }
+
+        .p5-dashboard-chart{
+            min-height:240px;
+            padding:19px;
+
+            background:var(--card);
+            border:1px solid var(--border);
+            border-radius:11px;
+        }
+
+        .p5-dashboard-chart h4{
+            margin:0 0 18px;
+            font-size:11px;
+        }
+
+
+        /* =====================================================
+           REPORT STRUCTURE
+        ===================================================== */
+
+        .p5-report-grid{
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:15px;
+        }
+
+        .p5-report-card{
+            padding:23px;
+
+            background:var(--card);
+            border:1px solid var(--border);
+            border-radius:15px;
+        }
+
+        .p5-report-card .number{
+            color:var(--orange);
+
+            font-size:9px;
+            font-weight:900;
+        }
+
+        .p5-report-card h3{
+            margin:11px 0 8px;
+            font-size:16px;
+        }
+
+        .p5-report-card p{
+            margin:0;
+
+            color:var(--muted);
+            font-size:10px;
+            line-height:1.7;
+        }
+
+
+        /* =====================================================
+           DELIVERABLES
+        ===================================================== */
+
+        .p5-deliverables{
+            display:grid;
+            grid-template-columns:repeat(2,1fr);
+            gap:12px;
+        }
+
+        .p5-deliverable{
+            display:flex;
+            align-items:flex-start;
+            gap:13px;
+
+            padding:17px;
+
+            background:var(--card);
+            border:1px solid var(--border);
+            border-radius:11px;
+        }
+
+        .p5-check{
+            width:27px;
+            height:27px;
+
+            flex:0 0 27px;
+
+            display:flex;
+            align-items:center;
+            justify-content:center;
+
+            border-radius:8px;
+
+            background:rgba(255,138,42,.09);
+            color:var(--orange);
+
+            font-weight:900;
+        }
+
+        .p5-deliverable strong{
+            display:block;
+            margin-bottom:4px;
+
+            font-size:11px;
+        }
+
+        .p5-deliverable p{
+            margin:0;
+
+            color:var(--muted);
+            font-size:9px;
+            line-height:1.5;
+        }
+
+
+        /* =====================================================
+           EVALUATION
+        ===================================================== */
+
+        .p5-evaluation{
+            overflow:hidden;
+
+            border:1px solid var(--border);
+            border-radius:15px;
+        }
+
+        .p5-evaluation-row{
+            display:grid;
+            grid-template-columns:1.5fr .7fr 2fr;
+
+            border-bottom:1px solid var(--border);
+        }
+
+        .p5-evaluation-row:last-child{
+            border-bottom:0;
+        }
+
+        .p5-evaluation-row span{
+            padding:14px;
+
+            color:var(--soft);
+            font-size:9px;
+            line-height:1.5;
+        }
+
+        .p5-evaluation-row.head{
+            background:rgba(255,138,42,.07);
+        }
+
+        .p5-evaluation-row.head span{
+            color:var(--orange);
+            font-weight:800;
+        }
+
+
+        /* =====================================================
+           FINAL CHALLENGE
+        ===================================================== */
+
+        .p5-final{
+            max-width:900px;
+            margin:auto;
+            padding:35px;
+
+            background:
+                radial-gradient(
+                    circle at 90% 10%,
+                    rgba(255,138,42,.12),
+                    transparent 35%
+                ),
+                var(--card);
+
+            border:1px solid var(--border);
+            border-radius:20px;
+        }
+
+        .p5-final-label{
+            color:var(--orange);
+
+            font-size:9px;
+            font-weight:900;
+            letter-spacing:2px;
+        }
+
+        .p5-final h2{
+            margin:13px 0;
+
+            font-size:29px;
+        }
+
+        .p5-final h2 span{
+            color:var(--orange);
+        }
+
+        .p5-final p{
+            color:var(--muted);
+
+            font-size:11px;
+            line-height:1.8;
+        }
+
+        .p5-final-flow{
+            display:grid;
+            grid-template-columns:repeat(6,1fr);
+            gap:7px;
+
+            margin-top:25px;
+        }
+
+        .p5-final-flow div{
+            padding:12px 7px;
+
+            text-align:center;
+
+            background:#0b0f17;
+            border:1px solid var(--border);
+            border-radius:8px;
+
+            color:var(--soft);
+            font-size:8px;
+        }
+
+        .p5-final-flow div:not(:last-child)::after{
+            content:"â†’";
+            position:absolute;
+            margin-left:13px;
+
+            color:var(--orange);
+        }
+
+
+        /* =====================================================
+           NAVIGATION
+        ===================================================== */
+
+        .p5-navigation{
+            width:min(1180px,calc(100% - 48px));
+
+            margin:0 auto 80px;
+
+            display:flex;
+            justify-content:space-between;
+            gap:12px;
+        }
+
+        .p5-nav{
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+
+            min-height:44px;
+            padding:11px 17px;
+
+            border:1px solid var(--border);
+            border-radius:10px;
+
+            color:var(--soft);
+            font-size:10px;
+        }
+
+        .p5-nav.next{
+            background:var(--orange);
+            border-color:var(--orange);
+
+            color:#111;
+            font-weight:900;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media(max-width:1050px){
+
+            .p5-pipeline{
+                grid-template-columns:repeat(3,1fr);
+            }
+
+            .p5-project-grid{
+                grid-template-columns:1fr;
+            }
+
+            .p5-project{
+                min-height:auto;
+            }
+
+            .p5-dataset-grid{
+                grid-template-columns:repeat(2,1fr);
+            }
+
+            .p5-report-grid{
+                grid-template-columns:repeat(2,1fr);
+            }
+        }
+
+
+        @media(max-width:800px){
+
+            .p5-objective,
+            .p5-dashboard-content{
+                grid-template-columns:1fr;
+            }
+
+            .p5-kpi-grid,
+            .p5-dashboard-kpis{
+                grid-template-columns:repeat(2,1fr);
+            }
+
+            .p5-final-flow{
+                grid-template-columns:repeat(3,1fr);
+            }
+
+            .p5-final-flow div:not(:last-child)::after{
+                display:none;
+            }
+        }
+
+
+        @media(max-width:650px){
+
+            .p5-container,
+            .p5-navigation{
+                width:calc(100% - 32px);
+            }
+
+            .p5-hero,
+            .p5-section{
+                padding-left:16px;
+                padding-right:16px;
+            }
+
+            .p5-hero{
+                padding-top:70px;
+            }
+
+            .p5-hero h1{
+                font-size:40px;
+                letter-spacing:-2px;
+            }
+
+            .p5-pipeline,
+            .p5-dataset-grid,
+            .p5-analysis-grid,
+            .p5-report-grid,
+            .p5-deliverables{
+                grid-template-columns:1fr;
+            }
+
+            .p5-kpi-grid,
+            .p5-dashboard-kpis{
+                grid-template-columns:1fr 1fr;
+            }
+
+            .p5-dashboard-header{
+                align-items:flex-start;
+                flex-direction:column;
+                gap:12px;
+            }
+
+            .p5-evaluation-row{
+                grid-template-columns:1fr 1fr;
+            }
+
+            .p5-evaluation-row span:last-child{
+                grid-column:1/-1;
+            }
+
+            .p5-final{
+                padding:25px;
+            }
+
+            .p5-final-flow{
+                grid-template-columns:1fr 1fr;
+            }
+
+            .p5-navigation{
+                flex-direction:column;
+            }
+
+            .p5-nav{
+                width:100%;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body class="da-p5-page protected-page">
+
+
+<!-- =====================================================
+     NAVBAR
+====================================================== -->
+
+<header class="navbar">
+
+    <div class="nav-container">
+
+        <a href="../../../index.html" class="logo">
+
+            <span class="logo-mark">
+                &lt;/&gt;
+            </span>
+
+            <span>
+                Rasika<span class="logo-highlight">CodeLab</span>
+            </span>
+
+        </a>
+
+
+        <nav class="nav-links">
+
+            <a href="../../../index.html">
+                Home
+            </a>
+
+            <a href="../../../subjects.html" class="active">
+                Subjects
+            </a>
+
+            <a href="../../../about.html">
+                About
+            </a>
+
+            <a href="../../../login.html">
+                Login
+            </a>
+
+        </nav>
+
+
+        <button class="menu-btn" aria-label="Open menu">
+            â˜°
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<main>
+
+
+<!-- =====================================================
+     HERO
+====================================================== -->
+
+<section class="p5-hero">
+
+    <div class="p5-container">
+
+        <div class="p5-breadcrumb">
+
+            DATA ANALYTICS
+            <span>â€º</span>
+            PRACTICALS
+            <span>â€º</span>
+            PRACTICAL 05
+
+        </div>
+
+
+        <div class="p5-label">
+            PRACTICAL 05 Â· FINAL PROJECT
+        </div>
+
+
+        <h1>
+            From Raw Data to
+            <span>Real Decisions</span>
+        </h1>
+
+
+        <p class="p5-description">
+
+            Build a complete data analytics solution using a real-world
+            dataset. You will clean the data, explore patterns,
+            calculate KPIs, create visualizations, build a dashboard,
+            generate insights and provide data-driven recommendations.
+
+        </p>
+
+
+        <div class="p5-tags">
+
+            <span>End-to-End Analytics</span>
+            <span>EDA</span>
+            <span>Data Cleaning</span>
+            <span>KPI Analysis</span>
+            <span>Visualization</span>
+            <span>Dashboard</span>
+            <span>Insights</span>
+            <span>Recommendations</span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PIPELINE
+====================================================== -->
+
+<section class="p5-section">
+
+    <div class="p5-container">
+
+        <div class="p5-heading">
+
+            <div class="p5-section-label">
+                01 â€” COMPLETE ANALYTICS WORKFLOW
+            </div>
+
+            <h2>
+                The complete
+                <span>analytics pipeline</span>
+            </h2>
+
+            <p>
+                This practical combines the skills developed throughout
+                Practical 01 to Practical 04.
+            </p>
+
+        </div>
+
+
+        <div class="p5-pipeline">
+
+
+            <div class="p5-pipeline-step">
+
+                <div class="p5-step-number">
+                    01
+                </div>
+
+                <h3>
+                    Collect
+                </h3>
+
+                <p>
+                    Obtain a real-world dataset from a suitable source.
+                </p>
+
+            </div>
+
+
+            <div class="p5-pipeline-step">
+
+                <div class="p5-step-number">
+                    02
+                </div>
+
+                <h3>
+                    Clean
+                </h3>
+
+                <p>
+                    Handle missing values, duplicates, incorrect data
+                    types and inconsistent records.
+                </p>
+
+            </div>
+
+
+            <div class="p5-pipeline-step">
+
+                <div class="p5-step-number">
+                    03
+                </div>
+
+                <h3>
+                    Explore
+                </h3>
+
+                <p>
+                    Understand distributions, relationships, trends
+                    and unusual observations.
+                </p>
+
+            </div>
+
+
+            <div class="p5-pipeline-step">
+
+                <div class="p5-step-number">
+                    04
+                </div>
+
+                <h3>
+                    Analyze
+                </h3>
+
+                <p>
+                    Calculate statistics, KPIs and meaningful comparisons.
+                </p>
+
+            </div>
+
+
+            <div class="p5-pipeline-step">
+
+                <div class="p5-step-number">
+                    05
+                </div>
+
+                <h3>
+                    Visualize
+                </h3>
+
+                <p>
+                    Select suitable charts and create a decision-focused
+                    dashboard.
+                </p>
+
+            </div>
+
+
+            <div class="p5-pipeline-step">
+
+                <div class="p5-step-number">
+                    06
+                </div>
+
+                <h3>
+                    Decide
+                </h3>
+
+                <p>
+                    Convert analytical findings into insights and
+                    recommendations.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     OBJECTIVE
+====================================================== -->
+
+<section class="p5-section dark">
+
+    <div class="p5-container">
+
+        <div class="p5-objective">
+
+
+            <div class="p5-objective-main">
+
+                <h3>
+                    <span>Project Objective</span>
+                </h3>
+
+                <p>
+
+                    The objective is to solve a real-world problem using
+                    data rather than simply producing charts.
+
+                    Students must demonstrate the complete analytical
+                    process from raw data to a final recommendation.
+
+                </p>
+
+                <p>
+
+                    The final output should allow a non-technical person
+                    such as a manager, teacher, HR professional or business
+                    owner to understand the important findings quickly.
+
+                </p>
+
+            </div>
+
+
+            <div class="p5-objective-side">
+
+                <h3>
+                    You must answer
+                </h3>
+
+                <ul>
+
+                    <li>
+                        What is happening in the data?
+                    </li>
+
+                    <li>
+                        Which patterns are important?
+                    </li>
+
+                    <li>
+                        What factors are associated with the outcome?
+                    </li>
+
+                    <li>
+                        Which categories perform better or worse?
+                    </li>
+
+                    <li>
+                        What action should be taken?
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     DATASET REQUIREMENTS
+====================================================== -->
+
+<section class="p5-section">
+
+    <div class="p5-container">
+
+        <div class="p5-heading">
+
+            <div class="p5-section-label">
+                02 â€” DATASET
+            </div>
+
+            <h2>
+                Start with
+                <span>real data</span>
+            </h2>
+
+            <p>
+                Students should work with a dataset that contains enough
+                variables and records to support meaningful analysis.
+            </p>
+
+        </div>
+
+
+        <div class="p5-dataset-grid">
+
+
+            <div class="p5-dataset-card">
+
+                <strong>
+                    Minimum
+                </strong>
+
+                <h3>
+                    Dataset Size
+                </h3>
+
+                <p>
+                    Preferably at least 500 records and multiple
+                    meaningful attributes.
+                </p>
+
+            </div>
+
+
+            <div class="p5-dataset-card">
+
+                <strong>
+                    Required
+                </strong>
+
+                <h3>
+                    Data Variety
+                </h3>
+
+                <p>
+                    Include numerical, categorical and, where possible,
+                    date/time attributes.
+                </p>
+
+            </div>
+
+
+            <div class="p5-dataset-card">
+
+                <strong>
+                    Important
+                </strong>
+
+                <h3>
+                    Imperfect Data
+                </h3>
+
+                <p>
+                    The dataset should contain realistic cleaning
+                    challenges such as missing values or duplicates.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PROJECT OPTIONS
+====================================================== -->
+
+<section class="p5-section dark">
+
+    <div class="p5-container">
+
+        <div class="p5-heading">
+
+            <div class="p5-section-label">
+                03 â€” PROJECT OPTIONS
+            </div>
+
+            <h2>
+                Choose a
+                <span>real-world problem</span>
+            </h2>
+
+            <p>
+                Select one project or choose another dataset with teacher
+                approval.
+            </p>
+
+        </div>
+
+
+        <div class="p5-project-grid">
+
+
+            <!-- PROJECT 01 -->
+
+            <article class="p5-project">
+
+                <div class="p5-project-number">
+                    PROJECT 01
+                </div>
+
+                <h3>
+                    E-Commerce Analytics
+                </h3>
+
+                <p>
+                    Analyze customer orders, products, categories,
+                    revenue and purchasing behaviour.
+                </p>
+
+
+                <div class="p5-project-block">
+
+                    <strong>
+                        Questions
+                    </strong>
+
+                    <ul>
+
+                        <li>
+                            Which products generate the most revenue?
+                        </li>
+
+                        <li>
+                            Which categories are growing?
+                        </li>
+
+                        <li>
+                            Which months have peak sales?
+                        </li>
+
+                        <li>
+                            Which customers contribute most revenue?
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="p5-project-block">
+
+                    <strong>
+                        Visualizations
+                    </strong>
+
+                    <ul>
+
+                        <li>Revenue trend</li>
+                        <li>Top products</li>
+                        <li>Category contribution</li>
+                        <li>Customer distribution</li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="p5-project-bottom">
+
+                    <div class="p5-dataset-card">
+                        <strong>
+                            Final Output
+                        </strong>
+
+                        <p>
+                            Sales dashboard + business recommendations.
+                        </p>
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PROJECT 02 -->
+
+            <article class="p5-project">
+
+                <div class="p5-project-number">
+                    PROJECT 02
+                </div>
+
+                <h3>
+                    Student Performance Analytics
+                </h3>
+
+                <p>
+                    Analyze marks, attendance, subjects and student
+                    performance to identify academic patterns.
+                </p>
+
+
+                <div class="p5-project-block">
+
+                    <strong>
+                        Questions
+                    </strong>
+
+                    <ul>
+
+                        <li>
+                            Which subjects have lower performance?
+                        </li>
+
+                        <li>
+                            Is attendance related to marks?
+                        </li>
+
+                        <li>
+                            Which division performs best?
+                        </li>
+
+                        <li>
+                            Which students need attention?
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="p5-project-block">
+
+                    <strong>
+                        Visualizations
+                    </strong>
+
+                    <ul>
+
+                        <li>Subject performance</li>
+                        <li>Attendance vs marks</li>
+                        <li>Marks distribution</li>
+                        <li>Division comparison</li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="p5-project-bottom">
+
+                    <div class="p5-dataset-card">
+                        <strong>
+                            Final Output
+                        </strong>
+
+                        <p>
+                            Academic analytics dashboard + intervention
+                            recommendations.
+                        </p>
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PROJECT 03 -->
+
+            <article class="p5-project">
+
+                <div class="p5-project-number">
+                    PROJECT 03
+                </div>
+
+                <h3>
+                    Employee Analytics
+                </h3>
+
+                <p>
+                    Analyze salary, experience, department and performance
+                    to understand workforce patterns.
+                </p>
+
+
+                <div class="p5-project-block">
+
+                    <strong>
+                        Questions
+                    </strong>
+
+                    <ul>
+
+                        <li>
+                            Which department has highest salary?
+                        </li>
+
+                        <li>
+                            Does experience relate to salary?
+                        </li>
+
+                        <li>
+                            Which departments have performance gaps?
+                        </li>
+
+                        <li>
+                            How is salary distributed?
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="p5-project-block">
+
+                    <strong>
+                        Visualizations
+                    </strong>
+
+                    <ul>
+
+                        <li>Salary distribution</li>
+                        <li>Experience vs salary</li>
+                        <li>Department comparison</li>
+                        <li>Performance analysis</li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="p5-project-bottom">
+
+                    <div class="p5-dataset-card">
+                        <strong>
+                            Final Output
+                        </strong>
+
+                        <p>
+                            HR analytics dashboard + workforce
+                            recommendations.
+                        </p>
+                    </div>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     KPI REQUIREMENTS
+====================================================== -->
+
+<section class="p5-section">
+
+    <div class="p5-container">
+
+        <div class="p5-heading">
+
+            <div class="p5-section-label">
+                04 â€” KPI DESIGN
+            </div>
+
+            <h2>
+                Define the numbers that
+                <span>matter</span>
+            </h2>
+
+            <p>
+                Every project should contain meaningful KPIs that give
+                a quick summary of performance.
+            </p>
+
+        </div>
+
+
+        <div class="p5-kpi-grid">
+
+
+            <div class="p5-kpi">
+
+                <small>
+                    KPI 01
+                </small>
+
+                <strong>
+                    Total
+                </strong>
+
+                <span>
+                    Overall quantity / volume
+                </span>
+
+            </div>
+
+
+            <div class="p5-kpi">
+
+                <small>
+                    KPI 02
+                </small>
+
+                <strong>
+                    Average
+                </strong>
+
+                <span>
+                    Central tendency
+                </span>
+
+            </div>
+
+
+            <div class="p5-kpi">
+
+                <small>
+                    KPI 03
+                </small>
+
+                <strong>
+                    Rate %
+                </strong>
+
+                <span>
+                    Performance / conversion
+                </span>
+
+            </div>
+
+
+            <div class="p5-kpi">
+
+                <small>
+                    KPI 04
+                </small>
+
+                <strong>
+                    Top
+                </strong>
+
+                <span>
+                    Best performing category
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ANALYSIS
+====================================================== -->
+
+<section class="p5-section dark">
+
+    <div class="p5-container">
+
+        <div class="p5-heading">
+
+            <div class="p5-section-label">
+                05 â€” ANALYSIS REQUIREMENTS
+            </div>
+
+            <h2>
+                Your analysis must go
+                <span>beyond averages</span>
+            </h2>
+
+            <p>
+                Students should investigate multiple dimensions of the
+                dataset instead of calculating only basic statistics.
+            </p>
+
+        </div>
+
+
+        <div class="p5-analysis-grid">
+
+
+            <div class="p5-analysis-card">
+
+                <h3>
+                    Descriptive Analysis
+                </h3>
+
+                <ul>
+
+                    <li>Count and frequency</li>
+                    <li>Mean, median and mode</li>
+                    <li>Minimum and maximum</li>
+                    <li>Range and standard deviation</li>
+
+                </ul>
+
+            </div>
+
+
+            <div class="p5-analysis-card">
+
+                <h3>
+                    Comparative Analysis
+                </h3>
+
+                <ul>
+
+                    <li>Category comparison</li>
+                    <li>Department comparison</li>
+                    <li>Time-period comparison</li>
+                    <li>Top and bottom performers</li>
+
+                </ul>
+
+            </div>
+
+
+            <div class="p5-analysis-card">
+
+                <h3>
+                    Relationship Analysis
+                </h3>
+
+                <ul>
+
+                    <li>Correlation</li>
+                    <li>Scatter plots</li>
+                    <li>Variable relationships</li>
+                    <li>Possible influencing factors</li>
+
+                </ul>
+
+            </div>
+
+
+            <div class="p5-analysis-card">
+
+                <h3>
+                    Trend Analysis
+                </h3>
+
+                <ul>
+
+                    <li>Monthly / yearly trends</li>
+                    <li>Growth and decline</li>
+                    <li>Peak periods</li>
+                    <li>Unusual changes</li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     DASHBOARD
+====================================================== -->
+
+<section class="p5-section">
+
+    <div class="p5-container">
+
+        <div class="p5-heading">
+
+            <div class="p5-section-label">
+                06 â€” FINAL DASHBOARD
+            </div>
+
+            <h2>
+                Build a dashboard that
+                <span>answers questions</span>
+            </h2>
+
+            <p>
+                The final dashboard should not be a collection of random
+                charts. Every visual should have a purpose.
+            </p>
+
+        </div>
+
+
+        <div class="p5-dashboard">
+
+
+            <div class="p5-dashboard-header">
+
+                <h3>
+                    Final Analytics Dashboard
+                </h3>
+
+                <div class="p5-filter">
+                    Filter / Year / Category â–¾
+                </div>
+
+            </div>
+
+
+            <div class="p5-dashboard-kpis">
+
+                <div class="p5-dashboard-kpi">
+
+                    <small>
+                        KPI 01
+                    </small>
+
+                    <strong>
+                        Total
+                    </strong>
+
+                </div>
+
+
+                <div class="p5-dashboard-kpi">
+
+                    <small>
+                        KPI 02
+                    </small>
+
+                    <strong>
+                        Average
+                    </strong>
+
+                </div>
+
+
+                <div class="p5-dashboard-kpi">
+
+                    <small>
+                        KPI 03
+                    </small>
+
+                    <strong>
+                        Rate
+                    </strong>
+
+                </div>
+
+
+                <div class="p5-dashboard-kpi">
+
+                    <small>
+                        KPI 04
+                    </small>
+
+                    <strong>
+                        Top
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="p5-dashboard-content">
+
+
+                <div class="p5-dashboard-chart">
+
+                    <h4>
+                        Main Trend / Comparison
+                    </h4>
+
+                    <div class="p5-line-chart"
+                         style="
+                         height:180px;
+                         border-left:1px solid rgba(255,255,255,.08);
+                         border-bottom:1px solid rgba(255,255,255,.08);
+                         background:repeating-linear-gradient(
+                         to top,
+                         transparent 0,
+                         transparent 35px,
+                         rgba(255,255,255,.04) 36px
+                         );">
+
+                        <div style="
+                            position:absolute;
+                            left:5%;
+                            right:5%;
+                            top:30%;
+                            height:45%;
+                            border-top:3px solid #ff8a2a;
+                            transform:skewY(-12deg);
+                        "></div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="p5-dashboard-chart">
+
+                    <h4>
+                        Category / Distribution
+                    </h4>
+
+                    <div style="
+                        width:120px;
+                        height:120px;
+                        margin:30px auto;
+                        border-radius:50%;
+                        background:conic-gradient(
+                            #ff8a2a 0 48%,
+                            #59606d 48% 73%,
+                            #303743 73% 100%
+                        );
+                    "></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     REPORT
+====================================================== -->
+
+<section class="p5-section dark">
+
+    <div class="p5-container">
+
+        <div class="p5-heading">
+
+            <div class="p5-section-label">
+                07 â€” ANALYTICAL REPORT
+            </div>
+
+            <h2>
+                Explain what the
+                <span>data means</span>
+            </h2>
+
+            <p>
+                The project is incomplete if students only submit charts.
+                They must explain the findings.
+            </p>
+
+        </div>
+
+
+        <div class="p5-report-grid">
+
+
+            <div class="p5-report-card">
+
+                <div class="number">
+                    01
+                </div>
+
+                <h3>
+                    Observation
+                </h3>
+
+                <p>
+                    State the important pattern or result discovered
+                    from the dataset.
+                </p>
+
+            </div>
+
+
+            <div class="p5-report-card">
+
+                <div class="number">
+                    02
+                </div>
+
+                <h3>
+                    Evidence
+                </h3>
+
+                <p>
+                    Support the observation using a KPI, statistic,
+                    chart or comparison.
+                </p>
+
+            </div>
+
+
+            <div class="p5-report-card">
+
+                <div class="number">
+                    03
+                </div>
+
+                <h3>
+                    Interpretation
+                </h3>
+
+                <p>
+                    Explain what the result means in the context of
+                    the selected problem.
+                </p>
+
+            </div>
+
+
+            <div class="p5-report-card">
+
+                <div class="number">
+                    04
+                </div>
+
+                <h3>
+                    Possible Reason
+                </h3>
+
+                <p>
+                    Identify factors or relationships that may explain
+                    the observed pattern.
+                </p>
+
+            </div>
+
+
+            <div class="p5-report-card">
+
+                <div class="number">
+                    05
+                </div>
+
+                <h3>
+                    Recommendation
+                </h3>
+
+                <p>
+                    Suggest a practical action based on the evidence.
+                </p>
+
+            </div>
+
+
+            <div class="p5-report-card">
+
+                <div class="number">
+                    06
+                </div>
+
+                <h3>
+                    Limitation
+                </h3>
+
+                <p>
+                    Mention important limitations of the dataset or
+                    analysis.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     DELIVERABLES
+====================================================== -->
+
+<section class="p5-section">
+
+    <div class="p5-container">
+
+        <div class="p5-heading">
+
+            <div class="p5-section-label">
+                08 â€” FINAL SUBMISSION
+            </div>
+
+            <h2>
+                What students must
+                <span>submit</span>
+            </h2>
+
+        </div>
+
+
+        <div class="p5-deliverables">
+
+
+            <div class="p5-deliverable">
+
+                <div class="p5-check">
+                    âœ“
+                </div>
+
+                <div>
+
+                    <strong>
+                        Dataset
+                    </strong>
+
+                    <p>
+                        Original dataset used for the project.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="p5-deliverable">
+
+                <div class="p5-check">
+                    âœ“
+                </div>
+
+                <div>
+
+                    <strong>
+                        Cleaned Dataset
+                    </strong>
+
+                    <p>
+                        Final dataset after preprocessing and cleaning.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="p5-deliverable">
+
+                <div class="p5-check">
+                    âœ“
+                </div>
+
+                <div>
+
+                    <strong>
+                        Analysis Notebook
+                    </strong>
+
+                    <p>
+                        Code and calculations used during the analysis.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="p5-deliverable">
+
+                <div class="p5-check">
+                    âœ“
+                </div>
+
+                <div>
+
+                    <strong>
+                        Visualizations
+                    </strong>
+
+                    <p>
+                        All important charts with titles and labels.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="p5-deliverable">
+
+                <div class="p5-check">
+                    âœ“
+                </div>
+
+                <div>
+
+                    <strong>
+                        Dashboard
+                    </strong>
+
+                    <p>
+                        Final interactive or static decision dashboard.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="p5-deliverable">
+
+                <div class="p5-check">
+                    âœ“
+                </div>
+
+                <div>
+
+                    <strong>
+                        Analytical Report
+                    </strong>
+
+                    <p>
+                        Findings, evidence, recommendations and limitations.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     EVALUATION
+====================================================== -->
+
+<section class="p5-section dark">
+
+    <div class="p5-container">
+
+        <div class="p5-heading">
+
+            <div class="p5-section-label">
+                09 â€” EVALUATION
+            </div>
+
+            <h2>
+                Evaluate the
+                <span>analytical thinking</span>
+            </h2>
+
+        </div>
+
+
+        <div class="p5-evaluation">
+
+
+            <div class="p5-evaluation-row head">
+
+                <span>
+                    Area
+                </span>
+
+                <span>
+                    Weight
+                </span>
+
+                <span>
+                    What is evaluated
+                </span>
+
+            </div>
+
+
+            <div class="p5-evaluation-row">
+
+                <span>
+                    Data Cleaning
+                </span>
+
+                <span>
+                    15%
+                </span>
+
+                <span>
+                    Correct handling of missing, duplicate and inconsistent data.
+                </span>
+
+            </div>
+
+
+            <div class="p5-evaluation-row">
+
+                <span>
+                    Analysis
+                </span>
+
+                <span>
+                    20%
+                </span>
+
+                <span>
+                    Appropriate statistics, comparisons and relationships.
+                </span>
+
+            </div>
+
+
+            <div class="p5-evaluation-row">
+
+                <span>
+                    Visualization
+                </span>
+
+                <span>
+                    20%
+                </span>
+
+                <span>
+                    Appropriate chart selection, clarity and interpretation.
+                </span>
+
+            </div>
+
+
+            <div class="p5-evaluation-row">
+
+                <span>
+                    Dashboard
+                </span>
+
+                <span>
+                    20%
+                </span>
+
+                <span>
+                    Layout, KPIs, filtering and decision-focused design.
+                </span>
+
+            </div>
+
+
+            <div class="p5-evaluation-row">
+
+                <span>
+                    Insights
+                </span>
+
+                <span>
+                    15%
+                </span>
+
+                <span>
+                    Quality of observations and evidence-based conclusions.
+                </span>
+
+            </div>
+
+
+            <div class="p5-evaluation-row">
+
+                <span>
+                    Recommendations
+                </span>
+
+                <span>
+                    10%
+                </span>
+
+                <span>
+                    Practicality and connection between findings and action.
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FINAL CHALLENGE
+====================================================== -->
+
+<section class="p5-section">
+
+    <div class="p5-container">
+
+        <div class="p5-final">
+
+            <div class="p5-final-label">
+                FINAL DATA ANALYTICS CHALLENGE
+            </div>
+
+
+            <h2>
+                Can you turn
+                <span>data into a decision?</span>
+            </h2>
+
+
+            <p>
+
+                Choose one real-world problem. Obtain a dataset.
+                Clean it. Explore it. Analyze it. Visualize it.
+                Build a dashboard. Identify the most important insights.
+                Finally, recommend what should be done based on your
+                evidence.
+
+            </p>
+
+
+            <div class="p5-final-flow">
+
+                <div>
+                    RAW DATA
+                </div>
+
+                <div>
+                    CLEAN
+                </div>
+
+                <div>
+                    EXPLORE
+                </div>
+
+                <div>
+                    ANALYZE
+                </div>
+
+                <div>
+                    VISUALIZE
+                </div>
+
+                <div>
+                    DECIDE
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     NAVIGATION
+====================================================== -->
+
+<div class="p5-navigation">
+
+    <a href="practical04.html" class="p5-nav">
+        â† Practical 04
+    </a>
+
+    <a href="data_analytics_practicals.html" class="p5-nav next">
+        All Practicals â†’
+    </a>
+
+</div>
+
+
+</main>
+
+
+<script src="../../../js/main.js"></script>
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

@@ -1,14 +1,14 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Foundation 02 — Understand pixels, resolution, aspect ratio, color depth and frame buffer in Computer Graphics.">
+    <meta name="description" content="Foundation 02 â€” Understand pixels, resolution, aspect ratio, color depth and frame buffer in Computer Graphics.">
     <title>Foundation 02 | What is a Pixel? | Rasika CodeLab</title>
-    <link rel="stylesheet" href="../../css/cgr_style.css">
+     <link rel="stylesheet" href="../css/cgr_style.css">
 
     <style>
-        /* Foundation 02 visualizer — page-specific interactive grid */
+        /* Foundation 02 visualizer â€” page-specific interactive grid */
         .pixel-lab {
             display: grid;
             grid-template-columns: 1fr 280px;
@@ -111,26 +111,26 @@
             }
         }
     </style>
+<style>body.protected-page:not(.auth-ready){visibility:hidden}</style>
 </head>
 
-<body>
+<body class="protected-page">
 
 <header class="site-header">
     <nav class="navbar">
-        <a href="../index.html" class="logo">
-            <span class="logo-mark">◈</span>
+        <a href="../cgr_index.html" class="logo">
+            <span class="logo-mark">â—ˆ</span>
             Rasika<span class="logo-highlight">CodeLab</span>
         </a>
 
         <div class="nav-links">
-            <a href="../index.html">Home</a>
+            <a href="../cgr_index.html">Home</a>
             <a href="../cgr_foundations.html" class="active">Foundations</a>
             <a href="../cgr_practicals.html">Practicals</a>
-            <a href="../cgr_algorithms.html">Algorithms</a>
-            <a href="../about.html">About</a>
+                        <a href="../../../about.html">About</a>
         </div>
 
-        <button class="menu-btn" type="button" aria-label="Open menu">☰</button>
+        <button class="menu-btn" type="button" aria-label="Open menu">â˜°</button>
     </nav>
 </header>
 
@@ -198,7 +198,7 @@
                     </div>
 
                     <div class="calc-result">
-                        1920 × 1080
+                        1920 Ã— 1080
                     </div>
                 </div>
             </div>
@@ -245,11 +245,11 @@
 <!-- CONCEPT -->
 <section class="section foundation-detail">
     <div class="content-card concept-card">
-        <span class="eyebrow">01 · CONCEPT</span>
+        <span class="eyebrow">01 Â· CONCEPT</span>
         <h2>What is a Pixel?</h2>
 
         <p>
-            The word <strong>pixel</strong> comes from “picture element”.
+            The word <strong>pixel</strong> comes from â€œpicture elementâ€.
             In a raster image, an image is represented as a rectangular
             grid of pixels.
         </p>
@@ -275,7 +275,7 @@
 <!-- PIXEL GRID -->
 <section class="section foundation-detail">
     <div class="section-heading">
-        <span class="eyebrow">02 · VISUALIZE</span>
+        <span class="eyebrow">02 Â· VISUALIZE</span>
         <h2>Zoom into the pixel grid.</h2>
         <p>
             Change the grid size and selected pixel to understand how a
@@ -295,7 +295,7 @@
             <div class="pixel-control">
                 <label>
                     <span>Grid Size</span>
-                    <output id="gridOutput">12 × 8</output>
+                    <output id="gridOutput">12 Ã— 8</output>
                 </label>
                 <input id="gridRange" type="range"
                        min="4" max="24" value="12">
@@ -325,7 +325,7 @@
             </div>
 
             <div class="pixel-equation">
-                Total Pixels = Columns × Rows
+                Total Pixels = Columns Ã— Rows
             </div>
 
         </div>
@@ -336,7 +336,7 @@
 <!-- RESOLUTION -->
 <section class="section foundation-detail">
     <div class="section-heading">
-        <span class="eyebrow">03 · RESOLUTION</span>
+        <span class="eyebrow">03 Â· RESOLUTION</span>
         <h2>What does resolution mean?</h2>
         <p>
             Resolution describes the number of pixels used along the
@@ -348,7 +348,7 @@
 
         <div class="content-card">
             <span class="card-label">EXAMPLE</span>
-            <h3>1920 × 1080</h3>
+            <h3>1920 Ã— 1080</h3>
 
             <p>
                 A display with 1920 pixels horizontally and 1080 pixels
@@ -357,13 +357,13 @@
 
             <div class="mini-example">
                 <span>Total Pixels</span>
-                <strong>1920 × 1080 = 2,073,600</strong>
+                <strong>1920 Ã— 1080 = 2,073,600</strong>
             </div>
         </div>
 
         <div class="content-card">
             <span class="card-label">IMPORTANT</span>
-            <h3>More pixels ≠ automatically better</h3>
+            <h3>More pixels â‰  automatically better</h3>
 
             <p>
                 Higher resolution can provide more image detail, but
@@ -379,7 +379,7 @@
 <!-- CALCULATION -->
 <section class="section foundation-detail">
     <div class="section-heading">
-        <span class="eyebrow">04 · CALCULATE</span>
+        <span class="eyebrow">04 Â· CALCULATE</span>
         <h2>Calculate the total number of pixels.</h2>
         <p>For a raster image, multiply its width by its height.</p>
     </div>
@@ -390,18 +390,18 @@
 
         <p>
             Suppose an image has a resolution of
-            <strong>1280 × 720 pixels</strong>.
+            <strong>1280 Ã— 720 pixels</strong>.
         </p>
 
         <div class="formula-box">
-            Total Pixels = Width × Height
+            Total Pixels = Width Ã— Height
         </div>
 
         <div class="calculation-box">
             Width = 1280 pixels<br>
             Height = 720 pixels<br><br>
 
-            Total Pixels = 1280 × 720<br>
+            Total Pixels = 1280 Ã— 720<br>
             Total Pixels = 921,600
         </div>
 
@@ -419,7 +419,7 @@
 <!-- ASPECT RATIO -->
 <section class="section foundation-detail">
     <div class="section-heading">
-        <span class="eyebrow">05 · ASPECT RATIO</span>
+        <span class="eyebrow">05 Â· ASPECT RATIO</span>
         <h2>Width and height have a relationship.</h2>
         <p>
             Aspect ratio describes the proportional relationship between
@@ -438,7 +438,7 @@
             </div>
 
             <p style="margin-top:16px;">
-                For 1920 × 1080:
+                For 1920 Ã— 1080:
             </p>
 
             <div class="calculation-box">
@@ -458,9 +458,9 @@
             </p>
 
             <ul>
-                <li>16:9 — common widescreen format</li>
-                <li>4:3 — older display and video format</li>
-                <li>1:1 — square image</li>
+                <li>16:9 â€” common widescreen format</li>
+                <li>4:3 â€” older display and video format</li>
+                <li>1:1 â€” square image</li>
             </ul>
         </div>
 
@@ -471,7 +471,7 @@
 <!-- COLOR DEPTH -->
 <section class="section foundation-detail">
     <div class="section-heading">
-        <span class="eyebrow">06 · COLOR DEPTH</span>
+        <span class="eyebrow">06 Â· COLOR DEPTH</span>
         <h2>How much information can one pixel store?</h2>
         <p>
             Color depth describes the number of bits used to represent
@@ -506,13 +506,13 @@
 
                     <tr>
                         <td>24 bits</td>
-                        <td>2²⁴ = 16,777,216</td>
+                        <td>2Â²â´ = 16,777,216</td>
                         <td>True-color RGB representation</td>
                     </tr>
 
                     <tr>
                         <td>32 bits</td>
-                        <td>2³² possible combinations</td>
+                        <td>2Â³Â² possible combinations</td>
                         <td>Often includes an alpha channel</td>
                     </tr>
                 </tbody>
@@ -520,7 +520,7 @@
         </div>
 
         <div class="formula-box">
-            Number of possible values = 2ⁿ
+            Number of possible values = 2â¿
         </div>
 
     </div>
@@ -530,7 +530,7 @@
 <!-- FRAME BUFFER -->
 <section class="section foundation-detail">
     <div class="section-heading">
-        <span class="eyebrow">07 · FRAME BUFFER</span>
+        <span class="eyebrow">07 Â· FRAME BUFFER</span>
         <h2>Where does the pixel information go?</h2>
     </div>
 
@@ -550,7 +550,7 @@
                 <small>Pixel information is generated.</small>
             </div>
 
-            <div class="flow-arrow">→</div>
+            <div class="flow-arrow">â†’</div>
 
             <div class="flow-item">
                 <span>02</span>
@@ -558,7 +558,7 @@
                 <small>Pixel values are stored.</small>
             </div>
 
-            <div class="flow-arrow">→</div>
+            <div class="flow-arrow">â†’</div>
 
             <div class="flow-item">
                 <span>03</span>
@@ -586,12 +586,12 @@
 
             <div>
                 <span>02</span>
-                <p>How many pixels are present in a 1920 × 1080 image?</p>
+                <p>How many pixels are present in a 1920 Ã— 1080 image?</p>
             </div>
 
             <div>
                 <span>03</span>
-                <p>What is the aspect ratio of a 1920 × 1080 image?</p>
+                <p>What is the aspect ratio of a 1920 Ã— 1080 image?</p>
             </div>
 
             <div>
@@ -627,7 +627,7 @@
             <div>
                 <span>02</span>
                 <strong>Resolution</strong>
-                <p>Width × height gives the number of pixels.</p>
+                <p>Width Ã— height gives the number of pixels.</p>
             </div>
 
             <div>
@@ -657,14 +657,14 @@
 <section class="section foundation-navigation">
 
     <a href="foundation01.html" class="nav-card">
-        <span>←</span>
+        <span>â†</span>
         <small>PREVIOUS FOUNDATION</small>
         <strong>What is Computer Graphics?</strong>
     </a>
 
     <a href="foundation03.html" class="nav-card next">
         <small>NEXT FOUNDATION</small>
-        <strong>How Do Coordinates Work? →</strong>
+        <strong>How Do Coordinates Work? â†’</strong>
     </a>
 
 </section>
@@ -682,17 +682,16 @@
         </div>
 
         <div class="footer-links">
-            <a href="../index.html">Home</a>
+            <a href="../../../index.html">Home</a>
             <a href="../cgr_foundations.html">Foundations</a>
             <a href="../cgr_practicals.html">Practicals</a>
-            <a href="../cgr_algorithms.html">Algorithms</a>
-            <a href="../about.html">About</a>
+                        <a href="../../../about.html">About</a>
         </div>
 
     </div>
 
     <div class="footer-bottom">
-        © 2026 Rasika CodeLab · Learn the concept. See the result.
+        Â© 2026 Rasika CodeLab Â· Learn the concept. See the result.
     </div>
 
 </footer>
@@ -738,7 +737,7 @@
             yRange.value = rows - 1;
         }
 
-        gridOutput.value = columns + " × " + rows;
+        gridOutput.value = columns + " Ã— " + rows;
         xOutput.value = xRange.value;
         yOutput.value = yRange.value;
         pixelOutput.textContent = "P(" + xRange.value + ", " + yRange.value + ")";
@@ -818,5 +817,6 @@
 })();
 </script>
 
+<script type="module" src="../../../js/auth-guard.js"></script>
 </body>
 </html>

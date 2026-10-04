@@ -35,6 +35,57 @@
     --transition: 0.3s ease;
 }
 
+/* =========================================================
+   THEME SYSTEM
+   ========================================================= */
+
+:root {
+    --bg: #ffffff;
+    --bg-soft: #f7f8fa;
+    --card: #ffffff;
+
+    --text: #111827;
+    --text-muted: #6b7280;
+
+    --border: #e5e7eb;
+    --border-strong: #d1d5db;
+
+    --nav-bg: rgba(255, 255, 255, 0.92);
+
+    --shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+}
+
+
+/* DARK THEME */
+
+html[data-theme="dark"] {
+    --bg: #080b12;
+    --bg-soft: #0d111a;
+    --card: #111722;
+
+    --text: #f5f7fa;
+    --text-muted: #9ca3af;
+
+    --border: #202938;
+    --border-strong: #344054;
+
+    --nav-bg: rgba(8, 11, 18, 0.92);
+
+    --shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+}
+
+
+/* GLOBAL */
+
+body {
+    background: var(--bg);
+    color: var(--text);
+
+    transition:
+        background-color .25s ease,
+        color .25s ease;
+}
+
 * {
     margin: 0;
     padding: 0;

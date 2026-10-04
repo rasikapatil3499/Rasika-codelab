@@ -1,0 +1,1048 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Foundation 04 â€” Learn how graphics primitives and geometric shapes are represented using points, lines, vertices and coordinates.">
+    <title>Foundation 04 | How are Shapes Created? | Rasika CodeLab</title>
+    <link rel="stylesheet" href="../css/cgr_style.css">
+<style>body.protected-page:not(.auth-ready){visibility:hidden}</style>
+</head>
+
+<body class="protected-page">
+
+<header class="site-header">
+    <nav class="navbar">
+        <a href="../cgr_index.html" class="logo">
+            <span class="logo-mark">â—ˆ</span>
+            Rasika<span class="logo-highlight">CodeLab</span>
+        </a>
+
+        <div class="nav-links">
+            <a href="../cgr_index.html">Home</a>
+            <a href="../cgr_foundations.html" class="active">Foundations</a>
+            <a href="../cgr_practicals.html">Practicals</a>
+                        <a href="../../../about.html">About</a>
+        </div>
+
+        <button class="menu-btn" type="button" aria-label="Open menu">â˜°</button>
+    </nav>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero foundation-detail-hero">
+
+    <div class="hero-content">
+
+        <span class="eyebrow">FOUNDATION 04</span>
+
+        <h1>How are <span>Shapes Created?</span></h1>
+
+        <p class="hero-description">
+            Computer graphics builds everything from simple geometric
+            primitives. Learn how points, lines, circles, rectangles,
+            triangles and polygons become visual objects.
+        </p>
+
+        <div class="foundation-meta">
+            <span>Graphics Primitives</span>
+            <span>Points</span>
+            <span>Lines</span>
+            <span>Polygons</span>
+            <span>Geometry</span>
+        </div>
+
+    </div>
+
+    <div class="hero-visual">
+
+        <div class="graphics-window foundation-visual-window">
+
+            <div class="window-header">
+
+                <div class="window-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <span class="window-title">graphics-primitives</span>
+
+            </div>
+
+            <div class="primitive-hero">
+
+                <div class="primitive-grid"></div>
+
+                <div class="primitive-line"></div>
+
+                <div class="primitive-triangle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <div class="primitive-circle"></div>
+
+                <div class="primitive-square"></div>
+
+                <span class="primitive-label line-label">LINE</span>
+                <span class="primitive-label triangle-label">TRIANGLE</span>
+                <span class="primitive-label circle-label">CIRCLE</span>
+                <span class="primitive-label square-label">RECT</span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- OBJECTIVES -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+
+        <span class="eyebrow">LEARNING OBJECTIVES</span>
+
+        <h2>By the end of this foundation, you should be able to...</h2>
+
+    </div>
+
+    <div class="foundation-objectives">
+
+        <div class="objective-card">
+            <span>01</span>
+            <strong>Identify Primitives</strong>
+            <p>Recognize the basic geometric elements used to construct graphics.</p>
+        </div>
+
+        <div class="objective-card">
+            <span>02</span>
+            <strong>Understand Vertices</strong>
+            <p>Explain how points and vertices define lines, triangles and polygons.</p>
+        </div>
+
+        <div class="objective-card">
+            <span>03</span>
+            <strong>Use Coordinates</strong>
+            <p>Represent shapes using coordinate points and dimensions.</p>
+        </div>
+
+        <div class="objective-card">
+            <span>04</span>
+            <strong>Calculate Geometry</strong>
+            <p>Apply basic distance, midpoint, perimeter and area calculations.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CONCEPT -->
+<section class="section foundation-detail">
+
+    <div class="content-card">
+
+        <span class="eyebrow">01 Â· CONCEPT</span>
+
+        <h2>What is a Graphics Primitive?</h2>
+
+        <p>
+            A graphics primitive is a basic geometric element that a
+            graphics system can draw directly or use as a building block
+            for more complex objects.
+        </p>
+
+        <p>
+            Common primitives include <strong>points, lines, circles,
+            ellipses, rectangles, triangles and polygons</strong>.
+            More complex graphics can be constructed by combining these
+            simple elements.
+        </p>
+
+        <div class="definition-box">
+
+            <strong>Think of primitives as building blocks.</strong>
+
+            <p>
+                A house can be represented using rectangles, triangles and
+                lines. A character can be constructed from circles,
+                polygons and curves.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PRIMITIVE TYPES -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+
+        <span class="eyebrow">02 Â· GRAPHICS PRIMITIVES</span>
+
+        <h2>Start with simple geometric elements.</h2>
+
+        <p>
+            Each primitive has a different geometric representation and
+            requires different parameters to draw it.
+        </p>
+
+    </div>
+
+    <div class="coordinate-parts">
+
+        <div class="coordinate-part-card">
+            <span>01</span>
+            <h3>Point</h3>
+            <p>
+                A single position represented by <strong>(x, y)</strong>.
+                It is the smallest basic geometric element.
+            </p>
+        </div>
+
+        <div class="coordinate-part-card">
+            <span>02</span>
+            <h3>Line</h3>
+            <p>
+                Defined by two endpoints such as
+                <strong>Pâ‚(xâ‚,yâ‚)</strong> and <strong>Pâ‚‚(xâ‚‚,yâ‚‚)</strong>.
+            </p>
+        </div>
+
+        <div class="coordinate-part-card">
+            <span>03</span>
+            <h3>Circle</h3>
+            <p>
+                Defined by a centre <strong>(h,k)</strong> and radius
+                <strong>r</strong>.
+            </p>
+        </div>
+
+        <div class="coordinate-part-card">
+            <span>04</span>
+            <h3>Polygon</h3>
+            <p>
+                A closed shape made from three or more connected
+                vertices and edges.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- GEOMETRIC REPRESENTATION -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+
+        <span class="eyebrow">03 Â· REPRESENTATION</span>
+
+        <h2>Every shape needs geometric information.</h2>
+
+    </div>
+
+    <div class="comparison-grid">
+
+        <div class="content-card">
+
+            <span class="card-label">LINE</span>
+
+            <h3>Two endpoints define a line.</h3>
+
+            <div class="formula-box">
+                Pâ‚ = (xâ‚, yâ‚)<br>
+                Pâ‚‚ = (xâ‚‚, yâ‚‚)
+            </div>
+
+            <div class="calculation-box">
+                Î”x = xâ‚‚ âˆ’ xâ‚<br>
+                Î”y = yâ‚‚ âˆ’ yâ‚
+            </div>
+
+        </div>
+
+        <div class="content-card">
+
+            <span class="card-label">CIRCLE</span>
+
+            <h3>Centre and radius define a circle.</h3>
+
+            <div class="formula-box">
+                (x âˆ’ h)Â² + (y âˆ’ k)Â² = rÂ²
+            </div>
+
+            <div class="calculation-box">
+                Centre = (h, k)<br>
+                Radius = r
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- WORKED CALCULATION -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+
+        <span class="eyebrow">04 Â· CALCULATE</span>
+
+        <h2>Calculate the length of a line.</h2>
+
+        <p>
+            The distance formula converts two coordinate points into
+            a measurable line length.
+        </p>
+
+    </div>
+
+    <div class="comparison-grid">
+
+        <div class="content-card">
+
+            <span class="card-label">GIVEN</span>
+
+            <h3>Pâ‚(2, 3) and Pâ‚‚(8, 11)</h3>
+
+            <div class="calculation-box">
+                xâ‚ = 2<br>
+                yâ‚ = 3<br>
+                xâ‚‚ = 8<br>
+                yâ‚‚ = 11
+            </div>
+
+        </div>
+
+        <div class="content-card">
+
+            <span class="card-label">STEP-BY-STEP</span>
+
+            <h3>Distance formula</h3>
+
+            <div class="formula-box">
+                d = âˆš[(xâ‚‚ âˆ’ xâ‚)Â² + (yâ‚‚ âˆ’ yâ‚)Â²]
+            </div>
+
+            <div class="calculation-box">
+                d = âˆš[(8 âˆ’ 2)Â² + (11 âˆ’ 3)Â²]<br>
+                d = âˆš[6Â² + 8Â²]<br>
+                d = âˆš[36 + 64]<br>
+                d = âˆš100<br>
+                d = <strong>10 units</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- INTERACTIVE SHAPE LAB -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+
+        <span class="eyebrow">05 Â· INTERACTIVE VISUALIZATION</span>
+
+        <h2>Build a shape from coordinates.</h2>
+
+        <p>
+            Change the coordinates and dimensions to see how the primitive
+            changes. This connects geometry directly to graphics programming.
+        </p>
+
+    </div>
+
+    <div class="shape-lab">
+
+        <div class="shape-canvas-wrap">
+            <canvas id="shapeCanvas"
+                    class="shape-canvas"
+                    aria-label="Interactive graphics primitive visualizer">
+            </canvas>
+        </div>
+
+        <div class="shape-controls">
+
+            <div class="shape-select-wrap">
+
+                <label for="shapeType">Primitive</label>
+
+                <select id="shapeType">
+
+                    <option value="line">Line</option>
+                    <option value="rectangle">Rectangle</option>
+                    <option value="circle">Circle</option>
+                    <option value="triangle">Triangle</option>
+
+                </select>
+
+            </div>
+
+            <div class="shape-input-row">
+
+                <label>
+                    X
+                    <input id="shapeX" type="number" value="4" min="-10" max="10">
+                </label>
+
+                <label>
+                    Y
+                    <input id="shapeY" type="number" value="3" min="-10" max="10">
+                </label>
+
+            </div>
+
+            <div class="shape-input-row">
+
+                <label>
+                    Size
+                    <input id="shapeSize" type="number" value="4" min="1" max="9">
+                </label>
+
+                <label>
+                    Height
+                    <input id="shapeHeight" type="number" value="3" min="1" max="9">
+                </label>
+
+            </div>
+
+            <div class="shape-readout">
+
+                <span>Primitive</span>
+                <strong id="shapeOutput">Line</strong>
+
+            </div>
+
+            <div class="shape-readout">
+
+                <span>Geometry</span>
+                <strong id="geometryOutput">P(4, 3)</strong>
+
+            </div>
+
+            <div class="coordinate-formula" id="shapeFormula">
+                Two endpoints define a line.
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- POLYGON -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+
+        <span class="eyebrow">06 Â· POLYGON GEOMETRY</span>
+
+        <h2>Vertices create the shape.</h2>
+
+        <p>
+            A polygon is represented by an ordered list of vertices.
+            Connecting consecutive vertices creates its edges.
+        </p>
+
+    </div>
+
+    <div class="content-card">
+
+        <div class="formula-box">
+            Polygon = {Pâ‚, Pâ‚‚, Pâ‚ƒ, ... Pâ‚™}
+        </div>
+
+        <div class="graphics-flow">
+
+            <div class="flow-item">
+                <span>01</span>
+                <strong>Define vertices</strong>
+                <small>Store each point as an (x,y) coordinate.</small>
+            </div>
+
+            <div class="flow-arrow">â†’</div>
+
+            <div class="flow-item">
+                <span>02</span>
+                <strong>Connect vertices</strong>
+                <small>Draw edges between consecutive points.</small>
+            </div>
+
+            <div class="flow-arrow">â†’</div>
+
+            <div class="flow-item">
+                <span>03</span>
+                <strong>Close the polygon</strong>
+                <small>Connect the final vertex back to the first.</small>
+            </div>
+
+            <div class="flow-arrow">â†’</div>
+
+            <div class="flow-item">
+                <span>04</span>
+                <strong>Fill if required</strong>
+                <small>Apply a polygon filling algorithm.</small>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- AREA -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+
+        <span class="eyebrow">07 Â· BASIC GEOMETRY</span>
+
+        <h2>Geometry gives graphics measurable properties.</h2>
+
+    </div>
+
+    <div class="terminology-grid">
+
+        <div class="term-card">
+            <strong>Rectangle Area</strong>
+            <p>Area = width Ã— height</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Circle Area</strong>
+            <p>Area = Ï€rÂ²</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Circle Circumference</strong>
+            <p>C = 2Ï€r</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Triangle Area</strong>
+            <p>Area = Â½ Ã— base Ã— height</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Line Length</strong>
+            <p>d = âˆš[(xâ‚‚âˆ’xâ‚)Â² + (yâ‚‚âˆ’yâ‚)Â²]</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Midpoint</strong>
+            <p>M = ((xâ‚+xâ‚‚)/2, (yâ‚+yâ‚‚)/2)</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FROM SHAPES TO PIXELS -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+
+        <span class="eyebrow">08 Â· FROM GEOMETRY TO PIXELS</span>
+
+        <h2>How does a shape finally appear on screen?</h2>
+
+    </div>
+
+    <div class="content-card">
+
+        <div class="graphics-flow">
+
+            <div class="flow-item">
+                <span>01</span>
+                <strong>Coordinates</strong>
+                <small>Describe where the object exists.</small>
+            </div>
+
+            <div class="flow-arrow">â†’</div>
+
+            <div class="flow-item">
+                <span>02</span>
+                <strong>Primitive</strong>
+                <small>Choose a line, circle, polygon or other shape.</small>
+            </div>
+
+            <div class="flow-arrow">â†’</div>
+
+            <div class="flow-item">
+                <span>03</span>
+                <strong>Algorithm</strong>
+                <small>Determine which pixels represent the geometry.</small>
+            </div>
+
+            <div class="flow-arrow">â†’</div>
+
+            <div class="flow-item">
+                <span>04</span>
+                <strong>Pixels</strong>
+                <small>Rasterized pixels form the visible image.</small>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- COMMON ERRORS -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+        <span class="eyebrow">COMMON ERRORS</span>
+        <h2>Watch out for these mistakes.</h2>
+    </div>
+
+    <div class="terminology-grid">
+
+        <div class="term-card">
+            <strong>Wrong Coordinate Order</strong>
+            <p>Keep the representation as (x, y), not (y, x).</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Missing Vertices</strong>
+            <p>A polygon needs an ordered collection of vertices.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Open Polygon</strong>
+            <p>Remember to connect the last vertex back to the first when required.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Wrong Radius</strong>
+            <p>A circle requires a centre and a radius, not a diameter as the radius.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Screen Coordinates</strong>
+            <p>Check the coordinate convention before drawing a shape.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Ignoring Geometry</strong>
+            <p>Calculate dimensions and positions before implementing the drawing.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- QUICK CHECK -->
+<section class="section foundation-detail">
+
+    <div class="content-card quick-check">
+
+        <span class="eyebrow">QUICK CHECK</span>
+
+        <h2>Test your understanding.</h2>
+
+        <div class="question-list">
+
+            <div>
+                <span>01</span>
+                <p>What are the basic graphics primitives?</p>
+            </div>
+
+            <div>
+                <span>02</span>
+                <p>How many points are required to define a line segment?</p>
+            </div>
+
+            <div>
+                <span>03</span>
+                <p>What information is required to define a circle?</p>
+            </div>
+
+            <div>
+                <span>04</span>
+                <p>What is a vertex in a polygon?</p>
+            </div>
+
+            <div>
+                <span>05</span>
+                <p>Find the distance between Pâ‚(0,0) and Pâ‚‚(6,8).</p>
+            </div>
+
+            <div>
+                <span>06</span>
+                <p>Why are graphics primitives important in computer graphics?</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SUMMARY -->
+<section class="section foundation-detail">
+
+    <div class="summary-box">
+
+        <span class="eyebrow">QUICK SUMMARY</span>
+
+        <h2>Remember these five ideas.</h2>
+
+        <div class="summary-grid">
+
+            <div>
+                <span>01</span>
+                <strong>Primitives are building blocks</strong>
+                <p>Complex graphics can be constructed from simple geometric elements.</p>
+            </div>
+
+            <div>
+                <span>02</span>
+                <strong>Coordinates define position</strong>
+                <p>Points and vertices use coordinates to describe location.</p>
+            </div>
+
+            <div>
+                <span>03</span>
+                <strong>Geometry defines shape</strong>
+                <p>Dimensions, radius, vertices and edges describe geometry.</p>
+            </div>
+
+            <div>
+                <span>04</span>
+                <strong>Algorithms rasterize shapes</strong>
+                <p>Drawing algorithms determine which pixels represent geometry.</p>
+            </div>
+
+            <div>
+                <span>05</span>
+                <strong>Everything connects</strong>
+                <p>Coordinates â†’ primitives â†’ algorithms â†’ pixels â†’ visual output.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- NAVIGATION -->
+<section class="section foundation-navigation">
+
+    <a href="foundation03.html" class="nav-card">
+        <span>â†</span>
+        <small>PREVIOUS FOUNDATION</small>
+        <strong>How Do Coordinates Work?</strong>
+    </a>
+
+    <a href="foundation05.html" class="nav-card next">
+        <small>NEXT FOUNDATION</small>
+        <strong>How Does Color Work? â†’</strong>
+    </a>
+
+</section>
+
+</main>
+
+
+<footer class="site-footer">
+
+    <div class="footer-content">
+
+        <div class="footer-brand">
+            <strong>Rasika<span class="logo-highlight">CodeLab</span></strong>
+            <p>Computer Graphics Practical Learning</p>
+        </div>
+
+        <div class="footer-links">
+            <a href="../../../index.html">Home</a>
+            <a href="../cgr_foundations.html">Foundations</a>
+            <a href="../cgr_practicals.html">Practicals</a>
+                        <a href="../../../about.html">About</a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        Â© 2026 Rasika CodeLab Â· Learn the concept. See the result.
+    </div>
+
+</footer>
+
+
+<script>
+(function () {
+
+    const canvas = document.getElementById("shapeCanvas");
+    const ctx = canvas.getContext("2d");
+
+    const shapeType = document.getElementById("shapeType");
+    const shapeX = document.getElementById("shapeX");
+    const shapeY = document.getElementById("shapeY");
+    const shapeSize = document.getElementById("shapeSize");
+    const shapeHeight = document.getElementById("shapeHeight");
+
+    const shapeOutput = document.getElementById("shapeOutput");
+    const geometryOutput = document.getElementById("geometryOutput");
+    const shapeFormula = document.getElementById("shapeFormula");
+
+    function resizeCanvas() {
+
+        const rect = canvas.getBoundingClientRect();
+        const dpr = window.devicePixelRatio || 1;
+
+        canvas.width = rect.width * dpr;
+        canvas.height = rect.height * dpr;
+
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        draw();
+
+    }
+
+    function drawGrid(width, height, scale, originX, originY) {
+
+        ctx.fillStyle = "#080b0e";
+        ctx.fillRect(0, 0, width, height);
+
+        ctx.strokeStyle = "rgba(255,255,255,.055)";
+        ctx.lineWidth = 1;
+
+        for (let i = -10; i <= 10; i++) {
+
+            const px = originX + i * scale;
+            const py = originY - i * scale;
+
+            ctx.beginPath();
+            ctx.moveTo(px, 22);
+            ctx.lineTo(px, height - 22);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(22, py);
+            ctx.lineTo(width - 22, py);
+            ctx.stroke();
+        }
+
+        ctx.strokeStyle = "rgba(255,138,0,.55)";
+        ctx.lineWidth = 1.5;
+
+        ctx.beginPath();
+        ctx.moveTo(22, originY);
+        ctx.lineTo(width - 22, originY);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(originX, 22);
+        ctx.lineTo(originX, height - 22);
+        ctx.stroke();
+
+        ctx.fillStyle = "#7f8790";
+        ctx.font = "11px monospace";
+
+        ctx.fillText("+X", width - 42, originY - 8);
+        ctx.fillText("+Y", originX + 8, 35);
+        ctx.fillText("0", originX + 7, originY + 15);
+
+    }
+
+    function updateReadout(type, x, y, size, height) {
+
+        const names = {
+            line: "Line",
+            rectangle: "Rectangle",
+            circle: "Circle",
+            triangle: "Triangle"
+        };
+
+        shapeOutput.textContent = names[type];
+
+        if (type === "line") {
+
+            geometryOutput.textContent = "Pâ‚(" + x + "," + y + ") â†’ Pâ‚‚(" + (x + size) + "," + (y + height) + ")";
+
+            shapeFormula.textContent =
+                "d = âˆš[(xâ‚‚ âˆ’ xâ‚)Â² + (yâ‚‚ âˆ’ yâ‚)Â²]";
+
+        } else if (type === "rectangle") {
+
+            geometryOutput.textContent = "W = " + size + ", H = " + height;
+
+            shapeFormula.textContent =
+                "Area = width Ã— height = " + (size * height) + " unitsÂ²";
+
+        } else if (type === "circle") {
+
+            geometryOutput.textContent = "Centre(" + x + "," + y + "), r = " + size;
+
+            shapeFormula.textContent =
+                "Area = Ï€rÂ² = " + (Math.PI * size * size).toFixed(2) + " unitsÂ²";
+
+        } else {
+
+            geometryOutput.textContent = "Base = " + size + ", Height = " + height;
+
+            shapeFormula.textContent =
+                "Area = Â½ Ã— base Ã— height = " + (0.5 * size * height) + " unitsÂ²";
+        }
+
+    }
+
+    function draw() {
+
+        const width = canvas.clientWidth;
+        const height = canvas.clientHeight;
+
+        const scale = Math.min(
+            (width - 44) / 20,
+            (height - 44) / 20
+        );
+
+        const originX = width / 2;
+        const originY = height / 2;
+
+        const type = shapeType.value;
+        const x = Number(shapeX.value);
+        const y = Number(shapeY.value);
+        const size = Number(shapeSize.value);
+        const h = Number(shapeHeight.value);
+
+        drawGrid(width, height, scale, originX, originY);
+
+        const px = originX + x * scale;
+        const py = originY - y * scale;
+
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = "#ff8a00";
+        ctx.fillStyle = "rgba(255,138,0,.14)";
+
+        if (type === "line") {
+
+            const x2 = originX + (x + size) * scale;
+            const y2 = originY - (y + h) * scale;
+
+            ctx.beginPath();
+            ctx.moveTo(px, py);
+            ctx.lineTo(x2, y2);
+            ctx.stroke();
+
+            drawPoint(px, py);
+            drawPoint(x2, y2);
+
+            drawLabel("Pâ‚", px + 9, py - 9);
+            drawLabel("Pâ‚‚", x2 + 9, y2 - 9);
+
+        } else if (type === "rectangle") {
+
+            const rw = size * scale;
+            const rh = h * scale;
+
+            ctx.strokeRect(px, py - rh, rw, rh);
+            ctx.fillRect(px, py - rh, rw, rh);
+
+            drawPoint(px, py);
+            drawLabel("P(" + x + "," + y + ")", px + 9, py + 17);
+
+        } else if (type === "circle") {
+
+            ctx.beginPath();
+            ctx.arc(px, py, size * scale, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+
+            drawPoint(px, py);
+            drawLabel("C(" + x + "," + y + ")", px + 9, py - 9);
+
+        } else {
+
+            const base = size * scale;
+            const triHeight = h * scale;
+
+            ctx.beginPath();
+            ctx.moveTo(px, py);
+            ctx.lineTo(px + base, py);
+            ctx.lineTo(px + base / 2, py - triHeight);
+            ctx.closePath();
+
+            ctx.fill();
+            ctx.stroke();
+
+            drawPoint(px, py);
+            drawPoint(px + base, py);
+            drawPoint(px + base / 2, py - triHeight);
+
+        }
+
+        updateReadout(type, x, y, size, h);
+
+    }
+
+    function drawPoint(x, y) {
+
+        ctx.fillStyle = "#ff8a00";
+
+        ctx.beginPath();
+        ctx.arc(x, y, 5, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.strokeStyle = "#ffd19a";
+        ctx.lineWidth = 1.5;
+
+        ctx.beginPath();
+        ctx.arc(x, y, 9, 0, Math.PI * 2);
+        ctx.stroke();
+
+        ctx.strokeStyle = "#ff8a00";
+        ctx.lineWidth = 3;
+
+    }
+
+    function drawLabel(text, x, y) {
+
+        ctx.fillStyle = "#e8ebee";
+        ctx.font = "10px monospace";
+        ctx.fillText(text, x, y);
+
+    }
+
+    [shapeType, shapeX, shapeY, shapeSize, shapeHeight].forEach(function (element) {
+
+        element.addEventListener("input", draw);
+        element.addEventListener("change", draw);
+
+    });
+
+    window.addEventListener("resize", resizeCanvas);
+
+    resizeCanvas();
+
+})();
+</script>
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

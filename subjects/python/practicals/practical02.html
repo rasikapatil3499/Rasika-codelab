@@ -1,0 +1,1441 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Practical 02 | Data & Functions | RasikaCodeLab</title>
+
+    <!-- Common CSS -->
+    <link rel="stylesheet" href="../css/python_practicals.css">
+
+    <!-- Python Practical CSS -->
+    <link rel="stylesheet" href="../css/python.css">
+<style>body.protected-page:not(.auth-ready){visibility:hidden}</style>
+</head>
+
+<body class="protected-page">
+
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <header class="header">
+
+        <div class="header-inner">
+
+            <a href="../../../index.html" class="logo">
+                <span class="logo-mark">&lt;/&gt;</span>
+                <span>
+                    Rasika<span class="logo-highlight">CodeLab</span>
+                </span>
+            </a>
+
+            <nav class="nav">
+
+                <a href="../../../index.html">
+                    Home
+                </a>
+
+                <a href="../../../subjects.html" class="active">
+                    Subjects
+                </a>
+ <a href="../practicals.html">Practicals</a>
+                <a href="../foundations.html">
+                    Foundations
+                </a>
+
+                <a href="../../../about.html">
+                    About
+                </a>
+
+                <a href="../../../login.html">
+                    Login
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <main class="python-page">
+
+        <!-- =================================================
+             HERO
+             ================================================= -->
+
+        <section class="python-hero compact">
+
+            <span class="subject-label">
+                PYTHON 2030
+            </span>
+
+            <h1>
+                Practical 02
+            </h1>
+
+            <p>
+                Data & Functions
+            </p>
+
+        </section>
+
+
+        <!-- =================================================
+             PRACTICAL CONTENT
+             ================================================= -->
+
+        <div class="practical-container">
+
+
+            <!-- =================================================
+                 PRACTICAL HEADER
+                 ================================================= -->
+
+            <section class="practical-header">
+
+                <span class="practical-number">
+                    02
+                </span>
+
+                <h1>
+                    Data & Functions
+                </h1>
+
+                <p>
+                    Solve problems using Python collections,
+                    functions and data transformation techniques.
+                    Learn how to organize data, process collections
+                    and create reusable program logic.
+                </p>
+
+            </section>
+
+
+            <!-- =================================================
+                 AIM
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>01</span>
+                    <h2>Aim</h2>
+                </div>
+
+                <div class="aim-box">
+
+                    <h3>
+                        Practical Aim
+                    </h3>
+
+                    <p>
+                        To develop programs using Python functions
+                        and collection data structures for processing,
+                        filtering, transforming and analyzing data.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 LEARNING OBJECTIVES
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>02</span>
+                    <h2>Learning Objectives</h2>
+                </div>
+
+                <div class="objectives-grid">
+
+                    <div class="objective-card">
+
+                        <span class="objective-number">
+                            LO 01
+                        </span>
+
+                        <p>
+                            Understand the purpose and structure
+                            of Python functions.
+                        </p>
+
+                    </div>
+
+
+                    <div class="objective-card">
+
+                        <span class="objective-number">
+                            LO 02
+                        </span>
+
+                        <p>
+                            Use lists, dictionaries and sets to
+                            represent structured data.
+                        </p>
+
+                    </div>
+
+
+                    <div class="objective-card">
+
+                        <span class="objective-number">
+                            LO 03
+                        </span>
+
+                        <p>
+                            Create reusable functions using
+                            parameters and return values.
+                        </p>
+
+                    </div>
+
+
+                    <div class="objective-card">
+
+                        <span class="objective-number">
+                            LO 04
+                        </span>
+
+                        <p>
+                            Apply filtering, sorting and
+                            transformation techniques to data.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 FOUNDATION CONCEPTS
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>03</span>
+                    <h2>Foundation Concepts</h2>
+                </div>
+
+                <div class="content-card">
+
+                    <div class="concept-list">
+
+                        <span class="concept-tag">
+                            Functions
+                        </span>
+
+                        <span class="concept-tag">
+                            Parameters
+                        </span>
+
+                        <span class="concept-tag">
+                            Return Values
+                        </span>
+
+                        <span class="concept-tag">
+                            Lists
+                        </span>
+
+                        <span class="concept-tag">
+                            Dictionaries
+                        </span>
+
+                        <span class="concept-tag">
+                            Sets
+                        </span>
+
+                        <span class="concept-tag">
+                            Strings
+                        </span>
+
+                        <span class="concept-tag">
+                            Sorting
+                        </span>
+
+                        <span class="concept-tag">
+                            Filtering
+                        </span>
+
+                        <span class="concept-tag">
+                            Lambda
+                        </span>
+
+                        <span class="concept-tag">
+                            map()
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 PROBLEM STATEMENTS
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>04</span>
+                    <h2>Problem Statements</h2>
+                </div>
+
+
+                <div class="problem-grid">
+
+
+                    <!-- PROBLEM 01 -->
+
+                    <article class="problem-card">
+
+                        <span class="problem-number">
+                            01
+                        </span>
+
+                        <h3>
+                            Student Data Processor
+                        </h3>
+
+                        <p>
+                            Create a Python program using functions
+                            to store and process student information.
+                        </p>
+
+                        <h4>
+                            Requirements
+                        </h4>
+
+                        <ul class="practical-list">
+
+                            <li>
+                                Add student records.
+                            </li>
+
+                            <li>
+                                Display all student records.
+                            </li>
+
+                            <li>
+                                Calculate average marks.
+                            </li>
+
+                            <li>
+                                Find the highest scorer.
+                            </li>
+
+                            <li>
+                                Filter students based on marks.
+                            </li>
+
+                        </ul>
+
+                        <h4>
+                            Concepts
+                        </h4>
+
+                        <div class="concept-list">
+
+                            <span class="concept-tag">
+                                Functions
+                            </span>
+
+                            <span class="concept-tag">
+                                Lists
+                            </span>
+
+                            <span class="concept-tag">
+                                Dictionaries
+                            </span>
+
+                            <span class="concept-tag">
+                                Parameters
+                            </span>
+
+                            <span class="concept-tag">
+                                Return
+                            </span>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- PROBLEM 02 -->
+
+                    <article class="problem-card">
+
+                        <span class="problem-number">
+                            02
+                        </span>
+
+                        <h3>
+                            Data Cleaning
+                        </h3>
+
+                        <p>
+                            Create functions to clean and organize
+                            a collection of names containing
+                            inconsistent formatting and duplicates.
+                        </p>
+
+                        <h4>
+                            Requirements
+                        </h4>
+
+                        <ul class="practical-list">
+
+                            <li>
+                                Remove unnecessary spaces.
+                            </li>
+
+                            <li>
+                                Convert names to proper case.
+                            </li>
+
+                            <li>
+                                Remove duplicate names.
+                            </li>
+
+                            <li>
+                                Sort names alphabetically.
+                            </li>
+
+                            <li>
+                                Display the cleaned collection.
+                            </li>
+
+                        </ul>
+
+                        <h4>
+                            Concepts
+                        </h4>
+
+                        <div class="concept-list">
+
+                            <span class="concept-tag">
+                                Strings
+                            </span>
+
+                            <span class="concept-tag">
+                                Lists
+                            </span>
+
+                            <span class="concept-tag">
+                                Sets
+                            </span>
+
+                            <span class="concept-tag">
+                                Functions
+                            </span>
+
+                            <span class="concept-tag">
+                                Sorting
+                            </span>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- PROBLEM 03 -->
+
+                    <article class="problem-card">
+
+                        <span class="problem-number">
+                            03
+                        </span>
+
+                        <h3>
+                            Filter & Transform
+                        </h3>
+
+                        <p>
+                            Process student records using filtering
+                            and data transformation techniques.
+                        </p>
+
+                        <h4>
+                            Requirements
+                        </h4>
+
+                        <ul class="practical-list">
+
+                            <li>
+                                Filter students above a specified mark.
+                            </li>
+
+                            <li>
+                                Extract student names.
+                            </li>
+
+                            <li>
+                                Calculate average marks.
+                            </li>
+
+                            <li>
+                                Transform the records.
+                            </li>
+
+                            <li>
+                                Display the processed data.
+                            </li>
+
+                        </ul>
+
+                        <h4>
+                            Concepts
+                        </h4>
+
+                        <div class="concept-list">
+
+                            <span class="concept-tag">
+                                Dictionaries
+                            </span>
+
+                            <span class="concept-tag">
+                                Functions
+                            </span>
+
+                            <span class="concept-tag">
+                                filter
+                            </span>
+
+                            <span class="concept-tag">
+                                lambda
+                            </span>
+
+                            <span class="concept-tag">
+                                map
+                            </span>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 PROBLEM 01 â€” DETAILED
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>05</span>
+                    <h2>Problem 01 â€” Student Data Processor</h2>
+                </div>
+
+
+                <div class="problem-detail">
+
+                    <h3>
+                        Problem Description
+                    </h3>
+
+                    <p>
+                        Develop a Python program that stores student
+                        information using a collection of dictionaries
+                        and provides reusable functions for performing
+                        different operations on the data.
+                    </p>
+
+
+                    <h4>
+                        Sample Data
+                    </h4>
+
+                    <div class="code-container">
+
+                        <div class="code-header">
+
+                            <span>
+                                students.py
+                            </span>
+
+                            <button
+                                class="copy-btn"
+                                onclick="copyCode(this)">
+                                Copy
+                            </button>
+
+                        </div>
+
+<pre><code>
+students = [
+
+    {
+        "name": "Aarav",
+        "marks": 82,
+        "department": "Computer"
+    },
+
+    {
+        "name": "Priya",
+        "marks": 91,
+        "department": "Computer"
+    },
+
+    {
+        "name": "Rahul",
+        "marks": 68,
+        "department": "IT"
+    },
+
+    {
+        "name": "Sneha",
+        "marks": 76,
+        "department": "Computer"
+    }
+
+]
+</code></pre>
+
+                    </div>
+
+
+                    <h4>
+                        Algorithm
+                    </h4>
+
+                    <div class="steps">
+
+                        <div class="step">
+
+                            <span class="step-number">
+                                01
+                            </span>
+
+                            <p>
+                                Create a collection containing
+                                student records.
+                            </p>
+
+                        </div>
+
+
+                        <div class="step">
+
+                            <span class="step-number">
+                                02
+                            </span>
+
+                            <p>
+                                Create a function to display
+                                student records.
+                            </p>
+
+                        </div>
+
+
+                        <div class="step">
+
+                            <span class="step-number">
+                                03
+                            </span>
+
+                            <p>
+                                Create a function to calculate
+                                the average marks.
+                            </p>
+
+                        </div>
+
+
+                        <div class="step">
+
+                            <span class="step-number">
+                                04
+                            </span>
+
+                            <p>
+                                Create a function to find the
+                                highest scorer.
+                            </p>
+
+                        </div>
+
+
+                        <div class="step">
+
+                            <span class="step-number">
+                                05
+                            </span>
+
+                            <p>
+                                Create a function to filter
+                                students according to marks.
+                            </p>
+
+                        </div>
+
+
+                        <div class="step">
+
+                            <span class="step-number">
+                                06
+                            </span>
+
+                            <p>
+                                Display the processed results.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 CODE
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>06</span>
+                    <h2>Python Code</h2>
+                </div>
+
+
+                <div class="code-container">
+
+                    <div class="code-header">
+
+                        <span>
+                            student_data.py
+                        </span>
+
+                        <button
+                            class="copy-btn"
+                            onclick="copyCode(this)">
+                            Copy
+                        </button>
+
+                    </div>
+
+<pre><code>
+students = [
+
+    {
+        "name": "Aarav",
+        "marks": 82,
+        "department": "Computer"
+    },
+
+    {
+        "name": "Priya",
+        "marks": 91,
+        "department": "Computer"
+    },
+
+    {
+        "name": "Rahul",
+        "marks": 68,
+        "department": "IT"
+    },
+
+    {
+        "name": "Sneha",
+        "marks": 76,
+        "department": "Computer"
+    }
+
+]
+
+
+def display_students(data):
+
+    for student in data:
+
+        print(
+            student["name"],
+            "-",
+            student["marks"],
+            "-",
+            student["department"]
+        )
+
+
+def calculate_average(data):
+
+    total = sum(
+        student["marks"]
+        for student in data
+    )
+
+    return total / len(data)
+
+
+def highest_scorer(data):
+
+    return max(
+        data,
+        key=lambda student: student["marks"]
+    )
+
+
+def filter_students(data, minimum_marks):
+
+    return [
+        student
+        for student in data
+        if student["marks"] >= minimum_marks
+    ]
+
+
+print("STUDENT RECORDS")
+print("----------------")
+
+display_students(students)
+
+
+average = calculate_average(students)
+
+print("\nAverage Marks:", average)
+
+
+topper = highest_scorer(students)
+
+print(
+    "Highest Scorer:",
+    topper["name"],
+    topper["marks"]
+)
+
+
+print("\nStudents scoring 75 or above:")
+
+filtered = filter_students(
+    students,
+    75
+)
+
+display_students(filtered)
+</code></pre>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 OUTPUT
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>07</span>
+                    <h2>Expected Output</h2>
+                </div>
+
+
+                <div class="terminal">
+
+                    <div class="terminal-header">
+
+                        <span class="terminal-dot"></span>
+                        <span class="terminal-dot"></span>
+                        <span class="terminal-dot"></span>
+
+                        <span class="terminal-title">
+                            Python Output
+                        </span>
+
+                    </div>
+
+<pre>
+STUDENT RECORDS
+----------------
+Aarav - 82 - Computer
+Priya - 91 - Computer
+Rahul - 68 - IT
+Sneha - 76 - Computer
+
+Average Marks: 79.25
+
+Highest Scorer: Priya 91
+
+Students scoring 75 or above:
+Aarav - 82 - Computer
+Priya - 91 - Computer
+Sneha - 76 - Computer
+</pre>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 CHALLENGE
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>08</span>
+                    <h2>Try It Yourself</h2>
+                </div>
+
+
+                <div class="try-it">
+
+                    <h3>
+                        Challenge
+                    </h3>
+
+                    <p>
+                        Extend the program so that the user can
+                        enter new student records at runtime.
+                        Then allow the user to search for students
+                        by department.
+                    </p>
+
+
+                    <div class="callout">
+
+                        <div class="callout-icon">
+                            ðŸ’¡
+                        </div>
+
+                        <div class="callout-content">
+
+                            <h4>
+                                Think Before You Code
+                            </h4>
+
+                            <p>
+                                Break the problem into separate
+                                functions. One function should
+                                collect data, another should search
+                                the data, and another should display
+                                the result.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 PROBLEM 02 â€” DATA CLEANING
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>09</span>
+                    <h2>Problem 02 â€” Data Cleaning</h2>
+                </div>
+
+
+                <div class="problem-detail">
+
+                    <h3>
+                        Problem Description
+                    </h3>
+
+                    <p>
+                        Given a list of names containing extra
+                        spaces, inconsistent capitalization and
+                        duplicate entries, create reusable functions
+                        to clean and organize the data.
+                    </p>
+
+
+                    <h4>
+                        Input
+                    </h4>
+
+<pre>
+names = [
+    "  rahul",
+    "PRIYA ",
+    " sneha",
+    "Rahul",
+    "  priya",
+    "AMIT"
+]
+</pre>
+
+
+                    <h4>
+                        Expected Output
+                    </h4>
+
+<pre>
+Amit
+Priya
+Rahul
+Sneha
+</pre>
+
+
+                    <h4>
+                        Suggested Functions
+                    </h4>
+
+                    <ul class="practical-list">
+
+                        <li>
+                            <span class="inline-code">
+                                clean_names()
+                            </span>
+                        </li>
+
+                        <li>
+                            <span class="inline-code">
+                                remove_duplicates()
+                            </span>
+                        </li>
+
+                        <li>
+                            <span class="inline-code">
+                                sort_names()
+                            </span>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 PROBLEM 03 â€” FILTER & TRANSFORM
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>10</span>
+                    <h2>Problem 03 â€” Filter & Transform</h2>
+                </div>
+
+
+                <div class="problem-detail">
+
+                    <h3>
+                        Problem Description
+                    </h3>
+
+                    <p>
+                        Given a collection of student records,
+                        use Python functions and data transformation
+                        techniques to filter students and generate
+                        a new collection containing only the required
+                        information.
+                    </p>
+
+
+                    <h4>
+                        Example
+                    </h4>
+
+                    <div class="code-container">
+
+                        <div class="code-header">
+
+                            <span>
+                                transform.py
+                            </span>
+
+                        </div>
+
+<pre><code>
+students = [
+    {"name": "Aarav", "marks": 82},
+    {"name": "Priya", "marks": 91},
+    {"name": "Rahul", "marks": 68},
+    {"name": "Sneha", "marks": 76}
+]
+
+result = list(
+    filter(
+        lambda student:
+        student["marks"] >= 75,
+        students
+    )
+)
+
+names = list(
+    map(
+        lambda student:
+        student["name"],
+        result
+    )
+)
+
+print(names)
+</code></pre>
+
+                    </div>
+
+
+                    <h4>
+                        Expected Output
+                    </h4>
+
+<pre>
+['Aarav', 'Priya', 'Sneha']
+</pre>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 LEARNING OUTCOME
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>11</span>
+                    <h2>Learning Outcome</h2>
+                </div>
+
+
+                <div class="outcome-box">
+
+                    <h3>
+                        After completing this practical
+                    </h3>
+
+                    <p>
+                        Students will be able to create reusable
+                        Python functions and apply collection,
+                        filtering, sorting and transformation
+                        techniques to solve data-processing problems.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 VIVA
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>12</span>
+                    <h2>Viva Questions</h2>
+                </div>
+
+
+                <div class="viva-list">
+
+
+                    <div class="viva-item">
+
+                        <div class="viva-question">
+                            1. What is a function in Python?
+                        </div>
+
+                        <div class="viva-answer">
+                            A function is a reusable block of code
+                            designed to perform a specific task.
+                        </div>
+
+                    </div>
+
+
+                    <div class="viva-item">
+
+                        <div class="viva-question">
+                            2. What is the difference between a
+                            parameter and an argument?
+                        </div>
+
+                        <div class="viva-answer">
+                            A parameter is a variable defined in
+                            the function definition, while an
+                            argument is the actual value passed
+                            to the function.
+                        </div>
+
+                    </div>
+
+
+                    <div class="viva-item">
+
+                        <div class="viva-question">
+                            3. What is the purpose of return?
+                        </div>
+
+                        <div class="viva-answer">
+                            The return statement sends a value from
+                            a function back to the calling code.
+                        </div>
+
+                    </div>
+
+
+                    <div class="viva-item">
+
+                        <div class="viva-question">
+                            4. What is a dictionary?
+                        </div>
+
+                        <div class="viva-answer">
+                            A dictionary stores data as key-value
+                            pairs.
+                        </div>
+
+                    </div>
+
+
+                    <div class="viva-item">
+
+                        <div class="viva-question">
+                            5. What does lambda mean in Python?
+                        </div>
+
+                        <div class="viva-answer">
+                            A lambda is a small anonymous function
+                            that can contain a single expression.
+                        </div>
+
+                    </div>
+
+
+                    <div class="viva-item">
+
+                        <div class="viva-question">
+                            6. What is the purpose of filter()?
+                        </div>
+
+                        <div class="viva-answer">
+                            The filter() function selects elements
+                            from an iterable based on a condition.
+                        </div>
+
+                    </div>
+
+
+                    <div class="viva-item">
+
+                        <div class="viva-question">
+                            7. What does map() do?
+                        </div>
+
+                        <div class="viva-answer">
+                            The map() function applies a function
+                            to each item of an iterable.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 NAVIGATION
+                 ================================================= -->
+
+            <div class="practical-navigation">
+
+
+                <a
+                    href="practical01.html"
+                    class="practical-nav-btn">
+
+                    <small>
+                        Previous Practical
+                    </small>
+
+                    <strong>
+                        â† Python Problem Solving
+                    </strong>
+
+                </a>
+
+
+                <a
+                    href="practical03.html"
+                    class="practical-nav-btn next">
+
+                    <small>
+                        Next Practical
+                    </small>
+
+                    <strong>
+                        OOP & Application Design â†’
+                    </strong>
+
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="footer">
+
+        <div class="footer-main">
+
+
+            <div class="footer-brand">
+
+                <div class="logo">
+
+                    <span class="logo-mark">
+                        &lt;/&gt;
+                    </span>
+
+                    <span>
+                        Rasika<span class="logo-highlight">
+                            CodeLab
+                        </span>
+                    </span>
+
+                </div>
+
+                <p>
+                    Interactive practical learning through
+                    concepts, code and visualization.
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <div>
+
+                    <h4>
+                        Learn
+                    </h4>
+
+                    <a href="../../../subjects.html">
+                        Subjects
+                    </a>
+
+                    <a href="../../../about.html">
+                        About
+                    </a>
+
+                </div>
+
+
+                <div>
+
+                    <h4>
+                        Subjects
+                    </h4>
+
+                    <a href="../../cpp/index.html">
+                        C++
+                    </a>
+
+                    <a href="../../computer-graphics/cgr_index.html">
+                        Computer Graphics
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <span>
+                Â© 2026 Rasika CodeLab
+            </span>
+
+            <span>
+                Built for practical learning.
+            </span>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
+
+  <script src="../../../js/main.js"></script>
+
+
+    <script>
+
+        function copyCode(button) {
+
+            const container =
+                button.closest(".code-container");
+
+            const code =
+                container.querySelector("code").innerText;
+
+            navigator.clipboard
+                .writeText(code)
+                .then(() => {
+
+                    const original =
+                        button.innerText;
+
+                    button.innerText = "Copied!";
+
+                    setTimeout(() => {
+
+                        button.innerText =
+                            original;
+
+                    }, 1500);
+
+                });
+
+        }
+
+    </script>
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,726 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practical 02 | RGB & CMYK Color Visualizer</title>
+    <meta name="description" content="Interactive Computer Graphics practical on RGB, CMYK, grayscale and color depth.">
+    <link rel="stylesheet" href="../css/cgr_style.css">
+    <link rel="stylesheet" href="../css/cgr_practicals.css">
+<style>body.protected-page:not(.auth-ready){visibility:hidden}</style>
+</head>
+
+<body class="cgr-practical-body practical-02 protected-page">
+
+<header class="navbar">
+    <div class="logo">
+        <span class="logo-mark">&lt;/&gt;</span>
+        <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+    </div>
+    <nav class="nav-links">
+        <a href="../cgr_index.html">Home</a>
+        <a href="../cgr_foundations.html">Foundations</a>
+                <a href="../cgr_practicals.html" class="active">Practicals</a>
+        <a href="../../../about.html">About</a>
+    </nav>
+    <button class="menu-btn" aria-label="Open Menu">â˜°</button>
+</header>
+
+<main class="cgr-practical-page">
+
+    <!-- HERO -->
+    <section class="cgr-practical-hero">
+        <div>
+            <div class="section-label">COMPUTER GRAPHICS Â· PRACTICAL 02</div>
+            <div class="practical-kicker">FOUNDATION PRACTICAL</div>
+            <h1>RGB &amp; CMYK <span>Color Visualizer</span></h1>
+            <p>Explore RGB, CMYK, grayscale, color depth and digital color representation through real-life problems and a live visual laboratory.</p>
+            <div class="practical-flow">
+                <span>Understand</span><b>â†’</b><span>Calculate</span><b>â†’</b><span>Visualize</span><b>â†’</b><span>Experiment</span>
+            </div>
+        </div>
+
+        <div class="cgr-hero-mini">
+            <div class="color-hero-orb">
+                <span class="hero-r"></span>
+                <span class="hero-g"></span>
+                <span class="hero-b"></span>
+                <span class="hero-mix"></span>
+            </div>
+            <div class="mini-readout">
+                <span>LIVE RGB</span>
+                <strong id="heroRgb">80, 150, 220</strong>
+            </div>
+        </div>
+    </section>
+
+    <!-- OBJECTIVES -->
+    <section class="practical-section">
+        <div class="section-heading">
+            <div>
+                <div class="section-label">01 Â· OBJECTIVES</div>
+                <h2>What will you learn?</h2>
+                <p>Build the color concepts first, then calculate and visualize them.</p>
+            </div>
+        </div>
+
+        <div class="experiment-grid">
+            <div><strong>RGB Model</strong><span>Understand Red, Green and Blue channels and their 0â€“255 values.</span></div>
+            <div><strong>CMYK Model</strong><span>Understand Cyan, Magenta, Yellow and Key/Black representation.</span></div>
+            <div><strong>Grayscale</strong><span>Convert a color pixel into weighted intensity.</span></div>
+            <div><strong>Color Depth</strong><span>Calculate how many colors can be represented by a given number of bits.</span></div>
+        </div>
+    </section>
+
+    <!-- RGB LAB -->
+    <section class="practical-section">
+        <div class="section-heading">
+            <div>
+                <div class="section-label">02 Â· LIVE INTERACTIVE LAB</div>
+                <h2>RGB Color Mixer</h2>
+                <p>Change the three channels and observe how digital light combines to create the final color.</p>
+            </div>
+            <button class="lab-reset" id="resetColor">Reset Lab</button>
+        </div>
+
+        <div class="live-lab color-live-lab">
+
+            <aside class="lab-controls">
+                <div class="control-group">
+                    <label>Red <output id="rOut">80</output></label>
+                    <input id="red" type="range" min="0" max="255" value="80">
+                </div>
+
+                <div class="control-group">
+                    <label>Green <output id="gOut">150</output></label>
+                    <input id="green" type="range" min="0" max="255" value="150">
+                </div>
+
+                <div class="control-group">
+                    <label>Blue <output id="bOut">220</output></label>
+                    <input id="blue" type="range" min="0" max="255" value="220">
+                </div>
+
+                <button class="draw-btn" id="randomColor">Generate Random Color <span>â†’</span></button>
+
+                <div class="control-hint">
+                    <strong>Try it:</strong>
+                    <span>Move a slider and watch the color, HEX value and visualization change.</span>
+                </div>
+
+                <div class="lab-stats">
+                    <div><span>RGB</span><strong id="rgbValue">rgb(80, 150, 220)</strong></div>
+                    <div><span>HEX</span><strong id="hexValue">#5096DC</strong></div>
+                    <div><span>Brightness</span><strong id="brightnessValue">Medium</strong></div>
+                </div>
+            </aside>
+
+            <div class="lab-stage">
+                <!-- RIGHT-SIDE LIVE COLOR VIEWER -->
+                <div class="live-color-viewer">
+                    <div class="live-viewer-header">
+                        <div>
+                            <span class="live-dot"></span>
+                            <strong>LIVE COLOR VIEWER</strong>
+                        </div>
+                        <span id="channelStatus">R 80 Â· G 150 Â· B 220</span>
+                    </div>
+
+                    <div class="color-preview color-preview-small" id="colorPreview">
+                        <div class="preview-readout">
+                            <strong id="previewHex">#5096DC</strong>
+                            <span>Current digital color</span>
+                        </div>
+                    </div>
+
+                    <div class="live-viewer-footer">
+                        <span>RGB</span>
+                        <strong id="viewerRgb">80, 150, 220</strong>
+                        <span>HEX</span>
+                        <strong id="viewerHex">#5096DC</strong>
+                    </div>
+                </div>
+
+                <div class="rgb-visualizer">
+                    <div class="rgb-visualizer-head">
+                        <div>
+                            <strong>RGB ADDITIVE COLOR VISUALIZATION</strong>
+                            <span>Red + Green + Blue light combine to create the final screen color.</span>
+                        </div>
+                        <button class="rgb-animation-button" id="playRgbBuild" type="button">â–¶ Play RGB Build-Up</button>
+                    </div>
+
+                    <div class="rgb-light-scene" id="rgbLightScene">
+                        <div class="rgb-orb orb-red"><span>R</span><small id="visualR">80</small></div>
+                        <div class="rgb-orb orb-green"><span>G</span><small id="visualG">150</small></div>
+                        <div class="rgb-orb orb-blue"><span>B</span><small id="visualB">220</small></div>
+                        <div class="rgb-mix-core" id="rgbMixCore"></div>
+                        <div class="rgb-visual-label" id="rgbVisualLabel">FINAL COLOR</div>
+                    </div>
+
+                    <div class="rgb-visual-readout">
+                        <span>R <b id="visualReadoutR">80</b></span>
+                        <span>G <b id="visualReadoutG">150</b></span>
+                        <span>B <b id="visualReadoutB">220</b></span>
+                        <strong id="visualReadoutHex">#5096DC</strong>
+                    </div>
+                </div>
+
+                <div class="rgb-build-panel">
+                    <div class="rgb-build-title">
+                        <strong>RGB COLOR BUILD-UP</strong>
+                        <span>Each channel goes from 00 â†’ FF</span>
+                    </div>
+
+                    <div class="rgb-build-bars">
+                        <div class="build-row">
+                            <span>R</span><div class="build-track"><i id="buildR"></i></div><b id="buildRValue">80</b>
+                        </div>
+                        <div class="build-row">
+                            <span>G</span><div class="build-track"><i id="buildG"></i></div><b id="buildGValue">150</b>
+                        </div>
+                        <div class="build-row">
+                            <span>B</span><div class="build-track"><i id="buildB"></i></div><b id="buildBValue">220</b>
+                        </div>
+                    </div>
+
+                    <div class="rgb-palette-title">
+                        <span>COLOR HEX VALUE</span>
+                        <small>Hexadecimal uses 0â€“9 and Aâ€“F</small>
+                    </div>
+
+                    <div class="hex-digit-row">
+                        <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span>
+                        <span>8</span><span>9</span><span>A</span><span>B</span><span>C</span><span>D</span><span>E</span><span>F</span>
+                    </div>
+
+                    <div class="hex-number-row">
+                        <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span>
+                        <span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span>
+                    </div>
+
+                    <div class="hex-gradient interactive-hex-gradient" id="hexGradient" title="Click or drag to choose the active RGB intensity"></div>
+
+                    <div class="hex-power-line">
+                        <span>OFF</span><i id="hexPowerTrack"></i><span>FULL POWER</span>
+                    </div>
+
+                    <div class="hex-endpoints">
+                        <span>00</span><strong id="hexCurrentValue">80</strong><span>FF</span>
+                    </div>
+
+                    <div class="hex-interactive-hint">Click / drag the scale to set the RGB channel selected by the last slider.</div>
+
+                    <div class="build-sequence">
+                        <div><span class="sequence-color red"></span><b>+ R</b><small id="sequenceR">R 80</small></div>
+                        <div><span class="sequence-color green"></span><b>+ G</b><small id="sequenceG">G 150</small></div>
+                        <div><span class="sequence-color blue"></span><b>+ B</b><small id="sequenceB">B 220</small></div>
+                        <div><span class="sequence-color final" id="sequenceFinalColor"></span><b>FINAL</b><small id="sequenceFinal">#5096DC</small></div>
+                    </div>
+                </div>
+
+                <div class="color-values">
+                    <div class="color-value"><span>Red</span><strong id="rBox">80</strong></div>
+                    <div class="color-value"><span>Green</span><strong id="gBox">150</strong></div>
+                    <div class="color-value"><span>Blue</span><strong id="bBox">220</strong></div>
+                    <div class="color-value"><span>Channels</span><strong>24-bit</strong></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CALCULATION -->
+    <section class="practical-section compact-grid">
+        <div class="calculation-card">
+            <div class="section-label">03 Â· RGB â†’ CMYK</div>
+            <h2>Digital Color Conversion</h2>
+            <div class="formula-line">C = 1 âˆ’ Râ€² &nbsp;&nbsp; M = 1 âˆ’ Gâ€² &nbsp;&nbsp; Y = 1 âˆ’ Bâ€²</div>
+            <div class="formula-line">K = min(C, M, Y)</div>
+            <div class="cmyk-values">
+                <div class="cmyk-chip"><b id="cValue">â€”</b><span>Cyan</span></div>
+                <div class="cmyk-chip"><b id="mValue">â€”</b><span>Magenta</span></div>
+                <div class="cmyk-chip"><b id="yValue">â€”</b><span>Yellow</span></div>
+                <div class="cmyk-chip"><b id="kValue">â€”</b><span>Key / Black</span></div>
+            </div>
+        </div>
+
+        <div class="concept-card">
+            <div class="section-label">CALCULATION</div>
+            <h2>RGB â†’ HEX</h2>
+            <div class="hex-calculation">
+                <div><span>R</span><strong id="calcR">80 â†’ 50</strong></div>
+                <div><span>G</span><strong id="calcG">150 â†’ 96</strong></div>
+                <div><span>B</span><strong id="calcB">220 â†’ DC</strong></div>
+            </div>
+            <div class="formula-line">Final HEX = #RRGGBB</div>
+        </div>
+    </section>
+
+    <!-- GRAYSCALE -->
+    <section class="practical-section">
+        <div class="section-heading">
+            <div>
+                <div class="section-label">04 Â· GRAYSCALE</div>
+                <h2>Color â†’ Intensity</h2>
+                <p>See how RGB information becomes one weighted intensity value.</p>
+            </div>
+        </div>
+
+        <div class="compact-grid">
+            <div class="concept-card">
+                <h3>Weighted intensity</h3>
+                <div class="formula-line">Gray â‰ˆ 0.299R + 0.587G + 0.114B</div>
+                <div class="calculation-result">
+                    <div><span>Grayscale Value</span><strong id="grayValue">â€”</strong></div>
+                    <div><span>Interpretation</span><strong id="grayText">â€”</strong></div>
+                </div>
+            </div>
+
+            <div class="concept-card">
+                <h3>Live grayscale preview</h3>
+                <div id="grayPreview" class="gray-preview"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COLOR DEPTH -->
+    <section class="practical-section">
+        <div class="section-heading">
+            <div>
+                <div class="section-label">05 Â· COLOR DEPTH</div>
+                <h2>How many colors?</h2>
+                <p>Color depth tells us how many bits are available to represent a pixel.</p>
+            </div>
+        </div>
+
+        <div class="depth-lab">
+            <div class="depth-card">
+                <h3>Calculate color count</h3>
+                <input id="bitsInput" type="number" min="1" max="32" value="8" aria-label="Color depth in bits">
+                <div class="formula-line">Number of colors = 2<sup>bits</sup></div>
+                <div class="depth-result" id="depthResult">256 colors</div>
+            </div>
+
+            <div class="depth-card">
+                <h3>Examples</h3>
+                <div class="concept-points">
+                    <div><b>1-bit</b><span>2 colors</span></div>
+                    <div><b>8-bit</b><span>256 colors</span></div>
+                    <div><b>16-bit</b><span>65,536 colors</span></div>
+                    <div><b>24-bit</b><span>16,777,216 colors</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="swatch-row" id="swatches"></div>
+    </section>
+
+    <!-- RGB VS CMYK -->
+    <section class="practical-section">
+        <div class="section-heading">
+            <div>
+                <div class="section-label">06 Â· CONCEPT CHECK</div>
+                <h2>RGB vs CMYK</h2>
+            </div>
+        </div>
+
+        <div class="concept-card">
+            <table class="color-table">
+                <thead><tr><th>Feature</th><th>RGB</th><th>CMYK</th></tr></thead>
+                <tbody>
+                    <tr><td>Type</td><td>Additive color model</td><td>Subtractive color model</td></tr>
+                    <tr><td>Channels</td><td>Red, Green, Blue</td><td>Cyan, Magenta, Yellow, Key</td></tr>
+                    <tr><td>Typical use</td><td>Displays and digital screens</td><td>Printing</td></tr>
+                    <tr><td>Representation</td><td>Light intensity</td><td>Ink / toner absorption</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- REAL LIFE PROBLEMS -->
+    <section class="practical-section">
+        <div class="section-heading">
+            <div>
+                <div class="section-label">07 Â· REAL-LIFE CHALLENGES</div>
+                <h2>Choose a problem</h2>
+                <p>Select a scenario to see the problem statement and answer, then verify it using the visualizer.</p>
+            </div>
+        </div>
+
+        <div class="scenario-grid" id="scenarioGrid">
+            <button class="scenario-card active" data-scenario="mobile">
+                <span class="scenario-number">P1</span><span class="scenario-icon">ðŸ“±</span>
+                <strong>Mobile App Color System</strong>
+                <small>RGB values â†’ consistent HEX color</small>
+            </button>
+
+            <button class="scenario-card" data-scenario="photo">
+                <span class="scenario-number">P2</span><span class="scenario-icon">ðŸŽ¨</span>
+                <strong>Digital Photo Color Correction</strong>
+                <small>Adjust RGB channels â†’ observe color</small>
+            </button>
+
+            <button class="scenario-card" data-scenario="printing">
+                <span class="scenario-number">P3</span><span class="scenario-icon">ðŸ–¨ï¸</span>
+                <strong>RGB to CMYK Printing</strong>
+                <small>RGB color â†’ approximate CMYK</small>
+            </button>
+
+            <button class="scenario-card" data-scenario="gray">
+                <span class="scenario-number">P4</span><span class="scenario-icon">ðŸ–¥ï¸</span>
+                <strong>Grayscale Image Converter</strong>
+                <small>RGB pixel â†’ weighted intensity</small>
+            </button>
+
+            <button class="scenario-card" data-scenario="game">
+                <span class="scenario-number">P5</span><span class="scenario-icon">ðŸŽ®</span>
+                <strong>Game Graphics &amp; Color Depth</strong>
+                <small>Bits â†’ possible colors</small>
+            </button>
+        </div>
+
+        <div class="problem-box">
+            <div class="problem-icon" id="problemIcon">ðŸ“±</div>
+            <div>
+                <div class="section-label">PROBLEM STATEMENT</div>
+                <h3 id="problemTitle">Mobile App Color System</h3>
+                <p id="problemText">A mobile application needs one consistent button color. Set R, G and B values from 0â€“255 and determine the final HEX representation.</p>
+
+                <div class="answer-box">
+                    <div class="section-label">ANSWER / SOLUTION</div>
+                    <p id="problemAnswer">Use the RGB sliders to select the required channel values. For example, RGB(255, 131, 245) becomes HEX <strong>#FF83F5</strong>. Each channel is 8-bit, so its value lies between 0 and 255.</p>
+                    <div class="answer-result" id="problemResult">Example: RGB(255, 131, 245) â†’ #FF83F5</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERIMENT -->
+    <section class="practical-section">
+        <div class="section-heading">
+            <div>
+                <div class="section-label">08 Â· OBSERVE</div>
+                <h2>Experiment with the visualizer</h2>
+            </div>
+        </div>
+
+        <div class="experiment-grid">
+            <div>01 <strong>Primary Color</strong><span>Set R=255, G=0, B=0 and observe pure red.</span></div>
+            <div>02 <strong>Equal Channels</strong><span>Set R=G=B and observe grayscale.</span></div>
+            <div>03 <strong>Color Mixing</strong><span>Increase two channels and observe additive mixing.</span></div>
+            <div>04 <strong>Color Depth</strong><span>Change bits from 1 to 24 and compare possible colors.</span></div>
+        </div>
+    </section>
+
+    <!-- VIVA -->
+    <section class="practical-section viva-section">
+        <div class="section-label">09 Â· VIVA QUICK CHECK</div>
+        <h2>Can you explain it?</h2>
+
+        <div class="viva-grid">
+            <details><summary>What does RGB stand for?</summary><p>Red, Green and Blue. It is an additive color model commonly used for digital displays.</p></details>
+            <details><summary>What is the range of an 8-bit RGB channel?</summary><p>Each channel ranges from 0 to 255.</p></details>
+            <details><summary>How many colors can 24-bit RGB represent?</summary><p>2Â²â´ = 16,777,216 possible color combinations.</p></details>
+            <details><summary>Where is CMYK commonly used?</summary><p>CMYK is primarily used for color printing.</p></details>
+            <details><summary>What is color depth?</summary><p>The number of bits used to represent the color information of a pixel.</p></details>
+            <details><summary>What is grayscale?</summary><p>A representation using intensity values from black through gray to white rather than separate color channels.</p></details>
+        </div>
+    </section>
+
+    <nav class="practical-next">
+        <a href="practical01.html">â† Previous<br><strong>Pixel, Resolution &amp; Coordinate System</strong></a>
+        <div><span>COMPUTER GRAPHICS</span><strong>PRACTICAL 02 / 21</strong></div>
+        <a href="practical03.html">Next â†’<br><strong>Basic Shapes &amp; Primitives</strong></a>
+    </nav>
+
+</main>
+
+<footer class="footer">
+    <div class="footer-main">
+        <div class="footer-brand">
+            <div class="logo"><span class="logo-mark">&lt;/&gt;</span><span>Rasika<span class="logo-highlight">CodeLab</span></span></div>
+            <p>Interactive Computer Graphics practical learning through concepts, calculations and visualization.</p>
+        </div>
+        <div class="footer-links">
+            <div><h4>Learn</h4><a href="../cgr_foundations.html">Foundations</a></div>
+            <div><h4>Practice</h4><a href="../cgr_practicals.html">Practicals</a><a href="../../../about.html">About</a></div>
+        </div>
+    </div>
+    <div class="footer-bottom"><span>Â© 2026 Rasika CodeLab</span><span>Built for practical learning.</span></div>
+</footer>
+
+<script>
+const red = document.getElementById("red");
+const green = document.getElementById("green");
+const blue = document.getElementById("blue");
+let activeChannel = "r";
+let buildTimer = null;
+
+const clamp = n => Math.max(0, Math.min(255, Number(n)));
+const hex = n => n.toString(16).padStart(2, "0").toUpperCase();
+
+function grayValue(r, g, b) {
+    return Math.round(0.299 * r + 0.587 * g + 0.114 * b);
+}
+
+function rgbToCmyk(r, g, b) {
+    const R = r / 255, G = g / 255, B = b / 255;
+    const k = 1 - Math.max(R, G, B);
+    if (k >= 0.999999) return {c: 0, m: 0, y: 0, k: 100};
+
+    return {
+        c: Math.round(((1 - R - k) / (1 - k)) * 100),
+        m: Math.round(((1 - G - k) / (1 - k)) * 100),
+        y: Math.round(((1 - B - k) / (1 - k)) * 100),
+        k: Math.round(k * 100)
+    };
+}
+
+function updateColor() {
+    const r = clamp(red.value), g = clamp(green.value), b = clamp(blue.value);
+    const color = `rgb(${r}, ${g}, ${b})`;
+    const hexColor = `#${hex(r)}${hex(g)}${hex(b)}`;
+
+    document.getElementById("rOut").textContent = r;
+    document.getElementById("gOut").textContent = g;
+    document.getElementById("bOut").textContent = b;
+
+    document.getElementById("rBox").textContent = r;
+    document.getElementById("gBox").textContent = g;
+    document.getElementById("bBox").textContent = b;
+
+    document.getElementById("colorPreview").style.background = color;
+    document.getElementById("grayPreview").style.background = `rgb(${grayValue(r,g,b)},${grayValue(r,g,b)},${grayValue(r,g,b)})`;
+
+    document.getElementById("rgbValue").textContent = color;
+    document.getElementById("hexValue").textContent = hexColor;
+    document.getElementById("previewHex").textContent = hexColor;
+    document.getElementById("channelStatus").textContent = `R ${r} Â· G ${g} Â· B ${b}`;
+    document.getElementById("heroRgb").textContent = `${r}, ${g}, ${b}`;
+    document.getElementById("viewerRgb").textContent = `${r}, ${g}, ${b}`;
+    document.getElementById("viewerHex").textContent = hexColor;
+
+    document.getElementById("visualR").textContent = r;
+    document.getElementById("visualG").textContent = g;
+    document.getElementById("visualB").textContent = b;
+    document.getElementById("visualReadoutR").textContent = r;
+    document.getElementById("visualReadoutG").textContent = g;
+    document.getElementById("visualReadoutB").textContent = b;
+    document.getElementById("visualReadoutHex").textContent = hexColor;
+
+    document.getElementById("rgbMixCore").style.background = color;
+    document.getElementById("rgbMixCore").style.boxShadow =
+        `0 0 25px ${color}, 0 0 70px ${color}`;
+
+    document.getElementById("rgbLightScene").style.setProperty("--r-alpha", Math.max(.18, r / 255));
+    document.getElementById("rgbLightScene").style.setProperty("--g-alpha", Math.max(.18, g / 255));
+    document.getElementById("rgbLightScene").style.setProperty("--b-alpha", Math.max(.18, b / 255));
+
+    document.getElementById("buildR").style.width = `${(r / 255) * 100}%`;
+    document.getElementById("buildG").style.width = `${(g / 255) * 100}%`;
+    document.getElementById("buildB").style.width = `${(b / 255) * 100}%`;
+
+    document.getElementById("buildRValue").textContent = r;
+    document.getElementById("buildGValue").textContent = g;
+    document.getElementById("buildBValue").textContent = b;
+
+    document.getElementById("sequenceR").textContent = `R ${r}`;
+    document.getElementById("sequenceG").textContent = `G ${g}`;
+    document.getElementById("sequenceB").textContent = `B ${b}`;
+    document.getElementById("sequenceFinal").textContent = hexColor;
+    document.getElementById("sequenceFinalColor").style.background = color;
+
+    const dominant = activeChannel === "r" ? r : activeChannel === "g" ? g : b;
+    document.getElementById("hexCurrentValue").textContent = hex(dominant);
+    document.getElementById("hexGradient").style.setProperty("--hex-position", `${(dominant / 255) * 100}%`);
+
+    const brightness = Math.round((r + g + b) / 3);
+    document.getElementById("brightnessValue").textContent =
+        brightness < 85 ? "Dark" : brightness < 170 ? "Medium" : "Bright";
+
+    const gray = grayValue(r, g, b);
+    document.getElementById("grayValue").textContent = gray;
+    document.getElementById("grayText").textContent =
+        gray < 85 ? "Dark intensity" : gray < 170 ? "Medium intensity" : "Light intensity";
+
+    const cmyk = rgbToCmyk(r, g, b);
+    document.getElementById("cValue").textContent = `${cmyk.c}%`;
+    document.getElementById("mValue").textContent = `${cmyk.m}%`;
+    document.getElementById("yValue").textContent = `${cmyk.y}%`;
+    document.getElementById("kValue").textContent = `${cmyk.k}%`;
+
+    document.getElementById("calcR").textContent = `${r} â†’ ${hex(r)}`;
+    document.getElementById("calcG").textContent = `${g} â†’ ${hex(g)}`;
+    document.getElementById("calcB").textContent = `${b} â†’ ${hex(b)}`;
+}
+
+red.addEventListener("input", () => { activeChannel = "r"; updateColor(); });
+green.addEventListener("input", () => { activeChannel = "g"; updateColor(); });
+blue.addEventListener("input", () => { activeChannel = "b"; updateColor(); });
+
+document.getElementById("randomColor").addEventListener("click", () => {
+    red.value = Math.floor(Math.random() * 256);
+    green.value = Math.floor(Math.random() * 256);
+    blue.value = Math.floor(Math.random() * 256);
+    activeChannel = "r";
+    updateColor();
+});
+
+document.getElementById("resetColor").addEventListener("click", () => {
+    red.value = 80;
+    green.value = 150;
+    blue.value = 220;
+    activeChannel = "r";
+    updateColor();
+});
+
+document.getElementById("bitsInput").addEventListener("input", e => {
+    const bits = Math.max(1, Math.min(32, Number(e.target.value) || 1));
+    document.getElementById("depthResult").textContent =
+        `${Math.pow(2, bits).toLocaleString()} colors`;
+});
+
+const hexGradient = document.getElementById("hexGradient");
+
+function pickHexIntensity(event) {
+    const rect = hexGradient.getBoundingClientRect();
+    const x = Math.max(0, Math.min(rect.width, event.clientX - rect.left));
+    const value = Math.round((x / rect.width) * 255);
+
+    if (activeChannel === "r") red.value = value;
+    else if (activeChannel === "g") green.value = value;
+    else blue.value = value;
+
+    updateColor();
+}
+
+hexGradient.addEventListener("pointerdown", event => {
+    hexGradient.setPointerCapture(event.pointerId);
+    pickHexIntensity(event);
+});
+
+hexGradient.addEventListener("pointermove", event => {
+    if (event.buttons) pickHexIntensity(event);
+});
+
+document.getElementById("swatches").innerHTML = "";
+[0,32,64,96,128,160,192,224].forEach(v => {
+    const s = document.createElement("div");
+    s.className = "swatch";
+    s.style.background = `rgb(${v},${v},${v})`;
+    s.title = `Grayscale ${v}`;
+    document.getElementById("swatches").appendChild(s);
+});
+
+const scenarios = {
+    mobile: {
+        icon: "ðŸ“±",
+        title: "Mobile App Color System",
+        text: "A mobile application needs one consistent button color. Set R, G and B values from 0â€“255 and determine the final HEX representation.",
+        answer: "Use the RGB sliders to select the required channel values. For example, RGB(255, 131, 245) becomes HEX #FF83F5. Each channel is 8-bit, so its value lies between 0 and 255.",
+        result: "Example: RGB(255, 131, 245) â†’ #FF83F5"
+    },
+    photo: {
+        icon: "ðŸŽ¨",
+        title: "Digital Photo Color Correction",
+        text: "A photo editor needs to correct the color of a pixel. Adjust the individual RGB channels and observe how the final digital color changes.",
+        answer: "Increase R to add red, G to add green, and B to add blue. For example, RGB(80, 150, 220) gives #5096DC. The live preview shows the additive effect immediately.",
+        result: "RGB(80, 150, 220) â†’ #5096DC"
+    },
+    printing: {
+        icon: "ðŸ–¨ï¸",
+        title: "RGB to CMYK Printing",
+        text: "A digital artwork is prepared for printing. Convert its selected RGB color into approximate CMYK percentages.",
+        answer: "Normalize each RGB channel: Râ€²=R/255, Gâ€²=G/255 and Bâ€²=B/255. Then calculate C=1âˆ’Râ€², M=1âˆ’Gâ€², Y=1âˆ’Bâ€² and K=min(C,M,Y). The live CMYK panel gives the resulting percentages.",
+        result: "For RGB(80,150,220): approximately C=64%, M=32%, Y=0%, K=14%"
+    },
+    gray: {
+        icon: "ðŸ–¥ï¸",
+        title: "Grayscale Image Converter",
+        text: "Convert an RGB pixel into one grayscale intensity value using the weighted grayscale formula.",
+        answer: "Use Gray â‰ˆ 0.299R + 0.587G + 0.114B. For RGB(255,0,0), Gray â‰ˆ 76. The grayscale preview displays that intensity as an equal R, G and B value.",
+        result: "RGB(255,0,0) â†’ Gray â‰ˆ 76"
+    },
+    game: {
+        icon: "ðŸŽ®",
+        title: "Game Graphics & Color Depth",
+        text: "A game designer wants to compare different color depths and calculate how many colors a pixel can represent.",
+        answer: "Use Number of colors = 2^bits. Therefore 1-bit = 2 colors, 8-bit = 256 colors, 16-bit = 65,536 colors and 24-bit = 16,777,216 colors.",
+        result: "24-bit â†’ 2Â²â´ = 16,777,216 colors"
+    }
+};
+
+document.querySelectorAll(".scenario-card").forEach(card => {
+    card.addEventListener("click", () => {
+        document.querySelectorAll(".scenario-card").forEach(c => c.classList.remove("active"));
+        card.classList.add("active");
+
+        const s = scenarios[card.dataset.scenario];
+        document.getElementById("problemIcon").textContent = s.icon;
+        document.getElementById("problemTitle").textContent = s.title;
+        document.getElementById("problemText").textContent = s.text;
+        document.getElementById("problemAnswer").textContent = s.answer;
+        document.getElementById("problemResult").textContent = s.result;
+
+        document.querySelector(".problem-box").scrollIntoView({
+            behavior: "smooth",
+            block: "nearest"
+        });
+    });
+});
+
+function playRgbBuildUp() {
+    if (buildTimer) clearInterval(buildTimer);
+
+    const targetR = clamp(red.value);
+    const targetG = clamp(green.value);
+    const targetB = clamp(blue.value);
+    const steps = 30;
+    let step = 0;
+
+    document.getElementById("rgbLightScene").classList.add("rgb-build-running");
+
+    buildTimer = setInterval(() => {
+        step++;
+
+        if (step <= steps) {
+            red.value = Math.round(targetR * step / steps);
+            green.value = 0;
+            blue.value = 0;
+            activeChannel = "r";
+            document.getElementById("rgbVisualLabel").textContent = "ADDING RED";
+        } else if (step <= steps * 2) {
+            red.value = targetR;
+            green.value = Math.round(targetG * (step - steps) / steps);
+            blue.value = 0;
+            activeChannel = "g";
+            document.getElementById("rgbVisualLabel").textContent = "ADDING GREEN";
+        } else if (step <= steps * 3) {
+            red.value = targetR;
+            green.value = targetG;
+            blue.value = Math.round(targetB * (step - steps * 2) / steps);
+            activeChannel = "b";
+            document.getElementById("rgbVisualLabel").textContent = "ADDING BLUE";
+        } else {
+            red.value = targetR;
+            green.value = targetG;
+            blue.value = targetB;
+            activeChannel = "r";
+            document.getElementById("rgbVisualLabel").textContent = "FINAL COLOR";
+            clearInterval(buildTimer);
+            buildTimer = null;
+            document.getElementById("rgbLightScene").classList.remove("rgb-build-running");
+        }
+
+        updateColor();
+    }, 35);
+}
+
+document.getElementById("playRgbBuild").addEventListener("click", playRgbBuildUp);
+
+updateColor();
+</script>
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

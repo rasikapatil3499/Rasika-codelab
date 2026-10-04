@@ -1,0 +1,1194 @@
+/* =========================================================
+   RASIKA CODELAB
+   PYTHON 2030 — COMPLETE SUBJECT CSS
+
+   File:
+   subjects/python/css/python.css
+
+   Includes:
+   ✓ Dark Theme
+   ✓ Light Theme
+   ✓ Header / Navbar
+   ✓ Logo
+   ✓ Navigation
+   ✓ Theme Toggle
+   ✓ Python Hero
+   ✓ Foundation Cards
+   ✓ Footer
+   ✓ Responsive Design
+   ========================================================= */
+
+
+/* =========================================================
+   01. ROOT THEME VARIABLES
+   ========================================================= */
+
+:root {
+
+    /* ---------- Background ---------- */
+
+    --python-bg: #0b0f14;
+    --python-bg-secondary: #0f141b;
+
+    /* ---------- Cards / Surfaces ---------- */
+
+    --python-surface: #111820;
+    --python-surface-2: #151d26;
+    --python-surface-hover: #18222d;
+
+    /* ---------- Borders ---------- */
+
+    --python-border: #26313d;
+    --python-border-hover: #3a4654;
+
+    /* ---------- Text ---------- */
+
+    --python-text: #f3f4f6;
+    --python-text-secondary: #a1aab5;
+    --python-text-soft: #737d89;
+
+    /* ---------- Accent ---------- */
+
+    --python-accent: #f97316;
+    --python-accent-hover: #fb923c;
+
+    --python-accent-soft: rgba(249, 115, 22, 0.12);
+    --python-accent-border: rgba(249, 115, 22, 0.35);
+
+    /* ---------- Shadows ---------- */
+
+    --python-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.22);
+
+    --python-shadow-hover:
+        0 16px 40px rgba(0, 0, 0, 0.30);
+
+    /* ---------- Radius ---------- */
+
+    --python-radius-sm: 8px;
+    --python-radius-md: 12px;
+    --python-radius-lg: 16px;
+
+}
+
+
+/* =========================================================
+   02. LIGHT THEME
+   ========================================================= */
+
+body.light-theme {
+
+    --python-bg: #ffffff;
+    --python-bg-secondary: #f8fafc;
+
+    --python-surface: #ffffff;
+    --python-surface-2: #f8fafc;
+    --python-surface-hover: #fff7ed;
+
+    --python-border: #e5e7eb;
+    --python-border-hover: #d1d5db;
+
+    --python-text: #111827;
+    --python-text-secondary: #6b7280;
+    --python-text-soft: #9ca3af;
+
+    --python-accent: #ea580c;
+    --python-accent-hover: #f97316;
+
+    --python-accent-soft: #fff7ed;
+    --python-accent-border: #fed7aa;
+
+    --python-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.06);
+
+    --python-shadow-hover:
+        0 14px 35px rgba(0, 0, 0, 0.09);
+}
+
+
+/* =========================================================
+   03. RESET
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    background: var(--python-bg);
+    color: var(--python-text);
+
+    transition:
+        background-color 0.25s ease,
+        color 0.25s ease;
+}
+
+a {
+    color: inherit;
+}
+
+button {
+    font-family: inherit;
+}
+
+
+/* =========================================================
+   04. HEADER
+   ========================================================= */
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    width: 100%;
+
+    background:
+        color-mix(
+            in srgb,
+            var(--python-bg) 88%,
+            transparent
+        );
+
+    border-bottom:
+        1px solid var(--python-border);
+
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease;
+}
+
+
+/* =========================================================
+   05. HEADER INNER
+   ========================================================= */
+
+.header-inner {
+    width: min(1100px, calc(100% - 48px));
+
+    min-height: 68px;
+
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 30px;
+}
+
+
+/* =========================================================
+   06. LOGO
+   ========================================================= */
+
+.logo {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 9px;
+
+    flex-shrink: 0;
+
+    text-decoration: none;
+
+    font-size: 1.04rem;
+    font-weight: 800;
+
+    letter-spacing: -0.02em;
+
+    color: var(--python-text);
+
+    transition: opacity 0.2s ease;
+}
+
+.logo:hover {
+    opacity: 0.9;
+}
+
+
+/* =========================================================
+   07. LOGO MARK
+   ========================================================= */
+
+.logo-mark {
+    width: 34px;
+    height: 34px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: var(--python-accent);
+
+    color: #ffffff;
+
+    font-family:
+        "SFMono-Regular",
+        Consolas,
+        monospace;
+
+    font-size: 0.76rem;
+    font-weight: 800;
+
+    box-shadow:
+        0 4px 12px rgba(249, 115, 22, 0.20);
+}
+
+
+/* =========================================================
+   08. LOGO HIGHLIGHT
+   ========================================================= */
+
+.logo-highlight {
+    color: var(--python-accent);
+}
+
+
+/* =========================================================
+   09. NAVIGATION
+   ========================================================= */
+
+.nav {
+    display: flex;
+    align-items: center;
+
+    gap: 4px;
+}
+
+.nav a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 36px;
+
+    padding: 7px 11px;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    font-size: 0.81rem;
+    font-weight: 600;
+
+    color: var(--python-text-secondary);
+
+    transition:
+        color 0.2s ease,
+        background 0.2s ease;
+}
+
+.nav a:hover {
+    color: var(--python-accent);
+
+    background: var(--python-accent-soft);
+}
+
+.nav a.active {
+    color: var(--python-accent);
+
+    background: var(--python-accent-soft);
+}
+
+
+/* =========================================================
+   10. NAVIGATION FOCUS
+   ========================================================= */
+
+.nav a:focus-visible {
+    outline: 2px solid var(--python-accent);
+
+    outline-offset: 2px;
+}
+
+
+/* =========================================================
+   11. THEME TOGGLE
+   ========================================================= */
+
+.theme-toggle {
+    width: 36px;
+    height: 36px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border:
+        1px solid var(--python-border);
+
+    border-radius: 9px;
+
+    background: var(--python-surface);
+
+    color: var(--python-text);
+
+    font-size: 0.95rem;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.theme-toggle:hover {
+    border-color: var(--python-accent);
+
+    background: var(--python-accent-soft);
+
+    color: var(--python-accent);
+
+    transform: translateY(-1px);
+}
+
+.theme-toggle:focus-visible {
+    outline: 2px solid var(--python-accent);
+
+    outline-offset: 2px;
+}
+
+
+/* =========================================================
+   12. PYTHON PAGE
+   ========================================================= */
+
+.python-page {
+    width: 100%;
+
+    min-height: 70vh;
+
+    background: var(--python-bg);
+}
+
+
+/* =========================================================
+   13. PYTHON HERO
+   ========================================================= */
+
+.python-hero {
+    width: min(1100px, calc(100% - 48px));
+
+    margin: 0 auto;
+
+    padding: 65px 0 42px;
+}
+
+.python-hero.compact {
+    padding-top: 48px;
+    padding-bottom: 32px;
+}
+
+
+/* =========================================================
+   14. SUBJECT LABEL
+   ========================================================= */
+
+.subject-label {
+    display: inline-block;
+
+    margin-bottom: 11px;
+
+    font-size: 0.71rem;
+    font-weight: 800;
+
+    letter-spacing: 0.13em;
+
+    color: var(--python-accent);
+}
+
+
+/* =========================================================
+   15. HERO TITLE
+   ========================================================= */
+
+.python-hero h1 {
+    margin: 0;
+
+    font-size:
+        clamp(2.2rem, 5vw, 3.4rem);
+
+    line-height: 1.08;
+
+    letter-spacing: -0.045em;
+
+    color: var(--python-text);
+}
+
+
+/* =========================================================
+   16. HERO DESCRIPTION
+   ========================================================= */
+
+.python-hero p {
+    max-width: 680px;
+
+    margin: 14px 0 0;
+
+    font-size: 0.96rem;
+
+    line-height: 1.7;
+
+    color: var(--python-text-secondary);
+}
+
+
+/* =========================================================
+   17. LEARNING PATH
+   ========================================================= */
+
+.learning-path {
+    width: min(1100px, calc(100% - 48px));
+
+    margin: 0 auto;
+
+    padding: 10px 0 70px;
+}
+
+
+/* =========================================================
+   18. SECTION HEADING
+   ========================================================= */
+
+.section-heading {
+    margin-bottom: 22px;
+}
+
+.section-heading > span {
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-size: 0.69rem;
+    font-weight: 800;
+
+    letter-spacing: 0.11em;
+
+    color: var(--python-accent);
+}
+
+.section-heading h2 {
+    margin: 0;
+
+    font-size:
+        clamp(1.35rem, 3vw, 1.9rem);
+
+    line-height: 1.25;
+
+    letter-spacing: -0.025em;
+
+    color: var(--python-text);
+}
+
+
+/* =========================================================
+   19. FOUNDATION GRID
+   ========================================================= */
+
+.python-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 16px;
+}
+
+
+/* =========================================================
+   20. FOUNDATION CARD
+   ========================================================= */
+
+.python-card {
+    position: relative;
+
+    min-height: 118px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 19px;
+
+    border:
+        1px solid var(--python-border);
+
+    border-radius: var(--python-radius-lg);
+
+    background: var(--python-surface);
+
+    text-decoration: none;
+
+    color: var(--python-text);
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.python-card:hover {
+    transform: translateY(-3px);
+
+    border-color: var(--python-accent-border);
+
+    background: var(--python-surface-hover);
+
+    box-shadow: var(--python-shadow-hover);
+}
+
+
+/* =========================================================
+   21. CARD NUMBER
+   ========================================================= */
+
+.card-number {
+    flex: 0 0 44px;
+
+    width: 44px;
+    height: 44px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 12px;
+
+    background: var(--python-accent-soft);
+
+    color: var(--python-accent);
+
+    font-size: 0.76rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0.03em;
+}
+
+
+/* =========================================================
+   22. CARD CONTENT
+   ========================================================= */
+
+.python-card > div {
+    flex: 1;
+
+    min-width: 0;
+}
+
+.python-card h3 {
+    margin: 0;
+
+    font-size: 0.98rem;
+
+    line-height: 1.35;
+
+    font-weight: 750;
+
+    letter-spacing: -0.01em;
+
+    color: var(--python-text);
+}
+
+.python-card p {
+    margin: 7px 0 0;
+
+    font-size: 0.81rem;
+
+    line-height: 1.55;
+
+    color: var(--python-text-secondary);
+}
+
+
+/* =========================================================
+   23. CARD ARROW
+   ========================================================= */
+
+.card-arrow {
+    flex: 0 0 auto;
+
+    width: 32px;
+    height: 32px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+
+    color: var(--python-text-soft);
+
+    font-size: 1rem;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+.python-card:hover .card-arrow {
+    transform: translateX(4px);
+
+    color: var(--python-accent);
+
+    background: var(--python-accent-soft);
+}
+
+
+/* =========================================================
+   24. CARD FOCUS
+   ========================================================= */
+
+.python-card:focus-visible {
+    outline: 2px solid var(--python-accent);
+
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   25. PYTHON AREAS
+   ========================================================= */
+
+.python-areas {
+    width: min(1100px, calc(100% - 48px));
+
+    margin: 0 auto;
+
+    padding: 0 0 70px;
+}
+
+.area-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 14px;
+}
+
+.area-card {
+    padding: 18px;
+
+    border:
+        1px solid var(--python-border);
+
+    border-radius: var(--python-radius-md);
+
+    background: var(--python-surface);
+
+    transition:
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.area-card:hover {
+    transform: translateY(-2px);
+
+    border-color: var(--python-border-hover);
+}
+
+.area-card h3 {
+    margin: 0 0 6px;
+
+    font-size: 0.94rem;
+
+    color: var(--python-text);
+}
+
+.area-card p {
+    margin: 0;
+
+    font-size: 0.81rem;
+
+    line-height: 1.55;
+
+    color: var(--python-text-secondary);
+}
+
+
+/* =========================================================
+   26. FOOTER
+   ========================================================= */
+
+.footer {
+    width: 100%;
+
+    margin-top: 30px;
+
+    border-top:
+        1px solid var(--python-border);
+
+    background: var(--python-surface);
+
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease;
+}
+
+
+/* =========================================================
+   27. FOOTER MAIN
+   ========================================================= */
+
+.footer-main {
+    width: min(1100px, calc(100% - 48px));
+
+    margin: 0 auto;
+
+    padding: 42px 0 30px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 50px;
+}
+
+
+/* =========================================================
+   28. FOOTER BRAND
+   ========================================================= */
+
+.footer-brand {
+    max-width: 380px;
+}
+
+.footer-brand .logo {
+    margin-bottom: 12px;
+}
+
+.footer-brand p {
+    margin: 0;
+
+    font-size: 0.81rem;
+
+    line-height: 1.65;
+
+    color: var(--python-text-secondary);
+}
+
+
+/* =========================================================
+   29. FOOTER LINKS
+   ========================================================= */
+
+.footer-links {
+    display: flex;
+
+    gap: 70px;
+}
+
+.footer-links > div {
+    min-width: 120px;
+}
+
+.footer-links h4 {
+    margin: 0 0 12px;
+
+    font-size: 0.79rem;
+
+    font-weight: 800;
+
+    color: var(--python-text);
+}
+
+.footer-links a {
+    display: block;
+
+    width: fit-content;
+
+    margin-bottom: 8px;
+
+    text-decoration: none;
+
+    font-size: 0.77rem;
+
+    color: var(--python-text-secondary);
+
+    transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+    color: var(--python-accent);
+}
+
+
+/* =========================================================
+   30. FOOTER BOTTOM
+   ========================================================= */
+
+.footer-bottom {
+    width: min(1100px, calc(100% - 48px));
+
+    margin: 0 auto;
+
+    padding: 16px 0;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    border-top:
+        1px solid var(--python-border);
+
+    font-size: 0.71rem;
+
+    color: var(--python-text-soft);
+}
+
+
+/* =========================================================
+   31. SELECTION
+   ========================================================= */
+
+::selection {
+    background: var(--python-accent);
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   32. SCROLLBAR — DARK
+   ========================================================= */
+
+::-webkit-scrollbar {
+    width: 9px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--python-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #303a45;
+
+    border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--python-accent);
+}
+
+
+/* =========================================================
+   33. LIGHT THEME SCROLLBAR
+   ========================================================= */
+
+body.light-theme::-webkit-scrollbar-track {
+    background: #f8fafc;
+}
+
+body.light-theme::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+}
+
+body.light-theme::-webkit-scrollbar-thumb:hover {
+    background: var(--python-accent);
+}
+
+
+/* =========================================================
+   34. TABLET
+   ========================================================= */
+
+@media (max-width: 850px) {
+
+    .header-inner {
+        width:
+            min(100% - 32px, 1100px);
+
+        gap: 15px;
+    }
+
+    .nav {
+        gap: 2px;
+    }
+
+    .nav a {
+        padding: 7px 8px;
+
+        font-size: 0.77rem;
+    }
+
+    .python-hero,
+    .learning-path,
+    .python-areas,
+    .footer-main,
+    .footer-bottom {
+        width:
+            min(100% - 36px, 1100px);
+    }
+
+    .python-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .area-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-main {
+        gap: 30px;
+    }
+
+    .footer-links {
+        gap: 40px;
+    }
+}
+
+
+/* =========================================================
+   35. MOBILE
+   ========================================================= */
+
+@media (max-width: 650px) {
+
+    .header {
+        position: relative;
+    }
+
+    .header-inner {
+        width: calc(100% - 28px);
+
+        min-height: auto;
+
+        padding: 13px 0;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 12px;
+    }
+
+
+    /* ---------- Mobile Navigation ---------- */
+
+    .nav {
+        width: 100%;
+
+        display: flex;
+
+        overflow-x: auto;
+
+        padding-bottom: 2px;
+
+        scrollbar-width: none;
+    }
+
+    .nav::-webkit-scrollbar {
+        display: none;
+    }
+
+    .nav a {
+        flex: 0 0 auto;
+
+        min-height: 34px;
+
+        padding: 6px 9px;
+
+        font-size: 0.75rem;
+    }
+
+    .theme-toggle {
+        flex: 0 0 auto;
+    }
+
+
+    /* ---------- Hero ---------- */
+
+    .python-hero {
+        width: calc(100% - 36px);
+
+        padding: 35px 0 27px;
+    }
+
+    .python-hero.compact {
+        padding-top: 32px;
+
+        padding-bottom: 25px;
+    }
+
+    .python-hero h1 {
+        font-size: 2.25rem;
+    }
+
+    .python-hero p {
+        font-size: 0.87rem;
+    }
+
+
+    /* ---------- Learning Path ---------- */
+
+    .learning-path {
+        width: calc(100% - 36px);
+
+        padding-bottom: 50px;
+    }
+
+
+    /* ---------- Cards ---------- */
+
+    .python-grid {
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+    }
+
+    .python-card {
+        min-height: 105px;
+
+        padding: 15px;
+    }
+
+    .card-number {
+        flex-basis: 40px;
+
+        width: 40px;
+        height: 40px;
+    }
+
+    .python-card h3 {
+        font-size: 0.92rem;
+    }
+
+    .python-card p {
+        font-size: 0.78rem;
+    }
+
+    .card-arrow {
+        width: 29px;
+        height: 29px;
+    }
+
+
+    /* ---------- Footer ---------- */
+
+    .footer-main {
+        width: calc(100% - 36px);
+
+        padding: 35px 0 25px;
+
+        flex-direction: column;
+
+        gap: 28px;
+    }
+
+    .footer-links {
+        gap: 45px;
+    }
+
+    .footer-bottom {
+        width: calc(100% - 36px);
+
+        flex-direction: column;
+
+        gap: 5px;
+    }
+}
+
+
+/* =========================================================
+   36. SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+    .header-inner {
+        width: calc(100% - 24px);
+    }
+
+    .logo {
+        font-size: 0.96rem;
+    }
+
+    .logo-mark {
+        width: 31px;
+        height: 31px;
+    }
+
+    .nav a {
+        font-size: 0.71rem;
+    }
+
+    .theme-toggle {
+        width: 33px;
+        height: 33px;
+
+        font-size: 0.85rem;
+    }
+
+    .python-hero,
+    .learning-path,
+    .python-areas,
+    .footer-main,
+    .footer-bottom {
+        width: calc(100% - 28px);
+    }
+
+    .python-card {
+        gap: 10px;
+
+        padding: 14px;
+    }
+
+    .card-number {
+        flex-basis: 36px;
+
+        width: 36px;
+        height: 36px;
+
+        border-radius: 10px;
+    }
+
+    .python-card h3 {
+        font-size: 0.88rem;
+    }
+
+    .python-card p {
+        font-size: 0.75rem;
+    }
+
+    .card-arrow {
+        width: 27px;
+        height: 27px;
+    }
+
+    .footer-links {
+        width: 100%;
+
+        justify-content: space-between;
+
+        gap: 20px;
+    }
+}

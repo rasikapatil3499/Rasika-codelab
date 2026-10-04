@@ -1,0 +1,225 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02 â€” How Does DBMS Store Data? | DBMS Foundation</title>
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../css/dbms_foundation.css">
+</head>
+
+<body class="protected-page">
+<header class="navbar">
+    <div class="nav-container">
+
+        <a href="../../../index.html" class="logo">
+            <span class="logo-mark">&lt;/&gt;</span>
+            <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="../../../index.html">Home</a>
+            <a href="../../../subjects.html" class="active">Subjects</a>
+            <a href="../foundations.html">Foundations</a>
+            <a href="../../../about.html">About</a>
+            <a href="../../../login.html">Login</a>
+        </nav>
+
+        <button class="menu-btn" aria-label="Open menu">â˜°</button>
+
+    </div>
+</header>
+
+
+
+<main class="lesson-page">
+
+    <section class="lesson-hero">
+
+        <span class="lesson-number">FOUNDATION 02</span>
+
+        <h1>How Does DBMS <span>Store Data?</span></h1>
+
+        <p>
+            Discover how a DBMS transforms tables and rows into
+            pages that can be stored efficiently on disk.
+        </p>
+
+    </section>
+
+
+    <section class="lesson-grid">
+
+        <article class="info-card">
+
+            <span class="card-label">WHAT STUDENT LEARNS</span>
+
+            <h2>Database â†’ Table â†’ Row â†’ Page</h2>
+
+            <p>
+                Understand the physical organization of database
+                information and how records eventually reach storage.
+            </p>
+
+            <div class="concept-list">
+                <span>Database</span>
+                <span>Table</span>
+                <span>Row</span>
+                <span>Page</span>
+                <span>Storage</span>
+            </div>
+
+        </article>
+
+
+        <article class="output-card">
+
+            <span class="card-label">PRACTICAL OUTPUT</span>
+
+            <h2>Insert & Visualize Records</h2>
+
+            <p>
+                Add records and observe how the DBMS groups rows
+                into storage pages.
+            </p>
+
+            <button class="primary-btn" onclick="addRecord()">
+                + Insert Record
+            </button>
+
+        </article>
+
+    </section>
+
+
+    <section class="visual-section">
+
+        <div class="section-heading">
+
+            <span class="section-tag">VISUAL / INTERACTIVE</span>
+
+            <h2>Table â†’ Page Animation</h2>
+
+            <p>
+                Insert records and watch them move into database pages.
+            </p>
+
+        </div>
+
+
+        <div class="storage-demo">
+
+            <div class="table-area">
+
+                <div class="demo-title">TABLE: STUDENTS</div>
+
+                <div class="table-header">
+                    <span>ID</span>
+                    <span>NAME</span>
+                </div>
+
+                <div id="records"></div>
+
+            </div>
+
+
+            <div class="page-arrow">â†’</div>
+
+
+            <div class="page-area">
+
+                <div class="demo-title">DATABASE PAGE</div>
+
+                <div class="database-page" id="databasePage">
+                    <span class="empty-page">Empty Page</span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="flow-status" id="storeStatus">
+            No records inserted yet.
+        </div>
+
+    </section>
+
+
+    <section class="takeaway">
+
+        <span class="card-label">KEY IDEA</span>
+
+        <h2>A table is logical. A page is physical.</h2>
+
+        <p>
+            Users work with tables and rows, while the DBMS manages
+            how those records are organized into pages on storage.
+        </p>
+
+    </section>
+
+
+    <nav class="lesson-navigation">
+
+        <a href="foundation01.html" class="nav-btn">
+            â† Previous
+        </a>
+
+        <a href="foundation03.html" class="nav-btn next">
+            Next Foundation â†’
+        </a>
+
+    </nav>
+
+</main>
+
+
+<script>
+
+let recordNumber = 1;
+
+function addRecord() {
+
+    const records = document.getElementById("records");
+    const page = document.getElementById("databasePage");
+    const status = document.getElementById("storeStatus");
+
+    const row = document.createElement("div");
+
+    row.className = "data-row";
+
+    row.innerHTML = `
+        <span>${recordNumber}</span>
+        <span>Student ${recordNumber}</span>
+    `;
+
+    records.appendChild(row);
+
+
+    const pageRow = document.createElement("div");
+
+    pageRow.className = "page-row";
+
+    pageRow.innerHTML = `
+        <span>#${recordNumber}</span>
+        <span>Student ${recordNumber}</span>
+    `;
+
+    if (recordNumber === 1) {
+        page.innerHTML = "";
+    }
+
+    page.appendChild(pageRow);
+
+    status.innerHTML =
+        `âœ“ Record ${recordNumber} stored inside <strong>Database Page</strong>`;
+
+    recordNumber++;
+}
+
+</script>
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

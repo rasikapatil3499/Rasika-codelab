@@ -1,0 +1,440 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practical 01 | Pixel, Resolution & Coordinate System</title>
+    <meta name="description" content="Interactive Computer Graphics practical on pixels, resolution and coordinate systems.">
+    <link rel="stylesheet" href="../css/cgr_style.css">
+    <link rel="stylesheet" href="../css/cgr_practicals.css">
+<style>body.protected-page:not(.auth-ready){visibility:hidden}</style>
+</head>
+
+<body class="protected-page">
+<header class="navbar">
+    <div class="logo">
+        <span class="logo-mark">&lt;/&gt;</span>
+        <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+    </div>
+    <nav class="nav-links">
+        <a href="../cgr_index.html">Home</a>
+        <a href="../cgr_foundations.html">Foundations</a>
+                <a href="../cgr_practicals.html" class="active">Practicals</a>
+        <a href="../../../about.html">About</a>
+    </nav>
+    <button class="menu-btn" aria-label="Open Menu">â˜°</button>
+</header>
+
+<main class="cgr-practical-page">
+
+    <section class="cgr-practical-hero">
+        <div>
+            <div class="section-label">COMPUTER GRAPHICS Â· PRACTICAL 01</div>
+            <div class="practical-kicker">FOUNDATION PRACTICAL</div>
+            <h1>Pixel, Resolution <span>&amp; Coordinate System</span></h1>
+            <p>Understand pixels, resolution, screen coordinates and coordinate mapping through real-life problems and a live visual laboratory.</p>
+            <div class="practical-flow">
+                <span>Coordinate</span><b>â†’</b><span>Map</span><b>â†’</b><span>Pixel</span><b>â†’</b><span>Visualize</span>
+            </div>
+        </div>
+        <div class="cgr-hero-mini">
+            <div class="mini-screen">
+                <span class="mini-axis x"></span>
+                <span class="mini-axis y"></span>
+                <span class="mini-point"></span>
+                <span class="mini-label">P(x,y)</span>
+            </div>
+            <div class="mini-readout">
+                <span>LIVE COORDINATE</span>
+                <strong id="heroCoord">(320, 180)</strong>
+            </div>
+        </div>
+    </section>
+
+    <section class="practical-section">
+        <div class="section-heading">
+            <div>
+                <div class="section-label">REAL-LIFE CHALLENGES</div>
+                <h2>Choose a problem</h2>
+                <p>The same graphics concept appears in different systems. Pick a scenario and experiment with it.</p>
+            </div>
+        </div>
+
+        <div class="scenario-grid" id="scenarioGrid">
+            <button class="scenario-card active" data-scenario="mobile">
+                <span class="scenario-number">P1</span><span class="scenario-icon">ðŸ“±</span>
+                <strong>Mobile Screen Touch Detection</strong>
+                <small>Touch coordinate â†’ screen pixel</small>
+            </button>
+            <button class="scenario-card" data-scenario="game">
+                <span class="scenario-number">P2</span><span class="scenario-icon">ðŸŽ®</span>
+                <strong>Game Character Position</strong>
+                <small>Character coordinate â†’ screen position</small>
+            </button>
+            <button class="scenario-card" data-scenario="traffic">
+                <span class="scenario-number">P3</span><span class="scenario-icon">ðŸš¦</span>
+                <strong>Traffic Monitoring System</strong>
+                <small>Vehicle position â†’ image pixel</small>
+            </button>
+            <button class="scenario-card" data-scenario="satellite">
+                <span class="scenario-number">P4</span><span class="scenario-icon">ðŸ›°ï¸</span>
+                <strong>Satellite Image</strong>
+                <small>Normalized point â†’ image pixel</small>
+            </button>
+            <button class="scenario-card" data-scenario="desktop">
+                <span class="scenario-number">P5</span><span class="scenario-icon">ðŸ–¥ï¸</span>
+                <strong>Desktop Coordinate Mapping</strong>
+                <small>Mouse position â†’ screen pixel</small>
+            </button>
+        </div>
+
+        <div class="problem-box">
+            <div class="problem-icon" id="problemIcon">ðŸ“±</div>
+            <div>
+                <div class="section-label">PROBLEM STATEMENT</div>
+                <h3 id="problemTitle">Mobile Screen Touch Detection</h3>
+                <p id="problemText">A mobile application needs to identify the exact location where a user touches the screen. Given the screen resolution and touch coordinates, determine the corresponding pixel position and highlight it visually.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="practical-section">
+        <div class="section-heading">
+            <div>
+                <div class="section-label">LIVE INTERACTIVE LAB</div>
+                <h2>Coordinate â†’ Pixel</h2>
+                <p>Move your mouse over the canvas, click to place a point, or change the coordinates. Everything updates instantly.</p>
+            </div>
+            <button class="lab-reset" id="resetLab">Reset Lab</button>
+        </div>
+
+        <div class="live-lab">
+            <aside class="lab-controls">
+                <div class="control-group">
+                    <label>Canvas Resolution</label>
+                    <div class="two-inputs">
+                        <input id="canvasW" type="number" min="200" max="1600" value="800" aria-label="Canvas width">
+                        <span>Ã—</span>
+                        <input id="canvasH" type="number" min="150" max="1000" value="500" aria-label="Canvas height">
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label>Point Coordinate</label>
+                    <div class="two-inputs">
+                        <input id="pointX" type="number" min="0" value="320" aria-label="X coordinate">
+                        <span>,</span>
+                        <input id="pointY" type="number" min="0" value="180" aria-label="Y coordinate">
+                    </div>
+                </div>
+
+                <button class="draw-btn" id="plotPoint">Plot Point <span>â†’</span></button>
+
+                <div class="control-hint">
+                    <strong>Try it:</strong>
+                    <span>Click anywhere on the canvas or change X/Y values.</span>
+                </div>
+
+                <div class="lab-stats">
+                    <div><span>Resolution</span><strong id="readResolution">800 Ã— 500</strong></div>
+                    <div><span>Pixel</span><strong id="readPixel">(320, 180)</strong></div>
+                    <div><span>Normalized X</span><strong id="readNormX">0.400</strong></div>
+                    <div><span>Normalized Y</span><strong id="readNormY">0.360</strong></div>
+                </div>
+            </aside>
+
+            <div class="lab-stage">
+                <div class="canvas-toolbar">
+                    <span class="live-dot"></span>
+                    <strong>LIVE CANVAS</strong>
+                    <span id="mouseReadout">Move pointer over canvas</span>
+                </div>
+                <div class="graphics-canvas-wrap">
+                    <canvas id="coordinateCanvas" width="800" height="500"></canvas>
+                </div>
+                <div class="canvas-caption">
+                    <span>Origin: (0, 0)</span>
+                    <span>Y increases downward on screen</span>
+                    <span id="clickMessage">Click to place a point</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="practical-section compact-grid">
+        <div class="calculation-card">
+            <div class="section-label">LIVE CALCULATION</div>
+            <h2>What is happening?</h2>
+            <div class="formula-line">Normalized X = X / Width</div>
+            <div class="formula-line">Normalized Y = Y / Height</div>
+            <div class="calculation-result">
+                <div><span>X</span><strong id="calcX">320 / 800 = 0.400</strong></div>
+                <div><span>Y</span><strong id="calcY">180 / 500 = 0.360</strong></div>
+            </div>
+            <p>The selected coordinate identifies one location in the pixel grid. Changing the resolution changes the mapping scale.</p>
+        </div>
+
+        <div class="concept-card">
+            <div class="section-label">CORE CONCEPT</div>
+            <h2>Pixel + Resolution</h2>
+            <div class="concept-points">
+                <div><b>Pixel</b><span>The smallest addressable picture element in a raster image.</span></div>
+                <div><b>Resolution</b><span>The number of pixels available across the image or display.</span></div>
+                <div><b>Coordinate</b><span>A numerical position used to locate a point.</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="practical-section">
+        <div class="section-heading">
+            <div>
+                <div class="section-label">OBSERVE</div>
+                <h2>Experiment with the visualizer</h2>
+            </div>
+        </div>
+        <div class="experiment-grid">
+            <div>01 <strong>Change X</strong><span>Watch the point move horizontally.</span></div>
+            <div>02 <strong>Change Y</strong><span>Watch the point move vertically.</span></div>
+            <div>03 <strong>Change Resolution</strong><span>Observe how the coordinate space changes.</span></div>
+            <div>04 <strong>Click the Canvas</strong><span>Read the live pixel coordinate.</span></div>
+        </div>
+    </section>
+
+    <section class="practical-section viva-section">
+        <div class="section-label">VIVA QUICK CHECK</div>
+        <h2>Can you explain it?</h2>
+        <div class="viva-grid">
+            <details><summary>What is a pixel?</summary><p>A pixel is a discrete picture element used to represent an image on a raster display.</p></details>
+            <details><summary>What does resolution mean?</summary><p>Resolution describes the number of pixels available horizontally and vertically, such as 1920 Ã— 1080.</p></details>
+            <details><summary>What is a coordinate system?</summary><p>It is a numerical system used to specify the position of points in a space.</p></details>
+            <details><summary>Why is screen Y often downward?</summary><p>Many raster displays use the top-left corner as the origin, so Y increases toward the bottom.</p></details>
+        </div>
+    </section>
+
+    <section class="practical-next">
+        <a href="../cgr_foundations.html">â† Foundations</a>
+        <div>
+            <span>COMPLETED PRACTICAL 01</span>
+            <strong>Next: Basic Shapes &amp; Drawing Primitives â†’</strong>
+        </div>
+        <a href="practical02.html">Practical 02 â†’</a>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="footer-main">
+        <div class="footer-brand">
+            <div class="logo"><span class="logo-mark">&lt;/&gt;</span><span>Rasika<span class="logo-highlight">CodeLab</span></span></div>
+            <p>Interactive Computer Graphics practical learning through concepts, calculations and visualization.</p>
+        </div>
+        <div class="footer-links">
+            <div><h4>Learn</h4><a href="../cgr_foundations.html">Foundations</a></div>
+            <div><h4>Practice</h4><a href="../cgr_practicals.html">Practicals</a><a href="../../../about.html">About</a></div>
+        </div>
+    </div>
+    <div class="footer-bottom"><span>Â© 2026 Rasika CodeLab</span><span>Built for practical learning.</span></div>
+</footer>
+
+<script>
+const canvas = document.getElementById("coordinateCanvas");
+const ctx = canvas.getContext("2d");
+
+const scenarios = {
+    mobile: {
+        icon: "ðŸ“±",
+        title: "Mobile Screen Touch Detection",
+        text: "A mobile application needs to identify the exact location where a user touches the screen. Given the screen resolution and touch coordinates, determine the corresponding pixel position and highlight it visually."
+    },
+    game: {
+        icon: "ðŸŽ®",
+        title: "Game Character Position",
+        text: "A 2D game represents a character using X-Y coordinates. Given the game-screen resolution and character position, determine the corresponding screen location and display the character at that position."
+    },
+    traffic: {
+        icon: "ðŸš¦",
+        title: "Traffic Monitoring System",
+        text: "A traffic-monitoring camera detects vehicles at different positions in an image. Given the image resolution and vehicle coordinates, determine the corresponding pixel position and highlight the detected vehicle."
+    },
+    satellite: {
+        icon: "ðŸ›°ï¸",
+        title: "Satellite Image",
+        text: "A satellite image is represented as a rectangular grid of pixels. Given a normalized position within the image, calculate its corresponding pixel coordinate and mark the location on the image."
+    },
+    desktop: {
+        icon: "ðŸ–¥ï¸",
+        title: "Computer Desktop Coordinate Mapping",
+        text: "A desktop application needs to identify the exact position of a mouse click. Given the screen resolution and mouse coordinates, determine the corresponding pixel position and display the coordinates dynamically."
+    }
+};
+
+let W = 800, H = 500, px = 320, py = 180;
+let animation = null;
+
+function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
+
+function resizeCanvas() {
+    W = clamp(parseInt(document.getElementById("canvasW").value) || 800, 200, 1600);
+    H = clamp(parseInt(document.getElementById("canvasH").value) || 500, 150, 1000);
+    px = clamp(parseInt(document.getElementById("pointX").value) || 0, 0, W - 1);
+    py = clamp(parseInt(document.getElementById("pointY").value) || 0, 0, H - 1);
+    document.getElementById("canvasW").value = W;
+    document.getElementById("canvasH").value = H;
+    document.getElementById("pointX").value = px;
+    document.getElementById("pointY").value = py;
+    draw(true);
+}
+
+function draw(showPoint = true) {
+    const dpr = window.devicePixelRatio || 1;
+    const rect = canvas.getBoundingClientRect();
+    canvas.width = Math.max(1, Math.floor(rect.width * dpr));
+    canvas.height = Math.max(1, Math.floor(rect.height * dpr));
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    const cw = rect.width, ch = rect.height;
+    ctx.clearRect(0, 0, cw, ch);
+
+    ctx.fillStyle = "#08111f";
+    ctx.fillRect(0, 0, cw, ch);
+
+    const pad = 28;
+    const sx = (cw - pad * 2) / W;
+    const sy = (ch - pad * 2) / H;
+    const scale = Math.min(sx, sy);
+    const ox = pad, oy = pad;
+
+    ctx.strokeStyle = "rgba(148,163,184,.12)";
+    ctx.lineWidth = 1;
+
+    const stepX = W > 1000 ? 100 : W > 500 ? 50 : 25;
+    const stepY = H > 700 ? 100 : H > 350 ? 50 : 25;
+
+    for (let x = 0; x <= W; x += stepX) {
+        const xx = ox + x * sx;
+        ctx.beginPath(); ctx.moveTo(xx, oy); ctx.lineTo(xx, oy + H * sy); ctx.stroke();
+    }
+    for (let y = 0; y <= H; y += stepY) {
+        const yy = oy + y * sy;
+        ctx.beginPath(); ctx.moveTo(ox, yy); ctx.lineTo(ox + W * sx, yy); ctx.stroke();
+    }
+
+    ctx.strokeStyle = "rgba(125,211,252,.42)";
+    ctx.lineWidth = 1.5;
+    ctx.strokeRect(ox, oy, W * sx, H * sy);
+
+    ctx.fillStyle = "rgba(226,232,240,.65)";
+    ctx.font = "11px system-ui";
+    ctx.fillText("0,0", ox + 5, oy + 14);
+    ctx.fillText(`${W},${H}`, ox + W * sx - 45, oy + H * sy - 7);
+
+    if (showPoint) {
+        const x = ox + px * sx;
+        const y = oy + py * sy;
+        const pulse = 5 + Math.sin(performance.now() / 250) * 2;
+
+        ctx.beginPath();
+        ctx.arc(x, y, 12 + pulse, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(56,189,248,.12)";
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(x, y, 5.5, 0, Math.PI * 2);
+        ctx.fillStyle = "#7dd3fc";
+        ctx.fill();
+
+        ctx.strokeStyle = "rgba(125,211,252,.75)";
+        ctx.beginPath();
+        ctx.moveTo(x, oy); ctx.lineTo(x, y);
+        ctx.moveTo(ox, y); ctx.lineTo(x, y);
+        ctx.stroke();
+
+        const label = `(${px}, ${py})`;
+        ctx.fillStyle = "#e0f2fe";
+        ctx.font = "600 12px system-ui";
+        ctx.fillText(label, Math.min(x + 10, cw - 70), Math.max(y - 10, 18));
+    }
+
+    if (showPoint) requestAnimationFrame(() => draw(true));
+}
+
+function updateReadout() {
+    const nx = px / W, ny = py / H;
+    document.getElementById("readResolution").textContent = `${W} Ã— ${H}`;
+    document.getElementById("readPixel").textContent = `(${px}, ${py})`;
+    document.getElementById("readNormX").textContent = nx.toFixed(3);
+    document.getElementById("readNormY").textContent = ny.toFixed(3);
+    document.getElementById("calcX").textContent = `${px} / ${W} = ${nx.toFixed(3)}`;
+    document.getElementById("calcY").textContent = `${py} / ${H} = ${ny.toFixed(3)}`;
+    document.getElementById("heroCoord").textContent = `(${px}, ${py})`;
+}
+
+function setPoint(x, y, message = "Point plotted") {
+    px = clamp(Math.round(x), 0, W - 1);
+    py = clamp(Math.round(y), 0, H - 1);
+    document.getElementById("pointX").value = px;
+    document.getElementById("pointY").value = py;
+    updateReadout();
+    document.getElementById("clickMessage").textContent = message;
+    draw(true);
+}
+
+document.getElementById("plotPoint").addEventListener("click", () => {
+    resizeCanvas();
+    setPoint(document.getElementById("pointX").value, document.getElementById("pointY").value);
+});
+
+document.getElementById("resetLab").addEventListener("click", () => {
+    document.getElementById("canvasW").value = 800;
+    document.getElementById("canvasH").value = 500;
+    document.getElementById("pointX").value = 320;
+    document.getElementById("pointY").value = 180;
+    resizeCanvas();
+    document.getElementById("clickMessage").textContent = "Click to place a point";
+});
+
+["canvasW", "canvasH", "pointX", "pointY"].forEach(id => {
+    document.getElementById(id).addEventListener("input", () => {
+        if (id === "pointX") px = clamp(parseInt(document.getElementById(id).value) || 0, 0, W - 1);
+        if (id === "pointY") py = clamp(parseInt(document.getElementById(id).value) || 0, 0, H - 1);
+        resizeCanvas();
+        updateReadout();
+    });
+});
+
+canvas.addEventListener("mousemove", e => {
+    const r = canvas.getBoundingClientRect();
+    const x = clamp(Math.round(((e.clientX - r.left) / r.width) * W), 0, W - 1);
+    const y = clamp(Math.round(((e.clientY - r.top) / r.height) * H), 0, H - 1);
+    document.getElementById("mouseReadout").textContent = `Pointer: (${x}, ${y})`;
+});
+
+canvas.addEventListener("mouseleave", () => {
+    document.getElementById("mouseReadout").textContent = "Move pointer over canvas";
+});
+
+canvas.addEventListener("click", e => {
+    const r = canvas.getBoundingClientRect();
+    const x = clamp(((e.clientX - r.left) / r.width) * W, 0, W - 1);
+    const y = clamp(((e.clientY - r.top) / r.height) * H, 0, H - 1);
+    setPoint(x, y, "Point selected by canvas click");
+});
+
+document.querySelectorAll(".scenario-card").forEach(card => {
+    card.addEventListener("click", () => {
+        document.querySelectorAll(".scenario-card").forEach(c => c.classList.remove("active"));
+        card.classList.add("active");
+        const s = scenarios[card.dataset.scenario];
+        document.getElementById("problemIcon").textContent = s.icon;
+        document.getElementById("problemTitle").textContent = s.title;
+        document.getElementById("problemText").textContent = s.text;
+        document.getElementById("clickMessage").textContent = `${s.title}: click to select a position`;
+    });
+});
+
+window.addEventListener("resize", () => draw(true));
+resizeCanvas();
+updateReadout();
+</script>
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

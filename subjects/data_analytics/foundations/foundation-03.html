@@ -1,0 +1,3089 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Foundation 03 | Data Cleaning & Preparation | Rasika CodeLab
+    </title>
+<link rel="stylesheet" href="../../../css/style.css">
+
+<style>
+/* =========================================================
+   DATA ANALYTICS â€” FOUNDATION 03
+   DATA CLEANING & PREPARATION
+   ========================================================= */
+
+:root {
+    --da-orange: #ff8a2a;
+    --da-orange-light: #ffb067;
+    --da-orange-soft: rgba(255,138,42,.10);
+
+    --da-bg: #07090d;
+    --da-bg2: #0b0f15;
+    --da-card: #111720;
+    --da-card2: #151c25;
+
+    --da-text: #f5f6f8;
+    --da-soft: #cbd0d8;
+    --da-muted: #929aa7;
+
+    --da-border: rgba(255,255,255,.08);
+    --da-orange-border: rgba(255,138,42,.30);
+
+    --radius: 18px;
+    --max: 1180px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body.data-analytics-foundation-page {
+    margin: 0;
+    background:
+        radial-gradient(
+            circle at 85% 4%,
+            rgba(255,138,42,.08),
+            transparent 28%
+        ),
+        var(--da-bg);
+
+    color: var(--da-text);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+}
+
+main {
+    width: min(var(--max), calc(100% - 40px));
+    margin: auto;
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.foundation-hero {
+    margin-top: 85px;
+    padding: 65px 50px;
+
+    position: relative;
+    overflow: hidden;
+
+    border: 1px solid var(--da-border);
+    border-radius: 25px;
+
+    background:
+        radial-gradient(
+            circle at 90% 5%,
+            rgba(255,138,42,.15),
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #11151d,
+            #0b0f15
+        );
+}
+
+.foundation-hero::after {
+    content: "03";
+
+    position: absolute;
+    right: 25px;
+    bottom: -45px;
+
+    color: rgba(255,138,42,.04);
+
+    font-size: 190px;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.foundation-hero-inner {
+    position: relative;
+    z-index: 2;
+}
+
+.foundation-breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    margin-bottom: 25px;
+
+    color: var(--da-muted);
+
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+}
+
+.foundation-breadcrumb span {
+    color: var(--da-orange);
+}
+
+.foundation-label,
+.section-label {
+    display: inline-block;
+
+    color: var(--da-orange);
+
+    font-size: 9px;
+    font-weight: 900;
+
+    letter-spacing: 2px;
+}
+
+.foundation-label {
+    padding: 7px 12px;
+
+    border: 1px solid var(--da-orange-border);
+    border-radius: 50px;
+
+    background: var(--da-orange-soft);
+}
+
+.foundation-hero h1 {
+    max-width: 850px;
+
+    margin: 20px 0 15px;
+
+    font-size: clamp(40px, 6vw, 68px);
+    line-height: 1.02;
+
+    letter-spacing: -3px;
+}
+
+.foundation-hero h1 span,
+.foundation-section h2 span {
+    color: var(--da-orange);
+}
+
+.foundation-intro {
+    max-width: 780px;
+
+    margin: 0;
+
+    color: var(--da-soft);
+
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.foundation-hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+
+    margin-top: 27px;
+}
+
+.foundation-hero-meta span {
+    padding: 8px 12px;
+
+    border: 1px solid var(--da-border);
+    border-radius: 8px;
+
+    background: rgba(255,255,255,.025);
+
+    color: var(--da-muted);
+
+    font-size: 9px;
+}
+
+/* =========================================================
+   SECTIONS
+   ========================================================= */
+
+.foundation-section {
+    padding: 80px 0;
+}
+
+.dark-section {
+    width: 100vw;
+    margin-left: calc((100vw - min(var(--max), calc(100vw - 40px))) / -2);
+
+    padding-left: max(20px, calc((100vw - var(--max)) / 2));
+    padding-right: max(20px, calc((100vw - var(--max)) / 2));
+
+    background: #0b0f15;
+    border-top: 1px solid var(--da-border);
+    border-bottom: 1px solid var(--da-border);
+}
+
+.foundation-two-column {
+    display: grid;
+
+    grid-template-columns: .8fr 1.2fr;
+
+    gap: 60px;
+}
+
+.foundation-section h2 {
+    margin: 12px 0 15px;
+
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1.1;
+
+    letter-spacing: -1.5px;
+}
+
+.learning-objective-content p,
+.section-heading p {
+    color: var(--da-muted);
+
+    font-size: 12px;
+    line-height: 1.9;
+}
+
+.objective-list {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+
+    margin-top: 25px;
+}
+
+.objective-list > div {
+    padding: 14px;
+
+    border: 1px solid var(--da-border);
+    border-radius: 11px;
+
+    background: var(--da-card);
+
+    color: var(--da-soft);
+
+    font-size: 10px;
+}
+
+.objective-list span {
+    margin-right: 8px;
+
+    color: var(--da-orange);
+    font-weight: 900;
+}
+
+/* =========================================================
+   SECTION HEADING
+   ========================================================= */
+
+.section-heading {
+    max-width: 800px;
+    margin-bottom: 35px;
+}
+
+.section-heading h2 {
+    margin-top: 10px;
+}
+
+/* =========================================================
+   QUALITY FLOW
+   ========================================================= */
+
+.quality-flow {
+    display: grid;
+
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+.quality-box {
+    min-height: 210px;
+
+    padding: 25px;
+
+    border: 1px solid var(--da-border);
+    border-radius: 17px;
+
+    background: var(--da-card);
+
+    text-align: center;
+}
+
+.quality-box span {
+    display: block;
+
+    color: var(--da-muted);
+
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.quality-box strong {
+    display: block;
+
+    margin: 17px 0;
+
+    font-size: 30px;
+}
+
+.quality-box p {
+    margin: 0;
+
+    color: var(--da-muted);
+
+    font-size: 10px;
+    line-height: 1.9;
+}
+
+.quality-box.bad {
+    border-color: rgba(255,80,80,.25);
+}
+
+.quality-box.cleaning {
+    border-color: var(--da-orange-border);
+}
+
+.quality-box.good {
+    border-color: rgba(70,210,130,.25);
+}
+
+.quality-arrow {
+    color: var(--da-orange);
+    font-size: 24px;
+}
+
+/* =========================================================
+   PROBLEM GRID
+   ========================================================= */
+
+.problem-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 15px;
+}
+
+.problem-card {
+    padding: 25px;
+
+    border: 1px solid var(--da-border);
+    border-radius: 17px;
+
+    background: var(--da-card);
+
+    transition: .25s ease;
+}
+
+.problem-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--da-orange-border);
+}
+
+.problem-number {
+    color: rgba(255,138,42,.25);
+
+    font-size: 30px;
+    font-weight: 900;
+}
+
+.problem-icon {
+    width: 42px;
+    height: 42px;
+
+    display: grid;
+    place-items: center;
+
+    margin: 15px 0;
+
+    border-radius: 11px;
+
+    background: var(--da-orange-soft);
+
+    color: var(--da-orange);
+
+    font-weight: 900;
+}
+
+.problem-card h3 {
+    margin: 0 0 8px;
+
+    font-size: 16px;
+}
+
+.problem-card p {
+    color: var(--da-muted);
+
+    font-size: 10px;
+}
+
+.bad-data-example {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+
+    margin: 18px 0;
+}
+
+.bad-data-example span {
+    padding: 7px 9px;
+
+    border-radius: 6px;
+
+    background: #090c11;
+
+    border: 1px solid var(--da-border);
+
+    color: var(--da-soft);
+
+    font-family: Consolas, monospace;
+    font-size: 9px;
+}
+
+.problem-card > strong {
+    color: var(--da-orange);
+
+    font-size: 9px;
+}
+
+/* =========================================================
+   BEFORE / AFTER
+   ========================================================= */
+
+.before-after {
+    display: grid;
+
+    grid-template-columns: 1fr auto 1fr;
+
+    gap: 18px;
+
+    align-items: center;
+}
+
+.data-clean-table {
+    overflow: hidden;
+
+    border: 1px solid var(--da-border);
+    border-radius: 15px;
+
+    background: var(--da-card);
+}
+
+.clean-title {
+    padding: 14px;
+
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.bad-title {
+    background: rgba(255,70,70,.08);
+    color: #ff8585;
+}
+
+.good-title {
+    background: rgba(60,210,130,.08);
+    color: #6ce0a0;
+}
+
+.clean-row {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    border-top: 1px solid var(--da-border);
+}
+
+.clean-row span {
+    padding: 12px 10px;
+
+    color: var(--da-soft);
+
+    font-size: 9px;
+}
+
+.clean-header span {
+    color: var(--da-orange);
+    font-weight: 800;
+}
+
+.warning-row {
+    background: rgba(255,138,42,.05);
+}
+
+.danger-row {
+    background: rgba(255,70,70,.05);
+}
+
+.clean-arrow {
+    color: var(--da-orange);
+    font-size: 25px;
+}
+
+.cleaning-note {
+    margin-top: 18px;
+
+    padding: 17px;
+
+    border-left: 3px solid var(--da-orange);
+
+    background: var(--da-orange-soft);
+
+    color: var(--da-muted);
+
+    font-size: 10px;
+}
+
+.cleaning-note strong {
+    color: var(--da-orange);
+}
+
+/* =========================================================
+   MISSING STRATEGIES
+   ========================================================= */
+
+.missing-strategies {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 14px;
+}
+
+.strategy-card {
+    padding: 23px;
+
+    border: 1px solid var(--da-border);
+    border-radius: 15px;
+
+    background: var(--da-card);
+}
+
+.strategy-card > span {
+    color: rgba(255,138,42,.35);
+
+    font-size: 25px;
+    font-weight: 900;
+}
+
+.strategy-card h3 {
+    margin: 10px 0;
+
+    font-size: 15px;
+}
+
+.strategy-card p {
+    min-height: 75px;
+
+    color: var(--da-muted);
+
+    font-size: 10px;
+}
+
+.strategy-card code {
+    display: inline-block;
+
+    padding: 7px 9px;
+
+    border-radius: 6px;
+
+    background: #090c11;
+
+    color: var(--da-orange);
+
+    font-size: 9px;
+}
+
+/* =========================================================
+   OUTLIER
+   ========================================================= */
+
+.outlier-demo {
+    padding: 35px;
+
+    border: 1px solid var(--da-border);
+    border-radius: 20px;
+
+    background: var(--da-card);
+}
+
+.outlier-values {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+
+    min-height: 130px;
+}
+
+.outlier-values span {
+    flex: 1;
+
+    padding: 25px 5px;
+
+    border-radius: 8px 8px 0 0;
+
+    background: rgba(255,138,42,.18);
+
+    color: var(--da-soft);
+
+    text-align: center;
+
+    font-weight: 800;
+}
+
+.outlier-values .outlier-value {
+    padding-top: 80px;
+
+    background: rgba(255,70,70,.20);
+
+    color: #ff8585;
+}
+
+.outlier-scale {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-top: 12px;
+}
+
+.normal-range {
+    color: var(--da-muted);
+    font-size: 10px;
+}
+
+.outlier-label {
+    color: #ff8585;
+
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.outlier-label small {
+    display: block;
+
+    color: var(--da-muted);
+
+    font-size: 8px;
+}
+
+.outlier-question {
+    margin-top: 25px;
+
+    padding: 20px;
+
+    border-radius: 12px;
+
+    background: rgba(255,138,42,.06);
+}
+
+.outlier-question strong {
+    color: var(--da-orange);
+}
+
+.outlier-question p {
+    color: var(--da-muted);
+
+    font-size: 10px;
+}
+
+/* =========================================================
+   TRANSFORMATION
+   ========================================================= */
+
+.transformation-grid {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 14px;
+}
+
+.transform-card {
+    padding: 24px;
+
+    border: 1px solid var(--da-border);
+    border-radius: 15px;
+
+    background: var(--da-card);
+
+    text-align: center;
+}
+
+.transform-card span {
+    color: var(--da-muted);
+
+    font-size: 8px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.transform-card strong {
+    display: block;
+
+    margin: 10px 0;
+
+    color: var(--da-orange);
+
+    font-family: Consolas, monospace;
+    font-size: 14px;
+}
+
+.transform-card p {
+    color: var(--da-muted);
+
+    font-size: 9px;
+}
+
+.transform-card div {
+    color: var(--da-orange);
+    font-size: 20px;
+}
+
+/* =========================================================
+   CLEANING PIPELINE
+   ========================================================= */
+
+.cleaning-pipeline {
+    display: grid;
+
+    grid-template-columns:
+        1fr auto
+        1fr auto
+        1fr auto
+        1fr auto
+        1fr;
+
+    gap: 8px;
+
+    align-items: center;
+}
+
+.pipeline-step {
+    min-height: 130px;
+
+    padding: 20px;
+
+    border: 1px solid var(--da-border);
+    border-radius: 14px;
+
+    background: var(--da-card);
+
+    text-align: center;
+}
+
+.pipeline-step > span {
+    display: block;
+
+    color: var(--da-orange);
+
+    font-size: 18px;
+    font-weight: 900;
+}
+
+.pipeline-step strong {
+    display: block;
+
+    margin: 8px 0;
+
+    font-size: 12px;
+}
+
+.pipeline-step small {
+    color: var(--da-muted);
+
+    font-size: 8px;
+}
+
+.pipeline-arrow {
+    color: var(--da-orange);
+    font-size: 18px;
+}
+
+/* =========================================================
+   CHALLENGE
+   ========================================================= */
+
+.challenge-section {
+    text-align: center;
+}
+
+.challenge-card {
+    max-width: 800px;
+
+    margin: auto;
+    padding: 35px;
+
+    border: 1px solid var(--da-orange-border);
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,138,42,.10),
+            rgba(255,255,255,.015)
+        );
+}
+
+.challenge-data-value {
+    margin-bottom: 20px;
+
+    color: var(--da-orange);
+
+    font-family: Consolas, monospace;
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.challenge-card h3 {
+    margin-bottom: 25px;
+
+    font-size: 17px;
+}
+
+.challenge-options {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+}
+
+.challenge-options button {
+    padding: 13px;
+
+    border: 1px solid var(--da-border);
+    border-radius: 9px;
+
+    background: var(--da-card);
+
+    color: var(--da-soft);
+
+    cursor: pointer;
+
+    font-size: 10px;
+
+    transition: .2s ease;
+}
+
+.challenge-options button:hover {
+    border-color: var(--da-orange-border);
+}
+
+.challenge-options button.correct {
+    border-color: #46d28a;
+    background: rgba(70,210,138,.10);
+    color: #6ce0a0;
+}
+
+.challenge-options button.wrong {
+    border-color: #ff6464;
+    background: rgba(255,70,70,.10);
+    color: #ff8585;
+}
+
+.challenge-result {
+    margin-top: 20px;
+
+    font-size: 10px;
+}
+
+.correct-result {
+    color: #6ce0a0;
+}
+
+.wrong-result {
+    color: #ff8585;
+}
+
+/* =========================================================
+   DECISION GRID
+   ========================================================= */
+
+.decision-grid {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 14px;
+}
+
+.decision-card {
+    padding: 22px;
+
+    border: 1px solid var(--da-border);
+    border-radius: 14px;
+
+    background: var(--da-card);
+}
+
+.decision-card strong {
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: var(--da-orange);
+
+    font-size: 9px;
+
+    text-transform: uppercase;
+}
+
+.decision-card span {
+    display: block;
+
+    color: var(--da-soft);
+
+    font-size: 11px;
+}
+
+.decision-card small {
+    display: block;
+
+    margin-top: 12px;
+
+    color: var(--da-muted);
+
+    font-size: 9px;
+}
+
+/* =========================================================
+   TAKEAWAYS
+   ========================================================= */
+
+.takeaway-grid {
+    display: grid;
+
+    grid-template-columns: repeat(5, 1fr);
+
+    gap: 12px;
+}
+
+.takeaway-card {
+    min-height: 150px;
+
+    padding: 20px;
+
+    border: 1px solid var(--da-border);
+    border-radius: 14px;
+
+    background: var(--da-card);
+}
+
+.takeaway-card span {
+    color: rgba(255,138,42,.35);
+
+    font-size: 25px;
+    font-weight: 900;
+}
+
+.takeaway-card p {
+    color: var(--da-soft);
+
+    font-size: 10px;
+}
+
+/* =========================================================
+   FOUNDATION NAVIGATION
+   ========================================================= */
+
+.foundation-navigation {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr 1fr;
+
+    gap: 12px;
+
+    margin: 60px 0;
+
+    padding-top: 25px;
+
+    border-top: 1px solid var(--da-border);
+}
+
+.foundation-nav-btn {
+    padding: 16px;
+
+    border: 1px solid var(--da-border);
+    border-radius: 12px;
+
+    background: var(--da-card);
+
+    color: var(--da-soft);
+
+    text-align: center;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    transition: .2s ease;
+}
+
+.foundation-nav-btn:hover {
+    border-color: var(--da-orange-border);
+    color: var(--da-orange);
+}
+
+.foundation-nav-btn.next {
+    text-align: right;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+    .problem-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .missing-strategies,
+    .transformation-grid,
+    .decision-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .takeaway-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .cleaning-pipeline {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .pipeline-arrow {
+        display: none;
+    }
+}
+
+@media (max-width: 800px) {
+
+    .foundation-two-column {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .quality-flow {
+        grid-template-columns: 1fr;
+    }
+
+    .quality-arrow {
+        transform: rotate(90deg);
+        text-align: center;
+    }
+
+    .before-after {
+        grid-template-columns: 1fr;
+    }
+
+    .clean-arrow {
+        transform: rotate(90deg);
+        text-align: center;
+    }
+
+    .takeaway-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .foundation-navigation {
+        grid-template-columns: 1fr;
+    }
+
+    .foundation-nav-btn.next {
+        text-align: center;
+    }
+}
+
+@media (max-width: 600px) {
+
+    main {
+        width: calc(100% - 26px);
+    }
+
+    .foundation-hero {
+        margin-top: 75px;
+        padding: 38px 22px;
+    }
+
+    .foundation-hero h1 {
+        font-size: 40px;
+        letter-spacing: -2px;
+    }
+
+    .objective-list,
+    .problem-grid,
+    .missing-strategies,
+    .transformation-grid,
+    .decision-grid,
+    .challenge-options,
+    .takeaway-grid,
+    .cleaning-pipeline {
+        grid-template-columns: 1fr;
+    }
+
+    .dark-section {
+        width: 100vw;
+        margin-left: calc((100vw - (100vw - 26px)) / -2);
+
+        padding-left: 13px;
+        padding-right: 13px;
+    }
+
+    .outlier-values {
+        gap: 5px;
+    }
+
+    .outlier-values span {
+        font-size: 8px;
+    }
+}
+</style>
+
+</head>
+
+
+<body class="subject-page data-analytics-foundation-page protected-page">
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="navbar">
+
+        <div class="nav-container">
+
+            <a href="../../../index.html"
+               class="logo">
+
+                <span class="logo-mark">
+                    &lt;/&gt;
+                </span>
+
+                <span>
+                    Rasika<span class="logo-highlight">
+                        CodeLab
+                    </span>
+                </span>
+
+            </a>
+
+
+            <nav class="nav-links">
+
+                <a href="../../../index.html">
+                    Home
+                </a>
+
+                <a href="../../../subjects.html"
+                   class="active">
+                    Subjects
+                </a>
+
+                <a href="../../../about.html">
+                    About
+                </a>
+
+                <a href="../../../login.html">
+                    Login
+                </a>
+
+            </nav>
+
+
+            <button class="menu-btn"
+                    aria-label="Open menu">
+
+                â˜°
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main>
+
+
+        <!-- ================= HERO ================= -->
+
+        <section class="foundation-hero">
+
+            <div class="foundation-hero-inner">
+
+
+                <div class="foundation-breadcrumb">
+
+                    DATA ANALYTICS
+
+                    <span>â€º</span>
+
+                    FOUNDATIONS
+
+                    <span>â€º</span>
+
+                    FOUNDATION 03
+
+                </div>
+
+
+                <div class="foundation-label">
+
+                    FOUNDATION 03
+
+                </div>
+
+
+                <h1>
+
+                    Data Cleaning
+                    <span>
+                        & Preparation
+                    </span>
+
+                </h1>
+
+
+                <p class="foundation-intro">
+
+                    Real-world data is rarely perfect.
+                    Learn how to detect missing values, duplicates,
+                    incorrect formats, inconsistent entries and
+                    unusual observations before performing analysis.
+
+                </p>
+
+
+                <div class="foundation-hero-meta">
+
+                    <span>
+                        Beginner â†’ Intermediate
+                    </span>
+
+                    <span>
+                        Data Quality
+                    </span>
+
+                    <span>
+                        Hands-on
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= LEARNING OBJECTIVE ================= -->
+
+        <section class="foundation-section">
+
+            <div class="foundation-two-column">
+
+
+                <div>
+
+                    <span class="section-label">
+                        LEARNING OBJECTIVE
+                    </span>
+
+
+                    <h2>
+
+                        Can You
+                        <span>
+                            Trust Your Data?
+                        </span>
+
+                    </h2>
+
+                </div>
+
+
+                <div class="learning-objective-content">
+
+                    <p>
+
+                        Before creating charts, calculating statistics,
+                        or building models, an analyst must determine
+                        whether the dataset is reliable enough to use.
+
+                    </p>
+
+
+                    <div class="objective-list">
+
+
+                        <div>
+
+                            <span>âœ“</span>
+
+                            Detect missing values
+
+                        </div>
+
+
+                        <div>
+
+                            <span>âœ“</span>
+
+                            Find duplicate records
+
+                        </div>
+
+
+                        <div>
+
+                            <span>âœ“</span>
+
+                            Identify inconsistent values
+
+                        </div>
+
+
+                        <div>
+
+                            <span>âœ“</span>
+
+                            Detect invalid data
+
+                        </div>
+
+
+                        <div>
+
+                            <span>âœ“</span>
+
+                            Understand outliers
+
+                        </div>
+
+
+                        <div>
+
+                            <span>âœ“</span>
+
+                            Transform data into an analysis-ready format
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= WHY CLEANING ================= -->
+
+        <section class="foundation-section dark-section">
+
+
+            <div class="section-heading">
+
+                <span class="section-label">
+
+                    01 â€” WHY CLEAN DATA?
+
+                </span>
+
+
+                <h2>
+
+                    Garbage In,
+                    <span>
+                        Garbage Out
+                    </span>
+
+                </h2>
+
+
+                <p>
+
+                    If the input data is incorrect, incomplete,
+                    or inconsistent, the resulting analysis
+                    can also be misleading.
+
+                </p>
+
+            </div>
+
+
+
+            <div class="quality-flow">
+
+
+                <div class="quality-box bad">
+
+                    <span>
+                        RAW DATA
+                    </span>
+
+                    <strong>
+                        âŒ
+                    </strong>
+
+                    <p>
+
+                        Missing values<br>
+                        Duplicate records<br>
+                        Wrong formats<br>
+                        Invalid values
+
+                    </p>
+
+                </div>
+
+
+                <div class="quality-arrow">
+                    â†’
+                </div>
+
+
+                <div class="quality-box cleaning">
+
+                    <span>
+                        CLEANING
+                    </span>
+
+                    <strong>
+                        âš™
+                    </strong>
+
+                    <p>
+
+                        Detect<br>
+                        Correct<br>
+                        Transform<br>
+                        Validate
+
+                    </p>
+
+                </div>
+
+
+                <div class="quality-arrow">
+                    â†’
+                </div>
+
+
+                <div class="quality-box good">
+
+                    <span>
+                        CLEAN DATA
+                    </span>
+
+                    <strong>
+                        âœ“
+                    </strong>
+
+                    <p>
+
+                        Consistent<br>
+                        Complete<br>
+                        Valid<br>
+                        Analysis-ready
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= PROBLEMS ================= -->
+
+        <section class="foundation-section">
+
+
+            <div class="section-heading">
+
+                <span class="section-label">
+
+                    02 â€” COMMON DATA PROBLEMS
+
+                </span>
+
+
+                <h2>
+
+                    Find What is
+                    <span>
+                        Wrong
+                    </span>
+
+                </h2>
+
+
+                <p>
+
+                    Real datasets contain many types of quality problems.
+                    Learn to recognize them visually.
+
+                </p>
+
+            </div>
+
+
+
+            <div class="problem-grid">
+
+
+                <!-- MISSING -->
+
+                <article class="problem-card">
+
+                    <div class="problem-number">
+                        01
+                    </div>
+
+                    <div class="problem-icon">
+                        ?
+                    </div>
+
+                    <h3>
+                        Missing Values
+                    </h3>
+
+                    <p>
+
+                        Some records have no value
+                        for a particular field.
+
+                    </p>
+
+
+                    <div class="bad-data-example">
+
+                        <span>Riya</span>
+                        <span>82</span>
+                        <span>â€”</span>
+
+                    </div>
+
+
+                    <strong>
+                        Example: Missing attendance
+                    </strong>
+
+                </article>
+
+
+
+                <!-- DUPLICATE -->
+
+                <article class="problem-card">
+
+                    <div class="problem-number">
+                        02
+                    </div>
+
+                    <div class="problem-icon">
+                        â§‰
+                    </div>
+
+                    <h3>
+                        Duplicate Records
+                    </h3>
+
+                    <p>
+
+                        The same record appears more
+                        than once.
+
+                    </p>
+
+
+                    <div class="bad-data-example">
+
+                        <span>S001</span>
+                        <span>Riya</span>
+                        <span>82</span>
+
+                    </div>
+
+
+                    <strong>
+                        Same record repeated
+                    </strong>
+
+                </article>
+
+
+
+                <!-- INCONSISTENT -->
+
+                <article class="problem-card">
+
+                    <div class="problem-number">
+                        03
+                    </div>
+
+                    <div class="problem-icon">
+                        â‰ 
+                    </div>
+
+                    <h3>
+                        Inconsistent Values
+                    </h3>
+
+                    <p>
+
+                        The same category is written
+                        in different ways.
+
+                    </p>
+
+
+                    <div class="bad-data-example">
+
+                        <span>Mumbai</span>
+                        <span>MUM</span>
+                        <span>mumbai</span>
+
+                    </div>
+
+
+                    <strong>
+                        Same meaning, different values
+                    </strong>
+
+                </article>
+
+
+
+                <!-- INVALID -->
+
+                <article class="problem-card">
+
+                    <div class="problem-number">
+                        04
+                    </div>
+
+                    <div class="problem-icon">
+                        !
+                    </div>
+
+                    <h3>
+                        Invalid Values
+                    </h3>
+
+                    <p>
+
+                        Values that violate the expected
+                        rules of the dataset.
+
+                    </p>
+
+
+                    <div class="bad-data-example">
+
+                        <span>Age = 250</span>
+
+                    </div>
+
+
+                    <strong>
+                        Impossible or invalid value
+                    </strong>
+
+                </article>
+
+
+
+                <!-- FORMAT -->
+
+                <article class="problem-card">
+
+                    <div class="problem-number">
+                        05
+                    </div>
+
+                    <div class="problem-icon">
+                        #
+                    </div>
+
+                    <h3>
+                        Wrong Format
+                    </h3>
+
+                    <p>
+
+                        Values represent the same thing
+                        but use different formats.
+
+                    </p>
+
+
+                    <div class="bad-data-example">
+
+                        <span>03/10/26</span>
+                        <span>2026-10-03</span>
+
+                    </div>
+
+
+                    <strong>
+                        Date format mismatch
+                    </strong>
+
+                </article>
+
+
+
+                <!-- OUTLIER -->
+
+                <article class="problem-card">
+
+                    <div class="problem-number">
+                        06
+                    </div>
+
+                    <div class="problem-icon">
+                        â—‰
+                    </div>
+
+                    <h3>
+                        Outliers
+                    </h3>
+
+                    <p>
+
+                        Values that are unusually far
+                        from the rest of the observations.
+
+                    </p>
+
+
+                    <div class="bad-data-example">
+
+                        <span>48</span>
+                        <span>52</span>
+                        <span>51</span>
+                        <span>490</span>
+
+                    </div>
+
+
+                    <strong>
+                        Unusually large value
+                    </strong>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= BEFORE AFTER ================= -->
+
+        <section class="foundation-section dark-section">
+
+
+            <div class="section-heading">
+
+                <span class="section-label">
+
+                    03 â€” BEFORE & AFTER
+
+                </span>
+
+
+                <h2>
+
+                    See How Cleaning
+                    <span>
+                        Changes Data
+                    </span>
+
+                </h2>
+
+
+                <p>
+
+                    Cleaning does not mean blindly deleting data.
+                    The analyst must understand the problem first.
+
+                </p>
+
+            </div>
+
+
+
+            <div class="before-after">
+
+
+                <!-- BEFORE -->
+
+                <div class="data-clean-table">
+
+
+                    <div class="clean-title bad-title">
+
+                        âŒ BEFORE CLEANING
+
+                    </div>
+
+
+                    <div class="clean-row clean-header">
+
+                        <span>
+                            Name
+                        </span>
+
+                        <span>
+                            Age
+                        </span>
+
+                        <span>
+                            City
+                        </span>
+
+                        <span>
+                            Salary
+                        </span>
+
+                    </div>
+
+
+                    <div class="clean-row">
+
+                        <span>
+                            Riya
+                        </span>
+
+                        <span>
+                            22
+                        </span>
+
+                        <span>
+                            Mumbai
+                        </span>
+
+                        <span>
+                            35000
+                        </span>
+
+                    </div>
+
+
+                    <div class="clean-row warning-row">
+
+                        <span>
+                            Aman
+                        </span>
+
+                        <span>
+                            â€”
+                        </span>
+
+                        <span>
+                            MUM
+                        </span>
+
+                        <span>
+                            42000
+                        </span>
+
+                    </div>
+
+
+                    <div class="clean-row">
+
+                        <span>
+                            Neha
+                        </span>
+
+                        <span>
+                            21
+                        </span>
+
+                        <span>
+                            mumbai
+                        </span>
+
+                        <span>
+                            39000
+                        </span>
+
+                    </div>
+
+
+                    <div class="clean-row danger-row">
+
+                        <span>
+                            Rahul
+                        </span>
+
+                        <span>
+                            250
+                        </span>
+
+                        <span>
+                            Pune
+                        </span>
+
+                        <span>
+                            41000
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="clean-arrow">
+                    â†’
+                </div>
+
+
+
+                <!-- AFTER -->
+
+                <div class="data-clean-table">
+
+
+                    <div class="clean-title good-title">
+
+                        âœ“ AFTER CLEANING
+
+                    </div>
+
+
+                    <div class="clean-row clean-header">
+
+                        <span>
+                            Name
+                        </span>
+
+                        <span>
+                            Age
+                        </span>
+
+                        <span>
+                            City
+                        </span>
+
+                        <span>
+                            Salary
+                        </span>
+
+                    </div>
+
+
+                    <div class="clean-row">
+
+                        <span>
+                            Riya
+                        </span>
+
+                        <span>
+                            22
+                        </span>
+
+                        <span>
+                            Mumbai
+                        </span>
+
+                        <span>
+                            â‚¹35,000
+                        </span>
+
+                    </div>
+
+
+                    <div class="clean-row">
+
+                        <span>
+                            Aman
+                        </span>
+
+                        <span>
+                            23
+                        </span>
+
+                        <span>
+                            Mumbai
+                        </span>
+
+                        <span>
+                            â‚¹42,000
+                        </span>
+
+                    </div>
+
+
+                    <div class="clean-row">
+
+                        <span>
+                            Neha
+                        </span>
+
+                        <span>
+                            21
+                        </span>
+
+                        <span>
+                            Mumbai
+                        </span>
+
+                        <span>
+                            â‚¹39,000
+                        </span>
+
+                    </div>
+
+
+                    <div class="clean-row">
+
+                        <span>
+                            Rahul
+                        </span>
+
+                        <span>
+                            25
+                        </span>
+
+                        <span>
+                            Pune
+                        </span>
+
+                        <span>
+                            â‚¹41,000
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="cleaning-note">
+
+                <strong>
+                    Notice:
+                </strong>
+
+                The cleaning process involved
+                handling missing data, standardizing categories,
+                validating age values, and formatting salary.
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= MISSING VALUES ================= -->
+
+        <section class="foundation-section">
+
+
+            <div class="section-heading">
+
+                <span class="section-label">
+
+                    04 â€” MISSING VALUES
+
+                </span>
+
+
+                <h2>
+
+                    What Should You Do
+                    <span>
+                        With Missing Data?
+                    </span>
+
+                </h2>
+
+
+                <p>
+
+                    There is no single solution.
+                    The correct approach depends on the dataset
+                    and the reason the value is missing.
+
+                </p>
+
+            </div>
+
+
+
+            <div class="missing-strategies">
+
+
+                <div class="strategy-card">
+
+                    <span>
+                        01
+                    </span>
+
+                    <h3>
+                        Remove
+                    </h3>
+
+                    <p>
+
+                        Remove records when missing information
+                        makes the record unusable and the loss is acceptable.
+
+                    </p>
+
+                    <code>
+                        dropna()
+                    </code>
+
+                </div>
+
+
+                <div class="strategy-card">
+
+                    <span>
+                        02
+                    </span>
+
+                    <h3>
+                        Fill
+                    </h3>
+
+                    <p>
+
+                        Replace missing numerical values using
+                        appropriate statistics such as mean or median.
+
+                    </p>
+
+                    <code>
+                        fillna()
+                    </code>
+
+                </div>
+
+
+                <div class="strategy-card">
+
+                    <span>
+                        03
+                    </span>
+
+                    <h3>
+                        Use a Category
+                    </h3>
+
+                    <p>
+
+                        For categorical fields, a meaningful category
+                        such as "Unknown" may be appropriate.
+
+                    </p>
+
+                    <code>
+                        "Unknown"
+                    </code>
+
+                </div>
+
+
+                <div class="strategy-card">
+
+                    <span>
+                        04
+                    </span>
+
+                    <h3>
+                        Investigate
+                    </h3>
+
+                    <p>
+
+                        Sometimes missing data itself provides
+                        useful information about the process.
+
+                    </p>
+
+                    <code>
+                        Analyze the cause
+                    </code>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= OUTLIERS ================= -->
+
+        <section class="foundation-section dark-section">
+
+
+            <div class="section-heading">
+
+                <span class="section-label">
+
+                    05 â€” OUTLIERS
+
+                </span>
+
+
+                <h2>
+
+                    Not Every
+                    <span>
+                        Unusual Value Is Wrong
+                    </span>
+
+                </h2>
+
+
+                <p>
+
+                    An outlier may represent an error,
+                    or it may represent a genuinely unusual event.
+
+                </p>
+
+            </div>
+
+
+
+            <div class="outlier-demo">
+
+
+                <div class="outlier-values">
+
+                    <span>48</span>
+                    <span>50</span>
+                    <span>51</span>
+                    <span>52</span>
+                    <span>53</span>
+                    <span class="outlier-value">490</span>
+
+                </div>
+
+
+                <div class="outlier-scale">
+
+                    <div class="normal-range">
+
+                        Normal observations
+
+                    </div>
+
+
+                    <div class="outlier-label">
+
+                        490
+
+                        <small>
+                            Investigate
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="outlier-question">
+
+                    <strong>
+                        Should 490 be deleted?
+                    </strong>
+
+                    <p>
+
+                        Not automatically.
+
+                        It could be a typing error,
+                        a genuine extreme event,
+                        or a different population.
+
+                        Always investigate first.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= TRANSFORMATION ================= -->
+
+        <section class="foundation-section">
+
+
+            <div class="section-heading">
+
+                <span class="section-label">
+
+                    06 â€” DATA TRANSFORMATION
+
+                </span>
+
+
+                <h2>
+
+                    Prepare Data for
+                    <span>
+                        Analysis
+                    </span>
+
+                </h2>
+
+
+                <p>
+
+                    Sometimes data is valid but still needs
+                    transformation before analysis.
+
+                </p>
+
+            </div>
+
+
+
+            <div class="transformation-grid">
+
+
+                <div class="transform-card">
+
+                    <span>
+                        BEFORE
+                    </span>
+
+                    <strong>
+                        "â‚¹35,000"
+                    </strong>
+
+                    <p>
+                        Text value
+                    </p>
+
+                    <div>
+                        â†“
+                    </div>
+
+                    <span>
+                        AFTER
+                    </span>
+
+                    <strong>
+                        35000
+                    </strong>
+
+                    <p>
+                        Numerical value
+                    </p>
+
+                </div>
+
+
+
+                <div class="transform-card">
+
+                    <span>
+                        BEFORE
+                    </span>
+
+                    <strong>
+                        "Male"
+                    </strong>
+
+                    <p>
+                        Category
+                    </p>
+
+                    <div>
+                        â†“
+                    </div>
+
+                    <span>
+                        AFTER
+                    </span>
+
+                    <strong>
+                        "M"
+                    </strong>
+
+                    <p>
+                        Standardized category
+                    </p>
+
+                </div>
+
+
+
+                <div class="transform-card">
+
+                    <span>
+                        BEFORE
+                    </span>
+
+                    <strong>
+                        "03/10/2026"
+                    </strong>
+
+                    <p>
+                        Text date
+                    </p>
+
+                    <div>
+                        â†“
+                    </div>
+
+                    <span>
+                        AFTER
+                    </span>
+
+                    <strong>
+                        2026-10-03
+                    </strong>
+
+                    <p>
+                        Standard date
+                    </p>
+
+                </div>
+
+
+
+                <div class="transform-card">
+
+                    <span>
+                        BEFORE
+                    </span>
+
+                    <strong>
+                        "Mumbai "
+                    </strong>
+
+                    <p>
+                        Extra whitespace
+                    </p>
+
+                    <div>
+                        â†“
+                    </div>
+
+                    <span>
+                        AFTER
+                    </span>
+
+                    <strong>
+                        "Mumbai"
+                    </strong>
+
+                    <p>
+                        Clean text
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= CLEANING PIPELINE ================= -->
+
+        <section class="foundation-section dark-section">
+
+
+            <div class="section-heading">
+
+                <span class="section-label">
+
+                    DATA CLEANING PIPELINE
+
+                </span>
+
+
+                <h2>
+
+                    Your
+                    <span>
+                        Cleaning Workflow
+                    </span>
+
+                </h2>
+
+            </div>
+
+
+
+            <div class="cleaning-pipeline">
+
+
+                <div class="pipeline-step">
+
+                    <span>
+                        01
+                    </span>
+
+                    <strong>
+                        Inspect
+                    </strong>
+
+                    <small>
+                        Understand the dataset
+                    </small>
+
+                </div>
+
+
+                <div class="pipeline-arrow">
+                    â†’
+                </div>
+
+
+                <div class="pipeline-step">
+
+                    <span>
+                        02
+                    </span>
+
+                    <strong>
+                        Detect
+                    </strong>
+
+                    <small>
+                        Find data quality problems
+                    </small>
+
+                </div>
+
+
+                <div class="pipeline-arrow">
+                    â†’
+                </div>
+
+
+                <div class="pipeline-step">
+
+                    <span>
+                        03
+                    </span>
+
+                    <strong>
+                        Clean
+                    </strong>
+
+                    <small>
+                        Fix or handle problems
+                    </small>
+
+                </div>
+
+
+                <div class="pipeline-arrow">
+                    â†’
+                </div>
+
+
+                <div class="pipeline-step">
+
+                    <span>
+                        04
+                    </span>
+
+                    <strong>
+                        Transform
+                    </strong>
+
+                    <small>
+                        Convert into useful format
+                    </small>
+
+                </div>
+
+
+                <div class="pipeline-arrow">
+                    â†’
+                </div>
+
+
+                <div class="pipeline-step">
+
+                    <span>
+                        05
+                    </span>
+
+                    <strong>
+                        Validate
+                    </strong>
+
+                    <small>
+                        Confirm quality
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= MINI CHALLENGE ================= -->
+
+        <section class="foundation-section challenge-section">
+
+
+            <div class="section-heading">
+
+                <span class="section-label">
+                    MINI CHALLENGE
+                </span>
+
+
+                <h2>
+
+                    You Are the
+                    <span>
+                        Data Analyst
+                    </span>
+
+                </h2>
+
+
+                <p>
+
+                    You receive the following customer ages:
+
+                </p>
+
+            </div>
+
+
+
+            <div class="challenge-card">
+
+
+                <div class="challenge-data-value">
+
+                    21, 23, 25, 24, 22, 250
+
+                </div>
+
+
+                <h3>
+
+                    What should you do first with
+                    the value <strong>250</strong>?
+
+                </h3>
+
+
+                <div class="challenge-options">
+
+
+                    <button
+                        onclick="checkAnswer(this, false)">
+
+                        A. Delete it immediately
+
+                    </button>
+
+
+                    <button
+                        onclick="checkAnswer(this, true)">
+
+                        B. Investigate whether it is valid
+
+                    </button>
+
+
+                    <button
+                        onclick="checkAnswer(this, false)">
+
+                        C. Replace it with 21
+
+                    </button>
+
+
+                    <button
+                        onclick="checkAnswer(this, false)">
+
+                        D. Ignore the entire dataset
+
+                    </button>
+
+                </div>
+
+
+                <div id="challenge-result"
+                     class="challenge-result">
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= REAL WORLD PROBLEM ================= -->
+
+        <section class="foundation-section">
+
+
+            <div class="section-heading">
+
+                <span class="section-label">
+                    REAL-WORLD THINKING
+                </span>
+
+
+                <h2>
+
+                    Cleaning is About
+                    <span>
+                        Decisions
+                    </span>
+
+                </h2>
+
+
+                <p>
+
+                    The analyst should never modify data blindly.
+                    Every cleaning decision should have a reason.
+
+                </p>
+
+            </div>
+
+
+
+            <div class="decision-grid">
+
+
+                <div class="decision-card">
+
+                    <strong>
+                        Problem
+                    </strong>
+
+                    <span>
+                        Missing salary
+                    </span>
+
+                    <small>
+                        â†’ Investigate why it is missing
+                    </small>
+
+                </div>
+
+
+                <div class="decision-card">
+
+                    <strong>
+                        Problem
+                    </strong>
+
+                    <span>
+                        Duplicate customer
+                    </span>
+
+                    <small>
+                        â†’ Determine whether it is truly duplicate
+                    </small>
+
+                </div>
+
+
+                <div class="decision-card">
+
+                    <strong>
+                        Problem
+                    </strong>
+
+                    <span>
+                        Age = 250
+                    </span>
+
+                    <small>
+                        â†’ Validate before changing
+                    </small>
+
+                </div>
+
+
+                <div class="decision-card">
+
+                    <strong>
+                        Problem
+                    </strong>
+
+                    <span>
+                        Mumbai / MUM / mumbai
+                    </span>
+
+                    <small>
+                        â†’ Standardize categories
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= KEY TAKEAWAYS ================= -->
+
+        <section class="foundation-section">
+
+
+            <div class="section-heading">
+
+                <span class="section-label">
+                    KEY TAKEAWAYS
+                </span>
+
+
+                <h2>
+
+                    Remember These
+                    <span>
+                        Rules
+                    </span>
+
+                </h2>
+
+            </div>
+
+
+
+            <div class="takeaway-grid">
+
+
+                <div class="takeaway-card">
+
+                    <span>
+                        01
+                    </span>
+
+                    <p>
+                        Never assume raw data is clean.
+                    </p>
+
+                </div>
+
+
+                <div class="takeaway-card">
+
+                    <span>
+                        02
+                    </span>
+
+                    <p>
+                        Missing data needs investigation,
+                        not automatic deletion.
+                    </p>
+
+                </div>
+
+
+                <div class="takeaway-card">
+
+                    <span>
+                        03
+                    </span>
+
+                    <p>
+                        Duplicate and inconsistent records
+                        can distort analysis.
+                    </p>
+
+                </div>
+
+
+                <div class="takeaway-card">
+
+                    <span>
+                        04
+                    </span>
+
+                    <p>
+                        Outliers should be investigated
+                        before being removed.
+                    </p>
+
+                </div>
+
+
+                <div class="takeaway-card">
+
+                    <span>
+                        05
+                    </span>
+
+                    <p>
+                        Clean data produces more reliable
+                        analysis and visualizations.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= NAVIGATION ================= -->
+
+        <section class="foundation-navigation">
+
+
+            <a href="foundation-02.html"
+               class="foundation-nav-btn">
+
+                â† Foundation 02
+
+            </a>
+
+
+            <a href="data_analytics_foundations.html"
+               class="foundation-nav-btn">
+
+                All Foundations
+
+            </a>
+
+
+            <a href="foundation-04.html"
+               class="foundation-nav-btn next">
+
+                Foundation 04 â†’
+
+            </a>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <div class="footer-content">
+
+            <p>
+                Â© 2026 Rasika CodeLab
+            </p>
+
+            <p>
+                Learn. Build. Analyze.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        function checkAnswer(button, correct) {
+
+            const result =
+                document.getElementById(
+                    "challenge-result"
+                );
+
+
+            const options =
+                document.querySelectorAll(
+                    ".challenge-options button"
+                );
+
+
+            options.forEach(option => {
+
+                option.classList.remove("correct");
+                option.classList.remove("wrong");
+
+            });
+
+
+            if (correct) {
+
+                button.classList.add("correct");
+
+
+                result.innerHTML =
+                    "âœ“ Correct! An outlier should be " +
+                    "<strong>investigated first</strong>. " +
+                    "It may be an error or a genuine observation.";
+
+
+                result.className =
+                    "challenge-result correct-result";
+
+            }
+
+            else {
+
+                button.classList.add("wrong");
+
+
+                result.innerHTML =
+                    "Not quite. Never delete an unusual value " +
+                    "without understanding why it occurred.";
+
+
+                result.className =
+                    "challenge-result wrong-result";
+
+            }
+
+        }
+
+    </script>
+
+
+   <script src="../../../js/main.js"></script>
+<script type="module" src="../../../js/auth-nav.js"></script>
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,1637 @@
+/* =========================================================
+   RASIKA CODELAB
+   GLOBAL FINAL UI FIX
+   HOME + FOUNDATIONS + PRACTICALS
+   DARK / ORANGE DESIGN SYSTEM
+   ========================================================= */
+
+
+/* =========================================================
+   01. GLOBAL VARIABLES
+   ========================================================= */
+
+:root {
+    --bg: #07090a;
+    --bg-soft: #0b0e10;
+    --card: #111518;
+    --card-hover: #151a1d;
+
+    --text: #f5f5f5;
+    --muted: #858b91;
+    --muted-light: #a8adb2;
+
+    --accent: #ff8a00;
+    --accent-dark: #d96f00;
+    --accent-soft: rgba(255, 138, 0, .10);
+    --accent-border: rgba(255, 138, 0, .25);
+
+    --border: rgba(255,255,255,.08);
+    --border-light: rgba(255,255,255,.12);
+
+    --max-width: 1180px;
+    --radius: 12px;
+}
+
+
+/* =========================================================
+   02. GLOBAL RESET
+   ========================================================= */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+
+    background:
+        radial-gradient(
+            circle at 20% 10%,
+            rgba(255,138,0,.025),
+            transparent 35%
+        ),
+        #07090a;
+
+    color: var(--text);
+
+    font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    line-height: 1.5;
+
+    overflow-x: hidden;
+}
+
+img,
+svg,
+canvas,
+video {
+    max-width: 100%;
+}
+
+button,
+a,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   03. COMMON CONTAINER
+   ========================================================= */
+
+.container,
+.section-container,
+.learning-model,
+.foundation-detail,
+.foundation-navigation,
+.practical-container {
+    width: min(
+        var(--max-width),
+        calc(100% - 40px)
+    );
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* =========================================================
+   04. NAVBAR
+   ========================================================= */
+
+header,
+.navbar,
+.site-header {
+    position: relative;
+    z-index: 100;
+
+    width: 100%;
+
+    background: rgba(7,9,10,.94);
+
+    border-bottom: 1px solid rgba(255,255,255,.06);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.navbar {
+    min-height: 58px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 32px;
+}
+
+.logo,
+.brand,
+.nav-logo {
+    color: #fff;
+    font-weight: 800;
+}
+
+.logo span,
+.brand span,
+.nav-logo span {
+    color: var(--accent);
+}
+
+nav,
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+nav a,
+.nav-links a {
+    position: relative;
+
+    color: #8d9398;
+
+    font-size: .72rem;
+    font-weight: 500;
+
+    transition: color .2s ease;
+}
+
+nav a:hover,
+.nav-links a:hover {
+    color: #fff;
+}
+
+nav a.active,
+.nav-links a.active {
+    color: #fff;
+}
+
+nav a.active::after,
+.nav-links a.active::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: -18px;
+
+    height: 2px;
+
+    background: var(--accent);
+}
+
+
+/* =========================================================
+   05. BUTTONS
+   ========================================================= */
+
+.btn,
+button,
+.hero-btn,
+.primary-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 40px;
+
+    padding: 0 17px;
+
+    border: 1px solid transparent;
+    border-radius: 7px;
+
+    background: var(--accent);
+
+    color: #080808;
+
+    font-size: .72rem;
+    font-weight: 750;
+
+    cursor: pointer;
+
+    transition:
+        transform .2s ease,
+        background .2s ease,
+        box-shadow .2s ease;
+}
+
+.btn:hover,
+button:hover,
+.hero-btn:hover,
+.primary-btn:hover {
+    background: #ff970f;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 25px rgba(255,138,0,.16);
+}
+
+.btn-secondary,
+.secondary-btn {
+    background: #151a1d;
+
+    border-color: var(--border);
+
+    color: #fff;
+}
+
+.btn-secondary:hover,
+.secondary-btn:hover {
+    background: #1b2024;
+}
+
+
+/* =========================================================
+   06. COMMON SECTION
+   ========================================================= */
+
+section {
+    position: relative;
+}
+
+.section-heading {
+    margin-bottom: 34px;
+}
+
+.section-heading .eyebrow,
+.eyebrow,
+.section-label {
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: var(--accent);
+
+    font-family:
+        "SFMono-Regular",
+        Consolas,
+        monospace;
+
+    font-size: .58rem;
+    font-weight: 800;
+
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.section-heading h2,
+section h2 {
+    margin: 0;
+
+    color: #f4f4f4;
+
+    font-size: clamp(2rem, 4vw, 3.3rem);
+
+    line-height: 1.02;
+    letter-spacing: -.045em;
+}
+
+.section-heading p {
+    max-width: 680px;
+
+    margin-top: 12px;
+
+    color: var(--muted);
+
+    font-size: .78rem;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   07. HERO
+   ========================================================= */
+
+.hero,
+.foundation-detail-hero,
+.practical-hero {
+    width: min(
+        var(--max-width),
+        calc(100% - 40px)
+    );
+
+    min-height: 510px;
+
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    align-items: center;
+
+    gap: 70px;
+
+    padding: 80px 0 70px;
+}
+
+.hero-content,
+.foundation-hero-content,
+.practical-hero-content {
+    max-width: 590px;
+}
+
+.hero h1,
+.foundation-detail-hero h1,
+.practical-hero h1 {
+    margin: 0;
+
+    color: #f7f7f7;
+
+    font-size: clamp(3.4rem, 6vw, 6rem);
+
+    line-height: .94;
+
+    letter-spacing: -.065em;
+
+    font-weight: 850;
+}
+
+.hero h1 span,
+.foundation-detail-hero h1 span,
+.practical-hero h1 span {
+    color: var(--accent);
+}
+
+.hero p,
+.foundation-detail-hero p,
+.practical-hero p {
+    max-width: 570px;
+
+    margin: 20px 0 25px;
+
+    color: var(--muted);
+
+    font-size: .84rem;
+
+    line-height: 1.75;
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+
+/* =========================================================
+   08. HERO VISUAL
+   ========================================================= */
+
+.hero-visual,
+.foundation-visual-window,
+.graphics-window {
+    position: relative;
+
+    width: 100%;
+    max-width: 530px;
+
+    min-height: 230px;
+
+    margin-left: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.visualizer-window {
+    width: 100%;
+
+    min-height: 220px;
+
+    padding: 20px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.025),
+            transparent
+        ),
+        #101416;
+
+    box-shadow:
+        0 30px 70px rgba(0,0,0,.35);
+}
+
+.visualizer-window::before {
+    content: "•••";
+
+    display: block;
+
+    margin-bottom: 22px;
+
+    color: #565b60;
+
+    letter-spacing: 4px;
+}
+
+
+/* =========================================================
+   09. WHY RASIKA CODELAB
+   ========================================================= */
+
+.features-section,
+.why-section,
+.learning-features {
+    width: min(
+        var(--max-width),
+        calc(100% - 40px)
+    );
+
+    margin: 0 auto;
+
+    padding: 70px 0;
+}
+
+.features-section > h2,
+.why-section > h2 {
+    max-width: 850px;
+
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+
+    letter-spacing: -.035em;
+}
+
+
+/* =========================================================
+   10. FEATURE GRID
+   ========================================================= */
+
+.features-grid,
+.feature-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 12px;
+
+    margin-top: 30px;
+}
+
+.feature-card {
+    position: relative;
+
+    min-width: 0;
+    min-height: 190px;
+
+    padding: 22px;
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius);
+
+    background: #111518;
+
+    transition:
+        transform .2s ease,
+        border-color .2s ease,
+        background .2s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-4px);
+
+    border-color: var(--accent-border);
+
+    background: var(--card-hover);
+}
+
+.feature-card strong {
+    display: block;
+
+    margin: 12px 0 7px;
+
+    color: #fff;
+
+    font-size: .92rem;
+}
+
+.feature-card p {
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: .72rem;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   11. FOUNDATION GRID
+   ========================================================= */
+
+.foundation-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 12px;
+
+    width: 100%;
+
+    min-width: 0;
+}
+
+.foundation-card {
+    min-width: 0;
+
+    min-height: 175px;
+
+    padding: 22px;
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.025),
+            transparent 70%
+        ),
+        #111518;
+
+    transition:
+        transform .2s ease,
+        border-color .2s ease,
+        background .2s ease;
+}
+
+.foundation-card:hover {
+    transform: translateY(-4px);
+
+    border-color: var(--accent-border);
+
+    background: #15191c;
+}
+
+.foundation-card h3 {
+    margin: 12px 0 8px;
+
+    color: #fff;
+
+    font-size: .88rem;
+
+    line-height: 1.3;
+}
+
+.foundation-card p {
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: .68rem;
+
+    line-height: 1.6;
+}
+
+.foundation-card a {
+    display: inline-block;
+
+    margin-top: 12px;
+
+    color: var(--accent);
+
+    font-size: .68rem;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   12. FOUNDATION NUMBER
+   ========================================================= */
+
+.foundation-card .number,
+.foundation-card > span:first-child {
+    color: var(--accent);
+
+    font-family:
+        "SFMono-Regular",
+        Consolas,
+        monospace;
+
+    font-size: .63rem;
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   13. LEARNING MODEL
+   ========================================================= */
+
+.learning-model {
+    padding: 80px 0;
+
+    min-width: 0;
+}
+
+.learning-model .section-heading {
+    margin-bottom: 30px;
+}
+
+.learning-steps {
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, minmax(0, 1fr));
+
+    gap: 12px;
+
+    width: 100%;
+
+    min-width: 0;
+}
+
+.learning-step {
+    position: relative;
+
+    min-width: 0;
+    min-height: 170px;
+
+    padding: 22px 20px;
+
+    display: flex;
+    flex-direction: column;
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.025),
+            transparent 65%
+        ),
+        #111518;
+
+    transition:
+        transform .22s ease,
+        border-color .22s ease,
+        background .22s ease;
+}
+
+.learning-step:hover {
+    transform: translateY(-5px);
+
+    border-color: var(--accent-border);
+
+    background: #15191c;
+}
+
+.learning-step .step-number,
+.learning-step > span:first-child {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 31px;
+    height: 31px;
+
+    margin-bottom: 22px;
+
+    border: 1px solid var(--accent-border);
+
+    border-radius: 8px;
+
+    background: var(--accent-soft);
+
+    color: var(--accent);
+
+    font-family:
+        "SFMono-Regular",
+        Consolas,
+        monospace;
+
+    font-size: .6rem;
+    font-weight: 800;
+}
+
+.learning-step strong {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #fff;
+
+    font-size: .82rem;
+}
+
+.learning-step p {
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: .68rem;
+
+    line-height: 1.55;
+}
+
+.learning-step::after {
+    content: "";
+
+    position: absolute;
+
+    left: 20px;
+    bottom: 14px;
+
+    width: 23px;
+    height: 2px;
+
+    border-radius: 10px;
+
+    background: rgba(255,138,0,.3);
+
+    transition: width .2s ease;
+}
+
+.learning-step:hover::after {
+    width: 43px;
+
+    background: var(--accent);
+}
+
+
+/* =========================================================
+   14. LEARNING MODEL LINE
+   ========================================================= */
+
+.learning-steps::before {
+    content: "";
+
+    position: absolute;
+
+    z-index: 0;
+
+    left: 6%;
+    right: 6%;
+
+    top: 37px;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,138,0,.3),
+            rgba(255,138,0,.12),
+            transparent
+        );
+
+    pointer-events: none;
+}
+
+.learning-step > * {
+    position: relative;
+    z-index: 2;
+}
+
+
+/* =========================================================
+   15. PRACTICAL PAGE
+   ========================================================= */
+
+.practicals,
+.practical-section,
+.practicals-section {
+    width: min(
+        var(--max-width),
+        calc(100% - 40px)
+    );
+
+    margin: 0 auto;
+
+    padding: 70px 0;
+}
+
+
+/* =========================================================
+   16. PRACTICAL LIST
+   ========================================================= */
+
+.practical-list {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 12px;
+
+    min-width: 0;
+}
+
+
+/* =========================================================
+   17. PRACTICAL CARD
+   ========================================================= */
+
+.practical-card {
+    position: relative;
+
+    min-width: 0;
+
+    min-height: 165px;
+
+    padding: 22px;
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.025),
+            transparent 65%
+        ),
+        #111518;
+
+    transition:
+        transform .2s ease,
+        border-color .2s ease,
+        background .2s ease;
+}
+
+.practical-card:hover {
+    transform: translateY(-4px);
+
+    border-color: var(--accent-border);
+
+    background: #15191c;
+}
+
+.practical-card .practical-number,
+.practical-card > span:first-child {
+    color: var(--accent);
+
+    font-family:
+        "SFMono-Regular",
+        Consolas,
+        monospace;
+
+    font-size: .62rem;
+
+    font-weight: 800;
+}
+
+.practical-card h3 {
+    margin: 11px 0 7px;
+
+    color: #fff;
+
+    font-size: .9rem;
+
+    line-height: 1.35;
+}
+
+.practical-card p {
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: .69rem;
+
+    line-height: 1.6;
+}
+
+.practical-card a {
+    display: inline-block;
+
+    margin-top: 12px;
+
+    color: var(--accent);
+
+    font-size: .67rem;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   18. IF PRACTICALS ARE CURRENTLY PLAIN TEXT
+   ========================================================= */
+
+.practical-list > div,
+.practicals-list > div {
+    min-width: 0;
+
+    padding: 18px 20px;
+
+    border-bottom: 1px solid var(--border);
+
+    background: #111518;
+}
+
+.practical-list > div:first-child,
+.practicals-list > div:first-child {
+    border-radius: 12px 12px 0 0;
+}
+
+.practical-list > div:last-child,
+.practicals-list > div:last-child {
+    border-radius: 0 0 12px 12px;
+}
+
+.practical-list > div:hover,
+.practicals-list > div:hover {
+    background: #15191c;
+}
+
+
+/* =========================================================
+   19. OBJECTIVES
+   ========================================================= */
+
+.foundation-objectives,
+.objectives-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 12px;
+
+    min-width: 0;
+}
+
+.objective-card {
+    min-width: 0;
+
+    padding: 20px;
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius);
+
+    background: #111518;
+}
+
+.objective-card h3 {
+    margin: 0 0 8px;
+
+    color: #fff;
+
+    font-size: .85rem;
+}
+
+.objective-card p {
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: .7rem;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   20. APPLICATION / TERMINOLOGY / SUMMARY
+   ========================================================= */
+
+.application-grid,
+.coordinate-parts,
+.quadrant-grid,
+.terminology-grid,
+.summary-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 12px;
+
+    min-width: 0;
+}
+
+.application-card,
+.coordinate-part-card,
+.quadrant-card,
+.term-card {
+    min-width: 0;
+
+    padding: 20px;
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius);
+
+    background: #111518;
+}
+
+.application-card h3,
+.coordinate-part-card h3,
+.quadrant-card h3,
+.term-card h3 {
+    margin: 0 0 7px;
+
+    color: #fff;
+
+    font-size: .82rem;
+}
+
+.application-card p,
+.coordinate-part-card p,
+.quadrant-card p,
+.term-card p {
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: .68rem;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   21. CONTENT CARD
+   ========================================================= */
+
+.content-card {
+    padding: 28px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 12px;
+
+    background: #111518;
+}
+
+.content-card h2,
+.content-card h3 {
+    color: #fff;
+}
+
+.content-card p,
+.content-card li {
+    color: var(--muted);
+
+    font-size: .76rem;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   22. CANVAS / VISUALIZERS
+   ========================================================= */
+
+.coordinate-canvas,
+.shape-canvas,
+.visualizer-canvas,
+canvas {
+    display: block;
+
+    width: 100%;
+    max-width: 100%;
+
+    border-radius: 10px;
+}
+
+
+/* =========================================================
+   23. CTA SECTION
+   ========================================================= */
+
+.cta-section,
+.final-cta {
+    width: min(
+        var(--max-width),
+        calc(100% - 40px)
+    );
+
+    margin: 0 auto;
+
+    padding: 90px 0;
+
+    border-top: 1px solid rgba(255,255,255,.05);
+}
+
+.cta-section h2,
+.final-cta h2 {
+    max-width: 760px;
+
+    margin: 0 0 12px;
+
+    color: #f5f5f5;
+
+    font-size: clamp(2rem, 4vw, 3.4rem);
+
+    line-height: 1;
+
+    letter-spacing: -.045em;
+}
+
+.cta-section h2 span,
+.final-cta h2 span {
+    color: var(--accent);
+}
+
+.cta-section p,
+.final-cta p {
+    max-width: 650px;
+
+    margin-bottom: 22px;
+
+    color: var(--muted);
+
+    font-size: .75rem;
+}
+
+
+/* =========================================================
+   24. FOOTER
+   ========================================================= */
+
+footer,
+.site-footer {
+    margin-top: 70px;
+
+    border-top: 1px solid rgba(255,255,255,.06);
+
+    background: #080a0b;
+}
+
+.footer-inner {
+    width: min(
+        var(--max-width),
+        calc(100% - 40px)
+    );
+
+    margin: 0 auto;
+
+    padding: 55px 0 25px;
+
+    display: grid;
+
+    grid-template-columns: 2fr 1fr 1fr;
+
+    gap: 50px;
+}
+
+.footer-brand {
+    color: #fff;
+
+    font-weight: 800;
+}
+
+.footer-brand span {
+    color: var(--accent);
+}
+
+.footer-description {
+    max-width: 300px;
+
+    margin-top: 12px;
+
+    color: var(--muted);
+
+    font-size: .65rem;
+
+    line-height: 1.6;
+}
+
+.footer-column h4 {
+    margin: 0 0 12px;
+
+    color: #fff;
+
+    font-size: .7rem;
+}
+
+.footer-column a {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: var(--muted);
+
+    font-size: .65rem;
+}
+
+.footer-column a:hover {
+    color: var(--accent);
+}
+
+.footer-bottom {
+    width: min(
+        var(--max-width),
+        calc(100% - 40px)
+    );
+
+    margin: 0 auto;
+
+    padding: 17px 0;
+
+    display: flex;
+    justify-content: space-between;
+
+    border-top: 1px solid rgba(255,255,255,.05);
+
+    color: #555b60;
+
+    font-size: .58rem;
+}
+
+
+/* =========================================================
+   25. PREVENT GRID OVERFLOW
+   ========================================================= */
+
+.learning-steps,
+.foundation-grid,
+.foundation-objectives,
+.application-grid,
+.coordinate-parts,
+.quadrant-grid,
+.terminology-grid,
+.summary-grid,
+.practical-list,
+.features-grid,
+.feature-grid {
+    min-width: 0;
+}
+
+.learning-step,
+.foundation-card,
+.objective-card,
+.application-card,
+.coordinate-part-card,
+.quadrant-card,
+.term-card,
+.practical-card,
+.feature-card {
+    min-width: 0;
+}
+
+
+/* =========================================================
+   26. TABLET
+   ========================================================= */
+
+@media (max-width: 1050px) {
+
+    .hero,
+    .foundation-detail-hero,
+    .practical-hero {
+        gap: 40px;
+    }
+
+    .features-grid,
+    .feature-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .foundation-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .learning-steps {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+    }
+
+    .learning-steps::before {
+        display: none;
+    }
+
+    .application-grid,
+    .coordinate-parts,
+    .quadrant-grid,
+    .terminology-grid,
+    .summary-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+}
+
+
+/* =========================================================
+   27. TABLET / MOBILE
+   ========================================================= */
+
+@media (max-width: 760px) {
+
+    .container,
+    .section-container,
+    .learning-model,
+    .foundation-detail,
+    .foundation-navigation,
+    .practical-container,
+    .features-section,
+    .why-section,
+    .practicals,
+    .practical-section,
+    .practicals-section,
+    .cta-section,
+    .final-cta {
+        width: calc(100% - 28px);
+    }
+
+    .navbar {
+        padding: 0 16px;
+    }
+
+    nav,
+    .nav-links {
+        gap: 13px;
+    }
+
+    nav a,
+    .nav-links a {
+        font-size: .62rem;
+    }
+
+    .hero,
+    .foundation-detail-hero,
+    .practical-hero {
+        grid-template-columns: 1fr;
+
+        min-height: auto;
+
+        padding: 60px 0 50px;
+
+        gap: 45px;
+    }
+
+    .hero h1,
+    .foundation-detail-hero h1,
+    .practical-hero h1 {
+        font-size: clamp(
+            3rem,
+            12vw,
+            4.5rem
+        );
+    }
+
+    .hero-visual,
+    .foundation-visual-window,
+    .graphics-window {
+        max-width: 100%;
+    }
+
+    .features-grid,
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .foundation-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .learning-steps {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 10px;
+    }
+
+    .learning-step {
+        min-height: 165px;
+
+        padding: 18px;
+    }
+
+    .practical-list {
+        grid-template-columns: 1fr;
+    }
+
+    .foundation-objectives,
+    .application-grid,
+    .coordinate-parts,
+    .quadrant-grid,
+    .terminology-grid,
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-inner {
+        width: calc(100% - 28px);
+
+        grid-template-columns: 1fr 1fr;
+
+        gap: 30px;
+    }
+
+    .footer-brand-area {
+        grid-column: 1 / -1;
+    }
+}
+
+
+/* =========================================================
+   28. MOBILE
+   ========================================================= */
+
+@media (max-width: 520px) {
+
+    .navbar {
+        min-height: 52px;
+    }
+
+    nav,
+    .nav-links {
+        gap: 9px;
+    }
+
+    nav a,
+    .nav-links a {
+        font-size: .55rem;
+    }
+
+    nav a.active::after,
+    .nav-links a.active::after {
+        bottom: -15px;
+    }
+
+    .hero,
+    .foundation-detail-hero,
+    .practical-hero {
+        padding-top: 45px;
+    }
+
+    .hero h1,
+    .foundation-detail-hero h1,
+    .practical-hero h1 {
+        font-size: 3rem;
+    }
+
+    .hero p,
+    .foundation-detail-hero p,
+    .practical-hero p {
+        font-size: .73rem;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .hero-actions .btn {
+        width: 100%;
+    }
+
+    .foundation-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .learning-steps {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .learning-step {
+        min-height: 175px;
+
+        padding: 17px 15px;
+    }
+
+    .learning-step strong {
+        font-size: .78rem;
+    }
+
+    .learning-step p {
+        font-size: .65rem;
+    }
+
+    .section-heading h2,
+    section h2 {
+        font-size: 2rem;
+    }
+
+    .content-card {
+        padding: 20px;
+    }
+
+    .footer-inner {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+
+        gap: 8px;
+    }
+}
+
+
+/* =========================================================
+   29. VERY SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 360px) {
+
+    .learning-steps {
+        grid-template-columns: 1fr;
+    }
+
+    .learning-step {
+        min-height: 145px;
+    }
+
+    .foundation-grid {
+        grid-template-columns: 1fr;
+    }
+
+    nav,
+    .nav-links {
+        gap: 7px;
+    }
+
+    nav a,
+    .nav-links a {
+        font-size: .5rem;
+    }
+}
+
+
+/* =========================================================
+   30. ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+        animation: none !important;
+    }
+
+    .learning-step:hover,
+    .foundation-card:hover,
+    .feature-card:hover,
+    .objective-card:hover,
+    .practical-card:hover {
+        transform: none;
+    }
+}
+
+
+/* =========================================================
+   31. FINAL SAFETY FIX
+   ========================================================= */
+
+.foundation-detail *,
+.foundation-grid *,
+.learning-model *,
+.practical-list *,
+.features-section * {
+    max-width: 100%;
+}
+
+table {
+    max-width: 100%;
+}
+
+pre {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+pre,
+code {
+    font-family:
+        "SFMono-Regular",
+        Consolas,
+        monospace;
+}

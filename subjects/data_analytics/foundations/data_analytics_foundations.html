@@ -1,0 +1,2026 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Data Analytics Foundations | Rasika CodeLab</title>
+
+    <link rel="stylesheet" href="../../../css/style.css">
+
+    <style>
+
+        /* =====================================================
+           DATA ANALYTICS FOUNDATIONS
+        ===================================================== */
+
+        :root {
+            --da-orange: #ff8a2a;
+            --da-orange-light: #ffad62;
+
+            --da-bg: #07090d;
+            --da-bg-2: #0b0f15;
+
+            --da-card: #111720;
+            --da-card-2: #151c26;
+
+            --da-border: rgba(255,255,255,.09);
+
+            --da-text: #f4f5f7;
+            --da-soft: #c5cad2;
+            --da-muted: #8d96a3;
+        }
+
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+            margin: 0;
+            background: var(--da-bg);
+        }
+
+
+        .da-foundation-page {
+            min-height: 100vh;
+            background: var(--da-bg);
+            color: var(--da-text);
+        }
+
+
+        .da-container {
+            width: min(1180px, calc(100% - 40px));
+            margin: auto;
+        }
+
+
+        /* =====================================================
+           SUBJECT NAVIGATION
+        ===================================================== */
+
+        .da-subnav {
+            min-height: 50px;
+
+            border-bottom: 1px solid var(--da-border);
+
+            background: rgba(7,9,13,.97);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 max(20px, calc((100vw - 1180px) / 2));
+        }
+
+
+        .da-subnav-title {
+            color: var(--da-muted);
+
+            font-size: 9px;
+            font-weight: 800;
+
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+
+        .da-subnav-links {
+            display: flex;
+            gap: 6px;
+        }
+
+
+        .da-subnav-links a {
+            padding: 7px 11px;
+
+            border: 1px solid transparent;
+            border-radius: 7px;
+
+            color: var(--da-muted);
+
+            font-size: 9px;
+            font-weight: 600;
+
+            text-decoration: none;
+
+            transition: .2s ease;
+        }
+
+
+        .da-subnav-links a:hover,
+        .da-subnav-links a.active {
+            color: var(--da-orange);
+
+            background: rgba(255,138,42,.06);
+
+            border-color: rgba(255,138,42,.25);
+        }
+
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .foundation-hero {
+            padding: 85px 0 70px;
+
+            border-bottom: 1px solid var(--da-border);
+
+            background:
+                radial-gradient(
+                    circle at 85% 20%,
+                    rgba(255,138,42,.14),
+                    transparent 32%
+                ),
+                var(--da-bg);
+        }
+
+
+        .hero-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            color: var(--da-orange);
+
+            font-size: 9px;
+            font-weight: 900;
+
+            letter-spacing: 2px;
+        }
+
+
+        .hero-kicker::before {
+            content: "";
+
+            width: 25px;
+            height: 1px;
+
+            background: var(--da-orange);
+        }
+
+
+        .foundation-hero h1 {
+            max-width: 900px;
+
+            margin: 18px 0 15px;
+
+            font-size: clamp(43px, 6vw, 70px);
+
+            line-height: 1;
+
+            letter-spacing: -3px;
+        }
+
+
+        .foundation-hero h1 span {
+            color: var(--da-orange);
+        }
+
+
+        .hero-description {
+            max-width: 720px;
+
+            margin: 0;
+
+            color: var(--da-muted);
+
+            font-size: 12px;
+
+            line-height: 1.8;
+        }
+
+
+        /* =====================================================
+           FOUNDATION ROADMAP
+        ===================================================== */
+
+        .foundation-roadmap {
+            display: grid;
+
+            grid-template-columns: repeat(5, 1fr);
+
+            gap: 8px;
+
+            margin-top: 35px;
+        }
+
+
+        .roadmap-item {
+            padding: 13px;
+
+            background: rgba(255,255,255,.025);
+
+            border: 1px solid rgba(255,255,255,.07);
+
+            border-radius: 9px;
+        }
+
+
+        .roadmap-number {
+            color: var(--da-orange);
+
+            font-size: 8px;
+
+            font-weight: 900;
+        }
+
+
+        .roadmap-item strong {
+            display: block;
+
+            margin-top: 7px;
+
+            font-size: 9px;
+        }
+
+
+        .roadmap-item small {
+            display: block;
+
+            margin-top: 4px;
+
+            color: var(--da-muted);
+
+            font-size: 7px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =====================================================
+           SECTION
+        ===================================================== */
+
+        .da-section {
+            padding: 75px 0;
+        }
+
+
+        .da-section.dark {
+            background: var(--da-bg-2);
+
+            border-block: 1px solid rgba(255,255,255,.04);
+        }
+
+
+        .section-heading {
+            margin-bottom: 35px;
+        }
+
+
+        .section-label {
+            color: var(--da-orange);
+
+            font-size: 9px;
+            font-weight: 900;
+
+            letter-spacing: 2px;
+        }
+
+
+        .section-heading h2 {
+            margin: 10px 0;
+
+            font-size: clamp(28px, 4vw, 42px);
+
+            letter-spacing: -1px;
+        }
+
+
+        .section-heading h2 span {
+            color: var(--da-orange);
+        }
+
+
+        .section-heading p {
+            max-width: 700px;
+
+            margin: 0;
+
+            color: var(--da-muted);
+
+            font-size: 10px;
+
+            line-height: 1.8;
+        }
+
+
+        /* =====================================================
+           FOUNDATION CARD
+        ===================================================== */
+
+        .foundation-card {
+            position: relative;
+
+            display: grid;
+
+            grid-template-columns: 100px 1fr;
+
+            gap: 25px;
+
+            margin-bottom: 18px;
+
+            padding: 28px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #141a23,
+                    #0d1118
+                );
+
+            border: 1px solid var(--da-border);
+
+            border-radius: 18px;
+
+            overflow: hidden;
+
+            transition: .25s ease;
+        }
+
+
+        .foundation-card::before {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            top: 0;
+            bottom: 0;
+
+            width: 3px;
+
+            background: var(--da-orange);
+
+            opacity: .7;
+        }
+
+
+        .foundation-card:hover {
+            transform: translateY(-3px);
+
+            border-color: rgba(255,138,42,.3);
+        }
+
+
+        /* =====================================================
+           NUMBER
+        ===================================================== */
+
+        .foundation-number {
+            display: flex;
+
+            align-items: flex-start;
+            justify-content: center;
+        }
+
+
+        .foundation-number span {
+            width: 68px;
+            height: 68px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid rgba(255,138,42,.3);
+
+            border-radius: 50%;
+
+            color: var(--da-orange);
+
+            background: rgba(255,138,42,.05);
+
+            font-size: 18px;
+
+            font-weight: 900;
+        }
+
+
+        /* =====================================================
+           CARD CONTENT
+        ===================================================== */
+
+        .foundation-content h3 {
+            margin: 0;
+
+            font-size: 25px;
+
+            line-height: 1.2;
+        }
+
+
+        .foundation-content h3 span {
+            color: var(--da-orange);
+        }
+
+
+        .foundation-intro {
+            max-width: 750px;
+
+            margin: 10px 0 22px;
+
+            color: var(--da-muted);
+
+            font-size: 10px;
+
+            line-height: 1.8;
+        }
+
+
+        /* =====================================================
+           TOPIC GRID
+        ===================================================== */
+
+        .topic-grid {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 10px;
+        }
+
+
+        .topic-card {
+            min-height: 105px;
+
+            padding: 15px;
+
+            background: rgba(255,255,255,.025);
+
+            border: 1px solid rgba(255,255,255,.06);
+
+            border-radius: 10px;
+
+            transition: .2s ease;
+        }
+
+
+        .topic-card:hover {
+            border-color: rgba(255,138,42,.25);
+
+            background: rgba(255,138,42,.025);
+        }
+
+
+        .topic-card h4 {
+            margin: 0 0 7px;
+
+            font-size: 12px;
+        }
+
+
+        .topic-card p {
+            margin: 0;
+
+            color: var(--da-muted);
+
+            font-size: 8px;
+
+            line-height: 1.65;
+        }
+
+
+        /* =====================================================
+           EXAMPLE STRIP
+        ===================================================== */
+
+        .example-strip {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 6px;
+
+            margin-top: 17px;
+        }
+
+
+        .example-strip span {
+            padding: 6px 9px;
+
+            border: 1px solid rgba(255,255,255,.07);
+
+            border-radius: 50px;
+
+            color: var(--da-soft);
+
+            font-size: 7px;
+        }
+
+
+        /* =====================================================
+           LEARNING OUTCOME
+        ===================================================== */
+
+        .foundation-outcome {
+            margin-top: 18px;
+
+            padding: 15px;
+
+            border-radius: 9px;
+
+            background: rgba(255,138,42,.035);
+
+            border: 1px solid rgba(255,138,42,.12);
+        }
+
+
+        .foundation-outcome strong {
+            display: block;
+
+            margin-bottom: 6px;
+
+            color: var(--da-orange);
+
+            font-size: 7px;
+
+            letter-spacing: 1px;
+        }
+
+
+        .foundation-outcome p {
+            margin: 0;
+
+            color: var(--da-soft);
+
+            font-size: 8px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =====================================================
+           DATA ANALYTICS FLOW
+        ===================================================== */
+
+        .analytics-flow {
+            display: grid;
+
+            grid-template-columns:
+                repeat(5, minmax(0, 1fr));
+
+            gap: 10px;
+        }
+
+
+        .flow-card {
+            position: relative;
+
+            padding: 20px 15px;
+
+            background: var(--da-card);
+
+            border: 1px solid var(--da-border);
+
+            border-radius: 12px;
+
+            text-align: center;
+        }
+
+
+        .flow-card:not(:last-child)::after {
+            content: "â†’";
+
+            position: absolute;
+
+            right: -15px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: var(--da-orange);
+
+            font-size: 15px;
+
+            z-index: 2;
+        }
+
+
+        .flow-number {
+            color: var(--da-orange);
+
+            font-size: 8px;
+
+            font-weight: 900;
+        }
+
+
+        .flow-card h4 {
+            margin: 10px 0 6px;
+
+            font-size: 12px;
+        }
+
+
+        .flow-card p {
+            margin: 0;
+
+            color: var(--da-muted);
+
+            font-size: 7px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =====================================================
+           TOOLS
+        ===================================================== */
+
+        .tools-grid {
+            display: grid;
+
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 12px;
+        }
+
+
+        .tool-card {
+            padding: 20px;
+
+            background: var(--da-card);
+
+            border: 1px solid var(--da-border);
+
+            border-radius: 13px;
+        }
+
+
+        .tool-card h3 {
+            margin: 0 0 7px;
+
+            font-size: 14px;
+        }
+
+
+        .tool-card p {
+            margin: 0;
+
+            color: var(--da-muted);
+
+            font-size: 8px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =====================================================
+           CTA
+        ===================================================== */
+
+        .final-section {
+            padding: 75px 0 90px;
+        }
+
+
+        .final-box {
+            padding: 45px;
+
+            text-align: center;
+
+            background:
+                radial-gradient(
+                    circle at 90% 10%,
+                    rgba(255,138,42,.14),
+                    transparent 35%
+                ),
+                var(--da-card);
+
+            border: 1px solid var(--da-border);
+
+            border-radius: 22px;
+        }
+
+
+        .final-box small {
+            color: var(--da-orange);
+
+            font-size: 8px;
+
+            font-weight: 900;
+
+            letter-spacing: 2px;
+        }
+
+
+        .final-box h2 {
+            margin: 13px 0;
+
+            font-size: clamp(28px, 4vw, 42px);
+        }
+
+
+        .final-box h2 span {
+            color: var(--da-orange);
+        }
+
+
+        .final-box p {
+            max-width: 650px;
+
+            margin: auto;
+
+            color: var(--da-muted);
+
+            font-size: 10px;
+
+            line-height: 1.8;
+        }
+
+
+        .da-final-buttons {
+            display: flex;
+
+            justify-content: center;
+
+            gap: 10px;
+
+            margin-top: 25px;
+        }
+
+
+        .da-final-btn {
+            padding: 11px 18px;
+
+            border: 1px solid var(--da-border);
+
+            border-radius: 8px;
+
+            color: var(--da-soft);
+
+            font-size: 8px;
+
+            font-weight: 800;
+
+            text-decoration: none;
+
+            transition: .2s ease;
+        }
+
+
+        .da-final-btn:hover {
+            color: var(--da-orange);
+
+            border-color: var(--da-orange);
+        }
+
+
+        .da-final-btn.primary {
+            background: var(--da-orange);
+
+            border-color: var(--da-orange);
+
+            color: #111;
+        }
+
+
+        .da-final-btn.primary:hover {
+            background: var(--da-orange-light);
+
+            color: #111;
+        }
+
+
+        /* =====================================================
+           TABLET
+        ===================================================== */
+
+        @media(max-width: 950px) {
+
+            .foundation-roadmap {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+
+            .topic-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+
+            .analytics-flow {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+
+            .flow-card:not(:last-child)::after {
+                display: none;
+            }
+
+
+            .tools-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media(max-width: 700px) {
+
+            .da-container {
+                width: calc(100% - 30px);
+            }
+
+
+            .da-subnav {
+                padding: 10px 15px;
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 10px;
+            }
+
+
+            .da-subnav-links {
+                width: 100%;
+
+                overflow-x: auto;
+            }
+
+
+            .da-subnav-links a {
+                flex-shrink: 0;
+            }
+
+
+            .foundation-hero {
+                padding: 65px 0;
+            }
+
+
+            .foundation-hero h1 {
+                font-size: 43px;
+
+                letter-spacing: -2px;
+            }
+
+
+            .foundation-roadmap {
+                grid-template-columns: 1fr 1fr;
+            }
+
+
+            .da-section {
+                padding: 60px 0;
+            }
+
+
+            .foundation-card {
+                grid-template-columns: 1fr;
+
+                gap: 15px;
+
+                padding: 22px;
+            }
+
+
+            .foundation-number {
+                justify-content: flex-start;
+            }
+
+
+            .foundation-number span {
+                width: 50px;
+                height: 50px;
+
+                font-size: 14px;
+            }
+
+
+            .topic-grid,
+            .analytics-flow,
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .flow-card:not(:last-child)::after {
+                display: none;
+            }
+
+
+            .final-box {
+                padding: 30px 20px;
+            }
+
+
+            .da-final-buttons {
+                flex-direction: column;
+            }
+
+
+            .da-final-btn {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         MAIN NAVBAR
+    ===================================================== -->
+
+    <header class="navbar">
+
+        <div class="nav-container">
+
+            <a href="../../../index.html" class="logo">
+
+                <span class="logo-mark">&lt;/&gt;</span>
+
+                <span>
+                    Rasika<span class="logo-highlight">CodeLab</span>
+                </span>
+
+            </a>
+
+
+            <nav class="nav-links">
+
+                <a href="../../../index.html">
+                    Home
+                </a>
+
+                <a href="../../../subjects.html" class="active">
+                    Subjects
+                </a>
+
+                <a href="../../../about.html">
+                    About
+                </a>
+
+                <a href="../../../login.html">
+                    Login
+                </a>
+
+            </nav>
+
+
+            <button class="menu-btn" aria-label="Open menu">
+                â˜°
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         DATA ANALYTICS SUB NAV
+    ===================================================== -->
+
+    <div class="da-subnav">
+
+        <div class="da-subnav-title">
+            Data Analytics
+        </div>
+
+
+        <nav class="da-subnav-links">
+
+            <a href="../index.html">
+                Overview
+            </a>
+
+            <a href="data_analytics_foundations.html"
+               class="active">
+                Foundations
+            </a>
+
+            <a href="../practicals/data_analytics_practicals.html">
+                Practicals
+            </a>
+
+        </nav>
+
+    </div>
+
+
+    <main class="da-foundation-page">
+
+
+        <!-- =====================================================
+             HERO
+        ===================================================== -->
+
+        <section class="foundation-hero">
+
+            <div class="da-container">
+
+                <div class="hero-kicker">
+                    SUBJECT 04 Â· FOUNDATIONS
+                </div>
+
+
+                <h1>
+                    Build Your
+                    <span>Analytics Foundation.</span>
+                </h1>
+
+
+                <p class="hero-description">
+
+                    Before working with real-world datasets,
+                    understand how data is structured, prepared,
+                    explored and visualized. These five foundations
+                    provide the concepts required for every practical
+                    that follows.
+
+                </p>
+
+
+                <div class="foundation-roadmap">
+
+
+                    <div class="roadmap-item">
+
+                        <span class="roadmap-number">
+                            01
+                        </span>
+
+                        <strong>
+                            Data
+                        </strong>
+
+                        <small>
+                            Understand data
+                        </small>
+
+                    </div>
+
+
+                    <div class="roadmap-item">
+
+                        <span class="roadmap-number">
+                            02
+                        </span>
+
+                        <strong>
+                            Datasets
+                        </strong>
+
+                        <small>
+                            Understand structure
+                        </small>
+
+                    </div>
+
+
+                    <div class="roadmap-item">
+
+                        <span class="roadmap-number">
+                            03
+                        </span>
+
+                        <strong>
+                            Cleaning
+                        </strong>
+
+                        <small>
+                            Improve quality
+                        </small>
+
+                    </div>
+
+
+                    <div class="roadmap-item">
+
+                        <span class="roadmap-number">
+                            04
+                        </span>
+
+                        <strong>
+                            EDA
+                        </strong>
+
+                        <small>
+                            Discover patterns
+                        </small>
+
+                    </div>
+
+
+                    <div class="roadmap-item">
+
+                        <span class="roadmap-number">
+                            05
+                        </span>
+
+                        <strong>
+                            Visualization
+                        </strong>
+
+                        <small>
+                            Communicate insights
+                        </small>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             FOUNDATIONS
+        ===================================================== -->
+
+        <section class="da-section">
+
+            <div class="da-container">
+
+
+                <div class="section-heading">
+
+                    <span class="section-label">
+                        05 CORE FOUNDATIONS
+                    </span>
+
+                    <h2>
+                        What You Need
+                        <span>Before the Practicals.</span>
+                    </h2>
+
+                    <p>
+                        These are not designed as long theoretical
+                        chapters. Each foundation introduces a concept
+                        and immediately connects it to how an analyst
+                        actually works with data.
+                    </p>
+
+                </div>
+
+
+                <!-- =================================================
+                     FOUNDATION 01
+                ================================================= -->
+
+                <article class="foundation-card">
+
+
+                    <div class="foundation-number">
+
+                        <span>
+                            01
+                        </span>
+
+                    </div>
+
+
+                    <div class="foundation-content">
+
+                        <h3>
+                            What is
+                            <span>Data Analytics?</span>
+                        </h3>
+
+
+                        <p class="foundation-intro">
+
+                            Understand why organizations collect data
+                            and how analysts transform raw information
+                            into useful insights for decision-making.
+
+                        </p>
+
+
+                        <div class="topic-grid">
+
+
+                            <div class="topic-card">
+
+                                <h4>
+                                    Data vs Information
+                                </h4>
+
+                                <p>
+                                    Understand the difference between
+                                    raw observations and meaningful
+                                    information.
+                                </p>
+
+                            </div>
+
+
+                            <div class="topic-card">
+
+                                <h4>
+                                    What Does an Analyst Do?
+                                </h4>
+
+                                <p>
+                                    Explore the role of an analyst
+                                    from asking questions to finding
+                                    evidence in data.
+                                </p>
+
+                            </div>
+
+
+                            <div class="topic-card">
+
+                                <h4>
+                                    Types of Analytics
+                                </h4>
+
+                                <p>
+                                    Introduction to descriptive,
+                                    diagnostic, predictive and
+                                    prescriptive analytics.
+                                </p>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="example-strip">
+
+                            <span>Business</span>
+                            <span>Education</span>
+                            <span>Healthcare</span>
+                            <span>Finance</span>
+                            <span>Retail</span>
+
+                        </div>
+
+
+                        <div class="foundation-outcome">
+
+                            <strong>
+                                FOUNDATION OUTCOME
+                            </strong>
+
+                            <p>
+                                Students can explain what data analytics
+                                is and identify where analytics can be
+                                applied to real-world problems.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- =================================================
+                     FOUNDATION 02
+                ================================================= -->
+
+                <article class="foundation-card">
+
+
+                    <div class="foundation-number">
+
+                        <span>
+                            02
+                        </span>
+
+                    </div>
+
+
+                    <div class="foundation-content">
+
+                        <h3>
+                            Understand
+                            <span>Data & Datasets</span>
+                        </h3>
+
+
+                        <p class="foundation-intro">
+
+                            Learn how datasets are organized and how
+                            different types of variables affect the
+                            analysis and visualization you can perform.
+
+                        </p>
+
+
+                        <div class="topic-grid">
+
+
+                            <div class="topic-card">
+
+                                <h4>
+                                    Rows & Columns
+                                </h4>
+
+                                <p>
+                                    Understand observations, records,
+                                    features and variables in a
+                                    structured dataset.
+                                </p>
+
+                            </div>
+
+
+                            <div class="topic-card">
+
+                                <h4>
+                                    Data Types
+                                </h4>
+
+                                <p>
+                                    Work with numerical, categorical,
+                                    text, date and boolean data.
+                                </p>
+
+                            </div>
+
+
+                            <div class="topic-card">
+
+                                <h4>
+                                    Structured Data
+                                </h4>
+
+                                <p>
+                                    Understand tables, CSV files,
+                                    spreadsheets and database-style
+                                    datasets.
+                                </p>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="example-strip">
+
+                            <span>Numerical</span>
+                            <span>Categorical</span>
+                            <span>Text</span>
+                            <span>Date</span>
+                            <span>Boolean</span>
+
+                        </div>
+
+
+                        <div class="foundation-outcome">
+
+                            <strong>
+                                FOUNDATION OUTCOME
+                            </strong>
+
+                            <p>
+                                Students can inspect a dataset and
+                                identify its rows, columns, variables,
+                                data types and basic structure.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- =================================================
+                     FOUNDATION 03
+                ================================================= -->
+
+                <article class="foundation-card">
+
+
+                    <div class="foundation-number">
+
+                        <span>
+                            03
+                        </span>
+
+                    </div>
+
+
+                    <div class="foundation-content">
+
+                        <h3>
+                            Data Quality &
+                            <span>Cleaning</span>
+                        </h3>
+
+
+                        <p class="foundation-intro">
+
+                            Real-world data is rarely perfect. Learn
+                            how analysts identify and handle problems
+                            before performing analysis.
+
+                        </p>
+
+
+                        <div class="topic-grid">
+
+
+                            <div class="topic-card">
+
+                                <h4>
+                                    Missing Values
+                                </h4>
+
+                                <p>
+                                    Identify missing records and
+                                    understand appropriate ways to
+                                    handle them.
+                                </p>
+
+                            </div>
+
+
+                            <div class="topic-card">
+
+                                <h4>
+                                    Duplicates
+                                </h4>
+
+                                <p>
+                                    Detect repeated records that can
+                                    distort counts and analytical
+                                    results.
+                                </p>
+
+                            </div>
+
+
+                            <div class="topic-card">
+
+                                <h4>
+                                    Inconsistent Data
+                                </h4>
+
+                                <p>
+                                    Identify inconsistent categories,
+                                    formats, spellings and invalid
+                                    values.
+                                </p>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="example-strip">
+
+                            <span>Missing Data</span>
+                            <span>Duplicates</span>
+                            <span>Invalid Values</span>
+                            <span>Outliers</span>
+                            <span>Formatting</span>
+
+                        </div>
+
+
+                        <div class="foundation-outcome">
+
+                            <strong>
+                                FOUNDATION OUTCOME
+                            </strong>
+
+                            <p>
+                                Students understand why data quality
+                                matters and can identify common
+                                problems in raw datasets before analysis.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- =================================================
+                     FOUNDATION 04
+                ================================================= -->
+
+                <article class="foundation-card">
+
+
+                    <div class="foundation-number">
+
+                        <span>
+                            04
+                        </span>
+
+                    </div>
+
+
+                    <div class="foundation-content">
+
+                        <h3>
+                            Exploratory Data
+                            <span>Analysis</span>
+                        </h3>
+
+
+                        <p class="foundation-intro">
+
+                            Learn how analysts explore a dataset to
+                            discover distributions, patterns,
+                            relationships and unusual observations.
+
+                        </p>
+
+
+                        <div class="topic-grid">
+
+
+                            <div class="topic-card">
+
+                                <h4>
+                                    Descriptive Statistics
+                                </h4>
+
+                                <p>
+                                    Understand count, mean, median,
+                                    minimum, maximum and spread.
+                                </p>
+
+                            </div>
+
+
+                            <div class="topic-card">
+
+                                <h4>
+                                    Distributions
+                                </h4>
+
+                                <p>
+                                    Explore how values are distributed
+                                    using appropriate analytical
+                                    techniques.
+                                </p>
+
+                            </div>
+
+
+                            <div class="topic-card">
+
+                                <h4>
+                                    Relationships
+                                </h4>
+
+                                <p>
+                                    Investigate relationships between
+                                    variables using comparison and
+                                    correlation.
+                                </p>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="example-strip">
+
+                            <span>Mean</span>
+                            <span>Median</span>
+                            <span>Distribution</span>
+                            <span>Correlation</span>
+                            <span>Trends</span>
+
+                        </div>
+
+
+                        <div class="foundation-outcome">
+
+                            <strong>
+                                FOUNDATION OUTCOME
+                            </strong>
+
+                            <p>
+                                Students can ask analytical questions
+                                and use basic exploratory techniques
+                                to identify patterns in a dataset.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- =================================================
+                     FOUNDATION 05
+                ================================================= -->
+
+                <article class="foundation-card">
+
+
+                    <div class="foundation-number">
+
+                        <span>
+                            05
+                        </span>
+
+                    </div>
+
+
+                    <div class="foundation-content">
+
+                        <h3>
+                            Data Visualization &
+                            <span>Storytelling</span>
+                        </h3>
+
+
+                        <p class="foundation-intro">
+
+                            Learn how to transform analytical results
+                            into visual representations that make
+                            patterns and insights easier to understand.
+
+                        </p>
+
+
+                        <div class="topic-grid">
+
+
+                            <div class="topic-card">
+
+                                <h4>
+                                    Choosing a Chart
+                                </h4>
+
+                                <p>
+                                    Understand when to use bar charts,
+                                    line charts, scatter plots,
+                                    histograms and other visualizations.
+                                </p>
+
+                            </div>
+
+
+                            <div class="topic-card">
+
+                                <h4>
+                                    Visual Encoding
+                                </h4>
+
+                                <p>
+                                    Learn how position, size, labels
+                                    and categories communicate
+                                    information visually.
+                                </p>
+
+                            </div>
+
+
+                            <div class="topic-card">
+
+                                <h4>
+                                    Data Storytelling
+                                </h4>
+
+                                <p>
+                                    Move from simply displaying charts
+                                    to communicating findings and
+                                    actionable insights.
+                                </p>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="example-strip">
+
+                            <span>Bar Chart</span>
+                            <span>Line Chart</span>
+                            <span>Scatter Plot</span>
+                            <span>Histogram</span>
+                            <span>Heatmap</span>
+
+                        </div>
+
+
+                        <div class="foundation-outcome">
+
+                            <strong>
+                                FOUNDATION OUTCOME
+                            </strong>
+
+                            <p>
+                                Students can select an appropriate
+                                visualization and explain what the
+                                visual communicates about the data.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             ANALYTICS WORKFLOW
+        ===================================================== -->
+
+        <section class="da-section dark">
+
+            <div class="da-container">
+
+
+                <div class="section-heading">
+
+                    <span class="section-label">
+                        THE ANALYTICS WORKFLOW
+                    </span>
+
+                    <h2>
+                        Think Like a
+                        <span>Data Analyst.</span>
+                    </h2>
+
+                    <p>
+                        These five foundations connect into one
+                        practical workflow that will be used throughout
+                        the practical sessions.
+                    </p>
+
+                </div>
+
+
+                <div class="analytics-flow">
+
+
+                    <div class="flow-card">
+
+                        <span class="flow-number">
+                            01
+                        </span>
+
+                        <h4>
+                            Understand
+                        </h4>
+
+                        <p>
+                            Ask the right question.
+                        </p>
+
+                    </div>
+
+
+                    <div class="flow-card">
+
+                        <span class="flow-number">
+                            02
+                        </span>
+
+                        <h4>
+                            Prepare
+                        </h4>
+
+                        <p>
+                            Make the data reliable.
+                        </p>
+
+                    </div>
+
+
+                    <div class="flow-card">
+
+                        <span class="flow-number">
+                            03
+                        </span>
+
+                        <h4>
+                            Explore
+                        </h4>
+
+                        <p>
+                            Find patterns and relationships.
+                        </p>
+
+                    </div>
+
+
+                    <div class="flow-card">
+
+                        <span class="flow-number">
+                            04
+                        </span>
+
+                        <h4>
+                            Visualize
+                        </h4>
+
+                        <p>
+                            Turn patterns into visuals.
+                        </p>
+
+                    </div>
+
+
+                    <div class="flow-card">
+
+                        <span class="flow-number">
+                            05
+                        </span>
+
+                        <h4>
+                            Decide
+                        </h4>
+
+                        <p>
+                            Communicate useful insights.
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             TOOLS
+        ===================================================== -->
+
+        <section class="da-section">
+
+            <div class="da-container">
+
+
+                <div class="section-heading">
+
+                    <span class="section-label">
+                        FOUNDATION TOOLKIT
+                    </span>
+
+                    <h2>
+                        Tools You Will
+                        <span>Grow Into.</span>
+                    </h2>
+
+                    <p>
+                        Tools are introduced as part of the practical
+                        workflow rather than being taught as isolated
+                        software features.
+                    </p>
+
+                </div>
+
+
+                <div class="tools-grid">
+
+
+                    <div class="tool-card">
+
+                        <h3>
+                            Python
+                        </h3>
+
+                        <p>
+                            Programming environment for data analysis
+                            and automation.
+                        </p>
+
+                    </div>
+
+
+                    <div class="tool-card">
+
+                        <h3>
+                            Pandas
+                        </h3>
+
+                        <p>
+                            Work with structured datasets, filtering,
+                            grouping and transformation.
+                        </p>
+
+                    </div>
+
+
+                    <div class="tool-card">
+
+                        <h3>
+                            NumPy
+                        </h3>
+
+                        <p>
+                            Numerical computing and efficient
+                            array-based operations.
+                        </p>
+
+                    </div>
+
+
+                    <div class="tool-card">
+
+                        <h3>
+                            Visualization
+                        </h3>
+
+                        <p>
+                            Matplotlib, Seaborn and Plotly for creating
+                            meaningful visual representations.
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             FINAL CTA
+        ===================================================== -->
+
+        <section class="final-section">
+
+            <div class="da-container">
+
+                <div class="final-box">
+
+                    <small>
+                        FOUNDATIONS COMPLETE
+                    </small>
+
+
+                    <h2>
+                        Now Turn Data Into
+                        <span>Insights.</span>
+                    </h2>
+
+
+                    <p>
+
+                        You have the concepts required to begin working
+                        with real-world datasets. The next step is to
+                        apply them through practical problem solving.
+
+                    </p>
+
+
+                    <div class="da-final-buttons">
+
+
+                                           <a href="../practicals/data_analytics_practicals.html"
+                           class="da-final-btn primary">
+
+                            Start Practicals â†’
+
+                        </a>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <script src="../../../js/main.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,241 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Foundation 2 | Python 2030 | RasikaCodeLab</title>
+<link rel="stylesheet" href="../../../css/style.css">
+<link rel="stylesheet" href="../css/python.css">
+<link rel="stylesheet" href="../css/python_foundation.css">
+</head>
+<body class="protected-page">
+
+<header class="header">
+<div class="header-inner">
+<a href="../../../index.html" class="logo">
+<span class="logo-mark">&lt;/&gt;</span>
+<span>Rasika<span class="logo-highlight">CodeLab</span></span>
+</a>
+<nav class="nav">
+<a href="../../../index.html">Home</a>
+<a href="../../../subjects.html">Subjects</a>
+<a href="../foundations.html" class="active">Foundations</a>
+<a href="../../../about.html">About</a>
+</nav>
+</div>
+</header>
+
+<main class="python-foundation-page">
+<div class="foundation-breadcrumb">
+<a href="../index.html">Python 2030</a><span>/</span>
+<a href="../foundations.html">Foundations</a><span>/</span>
+<span>Foundation 2</span>
+</div>
+
+<section class="foundation-hero">
+<span class="foundation-label">FOUNDATION 02</span>
+<h1>Functions, Collections & Program Design</h1>
+<p>Build reusable programs with functions, modules, iteration and generators.</p>
+<div class="foundation-meta">
+<span>8 Sections</span><span>Core Foundation</span><span>Python 2030</span>
+</div>
+</section>
+
+<section class="foundation-content">
+<div class="foundation-grid">
+
+        <article class="foundation-card">
+            <button class="foundation-card-header" type="button" aria-expanded="false">
+                <div class="card-title">
+                    <span class="card-number">01</span>
+                    <div>
+                        <span class="card-category">FOUNDATION</span>
+                        <h2>Functions</h2>
+                        <p>Define reusable blocks of logic.</p>
+                    </div>
+                </div>
+                <span class="card-toggle">+</span>
+            </button>
+            <div class="foundation-card-content"><h3>Function</h3><p>A function packages a task into a reusable unit.</p><pre><code>def greet(name):
+    return f"Hello, {name}"
+
+print(greet("Rasika"))</code></pre><div class="concept-box"><span>IDEA</span><strong>Define â†’ Call â†’ Return</strong></div></div>
+        </article>
+        <article class="foundation-card">
+            <button class="foundation-card-header" type="button" aria-expanded="false">
+                <div class="card-title">
+                    <span class="card-number">02</span>
+                    <div>
+                        <span class="card-category">FOUNDATION</span>
+                        <h2>Parameters & Returns</h2>
+                        <p>Control how functions receive and produce data.</p>
+                    </div>
+                </div>
+                <span class="card-toggle">+</span>
+            </button>
+            <div class="foundation-card-content"><h3>Parameters</h3><pre><code>def add(a, b=0):
+    return a + b
+
+result = add(10, 5)</code></pre><p>Use positional, keyword and default arguments when appropriate.</p><div class="rule-box"><strong>Key Rule</strong><p>A return value lets the caller use the result of a function.</p></div></div>
+        </article>
+        <article class="foundation-card">
+            <button class="foundation-card-header" type="button" aria-expanded="false">
+                <div class="card-title">
+                    <span class="card-number">03</span>
+                    <div>
+                        <span class="card-category">FOUNDATION</span>
+                        <h2>Scope & Namespaces</h2>
+                        <p>Understand where names are available.</p>
+                    </div>
+                </div>
+                <span class="card-toggle">+</span>
+            </button>
+            <div class="foundation-card-content"><h3>LEGB</h3><div class="mini-list"><span>Local</span><span>Enclosing</span><span>Global</span><span>Built-in</span></div><p>Python resolves names through nested scopes using the LEGB rule.</p><pre><code>x = 10
+
+def show():
+    x = 20
+    print(x)
+
+show()</code></pre></div>
+        </article>
+        <article class="foundation-card">
+            <button class="foundation-card-header" type="button" aria-expanded="false">
+                <div class="card-title">
+                    <span class="card-number">04</span>
+                    <div>
+                        <span class="card-category">FOUNDATION</span>
+                        <h2>Collection Power</h2>
+                        <p>Process collections concisely.</p>
+                    </div>
+                </div>
+                <span class="card-toggle">+</span>
+            </button>
+            <div class="foundation-card-content"><h3>Comprehension</h3><pre><code>numbers = [1, 2, 3, 4, 5]
+squares = [n * n for n in numbers]
+print(squares)</code></pre><p>Comprehensions are useful for clear transformations and filtering.</p></div>
+        </article>
+        <article class="foundation-card">
+            <button class="foundation-card-header" type="button" aria-expanded="false">
+                <div class="card-title">
+                    <span class="card-number">05</span>
+                    <div>
+                        <span class="card-category">FOUNDATION</span>
+                        <h2>Modules</h2>
+                        <p>Organize code into reusable files.</p>
+                    </div>
+                </div>
+                <span class="card-toggle">+</span>
+            </button>
+            <div class="foundation-card-content"><h3>Importing</h3><pre><code># math_tools.py
+def add(a, b):
+    return a + b
+
+# app.py
+from math_tools import add
+print(add(2, 3))</code></pre><div class="concept-box"><span>DESIGN</span><strong>Small modules â†’ reusable systems</strong></div></div>
+        </article>
+        <article class="foundation-card">
+            <button class="foundation-card-header" type="button" aria-expanded="false">
+                <div class="card-title">
+                    <span class="card-number">06</span>
+                    <div>
+                        <span class="card-category">FOUNDATION</span>
+                        <h2>Iteration & Generators</h2>
+                        <p>Work with data one item at a time.</p>
+                    </div>
+                </div>
+                <span class="card-toggle">+</span>
+            </button>
+            <div class="foundation-card-content"><h3>Generator</h3><pre><code>def count_up_to(limit):
+    for n in range(1, limit + 1):
+        yield n
+
+for n in count_up_to(3):
+    print(n)</code></pre><p>Generators support lazy evaluation and can avoid building large collections in memory.</p></div>
+        </article>
+        <article class="foundation-card">
+            <button class="foundation-card-header" type="button" aria-expanded="false">
+                <div class="card-title">
+                    <span class="card-number">07</span>
+                    <div>
+                        <span class="card-category">FOUNDATION</span>
+                        <h2>Program Design</h2>
+                        <p>Break a problem into manageable components.</p>
+                    </div>
+                </div>
+                <span class="card-toggle">+</span>
+            </button>
+            <div class="foundation-card-content"><div class="flow-diagram"><div>Problem</div><span>â†’</span><div>Functions</div><span>â†’</span><div>Modules</div><span>â†’</span><div>Program</div></div><p>Separate input, processing and output so each part can be understood and tested independently.</p></div>
+        </article>
+        <article class="foundation-card">
+            <button class="foundation-card-header" type="button" aria-expanded="false">
+                <div class="card-title">
+                    <span class="card-number">08</span>
+                    <div>
+                        <span class="card-category">FOUNDATION</span>
+                        <h2>Mini Problem</h2>
+                        <p>Apply reusable program design.</p>
+                    </div>
+                </div>
+                <span class="card-toggle">+</span>
+            </button>
+            <div class="foundation-card-content"><h3>Problem: Text Analyzer</h3><p>Create functions that count words, characters and lines in a text.</p><div class="mini-list"><span>Functions</span><span>Strings</span><span>Collections</span><span>Iteration</span></div><div class="challenge-box"><strong>Think Further</strong><p>How would you process a large file without loading the whole file into memory?</p></div></div>
+        </article>
+</div>
+</section>
+
+<nav class="foundation-navigation">
+<a href="foundation01.html" class="foundation-nav-button">
+<span>â†</span><div><small>PREVIOUS FOUNDATION</small><strong>Foundation 1</strong></div>
+</a>
+<div class="foundation-progress">
+<span>FOUNDATION</span><strong>02 / 05</strong>
+<div class="progress-bar"><span style="width:40%"></span></div>
+</div>
+<a href="foundation03.html" class="foundation-nav-button next">
+<div><small>NEXT FOUNDATION</small>
+<strong>Foundation 3</strong></div><span>â†’</span>
+</a>
+</nav>
+</main>
+
+<footer class="footer">
+<div class="footer-main">
+<div class="footer-brand">
+<div class="logo"><span class="logo-mark">&lt;/&gt;</span><span>Rasika<span class="logo-highlight">CodeLab</span></span></div>
+<p>Interactive practical learning through concepts, code and visualization.</p>
+</div>
+<div class="footer-links">
+<div><h4>Learn</h4><a href="../../../subjects.html">Subjects</a><a href="../../../about.html">About</a></div>
+<div><h4>Subjects</h4><a href="../../cpp/index.html">C++</a><a href="../../computer-graphics/cgr_index.html">Computer Graphics</a></div>
+</div>
+</div>
+<div class="footer-bottom">
+<span>Â© 2026 Rasika CodeLab</span><span>Built for practical learning.</span>
+</div>
+</footer>
+
+<script src="../../../js/main.js"></script>
+<script>
+document.querySelectorAll(".foundation-card-header").forEach(button => {
+    button.addEventListener("click", () => {
+        const card = button.closest(".foundation-card");
+        const isOpen = card.classList.contains("open");
+
+        document.querySelectorAll(".foundation-card").forEach(item => {
+            item.classList.remove("open");
+            item.querySelector(".foundation-card-header").setAttribute("aria-expanded", "false");
+            item.querySelector(".card-toggle").textContent = "+";
+        });
+
+        if (!isOpen) {
+            card.classList.add("open");
+            button.setAttribute("aria-expanded", "true");
+            button.querySelector(".card-toggle").textContent = "âˆ’";
+        }
+    });
+});
+</script>
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

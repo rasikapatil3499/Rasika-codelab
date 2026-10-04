@@ -1,0 +1,854 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Foundation 06 â€” Learn how computer graphics are stored using raster and vector formats, including BMP, GIF, JPEG, PNG, TIFF, SVG, WebP and PCX.">
+    <title>Foundation 06 | How are Graphics Stored? | Rasika CodeLab</title>
+    <link rel="stylesheet" href="../css/cgr_style.css">
+<style>body.protected-page:not(.auth-ready){visibility:hidden}</style>
+</head>
+
+<body class="protected-page">
+
+<header class="site-header">
+    <nav class="navbar">
+        <a href="../cgr_index.html" class="logo">
+            <span class="logo-mark">â—ˆ</span>
+            Rasika<span class="logo-highlight">CodeLab</span>
+        </a>
+
+        <div class="nav-links">
+            <a href="../cgr_index.html">Home</a>
+            <a href="../cgr_foundations.html" class="active">Foundations</a>
+            <a href="../cgr_practicals.html">Practicals</a>
+                        <a href="../../../about.html">About</a>
+        </div>
+
+        <button class="menu-btn" type="button" aria-label="Open menu">â˜°</button>
+    </nav>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero foundation-detail-hero">
+
+    <div class="hero-content">
+
+        <span class="eyebrow">FOUNDATION 06</span>
+
+        <h1>How are <span>Graphics Stored?</span></h1>
+
+        <p class="hero-description">
+            A graphic must be represented as digital data before it can be
+            saved, transferred or displayed. Learn the difference between
+            raster and vector graphics and understand the most common
+            graphics file formats.
+        </p>
+
+        <div class="foundation-meta">
+            <span>Raster</span>
+            <span>Vector</span>
+            <span>Compression</span>
+            <span>File Formats</span>
+            <span>Image Data</span>
+        </div>
+
+    </div>
+
+    <div class="hero-visual">
+
+        <div class="graphics-window foundation-visual-window">
+
+            <div class="window-header">
+                <div class="window-dots">
+                    <span></span><span></span><span></span>
+                </div>
+                <span class="window-title">image-file.info</span>
+            </div>
+
+            <div class="storage-hero">
+
+                <div class="storage-pixel-grid">
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                </div>
+
+                <div class="storage-vector-shape">
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                </div>
+
+                <div class="storage-code">
+                    <span>TYPE</span> PNG<br>
+                    <span>SIZE</span> 1920Ã—1080<br>
+                    <span>MODE</span> RGB<br>
+                    <span>DATA</span> PIXELS
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- OBJECTIVES -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+
+        <span class="eyebrow">LEARNING OBJECTIVES</span>
+
+        <h2>By the end of this foundation, you should be able to...</h2>
+
+    </div>
+
+    <div class="foundation-objectives">
+
+        <div class="objective-card">
+            <span>01</span>
+            <strong>Differentiate Raster & Vector</strong>
+            <p>Explain how pixel-based and geometry-based graphics represent visual information.</p>
+        </div>
+
+        <div class="objective-card">
+            <span>02</span>
+            <strong>Identify File Formats</strong>
+            <p>Recognize BMP, GIF, JPEG, PNG, TIFF, SVG, WebP and PCX formats.</p>
+        </div>
+
+        <div class="objective-card">
+            <span>03</span>
+            <strong>Understand Compression</strong>
+            <p>Distinguish between lossy and lossless compression and why compression is used.</p>
+        </div>
+
+        <div class="objective-card">
+            <span>04</span>
+            <strong>Select a Suitable Format</strong>
+            <p>Choose a practical format based on image type, quality, transparency and use.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CONCEPT -->
+<section class="section foundation-detail">
+
+    <div class="content-card">
+
+        <span class="eyebrow">01 Â· CONCEPT</span>
+
+        <h2>What does a graphics file store?</h2>
+
+        <p>
+            A graphics file stores information required to reconstruct an
+            image. Depending on the representation, this information may
+            describe individual pixels or geometric objects.
+        </p>
+
+        <p>
+            The two fundamental approaches are
+            <strong>raster graphics</strong> and <strong>vector graphics</strong>.
+        </p>
+
+        <div class="definition-box">
+            <strong>Raster</strong>
+            <p>
+                Represents an image as a rectangular grid of pixels. Each
+                pixel contains color information.
+            </p>
+        </div>
+
+        <div class="definition-box">
+            <strong>Vector</strong>
+            <p>
+                Represents graphics using mathematical descriptions of
+                shapes such as paths, lines, curves and polygons.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- RASTER VS VECTOR -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+
+        <span class="eyebrow">02 Â· RASTER VS VECTOR</span>
+
+        <h2>Two ways to represent graphics.</h2>
+
+        <p>
+            The choice of representation affects scalability, storage,
+            editing and image quality.
+        </p>
+
+    </div>
+
+    <div class="comparison-table-wrap">
+
+        <table class="graphics-comparison">
+
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Raster Graphics</th>
+                    <th>Vector Graphics</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>Representation</td>
+                    <td>Pixels</td>
+                    <td>Mathematical shapes and paths</td>
+                </tr>
+
+                <tr>
+                    <td>Examples</td>
+                    <td>BMP, GIF, JPEG, PNG, TIFF, WebP</td>
+                    <td>SVG</td>
+                </tr>
+
+                <tr>
+                    <td>Scaling</td>
+                    <td>Can become pixelated when enlarged</td>
+                    <td>Can scale without the same pixel-based loss of detail</td>
+                </tr>
+
+                <tr>
+                    <td>Best suited for</td>
+                    <td>Photographs and pixel-based images</td>
+                    <td>Logos, icons, diagrams and geometric artwork</td>
+                </tr>
+
+                <tr>
+                    <td>Basic data</td>
+                    <td>Pixel color values</td>
+                    <td>Geometry, paths, fills and strokes</td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<!-- RASTER -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+
+        <span class="eyebrow">03 Â· RASTER GRAPHICS</span>
+
+        <h2>Raster images are built from pixels.</h2>
+
+    </div>
+
+    <div class="coordinate-parts">
+
+        <div class="coordinate-part-card">
+            <span>01</span>
+            <h3>Pixel Grid</h3>
+            <p>
+                An image is arranged as rows and columns of pixels.
+            </p>
+        </div>
+
+        <div class="coordinate-part-card">
+            <span>02</span>
+            <h3>Color Data</h3>
+            <p>
+                Each pixel stores color information using one or more channels.
+            </p>
+        </div>
+
+        <div class="coordinate-part-card">
+            <span>03</span>
+            <h3>Resolution</h3>
+            <p>
+                Width Ã— height determines the number of pixels in the image.
+            </p>
+        </div>
+
+        <div class="coordinate-part-card">
+            <span>04</span>
+            <h3>File Encoding</h3>
+            <p>
+                The format determines how pixel data and additional metadata
+                are organized and stored.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PIXEL CALCULATION -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+
+        <span class="eyebrow">04 Â· CALCULATE</span>
+
+        <h2>Calculate the number of pixels.</h2>
+
+        <p>
+            Resolution gives a direct way to calculate how many pixels a
+            raster image contains.
+        </p>
+
+    </div>
+
+    <div class="comparison-grid">
+
+        <div class="content-card">
+
+            <span class="card-label">GIVEN</span>
+
+            <h3>Image resolution: 1920 Ã— 1080</h3>
+
+            <div class="formula-box">
+                Total Pixels = Width Ã— Height
+            </div>
+
+        </div>
+
+        <div class="content-card">
+
+            <span class="card-label">WORKED CALCULATION</span>
+
+            <div class="calculation-box">
+                Total Pixels = 1920 Ã— 1080<br>
+                Total Pixels = <strong>2,073,600 pixels</strong><br><br>
+                â‰ˆ 2.07 megapixels
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FORMAT CARDS -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+
+        <span class="eyebrow">05 Â· COMMON FILE FORMATS</span>
+
+        <h2>Know what each format is designed for.</h2>
+
+        <p>
+            File formats make different trade-offs between quality,
+            compression, compatibility, transparency and storage size.
+        </p>
+
+    </div>
+
+    <div class="application-grid">
+
+        <div class="application-card">
+            <div class="application-icon">BMP</div>
+            <h3>BMP</h3>
+            <p>
+                Bitmap format with a relatively straightforward pixel-based
+                representation. Files can be large because compression is
+                limited or absent in common BMP usage.
+            </p>
+        </div>
+
+        <div class="application-card">
+            <div class="application-icon">GIF</div>
+            <h3>GIF</h3>
+            <p>
+                Raster format supporting a limited color palette and simple
+                animation. Commonly used for short animated graphics.
+            </p>
+        </div>
+
+        <div class="application-card">
+            <div class="application-icon">JPG</div>
+            <h3>JPEG / JPG</h3>
+            <p>
+                Common raster format using lossy compression. Well suited
+                to photographs and images where smaller files are useful.
+            </p>
+        </div>
+
+        <div class="application-card">
+            <div class="application-icon">PNG</div>
+            <h3>PNG</h3>
+            <p>
+                Lossless raster format with support for transparency.
+                Useful for graphics, screenshots and images requiring
+                preserved pixel detail.
+            </p>
+        </div>
+
+        <div class="application-card">
+            <div class="application-icon">TIF</div>
+            <h3>TIFF</h3>
+            <p>
+                Flexible raster format commonly associated with high-quality
+                imaging, scanning and publishing workflows.
+            </p>
+        </div>
+
+        <div class="application-card">
+            <div class="application-icon">SVG</div>
+            <h3>SVG</h3>
+            <p>
+                Vector format based on geometric descriptions. It is useful
+                for scalable icons, diagrams, logos and web graphics.
+            </p>
+        </div>
+
+        <div class="application-card">
+            <div class="application-icon">WEBP</div>
+            <h3>WebP</h3>
+            <p>
+                Modern image format designed for efficient web delivery,
+                supporting both lossy and lossless compression.
+            </p>
+        </div>
+
+        <div class="application-card">
+            <div class="application-icon">PCX</div>
+            <h3>PCX</h3>
+            <p>
+                Older raster graphics format associated with early PC-based
+                graphics software. It is mainly useful as a legacy format
+                to understand historically.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- COMPRESSION -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+
+        <span class="eyebrow">06 Â· COMPRESSION</span>
+
+        <h2>Why compress an image?</h2>
+
+        <p>
+            Compression reduces the amount of data required to store or
+            transmit an image.
+        </p>
+
+    </div>
+
+    <div class="comparison-grid">
+
+        <div class="content-card">
+
+            <span class="card-label">LOSSLESS</span>
+
+            <h3>Preserve the original data.</h3>
+
+            <p>
+                Lossless compression reduces file size while allowing the
+                original encoded information to be reconstructed.
+            </p>
+
+            <div class="definition-box">
+                <strong>Examples</strong>
+                <p>
+                    PNG is a common lossless image format. Some TIFF
+                    configurations can also use lossless compression.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="content-card">
+
+            <span class="card-label">LOSSY</span>
+
+            <h3>Trade some information for smaller files.</h3>
+
+            <p>
+                Lossy compression removes information considered less
+                important to achieve a smaller representation.
+            </p>
+
+            <div class="definition-box">
+                <strong>Example</strong>
+                <p>
+                    JPEG commonly uses lossy compression and is widely used
+                    for photographs.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FILE SELECTION -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+
+        <span class="eyebrow">07 Â· CHOOSE A FORMAT</span>
+
+        <h2>Match the format to the task.</h2>
+
+    </div>
+
+    <div class="terminology-grid">
+
+        <div class="term-card">
+            <strong>Photograph</strong>
+            <p>JPEG is often a practical choice when compact file size is important.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Transparent Web Graphic</strong>
+            <p>PNG is useful when lossless quality and transparency are required.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Scalable Logo</strong>
+            <p>SVG is suitable when the graphic is naturally represented by geometry.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Simple Animation</strong>
+            <p>GIF can be used for simple, limited-color animated graphics.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>High-Quality Imaging</strong>
+            <p>TIFF is commonly used in scanning, publishing and imaging workflows.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Legacy Graphics</strong>
+            <p>PCX is mainly encountered when working with older graphics systems.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FILE PIPELINE -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+
+        <span class="eyebrow">08 Â· DATA FLOW</span>
+
+        <h2>From graphics to a saved file.</h2>
+
+    </div>
+
+    <div class="content-card">
+
+        <div class="graphics-flow">
+
+            <div class="flow-item">
+                <span>01</span>
+                <strong>Visual content</strong>
+                <small>Shapes, photographs, text or other graphics are created.</small>
+            </div>
+
+            <div class="flow-arrow">â†’</div>
+
+            <div class="flow-item">
+                <span>02</span>
+                <strong>Representation</strong>
+                <small>Pixel data or geometric descriptions represent the image.</small>
+            </div>
+
+            <div class="flow-arrow">â†’</div>
+
+            <div class="flow-item">
+                <span>03</span>
+                <strong>Encoding</strong>
+                <small>A file format organizes the image data and metadata.</small>
+            </div>
+
+            <div class="flow-arrow">â†’</div>
+
+            <div class="flow-item">
+                <span>04</span>
+                <strong>Compression</strong>
+                <small>Optional compression reduces storage or transmission size.</small>
+            </div>
+
+            <div class="flow-arrow">â†’</div>
+
+            <div class="flow-item">
+                <span>05</span>
+                <strong>File</strong>
+                <small>The encoded data is stored for later use.</small>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- IMPORTANT TERMS -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+        <span class="eyebrow">09 Â· TERMINOLOGY</span>
+        <h2>Words you should know.</h2>
+    </div>
+
+    <div class="terminology-grid">
+
+        <div class="term-card">
+            <strong>Raster</strong>
+            <p>Graphics represented using a grid of pixels.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Vector</strong>
+            <p>Graphics represented using mathematical geometry.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Compression</strong>
+            <p>A technique used to reduce the amount of stored data.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Lossless</strong>
+            <p>Compression where the original encoded information can be reconstructed.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Lossy</strong>
+            <p>Compression that removes some information to reduce file size.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Resolution</strong>
+            <p>The dimensions of a raster image, commonly expressed as width Ã— height.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- COMMON ERRORS -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+        <span class="eyebrow">COMMON ERRORS</span>
+        <h2>Watch out for these mistakes.</h2>
+    </div>
+
+    <div class="terminology-grid">
+
+        <div class="term-card">
+            <strong>Raster â‰  File Format</strong>
+            <p>Raster describes a representation type; JPEG, PNG and BMP are file formats.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Vector â‰  Always Smaller</strong>
+            <p>File size depends on the content and representation, not simply raster or vector.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>JPEG Is Not Lossless</strong>
+            <p>Standard JPEG image compression is generally lossy.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>PNG Is Not Vector</strong>
+            <p>PNG is a raster image format even though it supports transparency.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>SVG Is Vector</strong>
+            <p>SVG describes graphical objects rather than storing a conventional pixel grid.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>PCX Is Legacy</strong>
+            <p>It remains useful for syllabus coverage and historical understanding.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- QUICK CHECK -->
+<section class="section foundation-detail">
+
+    <div class="content-card quick-check">
+
+        <span class="eyebrow">QUICK CHECK</span>
+
+        <h2>Test your understanding.</h2>
+
+        <div class="question-list">
+
+            <div>
+                <span>01</span>
+                <p>What is the main difference between raster and vector graphics?</p>
+            </div>
+
+            <div>
+                <span>02</span>
+                <p>Which type of graphics is based on pixels?</p>
+            </div>
+
+            <div>
+                <span>03</span>
+                <p>Calculate the total pixels in a 1280 Ã— 720 image.</p>
+            </div>
+
+            <div>
+                <span>04</span>
+                <p>What is the difference between lossy and lossless compression?</p>
+            </div>
+
+            <div>
+                <span>05</span>
+                <p>Which format is commonly used for scalable web logos and icons?</p>
+            </div>
+
+            <div>
+                <span>06</span>
+                <p>Why is PCX considered a legacy graphics format?</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SUMMARY -->
+<section class="section foundation-detail">
+
+    <div class="summary-box">
+
+        <span class="eyebrow">QUICK SUMMARY</span>
+
+        <h2>Remember these five ideas.</h2>
+
+        <div class="summary-grid">
+
+            <div>
+                <span>01</span>
+                <strong>Raster uses pixels</strong>
+                <p>Raster images are represented as rows and columns of pixel data.</p>
+            </div>
+
+            <div>
+                <span>02</span>
+                <strong>Vector uses geometry</strong>
+                <p>Vector graphics describe shapes using mathematical paths and objects.</p>
+            </div>
+
+            <div>
+                <span>03</span>
+                <strong>Formats make trade-offs</strong>
+                <p>Quality, size, transparency and compatibility influence format selection.</p>
+            </div>
+
+            <div>
+                <span>04</span>
+                <strong>Compression reduces data</strong>
+                <p>Lossless and lossy methods make different quality-versus-size trade-offs.</p>
+            </div>
+
+            <div>
+                <span>05</span>
+                <strong>Choose by purpose</strong>
+                <p>The best format depends on the type of graphics and how it will be used.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- NAVIGATION -->
+<section class="section foundation-navigation">
+
+    <a href="foundation05.html" class="nav-card">
+        <span>â†</span>
+        <small>PREVIOUS FOUNDATION</small>
+        <strong>How Does Color Work?</strong>
+    </a>
+
+    <a href="foundation07.html" class="nav-card next">
+        <small>NEXT FOUNDATION</small>
+        <strong>How Does a Computer Draw? â†’</strong>
+    </a>
+
+</section>
+
+</main>
+
+
+<footer class="site-footer">
+
+    <div class="footer-content">
+
+        <div class="footer-brand">
+            <strong>Rasika<span class="logo-highlight">CodeLab</span></strong>
+            <p>Computer Graphics Practical Learning</p>
+        </div>
+
+        <div class="footer-links">
+            <a href="../cgr_index.html">Home</a>
+            <a href="../cgr_foundations.html">Foundations</a>
+            <a href="../cgr_practicals.html">Practicals</a>
+                        <a href="../../../about.html">About</a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        Â© 2026 Rasika CodeLab Â· Learn the concept. See the result.
+    </div>
+
+</footer>
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

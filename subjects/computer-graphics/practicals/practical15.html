@@ -1,0 +1,954 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>15 â€” Sutherland-Hodgman Polygon Clipping | Rasika CodeLab</title>
+  <link rel="stylesheet" href="../css/cgr_style.css">
+  <link rel="stylesheet" href="../css/cgr_practicals.css">
+<style>body.protected-page:not(.auth-ready){visibility:hidden}</style>
+</head>
+
+<body class="cgr-practical-body practical-15 protected-page">
+
+<header class="navbar">
+  <div class="logo">
+    <span class="logo-mark">&lt;/&gt;</span>
+    <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+  </div>
+  <nav class="nav-links">
+    <a href="../cgr_index.html">Home</a>
+    <a href="../cgr_foundations.html">Foundations</a>
+        <a href="../cgr_practicals.html" class="active">Practicals</a>
+    <a href="../../../about.html">About</a>
+  </nav>
+  <button class="menu-btn" aria-label="Open Menu">â˜°</button>
+</header>
+
+<main>
+
+<section class="practical-hero">
+  <div class="container">
+    <span class="eyebrow">PRACTICAL 15 Â· CLIPPING</span>
+    <h1>Sutherland-Hodgman Polygon Clipping</h1>
+    <p>Clip a polygon against a rectangular window by processing one boundary at a time.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#live-lab">Open Interactive Lab</a>
+      <a class="btn btn-secondary" href="#worked-example">Study Worked Example</a>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">01</span>
+      <div>
+        <h2>What You Will Learn</h2>
+        <p>Sutherland-Hodgman clips a polygon against each edge of a convex clipping window and builds a new vertex list after every pass.</p>
+      </div>
+    </div>
+
+    <div class="objective-grid">
+      <article class="info-card">
+        <h3>Understand</h3>
+        <p>Learn polygon clipping and the inside/outside relationship for each clipping boundary.</p>
+      </article>
+      <article class="info-card">
+        <h3>Calculate</h3>
+        <p>Find intersection points when polygon edges cross the clipping boundary.</p>
+      </article>
+      <article class="info-card">
+        <h3>Implement</h3>
+        <p>Process the polygon using the four standard boundary passes.</p>
+      </article>
+      <article class="info-card">
+        <h3>Visualize</h3>
+        <p>Watch vertices and intersections update after LEFT, RIGHT, BOTTOM and TOP clipping.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section alt-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">02</span>
+      <div>
+        <h2>Polygon Clipping</h2>
+        <p>A polygon can extend outside the visible region. Clipping keeps only the portion inside the clipping window.</p>
+      </div>
+    </div>
+
+    <div class="concept-grid">
+      <article class="theory-card">
+        <h3>Input and Output</h3>
+        <div class="formula-box">
+          <strong>Input:</strong> Polygon vertices + clipping window<br>
+          <strong>Output:</strong> New polygon containing only the visible region
+        </div>
+        <p>The output can contain original vertices, boundary intersection points, or both.</p>
+      </article>
+
+      <article class="theory-card">
+        <h3>Boundary-by-Boundary Processing</h3>
+        <p>The rectangular window has four boundaries. The polygon is clipped against one boundary at a time.</p>
+        <ul class="clean-list">
+          <li>LEFT: x = xmin</li>
+          <li>RIGHT: x = xmax</li>
+          <li>BOTTOM: y = ymin</li>
+          <li>TOP: y = ymax</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">03</span>
+      <div>
+        <h2>The Four Vertex Cases</h2>
+        <p>For each polygon edge, compare the current vertex S and the next vertex P with the clipping boundary.</p>
+      </div>
+    </div>
+
+    <div class="case-grid">
+      <article class="case-card">
+        <span class="case-number">01</span>
+        <h3>Inside â†’ Inside</h3>
+        <p>Add P to the output list.</p>
+        <div class="formula-box"><strong>Output: P</strong></div>
+      </article>
+      <article class="case-card">
+        <span class="case-number">02</span>
+        <h3>Inside â†’ Outside</h3>
+        <p>Add the intersection point only.</p>
+        <div class="formula-box"><strong>Output: I</strong></div>
+      </article>
+      <article class="case-card">
+        <span class="case-number">03</span>
+        <h3>Outside â†’ Inside</h3>
+        <p>Add the intersection point followed by P.</p>
+        <div class="formula-box"><strong>Output: I, P</strong></div>
+      </article>
+      <article class="case-card">
+        <span class="case-number">04</span>
+        <h3>Outside â†’ Outside</h3>
+        <p>Add nothing.</p>
+        <div class="formula-box"><strong>Output: â€”</strong></div>
+      </article>
+    </div>
+
+    <div class="note-card">
+      <strong>Key idea:</strong> Sutherland-Hodgman does not process isolated vertices only. It processes every polygon edge as a transition from the previous vertex S to the current vertex P.
+    </div>
+  </div>
+</section>
+
+<section class="practical-section alt-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">04</span>
+      <div>
+        <h2>Intersection Calculations</h2>
+        <p>When an edge crosses a clipping boundary, calculate the exact intersection point.</p>
+      </div>
+    </div>
+
+    <div class="formula-grid">
+      <div class="formula-box">
+        <span>Vertical Boundary</span>
+        <strong>x = xb</strong>
+        <p>y = yâ‚ + (yâ‚‚ âˆ’ yâ‚)(xb âˆ’ xâ‚)/(xâ‚‚ âˆ’ xâ‚)</p>
+      </div>
+      <div class="formula-box">
+        <span>Horizontal Boundary</span>
+        <strong>y = yb</strong>
+        <p>x = xâ‚ + (xâ‚‚ âˆ’ xâ‚)(yb âˆ’ yâ‚)/(yâ‚‚ âˆ’ yâ‚)</p>
+      </div>
+    </div>
+
+    <div class="algorithm-steps">
+      <div class="algorithm-step"><span>01</span><div><h3>Start with polygon vertices</h3><p>Store the polygon as an ordered list of vertices.</p></div></div>
+      <div class="algorithm-step"><span>02</span><div><h3>Select a clipping boundary</h3><p>Start with LEFT, then process RIGHT, BOTTOM and TOP.</p></div></div>
+      <div class="algorithm-step"><span>03</span><div><h3>Process every edge</h3><p>Compare each current vertex P with the previous vertex S.</p></div></div>
+      <div class="algorithm-step"><span>04</span><div><h3>Apply the four cases</h3><p>Add P, an intersection, both, or nothing according to the transition.</p></div></div>
+      <div class="algorithm-step"><span>05</span><div><h3>Use output as next input</h3><p>The resulting vertex list becomes the input for the next boundary.</p></div></div>
+      <div class="algorithm-step"><span>06</span><div><h3>Repeat four times</h3><p>After all boundaries are processed, the final list forms the clipped polygon.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section" id="worked-example">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">05</span>
+      <div>
+        <h2>Worked Calculation</h2>
+        <p>Clip the polygon against the rectangular window x = 2 to 8 and y = 2 to 6.</p>
+      </div>
+    </div>
+
+    <div class="calculation-card">
+      <h3>Example Polygon</h3>
+      <p>Consider the triangle Pâ‚(1,3), Pâ‚‚(6,8), Pâ‚ƒ(10,3).</p>
+
+      <div class="calculation-flow">
+        <div class="calc-step">
+          <span>01</span>
+          <p>Against the <strong>LEFT</strong> boundary x = 2, edge Pâ‚â†’Pâ‚‚ crosses the boundary.</p>
+        </div>
+        <div class="calc-step">
+          <span>02</span>
+          <p>Intersection y = 3 + (8âˆ’3)(2âˆ’1)/(6âˆ’1) = <strong>4</strong>. New point: <strong>(2,4)</strong>.</p>
+        </div>
+        <div class="calc-step">
+          <span>03</span>
+          <p>Edge Pâ‚ƒâ†’Pâ‚ also crosses x = 2. Intersection gives approximately <strong>(2,3)</strong>.</p>
+        </div>
+        <div class="calc-step">
+          <span>04</span>
+          <p>The output from the LEFT pass becomes the input for the RIGHT pass.</p>
+        </div>
+        <div class="calc-step">
+          <span>05</span>
+          <p>Continue through RIGHT, BOTTOM and TOP. Each pass can add or remove vertices.</p>
+        </div>
+        <div class="calc-step">
+          <span>06</span>
+          <p>The final output list represents only the portion of the triangle inside the clipping window.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section alt-section" id="live-lab">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">06</span>
+      <div>
+        <h2>Interactive Polygon Clipping Lab</h2>
+        <p>Drag polygon vertices, change the window, and process the clipping boundaries one by one.</p>
+      </div>
+    </div>
+
+    <div class="interactive-layout">
+      <div class="control-panel">
+        <div class="control-group">
+          <h3>Polygon</h3>
+          <label>Shape
+            <select id="shape">
+              <option value="triangle">Triangle</option>
+              <option value="quad">Quadrilateral</option>
+              <option value="pentagon">Pentagon</option>
+              <option value="star">Star</option>
+            </select>
+          </label>
+          <label>Scale
+            <input id="polyScale" type="range" min="2" max="8" step="0.5" value="5">
+          </label>
+          <output id="scaleValue">5</output>
+        </div>
+
+        <div class="control-group">
+          <h3>Clipping Window</h3>
+          <label>xmin <input id="xmin" type="number" value="2" step="0.5"></label>
+          <label>ymin <input id="ymin" type="number" value="2" step="0.5"></label>
+          <label>xmax <input id="xmax" type="number" value="8" step="0.5"></label>
+          <label>ymax <input id="ymax" type="number" value="6" step="0.5"></label>
+        </div>
+
+        <div class="control-group">
+          <h3>Boundary</h3>
+          <select id="boundary">
+            <option value="all">All Boundaries</option>
+            <option value="left">LEFT</option>
+            <option value="right">RIGHT</option>
+            <option value="bottom">BOTTOM</option>
+            <option value="top">TOP</option>
+          </select>
+        </div>
+
+        <div class="button-row">
+          <button class="btn btn-primary" id="clipBtn">Clip All</button>
+          <button class="btn btn-secondary" id="stepBtn">Next Boundary</button>
+          <button class="btn btn-secondary" id="playBtn">Play</button>
+          <button class="btn btn-secondary" id="resetBtn">Reset</button>
+        </div>
+      </div>
+
+      <div class="visualizer-panel">
+        <canvas id="polyCanvas" width="760" height="500" aria-label="Sutherland-Hodgman polygon clipping visualizer"></canvas>
+
+        <div class="status-grid">
+          <div class="status-card">
+            <span>Current Boundary</span>
+            <strong id="boundaryStatus">LEFT</strong>
+            <small id="boundaryIndex">Pass 1 of 4</small>
+          </div>
+          <div class="status-card">
+            <span>Input Vertices</span>
+            <strong id="inputCount">3</strong>
+            <small>Before current pass</small>
+          </div>
+          <div class="status-card">
+            <span>Output Vertices</span>
+            <strong id="outputCount">3</strong>
+            <small>After current pass</small>
+          </div>
+        </div>
+
+        <div class="lab-message" id="labMessage">Ready. Process the first clipping boundary.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">07</span>
+      <div>
+        <h2>Step-by-Step Pipeline</h2>
+        <p>The polygon changes after every clipping pass.</p>
+      </div>
+    </div>
+
+    <div class="process-grid">
+      <article class="process-card"><span>1</span><h3>Original Polygon</h3><p>Start with the complete polygon, including vertices outside the window.</p></article>
+      <article class="process-card"><span>2</span><h3>LEFT Pass</h3><p>Remove the portion left of xmin and add boundary intersections.</p></article>
+      <article class="process-card"><span>3</span><h3>RIGHT Pass</h3><p>Use the LEFT output and clip the portion right of xmax.</p></article>
+      <article class="process-card"><span>4</span><h3>BOTTOM + TOP</h3><p>Repeat for ymin and ymax to obtain the final visible polygon.</p></article>
+    </div>
+
+    <div class="note-card">
+      <strong>Observe:</strong> The number of vertices is not fixed. Clipping can remove vertices and can also create new intersection vertices.
+    </div>
+  </div>
+</section>
+
+<section class="practical-section alt-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">08</span>
+      <div>
+        <h2>Real-Life Problem Statements</h2>
+        <p>Apply polygon clipping to common graphics applications.</p>
+      </div>
+    </div>
+
+    <div class="problem-grid">
+      <article class="problem-card">
+        <span class="problem-tag">01 Â· GAME</span>
+        <h3>Game Object Visibility</h3>
+        <p>A character or obstacle is represented by a polygon that extends outside the camera viewport. Clip it before rendering.</p>
+        <button class="btn btn-secondary problem-load" data-shape="star">Show in Live Viewer</button>
+      </article>
+
+      <article class="problem-card">
+        <span class="problem-tag">02 Â· CAD</span>
+        <h3>CAD Drawing Window</h3>
+        <p>A filled CAD component crosses the active drawing window. Display only the polygon portion inside the viewport.</p>
+        <button class="btn btn-secondary problem-load" data-shape="quad">Show in Live Viewer</button>
+      </article>
+
+      <article class="problem-card">
+        <span class="problem-tag">03 Â· MAP</span>
+        <h3>Map Region</h3>
+        <p>A geographic region is stored as a polygon and must be clipped to the current map viewport before display.</p>
+        <button class="btn btn-secondary problem-load" data-shape="pentagon">Show in Live Viewer</button>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">09</span>
+      <div>
+        <h2>Experiments</h2>
+        <p>Use the lab to understand how polygon vertices change during each pass.</p>
+      </div>
+    </div>
+
+    <div class="experiment-list">
+      <div class="experiment-item"><span>01</span><p>Start with a triangle completely inside the window. Verify that no vertices are removed.</p></div>
+      <div class="experiment-item"><span>02</span><p>Move one vertex outside the LEFT boundary and observe the new intersection point.</p></div>
+      <div class="experiment-item"><span>03</span><p>Process only one boundary and compare the output with the fully clipped polygon.</p></div>
+      <div class="experiment-item"><span>04</span><p>Use the star shape and observe how several intersection points can be created.</p></div>
+      <div class="experiment-item"><span>05</span><p>Resize the clipping window and compare the number of output vertices.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section alt-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">10</span>
+      <div>
+        <h2>Common Mistakes</h2>
+      </div>
+    </div>
+
+    <div class="mistake-grid">
+      <article class="mistake-card"><h3>Wrong vertex order</h3><p>Keep polygon vertices in their boundary order so consecutive vertices form polygon edges.</p></article>
+      <article class="mistake-card"><h3>Missing intersection</h3><p>Inside-to-outside and outside-to-inside transitions require an intersection calculation.</p></article>
+      <article class="mistake-card"><h3>Using original polygon every time</h3><p>The output from one clipping boundary becomes the input for the next boundary.</p></article>
+      <article class="mistake-card"><h3>Wrong inside test</h3><p>Use the correct inequality for the selected LEFT, RIGHT, BOTTOM or TOP boundary.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">11</span>
+      <div>
+        <h2>Line vs Polygon Clipping</h2>
+        <p>Connect this practical with the previous line-clipping algorithms.</p>
+      </div>
+    </div>
+
+    <div class="table-card">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Line Clipping</th>
+            <th>Polygon Clipping</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Input</td><td>Two endpoints</td><td>Ordered list of vertices</td></tr>
+          <tr><td>Output</td><td>Visible line segment</td><td>New visible polygon</td></tr>
+          <tr><td>Core operation</td><td>Classify endpoints / find intersections</td><td>Process vertex transitions / find intersections</td></tr>
+          <tr><td>This practical</td><td>â€”</td><td>Sutherland-Hodgman</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section alt-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">12</span>
+      <div>
+        <h2>Viva Questions</h2>
+        <p>Check your understanding before moving to curves.</p>
+      </div>
+    </div>
+
+    <div class="viva-list">
+      <details><summary>What is polygon clipping?</summary><p>It is the process of removing portions of a polygon that lie outside a specified clipping window.</p></details>
+      <details><summary>What is the Sutherland-Hodgman algorithm?</summary><p>It is a polygon clipping algorithm that processes a polygon against each clipping boundary sequentially.</p></details>
+      <details><summary>What are the four vertex cases?</summary><p>Insideâ†’Inside, Insideâ†’Outside, Outsideâ†’Inside and Outsideâ†’Outside.</p></details>
+      <details><summary>What is produced for Insideâ†’Outside?</summary><p>The intersection point with the clipping boundary is added.</p></details>
+      <details><summary>What is produced for Outsideâ†’Inside?</summary><p>The intersection point is added first, followed by the inside vertex.</p></details>
+      <details><summary>Why are multiple passes required?</summary><p>A rectangular clipping window has four boundaries, and the polygon is progressively clipped against each one.</p></details>
+      <details><summary>Can clipping create new vertices?</summary><p>Yes. Intersections between polygon edges and clipping boundaries become new output vertices.</p></details>
+      <details><summary>What happens if the entire polygon is outside?</summary><p>The output list can become empty after the appropriate clipping passes.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="practical-navigation">
+  <div class="container">
+    <a class="nav-practical prev" href="practical14.html">
+      <span>Previous Practical</span>
+      <strong>14 â€” Midpoint Subdivision</strong>
+    </a>
+    <a class="nav-practical next" href="practical16.html">
+      <span>Next Practical</span>
+      <strong>16 â€” Bezier Curve Generator</strong>
+    </a>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-main">
+    <div class="footer-brand">
+      <div class="logo">
+        <span class="logo-mark">&lt;/&gt;</span>
+        <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+      </div>
+      <p>Interactive Computer Graphics practical learning through concepts, calculations and visualization.</p>
+    </div>
+    <div class="footer-links">
+      <div>
+        <h4>Learn</h4>
+        <a href="../cgr_foundations.html">Foundations</a>
+              </div>
+      <div>
+        <h4>Practice</h4>
+        <a href="../cgr_practicals.html">Practicals</a>
+        <a href="../../../about.html">About</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>Â© 2026 Rasika CodeLab</span>
+    <span>Built for practical learning.</span>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const canvas = document.getElementById("polyCanvas");
+  const ctx = canvas.getContext("2d");
+
+  const shapeSelect = document.getElementById("shape");
+  const scaleInput = document.getElementById("polyScale");
+  const scaleValue = document.getElementById("scaleValue");
+  const boundarySelect = document.getElementById("boundary");
+  const inputs = {
+    xmin: document.getElementById("xmin"),
+    ymin: document.getElementById("ymin"),
+    xmax: document.getElementById("xmax"),
+    ymax: document.getElementById("ymax")
+  };
+
+  const boundaryStatus = document.getElementById("boundaryStatus");
+  const boundaryIndex = document.getElementById("boundaryIndex");
+  const inputCount = document.getElementById("inputCount");
+  const outputCount = document.getElementById("outputCount");
+  const message = document.getElementById("labMessage");
+
+  const W = canvas.width;
+  const H = canvas.height;
+  const padding = 55;
+  const world = { min: -2, max: 12 };
+
+  let vertices = [];
+  let passResults = [];
+  let passIndex = 0;
+  let timer = null;
+  let dragIndex = -1;
+
+  const boundaries = [
+    { name: "LEFT", key: "left" },
+    { name: "RIGHT", key: "right" },
+    { name: "BOTTOM", key: "bottom" },
+    { name: "TOP", key: "top" }
+  ];
+
+  const defaults = {
+    xmin: 2, ymin: 2, xmax: 8, ymax: 6
+  };
+
+  function n(input) {
+    return Number(input.value);
+  }
+
+  function rect() {
+    let xmin = n(inputs.xmin), xmax = n(inputs.xmax);
+    let ymin = n(inputs.ymin), ymax = n(inputs.ymax);
+    if (xmin > xmax) [xmin, xmax] = [xmax, xmin];
+    if (ymin > ymax) [ymin, ymax] = [ymax, ymin];
+    return { xmin, ymin, xmax, ymax };
+  }
+
+  function basePolygon() {
+    const s = Number(scaleInput.value);
+    const type = shapeSelect.value;
+
+    if (type === "triangle") {
+      return [
+        { x: 1.2, y: 3.0 },
+        { x: 6.0, y: 8.2 },
+        { x: 10.2, y: 3.0 }
+      ];
+    }
+
+    if (type === "quad") {
+      return [
+        { x: 0.5, y: 2.8 },
+        { x: 4.0, y: 8.2 },
+        { x: 10.2, y: 7.0 },
+        { x: 9.2, y: 1.0 }
+      ];
+    }
+
+    if (type === "pentagon") {
+      return [
+        { x: 5.2, y: 9.2 },
+        { x: 10.5, y: 6.2 },
+        { x: 8.5, y: 0.5 },
+        { x: 2.0, y: 0.8 },
+        { x: -0.2, y: 6.0 }
+      ];
+    }
+
+    const cx = 5.5, cy = 4.5;
+    const points = [];
+    for (let i = 0; i < 10; i++) {
+      const angle = -Math.PI / 2 + i * Math.PI / 5;
+      const radius = i % 2 === 0 ? s : s * 0.42;
+      points.push({ x: cx + Math.cos(angle) * radius, y: cy + Math.sin(angle) * radius });
+    }
+    return points;
+  }
+
+  function inside(p, boundary, r) {
+    if (boundary === "left") return p.x >= r.xmin;
+    if (boundary === "right") return p.x <= r.xmax;
+    if (boundary === "bottom") return p.y >= r.ymin;
+    return p.y <= r.ymax;
+  }
+
+  function intersection(s, p, boundary, r) {
+    const dx = p.x - s.x;
+    const dy = p.y - s.y;
+
+    if (boundary === "left" || boundary === "right") {
+      const x = boundary === "left" ? r.xmin : r.xmax;
+      const t = Math.abs(dx) < 1e-10 ? 0 : (x - s.x) / dx;
+      return { x, y: s.y + t * dy };
+    }
+
+    const y = boundary === "bottom" ? r.ymin : r.ymax;
+    const t = Math.abs(dy) < 1e-10 ? 0 : (y - s.y) / dy;
+    return { x: s.x + t * dx, y };
+  }
+
+  function clipAgainst(poly, boundary, r) {
+    if (!poly.length) return [];
+
+    const output = [];
+    let s = poly[poly.length - 1];
+    let sInside = inside(s, boundary, r);
+
+    for (const p of poly) {
+      const pInside = inside(p, boundary, r);
+
+      if (pInside && sInside) {
+        output.push({ ...p });
+      } else if (!pInside && sInside) {
+        output.push(intersection(s, p, boundary, r));
+      } else if (pInside && !sInside) {
+        output.push(intersection(s, p, boundary, r));
+        output.push({ ...p });
+      }
+
+      s = p;
+      sInside = pInside;
+    }
+
+    return output;
+  }
+
+  function buildPasses() {
+    const r = rect();
+    const source = basePolygon();
+    const results = [];
+    let current = source;
+
+    boundaries.forEach(b => {
+      const input = current;
+      current = clipAgainst(current, b.key, r);
+      results.push({
+        boundary: b,
+        input,
+        output: current
+      });
+    });
+
+    return { source, results };
+  }
+
+  function sx(x) {
+    return padding + (x - world.min) * (W - 2 * padding) / (world.max - world.min);
+  }
+
+  function sy(y) {
+    return H - padding - (y - world.min) * (H - 2 * padding) / (world.max - world.min);
+  }
+
+  function drawGrid() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.globalAlpha = 0.28;
+
+    for (let x = world.min; x <= world.max; x++) {
+      ctx.beginPath();
+      ctx.moveTo(sx(x), padding);
+      ctx.lineTo(sx(x), H - padding);
+      ctx.stroke();
+    }
+
+    for (let y = world.min; y <= world.max; y++) {
+      ctx.beginPath();
+      ctx.moveTo(padding, sy(y));
+      ctx.lineTo(W - padding, sy(y));
+      ctx.stroke();
+    }
+
+    ctx.globalAlpha = 1;
+  }
+
+  function drawWindow(r) {
+    const left = sx(r.xmin);
+    const right = sx(r.xmax);
+    const top = sy(r.ymax);
+    const bottom = sy(r.ymin);
+
+    ctx.lineWidth = 3;
+    ctx.strokeRect(left, top, right - left, bottom - top);
+
+    ctx.font = "13px sans-serif";
+    ctx.fillText("CLIPPING WINDOW", left + 8, top + 18);
+    ctx.fillText(`(${r.xmin}, ${r.ymin})`, left, bottom + 20);
+    ctx.fillText(`(${r.xmax}, ${r.ymax})`, right - 65, top - 9);
+  }
+
+  function drawPolygon(poly, dashed = false) {
+    if (!poly.length) return;
+
+    ctx.save();
+    if (dashed) ctx.setLineDash([7, 6]);
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.moveTo(sx(poly[0].x), sy(poly[0].y));
+
+    for (let i = 1; i < poly.length; i++) {
+      ctx.lineTo(sx(poly[i].x), sy(poly[i].y));
+    }
+
+    ctx.closePath();
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  function fillPolygon(poly) {
+    if (!poly.length) return;
+
+    ctx.save();
+    ctx.globalAlpha = 0.14;
+    ctx.beginPath();
+    ctx.moveTo(sx(poly[0].x), sy(poly[0].y));
+    for (let i = 1; i < poly.length; i++) {
+      ctx.lineTo(sx(poly[i].x), sy(poly[i].y));
+    }
+    ctx.closePath();
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function drawVertices(poly, prefix) {
+    ctx.font = "bold 12px sans-serif";
+    poly.forEach((p, i) => {
+      ctx.beginPath();
+      ctx.arc(sx(p.x), sy(p.y), 5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillText(`${prefix}${i + 1}`, sx(p.x) + 8, sy(p.y) - 7);
+    });
+  }
+
+  function currentDisplay() {
+    const data = buildPasses();
+    const selected = boundarySelect.value;
+
+    if (selected === "all") {
+      return {
+        input: data.source,
+        output: data.results[3].output,
+        active: "ALL",
+        pass: 4
+      };
+    }
+
+    const index = boundaries.findIndex(b => b.key === selected);
+    return {
+      input: index === 0 ? data.source : data.results[index - 1].output,
+      output: data.results[index].output,
+      active: data.results[index].boundary.name,
+      pass: index + 1
+    };
+  }
+
+  function render() {
+    const r = rect();
+    const display = currentDisplay();
+
+    drawGrid();
+    drawWindow(r);
+
+    drawPolygon(display.input, true);
+    drawPolygon(display.output, false);
+    fillPolygon(display.output);
+
+    drawVertices(display.input, "I");
+    drawVertices(display.output, "O");
+
+    boundaryStatus.textContent = display.active;
+    boundaryIndex.textContent = display.active === "ALL" ? "All 4 passes" : `Pass ${display.pass} of 4`;
+    inputCount.textContent = display.input.length;
+    outputCount.textContent = display.output.length;
+
+    if (!display.output.length) {
+      message.textContent = `${display.active} clipping removed the polygon. Output vertex list is empty.`;
+    } else {
+      message.textContent = `${display.active} pass: ${display.input.length} input vertices â†’ ${display.output.length} output vertices.`;
+    }
+  }
+
+  function nextBoundary() {
+    const order = ["left", "right", "bottom", "top"];
+    const current = boundarySelect.value;
+
+    if (current === "all") {
+      boundarySelect.value = "left";
+    } else {
+      const index = order.indexOf(current);
+      boundarySelect.value = order[(index + 1) % order.length];
+    }
+
+    render();
+  }
+
+  function play() {
+    if (timer) {
+      stop();
+      return;
+    }
+
+    const order = ["left", "right", "bottom", "top"];
+    let index = order.indexOf(boundarySelect.value);
+    if (index < 0) index = 0;
+
+    document.getElementById("playBtn").textContent = "Pause";
+
+    timer = setInterval(() => {
+      boundarySelect.value = order[index];
+      render();
+      index++;
+
+      if (index >= order.length) {
+        boundarySelect.value = "all";
+        render();
+        stop();
+      }
+    }, 900);
+  }
+
+  function stop() {
+    if (timer) clearInterval(timer);
+    timer = null;
+    document.getElementById("playBtn").textContent = "Play";
+  }
+
+  function reset() {
+    stop();
+    shapeSelect.value = "triangle";
+    scaleInput.value = 5;
+    scaleValue.textContent = "5";
+    Object.entries(defaults).forEach(([key, value]) => inputs[key].value = value);
+    boundarySelect.value = "all";
+    render();
+  }
+
+  function worldFromCanvas(clientX, clientY) {
+    const rectBox = canvas.getBoundingClientRect();
+    const px = (clientX - rectBox.left) * canvas.width / rectBox.width;
+    const py = (clientY - rectBox.top) * canvas.height / rectBox.height;
+
+    return {
+      x: world.min + (px - padding) * (world.max - world.min) / (W - 2 * padding),
+      y: world.min + (H - padding - py) * (world.max - world.min) / (H - 2 * padding)
+    };
+  }
+
+  function near(a, b) {
+    return Math.hypot(sx(a.x) - sx(b.x), sy(a.y) - sy(b.y)) < 17;
+  }
+
+  canvas.addEventListener("pointerdown", e => {
+    const data = buildPasses();
+    const source = data.source;
+    const p = worldFromCanvas(e.clientX, e.clientY);
+
+    dragIndex = source.findIndex(v => near(v, p));
+
+    if (dragIndex >= 0) {
+      canvas.setPointerCapture(e.pointerId);
+    }
+  });
+
+  canvas.addEventListener("pointermove", e => {
+    if (dragIndex < 0) return;
+
+    const p = worldFromCanvas(e.clientX, e.clientY);
+    const type = shapeSelect.value;
+
+    if (type === "triangle" || type === "quad" || type === "pentagon") {
+      const data = basePolygon();
+      data[dragIndex] = p;
+
+      window.__customPolygon = data;
+      render();
+    }
+  });
+
+  canvas.addEventListener("pointerup", () => {
+    dragIndex = -1;
+  });
+
+  const originalBasePolygon = basePolygon;
+  // Allow dragging to temporarily define a custom polygon for the simple preset shapes.
+  window.__customPolygon = null;
+
+  function getBasePolygon() {
+    if (window.__customPolygon && window.__customPolygon.length) {
+      return window.__customPolygon.map(p => ({ ...p }));
+    }
+    return originalBasePolygon();
+  }
+
+  // Replace the polygon source while preserving the preset controls.
+  basePolygon = getBasePolygon;
+
+  shapeSelect.addEventListener("change", () => {
+    window.__customPolygon = null;
+    render();
+  });
+
+  scaleInput.addEventListener("input", () => {
+    window.__customPolygon = null;
+    scaleValue.textContent = scaleInput.value;
+    render();
+  });
+
+  Object.values(inputs).forEach(input => input.addEventListener("input", render));
+  boundarySelect.addEventListener("change", render);
+
+  document.getElementById("clipBtn").addEventListener("click", () => {
+    boundarySelect.value = "all";
+    render();
+  });
+
+  document.getElementById("stepBtn").addEventListener("click", nextBoundary);
+  document.getElementById("playBtn").addEventListener("click", play);
+  document.getElementById("resetBtn").addEventListener("click", reset);
+
+  document.querySelectorAll(".problem-load").forEach(button => {
+    button.addEventListener("click", () => {
+      shapeSelect.value = button.dataset.shape;
+      window.__customPolygon = null;
+      boundarySelect.value = "all";
+      document.getElementById("live-lab").scrollIntoView({ behavior: "smooth" });
+      render();
+    });
+  });
+
+  render();
+})();
+</script>
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

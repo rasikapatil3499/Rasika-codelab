@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "dev": "node scripts/serve.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "openai": "^7.15.0"
+  }
+}

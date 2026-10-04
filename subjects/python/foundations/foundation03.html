@@ -1,0 +1,239 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Foundation 3 | Python 2030 | RasikaCodeLab</title>
+<link rel="stylesheet" href="../../../css/style.css">
+<link rel="stylesheet" href="../css/python.css">
+<link rel="stylesheet" href="../css/python_foundation.css">
+</head>
+<body class="protected-page">
+
+<header class="header">
+<div class="header-inner">
+<a href="../../../index.html" class="logo">
+<span class="logo-mark">&lt;/&gt;</span>
+<span>Rasika<span class="logo-highlight">CodeLab</span></span>
+</a>
+<nav class="nav">
+<a href="../../../index.html">Home</a>
+<a href="../../../subjects.html">Subjects</a>
+<a href="../foundations.html" class="active">Foundations</a>
+<a href="../../../about.html">About</a>
+</nav>
+</div>
+</header>
+
+<main class="python-foundation-page">
+<div class="foundation-breadcrumb">
+<a href="../index.html">Python 2030</a><span>/</span>
+<a href="../foundations.html">Foundations</a><span>/</span>
+<span>Foundation 3</span>
+</div>
+
+<section class="foundation-hero">
+<span class="foundation-label">FOUNDATION 03</span>
+<h1>Object-Oriented & Robust Python</h1>
+<p>Design structured, typed, testable and resilient Python programs.</p>
+<div class="foundation-meta">
+<span>8 Sections</span><span>Core Foundation</span><span>Python 2030</span>
+</div>
+</section>
+
+<section class="foundation-content">
+<div class="foundation-grid">
+
+        <article class="foundation-card">
+            <button class="foundation-card-header" type="button" aria-expanded="false">
+                <div class="card-title">
+                    <span class="card-number">01</span>
+                    <div>
+                        <span class="card-category">FOUNDATION</span>
+                        <h2>Object Model</h2>
+                        <p>Understand objects, identity and references.</p>
+                    </div>
+                </div>
+                <span class="card-toggle">+</span>
+            </button>
+            <div class="foundation-card-content"><h3>Objects</h3><p>Python programs manipulate objects. Names refer to objects, and objects have identity, type and value.</p><pre><code>items = [1, 2, 3]
+other = items
+other.append(4)
+print(items)</code></pre></div>
+        </article>
+        <article class="foundation-card">
+            <button class="foundation-card-header" type="button" aria-expanded="false">
+                <div class="card-title">
+                    <span class="card-number">02</span>
+                    <div>
+                        <span class="card-category">FOUNDATION</span>
+                        <h2>Classes & Objects</h2>
+                        <p>Create your own data types.</p>
+                    </div>
+                </div>
+                <span class="card-toggle">+</span>
+            </button>
+            <div class="foundation-card-content"><pre><code>class Student:
+    def __init__(self, name):
+        self.name = name
+
+student = Student("Riya")
+print(student.name)</code></pre><div class="concept-box"><span>OOP</span><strong>State + Behavior = Object</strong></div></div>
+        </article>
+        <article class="foundation-card">
+            <button class="foundation-card-header" type="button" aria-expanded="false">
+                <div class="card-title">
+                    <span class="card-number">03</span>
+                    <div>
+                        <span class="card-category">FOUNDATION</span>
+                        <h2>OOP Design</h2>
+                        <p>Use inheritance, composition and polymorphism appropriately.</p>
+                    </div>
+                </div>
+                <span class="card-toggle">+</span>
+            </button>
+            <div class="foundation-card-content"><h3>Composition</h3><p>Build objects from other objects when relationships represent a â€œhas-aâ€ design.</p><h3>Inheritance</h3><p>Use inheritance when a genuine subtype relationship exists.</p><div class="rule-box"><strong>Design Tip</strong><p>Prefer simple composition when inheritance does not add a clear modeling benefit.</p></div></div>
+        </article>
+        <article class="foundation-card">
+            <button class="foundation-card-header" type="button" aria-expanded="false">
+                <div class="card-title">
+                    <span class="card-number">04</span>
+                    <div>
+                        <span class="card-category">FOUNDATION</span>
+                        <h2>Exceptions</h2>
+                        <p>Handle failures explicitly and safely.</p>
+                    </div>
+                </div>
+                <span class="card-toggle">+</span>
+            </button>
+            <div class="foundation-card-content"><pre><code>try:
+    value = int(input("Number: "))
+except ValueError:
+    print("Invalid number")
+else:
+    print(value)</code></pre><p>Use specific exceptions and keep recovery logic close to the operation that can fail.</p></div>
+        </article>
+        <article class="foundation-card">
+            <button class="foundation-card-header" type="button" aria-expanded="false">
+                <div class="card-title">
+                    <span class="card-number">05</span>
+                    <div>
+                        <span class="card-category">FOUNDATION</span>
+                        <h2>Type Hints</h2>
+                        <p>Make interfaces clearer and easier to analyze.</p>
+                    </div>
+                </div>
+                <span class="card-toggle">+</span>
+            </button>
+            <div class="foundation-card-content"><pre><code>def total(values: list[float]) -> float:
+    return sum(values)</code></pre><p>Type hints document intended interfaces and can be checked by static type-analysis tools.</p></div>
+        </article>
+        <article class="foundation-card">
+            <button class="foundation-card-header" type="button" aria-expanded="false">
+                <div class="card-title">
+                    <span class="card-number">06</span>
+                    <div>
+                        <span class="card-category">FOUNDATION</span>
+                        <h2>Dataclasses</h2>
+                        <p>Represent structured data with less boilerplate.</p>
+                    </div>
+                </div>
+                <span class="card-toggle">+</span>
+            </button>
+            <div class="foundation-card-content"><pre><code>from dataclasses import dataclass
+
+@dataclass
+class Product:
+    name: str
+    price: float</code></pre><div class="concept-box"><span>USE</span><strong>Data-focused classes</strong></div></div>
+        </article>
+        <article class="foundation-card">
+            <button class="foundation-card-header" type="button" aria-expanded="false">
+                <div class="card-title">
+                    <span class="card-number">07</span>
+                    <div>
+                        <span class="card-category">FOUNDATION</span>
+                        <h2>Testing</h2>
+                        <p>Verify behavior before relying on the program.</p>
+                    </div>
+                </div>
+                <span class="card-toggle">+</span>
+            </button>
+            <div class="foundation-card-content"><pre><code>def add(a, b):
+    return a + b
+
+def test_add():
+    assert add(2, 3) == 5</code></pre><p>Good tests check expected behavior, edge cases and failure conditions.</p></div>
+        </article>
+        <article class="foundation-card">
+            <button class="foundation-card-header" type="button" aria-expanded="false">
+                <div class="card-title">
+                    <span class="card-number">08</span>
+                    <div>
+                        <span class="card-category">FOUNDATION</span>
+                        <h2>Mini Application</h2>
+                        <p>Combine OOP, exceptions, typing and tests.</p>
+                    </div>
+                </div>
+                <span class="card-toggle">+</span>
+            </button>
+            <div class="foundation-card-content"><h3>Problem: Library System</h3><p>Design a small library system with books, members and borrowing operations.</p><div class="mini-list"><span>Classes</span><span>Dataclasses</span><span>Exceptions</span><span>Type Hints</span><span>Testing</span></div></div>
+        </article>
+</div>
+</section>
+
+<nav class="foundation-navigation">
+<a href="foundation02.html" class="foundation-nav-button">
+<span>â†</span><div><small>PREVIOUS FOUNDATION</small><strong>Foundation 2</strong></div>
+</a>
+<div class="foundation-progress">
+<span>FOUNDATION</span><strong>03 / 05</strong>
+<div class="progress-bar"><span style="width:60%"></span></div>
+</div>
+<a href="foundation04.html" class="foundation-nav-button next">
+<div><small>NEXT FOUNDATION</small>
+<strong>Foundation 4</strong></div><span>â†’</span>
+</a>
+</nav>
+</main>
+
+<footer class="footer">
+<div class="footer-main">
+<div class="footer-brand">
+<div class="logo"><span class="logo-mark">&lt;/&gt;</span><span>Rasika<span class="logo-highlight">CodeLab</span></span></div>
+<p>Interactive practical learning through concepts, code and visualization.</p>
+</div>
+<div class="footer-links">
+<div><h4>Learn</h4><a href="../../../subjects.html">Subjects</a><a href="../../../about.html">About</a></div>
+<div><h4>Subjects</h4><a href="../../cpp/index.html">C++</a><a href="../../computer-graphics/cgr_index.html">Computer Graphics</a></div>
+</div>
+</div>
+<div class="footer-bottom">
+<span>Â© 2026 Rasika CodeLab</span><span>Built for practical learning.</span>
+</div>
+</footer>
+
+<script src="../../../js/main.js"></script>
+<script>
+document.querySelectorAll(".foundation-card-header").forEach(button => {
+    button.addEventListener("click", () => {
+        const card = button.closest(".foundation-card");
+        const isOpen = card.classList.contains("open");
+
+        document.querySelectorAll(".foundation-card").forEach(item => {
+            item.classList.remove("open");
+            item.querySelector(".foundation-card-header").setAttribute("aria-expanded", "false");
+            item.querySelector(".card-toggle").textContent = "+";
+        });
+
+        if (!isOpen) {
+            card.classList.add("open");
+            button.setAttribute("aria-expanded", "true");
+            button.querySelector(".card-toggle").textContent = "âˆ’";
+        }
+    });
+});
+</script>
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

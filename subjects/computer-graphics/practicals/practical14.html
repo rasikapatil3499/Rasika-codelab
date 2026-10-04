@@ -1,0 +1,797 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>14 â€” Midpoint Subdivision | Rasika CodeLab</title>
+  <link rel="stylesheet" href="../css/cgr_style.css">
+  <link rel="stylesheet" href="../css/cgr_practicals.css">
+<style>body.protected-page:not(.auth-ready){visibility:hidden}</style>
+</head>
+
+<body class="cgr-practical-body practical-14 protected-page">
+
+<header class="navbar">
+  <div class="logo">
+    <span class="logo-mark">&lt;/&gt;</span>
+    <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+  </div>
+  <nav class="nav-links">
+    <a href="../cgr_index.html">Home</a>
+    <a href="../cgr_foundations.html">Foundations</a>
+        <a href="../cgr_practicals.html" class="active">Practicals</a>
+    <a href="../../../about.html">About</a>
+  </nav>
+  <button class="menu-btn" aria-label="Open Menu">â˜°</button>
+</header>
+
+<main>
+
+<section class="practical-hero">
+  <div class="container">
+    <span class="eyebrow">PRACTICAL 14 Â· CLIPPING</span>
+    <h1>Midpoint Subdivision</h1>
+    <p>Clip a line by repeatedly dividing it at its midpoint and testing the resulting segments.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#live-lab">Open Interactive Lab</a>
+      <a class="btn btn-secondary" href="#worked-example">Study Worked Example</a>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">01</span>
+      <div>
+        <h2>What You Will Learn</h2>
+        <p>Midpoint subdivision uses recursive line division to determine which portion of a line belongs inside a clipping window.</p>
+      </div>
+    </div>
+
+    <div class="objective-grid">
+      <article class="info-card">
+        <h3>Understand</h3>
+        <p>Learn the idea of recursively subdividing a line into smaller segments.</p>
+      </article>
+      <article class="info-card">
+        <h3>Calculate</h3>
+        <p>Find midpoint coordinates and classify endpoints relative to a clipping rectangle.</p>
+      </article>
+      <article class="info-card">
+        <h3>Implement</h3>
+        <p>Use recursive subdivision until the visible portion can be identified.</p>
+      </article>
+      <article class="info-card">
+        <h3>Visualize</h3>
+        <p>Watch a line split into smaller segments and observe the accepted visible portion.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section alt-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">02</span>
+      <div>
+        <h2>Midpoint Subdivision Concept</h2>
+        <p>The line is divided into two halves using the midpoint. Each half is then tested independently.</p>
+      </div>
+    </div>
+
+    <div class="concept-grid">
+      <article class="theory-card">
+        <h3>Midpoint Formula</h3>
+        <div class="formula-box">
+          <strong>Xm = (xâ‚ + xâ‚‚) / 2</strong><br>
+          <strong>Ym = (yâ‚ + yâ‚‚) / 2</strong>
+        </div>
+        <p>The midpoint lies exactly halfway between the two endpoints.</p>
+      </article>
+
+      <article class="theory-card">
+        <h3>Why Subdivide?</h3>
+        <p>If a complete segment is known to be outside the clipping region, it can be discarded. If a segment is completely inside, it can be accepted.</p>
+        <p>When the endpoints are on different sides of the boundary, subdivision narrows the search for the intersection.</p>
+      </article>
+    </div>
+
+    <div class="process-grid">
+      <article class="process-card"><span>1</span><h3>Check endpoints</h3><p>Determine whether each endpoint is inside or outside.</p></article>
+      <article class="process-card"><span>2</span><h3>Accept / reject</h3><p>Accept a fully visible segment or reject a fully invisible one.</p></article>
+      <article class="process-card"><span>3</span><h3>Find midpoint</h3><p>Calculate the midpoint of the uncertain segment.</p></article>
+      <article class="process-card"><span>4</span><h3>Repeat</h3><p>Continue subdivision until the visible boundary location is sufficiently close.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">03</span>
+      <div>
+        <h2>Clipping Tests</h2>
+        <p>Every subdivision produces a smaller line segment that can be classified again.</p>
+      </div>
+    </div>
+
+    <div class="formula-grid">
+      <div class="formula-box">
+        <span>Inside Test</span>
+        <strong>xmin â‰¤ x â‰¤ xmax</strong>
+        <p>and</p>
+        <strong>ymin â‰¤ y â‰¤ ymax</strong>
+      </div>
+      <div class="formula-box">
+        <span>Trivial Accept</span>
+        <strong>Both endpoints inside</strong>
+        <p>The segment is completely visible.</p>
+      </div>
+      <div class="formula-box">
+        <span>Trivial Reject</span>
+        <strong>Both endpoints outside on the same side</strong>
+        <p>The segment cannot cross the window.</p>
+      </div>
+    </div>
+
+    <div class="note-card">
+      <strong>Important:</strong> Unlike Cohen-Sutherland, midpoint subdivision does not directly compute a boundary intersection using a slope equation. It approaches the boundary by repeatedly halving the uncertain segment.
+    </div>
+  </div>
+</section>
+
+<section class="practical-section alt-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">04</span>
+      <div>
+        <h2>Algorithm</h2>
+        <p>A simple recursive strategy for line clipping.</p>
+      </div>
+    </div>
+
+    <div class="algorithm-steps">
+      <div class="algorithm-step"><span>01</span><div><h3>Start with Pâ‚ and Pâ‚‚</h3><p>Take the two endpoints of the original line.</p></div></div>
+      <div class="algorithm-step"><span>02</span><div><h3>Classify endpoints</h3><p>Check whether each endpoint is inside or outside the clipping window.</p></div></div>
+      <div class="algorithm-step"><span>03</span><div><h3>Accept or reject</h3><p>If the segment is clearly inside, accept it. If it is clearly outside on the same side, reject it.</p></div></div>
+      <div class="algorithm-step"><span>04</span><div><h3>Calculate midpoint</h3><p>Compute M = ((xâ‚+xâ‚‚)/2, (yâ‚+yâ‚‚)/2).</p></div></div>
+      <div class="algorithm-step"><span>05</span><div><h3>Subdivide</h3><p>Test Pâ‚â†’M and Mâ†’Pâ‚‚ separately.</p></div></div>
+      <div class="algorithm-step"><span>06</span><div><h3>Repeat</h3><p>Continue until the visible portion is determined or the maximum subdivision depth is reached.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section" id="worked-example">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">05</span>
+      <div>
+        <h2>Worked Calculation</h2>
+        <p>Consider a clipping window from (2,2) to (8,6).</p>
+      </div>
+    </div>
+
+    <div class="calculation-card">
+      <h3>Line: Pâ‚(1,3) â†’ Pâ‚‚(10,5)</h3>
+
+      <div class="calculation-flow">
+        <div class="calc-step">
+          <span>01</span>
+          <p>Pâ‚(1,3) is outside on the LEFT. Pâ‚‚(10,5) is outside on the RIGHT.</p>
+        </div>
+        <div class="calc-step">
+          <span>02</span>
+          <p>Find midpoint: M = ((1+10)/2, (3+5)/2) = <strong>(5.5,4)</strong>.</p>
+        </div>
+        <div class="calc-step">
+          <span>03</span>
+          <p>M(5.5,4) lies inside the clipping window, so the segment around M contains visible geometry.</p>
+        </div>
+        <div class="calc-step">
+          <span>04</span>
+          <p>Subdivide Pâ‚â†’M and Mâ†’Pâ‚‚. Continue halving the outside/inside transitions.</p>
+        </div>
+        <div class="calc-step">
+          <span>05</span>
+          <p>After repeated subdivision, the left boundary approaches approximately <strong>(2,3.22)</strong>.</p>
+        </div>
+        <div class="calc-step">
+          <span>06</span>
+          <p>The right boundary approaches approximately <strong>(8,4.56)</strong>.</p>
+        </div>
+        <div class="calc-step">
+          <span>07</span>
+          <p>Final visible segment â‰ˆ <strong>(2,3.22) â†’ (8,4.56)</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section alt-section" id="live-lab">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">06</span>
+      <div>
+        <h2>Interactive Midpoint Subdivision Lab</h2>
+        <p>Drag the endpoints and step through the subdivision process.</p>
+      </div>
+    </div>
+
+    <div class="interactive-layout">
+      <div class="control-panel">
+        <div class="control-group">
+          <h3>Line Endpoints</h3>
+          <label>Pâ‚ X <input id="p1x" type="number" value="1" step="0.5"></label>
+          <label>Pâ‚ Y <input id="p1y" type="number" value="3" step="0.5"></label>
+          <label>Pâ‚‚ X <input id="p2x" type="number" value="10" step="0.5"></label>
+          <label>Pâ‚‚ Y <input id="p2y" type="number" value="5" step="0.5"></label>
+        </div>
+
+        <div class="control-group">
+          <h3>Clipping Window</h3>
+          <label>xmin <input id="xmin" type="number" value="2" step="0.5"></label>
+          <label>ymin <input id="ymin" type="number" value="2" step="0.5"></label>
+          <label>xmax <input id="xmax" type="number" value="8" step="0.5"></label>
+          <label>ymax <input id="ymax" type="number" value="6" step="0.5"></label>
+        </div>
+
+        <div class="control-group">
+          <h3>Subdivision</h3>
+          <label>Depth <input id="depth" type="range" min="1" max="12" value="7"></label>
+          <output id="depthValue">7</output>
+        </div>
+
+        <div class="button-row">
+          <button class="btn btn-primary" id="stepBtn">Next Step</button>
+          <button class="btn btn-secondary" id="playBtn">Play</button>
+          <button class="btn btn-secondary" id="resetBtn">Reset</button>
+        </div>
+      </div>
+
+      <div class="visualizer-panel">
+        <canvas id="midCanvas" width="760" height="500" aria-label="Midpoint subdivision visualizer"></canvas>
+
+        <div class="status-grid">
+          <div class="status-card">
+            <span>Current Segment</span>
+            <strong id="segmentStatus">Pâ‚ â†’ Pâ‚‚</strong>
+            <small id="segmentDecision">Pending</small>
+          </div>
+          <div class="status-card">
+            <span>Midpoint</span>
+            <strong id="midpoint">â€”</strong>
+            <small>Calculated point</small>
+          </div>
+          <div class="status-card">
+            <span>Subdivision</span>
+            <strong id="stepCount">0</strong>
+            <small id="depthStatus">Depth 0</small>
+          </div>
+        </div>
+
+        <div class="lab-message" id="labMessage">Ready. Click Next Step to divide the uncertain segment.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">07</span>
+      <div>
+        <h2>Visualization Guide</h2>
+        <p>Understand what each visual element represents.</p>
+      </div>
+    </div>
+
+    <div class="process-grid">
+      <article class="process-card"><span>01</span><h3>Original Line</h3><p>The complete input line is shown as a reference.</p></article>
+      <article class="process-card"><span>02</span><h3>Clipping Window</h3><p>The rectangle defines the visible region.</p></article>
+      <article class="process-card"><span>03</span><h3>Midpoint</h3><p>The current segment is divided at its center.</p></article>
+      <article class="process-card"><span>04</span><h3>Accepted Region</h3><p>The final visible portion remains inside the window.</p></article>
+    </div>
+
+    <div class="note-card">
+      <strong>Try this:</strong> Set one endpoint far to the left and the other far to the right. Increase the subdivision depth and observe how the uncertain regions become progressively smaller.
+    </div>
+  </div>
+</section>
+
+<section class="practical-section alt-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">08</span>
+      <div>
+        <h2>Real-Life Problem Statements</h2>
+        <p>Relate midpoint subdivision to practical clipping situations.</p>
+      </div>
+    </div>
+
+    <div class="problem-grid">
+      <article class="problem-card">
+        <span class="problem-tag">01 Â· VIEWPORT</span>
+        <h3>Viewport Line</h3>
+        <p>A CAD viewport contains a long construction line. Determine the portion that should be displayed inside the active viewport.</p>
+        <button class="btn btn-secondary problem-load" data-p1x="-1" data-p1y="3" data-p2x="11" data-p2y="7">Show in Live Viewer</button>
+      </article>
+
+      <article class="problem-card">
+        <span class="problem-tag">02 Â· MAP</span>
+        <h3>Road Segment</h3>
+        <p>A digital map stores roads as line segments. Clip a road to the current map window before rendering it.</p>
+        <button class="btn btn-secondary problem-load" data-p1x="0" data-p1y="8" data-p2x="10" data-p2y="0">Show in Live Viewer</button>
+      </article>
+
+      <article class="problem-card">
+        <span class="problem-tag">03 Â· GAME</span>
+        <h3>Laser Beam</h3>
+        <p>A game laser can cross the edge of the game panel. Find the portion that remains visible inside the panel.</p>
+        <button class="btn btn-secondary problem-load" data-p1x="-3" data-p1y="7" data-p2x="12" data-p2y="1">Show in Live Viewer</button>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">09</span>
+      <div>
+        <h2>Experiments</h2>
+        <p>Use the visualizer to investigate how recursive subdivision behaves.</p>
+      </div>
+    </div>
+
+    <div class="experiment-list">
+      <div class="experiment-item"><span>01</span><p>Place both endpoints inside the clipping window. Verify that no subdivision is required.</p></div>
+      <div class="experiment-item"><span>02</span><p>Place both endpoints above the window. Observe the immediate rejection.</p></div>
+      <div class="experiment-item"><span>03</span><p>Place endpoints on opposite sides of the window and increase the depth.</p></div>
+      <div class="experiment-item"><span>04</span><p>Compare the approximate boundary location at depth 3, 6, 9 and 12.</p></div>
+      <div class="experiment-item"><span>05</span><p>Move the clipping window while keeping the original line fixed.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section alt-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">10</span>
+      <div>
+        <h2>Common Mistakes</h2>
+      </div>
+    </div>
+
+    <div class="mistake-grid">
+      <article class="mistake-card"><h3>Wrong midpoint</h3><p>Use the average of both x-coordinates and both y-coordinates.</p></article>
+      <article class="mistake-card"><h3>Stopping too early</h3><p>Low subdivision depth gives only a rough boundary approximation.</p></article>
+      <article class="mistake-card"><h3>Ignoring rejection</h3><p>A segment completely outside on the same side can be discarded without endless subdivision.</p></article>
+      <article class="mistake-card"><h3>Mixing coordinate systems</h3><p>Keep mathematical coordinates separate from screen-pixel coordinates during calculations.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">11</span>
+      <div>
+        <h2>Midpoint Subdivision vs Cohen-Sutherland</h2>
+        <p>Both solve line clipping, but they approach the problem differently.</p>
+      </div>
+    </div>
+
+    <div class="table-card">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Midpoint Subdivision</th>
+            <th>Cohen-Sutherland</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Main idea</td><td>Repeatedly divide the segment</td><td>Use region codes and boundary intersections</td></tr>
+          <tr><td>Midpoint calculation</td><td>Core operation</td><td>Not required for the main algorithm</td></tr>
+          <tr><td>Boundary result</td><td>Approximated through subdivision</td><td>Calculated directly using intersection equations</td></tr>
+          <tr><td>Learning value</td><td>Good for recursion and geometric reasoning</td><td>Good for bitwise region classification</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section alt-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">12</span>
+      <div>
+        <h2>Viva Questions</h2>
+        <p>Check your understanding before moving to polygon clipping.</p>
+      </div>
+    </div>
+
+    <div class="viva-list">
+      <details><summary>What is midpoint subdivision?</summary><p>It is a line-clipping approach that repeatedly divides a line segment at its midpoint and classifies the resulting segments.</p></details>
+      <details><summary>What is the midpoint formula?</summary><p>M = ((xâ‚+xâ‚‚)/2, (yâ‚+yâ‚‚)/2).</p></details>
+      <details><summary>Why is recursion useful here?</summary><p>Each uncertain segment can be divided into smaller segments and processed using the same clipping logic.</p></details>
+      <details><summary>When can a segment be accepted?</summary><p>When it is completely inside the clipping window.</p></details>
+      <details><summary>When can a segment be rejected?</summary><p>When it is completely outside and cannot intersect the clipping window.</p></details>
+      <details><summary>What happens when one endpoint is inside and one is outside?</summary><p>The segment is subdivided so that the boundary transition can be located progressively.</p></details>
+      <details><summary>What does increasing subdivision depth do?</summary><p>It improves the approximation of the clipping boundary but requires more subdivision steps.</p></details>
+      <details><summary>How is it different from Cohen-Sutherland?</summary><p>Midpoint subdivision searches for the boundary by repeated halving, while Cohen-Sutherland uses outcodes and direct boundary intersection calculations.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="practical-navigation">
+  <div class="container">
+    <a class="nav-practical prev" href="practical13.html">
+      <span>Previous Practical</span>
+      <strong>13 â€” Cohen-Sutherland Line Clipping</strong>
+    </a>
+    <a class="nav-practical next" href="practical15.html">
+      <span>Next Practical</span>
+      <strong>15 â€” Sutherland-Hodgman Polygon Clipping</strong>
+    </a>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-main">
+    <div class="footer-brand">
+      <div class="logo">
+        <span class="logo-mark">&lt;/&gt;</span>
+        <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+      </div>
+      <p>Interactive Computer Graphics practical learning through concepts, calculations and visualization.</p>
+    </div>
+    <div class="footer-links">
+      <div>
+        <h4>Learn</h4>
+        <a href="../cgr_foundations.html">Foundations</a>
+              </div>
+      <div>
+        <h4>Practice</h4>
+        <a href="../cgr_practicals.html">Practicals</a>
+        <a href="../../../about.html">About</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>Â© 2026 Rasika CodeLab</span>
+    <span>Built for practical learning.</span>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const canvas = document.getElementById("midCanvas");
+  const ctx = canvas.getContext("2d");
+
+  const inputs = {
+    p1x: document.getElementById("p1x"),
+    p1y: document.getElementById("p1y"),
+    p2x: document.getElementById("p2x"),
+    p2y: document.getElementById("p2y"),
+    xmin: document.getElementById("xmin"),
+    ymin: document.getElementById("ymin"),
+    xmax: document.getElementById("xmax"),
+    ymax: document.getElementById("ymax")
+  };
+
+  const depthInput = document.getElementById("depth");
+  const depthValue = document.getElementById("depthValue");
+  const segmentStatus = document.getElementById("segmentStatus");
+  const segmentDecision = document.getElementById("segmentDecision");
+  const midpointText = document.getElementById("midpoint");
+  const stepCount = document.getElementById("stepCount");
+  const depthStatus = document.getElementById("depthStatus");
+  const message = document.getElementById("labMessage");
+
+  const original = { p1x: 1, p1y: 3, p2x: 10, p2y: 5, xmin: 2, ymin: 2, xmax: 8, ymax: 6 };
+
+  const W = canvas.width;
+  const H = canvas.height;
+  const padding = 55;
+  const world = { min: -2, max: 12 };
+
+  let frames = [];
+  let frameIndex = 0;
+  let timer = null;
+  let dragPoint = null;
+
+  function n(id) {
+    return Number(inputs[id].value);
+  }
+
+  function state() {
+    let xmin = n("xmin"), xmax = n("xmax");
+    let ymin = n("ymin"), ymax = n("ymax");
+    if (xmin > xmax) [xmin, xmax] = [xmax, xmin];
+    if (ymin > ymax) [ymin, ymax] = [ymax, ymin];
+
+    return {
+      p1: { x: n("p1x"), y: n("p1y") },
+      p2: { x: n("p2x"), y: n("p2y") },
+      xmin, ymin, xmax, ymax,
+      maxDepth: Number(depthInput.value)
+    };
+  }
+
+  function inside(p, r) {
+    return p.x >= r.xmin && p.x <= r.xmax && p.y >= r.ymin && p.y <= r.ymax;
+  }
+
+  function sameOutsideSide(a, b, r) {
+    if (a.x < r.xmin && b.x < r.xmin) return true;
+    if (a.x > r.xmax && b.x > r.xmax) return true;
+    if (a.y < r.ymin && b.y < r.ymin) return true;
+    if (a.y > r.ymax && b.y > r.ymax) return true;
+    return false;
+  }
+
+  function midpoint(a, b) {
+    return { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 };
+  }
+
+  function pointText(p) {
+    return `(${p.x.toFixed(2)}, ${p.y.toFixed(2)})`;
+  }
+
+  function classify(a, b, r) {
+    if (inside(a, r) && inside(b, r)) return "ACCEPT";
+    if (sameOutsideSide(a, b, r)) return "REJECT";
+    return "SUBDIVIDE";
+  }
+
+  function buildFrames(r) {
+    const result = [];
+    const queue = [{ a: r.p1, b: r.p2, depth: 0, path: "Pâ‚ â†’ Pâ‚‚" }];
+
+    while (queue.length && result.length < 180) {
+      const current = queue.shift();
+      const { a, b, depth, path } = current;
+      const decision = classify(a, b, r);
+
+      if (decision === "ACCEPT") {
+        result.push({ a, b, depth, path, decision, mid: null, action: "Accept: segment is completely inside." });
+        continue;
+      }
+
+      if (decision === "REJECT") {
+        result.push({ a, b, depth, path, decision, mid: null, action: "Reject: segment is completely outside." });
+        continue;
+      }
+
+      const m = midpoint(a, b);
+      result.push({
+        a, b, depth, path, decision,
+        mid: m,
+        action: `Midpoint ${pointText(m)} â†’ subdivide into two segments.`
+      });
+
+      if (depth < r.maxDepth) {
+        queue.push({ a, b: m, depth: depth + 1, path: `${path.split(" â†’ ")[0]} â†’ M` });
+        queue.push({ a: m, b, depth: depth + 1, path: `M â†’ ${path.split(" â†’ ").slice(-1)[0]}` });
+      }
+    }
+
+    return result;
+  }
+
+  function sx(x) {
+    return padding + (x - world.min) * (W - 2 * padding) / (world.max - world.min);
+  }
+
+  function sy(y) {
+    return H - padding - (y - world.min) * (H - 2 * padding) / (world.max - world.min);
+  }
+
+  function drawGrid() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.globalAlpha = 0.3;
+    for (let x = world.min; x <= world.max; x++) {
+      ctx.beginPath();
+      ctx.moveTo(sx(x), padding);
+      ctx.lineTo(sx(x), H - padding);
+      ctx.stroke();
+    }
+    for (let y = world.min; y <= world.max; y++) {
+      ctx.beginPath();
+      ctx.moveTo(padding, sy(y));
+      ctx.lineTo(W - padding, sy(y));
+      ctx.stroke();
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  function drawWindow(r) {
+    const left = sx(r.xmin);
+    const right = sx(r.xmax);
+    const top = sy(r.ymax);
+    const bottom = sy(r.ymin);
+
+    ctx.lineWidth = 3;
+    ctx.strokeRect(left, top, right - left, bottom - top);
+
+    ctx.font = "13px sans-serif";
+    ctx.fillText("CLIPPING WINDOW", left + 8, top + 18);
+    ctx.fillText(`(${r.xmin}, ${r.ymin})`, left, bottom + 20);
+    ctx.fillText(`(${r.xmax}, ${r.ymax})`, right - 65, top - 9);
+  }
+
+  function line(a, b, dashed = false) {
+    ctx.save();
+    if (dashed) ctx.setLineDash([8, 7]);
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.moveTo(sx(a.x), sy(a.y));
+    ctx.lineTo(sx(b.x), sy(b.y));
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  function point(p, label, radius = 7) {
+    ctx.beginPath();
+    ctx.arc(sx(p.x), sy(p.y), radius, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.font = "bold 13px sans-serif";
+    ctx.fillText(label, sx(p.x) + 10, sy(p.y) - 9);
+  }
+
+  function render() {
+    const r = state();
+    frames = buildFrames(r);
+
+    drawGrid();
+    drawWindow(r);
+    line(r.p1, r.p2, true);
+
+    const frame = frames[Math.min(frameIndex, Math.max(0, frames.length - 1))];
+
+    if (!frame) {
+      point(r.p1, "Pâ‚");
+      point(r.p2, "Pâ‚‚");
+      return;
+    }
+
+    line(frame.a, frame.b, false);
+    point(frame.a, "A");
+    point(frame.b, "B");
+
+    if (frame.mid) {
+      ctx.beginPath();
+      ctx.arc(sx(frame.mid.x), sy(frame.mid.y), 9, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.font = "bold 13px sans-serif";
+      ctx.fillText("M", sx(frame.mid.x) + 10, sy(frame.mid.y) + 16);
+    }
+
+    if (frame.decision === "ACCEPT") {
+      ctx.lineWidth = 6;
+      line(frame.a, frame.b, false);
+    }
+
+    segmentStatus.textContent = frame.path;
+    segmentDecision.textContent = frame.decision;
+    midpointText.textContent = frame.mid ? pointText(frame.mid) : "â€”";
+    stepCount.textContent = String(frameIndex + 1);
+    depthStatus.textContent = `Depth ${frame.depth}`;
+    message.textContent = `Step ${frameIndex + 1} of ${frames.length}: ${frame.action}`;
+  }
+
+  function refresh() {
+    stop();
+    frameIndex = 0;
+    render();
+  }
+
+  function next() {
+    if (!frames.length) frames = buildFrames(state());
+    frameIndex++;
+    if (frameIndex >= frames.length) frameIndex = 0;
+    render();
+  }
+
+  function play() {
+    if (timer) {
+      stop();
+      return;
+    }
+
+    frames = buildFrames(state());
+    frameIndex = 0;
+    document.getElementById("playBtn").textContent = "Pause";
+
+    timer = setInterval(() => {
+      render();
+      frameIndex++;
+      if (frameIndex >= frames.length) {
+        render();
+        stop();
+      }
+    }, 550);
+  }
+
+  function stop() {
+    if (timer) clearInterval(timer);
+    timer = null;
+    document.getElementById("playBtn").textContent = "Play";
+  }
+
+  function reset() {
+    stop();
+    Object.entries(original).forEach(([key, value]) => {
+      inputs[key].value = value;
+    });
+    depthInput.value = 7;
+    depthValue.textContent = "7";
+    refresh();
+  }
+
+  function worldFromCanvas(clientX, clientY) {
+    const rect = canvas.getBoundingClientRect();
+    const px = (clientX - rect.left) * canvas.width / rect.width;
+    const py = (clientY - rect.top) * canvas.height / rect.height;
+    return {
+      x: world.min + (px - padding) * (world.max - world.min) / (W - 2 * padding),
+      y: world.min + (H - padding - py) * (world.max - world.min) / (H - 2 * padding)
+    };
+  }
+
+  function closeTo(a, b) {
+    return Math.hypot(sx(a.x) - sx(b.x), sy(a.y) - sy(b.y)) < 18;
+  }
+
+  canvas.addEventListener("pointerdown", e => {
+    const r = state();
+    const p = worldFromCanvas(e.clientX, e.clientY);
+    if (closeTo(p, r.p1)) dragPoint = "p1";
+    else if (closeTo(p, r.p2)) dragPoint = "p2";
+    if (dragPoint) canvas.setPointerCapture(e.pointerId);
+  });
+
+  canvas.addEventListener("pointermove", e => {
+    if (!dragPoint) return;
+    const p = worldFromCanvas(e.clientX, e.clientY);
+    inputs[dragPoint + "x"].value = p.x.toFixed(2);
+    inputs[dragPoint + "y"].value = p.y.toFixed(2);
+    refresh();
+  });
+
+  canvas.addEventListener("pointerup", () => dragPoint = null);
+
+  Object.values(inputs).forEach(input => input.addEventListener("input", refresh));
+
+  depthInput.addEventListener("input", () => {
+    depthValue.textContent = depthInput.value;
+    refresh();
+  });
+
+  document.getElementById("stepBtn").addEventListener("click", next);
+  document.getElementById("playBtn").addEventListener("click", play);
+  document.getElementById("resetBtn").addEventListener("click", reset);
+
+  document.querySelectorAll(".problem-load").forEach(button => {
+    button.addEventListener("click", () => {
+      inputs.p1x.value = button.dataset.p1x;
+      inputs.p1y.value = button.dataset.p1y;
+      inputs.p2x.value = button.dataset.p2x;
+      inputs.p2y.value = button.dataset.p2y;
+      document.getElementById("live-lab").scrollIntoView({ behavior: "smooth" });
+      refresh();
+    });
+  });
+
+  refresh();
+})();
+</script>
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

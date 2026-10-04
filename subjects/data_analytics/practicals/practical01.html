@@ -1,0 +1,1472 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Practical 01 | Data Exploration | Rasika CodeLab</title>
+
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../css/data_analytics_foundation.css">
+
+    <style>
+        /* =====================================================
+           PRACTICAL 01 â€” DATA EXPLORATION
+           Page-specific styling
+        ===================================================== */
+
+        .da-practical-page{
+            --p-orange:#ff8a2a;
+            --p-bg:#070a10;
+            --p-card:#111722;
+            --p-card2:#151c28;
+            --p-text:#f5f6f8;
+            --p-muted:#969daa;
+            --p-soft:#cdd1d8;
+            --p-border:rgba(255,255,255,.09);
+            background:var(--p-bg);
+            color:var(--p-text);
+        }
+
+        .da-practical-page *{
+            box-sizing:border-box;
+        }
+
+        .da-container{
+            width:min(1180px,calc(100% - 48px));
+            margin:auto;
+        }
+
+        /* HERO */
+
+        .da-practical-hero{
+            padding:90px 24px 75px;
+            border-bottom:1px solid var(--p-border);
+            background:
+                radial-gradient(circle at 82% 15%,rgba(255,138,42,.14),transparent 30%),
+                linear-gradient(135deg,#080b12,#151016);
+        }
+
+        .da-breadcrumb{
+            margin-bottom:25px;
+            color:var(--p-muted);
+            font-size:10px;
+            letter-spacing:1px;
+        }
+
+        .da-breadcrumb span{
+            color:var(--p-orange);
+            margin:0 7px;
+        }
+
+        .da-practical-label{
+            color:var(--p-orange);
+            font-size:10px;
+            font-weight:800;
+            letter-spacing:2px;
+        }
+
+        .da-practical-hero h1{
+            max-width:900px;
+            margin:15px 0;
+            font-size:clamp(42px,6vw,70px);
+            line-height:1;
+            letter-spacing:-3px;
+        }
+
+        .da-practical-hero h1 span{
+            color:var(--p-orange);
+        }
+
+        .da-hero-description{
+            max-width:760px;
+            margin:0;
+            color:var(--p-soft);
+            font-size:14px;
+            line-height:1.85;
+        }
+
+        .da-hero-tags{
+            display:flex;
+            flex-wrap:wrap;
+            gap:8px;
+            margin-top:25px;
+        }
+
+        .da-hero-tags span{
+            padding:7px 11px;
+            border:1px solid var(--p-border);
+            border-radius:50px;
+            color:var(--p-soft);
+            font-size:9px;
+        }
+
+        /* SECTION */
+
+        .da-section{
+            padding:80px 24px;
+        }
+
+        .da-section.dark{
+            background:#090c13;
+            border-block:1px solid rgba(255,255,255,.04);
+        }
+
+        .da-section-heading{
+            margin-bottom:38px;
+        }
+
+        .da-section-label{
+            color:var(--p-orange);
+            font-size:9px;
+            font-weight:800;
+            letter-spacing:2px;
+            text-transform:uppercase;
+        }
+
+        .da-section-heading h2{
+            margin:11px 0;
+            font-size:clamp(29px,4vw,45px);
+            line-height:1.1;
+        }
+
+        .da-section-heading h2 span{
+            color:var(--p-orange);
+        }
+
+        .da-section-heading p{
+            max-width:700px;
+            margin:0;
+            color:var(--p-muted);
+            font-size:12px;
+            line-height:1.8;
+        }
+
+        /* OBJECTIVE */
+
+        .da-objective-grid{
+            display:grid;
+            grid-template-columns:.8fr 1.2fr;
+            gap:20px;
+        }
+
+        .da-objective-card{
+            padding:28px;
+            background:var(--p-card);
+            border:1px solid var(--p-border);
+            border-radius:18px;
+        }
+
+        .da-objective-card h3{
+            margin:0 0 15px;
+            font-size:19px;
+        }
+
+        .da-objective-card p{
+            color:var(--p-muted);
+            font-size:11px;
+            line-height:1.8;
+        }
+
+        .da-outcome-list{
+            display:grid;
+            gap:9px;
+        }
+
+        .da-outcome-list div{
+            padding:13px 15px;
+            background:rgba(255,255,255,.025);
+            border:1px solid var(--p-border);
+            border-radius:9px;
+            color:var(--p-soft);
+            font-size:10px;
+        }
+
+        .da-outcome-list span{
+            margin-right:8px;
+            color:var(--p-orange);
+            font-weight:800;
+        }
+
+        /* WORKFLOW */
+
+        .da-workflow{
+            display:grid;
+            grid-template-columns:repeat(6,1fr);
+            gap:10px;
+        }
+
+        .da-workflow-step{
+            min-height:130px;
+            padding:18px 12px;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            text-align:center;
+            background:var(--p-card);
+            border:1px solid var(--p-border);
+            border-radius:14px;
+            transition:.25s ease;
+        }
+
+        .da-workflow-step:hover{
+            transform:translateY(-5px);
+            border-color:rgba(255,138,42,.4);
+        }
+
+        .da-workflow-step strong{
+            color:var(--p-orange);
+            font-size:10px;
+        }
+
+        .da-workflow-step h3{
+            margin:9px 0 5px;
+            font-size:13px;
+        }
+
+        .da-workflow-step p{
+            margin:0;
+            color:var(--p-muted);
+            font-size:9px;
+            line-height:1.5;
+        }
+
+        /* PROBLEM CARDS */
+
+        .da-problem-grid{
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:18px;
+        }
+
+        .da-problem-card{
+            display:flex;
+            flex-direction:column;
+            min-height:590px;
+            padding:25px;
+            background:linear-gradient(145deg,#121722,#0d111a);
+            border:1px solid var(--p-border);
+            border-radius:18px;
+            transition:.25s ease;
+        }
+
+        .da-problem-card:hover{
+            transform:translateY(-6px);
+            border-color:rgba(255,138,42,.4);
+            box-shadow:0 20px 50px rgba(0,0,0,.28);
+        }
+
+        .da-problem-number{
+            color:var(--p-orange);
+            font-size:9px;
+            font-weight:900;
+            letter-spacing:1.5px;
+        }
+
+        .da-problem-card h3{
+            margin:13px 0 10px;
+            font-size:20px;
+        }
+
+        .da-problem-card > p{
+            color:var(--p-muted);
+            font-size:11px;
+            line-height:1.75;
+        }
+
+        .da-problem-block{
+            margin-top:18px;
+        }
+
+        .da-problem-block strong{
+            display:block;
+            margin-bottom:8px;
+            color:var(--p-orange);
+            font-size:9px;
+            letter-spacing:1px;
+            text-transform:uppercase;
+        }
+
+        .da-problem-block ul{
+            margin:0;
+            padding-left:17px;
+            color:var(--p-soft);
+        }
+
+        .da-problem-block li{
+            margin:6px 0;
+            font-size:10px;
+            line-height:1.55;
+        }
+
+        /* DATASET */
+
+        .da-dataset{
+            overflow:hidden;
+            margin-top:18px;
+            border:1px solid var(--p-border);
+            border-radius:10px;
+        }
+
+        .da-dataset-row{
+            display:grid;
+            grid-template-columns:1.2fr 1fr 1fr;
+            border-bottom:1px solid var(--p-border);
+        }
+
+        .da-dataset-row:last-child{
+            border-bottom:0;
+        }
+
+        .da-dataset-row span{
+            padding:9px;
+            color:var(--p-soft);
+            font-size:8px;
+        }
+
+        .da-dataset-head{
+            background:rgba(255,138,42,.06);
+        }
+
+        .da-dataset-head span{
+            color:var(--p-orange);
+            font-weight:800;
+        }
+
+        /* VISUALIZATION */
+
+        .da-visualization{
+            display:grid;
+            grid-template-columns:repeat(2,1fr);
+            gap:8px;
+            margin-top:auto;
+            padding-top:20px;
+        }
+
+        .da-chart-tag{
+            padding:10px;
+            text-align:center;
+            background:rgba(255,138,42,.05);
+            border:1px solid rgba(255,138,42,.16);
+            border-radius:8px;
+            color:var(--p-soft);
+            font-size:9px;
+        }
+
+        .da-chart-tag strong{
+            display:block;
+            margin-bottom:3px;
+            color:var(--p-orange);
+            font-size:9px;
+        }
+
+        /* ANALYSIS QUESTIONS */
+
+        .da-question-grid{
+            display:grid;
+            grid-template-columns:repeat(2,1fr);
+            gap:15px;
+        }
+
+        .da-question{
+            padding:22px;
+            background:var(--p-card);
+            border:1px solid var(--p-border);
+            border-radius:15px;
+        }
+
+        .da-question-number{
+            color:var(--p-orange);
+            font-size:9px;
+            font-weight:900;
+        }
+
+        .da-question h3{
+            margin:11px 0 6px;
+            font-size:15px;
+        }
+
+        .da-question p{
+            margin:0;
+            color:var(--p-muted);
+            font-size:10px;
+            line-height:1.7;
+        }
+
+        /* EXPECTED OUTPUT */
+
+        .da-output-grid{
+            display:grid;
+            grid-template-columns:repeat(4,1fr);
+            gap:15px;
+        }
+
+        .da-output-card{
+            min-height:155px;
+            padding:23px;
+            background:var(--p-card);
+            border:1px solid var(--p-border);
+            border-radius:15px;
+        }
+
+        .da-output-card span{
+            color:var(--p-orange);
+            font-size:9px;
+            font-weight:900;
+        }
+
+        .da-output-card h3{
+            margin:12px 0 7px;
+            font-size:15px;
+        }
+
+        .da-output-card p{
+            margin:0;
+            color:var(--p-muted);
+            font-size:10px;
+            line-height:1.65;
+        }
+
+        /* CHALLENGE */
+
+        .da-challenge{
+            max-width:850px;
+            margin:auto;
+            padding:30px;
+            background:var(--p-card);
+            border:1px solid var(--p-border);
+            border-radius:20px;
+        }
+
+        .da-challenge h3{
+            margin:0 0 18px;
+            font-size:19px;
+        }
+
+        .da-challenge h3 span{
+            color:var(--p-orange);
+        }
+
+        .da-challenge-options{
+            display:grid;
+            gap:8px;
+        }
+
+        .da-challenge-options button{
+            padding:13px 15px;
+            text-align:left;
+            background:#0c1018;
+            border:1px solid var(--p-border);
+            border-radius:9px;
+            color:var(--p-soft);
+            cursor:pointer;
+            font-size:10px;
+        }
+
+        .da-challenge-options button:hover{
+            border-color:rgba(255,138,42,.4);
+        }
+
+        .da-answer{
+            min-height:20px;
+            margin-top:15px;
+            color:var(--p-muted);
+            font-size:10px;
+        }
+
+        /* NAVIGATION */
+
+        .da-practical-navigation{
+            width:min(1180px,calc(100% - 48px));
+            margin:0 auto 80px;
+            display:flex;
+            justify-content:space-between;
+            gap:12px;
+        }
+
+        .da-nav-button{
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            min-height:44px;
+            padding:11px 17px;
+            border:1px solid var(--p-border);
+            border-radius:10px;
+            color:var(--p-soft);
+            font-size:10px;
+        }
+
+        .da-nav-button.next{
+            background:var(--p-orange);
+            border-color:var(--p-orange);
+            color:#111;
+            font-weight:900;
+        }
+
+        /* RESPONSIVE */
+
+        @media(max-width:1000px){
+
+            .da-workflow{
+                grid-template-columns:repeat(3,1fr);
+            }
+
+            .da-problem-grid{
+                grid-template-columns:1fr;
+            }
+
+            .da-problem-card{
+                min-height:auto;
+            }
+
+            .da-output-grid{
+                grid-template-columns:repeat(2,1fr);
+            }
+        }
+
+        @media(max-width:750px){
+
+            .da-objective-grid{
+                grid-template-columns:1fr;
+            }
+
+            .da-question-grid{
+                grid-template-columns:1fr;
+            }
+
+            .da-workflow{
+                grid-template-columns:repeat(2,1fr);
+            }
+        }
+
+        @media(max-width:600px){
+
+            .da-container,
+            .da-practical-navigation{
+                width:calc(100% - 32px);
+            }
+
+            .da-practical-hero,
+            .da-section{
+                padding-left:16px;
+                padding-right:16px;
+            }
+
+            .da-practical-hero{
+                padding-top:70px;
+            }
+
+            .da-practical-hero h1{
+                font-size:40px;
+                letter-spacing:-2px;
+            }
+
+            .da-workflow,
+            .da-output-grid{
+                grid-template-columns:1fr;
+            }
+
+            .da-visualization{
+                grid-template-columns:1fr;
+            }
+
+            .da-practical-navigation{
+                flex-direction:column;
+            }
+
+            .da-nav-button{
+                width:100%;
+            }
+        }
+    </style>
+</head>
+
+<body class="da-practical-page protected-page">
+
+<header class="navbar">
+    <div class="nav-container">
+
+        <a href="../../../index.html" class="logo">
+            <span class="logo-mark">&lt;/&gt;</span>
+            <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="../../../index.html">Home</a>
+            <a href="../../../subjects.html" class="active">Subjects</a>
+            <a href="../../../about.html">About</a>
+            <a href="../../../login.html">Login</a>
+        </nav>
+
+        <button class="menu-btn" aria-label="Open menu">â˜°</button>
+
+    </div>
+</header>
+
+
+<main>
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+
+    <section class="da-practical-hero">
+
+        <div class="da-container">
+
+            <div class="da-breadcrumb">
+                DATA ANALYTICS
+                <span>â€º</span>
+                PRACTICALS
+                <span>â€º</span>
+                PRACTICAL 01
+            </div>
+
+            <div class="da-practical-label">
+                PRACTICAL 01
+            </div>
+
+            <h1>
+                Explore the
+                <span>Data</span>
+            </h1>
+
+            <p class="da-hero-description">
+                Learn how to move from a raw dataset to your first meaningful
+                insights. In this practical, you will inspect real-world data,
+                understand its structure, calculate basic statistics and create
+                visualizations that answer practical questions.
+            </p>
+
+            <div class="da-hero-tags">
+                <span>Data Exploration</span>
+                <span>Python</span>
+                <span>Pandas</span>
+                <span>Basic Statistics</span>
+                <span>Visualization</span>
+                <span>Real-World Data</span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         OBJECTIVE
+    ====================================================== -->
+
+    <section class="da-section">
+
+        <div class="da-container">
+
+            <div class="da-section-heading">
+                <div class="da-section-label">01 â€” LEARNING OBJECTIVE</div>
+
+                <h2>
+                    First understand the
+                    <span>data</span>
+                </h2>
+
+                <p>
+                    Before creating advanced dashboards or applying machine
+                    learning, an analyst must understand what the dataset
+                    contains and what questions it can answer.
+                </p>
+            </div>
+
+
+            <div class="da-objective-grid">
+
+                <div class="da-objective-card">
+
+                    <h3>What you will learn</h3>
+
+                    <p>
+                        You will work with real-world datasets and learn the
+                        first stage of an analytics workflow: understanding
+                        the data before making decisions from it.
+                    </p>
+
+                    <div class="da-outcome-list">
+
+                        <div>
+                            <span>01</span>
+                            Load a dataset
+                        </div>
+
+                        <div>
+                            <span>02</span>
+                            Identify rows and columns
+                        </div>
+
+                        <div>
+                            <span>03</span>
+                            Understand data types
+                        </div>
+
+                        <div>
+                            <span>04</span>
+                            Calculate basic statistics
+                        </div>
+
+                        <div>
+                            <span>05</span>
+                            Find patterns
+                        </div>
+
+                        <div>
+                            <span>06</span>
+                            Select suitable visualizations
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="da-objective-card">
+
+                    <h3>Questions an analyst should ask</h3>
+
+                    <div class="da-question-grid">
+
+                        <div class="da-question">
+
+                            <div class="da-question-number">Q01</div>
+
+                            <h3>What is in the dataset?</h3>
+
+                            <p>
+                                Identify the number of records, variables
+                                and important fields.
+                            </p>
+
+                        </div>
+
+                        <div class="da-question">
+
+                            <div class="da-question-number">Q02</div>
+
+                            <h3>What type of data is present?</h3>
+
+                            <p>
+                                Identify numerical, categorical, date and
+                                other relevant variables.
+                            </p>
+
+                        </div>
+
+                        <div class="da-question">
+
+                            <div class="da-question-number">Q03</div>
+
+                            <h3>What are the important values?</h3>
+
+                            <p>
+                                Calculate minimum, maximum, mean, median
+                                and other basic statistics.
+                            </p>
+
+                        </div>
+
+                        <div class="da-question">
+
+                            <div class="da-question-number">Q04</div>
+
+                            <h3>What patterns can we see?</h3>
+
+                            <p>
+                                Use charts and comparisons to discover
+                                trends and relationships.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         ANALYTICS WORKFLOW
+    ====================================================== -->
+
+    <section class="da-section dark">
+
+        <div class="da-container">
+
+            <div class="da-section-heading">
+
+                <div class="da-section-label">
+                    02 â€” ANALYTICS WORKFLOW
+                </div>
+
+                <h2>
+                    From raw data to
+                    <span>insight</span>
+                </h2>
+
+                <p>
+                    Follow the same workflow for all three real-world
+                    problems in this practical.
+                </p>
+
+            </div>
+
+
+            <div class="da-workflow">
+
+                <div class="da-workflow-step">
+                    <strong>01</strong>
+                    <h3>Load</h3>
+                    <p>Read the dataset.</p>
+                </div>
+
+                <div class="da-workflow-step">
+                    <strong>02</strong>
+                    <h3>Inspect</h3>
+                    <p>Understand structure.</p>
+                </div>
+
+                <div class="da-workflow-step">
+                    <strong>03</strong>
+                    <h3>Summarize</h3>
+                    <p>Calculate statistics.</p>
+                </div>
+
+                <div class="da-workflow-step">
+                    <strong>04</strong>
+                    <h3>Compare</h3>
+                    <p>Find differences.</p>
+                </div>
+
+                <div class="da-workflow-step">
+                    <strong>05</strong>
+                    <h3>Visualize</h3>
+                    <p>Build meaningful charts.</p>
+                </div>
+
+                <div class="da-workflow-step">
+                    <strong>06</strong>
+                    <h3>Interpret</h3>
+                    <p>Explain the insight.</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         THREE REAL WORLD PROBLEMS
+    ====================================================== -->
+
+    <section class="da-section">
+
+        <div class="da-container">
+
+            <div class="da-section-heading">
+
+                <div class="da-section-label">
+                    03 â€” REAL-WORLD PROBLEMS
+                </div>
+
+                <h2>
+                    Learn analytics through
+                    <span>problems</span>
+                </h2>
+
+                <p>
+                    Complete all three problems. Each problem uses a
+                    different real-world context but follows the same
+                    analytics workflow.
+                </p>
+
+            </div>
+
+
+            <div class="da-problem-grid">
+
+
+                <!-- PROBLEM 01 -->
+
+                <article class="da-problem-card">
+
+                    <div class="da-problem-number">
+                        PROBLEM 01
+                    </div>
+
+                    <h3>Supermarket Sales</h3>
+
+                    <p>
+                        A supermarket wants to understand its sales
+                        performance and identify the products and categories
+                        generating the highest sales.
+                    </p>
+
+
+                    <div class="da-problem-block">
+
+                        <strong>Dataset</strong>
+
+                        <div class="da-dataset">
+
+                            <div class="da-dataset-row da-dataset-head">
+                                <span>Field</span>
+                                <span>Type</span>
+                                <span>Example</span>
+                            </div>
+
+                            <div class="da-dataset-row">
+                                <span>Product</span>
+                                <span>Text</span>
+                                <span>Laptop</span>
+                            </div>
+
+                            <div class="da-dataset-row">
+                                <span>Category</span>
+                                <span>Category</span>
+                                <span>Electronics</span>
+                            </div>
+
+                            <div class="da-dataset-row">
+                                <span>Quantity</span>
+                                <span>Number</span>
+                                <span>4</span>
+                            </div>
+
+                            <div class="da-dataset-row">
+                                <span>Price</span>
+                                <span>Number</span>
+                                <span>45000</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="da-problem-block">
+
+                        <strong>Find out</strong>
+
+                        <ul>
+                            <li>Which category sells the most?</li>
+                            <li>Which product generates maximum revenue?</li>
+                            <li>Which payment method is most common?</li>
+                            <li>Which day has the highest sales?</li>
+                        </ul>
+
+                    </div>
+
+
+                    <div class="da-visualization">
+
+                        <div class="da-chart-tag">
+                            <strong>BAR</strong>
+                            Sales by Category
+                        </div>
+
+                        <div class="da-chart-tag">
+                            <strong>COLUMN</strong>
+                            Top Products
+                        </div>
+
+                        <div class="da-chart-tag">
+                            <strong>DONUT</strong>
+                            Payment Method
+                        </div>
+
+                        <div class="da-chart-tag">
+                            <strong>LINE</strong>
+                            Sales Trend
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- PROBLEM 02 -->
+
+                <article class="da-problem-card">
+
+                    <div class="da-problem-number">
+                        PROBLEM 02
+                    </div>
+
+                    <h3>Student Performance</h3>
+
+                    <p>
+                        A college wants to understand student performance
+                        and determine whether attendance is related to
+                        academic achievement.
+                    </p>
+
+
+                    <div class="da-problem-block">
+
+                        <strong>Dataset</strong>
+
+                        <div class="da-dataset">
+
+                            <div class="da-dataset-row da-dataset-head">
+                                <span>Field</span>
+                                <span>Type</span>
+                                <span>Example</span>
+                            </div>
+
+                            <div class="da-dataset-row">
+                                <span>Student ID</span>
+                                <span>Text</span>
+                                <span>ST101</span>
+                            </div>
+
+                            <div class="da-dataset-row">
+                                <span>Attendance</span>
+                                <span>Number</span>
+                                <span>82%</span>
+                            </div>
+
+                            <div class="da-dataset-row">
+                                <span>Internal Marks</span>
+                                <span>Number</span>
+                                <span>24</span>
+                            </div>
+
+                            <div class="da-dataset-row">
+                                <span>Final Marks</span>
+                                <span>Number</span>
+                                <span>78</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="da-problem-block">
+
+                        <strong>Find out</strong>
+
+                        <ul>
+                            <li>What is the average student score?</li>
+                            <li>What is the pass percentage?</li>
+                            <li>How are marks distributed?</li>
+                            <li>Does attendance relate to marks?</li>
+                        </ul>
+
+                    </div>
+
+
+                    <div class="da-visualization">
+
+                        <div class="da-chart-tag">
+                            <strong>HISTOGRAM</strong>
+                            Marks Distribution
+                        </div>
+
+                        <div class="da-chart-tag">
+                            <strong>BAR</strong>
+                            Average Marks
+                        </div>
+
+                        <div class="da-chart-tag">
+                            <strong>SCATTER</strong>
+                            Attendance vs Marks
+                        </div>
+
+                        <div class="da-chart-tag">
+                            <strong>DONUT</strong>
+                            Pass / Fail
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- PROBLEM 03 -->
+
+                <article class="da-problem-card">
+
+                    <div class="da-problem-number">
+                        PROBLEM 03
+                    </div>
+
+                    <h3>Food Delivery</h3>
+
+                    <p>
+                        A food delivery company wants to understand customer
+                        ordering patterns, delivery performance and restaurant
+                        ratings.
+                    </p>
+
+
+                    <div class="da-problem-block">
+
+                        <strong>Dataset</strong>
+
+                        <div class="da-dataset">
+
+                            <div class="da-dataset-row da-dataset-head">
+                                <span>Field</span>
+                                <span>Type</span>
+                                <span>Example</span>
+                            </div>
+
+                            <div class="da-dataset-row">
+                                <span>Order ID</span>
+                                <span>Text</span>
+                                <span>ORD501</span>
+                            </div>
+
+                            <div class="da-dataset-row">
+                                <span>Category</span>
+                                <span>Category</span>
+                                <span>Pizza</span>
+                            </div>
+
+                            <div class="da-dataset-row">
+                                <span>Order Amount</span>
+                                <span>Number</span>
+                                <span>650</span>
+                            </div>
+
+                            <div class="da-dataset-row">
+                                <span>Delivery Time</span>
+                                <span>Number</span>
+                                <span>32 min</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="da-problem-block">
+
+                        <strong>Find out</strong>
+
+                        <ul>
+                            <li>Which food category is most popular?</li>
+                            <li>What is the average order value?</li>
+                            <li>What is the average delivery time?</li>
+                            <li>Does distance affect delivery time?</li>
+                        </ul>
+
+                    </div>
+
+
+                    <div class="da-visualization">
+
+                        <div class="da-chart-tag">
+                            <strong>BAR</strong>
+                            Food Category
+                        </div>
+
+                        <div class="da-chart-tag">
+                            <strong>COLUMN</strong>
+                            Restaurant Rating
+                        </div>
+
+                        <div class="da-chart-tag">
+                            <strong>LINE</strong>
+                            Orders Over Time
+                        </div>
+
+                        <div class="da-chart-tag">
+                            <strong>SCATTER</strong>
+                            Distance vs Time
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         ANALYSIS QUESTIONS
+    ====================================================== -->
+
+    <section class="da-section dark">
+
+        <div class="da-container">
+
+            <div class="da-section-heading">
+
+                <div class="da-section-label">
+                    04 â€” THINK LIKE AN ANALYST
+                </div>
+
+                <h2>
+                    Don't just create charts.
+                    <span>Explain them.</span>
+                </h2>
+
+                <p>
+                    For every visualization, write at least one meaningful
+                    observation based on the data.
+                </p>
+
+            </div>
+
+
+            <div class="da-question-grid">
+
+                <div class="da-question">
+                    <div class="da-question-number">01</div>
+                    <h3>What is the highest value?</h3>
+                    <p>
+                        Identify the category, product, student group or
+                        period with the highest value.
+                    </p>
+                </div>
+
+                <div class="da-question">
+                    <div class="da-question-number">02</div>
+                    <h3>What is the lowest value?</h3>
+                    <p>
+                        Identify areas that may require attention or
+                        improvement.
+                    </p>
+                </div>
+
+                <div class="da-question">
+                    <div class="da-question-number">03</div>
+                    <h3>Is there a trend?</h3>
+                    <p>
+                        Determine whether values are increasing, decreasing
+                        or remaining relatively stable.
+                    </p>
+                </div>
+
+                <div class="da-question">
+                    <div class="da-question-number">04</div>
+                    <h3>Is there a relationship?</h3>
+                    <p>
+                        Compare two numerical variables and determine
+                        whether a visible relationship exists.
+                    </p>
+                </div>
+
+                <div class="da-question">
+                    <div class="da-question-number">05</div>
+                    <h3>What surprised you?</h3>
+                    <p>
+                        Identify an unexpected pattern or unusual observation
+                        in the dataset.
+                    </p>
+                </div>
+
+                <div class="da-question">
+                    <div class="da-question-number">06</div>
+                    <h3>What decision can be made?</h3>
+                    <p>
+                        Convert your observation into a simple real-world
+                        recommendation.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         EXPECTED OUTPUT
+    ====================================================== -->
+
+    <section class="da-section">
+
+        <div class="da-container">
+
+            <div class="da-section-heading">
+
+                <div class="da-section-label">
+                    05 â€” EXPECTED OUTPUT
+                </div>
+
+                <h2>
+                    Your final practical should contain
+                    <span>these outputs</span>
+                </h2>
+
+            </div>
+
+
+            <div class="da-output-grid">
+
+                <div class="da-output-card">
+                    <span>OUTPUT 01</span>
+                    <h3>Dataset Summary</h3>
+                    <p>
+                        Display rows, columns, data types and basic
+                        descriptive statistics.
+                    </p>
+                </div>
+
+                <div class="da-output-card">
+                    <span>OUTPUT 02</span>
+                    <h3>Exploration</h3>
+                    <p>
+                        Show filtering, grouping, sorting and important
+                        observations.
+                    </p>
+                </div>
+
+                <div class="da-output-card">
+                    <span>OUTPUT 03</span>
+                    <h3>Visualizations</h3>
+                    <p>
+                        Create appropriate charts for the questions
+                        defined in each problem.
+                    </p>
+                </div>
+
+                <div class="da-output-card">
+                    <span>OUTPUT 04</span>
+                    <h3>Insights</h3>
+                    <p>
+                        Write meaningful observations and recommendations
+                        from the visualizations.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         MINI CHALLENGE
+    ====================================================== -->
+
+    <section class="da-section dark">
+
+        <div class="da-container">
+
+            <div class="da-challenge">
+
+                <h3>
+                    Quick Challenge:
+                    <span>Choose the right chart</span>
+                </h3>
+
+                <p style="color:#969daa;font-size:11px;line-height:1.7;">
+                    You want to compare the sales of five product categories.
+                    Which visualization is the most suitable?
+                </p>
+
+                <div class="da-challenge-options">
+
+                    <button onclick="checkAnswer(this,'wrong')">
+                        A. Scatter Plot
+                    </button>
+
+                    <button onclick="checkAnswer(this,'correct')">
+                        B. Bar Chart
+                    </button>
+
+                    <button onclick="checkAnswer(this,'wrong')">
+                        C. Line Chart
+                    </button>
+
+                    <button onclick="checkAnswer(this,'wrong')">
+                        D. Histogram
+                    </button>
+
+                </div>
+
+                <div class="da-answer" id="daAnswer"></div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         NAVIGATION
+    ====================================================== -->
+
+    <div class="da-practical-navigation">
+
+        <a href="data_analytics_practicals.html" class="da-nav-button">
+            â† All Practicals
+        </a>
+
+        <a href="practical02.html" class="da-nav-button next">
+            Practical 02 â†’
+        </a>
+
+    </div>
+
+</main>
+
+
+<script>
+
+function checkAnswer(button, result){
+
+    const buttons =
+        document.querySelectorAll(".da-challenge-options button");
+
+    buttons.forEach(btn => {
+        btn.style.borderColor = "";
+        btn.style.background = "";
+    });
+
+    const answer =
+        document.getElementById("daAnswer");
+
+    if(result === "correct"){
+
+        button.style.borderColor = "#52c77a";
+        button.style.background = "rgba(82,199,122,.10)";
+
+        answer.innerHTML =
+            "âœ“ Correct. A bar chart is suitable for comparing values across discrete categories.";
+
+        answer.style.color = "#76e39b";
+
+    }else{
+
+        button.style.borderColor = "#e65f5f";
+        button.style.background = "rgba(230,95,95,.08)";
+
+        answer.innerHTML =
+            "âœ• Try again. Think about which chart is best for comparing categories.";
+
+        answer.style.color = "#ff8a8a";
+    }
+}
+
+</script>
+
+<script src="../../../js/main.js"></script>
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

@@ -1,0 +1,1496 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Practical 09 | 2D Rotation | Rasika CodeLab</title>
+  <link rel="stylesheet" href="../css/cgr_style.css">
+  <link rel="stylesheet" href="../css/cgr_practicals.css">
+<style>body.protected-page:not(.auth-ready){visibility:hidden}</style>
+</head>
+
+<body class="cgr-practical-body practical-09 protected-page">
+
+<header class="navbar">
+  <div class="logo">
+    <span class="logo-mark">&lt;/&gt;</span>
+    <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+  </div>
+
+  <nav class="nav-links">
+    <a href="../cgr_index.html">Home</a>
+    <a href="../cgr_foundations.html">Foundations</a>
+    
+    <a href="../cgr_practicals.html" class="active">Practicals</a>
+    <a href="../../../about.html">About</a>
+  </nav>
+
+  <button class="menu-btn" aria-label="Open Menu">â˜°</button>
+</header>
+
+
+<main class="cgr-practical-page practical-09-page">
+
+  <!-- HERO -->
+  <section class="practical-hero">
+    <div class="practical-hero-content">
+      <span class="practical-badge">09 â€¢ 2D TRANSFORMATION</span>
+      <h1>2D Rotation</h1>
+      <p>Rotate objects around the origin or a selected pivot using transformation matrices.</p>
+
+      <div class="practical-tags">
+        <span>Rotation</span>
+        <span>Matrix</span>
+        <span>Angle</span>
+        <span>Pivot Point</span>
+      </div>
+    </div>
+
+    <div class="rotation-hero-visual" aria-hidden="true">
+      <div class="rotation-axis rotation-axis-x"></div>
+      <div class="rotation-axis rotation-axis-y"></div>
+      <div class="rotation-ring"></div>
+      <div class="rotation-hero-object"></div>
+      <div class="rotation-arrow"></div>
+      <span class="rotation-angle-label">Î¸</span>
+    </div>
+  </section>
+
+
+  <!-- OBJECTIVES -->
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>01</span>
+      <div>
+        <h2>What Will You Learn?</h2>
+        <p>Understand how rotation changes the coordinates of every vertex in a 2D object.</p>
+      </div>
+    </div>
+
+    <div class="concept-grid">
+
+      <article class="concept-card">
+        <div class="concept-icon">â†»</div>
+        <h3>Rotation</h3>
+        <p>Turn an object through a specified angle while preserving its size and shape.</p>
+      </article>
+
+      <article class="concept-card">
+        <div class="concept-icon">Î¸</div>
+        <h3>Rotation Angle</h3>
+        <p>The angle determines how far the object rotates from its original orientation.</p>
+      </article>
+
+      <article class="concept-card">
+        <div class="concept-icon">0,0</div>
+        <h3>Origin</h3>
+        <p>By default, the standard 2D rotation matrix rotates an object around the origin.</p>
+      </article>
+
+      <article class="concept-card">
+        <div class="concept-icon">âœ¦</div>
+        <h3>Pivot Point</h3>
+        <p>A selected pivot can be used when the object must rotate around a point other than the origin.</p>
+      </article>
+
+    </div>
+
+    <div class="transform-flow">
+      <span>Original Object</span>
+      <b>â†’</b>
+      <span>Choose Pivot</span>
+      <b>â†’</b>
+      <span>Choose Angle</span>
+      <b>â†’</b>
+      <span>Rotation Matrix</span>
+      <b>â†’</b>
+      <span>Rotated Object</span>
+    </div>
+  </section>
+
+
+  <!-- ROTATION EQUATION -->
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>02</span>
+      <div>
+        <h2>Rotation About the Origin</h2>
+        <p>For counter-clockwise rotation by angle Î¸, each point is transformed using sine and cosine.</p>
+      </div>
+    </div>
+
+    <div class="formula-layout">
+
+      <article class="formula-card">
+        <h3>Coordinate Equations</h3>
+
+        <div class="big-formula">
+          xâ€² = x cosÎ¸ âˆ’ y sinÎ¸<br>
+          yâ€² = x sinÎ¸ + y cosÎ¸
+        </div>
+
+        <p>
+          Positive angles represent counter-clockwise rotation in the standard Cartesian coordinate system.
+        </p>
+      </article>
+
+
+      <article class="matrix-card">
+        <h3>2D Rotation Matrix</h3>
+
+        <div class="matrix-equation">
+          <span>
+            [ xâ€² &nbsp; yâ€² &nbsp; 1 ]<sup>T</sup>
+          </span>
+
+          <b>=</b>
+
+          <span class="matrix-box">
+            <i>cosÎ¸</i><i>âˆ’sinÎ¸</i><i>0</i>
+            <i>sinÎ¸</i><i>cosÎ¸</i><i>0</i>
+            <i>0</i><i>0</i><i>1</i>
+          </span>
+
+          <span>
+            [ x &nbsp; y &nbsp; 1 ]<sup>T</sup>
+          </span>
+        </div>
+
+        <p>
+          The 3Ã—3 homogeneous form keeps the transformation compatible with other 2D matrix operations.
+        </p>
+      </article>
+
+    </div>
+  </section>
+
+
+  <!-- CLOCKWISE / COUNTER CLOCKWISE -->
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>03</span>
+      <div>
+        <h2>Rotation Direction</h2>
+        <p>The sign of the angle determines the direction of rotation.</p>
+      </div>
+    </div>
+
+    <div class="direction-grid">
+
+      <article class="direction-card">
+        <div class="direction-visual counter-clockwise">
+          <span>â†º</span>
+        </div>
+        <h3>Positive Angle</h3>
+        <p>+Î¸ produces counter-clockwise rotation.</p>
+        <code>Î¸ = +45Â°</code>
+      </article>
+
+      <article class="direction-card">
+        <div class="direction-visual clockwise">
+          <span>â†»</span>
+        </div>
+        <h3>Negative Angle</h3>
+        <p>âˆ’Î¸ produces clockwise rotation.</p>
+        <code>Î¸ = âˆ’45Â°</code>
+      </article>
+
+    </div>
+  </section>
+
+
+  <!-- WORKED CALCULATION -->
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>04</span>
+      <div>
+        <h2>Worked Calculation</h2>
+        <p>Rotate a point about the origin and calculate its new coordinates.</p>
+      </div>
+    </div>
+
+    <div class="rotation-calculation">
+
+      <div class="given-card">
+        <h3>Given</h3>
+        <div class="given-line"><span>Point</span><strong>P(4, 2)</strong></div>
+        <div class="given-line"><span>Angle</span><strong>90Â°</strong></div>
+        <div class="given-line"><span>Pivot</span><strong>Origin (0, 0)</strong></div>
+      </div>
+
+      <div class="calculation-steps">
+
+        <div class="calc-step">
+          <span>01</span>
+          <code>xâ€² = x cos90Â° âˆ’ y sin90Â°</code>
+          <strong>xâ€² = 0 âˆ’ 2 = âˆ’2</strong>
+        </div>
+
+        <div class="calc-step">
+          <span>02</span>
+          <code>yâ€² = x sin90Â° + y cos90Â°</code>
+          <strong>yâ€² = 4 + 0 = 4</strong>
+        </div>
+
+        <div class="calc-step result-step">
+          <span>03</span>
+          <code>Pâ€² = (xâ€², yâ€²)</code>
+          <strong>Pâ€² = (âˆ’2, 4)</strong>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="calculation-note">
+      <strong>Result:</strong>
+      Point P(4, 2) becomes Pâ€²(âˆ’2, 4) after a 90Â° counter-clockwise rotation about the origin.
+    </div>
+  </section>
+
+
+  <!-- PIVOT -->
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>05</span>
+      <div>
+        <h2>Rotation About a Selected Pivot</h2>
+        <p>To rotate around a pivot, translate the pivot to the origin, rotate, then translate it back.</p>
+      </div>
+    </div>
+
+    <div class="pivot-flow">
+
+      <article class="pivot-step-card">
+        <span>01</span>
+        <h3>Translate</h3>
+        <p>Move the pivot point to the origin.</p>
+        <code>T(âˆ’px, âˆ’py)</code>
+      </article>
+
+      <b>â†’</b>
+
+      <article class="pivot-step-card">
+        <span>02</span>
+        <h3>Rotate</h3>
+        <p>Apply the standard rotation matrix.</p>
+        <code>R(Î¸)</code>
+      </article>
+
+      <b>â†’</b>
+
+      <article class="pivot-step-card">
+        <span>03</span>
+        <h3>Translate Back</h3>
+        <p>Return the pivot to its original position.</p>
+        <code>T(px, py)</code>
+      </article>
+
+    </div>
+
+    <div class="pivot-matrix">
+      <strong>Combined transformation:</strong>
+      <code>T(px, py) Â· R(Î¸) Â· T(âˆ’px, âˆ’py)</code>
+    </div>
+  </section>
+
+
+  <!-- LIVE ROTATION LAB -->
+  <section class="practical-section rotation-live-section">
+    <div class="section-heading">
+      <span>06</span>
+      <div>
+        <h2>Live Rotation Visualizer</h2>
+        <p>Change the angle and pivot to see the original and rotated object together.</p>
+      </div>
+    </div>
+
+    <div class="rotation-lab">
+
+      <div class="rotation-controls">
+
+        <div class="rotation-mode">
+          <button class="rotation-mode-btn active" data-pivot="origin">
+            Origin
+          </button>
+          <button class="rotation-mode-btn" data-pivot="custom">
+            Custom Pivot
+          </button>
+        </div>
+
+
+        <div class="control-block">
+          <h3>Rotation Angle</h3>
+
+          <label>
+            Angle
+            <input id="rotationAngle" type="range" min="-180" max="180" step="5" value="45">
+            <output id="rotationAngleValue">45Â°</output>
+          </label>
+
+          <div class="angle-presets">
+            <button data-angle="-90">âˆ’90Â°</button>
+            <button data-angle="-45">âˆ’45Â°</button>
+            <button data-angle="45">45Â°</button>
+            <button data-angle="90">90Â°</button>
+            <button data-angle="180">180Â°</button>
+          </div>
+        </div>
+
+
+        <div class="control-block pivot-controls" hidden>
+          <h3>Custom Pivot</h3>
+
+          <label>
+            Pivot X
+            <input id="pivotX" type="range" min="-8" max="8" step="1" value="3">
+            <output id="pivotXValue">3</output>
+          </label>
+
+          <label>
+            Pivot Y
+            <input id="pivotY" type="range" min="-8" max="8" step="1" value="2">
+            <output id="pivotYValue">2</output>
+          </label>
+        </div>
+
+
+        <div class="control-block">
+          <h3>Object</h3>
+
+          <div class="object-choice">
+            <button class="object-btn active" data-object="triangle">Triangle</button>
+            <button class="object-btn" data-object="square">Square</button>
+            <button class="object-btn" data-object="arrow">Arrow</button>
+          </div>
+        </div>
+
+
+        <div class="button-row">
+          <button class="primary-btn" id="applyRotation">Apply Rotation</button>
+          <button class="secondary-btn" id="animateRotation">â–¶ Animate</button>
+          <button class="ghost-btn" id="resetRotation">Reset</button>
+        </div>
+
+
+        <div class="rotation-readout">
+
+          <div>
+            <span>Angle</span>
+            <strong id="rotationReadout">45Â°</strong>
+          </div>
+
+          <div>
+            <span>Pivot</span>
+            <strong id="pivotReadout">(0, 0)</strong>
+          </div>
+
+          <div>
+            <span>Matrix</span>
+            <code id="rotationMatrixReadout">[ 0.707 âˆ’0.707 ; 0.707 0.707 ]</code>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="rotation-viewer">
+
+        <canvas id="rotationCanvas" width="700" height="520"></canvas>
+
+        <div class="rotation-legend">
+          <span><i class="legend-original"></i> Original</span>
+          <span><i class="legend-rotated"></i> Rotated</span>
+          <span><i class="legend-pivot"></i> Pivot</span>
+        </div>
+
+        <div class="viewer-footer">
+          <span id="rotationStatus">Rotation ready</span>
+          <span id="rotationVertices">Vertices: 3</span>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ANGLE VISUALIZER -->
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>07</span>
+      <div>
+        <h2>Angle Visualization</h2>
+        <p>Understand rotation geometrically using an angle arc and a radius.</p>
+      </div>
+    </div>
+
+    <div class="angle-visualizer">
+
+      <div class="angle-circle">
+        <div class="angle-axis horizontal"></div>
+        <div class="angle-axis vertical"></div>
+        <div class="angle-radius"></div>
+        <div class="angle-arc"></div>
+        <div class="angle-point"></div>
+        <span class="angle-zero">0Â°</span>
+        <span class="angle-theta">Î¸</span>
+      </div>
+
+      <div class="angle-explanation">
+        <div class="angle-value-box">
+          <span>Current Angle</span>
+          <strong id="angleVisualValue">45Â°</strong>
+        </div>
+
+        <p>
+          Rotation changes the direction of a point from its original position.
+          The distance from the pivot remains constant for a pure rotation.
+        </p>
+
+        <div class="angle-properties">
+          <span>âœ“ Shape preserved</span>
+          <span>âœ“ Size preserved</span>
+          <span>âœ“ Distance from pivot preserved</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- REAL LIFE PROBLEMS -->
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>08</span>
+      <div>
+        <h2>Real-Life Problem Statements</h2>
+        <p>Apply 2D rotation to common graphics and interface scenarios.</p>
+      </div>
+    </div>
+
+    <div class="problem-tabs">
+
+      <button class="problem-tab active" data-problem="compass">
+        ðŸ§­ Compass
+      </button>
+
+      <button class="problem-tab" data-problem="game">
+        ðŸŽ® Game Character
+      </button>
+
+      <button class="problem-tab" data-problem="clock">
+        ðŸ• Clock Hand
+      </button>
+
+    </div>
+
+
+    <div class="rotation-problem-layout">
+
+      <article class="problem-statement">
+
+        <span class="problem-label">PROBLEM</span>
+
+        <h3 id="problemTitle">Digital Compass Needle</h3>
+
+        <p id="problemDescription">
+          A digital compass displays a needle that must rotate according to the
+          direction detected by the device.
+        </p>
+
+        <div class="problem-given" id="problemGiven">
+          Original angle = 0Â° â€¢ Required rotation = 45Â° counter-clockwise
+        </div>
+
+        <div class="problem-answer" id="problemAnswer">
+          Apply the rotation matrix with Î¸ = 45Â° to every vertex of the needle.
+        </div>
+
+        <button class="primary-btn" id="showProblem">
+          Show in Live Viewer
+        </button>
+
+      </article>
+
+
+      <div class="problem-mini-viewer">
+
+        <canvas id="problemCanvas" width="600" height="390"></canvas>
+
+        <div class="viewer-footer">
+          <span id="problemStatus">Original â†’ rotated</span>
+          <span id="problemReadout">Î¸ = 45Â°</span>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- EXPERIMENT -->
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>09</span>
+      <div>
+        <h2>Experiment</h2>
+        <p>Try standard angles and observe the effect on the object's orientation.</p>
+      </div>
+    </div>
+
+    <div class="experiment-grid">
+
+      <button class="experiment-card" data-experiment="quarter">
+        <strong>Quarter Turn</strong>
+        <span>Î¸ = 90Â°</span>
+      </button>
+
+      <button class="experiment-card" data-experiment="half">
+        <strong>Half Turn</strong>
+        <span>Î¸ = 180Â°</span>
+      </button>
+
+      <button class="experiment-card" data-experiment="clockwise">
+        <strong>Clockwise</strong>
+        <span>Î¸ = âˆ’45Â°</span>
+      </button>
+
+      <button class="experiment-card" data-experiment="full">
+        <strong>Full Turn</strong>
+        <span>Î¸ = 360Â° concept</span>
+      </button>
+
+    </div>
+
+    <div class="experiment-result" id="experimentResult">
+      Select an experiment to load its rotation angle.
+    </div>
+  </section>
+
+
+  <!-- IMPORTANT OBSERVATIONS -->
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>10</span>
+      <div>
+        <h2>Important Observations</h2>
+        <p>Rotation has a few properties that make it different from scaling and translation.</p>
+      </div>
+    </div>
+
+    <div class="observation-grid">
+
+      <article class="observation-card">
+        <span>01</span>
+        <h3>Shape</h3>
+        <p>Rotation does not distort the shape of the object.</p>
+      </article>
+
+      <article class="observation-card">
+        <span>02</span>
+        <h3>Size</h3>
+        <p>All distances between points remain unchanged.</p>
+      </article>
+
+      <article class="observation-card">
+        <span>03</span>
+        <h3>Pivot</h3>
+        <p>The selected pivot remains fixed during rotation.</p>
+      </article>
+
+      <article class="observation-card">
+        <span>04</span>
+        <h3>Order</h3>
+        <p>When combined with other transformations, matrix order affects the result.</p>
+      </article>
+
+    </div>
+  </section>
+
+
+  <!-- VIVA -->
+  <section class="practical-section viva-section">
+    <div class="section-heading">
+      <span>11</span>
+      <div>
+        <h2>Viva Questions</h2>
+        <p>Check your understanding before implementing the rotation algorithm.</p>
+      </div>
+    </div>
+
+    <div class="viva-grid">
+
+      <details>
+        <summary>What is 2D rotation?</summary>
+        <p>It changes the orientation of a 2D object by rotating its points through a specified angle around a pivot.</p>
+      </details>
+
+      <details>
+        <summary>What is the standard rotation matrix?</summary>
+        <p>For counter-clockwise rotation, the matrix contains cosÎ¸ and sinÎ¸ terms that transform x and y coordinates.</p>
+      </details>
+
+      <details>
+        <summary>What does a positive angle mean?</summary>
+        <p>A positive angle represents counter-clockwise rotation in the standard Cartesian coordinate system.</p>
+      </details>
+
+      <details>
+        <summary>What does a negative angle mean?</summary>
+        <p>A negative angle represents clockwise rotation.</p>
+      </details>
+
+      <details>
+        <summary>What happens to the size of an object after rotation?</summary>
+        <p>The size remains unchanged because rotation preserves distances between points.</p>
+      </details>
+
+      <details>
+        <summary>How do you rotate around a custom pivot?</summary>
+        <p>Translate the pivot to the origin, rotate, and translate the object back using T(p) Â· R(Î¸) Â· T(âˆ’p).</p>
+      </details>
+
+    </div>
+  </section>
+
+
+  <nav class="practical-navigation">
+    <a href="practical08.html">
+      <span>â† Previous</span>
+      <strong>08 â€” 2D Translation &amp; Scaling</strong>
+    </a>
+
+    <a href="practical10.html">
+      <span>Next â†’</span>
+      <strong>10 â€” Reflection &amp; Shearing</strong>
+    </a>
+  </nav>
+
+</main>
+
+
+<footer class="footer">
+
+  <div class="footer-main">
+
+    <div class="footer-brand">
+
+      <div class="logo">
+        <span class="logo-mark">&lt;/&gt;</span>
+        <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+      </div>
+
+      <p>
+        Interactive Computer Graphics practical learning through concepts,
+        calculations and visualization.
+      </p>
+
+    </div>
+
+
+    <div class="footer-links">
+
+      <div>
+        <h4>Learn</h4>
+        <a href="../cgr_foundations.html">Foundations</a>
+              </div>
+
+      <div>
+        <h4>Practice</h4>
+        <a href="../cgr_practicals.html">Practicals</a>
+        <a href="../../../about.html">About</a>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="footer-bottom">
+    <span>Â© 2026 Rasika CodeLab</span>
+    <span>Built for practical learning.</span>
+  </div>
+
+</footer>
+
+
+<script>
+(function () {
+  "use strict";
+
+  const canvas = document.getElementById("rotationCanvas");
+  const ctx = canvas.getContext("2d");
+
+  let pivotMode = "origin";
+  let selectedObject = "triangle";
+  let animationTimer = null;
+  let animationRunning = false;
+
+
+  const objects = {
+
+    triangle: [
+      { x: -4, y: -3 },
+      { x: 2, y: -3 },
+      { x: -1, y: 3 }
+    ],
+
+    square: [
+      { x: -3, y: -3 },
+      { x: 3, y: -3 },
+      { x: 3, y: 3 },
+      { x: -3, y: 3 }
+    ],
+
+    arrow: [
+      { x: -4, y: -1 },
+      { x: 1, y: -1 },
+      { x: 1, y: -3 },
+      { x: 5, y: 0 },
+      { x: 1, y: 3 },
+      { x: 1, y: 1 },
+      { x: -4, y: 1 }
+    ]
+
+  };
+
+
+  function getAngle() {
+    return Number(document.getElementById("rotationAngle").value);
+  }
+
+
+  function getPivot() {
+
+    if (pivotMode === "origin") {
+      return { x: 0, y: 0 };
+    }
+
+    return {
+      x: Number(document.getElementById("pivotX").value),
+      y: Number(document.getElementById("pivotY").value)
+    };
+
+  }
+
+
+  function rotatePoint(point, pivot, degrees) {
+
+    const theta = degrees * Math.PI / 180;
+
+    const translatedX = point.x - pivot.x;
+    const translatedY = point.y - pivot.y;
+
+    const rotatedX =
+      translatedX * Math.cos(theta) -
+      translatedY * Math.sin(theta);
+
+    const rotatedY =
+      translatedX * Math.sin(theta) +
+      translatedY * Math.cos(theta);
+
+    return {
+      x: rotatedX + pivot.x,
+      y: rotatedY + pivot.y
+    };
+
+  }
+
+
+  function worldToCanvas(point) {
+
+    const scale = 25;
+
+    return {
+      x: canvas.width / 2 + point.x * scale,
+      y: canvas.height / 2 - point.y * scale
+    };
+
+  }
+
+
+  function drawGrid() {
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "#080b0f";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    const scale = 25;
+    const ox = canvas.width / 2;
+    const oy = canvas.height / 2;
+
+    ctx.strokeStyle = "rgba(255,255,255,.055)";
+    ctx.lineWidth = 1;
+
+    for (let x = ox % scale; x < canvas.width; x += scale) {
+      ctx.beginPath();
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, canvas.height);
+      ctx.stroke();
+    }
+
+    for (let y = oy % scale; y < canvas.height; y += scale) {
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      ctx.lineTo(canvas.width, y);
+      ctx.stroke();
+    }
+
+    ctx.strokeStyle = "rgba(255,138,0,.35)";
+    ctx.lineWidth = 1.5;
+
+    ctx.beginPath();
+    ctx.moveTo(0, oy);
+    ctx.lineTo(canvas.width, oy);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(ox, 0);
+    ctx.lineTo(ox, canvas.height);
+    ctx.stroke();
+
+    ctx.fillStyle = "#aeb6c2";
+    ctx.font = "12px Arial";
+
+    ctx.fillText("X", canvas.width - 18, oy - 8);
+    ctx.fillText("Y", ox + 8, 16);
+    ctx.fillText("(0,0)", ox + 8, oy + 16);
+
+  }
+
+
+  function drawPolygon(points, type) {
+
+    if (!points.length) return;
+
+    ctx.beginPath();
+
+    points.forEach((point, index) => {
+
+      const p = worldToCanvas(point);
+
+      if (index === 0) {
+        ctx.moveTo(p.x, p.y);
+      } else {
+        ctx.lineTo(p.x, p.y);
+      }
+
+    });
+
+    ctx.closePath();
+
+    if (type === "original") {
+
+      ctx.strokeStyle = "rgba(150,160,175,.85)";
+      ctx.lineWidth = 2;
+      ctx.setLineDash([7, 6]);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+    } else {
+
+      ctx.fillStyle = "rgba(255,138,0,.12)";
+      ctx.fill();
+
+      ctx.strokeStyle = "#ff8a00";
+      ctx.lineWidth = 3;
+      ctx.stroke();
+
+    }
+
+
+    points.forEach((point, index) => {
+
+      const p = worldToCanvas(point);
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 4, 0, Math.PI * 2);
+
+      ctx.fillStyle =
+        type === "original"
+          ? "#aeb6c2"
+          : "#ffb24a";
+
+      ctx.fill();
+
+      ctx.fillStyle = "#dfe4eb";
+      ctx.font = "11px Arial";
+
+      ctx.fillText(
+        String.fromCharCode(65 + index),
+        p.x + 7,
+        p.y - 7
+      );
+
+    });
+
+  }
+
+
+  function drawPivot(pivot) {
+
+    const p = worldToCanvas(pivot);
+
+    ctx.strokeStyle = "#ffffff";
+    ctx.lineWidth = 2;
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, 7, 0, Math.PI * 2);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(p.x - 11, p.y);
+    ctx.lineTo(p.x + 11, p.y);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(p.x, p.y - 11);
+    ctx.lineTo(p.x, p.y + 11);
+    ctx.stroke();
+
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "11px Arial";
+    ctx.fillText("Pivot", p.x + 10, p.y - 10);
+
+  }
+
+
+  function drawTransform() {
+
+    drawGrid();
+
+    const angle = getAngle();
+    const pivot = getPivot();
+
+    const original = objects[selectedObject];
+    const rotated = original.map(
+      point => rotatePoint(point, pivot, angle)
+    );
+
+    drawPolygon(original, "original");
+    drawPolygon(rotated, "rotated");
+    drawPivot(pivot);
+
+    updateReadout(rotated, pivot, angle);
+
+  }
+
+
+  function updateReadout(rotated, pivot, angle) {
+
+    const theta = angle * Math.PI / 180;
+
+    const cos = Math.cos(theta).toFixed(3);
+    const sin = Math.sin(theta).toFixed(3);
+
+    document.getElementById("rotationAngleValue").textContent =
+      angle + "Â°";
+
+    document.getElementById("pivotXValue").textContent =
+      pivot.x;
+
+    document.getElementById("pivotYValue").textContent =
+      pivot.y;
+
+    document.getElementById("rotationReadout").textContent =
+      angle + "Â°";
+
+    document.getElementById("pivotReadout").textContent =
+      "(" + pivot.x + ", " + pivot.y + ")";
+
+    document.getElementById("rotationMatrixReadout").textContent =
+      "[ " + cos + "  " + (-Number(sin)).toFixed(3) +
+      " ; " + sin + "  " + cos + " ]";
+
+    document.getElementById("rotationStatus").textContent =
+      "Rotation applied: " + angle + "Â°";
+
+    document.getElementById("rotationVertices").textContent =
+      "Vertices: " + rotated.length;
+
+    document.getElementById("angleVisualValue").textContent =
+      angle + "Â°";
+
+    document.documentElement.style.setProperty(
+      "--rotation-angle",
+      angle + "deg"
+    );
+
+  }
+
+
+  function updatePivotVisibility() {
+
+    document.querySelector(".pivot-controls").hidden =
+      pivotMode !== "custom";
+
+  }
+
+
+  document.querySelectorAll(".rotation-mode-btn").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      document
+        .querySelectorAll(".rotation-mode-btn")
+        .forEach(item => item.classList.remove("active"));
+
+      button.classList.add("active");
+
+      pivotMode = button.dataset.pivot;
+
+      updatePivotVisibility();
+      drawTransform();
+
+    });
+
+  });
+
+
+  document.getElementById("rotationAngle").addEventListener(
+    "input",
+    drawTransform
+  );
+
+  document.getElementById("pivotX").addEventListener(
+    "input",
+    drawTransform
+  );
+
+  document.getElementById("pivotY").addEventListener(
+    "input",
+    drawTransform
+  );
+
+
+  document.querySelectorAll(".angle-presets button").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      document.getElementById("rotationAngle").value =
+        button.dataset.angle;
+
+      drawTransform();
+
+    });
+
+  });
+
+
+  document.querySelectorAll(".object-btn").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      document
+        .querySelectorAll(".object-btn")
+        .forEach(item => item.classList.remove("active"));
+
+      button.classList.add("active");
+
+      selectedObject = button.dataset.object;
+
+      drawTransform();
+
+    });
+
+  });
+
+
+  document.getElementById("applyRotation").addEventListener(
+    "click",
+    () => {
+
+      drawTransform();
+
+      document.getElementById("rotationStatus").textContent =
+        "Rotation applied âœ“";
+
+    }
+  );
+
+
+  document.getElementById("resetRotation").addEventListener(
+    "click",
+    () => {
+
+      clearInterval(animationTimer);
+      animationRunning = false;
+
+      document.getElementById("rotationAngle").value = 45;
+      document.getElementById("pivotX").value = 3;
+      document.getElementById("pivotY").value = 2;
+
+      pivotMode = "origin";
+
+      document
+        .querySelectorAll(".rotation-mode-btn")
+        .forEach(item => {
+          item.classList.toggle(
+            "active",
+            item.dataset.pivot === "origin"
+          );
+        });
+
+      updatePivotVisibility();
+      drawTransform();
+
+    }
+  );
+
+
+  document.getElementById("animateRotation").addEventListener(
+    "click",
+    () => {
+
+      if (animationRunning) {
+
+        clearInterval(animationTimer);
+        animationRunning = false;
+
+        document.getElementById("animateRotation").textContent =
+          "â–¶ Animate";
+
+        return;
+
+      }
+
+      animationRunning = true;
+
+      document.getElementById("animateRotation").textContent =
+        "âšâš Pause";
+
+      const target =
+        Number(document.getElementById("rotationAngle").value);
+
+      let current = 0;
+
+      document.getElementById("rotationAngle").value = 0;
+
+      animationTimer = setInterval(() => {
+
+        current += target >= 0 ? 5 : -5;
+
+        if (
+          (target >= 0 && current >= target) ||
+          (target < 0 && current <= target)
+        ) {
+          current = target;
+        }
+
+        document.getElementById("rotationAngle").value = current;
+
+        drawTransform();
+
+        if (current === target) {
+
+          clearInterval(animationTimer);
+          animationRunning = false;
+
+          document.getElementById("animateRotation").textContent =
+            "â–¶ Animate";
+
+          document.getElementById("rotationStatus").textContent =
+            "Rotation animation complete âœ“";
+
+        }
+
+      }, 70);
+
+    }
+  );
+
+
+  /* Problem visualizer */
+
+  const problems = {
+
+    compass: {
+      title: "Digital Compass Needle",
+      description:
+        "A digital compass displays a needle that must rotate according to the direction detected by the device.",
+      given:
+        "Original angle = 0Â° â€¢ Required rotation = 45Â° counter-clockwise",
+      answer:
+        "Apply the rotation matrix with Î¸ = 45Â° to every vertex of the needle.",
+      angle: 45
+    },
+
+    game: {
+      title: "Game Character Direction",
+      description:
+        "A game character changes its facing direction when the player moves the control stick.",
+      given:
+        "Current orientation = 0Â° â€¢ New orientation = âˆ’90Â°",
+      answer:
+        "Use a âˆ’90Â° rotation to turn the character clockwise while preserving its shape.",
+      angle: -90
+    },
+
+    clock: {
+      title: "Clock Hand Movement",
+      description:
+        "A graphical clock rotates its hand around a fixed center point as time changes.",
+      given:
+        "Pivot = clock center â€¢ Rotation = 120Â°",
+      answer:
+        "Rotate the hand vertices around the clock center using the selected angle.",
+      angle: 120
+    }
+
+  };
+
+
+  let selectedProblem = "compass";
+
+
+  function drawProblem() {
+
+    const p = problems[selectedProblem];
+
+    const pc = document.getElementById("problemCanvas");
+    const pctx = pc.getContext("2d");
+
+    pctx.clearRect(0, 0, pc.width, pc.height);
+
+    pctx.fillStyle = "#080b0f";
+    pctx.fillRect(0, 0, pc.width, pc.height);
+
+    const ox = pc.width / 2;
+    const oy = pc.height / 2;
+
+    pctx.strokeStyle = "rgba(255,255,255,.06)";
+    pctx.lineWidth = 1;
+
+    for (let x = 20; x < pc.width; x += 25) {
+      pctx.beginPath();
+      pctx.moveTo(x, 0);
+      pctx.lineTo(x, pc.height);
+      pctx.stroke();
+    }
+
+    for (let y = 20; y < pc.height; y += 25) {
+      pctx.beginPath();
+      pctx.moveTo(0, y);
+      pctx.lineTo(pc.width, y);
+      pctx.stroke();
+    }
+
+
+    const pivot = { x: 0, y: 0 };
+
+    let original;
+
+    if (selectedProblem === "clock") {
+
+      original = [
+        { x: 0, y: 0 },
+        { x: 1, y: 5 },
+        { x: -1, y: 5 }
+      ];
+
+    } else {
+
+      original = [
+        { x: 0, y: -1 },
+        { x: 5, y: 0 },
+        { x: 0, y: 1 }
+      ];
+
+    }
+
+
+    const rotated = original.map(point =>
+      rotatePoint(point, pivot, p.angle)
+    );
+
+
+    function map(point) {
+
+      return {
+        x: ox + point.x * 28,
+        y: oy - point.y * 28
+      };
+
+    }
+
+
+    function polygon(points, rotatedObject) {
+
+      pctx.beginPath();
+
+      points.forEach((point, index) => {
+
+        const q = map(point);
+
+        if (index === 0) {
+          pctx.moveTo(q.x, q.y);
+        } else {
+          pctx.lineTo(q.x, q.y);
+        }
+
+      });
+
+      pctx.closePath();
+
+      if (rotatedObject) {
+
+        pctx.fillStyle = "rgba(255,138,0,.16)";
+        pctx.fill();
+
+        pctx.strokeStyle = "#ff8a00";
+        pctx.lineWidth = 3;
+
+      } else {
+
+        pctx.strokeStyle = "#858f9e";
+        pctx.lineWidth = 2;
+        pctx.setLineDash([6, 5]);
+
+      }
+
+      pctx.stroke();
+      pctx.setLineDash([]);
+
+    }
+
+
+    polygon(original, false);
+    polygon(rotated, true);
+
+
+    pctx.fillStyle = "#ffffff";
+    pctx.beginPath();
+    pctx.arc(ox, oy, 5, 0, Math.PI * 2);
+    pctx.fill();
+
+    pctx.fillStyle = "#cbd2dc";
+    pctx.font = "12px Arial";
+    pctx.fillText("Original", 20, 25);
+
+    pctx.fillStyle = "#ffb24a";
+    pctx.fillText("Rotated", 20, 45);
+
+    document.getElementById("problemStatus").textContent =
+      "Î¸ = " + p.angle + "Â°";
+
+    document.getElementById("problemReadout").textContent =
+      "Pivot: (0, 0)";
+
+  }
+
+
+  document.querySelectorAll(".problem-tab").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      document
+        .querySelectorAll(".problem-tab")
+        .forEach(item => item.classList.remove("active"));
+
+      button.classList.add("active");
+
+      selectedProblem = button.dataset.problem;
+
+      const p = problems[selectedProblem];
+
+      document.getElementById("problemTitle").textContent =
+        p.title;
+
+      document.getElementById("problemDescription").textContent =
+        p.description;
+
+      document.getElementById("problemGiven").textContent =
+        p.given;
+
+      document.getElementById("problemAnswer").textContent =
+        p.answer;
+
+      drawProblem();
+
+    });
+
+  });
+
+
+  document.getElementById("showProblem").addEventListener(
+    "click",
+    () => {
+
+      const p = problems[selectedProblem];
+
+      document.getElementById("rotationAngle").value =
+        p.angle;
+
+      pivotMode = "origin";
+
+      document
+        .querySelectorAll(".rotation-mode-btn")
+        .forEach(item => {
+          item.classList.toggle(
+            "active",
+            item.dataset.pivot === "origin"
+          );
+        });
+
+      updatePivotVisibility();
+      drawTransform();
+
+      document
+        .querySelector(".rotation-live-section")
+        .scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+    }
+  );
+
+
+  /* Experiments */
+
+  document.querySelectorAll(".experiment-card").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      const experiment = button.dataset.experiment;
+      let angle = 45;
+
+      if (experiment === "quarter") angle = 90;
+      if (experiment === "half") angle = 180;
+      if (experiment === "clockwise") angle = -45;
+      if (experiment === "full") angle = 360;
+
+      document.getElementById("rotationAngle").value =
+        Math.max(-180, Math.min(180, angle));
+
+      drawTransform();
+
+      document.getElementById("experimentResult").textContent =
+        "Loaded: Î¸ = " + angle +
+        "Â°. A full 360Â° rotation returns the object to its original orientation.";
+
+      document
+        .querySelector(".rotation-live-section")
+        .scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+    });
+
+  });
+
+
+  updatePivotVisibility();
+  drawTransform();
+  drawProblem();
+
+})();
+</script>
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

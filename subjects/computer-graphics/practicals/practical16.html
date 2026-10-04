@@ -1,0 +1,765 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>16 â€” Bezier Curve Generator | Rasika CodeLab</title>
+  <link rel="stylesheet" href="../css/cgr_style.css">
+  <link rel="stylesheet" href="../css/cgr_practicals.css">
+<style>body.protected-page:not(.auth-ready){visibility:hidden}</style>
+</head>
+
+<body class="cgr-practical-body practical-16 protected-page">
+
+<header class="navbar">
+  <div class="logo">
+    <span class="logo-mark">&lt;/&gt;</span>
+    <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+  </div>
+  <nav class="nav-links">
+    <a href="../cgr_index.html">Home</a>
+    <a href="../cgr_foundations.html">Foundations</a>
+        <a href="../cgr_practicals.html" class="active">Practicals</a>
+    <a href="../../../about.html">About</a>
+  </nav>
+  <button class="menu-btn" aria-label="Open Menu">â˜°</button>
+</header>
+
+<main>
+
+<section class="practical-hero">
+  <div class="container">
+    <span class="eyebrow">PRACTICAL 16 Â· CURVES</span>
+    <h1>Bezier Curve Generator</h1>
+    <p>Generate smooth curves from control points and understand how Bernstein polynomials shape the curve.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#live-lab">Open Interactive Lab</a>
+      <a class="btn btn-secondary" href="#worked-example">Study Worked Example</a>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">01</span>
+      <div>
+        <h2>What You Will Learn</h2>
+        <p>Bezier curves provide a mathematical way to create smooth shapes using a small set of control points.</p>
+      </div>
+    </div>
+
+    <div class="objective-grid">
+      <article class="info-card">
+        <h3>Understand</h3>
+        <p>Learn control points, parameter t, degree and the geometry of a Bezier curve.</p>
+      </article>
+      <article class="info-card">
+        <h3>Calculate</h3>
+        <p>Evaluate curve points using Bernstein basis polynomials.</p>
+      </article>
+      <article class="info-card">
+        <h3>Implement</h3>
+        <p>Generate curve points for 2, 3 or 4 control points.</p>
+      </article>
+      <article class="info-card">
+        <h3>Visualize</h3>
+        <p>Drag control points and observe the curve change immediately.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section alt-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">02</span>
+      <div>
+        <h2>What Is a Bezier Curve?</h2>
+        <p>A Bezier curve is a parametric curve controlled by a sequence of control points.</p>
+      </div>
+    </div>
+
+    <div class="concept-grid">
+      <article class="theory-card">
+        <h3>Control Points</h3>
+        <p>Control points determine the position and direction of the curve. The curve generally starts at the first point and ends at the last point.</p>
+        <div class="formula-box">
+          <strong>0 â‰¤ t â‰¤ 1</strong><br>
+          <span>t is the curve parameter.</span>
+        </div>
+      </article>
+
+      <article class="theory-card">
+        <h3>Degree</h3>
+        <p>For n + 1 control points, the Bezier curve has degree n.</p>
+        <ul class="clean-list">
+          <li>2 points â†’ Linear â†’ degree 1</li>
+          <li>3 points â†’ Quadratic â†’ degree 2</li>
+          <li>4 points â†’ Cubic â†’ degree 3</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">03</span>
+      <div>
+        <h2>Bezier Equations</h2>
+        <p>The curve is calculated as a weighted combination of its control points.</p>
+      </div>
+    </div>
+
+    <div class="formula-grid">
+      <div class="formula-box">
+        <span>Linear</span>
+        <strong>B(t) = (1âˆ’t)Pâ‚€ + tPâ‚</strong>
+        <p>Degree 1 curve.</p>
+      </div>
+      <div class="formula-box">
+        <span>Quadratic</span>
+        <strong>B(t) = (1âˆ’t)Â²Pâ‚€ + 2(1âˆ’t)tPâ‚ + tÂ²Pâ‚‚</strong>
+        <p>Degree 2 curve.</p>
+      </div>
+      <div class="formula-box">
+        <span>Cubic</span>
+        <strong>B(t) = (1âˆ’t)Â³Pâ‚€ + 3(1âˆ’t)Â²tPâ‚ + 3(1âˆ’t)tÂ²Pâ‚‚ + tÂ³Pâ‚ƒ</strong>
+        <p>Degree 3 curve.</p>
+      </div>
+    </div>
+
+    <div class="formula-box large-formula">
+      <h3>General Bezier Equation</h3>
+      <p>For n + 1 control points:</p>
+      <strong>B(t) = Î£ [C(n,i)(1âˆ’t)â¿â»â±tâ±Páµ¢], &nbsp; 0 â‰¤ t â‰¤ 1</strong>
+      <p>where C(n,i) is the binomial coefficient.</p>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section alt-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">04</span>
+      <div>
+        <h2>Bernstein Basis Functions</h2>
+        <p>The basis functions determine how strongly each control point influences the curve at a particular t.</p>
+      </div>
+    </div>
+
+    <div class="table-card">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Degree</th>
+            <th>Basis Functions</th>
+            <th>Number of Control Points</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>Bâ‚€,â‚ = 1âˆ’t; Bâ‚,â‚ = t</td><td>2</td></tr>
+          <tr><td>2</td><td>Bâ‚€,â‚‚ = (1âˆ’t)Â²; Bâ‚,â‚‚ = 2(1âˆ’t)t; Bâ‚‚,â‚‚ = tÂ²</td><td>3</td></tr>
+          <tr><td>3</td><td>(1âˆ’t)Â³, 3(1âˆ’t)Â²t, 3(1âˆ’t)tÂ², tÂ³</td><td>4</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note-card">
+      <strong>Important property:</strong> The Bernstein basis functions add up to 1. Therefore, a Bezier point is a weighted combination of the control points.
+    </div>
+  </div>
+</section>
+
+<section class="practical-section" id="worked-example">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">05</span>
+      <div>
+        <h2>Worked Calculation</h2>
+        <p>Calculate a point on a quadratic Bezier curve.</p>
+      </div>
+    </div>
+
+    <div class="calculation-card">
+      <h3>Control Points: Pâ‚€(0,0), Pâ‚(4,6), Pâ‚‚(8,0)</h3>
+
+      <div class="calculation-flow">
+        <div class="calc-step">
+          <span>01</span>
+          <p>Use the quadratic equation: B(t) = (1âˆ’t)Â²Pâ‚€ + 2(1âˆ’t)tPâ‚ + tÂ²Pâ‚‚.</p>
+        </div>
+        <div class="calc-step">
+          <span>02</span>
+          <p>Choose <strong>t = 0.5</strong>.</p>
+        </div>
+        <div class="calc-step">
+          <span>03</span>
+          <p>Weights are: (1âˆ’0.5)Â² = 0.25, 2(0.5)(0.5) = 0.50, and 0.5Â² = 0.25.</p>
+        </div>
+        <div class="calc-step">
+          <span>04</span>
+          <p>x = 0.25(0) + 0.50(4) + 0.25(8) = <strong>4</strong>.</p>
+        </div>
+        <div class="calc-step">
+          <span>05</span>
+          <p>y = 0.25(0) + 0.50(6) + 0.25(0) = <strong>3</strong>.</p>
+        </div>
+        <div class="calc-step">
+          <span>06</span>
+          <p>Therefore, B(0.5) = <strong>(4,3)</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section alt-section" id="live-lab">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">06</span>
+      <div>
+        <h2>Interactive Bezier Curve Lab</h2>
+        <p>Drag control points, change the curve degree, and inspect the parameter t.</p>
+      </div>
+    </div>
+
+    <div class="interactive-layout">
+      <div class="control-panel">
+        <div class="control-group">
+          <h3>Curve Type</h3>
+          <label>Degree
+            <select id="degree">
+              <option value="1">Linear â€” 2 Points</option>
+              <option value="2">Quadratic â€” 3 Points</option>
+              <option value="3" selected>Cubic â€” 4 Points</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="control-group">
+          <h3>Parameter</h3>
+          <label>t
+            <input id="t" type="range" min="0" max="1" step="0.01" value="0.50">
+          </label>
+          <output id="tValue">0.50</output>
+        </div>
+
+        <div class="control-group">
+          <h3>Animation</h3>
+          <label>Speed
+            <input id="speed" type="range" min="1" max="10" value="5">
+          </label>
+        </div>
+
+        <div class="button-row">
+          <button class="btn btn-primary" id="animateBtn">Animate t</button>
+          <button class="btn btn-secondary" id="resetBtn">Reset</button>
+          <button class="btn btn-secondary" id="presetBtn">Try Preset</button>
+        </div>
+      </div>
+
+      <div class="visualizer-panel">
+        <canvas id="bezierCanvas" width="760" height="500" aria-label="Bezier curve visualizer"></canvas>
+
+        <div class="status-grid">
+          <div class="status-card">
+            <span>Current t</span>
+            <strong id="currentT">0.50</strong>
+            <small>0 â†’ 1</small>
+          </div>
+          <div class="status-card">
+            <span>Curve Point</span>
+            <strong id="curvePoint">(4.00, 3.00)</strong>
+            <small>B(t)</small>
+          </div>
+          <div class="status-card">
+            <span>Degree</span>
+            <strong id="degreeStatus">3</strong>
+            <small>Cubic</small>
+          </div>
+        </div>
+
+        <div class="lab-message" id="labMessage">Drag a control point to reshape the curve.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">07</span>
+      <div>
+        <h2>How the Curve Is Generated</h2>
+        <p>Think of t as a slider that travels from the first control point to the last.</p>
+      </div>
+    </div>
+
+    <div class="process-grid">
+      <article class="process-card"><span>1</span><h3>Choose Points</h3><p>Define 2, 3 or 4 control points.</p></article>
+      <article class="process-card"><span>2</span><h3>Choose t</h3><p>Select a parameter between 0 and 1.</p></article>
+      <article class="process-card"><span>3</span><h3>Calculate Weights</h3><p>Evaluate the Bernstein basis functions.</p></article>
+      <article class="process-card"><span>4</span><h3>Combine</h3><p>Use the weights to calculate B(t).</p></article>
+    </div>
+
+    <div class="note-card">
+      <strong>Geometric insight:</strong> The curve is pulled by the control polygon. Moving a control point changes the curve without requiring a completely new curve representation.
+    </div>
+  </div>
+</section>
+
+<section class="practical-section alt-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">08</span>
+      <div>
+        <h2>Important Properties</h2>
+      </div>
+    </div>
+
+    <div class="concept-grid">
+      <article class="theory-card">
+        <h3>Endpoint Interpolation</h3>
+        <p>B(0) = Pâ‚€ and B(1) = Pâ‚™. The curve starts at the first control point and ends at the last.</p>
+      </article>
+      <article class="theory-card">
+        <h3>Convex Hull Property</h3>
+        <p>The Bezier curve lies within the convex hull of its control points.</p>
+      </article>
+      <article class="theory-card">
+        <h3>Affine Invariance</h3>
+        <p>Applying an affine transformation to the control points produces the same result as transforming the generated curve.</p>
+      </article>
+      <article class="theory-card">
+        <h3>Control</h3>
+        <p>Interior control points influence the direction and shape of the curve rather than normally becoming points on the curve itself.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">09</span>
+      <div>
+        <h2>Real-Life Problem Statements</h2>
+        <p>Bezier curves are widely used for smooth paths and shape design.</p>
+      </div>
+    </div>
+
+    <div class="problem-grid">
+      <article class="problem-card">
+        <span class="problem-tag">01 Â· UI DESIGN</span>
+        <h3>Logo Curve</h3>
+        <p>Create a smooth curve for a logo or icon using four control points and adjust its shape interactively.</p>
+        <button class="btn btn-secondary problem-load" data-preset="logo">Show in Live Viewer</button>
+      </article>
+
+      <article class="problem-card">
+        <span class="problem-tag">02 Â· ANIMATION</span>
+        <h3>Motion Path</h3>
+        <p>Define a smooth path for a game object or animation element to travel from a start point to an end point.</p>
+        <button class="btn btn-secondary problem-load" data-preset="motion">Show in Live Viewer</button>
+      </article>
+
+      <article class="problem-card">
+        <span class="problem-tag">03 Â· CAD</span>
+        <h3>Product Profile</h3>
+        <p>Use a Bezier curve to model a smooth product outline such as part of a vehicle, bottle or interface shape.</p>
+        <button class="btn btn-secondary problem-load" data-preset="product">Show in Live Viewer</button>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section alt-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">10</span>
+      <div>
+        <h2>Experiments</h2>
+        <p>Change the control polygon and observe how the curve responds.</p>
+      </div>
+    </div>
+
+    <div class="experiment-list">
+      <div class="experiment-item"><span>01</span><p>Move Pâ‚ of a quadratic curve vertically. Observe how the curve bends.</p></div>
+      <div class="experiment-item"><span>02</span><p>Set t = 0, 0.25, 0.5, 0.75 and 1. Compare the generated coordinates.</p></div>
+      <div class="experiment-item"><span>03</span><p>Change a cubic curve into a quadratic curve and compare the control polygon.</p></div>
+      <div class="experiment-item"><span>04</span><p>Move an interior control point outside the original convex hull and observe the new curve shape.</p></div>
+      <div class="experiment-item"><span>05</span><p>Play the animation and follow the point B(t) from t = 0 to t = 1.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">11</span>
+      <div>
+        <h2>Common Mistakes</h2>
+      </div>
+    </div>
+
+    <div class="mistake-grid">
+      <article class="mistake-card"><h3>Wrong parameter range</h3><p>For the standard Bezier curve, t must remain between 0 and 1.</p></article>
+      <article class="mistake-card"><h3>Wrong degree</h3><p>n + 1 control points produce a degree n Bezier curve.</p></article>
+      <article class="mistake-card"><h3>Missing binomial coefficient</h3><p>Quadratic and cubic equations require the correct Bernstein coefficients.</p></article>
+      <article class="mistake-card"><h3>Confusing control polygon and curve</h3><p>Interior control points generally guide the curve; they are not necessarily points on it.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section alt-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">12</span>
+      <div>
+        <h2>Viva Questions</h2>
+        <p>Check your understanding before moving to B-Spline curves.</p>
+      </div>
+    </div>
+
+    <div class="viva-list">
+      <details><summary>What is a Bezier curve?</summary><p>A parametric curve defined by a set of control points and Bernstein basis functions.</p></details>
+      <details><summary>What is the range of t?</summary><p>For the standard Bezier curve, 0 â‰¤ t â‰¤ 1.</p></details>
+      <details><summary>What determines the degree?</summary><p>If there are n + 1 control points, the degree is n.</p></details>
+      <details><summary>Does a Bezier curve pass through every control point?</summary><p>It passes through the first and last control points. Interior control points generally influence the curve without necessarily lying on it.</p></details>
+      <details><summary>What is the convex hull property?</summary><p>The curve lies inside the convex hull formed by its control points.</p></details>
+      <details><summary>What is a cubic Bezier curve?</summary><p>A Bezier curve with four control points and degree three.</p></details>
+      <details><summary>What are Bernstein polynomials?</summary><p>They are the basis functions that provide the weights for the control points.</p></details>
+      <details><summary>Where are Bezier curves used?</summary><p>They are used in computer graphics, animation paths, fonts, UI design, CAD and shape modeling.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="practical-navigation">
+  <div class="container">
+    <a class="nav-practical prev" href="practical15.html">
+      <span>Previous Practical</span>
+      <strong>15 â€” Sutherland-Hodgman Polygon Clipping</strong>
+    </a>
+    <a class="nav-practical next" href="practical17.html">
+      <span>Next Practical</span>
+      <strong>17 â€” B-Spline Curve Visualizer</strong>
+    </a>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-main">
+    <div class="footer-brand">
+      <div class="logo">
+        <span class="logo-mark">&lt;/&gt;</span>
+        <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+      </div>
+      <p>Interactive Computer Graphics practical learning through concepts, calculations and visualization.</p>
+    </div>
+    <div class="footer-links">
+      <div>
+        <h4>Learn</h4>
+        <a href="../cgr_foundations.html">Foundations</a>
+              </div>
+      <div>
+        <h4>Practice</h4>
+        <a href="../cgr_practicals.html">Practicals</a>
+        <a href="../../../about.html">About</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>Â© 2026 Rasika CodeLab</span>
+    <span>Built for practical learning.</span>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const canvas = document.getElementById("bezierCanvas");
+  const ctx = canvas.getContext("2d");
+
+  const degreeSelect = document.getElementById("degree");
+  const tInput = document.getElementById("t");
+  const tValue = document.getElementById("tValue");
+  const speedInput = document.getElementById("speed");
+  const currentT = document.getElementById("currentT");
+  const curvePoint = document.getElementById("curvePoint");
+  const degreeStatus = document.getElementById("degreeStatus");
+  const message = document.getElementById("labMessage");
+
+  const W = canvas.width;
+  const H = canvas.height;
+  const padding = 50;
+  const world = { min: 0, max: 12 };
+
+  const presets = {
+    default: [
+      { x: 1, y: 2 },
+      { x: 3.5, y: 8 },
+      { x: 7.5, y: 1 },
+      { x: 10.5, y: 7 }
+    ],
+    logo: [
+      { x: 1, y: 2.5 },
+      { x: 3.2, y: 9 },
+      { x: 8, y: 9 },
+      { x: 10.5, y: 2.5 }
+    ],
+    motion: [
+      { x: 1, y: 2 },
+      { x: 2, y: 8 },
+      { x: 8, y: 0.8 },
+      { x: 10.5, y: 7 }
+    ],
+    product: [
+      { x: 0.8, y: 3 },
+      { x: 4, y: 8.8 },
+      { x: 7.5, y: 8.2 },
+      { x: 11, y: 3 }
+    ]
+  };
+
+  let points = presets.default.map(p => ({ ...p }));
+  let dragIndex = -1;
+  let animationTimer = null;
+  let direction = 1;
+
+  function sx(x) {
+    return padding + (x - world.min) * (W - 2 * padding) / (world.max - world.min);
+  }
+
+  function sy(y) {
+    return H - padding - (y - world.min) * (H - 2 * padding) / (world.max - world.min);
+  }
+
+  function drawGrid() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.globalAlpha = 0.25;
+
+    for (let x = world.min; x <= world.max; x++) {
+      ctx.beginPath();
+      ctx.moveTo(sx(x), padding);
+      ctx.lineTo(sx(x), H - padding);
+      ctx.stroke();
+    }
+
+    for (let y = world.min; y <= world.max; y++) {
+      ctx.beginPath();
+      ctx.moveTo(padding, sy(y));
+      ctx.lineTo(W - padding, sy(y));
+      ctx.stroke();
+    }
+
+    ctx.globalAlpha = 1;
+  }
+
+  function choosePoints() {
+    const count = Number(degreeSelect.value) + 1;
+    return points.slice(0, count);
+  }
+
+  function binomial(n, k) {
+    if (k < 0 || k > n) return 0;
+    let result = 1;
+    for (let i = 1; i <= k; i++) {
+      result *= (n - i + 1) / i;
+    }
+    return result;
+  }
+
+  function bezier(t, control) {
+    const n = control.length - 1;
+    let x = 0;
+    let y = 0;
+
+    control.forEach((p, i) => {
+      const weight = binomial(n, i) * Math.pow(1 - t, n - i) * Math.pow(t, i);
+      x += weight * p.x;
+      y += weight * p.y;
+    });
+
+    return { x, y };
+  }
+
+  function drawControlPolygon(control) {
+    ctx.save();
+    ctx.setLineDash([7, 6]);
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(sx(control[0].x), sy(control[0].y));
+    for (let i = 1; i < control.length; i++) {
+      ctx.lineTo(sx(control[i].x), sy(control[i].y));
+    }
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  function drawCurve(control) {
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+
+    for (let i = 0; i <= 200; i++) {
+      const t = i / 200;
+      const p = bezier(t, control);
+      if (i === 0) ctx.moveTo(sx(p.x), sy(p.y));
+      else ctx.lineTo(sx(p.x), sy(p.y));
+    }
+
+    ctx.stroke();
+  }
+
+  function drawPoint(p, label, radius = 7) {
+    ctx.beginPath();
+    ctx.arc(sx(p.x), sy(p.y), radius, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.font = "bold 13px sans-serif";
+    ctx.fillText(label, sx(p.x) + 10, sy(p.y) - 9);
+  }
+
+  function drawTangentPoint(p) {
+    ctx.beginPath();
+    ctx.arc(sx(p.x), sy(p.y), 10, 0, Math.PI * 2);
+    ctx.stroke();
+
+    ctx.font = "bold 13px sans-serif";
+    ctx.fillText("B(t)", sx(p.x) + 12, sy(p.y) + 17);
+  }
+
+  function render() {
+    drawGrid();
+
+    const control = choosePoints();
+    const t = Number(tInput.value);
+    const p = bezier(t, control);
+
+    drawControlPolygon(control);
+    drawCurve(control);
+
+    control.forEach((point, i) => drawPoint(point, `P${i}`));
+    drawTangentPoint(p);
+
+    currentT.textContent = t.toFixed(2);
+    curvePoint.textContent = `(${p.x.toFixed(2)}, ${p.y.toFixed(2)})`;
+    degreeStatus.textContent = degreeSelect.value;
+    tValue.textContent = t.toFixed(2);
+    message.textContent = `B(t) = (${p.x.toFixed(2)}, ${p.y.toFixed(2)}). Drag a control point to reshape the curve.`;
+  }
+
+  function stopAnimation() {
+    if (animationTimer) clearInterval(animationTimer);
+    animationTimer = null;
+    document.getElementById("animateBtn").textContent = "Animate t";
+  }
+
+  function animate() {
+    if (animationTimer) {
+      stopAnimation();
+      return;
+    }
+
+    direction = 1;
+    document.getElementById("animateBtn").textContent = "Pause";
+
+    animationTimer = setInterval(() => {
+      let t = Number(tInput.value) + direction * 0.01;
+
+      if (t >= 1) {
+        t = 1;
+        direction = -1;
+      }
+
+      if (t <= 0) {
+        t = 0;
+        direction = 1;
+      }
+
+      tInput.value = t.toFixed(2);
+      render();
+    }, Math.max(35, 180 - Number(speedInput.value) * 14));
+  }
+
+  function reset() {
+    stopAnimation();
+    points = presets.default.map(p => ({ ...p }));
+    degreeSelect.value = "3";
+    tInput.value = "0.50";
+    render();
+  }
+
+  function loadPreset(name) {
+    stopAnimation();
+    points = presets[name].map(p => ({ ...p }));
+    degreeSelect.value = "3";
+    tInput.value = "0.50";
+    render();
+  }
+
+  function canvasToWorld(clientX, clientY) {
+    const rect = canvas.getBoundingClientRect();
+    const px = (clientX - rect.left) * canvas.width / rect.width;
+    const py = (clientY - rect.top) * canvas.height / rect.height;
+
+    return {
+      x: world.min + (px - padding) * (world.max - world.min) / (W - 2 * padding),
+      y: world.min + (H - padding - py) * (world.max - world.min) / (H - 2 * padding)
+    };
+  }
+
+  function closeTo(a, b) {
+    return Math.hypot(sx(a.x) - sx(b.x), sy(a.y) - sy(b.y)) < 18;
+  }
+
+  canvas.addEventListener("pointerdown", e => {
+    const control = choosePoints();
+    const p = canvasToWorld(e.clientX, e.clientY);
+
+    dragIndex = control.findIndex(v => closeTo(v, p));
+
+    if (dragIndex >= 0) {
+      canvas.setPointerCapture(e.pointerId);
+    }
+  });
+
+  canvas.addEventListener("pointermove", e => {
+    if (dragIndex < 0) return;
+
+    const p = canvasToWorld(e.clientX, e.clientY);
+    points[dragIndex] = p;
+    render();
+  });
+
+  canvas.addEventListener("pointerup", () => {
+    dragIndex = -1;
+  });
+
+  degreeSelect.addEventListener("change", () => {
+    stopAnimation();
+    render();
+  });
+
+  tInput.addEventListener("input", render);
+
+  document.getElementById("animateBtn").addEventListener("click", animate);
+  document.getElementById("resetBtn").addEventListener("click", reset);
+  document.getElementById("presetBtn").addEventListener("click", () => loadPreset("logo"));
+
+  document.querySelectorAll(".problem-load").forEach(button => {
+    button.addEventListener("click", () => {
+      loadPreset(button.dataset.preset);
+      document.getElementById("live-lab").scrollIntoView({ behavior: "smooth" });
+    });
+  });
+
+  render();
+})();
+</script>
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

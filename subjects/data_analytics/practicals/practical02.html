@@ -1,0 +1,1949 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Practical 02 | Data Cleaning & Transformation | Rasika CodeLab</title>
+
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../css/data_analytics_foundation.css">
+
+    <style>
+        /* =====================================================
+           PRACTICAL 02 â€” DATA CLEANING & TRANSFORMATION
+        ===================================================== */
+
+        .da-p2-page{
+            --orange:#ff8a2a;
+            --bg:#070a10;
+            --card:#111722;
+            --card2:#151c28;
+            --text:#f5f6f8;
+            --muted:#969daa;
+            --soft:#cdd1d8;
+            --border:rgba(255,255,255,.09);
+
+            background:var(--bg);
+            color:var(--text);
+        }
+
+        .da-p2-page *{
+            box-sizing:border-box;
+        }
+
+        .p2-container{
+            width:min(1180px,calc(100% - 48px));
+            margin:auto;
+        }
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .p2-hero{
+            padding:90px 24px 75px;
+            border-bottom:1px solid var(--border);
+
+            background:
+                radial-gradient(
+                    circle at 80% 15%,
+                    rgba(255,138,42,.15),
+                    transparent 30%
+                ),
+                linear-gradient(135deg,#080b12,#151016);
+        }
+
+        .p2-breadcrumb{
+            margin-bottom:25px;
+            color:var(--muted);
+            font-size:10px;
+            letter-spacing:1px;
+        }
+
+        .p2-breadcrumb span{
+            color:var(--orange);
+            margin:0 7px;
+        }
+
+        .p2-label{
+            color:var(--orange);
+            font-size:10px;
+            font-weight:800;
+            letter-spacing:2px;
+        }
+
+        .p2-hero h1{
+            max-width:950px;
+            margin:15px 0;
+            font-size:clamp(42px,6vw,70px);
+            line-height:1;
+            letter-spacing:-3px;
+        }
+
+        .p2-hero h1 span{
+            color:var(--orange);
+        }
+
+        .p2-description{
+            max-width:790px;
+            color:var(--soft);
+            font-size:14px;
+            line-height:1.85;
+        }
+
+        .p2-tags{
+            display:flex;
+            flex-wrap:wrap;
+            gap:8px;
+            margin-top:25px;
+        }
+
+        .p2-tags span{
+            padding:7px 11px;
+            border:1px solid var(--border);
+            border-radius:50px;
+            color:var(--soft);
+            font-size:9px;
+        }
+
+        /* =====================================================
+           SECTION
+        ===================================================== */
+
+        .p2-section{
+            padding:80px 24px;
+        }
+
+        .p2-section.dark{
+            background:#090c13;
+            border-block:1px solid rgba(255,255,255,.04);
+        }
+
+        .p2-heading{
+            margin-bottom:38px;
+        }
+
+        .p2-section-label{
+            color:var(--orange);
+            font-size:9px;
+            font-weight:800;
+            letter-spacing:2px;
+            text-transform:uppercase;
+        }
+
+        .p2-heading h2{
+            margin:11px 0;
+            font-size:clamp(29px,4vw,45px);
+            line-height:1.1;
+        }
+
+        .p2-heading h2 span{
+            color:var(--orange);
+        }
+
+        .p2-heading p{
+            max-width:720px;
+            margin:0;
+            color:var(--muted);
+            font-size:12px;
+            line-height:1.8;
+        }
+
+        /* =====================================================
+           WHY CLEAN DATA
+        ===================================================== */
+
+        .p2-why-grid{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:20px;
+        }
+
+        .p2-why-card{
+            padding:30px;
+            background:var(--card);
+            border:1px solid var(--border);
+            border-radius:18px;
+        }
+
+        .p2-why-card h3{
+            margin:0 0 14px;
+            font-size:20px;
+        }
+
+        .p2-why-card p{
+            color:var(--muted);
+            font-size:11px;
+            line-height:1.8;
+        }
+
+        .p2-warning{
+            margin-top:20px;
+            padding:16px;
+            border-left:3px solid var(--orange);
+            background:rgba(255,138,42,.05);
+            color:var(--soft);
+            font-size:10px;
+            line-height:1.7;
+        }
+
+        /* =====================================================
+           PIPELINE
+        ===================================================== */
+
+        .p2-pipeline{
+            display:grid;
+            grid-template-columns:repeat(7,1fr);
+            gap:8px;
+        }
+
+        .p2-pipeline-step{
+            min-height:135px;
+            padding:17px 10px;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            text-align:center;
+
+            background:var(--card);
+            border:1px solid var(--border);
+            border-radius:13px;
+
+            transition:.25s ease;
+        }
+
+        .p2-pipeline-step:hover{
+            transform:translateY(-5px);
+            border-color:rgba(255,138,42,.4);
+        }
+
+        .p2-pipeline-step strong{
+            color:var(--orange);
+            font-size:9px;
+        }
+
+        .p2-pipeline-step h3{
+            margin:9px 0 5px;
+            font-size:12px;
+        }
+
+        .p2-pipeline-step p{
+            margin:0;
+            color:var(--muted);
+            font-size:8px;
+            line-height:1.5;
+        }
+
+        /* =====================================================
+           DATA QUALITY PROBLEMS
+        ===================================================== */
+
+        .p2-quality-grid{
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:16px;
+        }
+
+        .p2-quality-card{
+            padding:24px;
+            min-height:205px;
+            background:linear-gradient(145deg,#121722,#0d111a);
+            border:1px solid var(--border);
+            border-radius:16px;
+            transition:.25s ease;
+        }
+
+        .p2-quality-card:hover{
+            transform:translateY(-5px);
+            border-color:rgba(255,138,42,.4);
+        }
+
+        .p2-quality-number{
+            color:var(--orange);
+            font-size:9px;
+            font-weight:900;
+        }
+
+        .p2-quality-card h3{
+            margin:12px 0 8px;
+            font-size:16px;
+        }
+
+        .p2-quality-card p{
+            color:var(--muted);
+            font-size:10px;
+            line-height:1.7;
+        }
+
+        .p2-example{
+            margin-top:14px;
+            padding:11px;
+            background:#090d14;
+            border:1px solid var(--border);
+            border-radius:8px;
+            color:var(--soft);
+            font-size:9px;
+            line-height:1.6;
+        }
+
+        .bad{
+            color:#ff7777;
+        }
+
+        .good{
+            color:#72d995;
+        }
+
+        /* =====================================================
+           REAL WORLD PROBLEMS
+        ===================================================== */
+
+        .p2-problem-grid{
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:18px;
+        }
+
+        .p2-problem{
+            display:flex;
+            flex-direction:column;
+            min-height:620px;
+            padding:25px;
+            background:linear-gradient(145deg,#121722,#0d111a);
+            border:1px solid var(--border);
+            border-radius:18px;
+            transition:.25s ease;
+        }
+
+        .p2-problem:hover{
+            transform:translateY(-6px);
+            border-color:rgba(255,138,42,.4);
+            box-shadow:0 20px 50px rgba(0,0,0,.28);
+        }
+
+        .p2-problem-number{
+            color:var(--orange);
+            font-size:9px;
+            font-weight:900;
+            letter-spacing:1.5px;
+        }
+
+        .p2-problem h3{
+            margin:13px 0 10px;
+            font-size:20px;
+        }
+
+        .p2-problem > p{
+            color:var(--muted);
+            font-size:10px;
+            line-height:1.75;
+        }
+
+        .p2-block{
+            margin-top:18px;
+        }
+
+        .p2-block strong{
+            display:block;
+            margin-bottom:8px;
+            color:var(--orange);
+            font-size:9px;
+            letter-spacing:1px;
+            text-transform:uppercase;
+        }
+
+        .p2-block ul{
+            margin:0;
+            padding-left:17px;
+            color:var(--soft);
+        }
+
+        .p2-block li{
+            margin:6px 0;
+            font-size:10px;
+            line-height:1.5;
+        }
+
+        /* =====================================================
+           RAW DATA TABLE
+        ===================================================== */
+
+        .p2-table{
+            overflow:hidden;
+            margin-top:12px;
+            border:1px solid var(--border);
+            border-radius:9px;
+        }
+
+        .p2-row{
+            display:grid;
+            grid-template-columns:1.2fr 1fr 1fr;
+            border-bottom:1px solid var(--border);
+        }
+
+        .p2-row:last-child{
+            border-bottom:0;
+        }
+
+        .p2-row span{
+            padding:8px;
+            color:var(--soft);
+            font-size:8px;
+        }
+
+        .p2-head{
+            background:rgba(255,138,42,.06);
+        }
+
+        .p2-head span{
+            color:var(--orange);
+            font-weight:800;
+        }
+
+        /* =====================================================
+           CLEANING TASKS
+        ===================================================== */
+
+        .p2-task-list{
+            display:grid;
+            gap:7px;
+            margin-top:auto;
+            padding-top:20px;
+        }
+
+        .p2-task{
+            padding:10px 12px;
+            background:rgba(255,255,255,.025);
+            border:1px solid var(--border);
+            border-radius:8px;
+            color:var(--soft);
+            font-size:9px;
+        }
+
+        .p2-task span{
+            margin-right:7px;
+            color:var(--orange);
+            font-weight:900;
+        }
+
+        /* =====================================================
+           TRANSFORMATION
+        ===================================================== */
+
+        .p2-transform-grid{
+            display:grid;
+            grid-template-columns:1fr 80px 1fr;
+            gap:15px;
+            align-items:center;
+        }
+
+        .p2-data-box{
+            padding:25px;
+            background:var(--card);
+            border:1px solid var(--border);
+            border-radius:15px;
+        }
+
+        .p2-data-box h3{
+            margin:0 0 15px;
+            font-size:16px;
+        }
+
+        .p2-data-box pre{
+            margin:0;
+            padding:15px;
+            overflow:auto;
+            background:#080b11;
+            border-radius:9px;
+            color:var(--soft);
+            font-size:10px;
+            line-height:1.8;
+        }
+
+        .p2-arrow{
+            text-align:center;
+            color:var(--orange);
+            font-size:25px;
+        }
+
+        /* =====================================================
+           TRANSFORM CARDS
+        ===================================================== */
+
+        .p2-transform-cards{
+            display:grid;
+            grid-template-columns:repeat(4,1fr);
+            gap:14px;
+            margin-top:25px;
+        }
+
+        .p2-transform-card{
+            padding:20px;
+            background:var(--card);
+            border:1px solid var(--border);
+            border-radius:14px;
+        }
+
+        .p2-transform-card span{
+            color:var(--orange);
+            font-size:9px;
+            font-weight:900;
+        }
+
+        .p2-transform-card h3{
+            margin:10px 0 6px;
+            font-size:14px;
+        }
+
+        .p2-transform-card p{
+            margin:0;
+            color:var(--muted);
+            font-size:9px;
+            line-height:1.65;
+        }
+
+        /* =====================================================
+           VISUALIZATION
+        ===================================================== */
+
+        .p2-visual-grid{
+            display:grid;
+            grid-template-columns:repeat(4,1fr);
+            gap:15px;
+        }
+
+        .p2-visual-card{
+            min-height:170px;
+            padding:22px;
+            background:var(--card);
+            border:1px solid var(--border);
+            border-radius:15px;
+        }
+
+        .p2-visual-card span{
+            color:var(--orange);
+            font-size:9px;
+            font-weight:900;
+        }
+
+        .p2-visual-card h3{
+            margin:10px 0 7px;
+            font-size:15px;
+        }
+
+        .p2-visual-card p{
+            margin:0;
+            color:var(--muted);
+            font-size:9px;
+            line-height:1.65;
+        }
+
+        /* =====================================================
+           CHECKLIST
+        ===================================================== */
+
+        .p2-checklist{
+            display:grid;
+            grid-template-columns:repeat(2,1fr);
+            gap:10px;
+        }
+
+        .p2-check{
+            padding:14px 16px;
+            background:var(--card);
+            border:1px solid var(--border);
+            border-radius:10px;
+            color:var(--soft);
+            font-size:10px;
+        }
+
+        .p2-check::before{
+            content:"âœ“";
+            margin-right:9px;
+            color:var(--orange);
+            font-weight:900;
+        }
+
+        /* =====================================================
+           MINI CHALLENGE
+        ===================================================== */
+
+        .p2-challenge{
+            max-width:850px;
+            margin:auto;
+            padding:30px;
+            background:var(--card);
+            border:1px solid var(--border);
+            border-radius:20px;
+        }
+
+        .p2-challenge h3{
+            margin:0 0 15px;
+            font-size:19px;
+        }
+
+        .p2-challenge h3 span{
+            color:var(--orange);
+        }
+
+        .p2-challenge p{
+            color:var(--muted);
+            font-size:11px;
+            line-height:1.7;
+        }
+
+        .p2-options{
+            display:grid;
+            gap:8px;
+            margin-top:18px;
+        }
+
+        .p2-options button{
+            padding:13px 15px;
+            text-align:left;
+            background:#0c1018;
+            border:1px solid var(--border);
+            border-radius:9px;
+            color:var(--soft);
+            cursor:pointer;
+            font-size:10px;
+        }
+
+        .p2-options button:hover{
+            border-color:rgba(255,138,42,.4);
+        }
+
+        .p2-answer{
+            min-height:20px;
+            margin-top:15px;
+            font-size:10px;
+        }
+
+        /* =====================================================
+           NAVIGATION
+        ===================================================== */
+
+        .p2-navigation{
+            width:min(1180px,calc(100% - 48px));
+            margin:0 auto 80px;
+            display:flex;
+            justify-content:space-between;
+            gap:12px;
+        }
+
+        .p2-nav{
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            min-height:44px;
+            padding:11px 17px;
+            border:1px solid var(--border);
+            border-radius:10px;
+            color:var(--soft);
+            font-size:10px;
+        }
+
+        .p2-nav.next{
+            background:var(--orange);
+            border-color:var(--orange);
+            color:#111;
+            font-weight:900;
+        }
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media(max-width:1050px){
+
+            .p2-pipeline{
+                grid-template-columns:repeat(4,1fr);
+            }
+
+            .p2-problem-grid{
+                grid-template-columns:1fr;
+            }
+
+            .p2-problem{
+                min-height:auto;
+            }
+
+            .p2-transform-cards{
+                grid-template-columns:repeat(2,1fr);
+            }
+
+            .p2-visual-grid{
+                grid-template-columns:repeat(2,1fr);
+            }
+        }
+
+        @media(max-width:750px){
+
+            .p2-why-grid{
+                grid-template-columns:1fr;
+            }
+
+            .p2-quality-grid{
+                grid-template-columns:1fr;
+            }
+
+            .p2-pipeline{
+                grid-template-columns:repeat(2,1fr);
+            }
+
+            .p2-transform-grid{
+                grid-template-columns:1fr;
+            }
+
+            .p2-arrow{
+                transform:rotate(90deg);
+            }
+
+            .p2-checklist{
+                grid-template-columns:1fr;
+            }
+        }
+
+        @media(max-width:600px){
+
+            .p2-container,
+            .p2-navigation{
+                width:calc(100% - 32px);
+            }
+
+            .p2-hero,
+            .p2-section{
+                padding-left:16px;
+                padding-right:16px;
+            }
+
+            .p2-hero{
+                padding-top:70px;
+            }
+
+            .p2-hero h1{
+                font-size:40px;
+                letter-spacing:-2px;
+            }
+
+            .p2-pipeline,
+            .p2-transform-cards,
+            .p2-visual-grid{
+                grid-template-columns:1fr;
+            }
+
+            .p2-navigation{
+                flex-direction:column;
+            }
+
+            .p2-nav{
+                width:100%;
+            }
+        }
+    </style>
+</head>
+
+
+<body class="da-p2-page protected-page">
+
+<header class="navbar">
+
+    <div class="nav-container">
+
+        <a href="../../../index.html" class="logo">
+            <span class="logo-mark">&lt;/&gt;</span>
+            <span>
+                Rasika<span class="logo-highlight">CodeLab</span>
+            </span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="../../../index.html">Home</a>
+            <a href="../../../subjects.html" class="active">Subjects</a>
+            <a href="../../../about.html">About</a>
+            <a href="../../../login.html">Login</a>
+        </nav>
+
+        <button class="menu-btn" aria-label="Open menu">
+            â˜°
+        </button>
+
+    </div>
+
+</header>
+
+
+<main>
+
+
+<!-- =====================================================
+     HERO
+====================================================== -->
+
+<section class="p2-hero">
+
+    <div class="p2-container">
+
+        <div class="p2-breadcrumb">
+            DATA ANALYTICS
+            <span>â€º</span>
+            PRACTICALS
+            <span>â€º</span>
+            PRACTICAL 02
+        </div>
+
+        <div class="p2-label">
+            PRACTICAL 02
+        </div>
+
+        <h1>
+            Clean &
+            <span>Transform</span>
+            Data
+        </h1>
+
+        <p class="p2-description">
+            Real-world datasets are rarely ready for analysis. They contain
+            missing values, duplicate records, inconsistent text, incorrect
+            formats and unusual values. In this practical, you will learn how
+            to identify these problems, clean the data and transform it into
+            an analysis-ready dataset.
+        </p>
+
+        <div class="p2-tags">
+            <span>Data Cleaning</span>
+            <span>Missing Values</span>
+            <span>Duplicates</span>
+            <span>Data Types</span>
+            <span>Outliers</span>
+            <span>Transformation</span>
+            <span>Pandas</span>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     LEARNING OBJECTIVE
+====================================================== -->
+
+<section class="p2-section">
+
+    <div class="p2-container">
+
+        <div class="p2-heading">
+
+            <div class="p2-section-label">
+                01 â€” LEARNING OBJECTIVE
+            </div>
+
+            <h2>
+                Make messy data
+                <span>usable</span>
+            </h2>
+
+            <p>
+                The goal is not simply to delete incorrect values. You must
+                understand why the data is problematic and select an
+                appropriate cleaning strategy.
+            </p>
+
+        </div>
+
+
+        <div class="p2-why-grid">
+
+            <div class="p2-why-card">
+
+                <h3>Why data cleaning matters</h3>
+
+                <p>
+                    Poor-quality data can produce misleading statistics,
+                    incorrect visualizations and wrong business decisions.
+                    Data cleaning is therefore one of the most important
+                    stages of the analytics workflow.
+                </p>
+
+                <div class="p2-warning">
+                    <strong>Remember:</strong>
+                    Cleaning decisions should be based on the meaning of
+                    the data, not simply on what is easiest to remove.
+                </div>
+
+            </div>
+
+
+            <div class="p2-why-card">
+
+                <h3>What you will learn</h3>
+
+                <div class="p2-checklist">
+
+                    <div class="p2-check">
+                        Detect missing values
+                    </div>
+
+                    <div class="p2-check">
+                        Remove duplicate records
+                    </div>
+
+                    <div class="p2-check">
+                        Standardize text
+                    </div>
+
+                    <div class="p2-check">
+                        Convert data types
+                    </div>
+
+                    <div class="p2-check">
+                        Handle invalid values
+                    </div>
+
+                    <div class="p2-check">
+                        Detect outliers
+                    </div>
+
+                    <div class="p2-check">
+                        Create calculated columns
+                    </div>
+
+                    <div class="p2-check">
+                        Prepare final dataset
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CLEANING PIPELINE
+====================================================== -->
+
+<section class="p2-section dark">
+
+    <div class="p2-container">
+
+        <div class="p2-heading">
+
+            <div class="p2-section-label">
+                02 â€” DATA CLEANING PIPELINE
+            </div>
+
+            <h2>
+                Raw data â†’
+                <span>analysis-ready data</span>
+            </h2>
+
+            <p>
+                Follow this pipeline for every dataset.
+            </p>
+
+        </div>
+
+
+        <div class="p2-pipeline">
+
+            <div class="p2-pipeline-step">
+                <strong>01</strong>
+                <h3>Inspect</h3>
+                <p>Understand the dataset.</p>
+            </div>
+
+            <div class="p2-pipeline-step">
+                <strong>02</strong>
+                <h3>Detect</h3>
+                <p>Find quality problems.</p>
+            </div>
+
+            <div class="p2-pipeline-step">
+                <strong>03</strong>
+                <h3>Clean</h3>
+                <p>Fix invalid data.</p>
+            </div>
+
+            <div class="p2-pipeline-step">
+                <strong>04</strong>
+                <h3>Transform</h3>
+                <p>Create useful variables.</p>
+            </div>
+
+            <div class="p2-pipeline-step">
+                <strong>05</strong>
+                <h3>Validate</h3>
+                <p>Check the results.</p>
+            </div>
+
+            <div class="p2-pipeline-step">
+                <strong>06</strong>
+                <h3>Visualize</h3>
+                <p>Compare before and after.</p>
+            </div>
+
+            <div class="p2-pipeline-step">
+                <strong>07</strong>
+                <h3>Export</h3>
+                <p>Save clean dataset.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     DATA QUALITY PROBLEMS
+====================================================== -->
+
+<section class="p2-section">
+
+    <div class="p2-container">
+
+        <div class="p2-heading">
+
+            <div class="p2-section-label">
+                03 â€” DATA QUALITY
+            </div>
+
+            <h2>
+                Find the problems
+                <span>first</span>
+            </h2>
+
+            <p>
+                Before modifying data, identify exactly what is wrong.
+            </p>
+
+        </div>
+
+
+        <div class="p2-quality-grid">
+
+
+            <div class="p2-quality-card">
+
+                <div class="p2-quality-number">
+                    01
+                </div>
+
+                <h3>Missing Values</h3>
+
+                <p>
+                    Important fields may contain empty or null values.
+                </p>
+
+                <div class="p2-example">
+                    <span class="bad">Age: NaN</span>
+                    â†’
+                    <span class="good">Age: 21</span>
+                </div>
+
+            </div>
+
+
+            <div class="p2-quality-card">
+
+                <div class="p2-quality-number">
+                    02
+                </div>
+
+                <h3>Duplicate Records</h3>
+
+                <p>
+                    The same customer, student or transaction may appear
+                    more than once.
+                </p>
+
+                <div class="p2-example">
+                    <span class="bad">Customer 101 Ã— 2</span>
+                    â†’
+                    <span class="good">Customer 101 Ã— 1</span>
+                </div>
+
+            </div>
+
+
+            <div class="p2-quality-card">
+
+                <div class="p2-quality-number">
+                    03
+                </div>
+
+                <h3>Inconsistent Text</h3>
+
+                <p>
+                    The same category may be written in different formats.
+                </p>
+
+                <div class="p2-example">
+                    <span class="bad">
+                        Mumbai / mumbai / MUMBAI
+                    </span>
+                    â†’
+                    <span class="good">Mumbai</span>
+                </div>
+
+            </div>
+
+
+            <div class="p2-quality-card">
+
+                <div class="p2-quality-number">
+                    04
+                </div>
+
+                <h3>Incorrect Data Types</h3>
+
+                <p>
+                    Numerical values or dates may be stored as text.
+                </p>
+
+                <div class="p2-example">
+                    <span class="bad">"45000"</span>
+                    â†’
+                    <span class="good">45000.0</span>
+                </div>
+
+            </div>
+
+
+            <div class="p2-quality-card">
+
+                <div class="p2-quality-number">
+                    05
+                </div>
+
+                <h3>Invalid Values</h3>
+
+                <p>
+                    Values outside a realistic range must be investigated.
+                </p>
+
+                <div class="p2-example">
+                    <span class="bad">Age = 250</span>
+                    â†’
+                    <span class="good">Investigate</span>
+                </div>
+
+            </div>
+
+
+            <div class="p2-quality-card">
+
+                <div class="p2-quality-number">
+                    06
+                </div>
+
+                <h3>Outliers</h3>
+
+                <p>
+                    Extremely unusual values can affect statistics and
+                    visualizations.
+                </p>
+
+                <div class="p2-example">
+                    Normal Salary: â‚¹40Kâ€“â‚¹80K
+                    <br>
+                    Outlier: â‚¹9L
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     REAL WORLD PROBLEMS
+====================================================== -->
+
+<section class="p2-section dark">
+
+    <div class="p2-container">
+
+        <div class="p2-heading">
+
+            <div class="p2-section-label">
+                04 â€” REAL-WORLD PROBLEMS
+            </div>
+
+            <h2>
+                Clean data from
+                <span>real situations</span>
+            </h2>
+
+            <p>
+                Complete all three problems and document every cleaning
+                decision.
+            </p>
+
+        </div>
+
+
+        <div class="p2-problem-grid">
+
+
+            <!-- PROBLEM 01 -->
+
+            <article class="p2-problem">
+
+                <div class="p2-problem-number">
+                    PROBLEM 01
+                </div>
+
+                <h3>E-Commerce Customers</h3>
+
+                <p>
+                    An online shopping company has customer purchase data
+                    collected from multiple sources. The data contains
+                    inconsistent values and missing information.
+                </p>
+
+
+                <div class="p2-block">
+
+                    <strong>Dataset</strong>
+
+                    <div class="p2-table">
+
+                        <div class="p2-row p2-head">
+                            <span>Field</span>
+                            <span>Type</span>
+                            <span>Example</span>
+                        </div>
+
+                        <div class="p2-row">
+                            <span>Customer</span>
+                            <span>Text</span>
+                            <span>Riya</span>
+                        </div>
+
+                        <div class="p2-row">
+                            <span>Age</span>
+                            <span>Number</span>
+                            <span>24</span>
+                        </div>
+
+                        <div class="p2-row">
+                            <span>City</span>
+                            <span>Category</span>
+                            <span>Mumbai</span>
+                        </div>
+
+                        <div class="p2-row">
+                            <span>Purchase</span>
+                            <span>Number</span>
+                            <span>4500</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="p2-block">
+
+                    <strong>Problems included</strong>
+
+                    <ul>
+                        <li>Missing age values</li>
+                        <li>Duplicate customers</li>
+                        <li>Different city formats</li>
+                        <li>Invalid purchase values</li>
+                        <li>Incorrect date formats</li>
+                    </ul>
+
+                </div>
+
+
+                <div class="p2-block">
+
+                    <strong>Create new columns</strong>
+
+                    <ul>
+                        <li>Age Group</li>
+                        <li>Purchase Category</li>
+                        <li>Month</li>
+                        <li>Customer Type</li>
+                    </ul>
+
+                </div>
+
+
+                <div class="p2-task-list">
+
+                    <div class="p2-task">
+                        <span>01</span>
+                        Detect missing values
+                    </div>
+
+                    <div class="p2-task">
+                        <span>02</span>
+                        Remove duplicates
+                    </div>
+
+                    <div class="p2-task">
+                        <span>03</span>
+                        Standardize city names
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- PROBLEM 02 -->
+
+            <article class="p2-problem">
+
+                <div class="p2-problem-number">
+                    PROBLEM 02
+                </div>
+
+                <h3>Employee Analytics</h3>
+
+                <p>
+                    A company has employee records collected from different
+                    departments. Management wants a clean dataset for
+                    salary and performance analysis.
+                </p>
+
+
+                <div class="p2-block">
+
+                    <strong>Dataset</strong>
+
+                    <div class="p2-table">
+
+                        <div class="p2-row p2-head">
+                            <span>Field</span>
+                            <span>Type</span>
+                            <span>Example</span>
+                        </div>
+
+                        <div class="p2-row">
+                            <span>Employee ID</span>
+                            <span>Text</span>
+                            <span>E101</span>
+                        </div>
+
+                        <div class="p2-row">
+                            <span>Department</span>
+                            <span>Category</span>
+                            <span>IT</span>
+                        </div>
+
+                        <div class="p2-row">
+                            <span>Salary</span>
+                            <span>Number</span>
+                            <span>55000</span>
+                        </div>
+
+                        <div class="p2-row">
+                            <span>Experience</span>
+                            <span>Number</span>
+                            <span>4</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="p2-block">
+
+                    <strong>Problems included</strong>
+
+                    <ul>
+                        <li>Missing salary values</li>
+                        <li>Duplicate employee IDs</li>
+                        <li>Inconsistent departments</li>
+                        <li>Invalid experience values</li>
+                        <li>Incorrect joining dates</li>
+                    </ul>
+
+                </div>
+
+
+                <div class="p2-block">
+
+                    <strong>Create new columns</strong>
+
+                    <ul>
+                        <li>Experience Group</li>
+                        <li>Salary Band</li>
+                        <li>Years Since Joining</li>
+                        <li>Performance Category</li>
+                    </ul>
+
+                </div>
+
+
+                <div class="p2-task-list">
+
+                    <div class="p2-task">
+                        <span>01</span>
+                        Validate employee IDs
+                    </div>
+
+                    <div class="p2-task">
+                        <span>02</span>
+                        Clean department names
+                    </div>
+
+                    <div class="p2-task">
+                        <span>03</span>
+                        Detect salary outliers
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- PROBLEM 03 -->
+
+            <article class="p2-problem">
+
+                <div class="p2-problem-number">
+                    PROBLEM 03
+                </div>
+
+                <h3>Healthcare Appointments</h3>
+
+                <p>
+                    A hospital has appointment records from multiple
+                    departments. The hospital wants reliable data for
+                    patient and treatment analysis.
+                </p>
+
+
+                <div class="p2-block">
+
+                    <strong>Dataset</strong>
+
+                    <div class="p2-table">
+
+                        <div class="p2-row p2-head">
+                            <span>Field</span>
+                            <span>Type</span>
+                            <span>Example</span>
+                        </div>
+
+                        <div class="p2-row">
+                            <span>Patient ID</span>
+                            <span>Text</span>
+                            <span>P501</span>
+                        </div>
+
+                        <div class="p2-row">
+                            <span>Age</span>
+                            <span>Number</span>
+                            <span>42</span>
+                        </div>
+
+                        <div class="p2-row">
+                            <span>Disease</span>
+                            <span>Category</span>
+                            <span>Diabetes</span>
+                        </div>
+
+                        <div class="p2-row">
+                            <span>Treatment Cost</span>
+                            <span>Number</span>
+                            <span>8500</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="p2-block">
+
+                    <strong>Problems included</strong>
+
+                    <ul>
+                        <li>Missing age values</li>
+                        <li>Duplicate patient records</li>
+                        <li>Invalid age values</li>
+                        <li>Inconsistent disease names</li>
+                        <li>Missing treatment cost</li>
+                    </ul>
+
+                </div>
+
+
+                <div class="p2-block">
+
+                    <strong>Create new columns</strong>
+
+                    <ul>
+                        <li>Age Group</li>
+                        <li>Treatment Cost Band</li>
+                        <li>Appointment Month</li>
+                        <li>Patient Type</li>
+                    </ul>
+
+                </div>
+
+
+                <div class="p2-task-list">
+
+                    <div class="p2-task">
+                        <span>01</span>
+                        Validate patient records
+                    </div>
+
+                    <div class="p2-task">
+                        <span>02</span>
+                        Standardize disease names
+                    </div>
+
+                    <div class="p2-task">
+                        <span>03</span>
+                        Detect unusual values
+                    </div>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     TRANSFORMATION
+====================================================== -->
+
+<section class="p2-section">
+
+    <div class="p2-container">
+
+        <div class="p2-heading">
+
+            <div class="p2-section-label">
+                05 â€” DATA TRANSFORMATION
+            </div>
+
+            <h2>
+                Turn existing columns into
+                <span>useful information</span>
+            </h2>
+
+            <p>
+                Cleaning fixes problems. Transformation creates variables
+                that make analysis easier.
+            </p>
+
+        </div>
+
+
+        <div class="p2-transform-grid">
+
+            <div class="p2-data-box">
+
+                <h3>Before Transformation</h3>
+
+                <pre>
+Age     Salary     Date
+22      45000      2026-01-15
+31      72000      2026-02-04
+45      95000      2026-03-11
+                </pre>
+
+            </div>
+
+
+            <div class="p2-arrow">
+                â†’
+            </div>
+
+
+            <div class="p2-data-box">
+
+                <h3>After Transformation</h3>
+
+                <pre>
+Age Group    Salary Band    Month
+18-25        Medium         Jan
+26-35        High           Feb
+36-50        High           Mar
+                </pre>
+
+            </div>
+
+        </div>
+
+
+        <div class="p2-transform-cards">
+
+            <div class="p2-transform-card">
+
+                <span>TRANSFORMATION 01</span>
+
+                <h3>Age Group</h3>
+
+                <p>
+                    Convert numerical age into meaningful groups such as
+                    18â€“25, 26â€“35 and 36â€“50.
+                </p>
+
+            </div>
+
+
+            <div class="p2-transform-card">
+
+                <span>TRANSFORMATION 02</span>
+
+                <h3>Salary Band</h3>
+
+                <p>
+                    Convert continuous salary into Low, Medium and High
+                    categories.
+                </p>
+
+            </div>
+
+
+            <div class="p2-transform-card">
+
+                <span>TRANSFORMATION 03</span>
+
+                <h3>Month</h3>
+
+                <p>
+                    Extract month and year from a date field for
+                    time-based analysis.
+                </p>
+
+            </div>
+
+
+            <div class="p2-transform-card">
+
+                <span>TRANSFORMATION 04</span>
+
+                <h3>Calculated Field</h3>
+
+                <p>
+                    Create new metrics such as total purchase,
+                    profit margin or cost per unit.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     BEFORE VS AFTER VISUALIZATION
+====================================================== -->
+
+<section class="p2-section dark">
+
+    <div class="p2-container">
+
+        <div class="p2-heading">
+
+            <div class="p2-section-label">
+                06 â€” VISUAL VALIDATION
+            </div>
+
+            <h2>
+                Did cleaning actually
+                <span>improve the data?</span>
+            </h2>
+
+            <p>
+                Compare the dataset before and after cleaning using
+                appropriate visualizations.
+            </p>
+
+        </div>
+
+
+        <div class="p2-visual-grid">
+
+            <div class="p2-visual-card">
+
+                <span>VISUAL 01</span>
+
+                <h3>Missing Values</h3>
+
+                <p>
+                    Create a chart showing the number of missing values
+                    before and after cleaning.
+                </p>
+
+            </div>
+
+
+            <div class="p2-visual-card">
+
+                <span>VISUAL 02</span>
+
+                <h3>Duplicates</h3>
+
+                <p>
+                    Show record count before and after duplicate removal.
+                </p>
+
+            </div>
+
+
+            <div class="p2-visual-card">
+
+                <span>VISUAL 03</span>
+
+                <h3>Category Consistency</h3>
+
+                <p>
+                    Compare inconsistent category labels before and after
+                    standardization.
+                </p>
+
+            </div>
+
+
+            <div class="p2-visual-card">
+
+                <span>VISUAL 04</span>
+
+                <h3>Outliers</h3>
+
+                <p>
+                    Use a box plot to inspect unusual numerical values.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FINAL CHECKLIST
+====================================================== -->
+
+<section class="p2-section">
+
+    <div class="p2-container">
+
+        <div class="p2-heading">
+
+            <div class="p2-section-label">
+                07 â€” SUBMISSION CHECKLIST
+            </div>
+
+            <h2>
+                Before you submit,
+                <span>check everything</span>
+            </h2>
+
+        </div>
+
+
+        <div class="p2-checklist">
+
+            <div class="p2-check">
+                Dataset loaded successfully
+            </div>
+
+            <div class="p2-check">
+                Data types inspected
+            </div>
+
+            <div class="p2-check">
+                Missing values identified
+            </div>
+
+            <div class="p2-check">
+                Missing values handled with justification
+            </div>
+
+            <div class="p2-check">
+                Duplicate records identified and handled
+            </div>
+
+            <div class="p2-check">
+                Text values standardized
+            </div>
+
+            <div class="p2-check">
+                Invalid values investigated
+            </div>
+
+            <div class="p2-check">
+                Outliers investigated
+            </div>
+
+            <div class="p2-check">
+                New calculated columns created
+            </div>
+
+            <div class="p2-check">
+                Before/after comparison performed
+            </div>
+
+            <div class="p2-check">
+                Clean dataset exported
+            </div>
+
+            <div class="p2-check">
+                Cleaning decisions documented
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     MINI CHALLENGE
+====================================================== -->
+
+<section class="p2-section dark">
+
+    <div class="p2-container">
+
+        <div class="p2-challenge">
+
+            <h3>
+                Quick Challenge:
+                <span>What should you do?</span>
+            </h3>
+
+            <p>
+                A customer dataset contains 500 records. One customer
+                appears twice with exactly the same Customer ID and
+                transaction information. What is the most appropriate
+                first action?
+            </p>
+
+
+            <div class="p2-options">
+
+                <button onclick="p2Answer(this,'wrong')">
+                    A. Replace the customer with the average customer
+                </button>
+
+                <button onclick="p2Answer(this,'correct')">
+                    B. Investigate the duplicate and determine whether it is a genuine duplicate
+                </button>
+
+                <button onclick="p2Answer(this,'wrong')">
+                    C. Delete the entire dataset
+                </button>
+
+                <button onclick="p2Answer(this,'wrong')">
+                    D. Replace the Customer ID
+                </button>
+
+            </div>
+
+
+            <div class="p2-answer" id="p2Answer"></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     NAVIGATION
+====================================================== -->
+
+<div class="p2-navigation">
+
+    <a href="practical01.html" class="p2-nav">
+        â† Practical 01
+    </a>
+
+    <a href="practical03.html" class="p2-nav next">
+        Practical 03 â†’
+    </a>
+
+</div>
+
+
+</main>
+
+
+<script>
+
+function p2Answer(button,result){
+
+    const buttons =
+        document.querySelectorAll(".p2-options button");
+
+    buttons.forEach(btn => {
+        btn.style.borderColor = "";
+        btn.style.background = "";
+    });
+
+    const answer =
+        document.getElementById("p2Answer");
+
+    if(result === "correct"){
+
+        button.style.borderColor = "#52c77a";
+        button.style.background =
+            "rgba(82,199,122,.10)";
+
+        answer.innerHTML =
+            "âœ“ Correct. Always investigate a duplicate before deleting it. Two identical-looking records may represent a legitimate repeated transaction.";
+
+        answer.style.color = "#76e39b";
+
+    }else{
+
+        button.style.borderColor = "#e65f5f";
+        button.style.background =
+            "rgba(230,95,95,.08)";
+
+        answer.innerHTML =
+            "âœ• Not the best first step. First investigate why the record is duplicated.";
+
+        answer.style.color = "#ff8a8a";
+    }
+}
+
+</script>
+
+
+<script src="../../../js/main.js"></script>
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

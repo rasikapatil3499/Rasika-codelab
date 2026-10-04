@@ -1,0 +1,1207 @@
+/* =========================================================
+   RASIKA CODELAB
+   PYTHON 2030 — FOUNDATION PAGES
+   File: python_foundation.css
+
+   PURPOSE
+   ---------------------------------------------------------
+   • Foundation accordion cards
+   • Closed by default
+   • Open only on click
+   • Dark / light theme compatible
+   • Code blocks
+   • Concept boxes
+   • Definition boxes
+   • Mini problems
+   • Progress
+   • Previous / Next navigation
+   • Responsive layout
+   ========================================================= */
+
+
+/* =========================================================
+   01. FOUNDATION PAGE
+   ========================================================= */
+
+.python-foundation-page {
+    width: 100%;
+    min-height: 100vh;
+
+    background: var(--python-bg, #0b0f14);
+    color: var(--python-text, #f3f4f6);
+}
+
+
+/* =========================================================
+   02. BREADCRUMB
+   ========================================================= */
+
+.foundation-breadcrumb {
+    width: min(1100px, calc(100% - 48px));
+
+    margin: 0 auto;
+
+    padding: 12px 0 0;
+
+    font-size: 0.72rem;
+    line-height: 1.5;
+
+    color: var(--python-text-soft, #737d89);
+}
+
+.foundation-breadcrumb a {
+    color: var(--python-text-secondary, #a1aab5);
+
+    text-decoration: none;
+
+    transition: color 0.2s ease;
+}
+
+.foundation-breadcrumb a:hover {
+    color: var(--python-accent, #f97316);
+}
+
+.foundation-breadcrumb span {
+    margin: 0 5px;
+
+    color: var(--python-text-soft, #737d89);
+}
+
+
+/* =========================================================
+   03. FOUNDATION HERO
+   ========================================================= */
+
+.foundation-hero {
+    width: min(1100px, calc(100% - 48px));
+
+    margin: 0 auto;
+
+    padding: 30px 0 28px;
+}
+
+.foundation-label {
+    display: inline-block;
+
+    margin-bottom: 8px;
+
+    font-size: 0.7rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0.12em;
+
+    color: var(--python-accent, #f97316);
+}
+
+.foundation-hero h1 {
+    margin: 0;
+
+    font-size: clamp(2rem, 4vw, 2.8rem);
+
+    line-height: 1.1;
+
+    letter-spacing: -0.04em;
+
+    color: var(--python-text, #f3f4f6);
+}
+
+.foundation-hero p {
+    max-width: 720px;
+
+    margin: 10px 0 0;
+
+    font-size: 0.86rem;
+
+    line-height: 1.65;
+
+    color: var(--python-text-secondary, #a1aab5);
+}
+
+
+/* =========================================================
+   04. FOUNDATION META
+   ========================================================= */
+
+.foundation-meta {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-top: 15px;
+}
+
+.foundation-meta span {
+    display: inline-flex;
+
+    align-items: center;
+
+    min-height: 28px;
+
+    padding: 5px 10px;
+
+    border: 1px solid var(--python-border, #26313d);
+
+    border-radius: 999px;
+
+    background: var(--python-surface, #111820);
+
+    color: var(--python-text-secondary, #a1aab5);
+
+    font-size: 0.68rem;
+
+    font-weight: 650;
+}
+
+
+/* =========================================================
+   05. FOUNDATION CONTENT
+   ========================================================= */
+
+.foundation-content {
+    width: min(1100px, calc(100% - 48px));
+
+    margin: 0 auto;
+
+    padding: 0 0 35px;
+}
+
+
+/* =========================================================
+   06. SECTION HEADING
+   ========================================================= */
+
+.foundation-section-heading {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 14px;
+}
+
+.foundation-section-heading h2 {
+    margin: 0;
+
+    font-size: 1rem;
+
+    line-height: 1.3;
+
+    color: var(--python-text, #f3f4f6);
+}
+
+.foundation-section-heading span {
+    font-size: 0.68rem;
+
+    color: var(--python-text-soft, #737d89);
+}
+
+
+/* =========================================================
+   07. FOUNDATION GRID
+
+   TWO COLUMNS
+   ========================================================= */
+
+.foundation-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 12px;
+
+    align-items: start;
+}
+
+
+/* =========================================================
+   08. FOUNDATION CARD
+   ========================================================= */
+
+.foundation-card {
+    width: 100%;
+
+    overflow: hidden;
+
+    border: 1px solid var(--python-border, #26313d);
+
+    border-radius: 14px;
+
+    background: var(--python-surface, #111820);
+
+    color: var(--python-text, #f3f4f6);
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.foundation-card:hover {
+    border-color: var(--python-border-hover, #3a4654);
+}
+
+
+/* =========================================================
+   09. ACTIVE CARD
+   ========================================================= */
+
+.foundation-card.active {
+    border-color:
+        var(--python-accent-border, rgba(249, 115, 22, 0.35));
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.20);
+}
+
+
+/* =========================================================
+   10. CARD HEADER
+
+   IMPORTANT:
+   FULL WIDTH
+   NO WHITE BACKGROUND
+   ========================================================= */
+
+.foundation-card-header {
+    width: 100%;
+
+    min-height: 72px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    padding: 13px 15px;
+
+    margin: 0;
+
+    border: 0;
+
+    outline: 0;
+
+    background: transparent;
+
+    color: var(--python-text, #f3f4f6);
+
+    text-align: left;
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    font-size: inherit;
+
+    appearance: none;
+
+    -webkit-appearance: none;
+
+    box-shadow: none;
+}
+
+.foundation-card-header:hover {
+    background: var(--python-surface-hover, #18222d);
+}
+
+
+/* =========================================================
+   11. CARD NUMBER
+   ========================================================= */
+
+.foundation-number {
+    flex: 0 0 38px;
+
+    width: 38px;
+
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: var(--python-accent-soft, rgba(249, 115, 22, 0.12));
+
+    color: var(--python-accent, #f97316);
+
+    font-size: 0.7rem;
+
+    font-weight: 800;
+
+    line-height: 1;
+}
+
+
+/* =========================================================
+   12. CARD TITLE
+   ========================================================= */
+
+.foundation-card-title {
+    flex: 1;
+
+    min-width: 0;
+}
+
+.foundation-card-title h2,
+.foundation-card-title h3 {
+    margin: 0;
+
+    padding: 0;
+
+    font-size: 0.92rem;
+
+    line-height: 1.3;
+
+    font-weight: 750;
+
+    color: var(--python-text, #f3f4f6);
+}
+
+.foundation-card-title p {
+    margin: 4px 0 0;
+
+    padding: 0;
+
+    font-size: 0.7rem;
+
+    line-height: 1.4;
+
+    color: var(--python-text-soft, #737d89);
+}
+
+
+/* =========================================================
+   13. ARROW
+   ========================================================= */
+
+.foundation-arrow {
+    flex: 0 0 28px;
+
+    width: 28px;
+
+    height: 28px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    color: var(--python-text-soft, #737d89);
+
+    font-size: 0.8rem;
+
+    line-height: 1;
+
+    transition:
+        transform 0.25s ease,
+        color 0.2s ease,
+        background 0.2s ease;
+}
+
+.foundation-card-header:hover .foundation-arrow {
+    color: var(--python-accent, #f97316);
+
+    background:
+        var(--python-accent-soft, rgba(249, 115, 22, 0.12));
+}
+
+.foundation-card.active .foundation-arrow {
+    transform: rotate(180deg);
+
+    color: var(--python-accent, #f97316);
+
+    background:
+        var(--python-accent-soft, rgba(249, 115, 22, 0.12));
+}
+
+
+/* =========================================================
+   14. CARD BODY
+
+   CLOSED BY DEFAULT
+   ========================================================= */
+
+.foundation-card-body {
+    display: block;
+
+    max-height: 0;
+
+    overflow: hidden;
+
+    padding: 0 15px;
+
+    border-top: 0 solid var(--python-border, #26313d);
+
+    background: var(--python-surface, #111820);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition:
+        max-height 0.3s ease,
+        opacity 0.2s ease,
+        padding 0.3s ease,
+        border-top-width 0.3s ease,
+        visibility 0.3s ease;
+}
+
+
+/* =========================================================
+   15. CARD BODY OPEN
+
+   ONLY ACTIVE CARD
+   ========================================================= */
+
+.foundation-card.active .foundation-card-body {
+    max-height: 2000px;
+
+    padding: 0 15px 18px;
+
+    border-top-width: 1px;
+
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+}
+
+
+/* =========================================================
+   16. BODY TYPOGRAPHY
+   ========================================================= */
+
+.foundation-card-body h3 {
+    margin: 17px 0 7px;
+
+    padding: 0;
+
+    font-size: 0.82rem;
+
+    line-height: 1.35;
+
+    font-weight: 750;
+
+    color: var(--python-text, #f3f4f6);
+}
+
+.foundation-card-body h4 {
+    margin: 13px 0 6px;
+
+    padding: 0;
+
+    font-size: 0.76rem;
+
+    line-height: 1.35;
+
+    color: var(--python-text, #f3f4f6);
+}
+
+.foundation-card-body p {
+    margin: 7px 0;
+
+    font-size: 0.75rem;
+
+    line-height: 1.6;
+
+    color: var(--python-text-secondary, #a1aab5);
+}
+
+.foundation-card-body ul,
+.foundation-card-body ol {
+    margin: 8px 0;
+
+    padding-left: 18px;
+}
+
+.foundation-card-body li {
+    margin: 4px 0;
+
+    font-size: 0.74rem;
+
+    line-height: 1.5;
+
+    color: var(--python-text-secondary, #a1aab5);
+}
+
+
+/* =========================================================
+   17. DEFINITION BOX
+   ========================================================= */
+
+.foundation-definition {
+    margin: 13px 0;
+
+    padding: 12px 13px;
+
+    border: 1px solid var(--python-border, #26313d);
+
+    border-radius: 9px;
+
+    background: var(--python-surface-2, #151d26);
+}
+
+.foundation-definition strong {
+    display: block;
+
+    margin-bottom: 5px;
+
+    font-size: 0.74rem;
+
+    color: var(--python-text, #f3f4f6);
+}
+
+.foundation-definition p {
+    margin: 0;
+
+    font-size: 0.73rem;
+}
+
+
+/* =========================================================
+   18. KEY IDEA
+   ========================================================= */
+
+.foundation-idea {
+    margin: 13px 0;
+
+    padding: 12px 13px;
+
+    border-left:
+        3px solid var(--python-accent, #f97316);
+
+    border-radius: 0 9px 9px 0;
+
+    background:
+        var(--python-accent-soft, rgba(249, 115, 22, 0.12));
+}
+
+.foundation-idea strong {
+    display: block;
+
+    margin-bottom: 4px;
+
+    font-size: 0.68rem;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.06em;
+
+    color: var(--python-accent, #f97316);
+}
+
+.foundation-idea p {
+    margin: 0;
+
+    color: var(--python-text-secondary, #a1aab5);
+}
+
+
+/* =========================================================
+   19. SYNTAX BOX
+   ========================================================= */
+
+.foundation-syntax {
+    margin: 12px 0;
+
+    padding: 11px 12px;
+
+    border:
+        1px dashed var(--python-border, #26313d);
+
+    border-radius: 9px;
+
+    background: var(--python-surface-2, #151d26);
+}
+
+.foundation-syntax-label {
+    display: block;
+
+    margin-bottom: 6px;
+
+    font-size: 0.64rem;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.07em;
+
+    color: var(--python-text-soft, #737d89);
+}
+
+.foundation-syntax code {
+    font-family:
+        "SFMono-Regular",
+        Consolas,
+        "Liberation Mono",
+        monospace;
+
+    font-size: 0.72rem;
+
+    color: var(--python-text, #f3f4f6);
+}
+
+
+/* =========================================================
+   20. CODE BLOCK
+   ========================================================= */
+
+.foundation-code {
+    width: 100%;
+
+    margin: 13px 0;
+
+    overflow-x: auto;
+
+    border: 1px solid var(--python-border, #26313d);
+
+    border-radius: 9px;
+
+    background: #080c11;
+}
+
+.foundation-code pre {
+    margin: 0;
+
+    padding: 13px;
+
+    overflow-x: auto;
+
+    font-family:
+        "SFMono-Regular",
+        Consolas,
+        "Liberation Mono",
+        monospace;
+
+    font-size: 0.7rem;
+
+    line-height: 1.6;
+
+    color: #e5e7eb;
+}
+
+.foundation-code code {
+    font-family: inherit;
+}
+
+
+/* =========================================================
+   21. INLINE CODE
+   ========================================================= */
+
+.foundation-card-body code:not(pre code) {
+    padding: 2px 5px;
+
+    border-radius: 4px;
+
+    background:
+        var(--python-accent-soft, rgba(249, 115, 22, 0.12));
+
+    color: var(--python-accent, #f97316);
+
+    font-family:
+        "SFMono-Regular",
+        Consolas,
+        "Liberation Mono",
+        monospace;
+
+    font-size: 0.78em;
+}
+
+
+/* =========================================================
+   22. CONCEPT GRID
+   ========================================================= */
+
+.foundation-concept-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 8px;
+
+    margin: 12px 0;
+}
+
+.foundation-concept {
+    padding: 10px;
+
+    border:
+        1px solid var(--python-border, #26313d);
+
+    border-radius: 8px;
+
+    background: var(--python-surface-2, #151d26);
+}
+
+.foundation-concept strong {
+    display: block;
+
+    margin-bottom: 3px;
+
+    font-size: 0.73rem;
+
+    color: var(--python-text, #f3f4f6);
+}
+
+.foundation-concept span {
+    display: block;
+
+    font-size: 0.68rem;
+
+    line-height: 1.45;
+
+    color: var(--python-text-secondary, #a1aab5);
+}
+
+
+/* =========================================================
+   23. TYPE GRID
+   ========================================================= */
+
+.foundation-type-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 7px;
+
+    margin: 12px 0;
+}
+
+.foundation-type {
+    padding: 9px;
+
+    border:
+        1px solid var(--python-border, #26313d);
+
+    border-radius: 8px;
+
+    background: var(--python-surface-2, #151d26);
+
+    text-align: center;
+}
+
+.foundation-type strong {
+    display: block;
+
+    margin-bottom: 3px;
+
+    font-size: 0.7rem;
+
+    color: var(--python-text, #f3f4f6);
+}
+
+.foundation-type span {
+    font-size: 0.64rem;
+
+    line-height: 1.4;
+
+    color: var(--python-text-secondary, #a1aab5);
+}
+
+
+/* =========================================================
+   24. MINI PROBLEM
+   ========================================================= */
+
+.foundation-problem {
+    margin-top: 14px;
+
+    padding: 13px;
+
+    border:
+        1px solid var(--python-border, #26313d);
+
+    border-radius: 9px;
+
+    background: var(--python-surface-2, #151d26);
+}
+
+.foundation-problem-label {
+    display: inline-block;
+
+    margin-bottom: 5px;
+
+    font-size: 0.64rem;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.07em;
+
+    color: var(--python-accent, #f97316);
+}
+
+.foundation-problem p {
+    margin: 0;
+
+    color: var(--python-text-secondary, #a1aab5);
+}
+
+
+/* =========================================================
+   25. CHECKLIST
+   ========================================================= */
+
+.foundation-checklist {
+    display: grid;
+
+    gap: 6px;
+
+    margin: 12px 0;
+}
+
+.foundation-check {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 7px;
+
+    font-size: 0.73rem;
+
+    line-height: 1.45;
+
+    color: var(--python-text-secondary, #a1aab5);
+}
+
+.foundation-check::before {
+    content: "✓";
+
+    flex: 0 0 17px;
+
+    width: 17px;
+
+    height: 17px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        var(--python-accent-soft, rgba(249, 115, 22, 0.12));
+
+    color: var(--python-accent, #f97316);
+
+    font-size: 0.6rem;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   26. PROGRESS
+   ========================================================= */
+
+.foundation-progress {
+    width: min(1100px, calc(100% - 48px));
+
+    margin: 0 auto;
+
+    padding: 0 0 18px;
+}
+
+.foundation-progress-top {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 6px;
+
+    font-size: 0.66rem;
+
+    color: var(--python-text-soft, #737d89);
+}
+
+.foundation-progress-bar {
+    width: 100%;
+
+    height: 4px;
+
+    overflow: hidden;
+
+    border-radius: 999px;
+
+    background: var(--python-border, #26313d);
+}
+
+.foundation-progress-fill {
+    height: 100%;
+
+    border-radius: inherit;
+
+    background: var(--python-accent, #f97316);
+
+    transition: width 0.3s ease;
+}
+
+
+/* =========================================================
+   27. PREVIOUS / NEXT NAVIGATION
+   ========================================================= */
+
+.foundation-navigation {
+    width: min(1100px, calc(100% - 48px));
+
+    margin: 0 auto;
+
+    padding: 8px 0 45px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 12px;
+}
+
+.foundation-navigation a {
+    min-width: 170px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+
+    padding: 11px 13px;
+
+    border:
+        1px solid var(--python-border, #26313d);
+
+    border-radius: 10px;
+
+    background: var(--python-surface, #111820);
+
+    text-decoration: none;
+
+    transition:
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+.foundation-navigation a:hover {
+    transform: translateY(-2px);
+
+    border-color:
+        var(--python-accent-border, rgba(249, 115, 22, 0.35));
+
+    background: var(--python-surface-hover, #18222d);
+}
+
+.foundation-navigation .nav-label {
+    font-size: 0.62rem;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.06em;
+
+    color: var(--python-text-soft, #737d89);
+}
+
+.foundation-navigation .nav-title {
+    font-size: 0.76rem;
+
+    font-weight: 700;
+
+    color: var(--python-text, #f3f4f6);
+}
+
+.foundation-navigation .next {
+    margin-left: auto;
+
+    text-align: right;
+}
+
+
+/* =========================================================
+   28. ACCESSIBILITY
+   ========================================================= */
+
+.foundation-card-header:focus-visible {
+    outline: 2px solid var(--python-accent, #f97316);
+
+    outline-offset: -2px;
+}
+
+
+/* =========================================================
+   29. TABLET
+   ========================================================= */
+
+@media (max-width: 850px) {
+
+    .foundation-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .foundation-hero,
+    .foundation-content,
+    .foundation-progress,
+    .foundation-navigation,
+    .foundation-breadcrumb {
+        width: calc(100% - 36px);
+    }
+}
+
+
+/* =========================================================
+   30. MOBILE
+   ========================================================= */
+
+@media (max-width: 650px) {
+
+    .foundation-breadcrumb {
+        padding-top: 12px;
+
+        font-size: 0.65rem;
+    }
+
+    .foundation-hero {
+        padding-top: 25px;
+
+        padding-bottom: 22px;
+    }
+
+    .foundation-hero h1 {
+        font-size: 1.85rem;
+    }
+
+    .foundation-hero p {
+        font-size: 0.8rem;
+    }
+
+    .foundation-content {
+        padding-bottom: 25px;
+    }
+
+    .foundation-card-header {
+        min-height: 64px;
+
+        padding: 11px 12px;
+
+        gap: 10px;
+    }
+
+    .foundation-number {
+        flex-basis: 34px;
+
+        width: 34px;
+
+        height: 34px;
+
+        border-radius: 8px;
+
+        font-size: 0.64rem;
+    }
+
+    .foundation-card-title h2,
+    .foundation-card-title h3 {
+        font-size: 0.84rem;
+    }
+
+    .foundation-card-title p {
+        font-size: 0.64rem;
+    }
+
+    .foundation-card-body {
+        padding-left: 12px;
+
+        padding-right: 12px;
+    }
+
+    .foundation-card.active .foundation-card-body {
+        padding-left: 12px;
+
+        padding-right: 12px;
+
+        padding-bottom: 15px;
+    }
+
+    .foundation-concept-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .foundation-type-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .foundation-navigation {
+        width: calc(100% - 36px);
+
+        flex-direction: column;
+
+        padding-bottom: 35px;
+    }
+
+    .foundation-navigation a {
+        width: 100%;
+
+        min-width: 0;
+    }
+
+    .foundation-navigation .next {
+        margin-left: 0;
+
+        text-align: left;
+    }
+}
+
+
+/* =========================================================
+   31. SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+    .foundation-hero,
+    .foundation-content,
+    .foundation-progress,
+    .foundation-navigation,
+    .foundation-breadcrumb {
+        width: calc(100% - 28px);
+    }
+
+    .foundation-type-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .foundation-section-heading {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 4px;
+    }
+}

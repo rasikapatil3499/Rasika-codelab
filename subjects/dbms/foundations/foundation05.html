@@ -1,0 +1,270 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>05 â€” How Does DBMS Keep Data Safe? | DBMS Foundation</title>
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../css/dbms_foundation.css">
+</head>
+
+<body class="protected-page">
+
+<header class="navbar">
+    <div class="nav-container">
+
+        <a href="../../../index.html" class="logo">
+            <span class="logo-mark">&lt;/&gt;</span>
+            <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="../../../index.html">Home</a>
+            <a href="../../../subjects.html" class="active">Subjects</a>
+            <a href="../foundations.html">Foundations</a>
+            <a href="../../../about.html">About</a>
+            <a href="../../../login.html">Login</a>
+        </nav>
+
+        <button class="menu-btn" aria-label="Open menu">â˜°</button>
+
+    </div>
+</header>
+
+
+
+<main class="lesson-page">
+
+    <section class="lesson-hero">
+
+        <span class="lesson-number">FOUNDATION 05</span>
+
+        <h1>How Does DBMS <span>Keep Data Safe?</span></h1>
+
+        <p>
+            Explore buffers, logs, failures, backups and recovery â€”
+            and understand how a DBMS protects data when systems fail.
+        </p>
+
+    </section>
+
+
+    <section class="lesson-grid">
+
+        <article class="info-card">
+
+            <span class="card-label">WHAT STUDENT LEARNS</span>
+
+            <h2>Failure & Recovery</h2>
+
+            <p>
+                Learn how a DBMS uses buffers, transaction logs,
+                backups and recovery mechanisms to protect data.
+            </p>
+
+            <div class="concept-list">
+                <span>Buffer</span>
+                <span>Log</span>
+                <span>Failure</span>
+                <span>Backup</span>
+                <span>Recovery</span>
+            </div>
+
+        </article>
+
+
+        <article class="output-card">
+
+            <span class="card-label">PRACTICAL OUTPUT</span>
+
+            <h2>Failure / Recovery Simulation</h2>
+
+            <p>
+                Simulate a system failure and observe how the DBMS
+                uses its recovery information to restore consistency.
+            </p>
+
+            <button class="primary-btn" onclick="startRecovery()">
+                âš¡ Simulate Failure
+            </button>
+
+        </article>
+
+    </section>
+
+
+    <section class="visual-section">
+
+        <div class="section-heading">
+
+            <span class="section-tag">VISUAL / INTERACTIVE</span>
+
+            <h2>Recovery Flowchart</h2>
+
+            <p>
+                Follow the path from normal operation to recovery.
+            </p>
+
+        </div>
+
+
+        <div class="recovery-flow">
+
+            <div class="recovery-node" id="normalNode">
+                <span>01</span>
+                <strong>DATABASE</strong>
+                <small>Normal Operation</small>
+            </div>
+
+            <div class="recovery-arrow">â†“</div>
+
+            <div class="recovery-node" id="logNode">
+                <span>02</span>
+                <strong>LOG</strong>
+                <small>Changes Recorded</small>
+            </div>
+
+            <div class="recovery-arrow">â†“</div>
+
+            <div class="recovery-node failure-node" id="failureNode">
+                <span>03</span>
+                <strong>FAILURE</strong>
+                <small>System Crash</small>
+            </div>
+
+            <div class="recovery-arrow">â†“</div>
+
+            <div class="recovery-node" id="recoveryNode">
+                <span>04</span>
+                <strong>RECOVERY</strong>
+                <small>Restore Consistency</small>
+            </div>
+
+        </div>
+
+
+        <div class="recovery-actions">
+
+            <button class="secondary-btn" onclick="startRecovery()">
+                â–¶ Start Recovery
+            </button>
+
+            <button class="secondary-btn danger" onclick="resetRecovery()">
+                â†» Reset
+            </button>
+
+        </div>
+
+
+        <div class="flow-status" id="recoveryStatus">
+            System operating normally.
+        </div>
+
+    </section>
+
+
+    <section class="takeaway">
+
+        <span class="card-label">KEY IDEA</span>
+
+        <h2>Failure should not mean data loss.</h2>
+
+        <p>
+            DBMS recovery mechanisms use logs, backups and other
+            techniques to restore the database to a consistent state.
+        </p>
+
+    </section>
+
+
+    <nav class="lesson-navigation">
+
+        <a href="foundation04.html" class="nav-btn">
+            â† Previous
+        </a>
+
+        <a href="../index.html" class="nav-btn next">
+            Finish Foundations âœ“
+        </a>
+
+    </nav>
+
+</main>
+
+
+<script>
+
+function startRecovery() {
+
+    const nodes = [
+        "normalNode",
+        "logNode",
+        "failureNode",
+        "recoveryNode"
+    ];
+
+    const status =
+        document.getElementById("recoveryStatus");
+
+    nodes.forEach(id => {
+        document.getElementById(id).classList.remove("active");
+    });
+
+    let index = 0;
+
+    function animate() {
+
+        if (index >= nodes.length) {
+
+            status.innerHTML =
+                "âœ“ Recovery complete â€” database restored to a consistent state.";
+
+            return;
+        }
+
+        document
+            .getElementById(nodes[index])
+            .classList.add("active");
+
+        const messages = [
+            "Database is operating normally.",
+            "DBMS records changes in the transaction log.",
+            "âš  System failure detected!",
+            "DBMS uses recovery information to restore consistency."
+        ];
+
+        status.innerHTML = messages[index];
+
+        index++;
+
+        setTimeout(animate, 900);
+    }
+
+    animate();
+}
+
+
+function resetRecovery() {
+
+    const nodes = [
+        "normalNode",
+        "logNode",
+        "failureNode",
+        "recoveryNode"
+    ];
+
+    nodes.forEach(id => {
+        document
+            .getElementById(id)
+            .classList.remove("active");
+    });
+
+    document.getElementById("recoveryStatus").innerHTML =
+        "System operating normally.";
+}
+
+</script>
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

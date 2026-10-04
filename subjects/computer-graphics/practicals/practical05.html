@@ -1,0 +1,852 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Practical 05 | Bresenham Line Drawing Algorithm</title>
+<link rel="stylesheet" href="../css/cgr_style.css">
+<link rel="stylesheet" href="../css/cgr_practicals.css">
+<style>body.protected-page:not(.auth-ready){visibility:hidden}</style>
+</head>
+<body class="cgr-practical-body practical-05 protected-page">
+
+<header class="navbar">
+  <div class="logo">
+    <span class="logo-mark">&lt;/&gt;</span>
+    <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+  </div>
+  <nav class="nav-links">
+    <a href="../cgr_index.html">Home</a>
+    <a href="../cgr_foundations.html">Foundations</a>
+    <a href="../cgr_practicals.html" class="active">Practicals</a>
+    <a href="../../../about.html">About</a>
+  </nav>
+  <button class="menu-btn" aria-label="Open Menu">â˜°</button>
+</header>
+
+<main class="cgr-practical-page">
+
+<section class="practical-hero">
+  <div class="container">
+    <div class="hero-badge">05 Â· RASTER SCAN</div>
+    <h1>Bresenham Line Drawing</h1>
+    <p>Understand the decision parameter and generate a raster line using efficient integer-based pixel selection.</p>
+    <div class="hero-flow">
+      <div>Coordinates</div><span>â†’</span>
+      <div>Î”x, Î”y</div><span>â†’</span>
+      <div>Decision P</div><span>â†’</span>
+      <div>E / NE</div><span>â†’</span>
+      <div>Pixels</div><span>â†’</span>
+      <div>Raster Line</div>
+    </div>
+  </div>
+</section>
+
+<!-- 01 -->
+<section class="practical-section">
+  <div class="container">
+    <div class="section-heading">
+      <span>01</span>
+      <h2>Why Bresenham?</h2>
+      <p>A mathematical line is continuous, while a raster display must choose discrete pixels. Bresenham makes that choice efficiently using a decision parameter.</p>
+    </div>
+
+    <div class="concept-grid">
+      <article class="concept-card">
+        <div class="concept-icon">â–«</div>
+        <h3>Raster Display</h3>
+        <p>A screen is a grid of discrete pixels. A line must therefore be converted into a sequence of pixel positions.</p>
+      </article>
+      <article class="concept-card">
+        <div class="concept-icon">P</div>
+        <h3>Decision Parameter</h3>
+        <p>Bresenham evaluates a decision value to determine which candidate pixel is closer to the ideal mathematical line.</p>
+      </article>
+      <article class="concept-card">
+        <div class="concept-icon">01</div>
+        <h3>Integer Arithmetic</h3>
+        <p>The classic algorithm avoids repeated floating-point calculations, making pixel generation efficient.</p>
+      </article>
+    </div>
+
+    <div class="decision-flow">
+      <div class="decision-flow-card">
+        <span class="decision-flow-label">IDEAL LINE</span>
+        <h3>Continuous Geometry</h3>
+        <p>The required line exists mathematically between two endpoints.</p>
+      </div>
+      <div class="decision-flow-arrow">â†’</div>
+      <div class="decision-flow-card highlight">
+        <span class="decision-flow-label">DECISION</span>
+        <h3>Choose E or NE</h3>
+        <p>The decision parameter determines the better next pixel.</p>
+      </div>
+      <div class="decision-flow-arrow">â†’</div>
+      <div class="decision-flow-card">
+        <span class="decision-flow-label">RASTER RESULT</span>
+        <h3>Selected Pixels</h3>
+        <p>The chosen pixels form a close raster approximation of the line.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 -->
+<section class="practical-section theory-section">
+  <div class="container">
+    <div class="section-heading">
+      <span>02</span>
+      <h2>Bresenham Concept & Algorithm</h2>
+      <p>For the basic positive-slope case, each iteration chooses between the East (E) and North-East (NE) candidate pixels.</p>
+    </div>
+
+    <div class="algorithm-layout">
+      <div class="algorithm-card">
+        <h3>Algorithm Steps</h3>
+        <ol class="algorithm-steps">
+          <li>Read the starting point <strong>(xâ‚, yâ‚)</strong> and ending point <strong>(xâ‚‚, yâ‚‚)</strong>.</li>
+          <li>Calculate <strong>Î”x = xâ‚‚ âˆ’ xâ‚</strong> and <strong>Î”y = yâ‚‚ âˆ’ yâ‚</strong>.</li>
+          <li>For the basic case, take <strong>0 â‰¤ m â‰¤ 1</strong> and move from left to right.</li>
+          <li>Initialize the decision parameter using <strong>pâ‚€ = 2Î”y âˆ’ Î”x</strong>.</li>
+          <li>Plot the current pixel.</li>
+          <li>If <strong>p &lt; 0</strong>, choose the East pixel and update the decision parameter.</li>
+          <li>If <strong>p â‰¥ 0</strong>, choose the North-East pixel and update the decision parameter.</li>
+          <li>Repeat until the endpoint is reached.</li>
+          <li>For other slope directions, the coordinate update rules are adapted to the octant.</li>
+        </ol>
+      </div>
+
+      <div class="formula-card">
+        <span class="formula-kicker">CORE FORMULAS</span>
+        <div class="formula-row"><span>Î”x</span><strong>xâ‚‚ âˆ’ xâ‚</strong></div>
+        <div class="formula-row"><span>Î”y</span><strong>yâ‚‚ âˆ’ yâ‚</strong></div>
+        <div class="formula-row"><span>Initial P</span><strong>2Î”y âˆ’ Î”x</strong></div>
+        <div class="formula-row"><span>If P &lt; 0</span><strong>P + 2Î”y</strong></div>
+        <div class="formula-row"><span>If P â‰¥ 0</span><strong>P + 2Î”y âˆ’ 2Î”x</strong></div>
+      </div>
+    </div>
+
+    <div class="decision-card">
+      <div class="decision-card-header">
+        <strong>How the decision works</strong>
+        <span>E vs NE</span>
+      </div>
+      <div class="decision-equation">P &lt; 0 â†’ choose E &nbsp;&nbsp; | &nbsp;&nbsp; P â‰¥ 0 â†’ choose NE</div>
+    </div>
+
+    <div class="algorithm-reference">
+      <div>
+        <span class="live-dot"></span>
+        <strong>ALGORITHM REFERENCE</strong>
+        <p>Use the detailed Bresenham algorithm in the Algorithms section as the formal algorithm reference for this practical.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 -->
+<section class="practical-section">
+  <div class="container">
+    <div class="section-heading">
+      <span>03</span>
+      <h2>Worked Calculation</h2>
+      <p>Follow the decision parameter at every step instead of looking only at the final line.</p>
+    </div>
+
+    <div class="calculation-layout">
+      <div class="calculation-card">
+        <span class="example-tag">EXAMPLE</span>
+        <h3>Draw a line from (2, 3) to (10, 7)</h3>
+        <div class="calculation-step"><span>Î”x</span><strong>10 âˆ’ 2 = 8</strong></div>
+        <div class="calculation-step"><span>Î”y</span><strong>7 âˆ’ 3 = 4</strong></div>
+        <div class="calculation-step"><span>Initial decision parameter</span><strong>pâ‚€ = 2(4) âˆ’ 8 = 0</strong></div>
+        <div class="calculation-step"><span>E update</span><strong>p = p + 2Î”y</strong></div>
+        <div class="calculation-step"><span>NE update</span><strong>p = p + 2Î”y âˆ’ 2Î”x</strong></div>
+      </div>
+
+      <div class="pixel-table-card">
+        <h3>Pixel-by-Pixel Decision Table</h3>
+        <table class="bresenham-table">
+          <thead>
+            <tr><th>Step</th><th>x</th><th>y</th><th>P</th><th>Decision</th><th>Plotted Pixel</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>0</td><td>2</td><td>3</td><td>0</td><td>NE</td><td>(2,3)</td></tr>
+            <tr><td>1</td><td>3</td><td>4</td><td>-8</td><td>E</td><td>(3,4)</td></tr>
+            <tr><td>2</td><td>4</td><td>4</td><td>0</td><td>NE</td><td>(4,4)</td></tr>
+            <tr><td>3</td><td>5</td><td>5</td><td>-8</td><td>E</td><td>(5,5)</td></tr>
+            <tr><td>4</td><td>6</td><td>5</td><td>0</td><td>NE</td><td>(6,5)</td></tr>
+            <tr><td>5</td><td>7</td><td>6</td><td>-8</td><td>E</td><td>(7,6)</td></tr>
+            <tr><td>6</td><td>8</td><td>6</td><td>0</td><td>NE</td><td>(8,6)</td></tr>
+            <tr><td>7</td><td>9</td><td>7</td><td>-8</td><td>E</td><td>(9,7)</td></tr>
+            <tr><td>8</td><td>10</td><td>7</td><td>0</td><td>END</td><td>(10,7)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 -->
+<section class="practical-section">
+  <div class="container">
+    <div class="section-heading">
+      <span>04</span>
+      <h2>Bresenham Decision-Pixel Visualizer</h2>
+      <p>Change the endpoints and observe the decision parameter, candidate pixels, and rasterized line in real time.</p>
+    </div>
+
+    <div class="bresenham-lab">
+      <aside class="bresenham-controls">
+        <div class="control-group">
+          <h3>Start Point</h3>
+          <div class="input-row">
+            <label>Xâ‚<input type="number" id="x1" value="2"></label>
+            <label>Yâ‚<input type="number" id="y1" value="3"></label>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <h3>End Point</h3>
+          <div class="input-row">
+            <label>Xâ‚‚<input type="number" id="x2" value="18"></label>
+            <label>Yâ‚‚<input type="number" id="y2" value="10"></label>
+          </div>
+        </div>
+
+        <div class="lab-buttons">
+          <button class="primary-btn" id="generateBtn">Generate Line</button>
+          <button class="outline-btn" id="stepBtn">â†’ Next Pixel</button>
+          <button class="outline-btn" id="playBtn">â–¶ Play Bresenham</button>
+          <button class="text-btn" id="resetBtn">â†» Reset</button>
+        </div>
+
+        <div class="speed-control">
+          <label>Animation Speed <span id="speedValue">350 ms</span></label>
+          <input type="range" id="speed" min="100" max="1000" value="350" step="50">
+        </div>
+
+        <div class="live-decision-panel">
+          <span class="live-decision-title">LIVE DECISION</span>
+          <div class="decision-value-box">
+            <span>DECISION PARAMETER P</span>
+            <strong id="liveP">0</strong>
+          </div>
+          <div class="candidate-grid">
+            <div class="candidate-card" id="candidateE">
+              <span>E CANDIDATE</span>
+              <strong id="ePoint">(3, 3)</strong>
+            </div>
+            <div class="candidate-card" id="candidateNE">
+              <span>NE CANDIDATE</span>
+              <strong id="nePoint">(3, 4)</strong>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <div class="bresenham-viewer">
+        <div class="viewer-toolbar">
+          <span class="live-dot"></span>
+          <strong>LIVE BRESENHAM VIEWER</strong>
+          <span class="viewer-status" id="viewerStatus">READY</span>
+        </div>
+        <div class="bresenham-grid-wrap">
+          <canvas id="bresenhamCanvas" width="820" height="500"></canvas>
+        </div>
+        <div class="viewer-info">
+          <div><span>STEP</span><strong id="currentStep">0 / 0</strong></div>
+          <div><span>CURRENT PIXEL</span><strong id="currentPixel">â€”</strong></div>
+          <div><span>DECISION</span><strong id="currentDecision">â€”</strong></div>
+          <div><span>SELECTED</span><strong id="currentSelection">â€”</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 -->
+<section class="practical-section animation-section">
+  <div class="container">
+    <div class="section-heading">
+      <span>05</span>
+      <h2>Pixel-by-Pixel Animation</h2>
+      <p>Watch Bresenham construct the line one pixel at a time. Each stage exposes the decision that produced the next pixel.</p>
+    </div>
+
+    <div class="bresenham-animation">
+      <div class="animation-stage">
+        <span class="animation-number" id="animationNumber">01 / 06</span>
+        <h3 id="animationTitle">Start Point</h3>
+        <p id="animationDescription">Begin with the starting coordinate.</p>
+        <div class="animation-formula" id="animationFormula">Pâ‚ = (xâ‚, yâ‚)</div>
+      </div>
+
+      <div class="animation-track">
+        <div class="animation-step active" data-stage="0">Start</div>
+        <div class="animation-step" data-stage="1">Î”x</div>
+        <div class="animation-step" data-stage="2">Î”y</div>
+        <div class="animation-step" data-stage="3">Pâ‚€</div>
+        <div class="animation-step" data-stage="4">E / NE</div>
+        <div class="animation-step" data-stage="5">Plot</div>
+      </div>
+
+      <div class="animation-actions">
+        <button class="primary-btn" id="animationPlay">â–¶ Play Algorithm</button>
+        <button class="outline-btn" id="animationNext">Next Stage â†’</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 -->
+<section class="practical-section">
+  <div class="container">
+    <div class="section-heading">
+      <span>06</span>
+      <h2>What Does the Decision Parameter Do?</h2>
+    </div>
+
+    <div class="decision-explanation">
+      <article class="decision-explanation-card">
+        <h3>When P &lt; 0</h3>
+        <p>The ideal line is closer to the East candidate, so the algorithm selects E and advances horizontally.</p>
+      </article>
+      <article class="decision-explanation-card highlight">
+        <h3>When P â‰¥ 0</h3>
+        <p>The ideal line is closer to the North-East candidate, so the algorithm selects NE and advances in both X and Y.</p>
+      </article>
+    </div>
+
+    <div class="decision-visualizer" >
+      <div class="decision-visualizer-header">
+        <h3>Candidate Pixel View</h3>
+        <span>E vs NE</span>
+      </div>
+      <div class="decision-canvas-wrap">
+        <canvas id="decisionCanvas" width="900" height="300"></canvas>
+      </div>
+      <div class="decision-readout">
+        <div><span>CURRENT</span><strong id="decisionCurrent">(2,3)</strong></div>
+        <div><span>E</span><strong id="decisionE">(3,3)</strong></div>
+        <div><span>NE</span><strong id="decisionNE">(3,4)</strong></div>
+        <div><span>CHOICE</span><strong id="decisionChoice">NE</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 -->
+<section class="practical-section">
+  <div class="container">
+    <div class="section-heading">
+      <span>07</span>
+      <h2>Bresenham vs DDA</h2>
+      <p>Both algorithms rasterize a line, but their calculation strategies are different.</p>
+    </div>
+
+    <div class="comparison-card">
+      <h3>Algorithm Comparison</h3>
+      <div class="comparison-table">
+        <div class="heading">Feature</div><div class="heading">DDA / Bresenham</div>
+        <div><strong>Arithmetic</strong></div><div><span>Floating-point / Integer</span></div>
+        <div><strong>Decision Parameter</strong></div><div><span>DDA: No &nbsp; | &nbsp; Bresenham: Yes</span></div>
+        <div><strong>Pixel Selection</strong></div><div><span>DDA uses rounding; Bresenham uses a decision test</span></div>
+        <div><strong>Efficiency</strong></div><div><span>Bresenham is designed for efficient rasterization</span></div>
+        <div><strong>Learning Focus</strong></div><div><span>DDA: increments &nbsp; | &nbsp; Bresenham: decision parameter</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 -->
+<section class="practical-section">
+  <div class="container">
+    <div class="section-heading">
+      <span>08</span>
+      <h2>Real-Life Problems</h2>
+      <p>Select a problem, view its data, and visualize the raster line generated by the algorithm.</p>
+    </div>
+
+    <div class="problem-tabs">
+      <button class="problem-tab active" data-problem="game">P1 Â· Game Movement</button>
+      <button class="problem-tab" data-problem="display">P2 Â· LED Display</button>
+      <button class="problem-tab" data-problem="map">P3 Â· Map Route</button>
+    </div>
+
+    <div class="problem-layout">
+      <article class="problem-content">
+        <span class="example-tag" id="problemTag">PROBLEM 01</span>
+        <h3 id="problemTitle">Game Character Movement</h3>
+        <p id="problemText">A 2D game needs to draw a straight movement path from a character position to a target position.</p>
+
+        <div class="problem-given">
+          <div><span>START</span><strong id="problemStart">(4, 5)</strong></div>
+          <div><span>END</span><strong id="problemEnd">(18, 11)</strong></div>
+        </div>
+
+        <div class="problem-answer">
+          <span>ANSWER</span>
+          <div id="problemAnswer">Î”x = 14, Î”y = 6, Pâ‚€ = -2. Bresenham selects a sequence of integer pixels between the character and target.</div>
+        </div>
+
+        <button class="primary-btn" id="visualizeProblem">â–¶ Visualize Pixel Plot</button>
+      </article>
+
+      <article class="problem-viewer">
+        <div class="viewer-toolbar">
+          <span class="live-dot"></span>
+          <strong>LIVE PROBLEM VIEWER</strong>
+          <span class="viewer-status" id="problemViewerStatus">P1 Â· GAME MOVEMENT</span>
+        </div>
+        <div class="problem-canvas-wrap">
+          <canvas id="problemCanvas" width="700" height="390"></canvas>
+        </div>
+        <p class="problem-caption" id="problemCaption">The character-to-target path is converted into discrete pixels.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 09 -->
+<section class="practical-section">
+  <div class="container">
+    <div class="section-heading">
+      <span>09</span>
+      <h2>Experiment</h2>
+      <p>Change the endpoints and observe how the selected pixels and decision values respond.</p>
+    </div>
+
+    <div class="slope-grid">
+      <div class="slope-card"><strong>m = 0</strong><span>Horizontal line</span></div>
+      <div class="slope-card"><strong>0 &lt; m &lt; 1</strong><span>Basic shallow positive slope</span></div>
+      <div class="slope-card"><strong>m &gt; 1</strong><span>Steep line; octant handling changes</span></div>
+      <div class="slope-card"><strong>m &lt; 0</strong><span>Negative slope; direction rules change</span></div>
+    </div>
+
+    <div class="experiment-box">
+      <h3>Try these experiments</h3>
+      <ul>
+        <li>Draw a shallow line and inspect the E / NE decisions.</li>
+        <li>Set Î”y close to Î”x and observe how often NE is selected.</li>
+        <li>Reverse the endpoints and compare the raster path.</li>
+        <li>Use a horizontal line and observe the decision parameter behavior.</li>
+        <li>Compare the same endpoints in the DDA practical and Bresenham practical.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 10 -->
+<section class="practical-section">
+  <div class="container">
+    <div class="section-heading">
+      <span>10</span>
+      <h2>Advantages & Limitations</h2>
+    </div>
+
+    <div class="pros-cons">
+      <article class="pros-card">
+        <h3>Advantages</h3>
+        <ul>
+          <li>Uses efficient integer-based calculations in the classic formulation.</li>
+          <li>Provides a clear decision rule for choosing pixels.</li>
+          <li>Well suited to raster line generation.</li>
+          <li>Produces a consistent pixel approximation.</li>
+        </ul>
+      </article>
+      <article class="cons-card">
+        <h3>Limitations</h3>
+        <ul>
+          <li>The basic derivation is easiest for one slope range.</li>
+          <li>Other octants require adapted coordinate update rules.</li>
+          <li>The decision logic is less intuitive initially than simple DDA increments.</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 11 -->
+<section class="practical-section">
+  <div class="container">
+    <div class="section-heading">
+      <span>11</span>
+      <h2>Viva & Quick Check</h2>
+    </div>
+
+    <div class="viva-grid">
+      <details><summary>What is Bresenham's line drawing algorithm?</summary><p>It is a raster line algorithm that selects pixels using an incremental decision parameter.</p></details>
+      <details><summary>What is the decision parameter?</summary><p>It is the value used to decide which candidate pixel should be selected next.</p></details>
+      <details><summary>Why is Bresenham efficient?</summary><p>The classic line formulation relies on incremental integer arithmetic instead of repeated floating-point interpolation.</p></details>
+      <details><summary>What are E and NE?</summary><p>For the basic positive-slope case, E is the horizontal candidate and NE is the diagonal candidate.</p></details>
+      <details><summary>What happens when P is negative?</summary><p>The basic rule selects E and updates the decision parameter with the corresponding incremental term.</p></details>
+      <details><summary>How is Bresenham different from DDA?</summary><p>DDA uses coordinate increments and rounding, while Bresenham uses a decision parameter to choose raster pixels.</p></details>
+      <details><summary>What is the initial decision parameter?</summary><p>For the basic case 0 â‰¤ m â‰¤ 1, pâ‚€ = 2Î”y âˆ’ Î”x.</p></details>
+      <details><summary>Why are octants important?</summary><p>The basic derivation assumes a particular direction and slope range, so other line directions require adapted update rules.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- Navigation -->
+<section class="practical-navigation">
+  <div class="container">
+    <div class="nav-cards">
+      <a class="nav-card" href="practical04.html">
+        <span>â† PREVIOUS PRACTICAL</span>
+        <strong>04 Â· DDA Line Drawing</strong>
+      </a>
+      <a class="nav-card next" href="practical06.html">
+        <span>NEXT PRACTICAL â†’</span>
+        <strong>06 Â· Circle Drawing</strong>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">
+          <span class="logo-mark">&lt;/&gt;</span>
+          <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+        </div>
+        <p>Interactive learning for Computer Graphics, algorithms and modern visual computing.</p>
+      </div>
+      <div>
+        <h4>Computer Graphics</h4>
+        <a href="../cgr_foundations.html">Foundations</a>
+                <a href="../cgr_practicals.html">Practicals</a>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <a href="../cgr_index.html">Home</a>
+        <a href="../../../about.html">About</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Â© 2026 Rasika CodeLab</span>
+      <span>Learn Â· Calculate Â· Implement Â· Visualize Â· Experiment</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const canvas = $('bresenhamCanvas');
+  const ctx = canvas.getContext('2d');
+  const decisionCanvas = $('decisionCanvas');
+  const dctx = decisionCanvas.getContext('2d');
+  const inputs = ['x1','y1','x2','y2'].map($);
+  let pixels = [];
+  let currentIndex = 0;
+  let timer = null;
+
+  function values() {
+    const x1 = +$('x1').value;
+    const y1 = +$('y1').value;
+    const x2 = +$('x2').value;
+    const y2 = +$('y2').value;
+    const dx = x2 - x1;
+    const dy = y2 - y1;
+    return {x1,y1,x2,y2,dx,dy};
+  }
+
+  function bresenham(v) {
+    let x1=v.x1, y1=v.y1, x2=v.x2, y2=v.y2;
+    let dx=Math.abs(x2-x1), sx=x1<x2?1:-1;
+    let dy=-Math.abs(y2-y1), sy=y1<y2?1:-1;
+    let err=dx+dy;
+    const out=[];
+    for(let guard=0; guard<5000; guard++) {
+      const p=2*err;
+      let decision='END', nx=x1, ny=y1;
+      if(x1===x2 && y1===y2){
+        out.push({step:out.length,x:x1,y:y1,p:0,decision:'END'});
+        break;
+      }
+      if(p>=dy){
+        nx=x1+sx;
+        if(p+dy<=dx){
+          ny=y1+sy;
+          decision='NE';
+        } else {
+          ny=y1;
+          decision='E';
+        }
+      } else {
+        nx=x1;
+        ny=y1+sy;
+        decision='N';
+      }
+      const pseudoP = err*2;
+      out.push({step:out.length,x:x1,y:y1,p:pseudoP,decision});
+      if(p>=dy) err+=dy;
+      if(p<=dx) err+=dx;
+      x1+= (p>=dy ? sx : 0);
+      y1+= (p<=dx ? sy : 0);
+    }
+    return out;
+  }
+
+  function metrics() {
+    const v=values();
+    pixels=bresenham(v);
+    return v;
+  }
+
+  function mapGrid(v) {
+    const pad=55;
+    const minX=Math.min(v.x1,v.x2,0)-2;
+    const maxX=Math.max(v.x1,v.x2,20)+2;
+    const minY=Math.min(v.y1,v.y2,0)-2;
+    const maxY=Math.max(v.y1,v.y2,15)+2;
+    const cell=Math.min((canvas.width-pad*2)/(maxX-minX),(canvas.height-pad*2)/(maxY-minY));
+    const ox=pad-minX*cell;
+    const oy=pad-minY*cell;
+    return {cell,ox,oy,minX,maxX,minY,maxY};
+  }
+
+  function drawGrid(v) {
+    const m=mapGrid(v);
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle='#050505';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.strokeStyle='rgba(255,255,255,.08)';
+    ctx.lineWidth=1;
+    for(let x=m.minX;x<=m.maxX;x++){
+      ctx.beginPath();ctx.moveTo(m.ox+x*m.cell,m.oy+m.minY*m.cell);ctx.lineTo(m.ox+x*m.cell,m.oy+m.maxY*m.cell);ctx.stroke();
+    }
+    for(let y=m.minY;y<=m.maxY;y++){
+      ctx.beginPath();ctx.moveTo(m.ox+m.minX*m.cell,m.oy+y*m.cell);ctx.lineTo(m.ox+m.maxX*m.cell,m.oy+y*m.cell);ctx.stroke();
+    }
+    ctx.fillStyle='rgba(255,255,255,.5)';ctx.font='11px Arial';
+    for(let x=m.minX;x<=m.maxX;x++) ctx.fillText(x,m.ox+x*m.cell-4,canvas.height-17);
+    for(let y=m.minY;y<=m.maxY;y++) ctx.fillText(y,14,m.oy+y*m.cell+4);
+    return m;
+  }
+
+  function render(count=0) {
+    const v=values();
+    const m=drawGrid(v);
+    const sx=m.ox+v.x1*m.cell, sy=m.oy+v.y1*m.cell;
+    const ex=m.ox+v.x2*m.cell, ey=m.oy+v.y2*m.cell;
+
+    ctx.strokeStyle='rgba(255,138,0,.22)';
+    ctx.lineWidth=2;
+    ctx.beginPath();ctx.moveTo(sx,sy);ctx.lineTo(ex,ey);ctx.stroke();
+
+    ctx.fillStyle='#fff';
+    ctx.beginPath();ctx.arc(sx,sy,5,0,Math.PI*2);ctx.fill();
+    ctx.beginPath();ctx.arc(ex,ey,5,0,Math.PI*2);ctx.fill();
+    ctx.font='bold 12px Arial';
+    ctx.fillText('Pâ‚',sx+8,sy-8);ctx.fillText('Pâ‚‚',ex+8,ey-8);
+
+    const shown=Math.min(count,pixels.length);
+    for(let i=0;i<shown;i++){
+      const p=pixels[i];
+      const px=m.ox+p.x*m.cell, py=m.oy+p.y*m.cell;
+      ctx.globalAlpha=i===shown-1 ? 1 : .72;
+      ctx.fillStyle='#ff8a00';
+      ctx.fillRect(px-m.cell*.36,py-m.cell*.36,m.cell*.72,m.cell*.72);
+      ctx.globalAlpha=1;
+      ctx.fillStyle='#fff';
+      ctx.font='10px Arial';
+      ctx.fillText(`(${p.x},${p.y})`,px+5,py-5);
+    }
+
+    if(shown){
+      const p=pixels[shown-1];
+      $('currentStep').textContent=`${p.step} / ${pixels.length-1}`;
+      $('currentPixel').textContent=`(${p.x}, ${p.y})`;
+      $('currentDecision').textContent=p.p;
+      $('currentSelection').textContent=p.decision;
+      updateDecisionPanel(p);
+    } else {
+      $('currentStep').textContent=`0 / ${Math.max(0,pixels.length-1)}`;
+      $('currentPixel').textContent='â€”';
+      $('currentDecision').textContent='â€”';
+      $('currentSelection').textContent='â€”';
+    }
+  }
+
+  function updateDecisionPanel(p) {
+    const e=`(${p.x+1}, ${p.y})`;
+    const ne=`(${p.x+1}, ${p.y+1})`;
+    $('liveP').textContent=p.p;
+    $('ePoint').textContent=e;
+    $('nePoint').textContent=ne;
+    $('candidateE').classList.toggle('selected',p.decision==='E');
+    $('candidateNE').classList.toggle('selected',p.decision==='NE');
+    $('decisionCurrent').textContent=`(${p.x},${p.y})`;
+    $('decisionE').textContent=e;
+    $('decisionNE').textContent=ne;
+    $('decisionChoice').textContent=p.decision;
+    drawDecision(p);
+  }
+
+  function drawDecision(p) {
+    const w=decisionCanvas.width,h=decisionCanvas.height;
+    dctx.clearRect(0,0,w,h);
+    dctx.fillStyle='#040404';dctx.fillRect(0,0,w,h);
+    const cell=48, ox=290, oy=205;
+    dctx.strokeStyle='rgba(255,255,255,.08)';dctx.lineWidth=1;
+    for(let i=-4;i<=4;i++){
+      dctx.beginPath();dctx.moveTo(ox+i*cell,30);dctx.lineTo(ox+i*cell,h-25);dctx.stroke();
+      dctx.beginPath();dctx.moveTo(80,oy+i*cell);dctx.lineTo(w-80,oy+i*cell);dctx.stroke();
+    }
+    const idealX=ox,idealY=oy;
+    dctx.strokeStyle='rgba(255,138,0,.25)';dctx.lineWidth=3;
+    dctx.beginPath();dctx.moveTo(120,260);dctx.lineTo(610,75);dctx.stroke();
+
+    function point(x,y,label,selected){
+      const px=idealX+(x-p.x)*cell, py=idealY-(y-p.y)*cell;
+      dctx.fillStyle=selected?'#ff8a00':'rgba(255,255,255,.22)';
+      dctx.fillRect(px-10,py-10,20,20);
+      dctx.fillStyle='#fff';dctx.font='bold 12px Arial';dctx.fillText(label,px+14,py-12);
+      dctx.font='10px Arial';dctx.fillText(`(${x},${y})`,px+14,py+3);
+    }
+    point(p.x,p.y,'CURRENT',false);
+    point(p.x+1,p.y,'E',p.decision==='E');
+    point(p.x+1,p.y+1,'NE',p.decision==='NE');
+  }
+
+  function stop(){
+    if(timer) clearInterval(timer);
+    timer=null;
+    $('playBtn').textContent='â–¶ Play Bresenham';
+  }
+
+  function resetView(){
+    stop();
+    metrics();
+    currentIndex=0;
+    render(0);
+    $('viewerStatus').textContent='READY';
+  }
+
+  function generate(){
+    stop();metrics();currentIndex=pixels.length;render(currentIndex);$('viewerStatus').textContent='LINE GENERATED';
+  }
+
+  function nextPixel(){
+    if(!pixels.length) metrics();
+    if(currentIndex<pixels.length) currentIndex++;
+    render(currentIndex);
+    $('viewerStatus').textContent=currentIndex>=pixels.length?'COMPLETE':`PIXEL ${currentIndex}`;
+  }
+
+  function play(){
+    if(!pixels.length) metrics();
+    if(currentIndex>=pixels.length) currentIndex=0;
+    stop();
+    $('playBtn').textContent='âšâš Pause';
+    $('viewerStatus').textContent='PLOTTING PIXELS';
+    timer=setInterval(()=>{
+      currentIndex++;
+      render(currentIndex);
+      if(currentIndex>=pixels.length){stop();$('viewerStatus').textContent='BRESENHAM COMPLETE';}
+    },+$('speed').value);
+  }
+
+  inputs.forEach(input=>input.addEventListener('input',resetView));
+  $('generateBtn').onclick=generate;
+  $('stepBtn').onclick=nextPixel;
+  $('playBtn').onclick=()=>timer?stop():play();
+  $('resetBtn').onclick=()=>{
+    $('x1').value=2;$('y1').value=3;$('x2').value=18;$('y2').value=10;
+    resetView();
+  };
+  $('speed').oninput=e=>$('speedValue').textContent=`${e.target.value} ms`;
+
+  const stages=[
+    ['Start Point','Begin with the starting coordinate.','Pâ‚ = (xâ‚, yâ‚)'],
+    ['Calculate Î”x','Find the horizontal difference between the endpoints.','Î”x = xâ‚‚ âˆ’ xâ‚'],
+    ['Calculate Î”y','Find the vertical difference between the endpoints.','Î”y = yâ‚‚ âˆ’ yâ‚'],
+    ['Initial P','Initialize the decision parameter for the basic case.','pâ‚€ = 2Î”y âˆ’ Î”x'],
+    ['Choose E / NE','Compare the decision parameter and select the better candidate pixel.','P < 0 â†’ E  |  P â‰¥ 0 â†’ NE'],
+    ['Plot Pixel','Advance to the selected coordinate and repeat.','Plot â†’ Update P â†’ Repeat']
+  ];
+  let ai=0,at=null;
+  const ast=[...document.querySelectorAll('.animation-step')];
+  function showStage(i){
+    ai=i;
+    $('animationNumber').textContent=`${String(i+1).padStart(2,'0')} / 06`;
+    $('animationTitle').textContent=stages[i][0];
+    $('animationDescription').textContent=stages[i][1];
+    $('animationFormula').textContent=stages[i][2];
+    ast.forEach((e,n)=>e.classList.toggle('active',n===i));
+  }
+  ast.forEach((e,i)=>e.onclick=()=>showStage(i));
+  $('animationNext').onclick=()=>showStage((ai+1)%stages.length);
+  $('animationPlay').onclick=()=>{
+    if(at){clearInterval(at);at=null;$('animationPlay').textContent='â–¶ Play Algorithm';return;}
+    showStage(0);$('animationPlay').textContent='âšâš Pause';
+    at=setInterval(()=>{
+      if(ai>=stages.length-1){clearInterval(at);at=null;$('animationPlay').textContent='â–¶ Play Algorithm';return;}
+      showStage(ai+1);
+    },1200);
+  };
+
+  const problems={
+    game:{tag:'PROBLEM 01',title:'Game Character Movement',text:'A 2D game needs to draw a straight movement path from a character position to a target position.',start:'(4, 5)',end:'(18, 11)',answer:'Î”x = 14, Î”y = 6. For the basic shallow-slope case, Bresenham uses a decision parameter to choose the raster pixels along the movement path.',caption:'The character-to-target path is converted into discrete pixels.',x1:4,y1:5,x2:18,y2:11},
+    display:{tag:'PROBLEM 02',title:'LED Display Pixel Path',text:'A display controller needs to activate pixels between two points to represent a diagonal indicator on a low-resolution panel.',start:'(3, 3)',end:'(17, 9)',answer:'Î”x = 14, Î”y = 6. The decision parameter determines whether each next LED position is E or NE.',caption:'Each selected pixel represents an LED position that becomes active.',x1:3,y1:3,x2:17,y2:9},
+    map:{tag:'PROBLEM 03',title:'Digital Map Route',text:'A mapping interface needs to rasterize a straight route segment between two map coordinates.',start:'(2, 10)',end:'(18, 16)',answer:'Î”x = 16, Î”y = 6. Bresenham generates a discrete route by repeatedly evaluating the decision parameter.',caption:'The route is shown as a sequence of raster pixels.',x1:2,y1:10,x2:18,y2:16}
+  };
+  let activeProblem='game',problemProgress=0,problemTimer=null;
+  const pcanvas=$('problemCanvas'),pctx=pcanvas.getContext('2d');
+
+  function drawProblem(key,count){
+    const p=problems[key],w=pcanvas.width,h=pcanvas.height;
+    pctx.clearRect(0,0,w,h);pctx.fillStyle='#050505';pctx.fillRect(0,0,w,h);
+    const cols=20,rows=12,cell=27,ox=(w-cols*cell)/2,oy=(h-rows*cell)/2;
+    pctx.strokeStyle='rgba(255,255,255,.08)';pctx.lineWidth=1;
+    for(let x=0;x<=cols;x++){pctx.beginPath();pctx.moveTo(ox+x*cell,oy);pctx.lineTo(ox+x*cell,oy+rows*cell);pctx.stroke();}
+    for(let y=0;y<=rows;y++){pctx.beginPath();pctx.moveTo(ox,oy+y*cell);pctx.lineTo(ox+cols*cell,oy+y*cell);pctx.stroke();}
+    const pts=bresenham(p);
+    const shown=Math.min(count,pts.length);
+    const mapX=x=>ox+(x/20)*cols*cell;
+    const mapY=y=>oy+(y/12)*rows*cell;
+    pctx.strokeStyle='rgba(255,138,0,.22)';pctx.lineWidth=2;pctx.beginPath();pctx.moveTo(mapX(p.x1),mapY(p.y1));pctx.lineTo(mapX(p.x2),mapY(p.y2));pctx.stroke();
+    for(let i=0;i<shown;i++){
+      const q=pts[i],px=mapX(q.x),py=mapY(q.y);
+      pctx.fillStyle='#ff8a00';pctx.fillRect(px-4,py-4,8,8);
+    }
+    pctx.fillStyle='#fff';pctx.font='bold 12px Arial';pctx.fillText('START',mapX(p.x1)+8,mapY(p.y1)-10);pctx.fillText('TARGET',mapX(p.x2)-50,mapY(p.y2)-10);
+  }
+
+  function selectProblem(key){
+    activeProblem=key;
+    const p=problems[key];
+    document.querySelectorAll('.problem-tab').forEach(t=>t.classList.toggle('active',t.dataset.problem===key));
+    $('problemTag').textContent=p.tag;$('problemTitle').textContent=p.title;$('problemText').textContent=p.text;
+    $('problemStart').textContent=p.start;$('problemEnd').textContent=p.end;$('problemAnswer').textContent=p.answer;$('problemCaption').textContent=p.caption;
+    $('problemViewerStatus').textContent=`${p.tag.replace('PROBLEM ','P')} Â· ${p.title.toUpperCase()}`;
+    problemProgress=0;if(problemTimer)clearInterval(problemTimer);drawProblem(key,0);
+  }
+
+  $('visualizeProblem').onclick=()=>{
+    if(problemTimer)clearInterval(problemTimer);
+    const pts=bresenham(problems[activeProblem]);problemProgress=0;
+    $('problemViewerStatus').textContent='PLOTTING PIXELS';
+    problemTimer=setInterval(()=>{
+      problemProgress++;
+      drawProblem(activeProblem,problemProgress);
+      if(problemProgress>=pts.length){clearInterval(problemTimer);problemTimer=null;$('problemViewerStatus').textContent='COMPLETE';}
+    },90);
+  };
+  document.querySelectorAll('.problem-tab').forEach(t=>t.onclick=()=>selectProblem(t.dataset.problem));
+
+  metrics();
+  render(0);
+  showStage(0);
+  selectProblem('game');
+})();
+</script>
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

@@ -1,0 +1,408 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Practical 04 | DDA Line Drawing Algorithm</title>
+<link rel="stylesheet" href="../css/cgr_style.css">
+<link rel="stylesheet" href="../css/cgr_practicals.css">
+<style>body.protected-page:not(.auth-ready){visibility:hidden}</style>
+</head>
+<body class="cgr-practical-body practical-04 protected-page">
+
+<header class="navbar">
+  <div class="logo">
+    <span class="logo-mark">&lt;/&gt;</span>
+    <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+  </div>
+  <nav class="nav-links">
+    <a href="../cgr_index.html">Home</a>
+    <a href="../cgr_foundations.html">Foundations</a>
+        <a href="../cgr_practicals.html" class="active">Practicals</a>
+    <a href="../../../about.html">About</a>
+  </nav>
+  <button class="menu-btn" aria-label="Open Menu">â˜°</button>
+</header>
+
+<main class="cgr-practical-page">
+<section class="practical-hero">
+<div class="container">
+    <div class="hero-badge">04 Â· RASTER SCAN</div>
+    <h1>DDA Line Drawing Algorithm</h1>
+    <p>Calculate increments and generate a line pixel-by-pixel using the Digital Differential Analyzer (DDA) algorithm.</p>
+    <div class="hero-flow">
+        <div>Coordinates</div><span>â†’</span><div>Î”x, Î”y</div><span>â†’</span>
+        <div>Steps</div><span>â†’</span><div>Increments</div><span>â†’</span>
+        <div>Pixels</div><span>â†’</span><div>Raster Line</div>
+    </div>
+</div>
+</section>
+
+<section class="practical-section">
+<div class="container">
+    <div class="section-heading"><span>01</span><h2>Why Raster Scan?</h2></div>
+    <div class="concept-grid">
+        <article class="concept-card"><div class="concept-icon">â–¦</div><h3>Raster Display</h3><p>A raster display represents an image using a rectangular grid of discrete pixels.</p></article>
+        <article class="concept-card"><div class="concept-icon">â—</div><h3>Continuous vs Pixel</h3><p>A mathematical line is continuous, but a screen can display only discrete pixel positions.</p></article>
+        <article class="concept-card"><div class="concept-icon">â†—</div><h3>Line Approximation</h3><p>DDA determines a sequence of pixels that approximates the required line.</p></article>
+    </div>
+    <div class="line-comparison">
+        <div class="comparison-panel"><span class="comparison-label">MATHEMATICAL VIEW</span><div class="math-line"></div><p>Continuous line</p></div>
+        <div class="comparison-arrow">â†’</div>
+        <div class="comparison-panel"><span class="comparison-label">RASTER VIEW</span><div class="raster-dots"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><p>Discrete pixels</p></div>
+    </div>
+</div>
+</section>
+
+<section class="practical-section theory-section">
+<div class="container">
+    <div class="section-heading"><span>02</span><h2>DDA Concept & Algorithm</h2></div>
+    <div class="algorithm-layout">
+        <div class="algorithm-card">
+            <h3>Algorithm Steps</h3>
+            <ol class="algorithm-steps">
+                <li>Read the starting point <strong>(xâ‚, yâ‚)</strong> and ending point <strong>(xâ‚‚, yâ‚‚)</strong>.</li>
+                <li>Calculate <strong>Î”x = xâ‚‚ âˆ’ xâ‚</strong>.</li>
+                <li>Calculate <strong>Î”y = yâ‚‚ âˆ’ yâ‚</strong>.</li>
+                <li>Find <strong>Steps = max(|Î”x|, |Î”y|)</strong>.</li>
+                <li>Calculate <strong>Xinc = Î”x / Steps</strong>.</li>
+                <li>Calculate <strong>Yinc = Î”y / Steps</strong>.</li>
+                <li>Start at <strong>(xâ‚, yâ‚)</strong> and plot the pixel.</li>
+                <li>Add Xinc and Yinc to generate the next point.</li>
+                <li>Round the calculated coordinates to select the raster pixel.</li>
+                <li>Repeat until the endpoint is reached.</li>
+            </ol>
+        </div>
+        <div class="formula-card">
+            <span class="formula-kicker">CORE FORMULAS</span>
+            <div class="formula-row"><span>Î”x</span><strong>xâ‚‚ âˆ’ xâ‚</strong></div>
+            <div class="formula-row"><span>Î”y</span><strong>yâ‚‚ âˆ’ yâ‚</strong></div>
+            <div class="formula-row"><span>Steps</span><strong>max(|Î”x|, |Î”y|)</strong></div>
+            <div class="formula-row"><span>Xinc</span><strong>Î”x / Steps</strong></div>
+            <div class="formula-row"><span>Yinc</span><strong>Î”y / Steps</strong></div>
+            <div class="formula-row"><span>Pixel</span><strong>(round x, round y)</strong></div>
+        </div>
+    </div>
+    <div class="algorithm-reference">
+        <div><span class="live-dot"></span><strong>ALGORITHM REFERENCE</strong><p>View the complete DDA algorithm, pseudocode and detailed algorithm explanation.</p></div>
+    </div>
+</div>
+</section>
+
+<section class="practical-section calculation-section">
+<div class="container">
+    <div class="section-heading"><span>03</span><h2>Worked Calculation</h2></div>
+    <div class="calculation-layout">
+        <div class="calculation-input">
+            <span class="example-tag">EXAMPLE</span><h3>Given Line</h3>
+            <div class="point-display">
+                <div><small>START</small><strong>Pâ‚ = (2, 3)</strong></div>
+                <div class="arrow">â†’</div>
+                <div><small>END</small><strong>Pâ‚‚ = (10, 7)</strong></div>
+            </div>
+            <div class="calculation-steps">
+                <div><span>Î”x</span><strong>10 âˆ’ 2 = 8</strong></div>
+                <div><span>Î”y</span><strong>7 âˆ’ 3 = 4</strong></div>
+                <div><span>Steps</span><strong>max(8, 4) = 8</strong></div>
+                <div><span>Xinc</span><strong>8 / 8 = 1</strong></div>
+                <div><span>Yinc</span><strong>4 / 8 = 0.5</strong></div>
+            </div>
+        </div>
+        <div class="calculation-table-wrap">
+            <h3>Generated Pixel Sequence</h3>
+            <table class="dda-table">
+                <thead><tr><th>Step</th><th>X calculated</th><th>Y calculated</th><th>Pixel X</th><th>Pixel Y</th></tr></thead>
+                <tbody>
+                    <tr><td>0</td><td>2.00</td><td>3.00</td><td>2</td><td>3</td></tr>
+                    <tr><td>1</td><td>3.00</td><td>3.50</td><td>3</td><td>4</td></tr>
+                    <tr><td>2</td><td>4.00</td><td>4.00</td><td>4</td><td>4</td></tr>
+                    <tr><td>3</td><td>5.00</td><td>4.50</td><td>5</td><td>5</td></tr>
+                    <tr><td>4</td><td>6.00</td><td>5.00</td><td>6</td><td>5</td></tr>
+                    <tr><td>5</td><td>7.00</td><td>5.50</td><td>7</td><td>6</td></tr>
+                    <tr><td>6</td><td>8.00</td><td>6.00</td><td>8</td><td>6</td></tr>
+                    <tr><td>7</td><td>9.00</td><td>6.50</td><td>9</td><td>7</td></tr>
+                    <tr><td>8</td><td>10.00</td><td>7.00</td><td>10</td><td>7</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</section>
+
+<section class="practical-section dda-lab-section">
+<div class="container">
+    <div class="section-heading"><span>04</span><h2>DDA Pixel-by-Pixel Visualizer</h2><p>Enter coordinates and watch the line form one raster pixel at a time.</p></div>
+    <div class="dda-lab">
+        <div class="dda-controls">
+            <div class="control-group"><h3>Start Point</h3><div class="input-row">
+                <label>Xâ‚<input type="number" id="x1" value="2"></label>
+                <label>Yâ‚<input type="number" id="y1" value="3"></label>
+            </div></div>
+            <div class="control-group"><h3>End Point</h3><div class="input-row">
+                <label>Xâ‚‚<input type="number" id="x2" value="10"></label>
+                <label>Yâ‚‚<input type="number" id="y2" value="7"></label>
+            </div></div>
+            <div class="lab-buttons">
+                <button class="primary-btn" id="generateBtn">Generate Line</button>
+                <button class="outline-btn" id="playBtn">â–¶ Play DDA</button>
+                <button class="outline-btn" id="stepBtn">Next Pixel</button>
+                <button class="text-btn" id="resetBtn">Reset</button>
+            </div>
+            <div class="speed-control"><label for="speed">Animation Speed</label><input type="range" id="speed" min="100" max="1000" value="450"><span id="speedValue">450 ms</span></div>
+            <div class="live-calculation">
+                <span>LIVE CALCULATION</span>
+                <div><b>Î”x</b><strong id="deltaX">8</strong></div><div><b>Î”y</b><strong id="deltaY">4</strong></div>
+                <div><b>Steps</b><strong id="stepsValue">8</strong></div><div><b>Xinc</b><strong id="xInc">1.000</strong></div>
+                <div><b>Yinc</b><strong id="yInc">0.500</strong></div>
+            </div>
+        </div>
+        <div class="dda-viewer">
+            <div class="viewer-toolbar"><span class="live-dot"></span><strong>LIVE DDA VIEWER</strong><span id="viewerStatus">READY</span></div>
+            <div class="pixel-grid-wrap"><canvas id="ddaCanvas" width="720" height="430"></canvas></div>
+            <div class="viewer-info">
+                <div><span>Current step</span><strong id="currentStep">0 / 8</strong></div>
+                <div><span>Calculated point</span><strong id="currentPoint">(2.00, 3.00)</strong></div>
+                <div><span>Plotted pixel</span><strong id="currentPixel">(2, 3)</strong></div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+<section class="practical-section animation-section">
+<div class="container">
+    <div class="section-heading"><span>05</span><h2>Step-by-Step DDA Animation</h2><p>Follow the exact sequence used by the algorithm.</p></div>
+    <div class="dda-animation">
+        <div class="animation-stage">
+            <div class="animation-number" id="animationNumber">01 / 06</div>
+            <h3 id="animationTitle">Start Point</h3>
+            <p id="animationDescription">Begin with the starting coordinate.</p>
+            <div class="animation-formula" id="animationFormula">Pâ‚ = (xâ‚, yâ‚)</div>
+        </div>
+        <div class="animation-track">
+            <div class="animation-step active" data-animation="0">01</div><div class="animation-step" data-animation="1">02</div>
+            <div class="animation-step" data-animation="2">03</div><div class="animation-step" data-animation="3">04</div>
+            <div class="animation-step" data-animation="4">05</div><div class="animation-step" data-animation="5">06</div>
+        </div>
+        <div class="animation-actions"><button class="primary-btn" id="animationPlay">â–¶ Play Algorithm</button><button class="outline-btn" id="animationNext">Next Stage â†’</button></div>
+    </div>
+</div>
+</section>
+
+<section class="practical-section rounding-section">
+<div class="container">
+    <div class="section-heading"><span>06</span><h2>Coordinate â†’ Raster Pixel</h2></div>
+    <div class="rounding-flow">
+        <div class="rounding-card"><span>CALCULATED COORDINATE</span><strong>(5.00, 4.50)</strong></div>
+        <div class="rounding-arrow">â†’</div>
+        <div class="rounding-card highlight"><span>ROUNDING</span><strong>round(x), round(y)</strong></div>
+        <div class="rounding-arrow">â†’</div>
+        <div class="rounding-card"><span>RASTER PIXEL</span><strong>(5, 5)</strong></div>
+    </div>
+    <p class="section-note">DDA produces calculated coordinates incrementally. Rounding maps those coordinates to discrete raster pixels.</p>
+</div>
+</section>
+
+<section class="practical-section problems-section">
+<div class="container">
+    <div class="section-heading"><span>07</span><h2>Real-Life Problems</h2><p>Select a problem, calculate the DDA values and visualize every generated pixel.</p></div>
+    <div class="problem-tabs">
+        <button class="problem-tab active" data-problem="mobile">01 Â· Mobile UI</button>
+        <button class="problem-tab" data-problem="game">02 Â· Game Laser</button>
+        <button class="problem-tab" data-problem="map">03 Â· Digital Map</button>
+    </div>
+    <div class="problem-layout">
+        <div class="problem-content">
+            <span class="problem-tag" id="problemTag">PROBLEM 01</span>
+            <h3 id="problemTitle">Mobile Screen UI Divider</h3>
+            <p id="problemText">A mobile interface needs a diagonal divider between two screen coordinates.</p>
+            <div class="problem-given">
+                <div><span>START</span><strong id="problemStart">(40, 80)</strong></div>
+                <div><span>END</span><strong id="problemEnd">(300, 200)</strong></div>
+            </div>
+            <div class="problem-answer"><span>ANSWER</span><div id="problemAnswer">Î”x = 260, Î”y = 120, Steps = 260, Xinc = 1.000, Yinc â‰ˆ 0.462.</div></div>
+            <button class="primary-btn" id="visualizeProblem">Visualize This Problem â†’</button>
+        </div>
+        <div class="problem-viewer">
+            <div class="viewer-toolbar"><span class="live-dot"></span><strong>PROBLEM VISUALIZATION</strong><span id="problemViewerStatus">P1 Â· MOBILE UI</span></div>
+            <div class="problem-canvas-wrap"><canvas id="problemCanvas" width="600" height="360"></canvas></div>
+            <div class="problem-caption" id="problemCaption">DDA pixels will be generated across the screen divider.</div>
+        </div>
+    </div>
+</div>
+</section>
+
+<section class="practical-section slope-section">
+<div class="container">
+    <div class="section-heading"><span>08</span><h2>Experiment with Slope</h2><p>Change the endpoints and observe how DDA handles different line directions.</p></div>
+    <div class="slope-grid">
+        <div class="slope-card"><strong>m &lt; 1</strong><span>Shallow line</span></div>
+        <div class="slope-card"><strong>m = 1</strong><span>45Â° line</span></div>
+        <div class="slope-card"><strong>m &gt; 1</strong><span>Steep line</span></div>
+        <div class="slope-card"><strong>m &lt; 0</strong><span>Negative slope</span></div>
+    </div>
+    <div class="experiment-box">
+        <h3>Try These Experiments</h3>
+        <ul>
+            <li>Draw a line with slope less than 1.</li><li>Draw a line with slope greater than 1.</li>
+            <li>Try a negative-slope line.</li><li>Try a horizontal line and observe Yinc.</li>
+            <li>Try a vertical line and observe Xinc.</li><li>Change the endpoints and compare the generated pixel sequence.</li>
+        </ul>
+    </div>
+</div>
+</section>
+
+<section class="practical-section limitations-section">
+<div class="container">
+    <div class="section-heading"><span>09</span><h2>DDA: Strengths & Limitations</h2></div>
+    <div class="pros-cons">
+        <div class="pros-card"><h3>âœ“ Advantages</h3><ul><li>Simple and easy to understand.</li><li>Uses incremental calculations.</li><li>Works for different line slopes.</li><li>Provides a clear mathematical-to-pixel connection.</li></ul></div>
+        <div class="cons-card"><h3>! Limitations</h3><ul><li>Uses floating-point calculations.</li><li>Requires rounding for pixel selection.</li><li>Can be less efficient than integer-based algorithms.</li><li>Floating-point error can accumulate.</li></ul></div>
+    </div>
+    <div class="comparison-card">
+        <h3>DDA vs Bresenham â€” Preview</h3>
+        <div class="comparison-table">
+            <div><strong>DDA</strong><span>Floating-point increments</span></div><div><strong>Bresenham</strong><span>Integer-based decision process</span></div>
+            <div><strong>DDA</strong><span>Rounding required</span></div><div><strong>Bresenham</strong><span>Efficient pixel selection</span></div>
+        </div>
+    </div>
+</div>
+</section>
+
+<section class="practical-section viva-section">
+<div class="container">
+    <div class="section-heading"><span>10</span><h2>Viva & Quick Check</h2></div>
+    <div class="viva-grid">
+        <details><summary>What is DDA?</summary><p>DDA is an incremental line drawing algorithm that generates line pixels using calculated coordinate increments.</p></details>
+        <details><summary>What does DDA stand for?</summary><p>Digital Differential Analyzer.</p></details>
+        <details><summary>Why are steps calculated using max(|Î”x|, |Î”y|)?</summary><p>It ensures the dominant coordinate changes by one unit per step while the other coordinate changes proportionally.</p></details>
+        <details><summary>What are Xinc and Yinc?</summary><p>They are the incremental changes added to X and Y after every iteration.</p></details>
+        <details><summary>Why is rounding required?</summary><p>A raster display uses discrete pixel coordinates, so calculated continuous coordinates must be mapped to pixels.</p></details>
+        <details><summary>What is a limitation of DDA?</summary><p>It relies on floating-point arithmetic and rounding, which can introduce computational overhead and accumulated error.</p></details>
+        <details><summary>What happens for a horizontal line?</summary><p>Î”y is zero, so Yinc becomes zero and Y remains constant.</p></details>
+        <details><summary>How is Bresenham different?</summary><p>Bresenham uses an integer-based decision process for efficient pixel selection.</p></details>
+    </div>
+</div>
+</section>
+
+<section class="practical-navigation">
+<div class="container nav-cards">
+    <a href="practical03.html" class="nav-card"><span>â† Previous</span><strong>03 Â· Graphics Primitives</strong></a>
+    <a href="practical05.html" class="nav-card next"><span>Next Practical â†’</span><strong>05 Â· Bresenham Line Drawing</strong></a>
+</div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="footer-main">
+    <div class="footer-brand">
+      <div class="logo"><span class="logo-mark">&lt;/&gt;</span><span>Rasika<span class="logo-highlight">CodeLab</span></span></div>
+      <p>Interactive Computer Graphics practical learning through concepts, calculations and visualization.</p>
+    </div>
+    <div class="footer-links">
+      <div><h4>Learn</h4><a href="../cgr_foundations.html">Foundations</a></div>
+      <div><h4>Practice</h4><a href="../cgr_practicals.html">Practicals</a><a href="../../../about.html">About</a></div>
+    </div>
+  </div>
+  <div class="footer-bottom"><span>Â© 2026 Rasika CodeLab</span><span>Built for practical learning.</span></div>
+</footer>
+
+<script>
+(() => {
+const canvas=document.getElementById("ddaCanvas"),ctx=canvas.getContext("2d");
+const inputs=["x1","y1","x2","y2"].map(id=>document.getElementById(id));
+const [x1Input,y1Input,x2Input,y2Input]=inputs;
+const $=id=>document.getElementById(id);
+let points=[],currentIndex=0,timer=null;
+
+function vals(){
+ const x1=+x1Input.value,y1=+y1Input.value,x2=+x2Input.value,y2=+y2Input.value;
+ const dx=x2-x1,dy=y2-y1,steps=Math.max(Math.abs(dx),Math.abs(dy));
+ return {x1,y1,x2,y2,dx,dy,steps,xinc:steps?dx/steps:0,yinc:steps?dy/steps:0};
+}
+function build(v){
+ return Array.from({length:v.steps+1},(_,i)=>{
+   const x=v.x1+i*v.xinc,y=v.y1+i*v.yinc;
+   return {step:i,x,y,px:Math.round(x),py:Math.round(y)};
+ });
+}
+function grid(){
+ const v=vals(),pad=42,minX=Math.min(0,v.x1,v.x2)-2,maxX=Math.max(12,v.x1,v.x2)+2,minY=Math.min(0,v.y1,v.y2)-2,maxY=Math.max(10,v.y1,v.y2)+2;
+ const cell=Math.min((canvas.width-pad*2)/(maxX-minX),(canvas.height-pad*2)/(maxY-minY)),ox=pad-minX*cell,oy=pad-minY*cell;
+ ctx.clearRect(0,0,canvas.width,canvas.height);ctx.strokeStyle="rgba(255,255,255,.1)";ctx.lineWidth=1;
+ for(let x=minX;x<=maxX;x++){ctx.beginPath();ctx.moveTo(ox+x*cell,pad);ctx.lineTo(ox+x*cell,canvas.height-pad);ctx.stroke();}
+ for(let y=minY;y<=maxY;y++){ctx.beginPath();ctx.moveTo(pad,oy+y*cell);ctx.lineTo(canvas.width-pad,oy+y*cell);ctx.stroke();}
+ ctx.fillStyle="rgba(255,255,255,.52)";ctx.font="11px Arial";
+ for(let x=minX;x<=maxX;x++)ctx.fillText(x,ox+x*cell-4,canvas.height-17);
+ for(let y=minY;y<=maxY;y++)ctx.fillText(y,13,oy+y*cell+4);
+ return {cell,ox,oy,v};
+}
+function render(count=0){
+ const m=grid(),v=m.v;
+ ctx.fillStyle="#fff";ctx.beginPath();ctx.arc(m.ox+v.x1*m.cell,m.oy+v.y1*m.cell,5,0,Math.PI*2);ctx.fill();
+ ctx.beginPath();ctx.arc(m.ox+v.x2*m.cell,m.oy+v.y2*m.cell,5,0,Math.PI*2);ctx.fill();
+ ctx.font="bold 12px Arial";ctx.fillText("Pâ‚",m.ox+v.x1*m.cell+8,m.oy+v.y1*m.cell-8);ctx.fillText("Pâ‚‚",m.ox+v.x2*m.cell+8,m.oy+v.y2*m.cell-8);
+ for(let i=0;i<Math.min(count,points.length);i++){
+   const p=points[i],px=m.ox+p.px*m.cell,py=m.oy+p.py*m.cell;
+   ctx.fillStyle="#ff8a00";ctx.globalAlpha=i===count-1?.98:.72;ctx.fillRect(px-m.cell*.36,py-m.cell*.36,m.cell*.72,m.cell*.72);ctx.globalAlpha=1;
+   ctx.fillStyle="#fff";ctx.font="10px Arial";ctx.fillText(`(${p.px},${p.py})`,px+5,py-5);
+ }
+ if(points.length&&count){const p=points[Math.min(count-1,points.length-1)];$("currentStep").textContent=`${p.step} / ${v.steps}`;$("currentPoint").textContent=`(${p.x.toFixed(2)}, ${p.y.toFixed(2)})`;$("currentPixel").textContent=`(${p.px}, ${p.py})`;}
+}
+function update(){
+ const v=vals();points=build(v);$("deltaX").textContent=v.dx;$("deltaY").textContent=v.dy;$("stepsValue").textContent=v.steps;$("xInc").textContent=v.xinc.toFixed(3);$("yInc").textContent=v.yinc.toFixed(3);
+}
+function stop(){if(timer)clearInterval(timer);timer=null;$("playBtn").textContent="â–¶ Play DDA";}
+function generate(){stop();update();currentIndex=points.length;render(currentIndex);$("viewerStatus").textContent="LINE GENERATED";}
+function next(){if(!points.length)update();if(currentIndex<points.length)currentIndex++;render(currentIndex);$("viewerStatus").textContent=currentIndex>=points.length?"COMPLETE":`PIXEL ${currentIndex}`;}
+function play(){if(!points.length)update();if(currentIndex>=points.length)currentIndex=0;stop();$("playBtn").textContent="âšâš Pause";$("viewerStatus").textContent="PLOTTING PIXELS";timer=setInterval(()=>{currentIndex++;render(currentIndex);if(currentIndex>=points.length){stop();$("viewerStatus").textContent="DDA COMPLETE";}},+$("speed").value);}
+inputs.forEach(i=>i.addEventListener("input",()=>{stop();update();currentIndex=0;render(0);$("viewerStatus").textContent="UPDATED";}));
+$("generateBtn").onclick=generate;$("stepBtn").onclick=next;$("playBtn").onclick=()=>timer?stop():play();$("resetBtn").onclick=()=>{stop();update();currentIndex=0;render(0);$("viewerStatus").textContent="READY";};
+$("speed").oninput=e=>$("speedValue").textContent=`${e.target.value} ms`;
+update();render(0);
+
+const stages=[
+["Start Point","Begin with the starting coordinate.","Pâ‚ = (xâ‚, yâ‚)"],
+["Calculate Î”x","Find the horizontal difference between the endpoints.","Î”x = xâ‚‚ âˆ’ xâ‚"],
+["Calculate Î”y","Find the vertical difference between the endpoints.","Î”y = yâ‚‚ âˆ’ yâ‚"],
+["Find Steps","Use the larger absolute difference.","Steps = max(|Î”x|, |Î”y|)"],
+["Calculate Increments","Find the amount added to X and Y after every iteration.","Xinc = Î”x / Steps  Â·  Yinc = Î”y / Steps"],
+["Plot Pixels","Increment, round and plot each raster pixel until the endpoint.","x = x + Xinc  Â·  y = y + Yinc"]
+];
+let ai=0,at=null;
+const ast=[...document.querySelectorAll(".animation-step")];
+function showStage(i){ai=i;$("animationNumber").textContent=`${String(i+1).padStart(2,"0")} / 06`;$("animationTitle").textContent=stages[i][0];$("animationDescription").textContent=stages[i][1];$("animationFormula").textContent=stages[i][2];ast.forEach((e,n)=>e.classList.toggle("active",n===i));}
+ast.forEach((e,i)=>e.onclick=()=>showStage(i));
+$("animationNext").onclick=()=>showStage((ai+1)%stages.length);
+$("animationPlay").onclick=()=>{if(at){clearInterval(at);at=null;$("animationPlay").textContent="â–¶ Play Algorithm";return;}showStage(0);$("animationPlay").textContent="âšâš Pause";at=setInterval(()=>{if(ai>=stages.length-1){clearInterval(at);at=null;$("animationPlay").textContent="â–¶ Play Algorithm";return;}showStage(ai+1);},1200);};
+
+const problems={
+ mobile:{tag:"PROBLEM 01",title:"Mobile Screen UI Divider",text:"A mobile interface needs a diagonal divider between two screen coordinates.",start:"(40, 80)",end:"(300, 200)",answer:"Î”x = 260, Î”y = 120, Steps = 260, Xinc = 1.000, Yinc â‰ˆ 0.462.",caption:"DDA constructs the UI divider from discrete screen pixels.",x1:40,y1:80,x2:300,y2:200},
+ game:{tag:"PROBLEM 02",title:"Game Character Laser",text:"A 2D game needs to draw a laser beam from a character toward a target.",start:"(100, 220)",end:"(400, 80)",answer:"Î”x = 300, Î”y = âˆ’140, Steps = 300, Xinc = 1.000, Yinc â‰ˆ âˆ’0.467.",caption:"The laser is rasterized by plotting the calculated pixels from character to target.",x1:100,y1:220,x2:400,y2:80},
+ map:{tag:"PROBLEM 03",title:"Digital Map Road Segment",text:"A mapping system needs to represent a straight road segment between two positions on a 2D map.",start:"(80, 100)",end:"(420, 280)",answer:"Î”x = 340, Î”y = 180, Steps = 340, Xinc = 1.000, Yinc â‰ˆ 0.529.",caption:"The road segment is represented as a sequence of raster pixels.",x1:80,y1:100,x2:420,y2:280}
+};
+let activeProblem="mobile",problemProgress=0,problemTimer=null;
+const pcanvas=$("problemCanvas"),pctx=pcanvas.getContext("2d");
+function drawProblem(key,animate=false){
+ const p=problems[key],w=pcanvas.width,h=pcanvas.height,m=35,cols=20,rows=12,cell=Math.min((w-m*2)/cols,(h-m*2)/rows),ox=(w-cols*cell)/2,oy=(h-rows*cell)/2;
+ pctx.clearRect(0,0,w,h);pctx.fillStyle="#050505";pctx.fillRect(0,0,w,h);pctx.strokeStyle="rgba(255,255,255,.08)";
+ for(let x=0;x<=cols;x++){pctx.beginPath();pctx.moveTo(ox+x*cell,oy);pctx.lineTo(ox+x*cell,oy+rows*cell);pctx.stroke();}
+ for(let y=0;y<=rows;y++){pctx.beginPath();pctx.moveTo(ox,oy+y*cell);pctx.lineTo(ox+cols*cell,oy+y*cell);pctx.stroke();}
+ const sx=ox+2*cell,sy=oy+9*cell,ex=ox+17*cell,ey=oy+3*cell,steps=Math.max(Math.abs(p.x2-p.x1),Math.abs(p.y2-p.y1)),count=animate?Math.min(problemProgress,steps+1):steps+1;
+ pctx.strokeStyle="rgba(255,138,0,.22)";pctx.lineWidth=2;pctx.beginPath();pctx.moveTo(sx,sy);pctx.lineTo(ex,ey);pctx.stroke();
+ for(let i=0;i<count;i++){const t=steps?i/steps:0,px=sx+(ex-sx)*t,py=sy+(ey-sy)*t;pctx.fillStyle="#ff8a00";pctx.fillRect(px-3,py-3,6,6);}
+ pctx.fillStyle="#fff";pctx.font="bold 12px Arial";pctx.fillText("START",sx+8,sy-10);pctx.fillText("TARGET",ex-48,ey-10);
+}
+function selectProblem(key){
+ activeProblem=key;const p=problems[key];document.querySelectorAll(".problem-tab").forEach(t=>t.classList.toggle("active",t.dataset.problem===key));
+ $("problemTag").textContent=p.tag;$("problemTitle").textContent=p.title;$("problemText").textContent=p.text;$("problemStart").textContent=p.start;$("problemEnd").textContent=p.end;$("problemAnswer").textContent=p.answer;$("problemCaption").textContent=p.caption;$("problemViewerStatus").textContent=`${p.tag.replace("PROBLEM ","P")} Â· ${p.title.toUpperCase()}`;
+ problemProgress=0;if(problemTimer)clearInterval(problemTimer);drawProblem(key,false);
+}
+$("visualizeProblem").onclick=()=>{if(problemTimer)clearInterval(problemTimer);const p=problems[activeProblem],steps=Math.max(Math.abs(p.x2-p.x1),Math.abs(p.y2-p.y1));problemProgress=0;$("problemViewerStatus").textContent="PLOTTING PIXELS";problemTimer=setInterval(()=>{problemProgress+=Math.max(1,Math.ceil(steps/80));drawProblem(activeProblem,true);if(problemProgress>=steps+1){clearInterval(problemTimer);problemTimer=null;$("problemViewerStatus").textContent="COMPLETE";}},35);};
+document.querySelectorAll(".problem-tab").forEach(t=>t.onclick=()=>selectProblem(t.dataset.problem));
+selectProblem("mobile");
+})();
+</script>
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

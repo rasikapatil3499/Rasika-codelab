@@ -1,0 +1,679 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>19 â€” 3D Scene using Three.js | Rasika CodeLab</title>
+  <link rel="stylesheet" href="../css/cgr_style.css">
+  <link rel="stylesheet" href="../css/cgr_practicals.css">
+<style>body.protected-page:not(.auth-ready){visibility:hidden}</style>
+</head>
+<body class="cgr-practical-body practical-19 protected-page">
+
+<header class="navbar">
+  <div class="logo">
+    <span class="logo-mark">&lt;/&gt;</span>
+    <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+  </div>
+  <nav class="nav-links">
+    <a href="../cgr_index.html">Home</a>
+    <a href="../cgr_foundations.html">Foundations</a>
+        <a href="../cgr_practicals.html" class="active">Practicals</a>
+    <a href="../../../about.html">About</a>
+  </nav>
+  <button class="menu-btn" aria-label="Open Menu">â˜°</button>
+</header>
+
+<main>
+  <section class="practical-hero">
+    <div class="container">
+      <div class="breadcrumb">Practicals / 19</div>
+      <span class="practical-number">P19</span>
+      <h1>3D Scene using Three.js</h1>
+      <p>Create and explore a browser-based 3D scene using Three.js, WebGL, cameras, lights, materials and animation.</p>
+      <div class="hero-tags">
+        <span>Three.js</span>
+        <span>WebGL</span>
+        <span>3D Scene</span>
+        <span>Animation</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">01</span>
+        <h2>Aim &amp; Objectives</h2>
+      </div>
+      <div class="content-card">
+        <p><strong>Aim:</strong> To create an interactive 3D graphics scene in the browser using the Three.js library.</p>
+        <ul>
+          <li>Understand the basic structure of a Three.js application.</li>
+          <li>Create a 3D scene containing objects, camera and lights.</li>
+          <li>Understand perspective projection and camera positioning.</li>
+          <li>Apply geometry, materials and transformations to 3D objects.</li>
+          <li>Render a scene using WebGL through Three.js.</li>
+          <li>Use an animation loop to create dynamic 3D graphics.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">02</span>
+        <h2>Theory â€” From 3D Data to a Browser Scene</h2>
+      </div>
+
+      <div class="content-grid">
+        <article class="content-card">
+          <h3>What is Three.js?</h3>
+          <p>Three.js is a JavaScript 3D graphics library that provides higher-level abstractions for creating scenes, cameras, lights, geometries, materials and renderers.</p>
+          <p>It commonly uses WebGL as the underlying browser graphics API.</p>
+        </article>
+
+        <article class="content-card">
+          <h3>Scene</h3>
+          <p>The <code>Scene</code> acts as the container for objects, lights and other elements that will be rendered.</p>
+          <pre><code>const scene = new THREE.Scene();
+scene.add(mesh);</code></pre>
+        </article>
+
+        <article class="content-card">
+          <h3>Camera</h3>
+          <p>A camera defines what part of the 3D world is visible and how it is projected onto the screen.</p>
+          <pre><code>const camera = new THREE.PerspectiveCamera(
+  60, aspect, 0.1, 1000
+);
+camera.position.z = 6;</code></pre>
+        </article>
+
+        <article class="content-card">
+          <h3>Renderer</h3>
+          <p>The renderer converts the scene from its 3D representation into pixels displayed by the browser.</p>
+          <pre><code>const renderer = new THREE.WebGLRenderer();
+renderer.setSize(width, height);
+renderer.render(scene, camera);</code></pre>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">03</span>
+        <h2>3D Coordinate System</h2>
+      </div>
+
+      <div class="content-card">
+        <p>A point in 3D space is represented by three coordinates:</p>
+        <div class="formula-box">
+          <strong>P = (x, y, z)</strong>
+          <p>X â†’ left / right &nbsp; | &nbsp; Y â†’ down / up &nbsp; | &nbsp; Z â†’ depth</p>
+        </div>
+
+        <div class="content-grid">
+          <article>
+            <h3>Translation</h3>
+            <p>xâ€² = x + t<sub>x</sub></p>
+            <p>yâ€² = y + t<sub>y</sub></p>
+            <p>zâ€² = z + t<sub>z</sub></p>
+          </article>
+          <article>
+            <h3>Scaling</h3>
+            <p>xâ€² = s<sub>x</sub>x</p>
+            <p>yâ€² = s<sub>y</sub>y</p>
+            <p>zâ€² = s<sub>z</sub>z</p>
+          </article>
+          <article>
+            <h3>Rotation</h3>
+            <p>Objects can rotate around the X, Y and Z axes.</p>
+            <p>Three.js uses radians for rotation values.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">04</span>
+        <h2>Perspective Projection</h2>
+      </div>
+
+      <div class="content-card">
+        <p>Three.js commonly uses a perspective camera for realistic depth. Objects farther from the camera appear smaller.</p>
+        <div class="formula-box">
+          <strong>Perspective idea</strong>
+          <p>Screen size decreases as camera distance increases.</p>
+          <p>Field of View (FOV) controls how wide the camera sees.</p>
+          <p>Near and far clipping planes define the visible depth range.</p>
+        </div>
+
+        <h3>PerspectiveCamera Parameters</h3>
+        <pre><code>new THREE.PerspectiveCamera(
+  fov,
+  aspect,
+  near,
+  far
+);</code></pre>
+
+        <ul>
+          <li><strong>fov:</strong> vertical field of view in degrees.</li>
+          <li><strong>aspect:</strong> viewport width Ã· viewport height.</li>
+          <li><strong>near:</strong> nearest visible distance.</li>
+          <li><strong>far:</strong> farthest visible distance.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">05</span>
+        <h2>Worked Calculation</h2>
+      </div>
+
+      <div class="content-card">
+        <p>Suppose a cube has a vertex:</p>
+        <div class="formula-box">
+          <strong>P = (2, 3, 4)</strong>
+        </div>
+        <p>Apply translation T = (3, âˆ’1, 2).</p>
+
+        <div class="calculation-steps">
+          <p><strong>Step 1:</strong> xâ€² = 2 + 3 = <strong>5</strong></p>
+          <p><strong>Step 2:</strong> yâ€² = 3 âˆ’ 1 = <strong>2</strong></p>
+          <p><strong>Step 3:</strong> zâ€² = 4 + 2 = <strong>6</strong></p>
+          <p><strong>Result:</strong> Pâ€² = <strong>(5, 2, 6)</strong></p>
+        </div>
+
+        <p>This mathematical transformation can then be represented in Three.js by changing an object's position:</p>
+        <pre><code>mesh.position.set(3, -1, 2);</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">06</span>
+        <h2>Live Three.js 3D Scene</h2>
+      </div>
+
+      <div class="interactive-lab content-card">
+        <div class="lab-controls">
+          <label>Object
+            <select id="objectType">
+              <option value="cube">Cube</option>
+              <option value="sphere">Sphere</option>
+              <option value="torus">Torus</option>
+              <option value="cone">Cone</option>
+            </select>
+          </label>
+
+          <label>Rotation Speed
+            <input type="range" id="speedRange" min="0" max="3" step="0.1" value="0.8">
+            <span id="speedValue">0.8</span>
+          </label>
+
+          <button class="btn" id="rotateToggle">Pause Rotation</button>
+          <button class="btn" id="resetScene">Reset Scene</button>
+        </div>
+
+        <div class="canvas-stage" id="threeStage">
+          <div id="threeContainer" aria-label="Interactive Three.js 3D scene"></div>
+        </div>
+
+        <div class="lab-status">
+          <span id="sceneStatus">Scene: Cube</span>
+          <span id="cameraStatus">Camera: Perspective</span>
+          <span id="renderStatus">Renderer: WebGL</span>
+        </div>
+      </div>
+
+      <div class="content-card">
+        <h3>Try This</h3>
+        <ol>
+          <li>Change the object and observe the geometry replacement.</li>
+          <li>Adjust rotation speed and compare slow and fast motion.</li>
+          <li>Pause the animation and inspect the static 3D object.</li>
+          <li>Reset the scene and observe the default camera/object state.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">07</span>
+        <h2>Scene Components</h2>
+      </div>
+
+      <div class="process-grid">
+        <div class="process-card"><span>1</span><h3>Scene</h3><p>Stores the objects and lights that form the 3D world.</p></div>
+        <div class="process-card"><span>2</span><h3>Geometry</h3><p>Defines the shape and vertices of a 3D object.</p></div>
+        <div class="process-card"><span>3</span><h3>Material</h3><p>Defines the visible appearance of the object's surface.</p></div>
+        <div class="process-card"><span>4</span><h3>Light</h3><p>Illuminates objects so their material can be displayed with depth.</p></div>
+        <div class="process-card"><span>5</span><h3>Camera</h3><p>Defines the viewpoint and projection of the scene.</p></div>
+        <div class="process-card"><span>6</span><h3>Renderer</h3><p>Produces the final image from the scene and camera.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">08</span>
+        <h2>Three.js Program Structure</h2>
+      </div>
+
+      <div class="content-card">
+        <pre><code>// 1. Create scene
+const scene = new THREE.Scene();
+
+// 2. Create camera
+const camera = new THREE.PerspectiveCamera(
+  60, aspect, 0.1, 100
+);
+
+// 3. Create geometry + material
+const geometry = new THREE.BoxGeometry(2, 2, 2);
+const material = new THREE.MeshStandardMaterial();
+const mesh = new THREE.Mesh(geometry, material);
+
+// 4. Add object and light
+scene.add(mesh);
+scene.add(light);
+
+// 5. Render repeatedly
+function animate() {
+  mesh.rotation.y += 0.01;
+  renderer.render(scene, camera);
+  requestAnimationFrame(animate);
+}
+animate();</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">09</span>
+        <h2>Real-Life Problem Statements</h2>
+      </div>
+
+      <div class="problem-grid">
+        <article class="problem-card">
+          <span class="problem-number">01</span>
+          <h3>3D Product Viewer</h3>
+          <p>Create a product model that rotates continuously and allows the user to inspect the object from different angles.</p>
+          <div class="mini-viewer" data-problem="product">
+            <canvas class="problem-canvas" width="420" height="190"></canvas>
+            <button class="btn problem-action">Try Visualization</button>
+          </div>
+        </article>
+
+        <article class="problem-card">
+          <span class="problem-number">02</span>
+          <h3>Virtual Room</h3>
+          <p>Build a simple 3D room containing walls, a floor, furniture and lights. Position the camera to create a useful viewpoint.</p>
+          <div class="mini-viewer" data-problem="room">
+            <canvas class="problem-canvas" width="420" height="190"></canvas>
+            <button class="btn problem-action">Try Visualization</button>
+          </div>
+        </article>
+
+        <article class="problem-card">
+          <span class="problem-number">03</span>
+          <h3>3D Solar System Model</h3>
+          <p>Create a simplified solar system where planets orbit a central object and each planet rotates around its own axis.</p>
+          <div class="mini-viewer" data-problem="solar">
+            <canvas class="problem-canvas" width="420" height="190"></canvas>
+            <button class="btn problem-action">Try Visualization</button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">10</span>
+        <h2>Experiments</h2>
+      </div>
+
+      <div class="content-card">
+        <ol>
+          <li>Replace the cube with a sphere, cone and torus and compare their geometry.</li>
+          <li>Move the camera closer and farther from the object and observe perspective.</li>
+          <li>Change the field of view and observe how much of the scene becomes visible.</li>
+          <li>Rotate the object independently around the X, Y and Z axes.</li>
+          <li>Add another light and compare the resulting illumination.</li>
+          <li>Resize the browser window and observe why the camera aspect ratio must be updated.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">11</span>
+        <h2>Common Mistakes</h2>
+      </div>
+
+      <div class="content-card">
+        <ul>
+          <li>Creating a geometry but forgetting to create and assign a material.</li>
+          <li>Adding a mesh to the scene but not adding a camera or renderer.</li>
+          <li>Placing the camera inside the object or facing away from the scene.</li>
+          <li>Using degrees directly where Three.js expects radians for rotation.</li>
+          <li>Forgetting to update the renderer and camera aspect ratio after resizing.</li>
+          <li>Creating a scene with lighting-dependent materials but no suitable light.</li>
+          <li>Starting multiple animation loops accidentally.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">12</span>
+        <h2>Canvas 3D vs Three.js</h2>
+      </div>
+
+      <div class="content-card">
+        <div class="content-grid">
+          <article>
+            <h3>Practical 12</h3>
+            <p>The 3D Transformation Visualizer focuses on the mathematics of 3D vertices, transformations and projection using Canvas-based rendering.</p>
+          </article>
+          <article>
+            <h3>Practical 19</h3>
+            <p>This practical moves to a higher-level 3D engine approach using Three.js, where scene management, cameras, materials, lighting and WebGL rendering are handled through library abstractions.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section viva-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">13</span>
+        <h2>Viva Questions</h2>
+      </div>
+
+      <div class="viva-list">
+        <details><summary>What is Three.js?</summary><p>Three.js is a JavaScript library used to create and display 3D graphics in the browser.</p></details>
+        <details><summary>What is the role of a scene?</summary><p>The scene is the container that holds the objects, lights and other elements that will be rendered.</p></details>
+        <details><summary>Why is a camera required?</summary><p>The camera defines the viewpoint and projection used to convert the 3D world into a 2D image.</p></details>
+        <details><summary>What is WebGL?</summary><p>WebGL is a browser graphics API that provides hardware-accelerated 2D and 3D rendering through compatible graphics hardware.</p></details>
+        <details><summary>What is a mesh?</summary><p>A mesh combines geometry, which defines shape, with a material, which defines its appearance.</p></details>
+        <details><summary>Why are lights used?</summary><p>Lights illuminate surfaces for lighting-aware materials and help create depth and shading.</p></details>
+        <details><summary>Why is requestAnimationFrame() used?</summary><p>It schedules animation updates in synchronization with the browser's rendering cycle.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-navigation">
+    <div class="container">
+      <a href="practical18.html" class="nav-practical prev">â† Practical 18<span>2D Interactive Graphics</span></a>
+      <a href="practical20.html" class="nav-practical next">Practical 20 â†’<span>3D Transformation, Lighting &amp; Texture</span></a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer-main">
+    <div class="footer-brand">
+      <div class="logo">
+        <span class="logo-mark">&lt;/&gt;</span>
+        <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+      </div>
+      <p>Interactive Computer Graphics practical learning through concepts, calculations and visualization.</p>
+    </div>
+    <div class="footer-links">
+      <div>
+        <h4>Learn</h4>
+        <a href="../cgr_foundations.html">Foundations</a>
+              </div>
+      <div>
+        <h4>Practice</h4>
+        <a href="../cgr_practicals.html">Practicals</a>
+        <a href="../../../about.html">About</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>Â© 2026 Rasika CodeLab</span>
+    <span>Built for practical learning.</span>
+  </div>
+</footer>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from "three";
+
+const container = document.getElementById("threeContainer");
+const objectType = document.getElementById("objectType");
+const speedRange = document.getElementById("speedRange");
+const speedValue = document.getElementById("speedValue");
+const rotateToggle = document.getElementById("rotateToggle");
+const resetScene = document.getElementById("resetScene");
+const sceneStatus = document.getElementById("sceneStatus");
+
+const scene = new THREE.Scene();
+scene.fog = new THREE.Fog(0x10131a, 8, 24);
+
+const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 100);
+camera.position.set(4.5, 3.2, 6.5);
+camera.lookAt(0, 0.4, 0);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setSize(900, 500);
+renderer.setAnimationLoop(animate);
+container.appendChild(renderer.domElement);
+
+const ambient = new THREE.HemisphereLight(0xffffff, 0x222233, 2.2);
+scene.add(ambient);
+
+const keyLight = new THREE.DirectionalLight(0xffffff, 3);
+keyLight.position.set(4, 6, 5);
+scene.add(keyLight);
+
+const fillLight = new THREE.PointLight(0xff8a3d, 35, 12);
+fillLight.position.set(-4, 2, 3);
+scene.add(fillLight);
+
+const grid = new THREE.GridHelper(12, 12, 0x555555, 0x333333);
+grid.position.y = -1.35;
+scene.add(grid);
+
+const axes = new THREE.AxesHelper(2.2);
+scene.add(axes);
+
+const floor = new THREE.Mesh(
+  new THREE.PlaneGeometry(12, 12),
+  new THREE.MeshStandardMaterial({ color: 0x151922, roughness: 0.9, metalness: 0.05 })
+);
+floor.rotation.x = -Math.PI / 2;
+floor.position.y = -1.36;
+scene.add(floor);
+
+let mesh;
+let rotating = true;
+let speed = 0.8;
+
+function createGeometry(type) {
+  if (type === "sphere") return new THREE.SphereGeometry(1.25, 48, 32);
+  if (type === "torus") return new THREE.TorusGeometry(1.05, 0.35, 24, 64);
+  if (type === "cone") return new THREE.ConeGeometry(1.25, 2.5, 48);
+  return new THREE.BoxGeometry(2.2, 2.2, 2.2);
+}
+
+function createMesh(type) {
+  if (mesh) scene.remove(mesh);
+
+  const material = new THREE.MeshStandardMaterial({
+    color: 0xff7a18,
+    roughness: 0.35,
+    metalness: 0.25
+  });
+
+  mesh = new THREE.Mesh(createGeometry(type), material);
+  mesh.position.y = 0;
+  scene.add(mesh);
+  sceneStatus.textContent = "Scene: " + type.charAt(0).toUpperCase() + type.slice(1);
+}
+
+function resize() {
+  const rect = container.getBoundingClientRect();
+  const width = Math.max(320, rect.width || 900);
+  const height = Math.max(240, rect.height || 500);
+  camera.aspect = width / height;
+  camera.updateProjectionMatrix();
+  renderer.setSize(width, height, false);
+}
+
+objectType.addEventListener("change", () => createMesh(objectType.value));
+
+speedRange.addEventListener("input", () => {
+  speed = Number(speedRange.value);
+  speedValue.textContent = speed.toFixed(1);
+});
+
+rotateToggle.addEventListener("click", () => {
+  rotating = !rotating;
+  rotateToggle.textContent = rotating ? "Pause Rotation" : "Resume Rotation";
+});
+
+resetScene.addEventListener("click", () => {
+  objectType.value = "cube";
+  speedRange.value = "0.8";
+  speed = 0.8;
+  speedValue.textContent = "0.8";
+  rotating = true;
+  rotateToggle.textContent = "Pause Rotation";
+  camera.position.set(4.5, 3.2, 6.5);
+  camera.lookAt(0, 0.4, 0);
+  createMesh("cube");
+});
+
+window.addEventListener("resize", resize);
+
+function animate(time) {
+  if (rotating && mesh) {
+    mesh.rotation.x += 0.005 * speed;
+    mesh.rotation.y += 0.009 * speed;
+    mesh.rotation.z += 0.003 * speed;
+  }
+  renderer.render(scene, camera);
+}
+
+createMesh("cube");
+resize();
+
+const problemCanvases = document.querySelectorAll(".mini-viewer");
+
+problemCanvases.forEach(viewer => {
+  const canvas = viewer.querySelector(".problem-canvas");
+  const button = viewer.querySelector(".problem-action");
+  const ctx = canvas.getContext("2d");
+  const type = viewer.dataset.problem;
+  let running = false;
+  let frame = 0;
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.lineWidth = 2;
+
+    if (type === "product") {
+      const x = 210 + Math.sin(frame * 0.04) * 55;
+      ctx.strokeRect(x - 55, 55, 110, 80);
+      ctx.beginPath();
+      ctx.moveTo(x - 55, 55);
+      ctx.lineTo(x - 25, 35);
+      ctx.lineTo(x + 85, 35);
+      ctx.lineTo(x + 55, 55);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(x + 85, 35);
+      ctx.lineTo(x + 85, 115);
+      ctx.lineTo(x + 55, 135);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(x, 95, 15, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+
+    if (type === "room") {
+      ctx.strokeRect(55, 45, 310, 110);
+      ctx.beginPath();
+      ctx.moveTo(55, 45);
+      ctx.lineTo(210, 20);
+      ctx.lineTo(365, 45);
+      ctx.stroke();
+      ctx.strokeRect(105, 105, 80, 50);
+      ctx.strokeRect(230, 85, 70, 70);
+      ctx.beginPath();
+      ctx.arc(330, 65, 14, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+
+    if (type === "solar") {
+      const cx = 210, cy = 100;
+      ctx.beginPath();
+      ctx.arc(cx, cy, 24, 0, Math.PI * 2);
+      ctx.stroke();
+      [48, 78, 112].forEach((r, i) => {
+        ctx.beginPath();
+        ctx.arc(cx, cy, r, 0, Math.PI * 2);
+        ctx.stroke();
+        const a = frame * 0.02 * (i + 1);
+        ctx.beginPath();
+        ctx.arc(cx + Math.cos(a) * r, cy + Math.sin(a) * r, 7 + i * 2, 0, Math.PI * 2);
+        ctx.stroke();
+      });
+    }
+
+    if (running) frame++;
+  }
+
+  function loop() {
+    draw();
+    if (running) requestAnimationFrame(loop);
+  }
+
+  button.addEventListener("click", () => {
+    running = !running;
+    button.textContent = running ? "Pause Visualization" : "Try Visualization";
+    if (running) requestAnimationFrame(loop);
+  });
+
+  draw();
+});
+</script>
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

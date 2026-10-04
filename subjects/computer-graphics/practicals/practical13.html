@@ -1,0 +1,862 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>13 â€” Cohen-Sutherland Line Clipping | Rasika CodeLab</title>
+  <link rel="stylesheet" href="../css/cgr_style.css">
+  <link rel="stylesheet" href="../css/cgr_practicals.css">
+<style>body.protected-page:not(.auth-ready){visibility:hidden}</style>
+</head>
+
+<body class="cgr-practical-body practical-13 protected-page">
+
+<header class="navbar">
+  <div class="logo">
+    <span class="logo-mark">&lt;/&gt;</span>
+    <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+  </div>
+  <nav class="nav-links">
+    <a href="../cgr_index.html">Home</a>
+    <a href="../cgr_foundations.html">Foundations</a>
+        <a href="../cgr_practicals.html" class="active">Practicals</a>
+    <a href="../../../about.html">About</a>
+  </nav>
+  <button class="menu-btn" aria-label="Open Menu">â˜°</button>
+</header>
+
+<main>
+
+<section class="practical-hero">
+  <div class="container">
+    <span class="eyebrow">PRACTICAL 13 Â· CLIPPING</span>
+    <h1>Cohen-Sutherland Line Clipping</h1>
+    <p>Use region codes to determine visible and invisible portions of a line.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#live-lab">Open Interactive Lab</a>
+      <a class="btn btn-secondary" href="#worked-example">Study Worked Example</a>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">01</span>
+      <div>
+        <h2>What You Will Learn</h2>
+        <p>The Cohen-Sutherland algorithm clips a line against a rectangular clipping window using a compact 4-bit region code.</p>
+      </div>
+    </div>
+
+    <div class="objective-grid">
+      <article class="info-card">
+        <h3>Understand</h3>
+        <p>Learn clipping windows, outcodes, trivial acceptance and trivial rejection.</p>
+      </article>
+      <article class="info-card">
+        <h3>Calculate</h3>
+        <p>Assign region codes and calculate intersection points with window boundaries.</p>
+      </article>
+      <article class="info-card">
+        <h3>Implement</h3>
+        <p>Apply the iterative Cohen-Sutherland line clipping algorithm.</p>
+      </article>
+      <article class="info-card">
+        <h3>Visualize</h3>
+        <p>Observe the original line, clipping rectangle, outcodes and final visible segment.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section alt-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">02</span>
+      <div>
+        <h2>Clipping Window</h2>
+        <p>Only the part of a line inside the rectangular viewing region is retained.</p>
+      </div>
+    </div>
+
+    <div class="concept-grid">
+      <article class="theory-card">
+        <h3>Why Clipping?</h3>
+        <p>Graphics scenes may contain objects extending beyond the visible viewport. Clipping removes the portions that cannot be displayed.</p>
+        <div class="formula-box">
+          <strong>Input:</strong> Line segment + rectangular clipping window<br>
+          <strong>Output:</strong> Visible segment inside the window
+        </div>
+      </article>
+
+      <article class="theory-card">
+        <h3>Four Outside Regions</h3>
+        <ul class="clean-list">
+          <li><strong>TOP</strong> â€” point is above the window</li>
+          <li><strong>BOTTOM</strong> â€” point is below the window</li>
+          <li><strong>RIGHT</strong> â€” point is to the right</li>
+          <li><strong>LEFT</strong> â€” point is to the left</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">03</span>
+      <div>
+        <h2>Region Codes / Outcodes</h2>
+        <p>Each endpoint receives a 4-bit code according to its position relative to the clipping window.</p>
+      </div>
+    </div>
+
+    <div class="table-card">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Bit</th>
+            <th>Meaning</th>
+            <th>Condition</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>TOP</td><td>Above window</td><td>y &gt; ymax</td><td>1000</td></tr>
+          <tr><td>BOTTOM</td><td>Below window</td><td>y &lt; ymin</td><td>0100</td></tr>
+          <tr><td>RIGHT</td><td>Right of window</td><td>x &gt; xmax</td><td>0010</td></tr>
+          <tr><td>LEFT</td><td>Left of window</td><td>x &lt; xmin</td><td>0001</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="formula-grid">
+      <div class="formula-box"><span>Inside</span><strong>0000</strong><p>Point lies inside the window.</p></div>
+      <div class="formula-box"><span>Trivial Accept</span><strong>codeâ‚ OR codeâ‚‚ = 0000</strong><p>Both endpoints are inside.</p></div>
+      <div class="formula-box"><span>Trivial Reject</span><strong>codeâ‚ AND codeâ‚‚ â‰  0000</strong><p>Both endpoints share an outside region.</p></div>
+    </div>
+
+    <div class="note-card">
+      <strong>Bitwise idea:</strong> AND detects a common outside region. OR checks whether any endpoint is outside.
+    </div>
+  </div>
+</section>
+
+<section class="practical-section alt-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">04</span>
+      <div>
+        <h2>Cohen-Sutherland Algorithm</h2>
+        <p>Repeatedly classify endpoints and move an outside endpoint to the appropriate window boundary.</p>
+      </div>
+    </div>
+
+    <div class="algorithm-steps">
+      <div class="algorithm-step"><span>01</span><div><h3>Calculate outcodes</h3><p>Find the 4-bit region code for both endpoints.</p></div></div>
+      <div class="algorithm-step"><span>02</span><div><h3>Test acceptance</h3><p>If both codes are 0000, accept the complete line.</p></div></div>
+      <div class="algorithm-step"><span>03</span><div><h3>Test rejection</h3><p>If the bitwise AND of the codes is non-zero, reject the line.</p></div></div>
+      <div class="algorithm-step"><span>04</span><div><h3>Find intersection</h3><p>Otherwise, select an outside endpoint and calculate its intersection with the relevant boundary.</p></div></div>
+      <div class="algorithm-step"><span>05</span><div><h3>Replace endpoint</h3><p>Update the endpoint and calculate its new outcode.</p></div></div>
+      <div class="algorithm-step"><span>06</span><div><h3>Repeat</h3><p>Continue until the segment is accepted or rejected.</p></div></div>
+    </div>
+
+    <div class="formula-box large-formula">
+      <h3>Intersection Equations</h3>
+      <p>For a line from (xâ‚,yâ‚) to (xâ‚‚,yâ‚‚):</p>
+      <div class="formula-row">
+        <span>y = ymax â†’ x = xâ‚ + (xâ‚‚ âˆ’ xâ‚)(ymax âˆ’ yâ‚)/(yâ‚‚ âˆ’ yâ‚)</span>
+        <span>y = ymin â†’ x = xâ‚ + (xâ‚‚ âˆ’ xâ‚)(ymin âˆ’ yâ‚)/(yâ‚‚ âˆ’ yâ‚)</span>
+      </div>
+      <div class="formula-row">
+        <span>x = xmax â†’ y = yâ‚ + (yâ‚‚ âˆ’ yâ‚)(xmax âˆ’ xâ‚)/(xâ‚‚ âˆ’ xâ‚)</span>
+        <span>x = xmin â†’ y = yâ‚ + (yâ‚‚ âˆ’ yâ‚)(xmin âˆ’ xâ‚)/(xâ‚‚ âˆ’ xâ‚)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section" id="worked-example">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">05</span>
+      <div>
+        <h2>Worked Calculation</h2>
+        <p>Let the clipping window be xmin = 2, ymin = 2, xmax = 8, ymax = 6.</p>
+      </div>
+    </div>
+
+    <div class="calculation-card">
+      <h3>Line: Pâ‚(1, 3) â†’ Pâ‚‚(10, 5)</h3>
+      <div class="calculation-grid">
+        <div>
+          <span class="calc-label">Pâ‚ outcode</span>
+          <strong>0001</strong>
+          <p>Pâ‚ is left of the window.</p>
+        </div>
+        <div>
+          <span class="calc-label">Pâ‚‚ outcode</span>
+          <strong>0010</strong>
+          <p>Pâ‚‚ is right of the window.</p>
+        </div>
+      </div>
+
+      <div class="calculation-flow">
+        <div class="calc-step">
+          <span>01</span>
+          <p>AND = 0001 AND 0010 = <strong>0000</strong> â†’ not rejected.</p>
+        </div>
+        <div class="calc-step">
+          <span>02</span>
+          <p>Use the left endpoint because it has the LEFT bit set.</p>
+        </div>
+        <div class="calc-step">
+          <span>03</span>
+          <p>At x = 2: y = 3 + (5âˆ’3)(2âˆ’1)/(10âˆ’1) = <strong>3.22</strong>.</p>
+        </div>
+        <div class="calc-step">
+          <span>04</span>
+          <p>New point is approximately <strong>(2, 3.22)</strong>.</p>
+        </div>
+        <div class="calc-step">
+          <span>05</span>
+          <p>Now clip the right endpoint at x = 8: y = 3 + 2(8âˆ’1)/9 = <strong>4.56</strong>.</p>
+        </div>
+        <div class="calc-step">
+          <span>06</span>
+          <p>Final visible segment â‰ˆ <strong>(2, 3.22) â†’ (8, 4.56)</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section alt-section" id="live-lab">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">06</span>
+      <div>
+        <h2>Interactive Clipping Lab</h2>
+        <p>Drag the endpoints, change the clipping window, and watch the region codes and clipping result update.</p>
+      </div>
+    </div>
+
+    <div class="interactive-layout">
+      <div class="control-panel">
+        <div class="control-group">
+          <h3>Line Endpoints</h3>
+          <label>Pâ‚ X <input id="p1x" type="number" value="1" step="0.5"></label>
+          <label>Pâ‚ Y <input id="p1y" type="number" value="3" step="0.5"></label>
+          <label>Pâ‚‚ X <input id="p2x" type="number" value="10" step="0.5"></label>
+          <label>Pâ‚‚ Y <input id="p2y" type="number" value="5" step="0.5"></label>
+        </div>
+
+        <div class="control-group">
+          <h3>Clipping Window</h3>
+          <label>xmin <input id="xmin" type="number" value="2" step="0.5"></label>
+          <label>ymin <input id="ymin" type="number" value="2" step="0.5"></label>
+          <label>xmax <input id="xmax" type="number" value="8" step="0.5"></label>
+          <label>ymax <input id="ymax" type="number" value="6" step="0.5"></label>
+        </div>
+
+        <div class="button-row">
+          <button class="btn btn-primary" id="clipBtn">Clip Line</button>
+          <button class="btn btn-secondary" id="stepBtn">Next Step</button>
+          <button class="btn btn-secondary" id="playBtn">Play</button>
+          <button class="btn btn-secondary" id="resetBtn">Reset</button>
+        </div>
+
+        <label class="range-label">Animation Speed
+          <input id="speed" type="range" min="1" max="10" value="5">
+        </label>
+      </div>
+
+      <div class="visualizer-panel">
+        <canvas id="clipCanvas" width="760" height="500" aria-label="Cohen-Sutherland clipping visualizer"></canvas>
+
+        <div class="status-grid">
+          <div class="status-card">
+            <span>Pâ‚ Code</span>
+            <strong id="code1">0001</strong>
+            <small id="pos1">LEFT</small>
+          </div>
+          <div class="status-card">
+            <span>Pâ‚‚ Code</span>
+            <strong id="code2">0010</strong>
+            <small id="pos2">RIGHT</small>
+          </div>
+          <div class="status-card">
+            <span>AND</span>
+            <strong id="andCode">0000</strong>
+            <small id="decision">Continue clipping</small>
+          </div>
+        </div>
+
+        <div class="lab-message" id="labMessage">Ready. Drag either endpoint or edit the values to begin.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">07</span>
+      <div>
+        <h2>How the Visualizer Works</h2>
+        <p>Follow the same logic used by the algorithm.</p>
+      </div>
+    </div>
+
+    <div class="process-grid">
+      <article class="process-card"><span>1</span><h3>Classify</h3><p>Each endpoint receives a 4-bit outcode.</p></article>
+      <article class="process-card"><span>2</span><h3>Compare</h3><p>OR identifies outside endpoints; AND tests common outside regions.</p></article>
+      <article class="process-card"><span>3</span><h3>Intersect</h3><p>The selected endpoint moves to a clipping boundary.</p></article>
+      <article class="process-card"><span>4</span><h3>Repeat</h3><p>New codes are calculated until the final decision is reached.</p></article>
+    </div>
+
+    <div class="note-card">
+      <strong>Drag experiment:</strong> Move Pâ‚ or Pâ‚‚ across the rectangle. Watch the four-bit code change as the endpoint crosses LEFT, RIGHT, TOP or BOTTOM boundaries.
+    </div>
+  </div>
+</section>
+
+<section class="practical-section alt-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">08</span>
+      <div>
+        <h2>Real-Life Problem Statements</h2>
+        <p>Connect line clipping with applications in computer graphics.</p>
+      </div>
+    </div>
+
+    <div class="problem-grid">
+      <article class="problem-card">
+        <span class="problem-tag">01 Â· VIEWPORT</span>
+        <h3>Viewport Rendering</h3>
+        <p>A 2D scene contains line segments extending outside the screen. Clip each segment to the viewport before rasterization.</p>
+        <button class="btn btn-secondary problem-load" data-p1x="-2" data-p1y="3" data-p2x="11" data-p2y="7">Show in Live Viewer</button>
+      </article>
+
+      <article class="problem-card">
+        <span class="problem-tag">02 Â· DIGITAL MAP</span>
+        <h3>Map Road Segment</h3>
+        <p>A road is represented by a line and only the portion inside the current map viewport should be displayed.</p>
+        <button class="btn btn-secondary problem-load" data-p1x="0" data-p1y="8" data-p2x="10" data-p2y="0">Show in Live Viewer</button>
+      </article>
+
+      <article class="problem-card">
+        <span class="problem-tag">03 Â· GAME UI</span>
+        <h3>Game Laser / UI Line</h3>
+        <p>A laser or UI guide line can extend beyond the visible game panel. Clip it to the panel before drawing it.</p>
+        <button class="btn btn-secondary problem-load" data-p1x="-3" data-p1y="7" data-p2x="12" data-p2y="1">Show in Live Viewer</button>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">09</span>
+      <div>
+        <h2>Experiments</h2>
+        <p>Change one condition at a time and observe the outcodes and final decision.</p>
+      </div>
+    </div>
+
+    <div class="experiment-list">
+      <div class="experiment-item"><span>01</span><p>Place both endpoints inside the window. Verify that both outcodes become 0000.</p></div>
+      <div class="experiment-item"><span>02</span><p>Place both endpoints above the window. Verify that the TOP bit is common and the line is rejected.</p></div>
+      <div class="experiment-item"><span>03</span><p>Move one endpoint from LEFT to inside. Observe the outcode change from 0001 to 0000.</p></div>
+      <div class="experiment-item"><span>04</span><p>Move endpoints into different outside regions. Observe why a non-zero OR does not automatically mean rejection.</p></div>
+      <div class="experiment-item"><span>05</span><p>Resize the clipping window and compare the visible portion of the same line.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section alt-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">10</span>
+      <div>
+        <h2>Common Mistakes</h2>
+      </div>
+    </div>
+
+    <div class="mistake-grid">
+      <article class="mistake-card"><h3>Confusing AND and OR</h3><p>Use AND for trivial rejection and OR for checking whether at least one endpoint is outside.</p></article>
+      <article class="mistake-card"><h3>Wrong boundary</h3><p>Select the boundary represented by the set bit in the selected endpoint's outcode.</p></article>
+      <article class="mistake-card"><h3>Incorrect slope equation</h3><p>Keep x and y terms consistent when calculating intersections.</p></article>
+      <article class="mistake-card"><h3>Forgetting to recalculate</h3><p>After replacing an endpoint, calculate its new outcode before the next test.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">11</span>
+      <div>
+        <h2>Viva Questions</h2>
+        <p>Test your understanding before moving to polygon clipping.</p>
+      </div>
+    </div>
+
+    <div class="viva-list">
+      <details><summary>What is line clipping?</summary><p>It is the process of removing the portions of a line outside a specified clipping window.</p></details>
+      <details><summary>What is an outcode?</summary><p>An outcode is a 4-bit region code that describes an endpoint's position relative to the rectangular clipping window.</p></details>
+      <details><summary>What does 0000 mean?</summary><p>The endpoint lies inside the clipping window.</p></details>
+      <details><summary>When is a line trivially accepted?</summary><p>When both endpoint outcodes are 0000.</p></details>
+      <details><summary>When is a line trivially rejected?</summary><p>When the bitwise AND of both endpoint outcodes is non-zero.</p></details>
+      <details><summary>Why is clipping useful in computer graphics?</summary><p>It avoids drawing portions of objects that lie outside the visible region.</p></details>
+      <details><summary>What happens after an intersection is found?</summary><p>The outside endpoint is replaced by the intersection point and its outcode is recalculated.</p></details>
+      <details><summary>Why is Cohen-Sutherland efficient for many lines?</summary><p>Many lines can be accepted or rejected quickly without calculating intersections when their outcodes permit a trivial decision.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="practical-navigation">
+  <div class="container">
+    <a class="nav-practical prev" href="practical12.html">
+      <span>Previous Practical</span>
+      <strong>12 â€” 3D Transformation Visualizer</strong>
+    </a>
+    <a class="nav-practical next" href="practical14.html">
+      <span>Next Practical</span>
+      <strong>14 â€” Midpoint Subdivision</strong>
+    </a>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-main">
+    <div class="footer-brand">
+      <div class="logo">
+        <span class="logo-mark">&lt;/&gt;</span>
+        <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+      </div>
+      <p>Interactive Computer Graphics practical learning through concepts, calculations and visualization.</p>
+    </div>
+    <div class="footer-links">
+      <div>
+        <h4>Learn</h4>
+        <a href="../cgr_foundations.html">Foundations</a>
+              </div>
+      <div>
+        <h4>Practice</h4>
+        <a href="../cgr_practicals.html">Practicals</a>
+        <a href="../../../about.html">About</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>Â© 2026 Rasika CodeLab</span>
+    <span>Built for practical learning.</span>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const canvas = document.getElementById("clipCanvas");
+  const ctx = canvas.getContext("2d");
+
+  const inputs = {
+    p1x: document.getElementById("p1x"),
+    p1y: document.getElementById("p1y"),
+    p2x: document.getElementById("p2x"),
+    p2y: document.getElementById("p2y"),
+    xmin: document.getElementById("xmin"),
+    ymin: document.getElementById("ymin"),
+    xmax: document.getElementById("xmax"),
+    ymax: document.getElementById("ymax")
+  };
+
+  const code1 = document.getElementById("code1");
+  const code2 = document.getElementById("code2");
+  const pos1 = document.getElementById("pos1");
+  const pos2 = document.getElementById("pos2");
+  const andCode = document.getElementById("andCode");
+  const decision = document.getElementById("decision");
+  const message = document.getElementById("labMessage");
+
+  const original = { p1x: 1, p1y: 3, p2x: 10, p2y: 5, xmin: 2, ymin: 2, xmax: 8, ymax: 6 };
+
+  let animationTimer = null;
+  let dragPoint = null;
+  let steps = [];
+  let stepIndex = -1;
+
+  const W = canvas.width;
+  const H = canvas.height;
+  const padding = 55;
+  const world = { min: -2, max: 12 };
+
+  function number(id) {
+    return Number(inputs[id].value);
+  }
+
+  function getState() {
+    let xmin = number("xmin");
+    let xmax = number("xmax");
+    let ymin = number("ymin");
+    let ymax = number("ymax");
+
+    if (xmin > xmax) [xmin, xmax] = [xmax, xmin];
+    if (ymin > ymax) [ymin, ymax] = [ymax, ymin];
+
+    return {
+      p1: { x: number("p1x"), y: number("p1y") },
+      p2: { x: number("p2x"), y: number("p2y") },
+      xmin, ymin, xmax, ymax
+    };
+  }
+
+  const TOP = 8;
+  const BOTTOM = 4;
+  const RIGHT = 2;
+  const LEFT = 1;
+
+  function outcode(p, r) {
+    let code = 0;
+    if (p.y > r.ymax) code |= TOP;
+    if (p.y < r.ymin) code |= BOTTOM;
+    if (p.x > r.xmax) code |= RIGHT;
+    if (p.x < r.xmin) code |= LEFT;
+    return code;
+  }
+
+  function bits(code) {
+    return code.toString(2).padStart(4, "0");
+  }
+
+  function labels(code) {
+    const result = [];
+    if (code & TOP) result.push("TOP");
+    if (code & BOTTOM) result.push("BOTTOM");
+    if (code & RIGHT) result.push("RIGHT");
+    if (code & LEFT) result.push("LEFT");
+    return result.length ? result.join(" + ") : "INSIDE";
+  }
+
+  function clonePoint(p) {
+    return { x: p.x, y: p.y };
+  }
+
+  function calculateClip(state) {
+    let p1 = clonePoint(state.p1);
+    let p2 = clonePoint(state.p2);
+    const r = state;
+    const history = [];
+    let accepted = false;
+    let rejected = false;
+    let guard = 0;
+
+    while (guard++ < 20) {
+      const c1 = outcode(p1, r);
+      const c2 = outcode(p2, r);
+      history.push({ p1: clonePoint(p1), p2: clonePoint(p2), c1, c2, action: "Classify endpoints" });
+
+      if ((c1 | c2) === 0) {
+        accepted = true;
+        history.push({ p1: clonePoint(p1), p2: clonePoint(p2), c1: 0, c2: 0, action: "TRIVIAL ACCEPT" });
+        break;
+      }
+
+      if ((c1 & c2) !== 0) {
+        rejected = true;
+        history.push({ p1: clonePoint(p1), p2: clonePoint(p2), c1, c2, action: "TRIVIAL REJECT" });
+        break;
+      }
+
+      const out = c1 !== 0 ? c1 : c2;
+      let x, y;
+
+      if (out & TOP) {
+        x = p1.x + (p2.x - p1.x) * (r.ymax - p1.y) / (p2.y - p1.y);
+        y = r.ymax;
+      } else if (out & BOTTOM) {
+        x = p1.x + (p2.x - p1.x) * (r.ymin - p1.y) / (p2.y - p1.y);
+        y = r.ymin;
+      } else if (out & RIGHT) {
+        y = p1.y + (p2.y - p1.y) * (r.xmax - p1.x) / (p2.x - p1.x);
+        x = r.xmax;
+      } else {
+        y = p1.y + (p2.y - p1.y) * (r.xmin - p1.x) / (p2.x - p1.x);
+        x = r.xmin;
+      }
+
+      const replacement = { x, y };
+      history.push({
+        p1: clonePoint(p1), p2: clonePoint(p2), c1, c2,
+        action: `Intersect ${labels(out)} â†’ (${x.toFixed(2)}, ${y.toFixed(2)})`,
+        intersection: replacement
+      });
+
+      if (out === c1) p1 = replacement;
+      else p2 = replacement;
+    }
+
+    return { p1, p2, accepted, rejected, history };
+  }
+
+  function scaleX() {
+    return (W - 2 * padding) / (world.max - world.min);
+  }
+
+  function scaleY() {
+    return (H - 2 * padding) / (world.max - world.min);
+  }
+
+  function sx(x) {
+    return padding + (x - world.min) * scaleX();
+  }
+
+  function sy(y) {
+    return H - padding - (y - world.min) * scaleY();
+  }
+
+  function drawGrid() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.lineWidth = 1;
+    ctx.globalAlpha = 0.35;
+
+    for (let x = world.min; x <= world.max; x++) {
+      ctx.beginPath();
+      ctx.moveTo(sx(x), padding);
+      ctx.lineTo(sx(x), H - padding);
+      ctx.stroke();
+    }
+
+    for (let y = world.min; y <= world.max; y++) {
+      ctx.beginPath();
+      ctx.moveTo(padding, sy(y));
+      ctx.lineTo(W - padding, sy(y));
+      ctx.stroke();
+    }
+
+    ctx.globalAlpha = 1;
+
+    ctx.beginPath();
+    ctx.moveTo(sx(0), padding);
+    ctx.lineTo(sx(0), H - padding);
+    ctx.moveTo(padding, sy(0));
+    ctx.lineTo(W - padding, sy(0));
+    ctx.stroke();
+
+    ctx.font = "13px sans-serif";
+    ctx.fillText("0", sx(0) + 6, sy(0) - 7);
+  }
+
+  function drawWindow(r) {
+    const left = sx(r.xmin);
+    const right = sx(r.xmax);
+    const top = sy(r.ymax);
+    const bottom = sy(r.ymin);
+
+    ctx.lineWidth = 3;
+    ctx.strokeRect(left, top, right - left, bottom - top);
+
+    ctx.font = "13px sans-serif";
+    ctx.fillText(`(${r.xmin}, ${r.ymin})`, left, bottom + 20);
+    ctx.fillText(`(${r.xmax}, ${r.ymax})`, right - 65, top - 10);
+
+    ctx.font = "12px sans-serif";
+    ctx.fillText("TOP", (left + right) / 2 - 12, top - 12);
+    ctx.fillText("BOTTOM", (left + right) / 2 - 25, bottom + 34);
+    ctx.fillText("LEFT", left - 38, (top + bottom) / 2);
+    ctx.fillText("RIGHT", right + 8, (top + bottom) / 2);
+  }
+
+  function drawPoint(p, label, code) {
+    ctx.beginPath();
+    ctx.arc(sx(p.x), sy(p.y), 7, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.font = "bold 13px sans-serif";
+    ctx.fillText(`${label} [${bits(code)}]`, sx(p.x) + 10, sy(p.y) - 10);
+  }
+
+  function drawSegment(a, b, dashed = false) {
+    ctx.save();
+    if (dashed) ctx.setLineDash([8, 7]);
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(sx(a.x), sy(a.y));
+    ctx.lineTo(sx(b.x), sy(b.y));
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  function render(historyIndex = -1) {
+    const state = getState();
+    const result = calculateClip(state);
+
+    drawGrid();
+    drawWindow(state);
+
+    const visible = historyIndex >= 0 ? historyIndex : result.history.length - 1;
+    const frame = result.history[Math.max(0, visible)] || result.history[0];
+
+    drawSegment(state.p1, state.p2, true);
+
+    if (frame && frame.p1 && frame.p2) {
+      drawSegment(frame.p1, frame.p2, false);
+      drawPoint(frame.p1, "Pâ‚", frame.c1);
+      drawPoint(frame.p2, "Pâ‚‚", frame.c2);
+    }
+
+    if (result.accepted && historyIndex < 0) {
+      ctx.save();
+      ctx.lineWidth = 5;
+      drawSegment(result.p1, result.p2, false);
+      ctx.restore();
+    }
+
+    if (frame && frame.intersection) {
+      ctx.beginPath();
+      ctx.arc(sx(frame.intersection.x), sy(frame.intersection.y), 8, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.font = "12px sans-serif";
+      ctx.fillText("Intersection", sx(frame.intersection.x) + 10, sy(frame.intersection.y) + 15);
+    }
+
+    updateStatus(state, frame, result, historyIndex);
+  }
+
+  function updateStatus(state, frame, result, historyIndex) {
+    const c1 = frame ? frame.c1 : outcode(state.p1, state);
+    const c2 = frame ? frame.c2 : outcode(state.p2, state);
+    const a = c1 & c2;
+    code1.textContent = bits(c1);
+    code2.textContent = bits(c2);
+    pos1.textContent = labels(c1);
+    pos2.textContent = labels(c2);
+    andCode.textContent = bits(a);
+
+    if (historyIndex >= 0 && result.history[historyIndex]) {
+      decision.textContent = result.history[historyIndex].action;
+      message.textContent = `Step ${historyIndex + 1} of ${result.history.length}: ${result.history[historyIndex].action}`;
+    } else if (result.accepted) {
+      decision.textContent = "Accepted";
+      message.textContent = `Visible segment: (${result.p1.x.toFixed(2)}, ${result.p1.y.toFixed(2)}) â†’ (${result.p2.x.toFixed(2)}, ${result.p2.y.toFixed(2)})`;
+    } else if (result.rejected) {
+      decision.textContent = "Rejected";
+      message.textContent = "The endpoints share an outside region, so the line is invisible.";
+    } else {
+      decision.textContent = "Continue clipping";
+      message.textContent = "One or both endpoints are outside. Calculate the next intersection.";
+    }
+  }
+
+  function refresh() {
+    stopAnimation();
+    steps = calculateClip(getState()).history;
+    stepIndex = -1;
+    render(-1);
+  }
+
+  function nextStep() {
+    if (!steps.length) steps = calculateClip(getState()).history;
+    stepIndex++;
+    if (stepIndex >= steps.length) stepIndex = 0;
+    render(stepIndex);
+  }
+
+  function stopAnimation() {
+    if (animationTimer) clearInterval(animationTimer);
+    animationTimer = null;
+    document.getElementById("playBtn").textContent = "Play";
+  }
+
+  function playAnimation() {
+    if (animationTimer) {
+      stopAnimation();
+      return;
+    }
+    steps = calculateClip(getState()).history;
+    stepIndex = -1;
+    const speed = Number(document.getElementById("speed").value);
+    const delay = Math.max(120, 1000 - speed * 85);
+
+    document.getElementById("playBtn").textContent = "Pause";
+    animationTimer = setInterval(() => {
+      stepIndex++;
+      if (stepIndex >= steps.length) {
+        render(-1);
+        stopAnimation();
+        return;
+      }
+      render(stepIndex);
+    }, delay);
+  }
+
+  function reset() {
+    stopAnimation();
+    Object.entries(original).forEach(([key, value]) => {
+      if (inputs[key]) inputs[key].value = value;
+    });
+    refresh();
+  }
+
+  function canvasToWorld(clientX, clientY) {
+    const rect = canvas.getBoundingClientRect();
+    const px = (clientX - rect.left) * canvas.width / rect.width;
+    const py = (clientY - rect.top) * canvas.height / rect.height;
+    return {
+      x: world.min + (px - padding) / scaleX(),
+      y: world.min + (H - padding - py) / scaleY()
+    };
+  }
+
+  function nearPoint(p, q) {
+    return Math.hypot(sx(p.x) - sx(q.x), sy(p.y) - sy(q.y)) < 18;
+  }
+
+  canvas.addEventListener("pointerdown", e => {
+    const state = getState();
+    const p = canvasToWorld(e.clientX, e.clientY);
+    if (nearPoint(p, state.p1)) dragPoint = "p1";
+    else if (nearPoint(p, state.p2)) dragPoint = "p2";
+    if (dragPoint) canvas.setPointerCapture(e.pointerId);
+  });
+
+  canvas.addEventListener("pointermove", e => {
+    if (!dragPoint) return;
+    const p = canvasToWorld(e.clientX, e.clientY);
+    inputs[dragPoint + "x"].value = p.x.toFixed(2);
+    inputs[dragPoint + "y"].value = p.y.toFixed(2);
+    refresh();
+  });
+
+  canvas.addEventListener("pointerup", () => dragPoint = null);
+
+  Object.values(inputs).forEach(input => input.addEventListener("input", refresh));
+  document.getElementById("clipBtn").addEventListener("click", () => { steps = calculateClip(getState()).history; stepIndex = -1; render(-1); });
+  document.getElementById("stepBtn").addEventListener("click", nextStep);
+  document.getElementById("playBtn").addEventListener("click", playAnimation);
+  document.getElementById("resetBtn").addEventListener("click", reset);
+
+  document.querySelectorAll(".problem-load").forEach(button => {
+    button.addEventListener("click", () => {
+      inputs.p1x.value = button.dataset.p1x;
+      inputs.p1y.value = button.dataset.p1y;
+      inputs.p2x.value = button.dataset.p2x;
+      inputs.p2y.value = button.dataset.p2y;
+      document.getElementById("live-lab").scrollIntoView({ behavior: "smooth" });
+      refresh();
+    });
+  });
+
+  refresh();
+})();
+</script>
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

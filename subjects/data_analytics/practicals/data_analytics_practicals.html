@@ -1,0 +1,2161 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Data Analytics Practicals | Rasika CodeLab</title>
+
+    <link rel="stylesheet" href="../../../css/style.css">
+
+    <style>
+
+        /* =====================================================
+           DATA ANALYTICS PRACTICALS
+        ===================================================== */
+
+        :root {
+            --da-orange: #ff8a2a;
+            --da-orange-light: #ffad62;
+
+            --da-bg: #07090d;
+            --da-bg-2: #0b0f15;
+
+            --da-card: #111720;
+            --da-card-2: #151c26;
+
+            --da-border: rgba(255,255,255,.09);
+
+            --da-text: #f4f5f7;
+            --da-soft: #c5cad2;
+            --da-muted: #8d96a3;
+        }
+
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+            margin: 0;
+            background: var(--da-bg);
+        }
+
+
+        .da-practical-page {
+            min-height: 100vh;
+            background: var(--da-bg);
+            color: var(--da-text);
+        }
+
+
+        .da-container {
+            width: min(1180px, calc(100% - 40px));
+            margin: auto;
+        }
+
+
+        /* =====================================================
+           SUB NAVIGATION
+        ===================================================== */
+
+        .da-subnav {
+            min-height: 50px;
+
+            border-bottom: 1px solid var(--da-border);
+
+            background: rgba(7,9,13,.96);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 max(20px, calc((100vw - 1180px) / 2));
+        }
+
+
+        .da-subnav-title {
+            color: var(--da-muted);
+
+            font-size: 9px;
+            font-weight: 800;
+
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+
+        .da-subnav-links {
+            display: flex;
+            gap: 6px;
+        }
+
+
+        .da-subnav-links a {
+            padding: 7px 11px;
+
+            border: 1px solid transparent;
+            border-radius: 7px;
+
+            color: var(--da-muted);
+
+            font-size: 9px;
+            font-weight: 600;
+
+            text-decoration: none;
+
+            transition: .2s ease;
+        }
+
+
+        .da-subnav-links a:hover,
+        .da-subnav-links a.active {
+            color: var(--da-orange);
+
+            background: rgba(255,138,42,.06);
+
+            border-color: rgba(255,138,42,.25);
+        }
+
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .practical-hero {
+            padding: 85px 0 75px;
+
+            border-bottom: 1px solid var(--da-border);
+
+            background:
+                radial-gradient(
+                    circle at 85% 20%,
+                    rgba(255,138,42,.14),
+                    transparent 32%
+                ),
+                var(--da-bg);
+        }
+
+
+        .hero-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            color: var(--da-orange);
+
+            font-size: 9px;
+            font-weight: 900;
+
+            letter-spacing: 2px;
+        }
+
+
+        .hero-kicker::before {
+            content: "";
+
+            width: 25px;
+            height: 1px;
+
+            background: var(--da-orange);
+        }
+
+
+        .practical-hero h1 {
+            max-width: 850px;
+
+            margin: 18px 0 15px;
+
+            font-size: clamp(43px, 6vw, 70px);
+
+            line-height: 1;
+
+            letter-spacing: -3px;
+        }
+
+
+        .practical-hero h1 span {
+            color: var(--da-orange);
+        }
+
+
+        .hero-description {
+            max-width: 720px;
+
+            margin: 0;
+
+            color: var(--da-muted);
+
+            font-size: 12px;
+
+            line-height: 1.8;
+        }
+
+
+        /* =====================================================
+           PROGRESS
+        ===================================================== */
+
+        .progress-wrapper {
+            margin-top: 35px;
+
+            display: flex;
+            gap: 8px;
+        }
+
+
+        .progress-item {
+            flex: 1;
+
+            height: 4px;
+
+            border-radius: 10px;
+
+            background: rgba(255,255,255,.08);
+        }
+
+
+        .progress-item.active {
+            background: var(--da-orange);
+        }
+
+
+        .progress-labels {
+            display: flex;
+            justify-content: space-between;
+
+            margin-top: 9px;
+
+            color: var(--da-muted);
+
+            font-size: 7px;
+        }
+
+
+        /* =====================================================
+           SECTION
+        ===================================================== */
+
+        .da-section {
+            padding: 75px 0;
+        }
+
+
+        .da-section.dark {
+            background: var(--da-bg-2);
+
+            border-block: 1px solid rgba(255,255,255,.04);
+        }
+
+
+        .section-heading {
+            margin-bottom: 35px;
+        }
+
+
+        .section-label {
+            color: var(--da-orange);
+
+            font-size: 9px;
+            font-weight: 900;
+
+            letter-spacing: 2px;
+        }
+
+
+        .section-heading h2 {
+            margin: 10px 0;
+
+            font-size: clamp(28px, 4vw, 42px);
+
+            letter-spacing: -1px;
+        }
+
+
+        .section-heading h2 span {
+            color: var(--da-orange);
+        }
+
+
+        .section-heading p {
+            max-width: 700px;
+
+            margin: 0;
+
+            color: var(--da-muted);
+
+            font-size: 10px;
+
+            line-height: 1.8;
+        }
+
+
+        /* =====================================================
+           PRACTICAL CARD
+        ===================================================== */
+
+        .practical-block {
+            margin-bottom: 45px;
+
+            padding: 30px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #141a23,
+                    #0d1118
+                );
+
+            border: 1px solid var(--da-border);
+
+            border-radius: 20px;
+
+            transition: .25s ease;
+        }
+
+
+        .practical-block:hover {
+            border-color: rgba(255,138,42,.35);
+        }
+
+
+        .practical-header {
+            display: flex;
+
+            align-items: flex-start;
+
+            justify-content: space-between;
+
+            gap: 25px;
+
+            padding-bottom: 25px;
+
+            border-bottom: 1px solid rgba(255,255,255,.07);
+        }
+
+
+        .practical-number {
+            color: var(--da-orange);
+
+            font-size: 11px;
+            font-weight: 900;
+
+            letter-spacing: 2px;
+        }
+
+
+        .practical-header h3 {
+            margin: 10px 0;
+
+            font-size: 27px;
+
+            line-height: 1.2;
+        }
+
+
+        .practical-header p {
+            max-width: 650px;
+
+            margin: 0;
+
+            color: var(--da-muted);
+
+            font-size: 10px;
+
+            line-height: 1.7;
+        }
+
+
+        .level-badge {
+            flex-shrink: 0;
+
+            padding: 7px 11px;
+
+            border: 1px solid rgba(255,138,42,.25);
+
+            border-radius: 50px;
+
+            color: var(--da-orange);
+
+            background: rgba(255,138,42,.05);
+
+            font-size: 7px;
+            font-weight: 800;
+
+            letter-spacing: 1px;
+        }
+
+
+        /* =====================================================
+           PROBLEM GRID
+        ===================================================== */
+
+        .problem-grid {
+            display: grid;
+
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+
+            gap: 15px;
+
+            margin-top: 25px;
+        }
+
+
+        .problem-card {
+            min-height: 275px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            padding: 21px;
+
+            background: rgba(255,255,255,.025);
+
+            border: 1px solid rgba(255,255,255,.07);
+
+            border-radius: 14px;
+
+            transition: .25s ease;
+        }
+
+
+        .problem-card:hover {
+            transform: translateY(-5px);
+
+            border-color: rgba(255,138,42,.35);
+
+            background: rgba(255,138,42,.025);
+        }
+
+
+        .problem-number {
+            color: var(--da-orange);
+
+            font-size: 8px;
+
+            font-weight: 900;
+
+            letter-spacing: 1.5px;
+        }
+
+
+        .problem-card h4 {
+            margin: 14px 0 9px;
+
+            font-size: 17px;
+
+            line-height: 1.3;
+        }
+
+
+        .problem-card > p {
+            margin: 0;
+
+            color: var(--da-muted);
+
+            font-size: 9px;
+
+            line-height: 1.7;
+        }
+
+
+        .problem-section {
+            margin-top: auto;
+
+            padding-top: 17px;
+        }
+
+
+        .problem-section-title {
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: var(--da-orange);
+
+            font-size: 7px;
+
+            font-weight: 800;
+
+            letter-spacing: 1px;
+        }
+
+
+        .problem-tags {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 5px;
+        }
+
+
+        .problem-tags span {
+            padding: 5px 7px;
+
+            border: 1px solid rgba(255,255,255,.07);
+
+            border-radius: 5px;
+
+            color: var(--da-soft);
+
+            font-size: 7px;
+        }
+
+
+        /* =====================================================
+           ANALYSIS + VISUALIZATION
+        ===================================================== */
+
+        .practical-output {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 15px;
+
+            margin-top: 15px;
+        }
+
+
+        .output-box {
+            padding: 21px;
+
+            background: #0c1016;
+
+            border: 1px solid rgba(255,255,255,.07);
+
+            border-radius: 13px;
+        }
+
+
+        .output-box h4 {
+            margin: 0 0 13px;
+
+            font-size: 13px;
+        }
+
+
+        .output-box h4 span {
+            color: var(--da-orange);
+        }
+
+
+        .output-list {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 6px;
+        }
+
+
+        .output-list span {
+            padding: 7px 9px;
+
+            background: rgba(255,255,255,.025);
+
+            border: 1px solid rgba(255,255,255,.06);
+
+            border-radius: 6px;
+
+            color: var(--da-soft);
+
+            font-size: 7px;
+        }
+
+
+        /* =====================================================
+           SKILLS BAR
+        ===================================================== */
+
+        .skills-bar {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 7px;
+
+            margin-top: 25px;
+
+            padding-top: 20px;
+
+            border-top: 1px solid rgba(255,255,255,.06);
+        }
+
+
+        .skill {
+            padding: 7px 10px;
+
+            border-radius: 50px;
+
+            background: rgba(255,138,42,.06);
+
+            border: 1px solid rgba(255,138,42,.15);
+
+            color: var(--da-orange);
+
+            font-size: 7px;
+
+            font-weight: 700;
+        }
+
+
+        /* =====================================================
+           FINAL OUTCOME
+        ===================================================== */
+
+        .outcome-grid {
+            display: grid;
+
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 13px;
+        }
+
+
+        .outcome-card {
+            padding: 22px;
+
+            background: var(--da-card);
+
+            border: 1px solid var(--da-border);
+
+            border-radius: 14px;
+        }
+
+
+        .outcome-number {
+            color: var(--da-orange);
+
+            font-size: 8px;
+
+            font-weight: 900;
+        }
+
+
+        .outcome-card h3 {
+            margin: 13px 0 8px;
+
+            font-size: 15px;
+        }
+
+
+        .outcome-card p {
+            margin: 0;
+
+            color: var(--da-muted);
+
+            font-size: 8px;
+
+            line-height: 1.7;
+        }
+
+
+        /* =====================================================
+           CTA
+        ===================================================== */
+
+        .final-section {
+            padding: 75px 0 90px;
+        }
+
+
+        .final-box {
+            padding: 45px;
+
+            text-align: center;
+
+            background:
+                radial-gradient(
+                    circle at 90% 10%,
+                    rgba(255,138,42,.14),
+                    transparent 35%
+                ),
+                var(--da-card);
+
+            border: 1px solid var(--da-border);
+
+            border-radius: 22px;
+        }
+
+
+        .final-box small {
+            color: var(--da-orange);
+
+            font-size: 8px;
+
+            font-weight: 900;
+
+            letter-spacing: 2px;
+        }
+
+
+        .final-box h2 {
+            margin: 13px 0;
+
+            font-size: clamp(28px, 4vw, 42px);
+        }
+
+
+        .final-box h2 span {
+            color: var(--da-orange);
+        }
+
+
+        .final-box p {
+            max-width: 650px;
+
+            margin: auto;
+
+            color: var(--da-muted);
+
+            font-size: 10px;
+
+            line-height: 1.8;
+        }
+
+
+        .final-buttons {
+            display: flex;
+
+            justify-content: center;
+
+            gap: 10px;
+
+            margin-top: 25px;
+        }
+
+
+        .final-btn {
+            padding: 11px 18px;
+
+            border: 1px solid var(--da-border);
+
+            border-radius: 8px;
+
+            color: var(--da-soft);
+
+            font-size: 8px;
+
+            font-weight: 800;
+
+            text-decoration: none;
+
+            transition: .2s ease;
+        }
+
+
+        .final-btn:hover {
+            color: var(--da-orange);
+
+            border-color: var(--da-orange);
+        }
+
+
+        .final-btn.primary {
+            background: var(--da-orange);
+
+            border-color: var(--da-orange);
+
+            color: #111;
+        }
+
+
+        .final-btn.primary:hover {
+            background: var(--da-orange-light);
+
+            color: #111;
+        }
+
+
+        /* =====================================================
+           TABLET
+        ===================================================== */
+
+        @media(max-width: 950px) {
+
+            .problem-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .outcome-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media(max-width: 700px) {
+
+            .da-container {
+                width: calc(100% - 30px);
+            }
+
+
+            .da-subnav {
+                padding: 10px 15px;
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 10px;
+            }
+
+
+            .da-subnav-links {
+                width: 100%;
+
+                overflow-x: auto;
+            }
+
+
+            .da-subnav-links a {
+                flex-shrink: 0;
+            }
+
+
+            .practical-hero {
+                padding: 65px 0;
+            }
+
+
+            .practical-hero h1 {
+                font-size: 43px;
+
+                letter-spacing: -2px;
+            }
+
+
+            .da-section {
+                padding: 60px 0;
+            }
+
+
+            .practical-header {
+                flex-direction: column;
+            }
+
+
+            .problem-grid,
+            .practical-output,
+            .outcome-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .practical-block {
+                padding: 20px;
+            }
+
+
+            .final-box {
+                padding: 30px 20px;
+            }
+
+
+            .final-buttons {
+                flex-direction: column;
+            }
+
+
+            .final-btn {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         MAIN NAVBAR
+    ===================================================== -->
+
+    <header class="navbar">
+
+        <div class="nav-container">
+
+            <a href="../../../index.html" class="logo">
+
+                <span class="logo-mark">&lt;/&gt;</span>
+
+                <span>
+                    Rasika<span class="logo-highlight">CodeLab</span>
+                </span>
+
+            </a>
+
+
+            <nav class="nav-links">
+
+                <a href="../../../index.html">
+                    Home
+                </a>
+
+                <a href="../../../subjects.html" class="active">
+                    Subjects
+                </a>
+
+                <a href="../../../about.html">
+                    About
+                </a>
+
+                <a href="../../../login.html">
+                    Login
+                </a>
+
+            </nav>
+
+
+            <button class="menu-btn" aria-label="Open menu">
+                â˜°
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         DATA ANALYTICS SUB NAV
+    ===================================================== -->
+
+    <div class="da-subnav">
+
+        <div class="da-subnav-title">
+            Data Analytics
+        </div>
+
+
+        <nav class="da-subnav-links">
+
+            <a href="../index.html">
+                Overview
+            </a>
+
+            <a href="../foundations/data_analytics_foundations.html">
+                Foundations
+            </a>
+
+            <a href="data_analytics_practicals.html"
+               class="active">
+                Practicals
+            </a>
+
+        </nav>
+
+    </div>
+
+
+    <main class="da-practical-page">
+
+
+        <!-- =====================================================
+             HERO
+        ===================================================== -->
+
+        <section class="practical-hero">
+
+            <div class="da-container">
+
+                <div class="hero-kicker">
+                    SUBJECT 04 Â· PRACTICALS
+                </div>
+
+
+                <h1>
+                    Learn Data Analytics
+                    <span>By Solving Problems.</span>
+                </h1>
+
+
+                <p class="hero-description">
+
+                    Five progressive practicals take you from
+                    understanding raw data to building analytical
+                    dashboards. Each practical contains three
+                    real-world problem statements, analysis tasks,
+                    visualization requirements and expected insights.
+
+                </p>
+
+
+                <div class="progress-wrapper">
+
+                    <div class="progress-item active"></div>
+                    <div class="progress-item active"></div>
+                    <div class="progress-item active"></div>
+                    <div class="progress-item active"></div>
+                    <div class="progress-item active"></div>
+
+                </div>
+
+
+                <div class="progress-labels">
+
+                    <span>01 Â· UNDERSTAND</span>
+                    <span>02 Â· CLEAN</span>
+                    <span>03 Â· EXPLORE</span>
+                    <span>04 Â· VISUALIZE</span>
+                    <span>05 Â· DASHBOARD</span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             PRACTICALS
+        ===================================================== -->
+
+        <section class="da-section">
+
+            <div class="da-container">
+
+
+                <div class="section-heading">
+
+                    <span class="section-label">
+                        05 PRACTICALS Â· 15 PROBLEMS
+                    </span>
+
+                    <h2>
+                        The Complete
+                        <span>Analytics Journey.</span>
+                    </h2>
+
+                    <p>
+                        Every practical builds on the previous one.
+                        Students progressively move from raw data
+                        to meaningful analytical decisions.
+                    </p>
+
+                </div>
+
+
+                <!-- =================================================
+                     PRACTICAL 01
+                ================================================= -->
+
+                <article class="practical-block">
+
+                    <div class="practical-header">
+
+                        <div>
+
+                            <span class="practical-number">
+                                PRACTICAL 01
+                            </span>
+
+                            <h3>
+                                Understand & Explore Real-World Data
+                            </h3>
+
+                            <p>
+                                Learn how to load a dataset, understand
+                                its structure, identify variables and
+                                perform the first level of exploration.
+                            </p>
+
+                        </div>
+
+                        <span class="level-badge">
+                            BEGINNER
+                        </span>
+
+                    </div>
+
+
+                    <div class="problem-grid">
+
+
+                        <article class="problem-card">
+
+                            <span class="problem-number">
+                                PROBLEM 01
+                            </span>
+
+                            <h4>
+                                E-Commerce Sales Analysis
+                            </h4>
+
+                            <p>
+                                Analyze an online store dataset to
+                                understand orders, products, categories
+                                and revenue.
+                            </p>
+
+
+                            <div class="problem-section">
+
+                                <span class="problem-section-title">
+                                    ANALYZE
+                                </span>
+
+                                <div class="problem-tags">
+                                    <span>Orders</span>
+                                    <span>Revenue</span>
+                                    <span>Products</span>
+                                    <span>Categories</span>
+                                </div>
+
+                            </div>
+
+                        </article>
+
+
+                        <article class="problem-card">
+
+                            <span class="problem-number">
+                                PROBLEM 02
+                            </span>
+
+                            <h4>
+                                Student Performance
+                            </h4>
+
+                            <p>
+                                Explore student marks and attendance
+                                to understand academic performance
+                                across a class.
+                            </p>
+
+
+                            <div class="problem-section">
+
+                                <span class="problem-section-title">
+                                    ANALYZE
+                                </span>
+
+                                <div class="problem-tags">
+                                    <span>Marks</span>
+                                    <span>Attendance</span>
+                                    <span>Subjects</span>
+                                </div>
+
+                            </div>
+
+                        </article>
+
+
+                        <article class="problem-card">
+
+                            <span class="problem-number">
+                                PROBLEM 03
+                            </span>
+
+                            <h4>
+                                Food Delivery Analysis
+                            </h4>
+
+                            <p>
+                                Explore orders, restaurants,
+                                locations and delivery information
+                                from a food delivery dataset.
+                            </p>
+
+
+                            <div class="problem-section">
+
+                                <span class="problem-section-title">
+                                    ANALYZE
+                                </span>
+
+                                <div class="problem-tags">
+                                    <span>Orders</span>
+                                    <span>Location</span>
+                                    <span>Restaurants</span>
+                                </div>
+
+                            </div>
+
+                        </article>
+
+                    </div>
+
+
+                    <div class="practical-output">
+
+                        <div class="output-box">
+
+                            <h4>
+                                What You Will <span>Analyze</span>
+                            </h4>
+
+                            <div class="output-list">
+
+                                <span>Rows & Columns</span>
+                                <span>Data Types</span>
+                                <span>Variables</span>
+                                <span>Categories</span>
+                                <span>Basic Statistics</span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="output-box">
+
+                            <h4>
+                                What You Will <span>Visualize</span>
+                            </h4>
+
+                            <div class="output-list">
+
+                                <span>Category Counts</span>
+                                <span>Basic Bar Chart</span>
+                                <span>Distribution</span>
+                                <span>Summary Charts</span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="skills-bar">
+
+                        <span class="skill">Python</span>
+                        <span class="skill">Pandas</span>
+                        <span class="skill">DataFrame</span>
+                        <span class="skill">Basic Statistics</span>
+
+                    </div>
+
+                </article>
+
+
+                <!-- =================================================
+                     PRACTICAL 02
+                ================================================= -->
+
+                <article class="practical-block">
+
+                    <div class="practical-header">
+
+                        <div>
+
+                            <span class="practical-number">
+                                PRACTICAL 02
+                            </span>
+
+                            <h3>
+                                Clean & Prepare Messy Data
+                            </h3>
+
+                            <p>
+                                Learn how real-world datasets contain
+                                missing values, duplicates, inconsistent
+                                formats and incorrect records.
+                            </p>
+
+                        </div>
+
+                        <span class="level-badge">
+                            BEGINNER +
+                        </span>
+
+                    </div>
+
+
+                    <div class="problem-grid">
+
+
+                        <article class="problem-card">
+
+                            <span class="problem-number">
+                                PROBLEM 01
+                            </span>
+
+                            <h4>
+                                Customer Data Cleaning
+                            </h4>
+
+                            <p>
+                                Clean customer records containing
+                                missing contact details, duplicate
+                                customers and inconsistent values.
+                            </p>
+
+                            <div class="problem-section">
+
+                                <span class="problem-section-title">
+                                    CLEAN
+                                </span>
+
+                                <div class="problem-tags">
+                                    <span>Missing Values</span>
+                                    <span>Duplicates</span>
+                                    <span>Formats</span>
+                                </div>
+
+                            </div>
+
+                        </article>
+
+
+                        <article class="problem-card">
+
+                            <span class="problem-number">
+                                PROBLEM 02
+                            </span>
+
+                            <h4>
+                                Employee Dataset
+                            </h4>
+
+                            <p>
+                                Prepare employee records containing
+                                incorrect department names, missing
+                                salary values and inconsistent dates.
+                            </p>
+
+                            <div class="problem-section">
+
+                                <span class="problem-section-title">
+                                    CLEAN
+                                </span>
+
+                                <div class="problem-tags">
+                                    <span>Salary</span>
+                                    <span>Dates</span>
+                                    <span>Categories</span>
+                                </div>
+
+                            </div>
+
+                        </article>
+
+
+                        <article class="problem-card">
+
+                            <span class="problem-number">
+                                PROBLEM 03
+                            </span>
+
+                            <h4>
+                                Retail Inventory
+                            </h4>
+
+                            <p>
+                                Detect invalid quantities, missing
+                                product information and unusual
+                                inventory values.
+                            </p>
+
+                            <div class="problem-section">
+
+                                <span class="problem-section-title">
+                                    CLEAN
+                                </span>
+
+                                <div class="problem-tags">
+                                    <span>Outliers</span>
+                                    <span>Invalid Data</span>
+                                    <span>Inventory</span>
+                                </div>
+
+                            </div>
+
+                        </article>
+
+                    </div>
+
+
+                    <div class="practical-output">
+
+                        <div class="output-box">
+
+                            <h4>
+                                What You Will <span>Analyze</span>
+                            </h4>
+
+                            <div class="output-list">
+                                <span>Missing Values</span>
+                                <span>Duplicates</span>
+                                <span>Outliers</span>
+                                <span>Invalid Records</span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="output-box">
+
+                            <h4>
+                                What You Will <span>Visualize</span>
+                            </h4>
+
+                            <div class="output-list">
+                                <span>Missing Data</span>
+                                <span>Before / After</span>
+                                <span>Outlier Plot</span>
+                                <span>Data Quality</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="skills-bar">
+
+                        <span class="skill">Pandas</span>
+                        <span class="skill">NumPy</span>
+                        <span class="skill">Data Cleaning</span>
+                        <span class="skill">Outlier Detection</span>
+
+                    </div>
+
+                </article>
+
+
+                <!-- =================================================
+                     PRACTICAL 03
+                ================================================= -->
+
+                <article class="practical-block">
+
+                    <div class="practical-header">
+
+                        <div>
+
+                            <span class="practical-number">
+                                PRACTICAL 03
+                            </span>
+
+                            <h3>
+                                Discover Patterns & Relationships
+                            </h3>
+
+                            <p>
+                                Move beyond cleaning and investigate
+                                trends, distributions, relationships,
+                                correlations and important patterns.
+                            </p>
+
+                        </div>
+
+                        <span class="level-badge">
+                            INTERMEDIATE
+                        </span>
+
+                    </div>
+
+
+                    <div class="problem-grid">
+
+
+                        <article class="problem-card">
+
+                            <span class="problem-number">
+                                PROBLEM 01
+                            </span>
+
+                            <h4>
+                                E-Commerce Trends
+                            </h4>
+
+                            <p>
+                                Discover monthly sales patterns,
+                                high-performing categories and
+                                changes in customer purchasing.
+                            </p>
+
+                            <div class="problem-section">
+
+                                <span class="problem-section-title">
+                                    EXPLORE
+                                </span>
+
+                                <div class="problem-tags">
+                                    <span>Trends</span>
+                                    <span>Sales</span>
+                                    <span>Categories</span>
+                                </div>
+
+                            </div>
+
+                        </article>
+
+
+                        <article class="problem-card">
+
+                            <span class="problem-number">
+                                PROBLEM 02
+                            </span>
+
+                            <h4>
+                                Banking Customer Analysis
+                            </h4>
+
+                            <p>
+                                Analyze customer income, spending
+                                and account activity to identify
+                                useful relationships.
+                            </p>
+
+                            <div class="problem-section">
+
+                                <span class="problem-section-title">
+                                    EXPLORE
+                                </span>
+
+                                <div class="problem-tags">
+                                    <span>Income</span>
+                                    <span>Spending</span>
+                                    <span>Correlation</span>
+                                </div>
+
+                            </div>
+
+                        </article>
+
+
+                        <article class="problem-card">
+
+                            <span class="problem-number">
+                                PROBLEM 03
+                            </span>
+
+                            <h4>
+                                Academic Performance
+                            </h4>
+
+                            <p>
+                                Investigate relationships between
+                                attendance, study patterns and
+                                student marks.
+                            </p>
+
+                            <div class="problem-section">
+
+                                <span class="problem-section-title">
+                                    EXPLORE
+                                </span>
+
+                                <div class="problem-tags">
+                                    <span>Attendance</span>
+                                    <span>Marks</span>
+                                    <span>Correlation</span>
+                                </div>
+
+                            </div>
+
+                        </article>
+
+                    </div>
+
+
+                    <div class="practical-output">
+
+                        <div class="output-box">
+
+                            <h4>
+                                What You Will <span>Analyze</span>
+                            </h4>
+
+                            <div class="output-list">
+                                <span>Mean</span>
+                                <span>Median</span>
+                                <span>Distribution</span>
+                                <span>Correlation</span>
+                                <span>Trends</span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="output-box">
+
+                            <h4>
+                                What You Will <span>Visualize</span>
+                            </h4>
+
+                            <div class="output-list">
+                                <span>Histogram</span>
+                                <span>Scatter Plot</span>
+                                <span>Box Plot</span>
+                                <span>Line Chart</span>
+                                <span>Heatmap</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="skills-bar">
+
+                        <span class="skill">EDA</span>
+                        <span class="skill">Statistics</span>
+                        <span class="skill">Matplotlib</span>
+                        <span class="skill">Seaborn</span>
+
+                    </div>
+
+                </article>
+
+
+                <!-- =================================================
+                     PRACTICAL 04
+                ================================================= -->
+
+                <article class="practical-block">
+
+                    <div class="practical-header">
+
+                        <div>
+
+                            <span class="practical-number">
+                                PRACTICAL 04
+                            </span>
+
+                            <h3>
+                                Transform Data Into Visual Stories
+                            </h3>
+
+                            <p>
+                                Learn to select the right visualization
+                                and communicate analytical findings
+                                through charts, KPIs and visual reports.
+                            </p>
+
+                        </div>
+
+                        <span class="level-badge">
+                            INTERMEDIATE +
+                        </span>
+
+                    </div>
+
+
+                    <div class="problem-grid">
+
+
+                        <article class="problem-card">
+
+                            <span class="problem-number">
+                                PROBLEM 01
+                            </span>
+
+                            <h4>
+                                Health Data Visualization
+                            </h4>
+
+                            <p>
+                                Visualize health-related trends and
+                                distributions to identify important
+                                patterns in a dataset.
+                            </p>
+
+                            <div class="problem-section">
+
+                                <span class="problem-section-title">
+                                    VISUALIZE
+                                </span>
+
+                                <div class="problem-tags">
+                                    <span>Trends</span>
+                                    <span>Distribution</span>
+                                    <span>Comparison</span>
+                                </div>
+
+                            </div>
+
+                        </article>
+
+
+                        <article class="problem-card">
+
+                            <span class="problem-number">
+                                PROBLEM 02
+                            </span>
+
+                            <h4>
+                                Business Sales Report
+                            </h4>
+
+                            <p>
+                                Create a visual sales report showing
+                                revenue, product performance and
+                                monthly trends.
+                            </p>
+
+                            <div class="problem-section">
+
+                                <span class="problem-section-title">
+                                    VISUALIZE
+                                </span>
+
+                                <div class="problem-tags">
+                                    <span>KPI</span>
+                                    <span>Revenue</span>
+                                    <span>Trend</span>
+                                </div>
+
+                            </div>
+
+                        </article>
+
+
+                        <article class="problem-card">
+
+                            <span class="problem-number">
+                                PROBLEM 03
+                            </span>
+
+                            <h4>
+                                Transport Analytics
+                            </h4>
+
+                            <p>
+                                Analyze transport usage by location,
+                                time and category and communicate
+                                the findings visually.
+                            </p>
+
+                            <div class="problem-section">
+
+                                <span class="problem-section-title">
+                                    VISUALIZE
+                                </span>
+
+                                <div class="problem-tags">
+                                    <span>Location</span>
+                                    <span>Time</span>
+                                    <span>Usage</span>
+                                </div>
+
+                            </div>
+
+                        </article>
+
+                    </div>
+
+
+                    <div class="practical-output">
+
+                        <div class="output-box">
+
+                            <h4>
+                                What You Will <span>Analyze</span>
+                            </h4>
+
+                            <div class="output-list">
+                                <span>Comparisons</span>
+                                <span>Trends</span>
+                                <span>KPIs</span>
+                                <span>Categories</span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="output-box">
+
+                            <h4>
+                                What You Will <span>Visualize</span>
+                            </h4>
+
+                            <div class="output-list">
+                                <span>Bar Chart</span>
+                                <span>Line Chart</span>
+                                <span>Pie Chart</span>
+                                <span>Heatmap</span>
+                                <span>KPI Cards</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="skills-bar">
+
+                        <span class="skill">Matplotlib</span>
+                        <span class="skill">Seaborn</span>
+                        <span class="skill">Plotly</span>
+                        <span class="skill">Visualization</span>
+
+                    </div>
+
+                </article>
+
+
+                <!-- =================================================
+                     PRACTICAL 05
+                ================================================= -->
+
+                <article class="practical-block">
+
+                    <div class="practical-header">
+
+                        <div>
+
+                            <span class="practical-number">
+                                PRACTICAL 05
+                            </span>
+
+                            <h3>
+                                Build an Insight-Driven Dashboard
+                            </h3>
+
+                            <p>
+                                Combine data preparation, analysis,
+                                KPIs, visualizations and storytelling
+                                into a complete decision-support dashboard.
+                            </p>
+
+                        </div>
+
+                        <span class="level-badge">
+                            ADVANCED
+                        </span>
+
+                    </div>
+
+
+                    <div class="problem-grid">
+
+
+                        <article class="problem-card">
+
+                            <span class="problem-number">
+                                PROBLEM 01
+                            </span>
+
+                            <h4>
+                                Business Performance Dashboard
+                            </h4>
+
+                            <p>
+                                Build an executive dashboard showing
+                                revenue, sales, products, categories
+                                and performance trends.
+                            </p>
+
+                            <div class="problem-section">
+
+                                <span class="problem-section-title">
+                                    DASHBOARD
+                                </span>
+
+                                <div class="problem-tags">
+                                    <span>Revenue</span>
+                                    <span>Sales</span>
+                                    <span>KPIs</span>
+                                </div>
+
+                            </div>
+
+                        </article>
+
+
+                        <article class="problem-card">
+
+                            <span class="problem-number">
+                                PROBLEM 02
+                            </span>
+
+                            <h4>
+                                Customer Insights Dashboard
+                            </h4>
+
+                            <p>
+                                Build a dashboard that helps a business
+                                understand customer behavior,
+                                purchasing and segments.
+                            </p>
+
+                            <div class="problem-section">
+
+                                <span class="problem-section-title">
+                                    DASHBOARD
+                                </span>
+
+                                <div class="problem-tags">
+                                    <span>Customers</span>
+                                    <span>Segments</span>
+                                    <span>Behavior</span>
+                                </div>
+
+                            </div>
+
+                        </article>
+
+
+                        <article class="problem-card">
+
+                            <span class="problem-number">
+                                PROBLEM 03
+                            </span>
+
+                            <h4>
+                                Student Analytics Dashboard
+                            </h4>
+
+                            <p>
+                                Create an academic dashboard showing
+                                performance, attendance, subject
+                                trends and students requiring attention.
+                            </p>
+
+                            <div class="problem-section">
+
+                                <span class="problem-section-title">
+                                    DASHBOARD
+                                </span>
+
+                                <div class="problem-tags">
+                                    <span>Marks</span>
+                                    <span>Attendance</span>
+                                    <span>Performance</span>
+                                </div>
+
+                            </div>
+
+                        </article>
+
+                    </div>
+
+
+                    <div class="practical-output">
+
+                        <div class="output-box">
+
+                            <h4>
+                                What You Will <span>Analyze</span>
+                            </h4>
+
+                            <div class="output-list">
+                                <span>KPIs</span>
+                                <span>Trends</span>
+                                <span>Segments</span>
+                                <span>Performance</span>
+                                <span>Insights</span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="output-box">
+
+                            <h4>
+                                What You Will <span>Build</span>
+                            </h4>
+
+                            <div class="output-list">
+                                <span>Dashboard</span>
+                                <span>KPI Cards</span>
+                                <span>Interactive Charts</span>
+                                <span>Filters</span>
+                                <span>Report</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="skills-bar">
+
+                        <span class="skill">Dashboard Design</span>
+                        <span class="skill">Plotly</span>
+                        <span class="skill">Dash</span>
+                        <span class="skill">Data Storytelling</span>
+                        <span class="skill">Decision Making</span>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             FINAL OUTCOME
+        ===================================================== -->
+
+        <section class="da-section dark">
+
+            <div class="da-container">
+
+                <div class="section-heading">
+
+                    <span class="section-label">
+                        PRACTICAL OUTCOME
+                    </span>
+
+                    <h2>
+                        From Dataset to
+                        <span>Decision.</span>
+                    </h2>
+
+                    <p>
+                        By completing all five practicals, students
+                        will experience the complete basic-to-advanced
+                        Data Analytics workflow.
+                    </p>
+
+                </div>
+
+
+                <div class="outcome-grid">
+
+
+                    <article class="outcome-card">
+
+                        <span class="outcome-number">
+                            01
+                        </span>
+
+                        <h3>
+                            Understand
+                        </h3>
+
+                        <p>
+                            Understand the structure and meaning
+                            of real-world datasets.
+                        </p>
+
+                    </article>
+
+
+                    <article class="outcome-card">
+
+                        <span class="outcome-number">
+                            02
+                        </span>
+
+                        <h3>
+                            Prepare
+                        </h3>
+
+                        <p>
+                            Clean and transform raw data into
+                            reliable analytical data.
+                        </p>
+
+                    </article>
+
+
+                    <article class="outcome-card">
+
+                        <span class="outcome-number">
+                            03
+                        </span>
+
+                        <h3>
+                            Discover
+                        </h3>
+
+                        <p>
+                            Find trends, patterns, relationships
+                            and useful insights.
+                        </p>
+
+                    </article>
+
+
+                    <article class="outcome-card">
+
+                        <span class="outcome-number">
+                            04
+                        </span>
+
+                        <h3>
+                            Communicate
+                        </h3>
+
+                        <p>
+                            Present findings using visualizations,
+                            dashboards and data stories.
+                        </p>
+
+                    </article>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             CTA
+        ===================================================== -->
+
+        <section class="final-section">
+
+            <div class="da-container">
+
+                <div class="final-box">
+
+                    <small>
+                        NEXT STEP
+                    </small>
+
+                    <h2>
+                        Start With
+                        <span>Practical 01.</span>
+                    </h2>
+
+                    <p>
+                        Begin with real-world data exploration and
+                        progressively build your analytical skills
+                        through all five practicals.
+                    </p>
+
+
+                    <div class="final-buttons">
+
+                        <a href="../foundations/../foundations/data_analytics_foundations.html"
+                           class="final-btn">
+                            â† Foundations
+                        </a>
+
+
+                        <a href="practical01.html"
+                           class="final-btn primary">
+                            Start Practical 01 â†’
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <script src="../../../js/main.js"></script>
+
+</body>
+
+</html>

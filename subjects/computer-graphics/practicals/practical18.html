@@ -1,0 +1,812 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>18 â€” 2D Interactive Graphics | Rasika CodeLab</title>
+  <link rel="stylesheet" href="../css/cgr_style.css">
+  <link rel="stylesheet" href="../css/cgr_practicals.css">
+<style>body.protected-page:not(.auth-ready){visibility:hidden}</style>
+</head>
+<body class="cgr-practical-body practical-18 protected-page">
+
+<header class="navbar">
+  <div class="logo">
+    <span class="logo-mark">&lt;/&gt;</span>
+    <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+  </div>
+  <nav class="nav-links">
+    <a href="../cgr_index.html">Home</a>
+    <a href="../cgr_foundations.html">Foundations</a>
+        <a href="../cgr_practicals.html" class="active">Practicals</a>
+    <a href="../../../about.html">About</a>
+  </nav>
+  <button class="menu-btn" aria-label="Open Menu">â˜°</button>
+</header>
+
+<main>
+  <section class="practical-hero">
+    <div class="container">
+      <div class="breadcrumb">Practicals / 18</div>
+      <span class="practical-number">P18</span>
+      <h1>2D Interactive Graphics using HTML Canvas</h1>
+      <p>Create and interact with 2D graphics directly in the browser using HTML Canvas, pointer events, paths and animation.</p>
+      <div class="hero-tags">
+        <span>HTML Canvas</span>
+        <span>JavaScript</span>
+        <span>Events</span>
+        <span>Animation</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">01</span>
+        <h2>Aim &amp; Objectives</h2>
+      </div>
+      <div class="content-card">
+        <p><strong>Aim:</strong> To create, draw and interact with 2D graphics directly inside a web browser using the HTML Canvas API.</p>
+        <ul>
+          <li>Understand the Canvas coordinate system and drawing context.</li>
+          <li>Draw lines, rectangles, circles and freehand paths.</li>
+          <li>Capture mouse, pointer and touch interaction through events.</li>
+          <li>Convert browser coordinates into Canvas coordinates.</li>
+          <li>Move and edit graphical objects interactively.</li>
+          <li>Understand the animation loop used for dynamic graphics.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">02</span>
+        <h2>Theory â€” Canvas as a 2D Graphics Surface</h2>
+      </div>
+      <div class="content-grid">
+        <article class="content-card">
+          <h3>What is HTML Canvas?</h3>
+          <p>The <code>&lt;canvas&gt;</code> element provides a drawable pixel surface in the browser. JavaScript obtains a rendering context and uses it to create 2D graphics.</p>
+          <pre><code>const canvas = document.querySelector("canvas");
+const ctx = canvas.getContext("2d");
+
+ctx.beginPath();
+ctx.moveTo(40, 40);
+ctx.lineTo(180, 100);
+ctx.stroke();</code></pre>
+        </article>
+
+        <article class="content-card">
+          <h3>Coordinate System</h3>
+          <p>The Canvas origin is at the top-left corner. X increases toward the right and Y increases downward.</p>
+          <div class="formula-box">
+            <strong>Canvas Point</strong>
+            <p>(x, y) â†’ horizontal position x, vertical position y</p>
+          </div>
+          <ul>
+            <li>Origin = (0, 0)</li>
+            <li>Right = +X</li>
+            <li>Down = +Y</li>
+          </ul>
+        </article>
+
+        <article class="content-card">
+          <h3>Drawing Primitives</h3>
+          <ul>
+            <li><code>moveTo()</code> and <code>lineTo()</code> â€” paths and lines</li>
+            <li><code>stroke()</code> â€” outlines</li>
+            <li><code>fillRect()</code> â€” filled rectangles</li>
+            <li><code>arc()</code> â€” circles and arcs</li>
+            <li><code>fill()</code> â€” fills a closed path</li>
+          </ul>
+        </article>
+
+        <article class="content-card">
+          <h3>Interaction</h3>
+          <p>Pointer events provide a common way to handle mouse, pen and touch input.</p>
+          <pre><code>canvas.addEventListener("pointerdown", start);
+canvas.addEventListener("pointermove", move);
+canvas.addEventListener("pointerup", end);</code></pre>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">03</span>
+        <h2>Coordinate Mapping &amp; Calculation</h2>
+      </div>
+      <div class="content-card">
+        <p>Pointer coordinates are measured relative to the browser viewport, while Canvas drawing uses coordinates relative to the Canvas itself. The Canvas bounding rectangle is used to perform the conversion.</p>
+        <div class="formula-box">
+          <strong>Pointer â†’ Canvas</strong>
+          <p>x<sub>canvas</sub> = x<sub>pointer</sub> âˆ’ left</p>
+          <p>y<sub>canvas</sub> = y<sub>pointer</sub> âˆ’ top</p>
+        </div>
+        <h3>Worked Calculation</h3>
+        <p>Suppose the Canvas begins at browser position <strong>(120, 80)</strong> and the pointer is at <strong>(310, 230)</strong>.</p>
+        <div class="calculation-steps">
+          <p><strong>Step 1:</strong> x = 310 âˆ’ 120 = <strong>190</strong></p>
+          <p><strong>Step 2:</strong> y = 230 âˆ’ 80 = <strong>150</strong></p>
+          <p><strong>Result:</strong> The drawing point inside Canvas is <strong>(190, 150)</strong>.</p>
+        </div>
+        <p class="note"><strong>Note:</strong> When the Canvas is visually scaled with CSS, robust applications also account for the ratio between its internal drawing size and displayed size.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">04</span>
+        <h2>Interactive Canvas Drawing Lab</h2>
+      </div>
+
+      <div class="interactive-lab content-card">
+        <div class="lab-controls">
+          <label>Tool
+            <select id="toolSelect">
+              <option value="line">Line</option>
+              <option value="rect">Rectangle</option>
+              <option value="circle">Circle</option>
+              <option value="freehand">Freehand</option>
+              <option value="select">Select / Move</option>
+            </select>
+          </label>
+
+          <label>Color
+            <input type="color" id="colorPicker" value="#ff7a18">
+          </label>
+
+          <label>Line Width
+            <input type="range" id="widthRange" min="1" max="12" value="3">
+            <span id="widthValue">3 px</span>
+          </label>
+
+          <button class="btn" id="gridBtn">Grid: ON</button>
+          <button class="btn" id="undoBtn">Undo</button>
+          <button class="btn" id="clearBtn">Clear</button>
+        </div>
+
+        <div class="canvas-stage">
+          <canvas id="drawCanvas" width="900" height="500"></canvas>
+          <div class="canvas-coordinates" id="coordinateReadout">Pointer: â€”</div>
+        </div>
+
+        <div class="lab-status">
+          <span id="toolStatus">Tool: Line</span>
+          <span id="shapeStatus">Objects: 0</span>
+          <span id="interactionStatus">Ready</span>
+        </div>
+      </div>
+
+      <div class="content-card">
+        <h3>How to Use</h3>
+        <ol>
+          <li>Select a drawing tool.</li>
+          <li>Press and drag on the Canvas to create the object.</li>
+          <li>Use <strong>Select / Move</strong> to drag an existing object.</li>
+          <li>Change color and line width before creating new objects.</li>
+          <li>Use Undo to remove the latest object or Clear to reset the board.</li>
+          <li>Move the pointer over the Canvas and observe its Canvas coordinates.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">05</span>
+        <h2>Interactive Graphics: What Actually Happens?</h2>
+      </div>
+      <div class="process-grid">
+        <div class="process-card"><span>1</span><h3>Input</h3><p>User presses, moves or releases a pointer.</p></div>
+        <div class="process-card"><span>2</span><h3>Coordinate</h3><p>Browser coordinates are converted into Canvas coordinates.</p></div>
+        <div class="process-card"><span>3</span><h3>Object</h3><p>The program creates or updates geometric data.</p></div>
+        <div class="process-card"><span>4</span><h3>Render</h3><p>The Canvas is redrawn from the current object state.</p></div>
+        <div class="process-card"><span>5</span><h3>Feedback</h3><p>The user immediately sees the result and can interact again.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">06</span>
+        <h2>Animation in Canvas</h2>
+      </div>
+      <div class="content-grid">
+        <article class="content-card">
+          <h3>Animation Loop</h3>
+          <p>Canvas animation repeatedly updates the scene and redraws it. The browser's <code>requestAnimationFrame()</code> API is commonly used for smooth visual updates.</p>
+          <pre><code>function animate(time) {
+  update(time);
+  draw();
+  requestAnimationFrame(animate);
+}
+
+requestAnimationFrame(animate);</code></pre>
+        </article>
+
+        <article class="content-card">
+          <h3>Mini Animation Demo</h3>
+          <canvas id="animationCanvas" width="500" height="220"></canvas>
+          <div class="lab-controls">
+            <button class="btn" id="animationBtn">Pause Animation</button>
+            <button class="btn" id="resetAnimationBtn">Reset</button>
+          </div>
+          <p id="animationStatus">Running â€” observe the moving object.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">07</span>
+        <h2>Real-Life Problem Statements</h2>
+      </div>
+      <div class="problem-grid">
+        <article class="problem-card">
+          <span class="problem-number">01</span>
+          <h3>Simple Paint Application</h3>
+          <p>Create a browser-based drawing board where users can draw freehand strokes, choose colors, change brush width and erase their work.</p>
+          <div class="mini-viewer" data-problem="paint">
+            <canvas class="problem-canvas" width="420" height="190"></canvas>
+            <button class="btn problem-action">Try Visualization</button>
+          </div>
+        </article>
+
+        <article class="problem-card">
+          <span class="problem-number">02</span>
+          <h3>Interactive Dashboard Chart</h3>
+          <p>Draw bars and labels on Canvas and allow the user to hover over a data point to display its value.</p>
+          <div class="mini-viewer" data-problem="chart">
+            <canvas class="problem-canvas" width="420" height="190"></canvas>
+            <button class="btn problem-action">Try Visualization</button>
+          </div>
+        </article>
+
+        <article class="problem-card">
+          <span class="problem-number">03</span>
+          <h3>2D Game Scene</h3>
+          <p>Create a small interactive scene containing a player, obstacles and a moving target controlled through pointer interaction.</p>
+          <div class="mini-viewer" data-problem="game">
+            <canvas class="problem-canvas" width="420" height="190"></canvas>
+            <button class="btn problem-action">Try Visualization</button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">08</span>
+        <h2>Experiments</h2>
+      </div>
+      <div class="content-card">
+        <ol>
+          <li>Draw the same shape with different line widths and compare the visual result.</li>
+          <li>Create a freehand drawing and observe how pointer sampling affects the path.</li>
+          <li>Turn the grid off and estimate coordinates visually. Then verify them with the coordinate readout.</li>
+          <li>Move objects using Select / Move and observe that the object data changes while the Canvas is redrawn.</li>
+          <li>Modify the animation speed in the JavaScript loop and observe frame-to-frame motion.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">09</span>
+        <h2>Common Mistakes</h2>
+      </div>
+      <div class="content-card">
+        <ul>
+          <li>Using page coordinates directly instead of converting them to Canvas coordinates.</li>
+          <li>Forgetting <code>beginPath()</code> when creating independent paths.</li>
+          <li>Mixing up Canvas width/height attributes with CSS display dimensions.</li>
+          <li>Changing an object without redrawing the Canvas.</li>
+          <li>Creating an uncontrolled animation loop without <code>requestAnimationFrame()</code>.</li>
+          <li>Not storing graphical objects when later interaction, selection or undo is required.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section viva-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">10</span>
+        <h2>Viva Questions</h2>
+      </div>
+      <div class="viva-list">
+        <details><summary>What is HTML Canvas?</summary><p>Canvas is an HTML element that provides a drawable graphics surface controlled through JavaScript.</p></details>
+        <details><summary>Where is the origin of a Canvas?</summary><p>The default origin is at the top-left corner, at coordinate (0, 0).</p></details>
+        <details><summary>What is the purpose of getContext("2d")?</summary><p>It obtains the 2D rendering context used for drawing and manipulating 2D graphics.</p></details>
+        <details><summary>Why do we convert pointer coordinates?</summary><p>Pointer events provide viewport coordinates, while drawing requires coordinates relative to the Canvas.</p></details>
+        <details><summary>What is requestAnimationFrame()?</summary><p>It schedules a callback for the browser's next repaint and is commonly used to implement smooth animation.</p></details>
+        <details><summary>How can Canvas graphics become interactive?</summary><p>Store graphical objects and update their geometry in response to pointer or keyboard events, then redraw the scene.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-navigation">
+    <div class="container">
+      <a href="practical17.html" class="nav-practical prev">â† Practical 17<span>B-Spline Curve Visualizer</span></a>
+      <a href="practical19.html" class="nav-practical next">Practical 19 â†’<span>3D Scene using Three.js</span></a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer-main">
+    <div class="footer-brand">
+      <div class="logo">
+        <span class="logo-mark">&lt;/&gt;</span>
+        <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+      </div>
+      <p>Interactive Computer Graphics practical learning through concepts, calculations and visualization.</p>
+    </div>
+    <div class="footer-links">
+      <div>
+        <h4>Learn</h4>
+        <a href="../cgr_foundations.html">Foundations</a>
+              </div>
+      <div>
+        <h4>Practice</h4>
+        <a href="../cgr_practicals.html">Practicals</a>
+        <a href="../../../about.html">About</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>Â© 2026 Rasika CodeLab</span>
+    <span>Built for practical learning.</span>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const canvas = document.getElementById("drawCanvas");
+  const ctx = canvas.getContext("2d");
+  const toolSelect = document.getElementById("toolSelect");
+  const colorPicker = document.getElementById("colorPicker");
+  const widthRange = document.getElementById("widthRange");
+  const widthValue = document.getElementById("widthValue");
+  const coordinateReadout = document.getElementById("coordinateReadout");
+  const toolStatus = document.getElementById("toolStatus");
+  const shapeStatus = document.getElementById("shapeStatus");
+  const interactionStatus = document.getElementById("interactionStatus");
+  const gridBtn = document.getElementById("gridBtn");
+  const undoBtn = document.getElementById("undoBtn");
+  const clearBtn = document.getElementById("clearBtn");
+
+  let objects = [];
+  let drawing = false;
+  let startPoint = null;
+  let currentPoint = null;
+  let activeObject = null;
+  let dragOffset = null;
+  let gridOn = true;
+
+  function pointFromEvent(event) {
+    const rect = canvas.getBoundingClientRect();
+    return {
+      x: (event.clientX - rect.left) * canvas.width / rect.width,
+      y: (event.clientY - rect.top) * canvas.height / rect.height
+    };
+  }
+
+  function distance(a, b) {
+    return Math.hypot(a.x - b.x, a.y - b.y);
+  }
+
+  function drawGrid() {
+    if (!gridOn) return;
+    ctx.save();
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = "rgba(128,128,128,0.16)";
+    for (let x = 0; x <= canvas.width; x += 25) {
+      ctx.beginPath();
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, canvas.height);
+      ctx.stroke();
+    }
+    for (let y = 0; y <= canvas.height; y += 25) {
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      ctx.lineTo(canvas.width, y);
+      ctx.stroke();
+    }
+    ctx.restore();
+  }
+
+  function drawObject(obj) {
+    ctx.save();
+    ctx.strokeStyle = obj.color;
+    ctx.fillStyle = obj.color;
+    ctx.lineWidth = obj.width;
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+
+    if (obj.type === "line") {
+      ctx.beginPath();
+      ctx.moveTo(obj.x1, obj.y1);
+      ctx.lineTo(obj.x2, obj.y2);
+      ctx.stroke();
+    }
+
+    if (obj.type === "rect") {
+      ctx.strokeRect(obj.x, obj.y, obj.w, obj.h);
+    }
+
+    if (obj.type === "circle") {
+      ctx.beginPath();
+      ctx.arc(obj.cx, obj.cy, obj.r, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+
+    if (obj.type === "freehand") {
+      if (obj.points.length > 1) {
+        ctx.beginPath();
+        ctx.moveTo(obj.points[0].x, obj.points[0].y);
+        obj.points.slice(1).forEach(p => ctx.lineTo(p.x, p.y));
+        ctx.stroke();
+      }
+    }
+
+    if (obj === activeObject) {
+      ctx.setLineDash([5, 5]);
+      ctx.strokeStyle = "rgba(255,122,24,0.8)";
+      ctx.lineWidth = 1;
+      const b = bounds(obj);
+      ctx.strokeRect(b.x - 5, b.y - 5, b.w + 10, b.h + 10);
+      ctx.setLineDash([]);
+    }
+    ctx.restore();
+  }
+
+  function bounds(obj) {
+    if (obj.type === "line") {
+      return {
+        x: Math.min(obj.x1, obj.x2),
+        y: Math.min(obj.y1, obj.y2),
+        w: Math.abs(obj.x2 - obj.x1),
+        h: Math.abs(obj.y2 - obj.y1)
+      };
+    }
+    if (obj.type === "rect") {
+      return {
+        x: Math.min(obj.x, obj.x + obj.w),
+        y: Math.min(obj.y, obj.y + obj.h),
+        w: Math.abs(obj.w),
+        h: Math.abs(obj.h)
+      };
+    }
+    if (obj.type === "circle") {
+      return { x: obj.cx - obj.r, y: obj.cy - obj.r, w: obj.r * 2, h: obj.r * 2 };
+    }
+    const xs = obj.points.map(p => p.x);
+    const ys = obj.points.map(p => p.y);
+    return {
+      x: Math.min(...xs),
+      y: Math.min(...ys),
+      w: Math.max(...xs) - Math.min(...xs),
+      h: Math.max(...ys) - Math.min(...ys)
+    };
+  }
+
+  function hitTest(obj, p) {
+    const b = bounds(obj);
+    const margin = 10;
+    if (obj.type === "circle") return distance({x: obj.cx, y: obj.cy}, p) <= obj.r + margin;
+    return p.x >= b.x - margin && p.x <= b.x + b.w + margin &&
+           p.y >= b.y - margin && p.y <= b.y + b.h + margin;
+  }
+
+  function moveObject(obj, dx, dy) {
+    if (obj.type === "line") {
+      obj.x1 += dx; obj.y1 += dy; obj.x2 += dx; obj.y2 += dy;
+    } else if (obj.type === "rect") {
+      obj.x += dx; obj.y += dy;
+    } else if (obj.type === "circle") {
+      obj.cx += dx; obj.cy += dy;
+    } else {
+      obj.points.forEach(p => { p.x += dx; p.y += dy; });
+    }
+  }
+
+  function redraw(preview = false) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawGrid();
+    objects.forEach(drawObject);
+
+    if (preview && startPoint && currentPoint) {
+      const color = colorPicker.value;
+      const width = Number(widthRange.value);
+      ctx.save();
+      ctx.strokeStyle = color;
+      ctx.lineWidth = width;
+      ctx.lineCap = "round";
+
+      if (toolSelect.value === "line") {
+        ctx.beginPath();
+        ctx.moveTo(startPoint.x, startPoint.y);
+        ctx.lineTo(currentPoint.x, currentPoint.y);
+        ctx.stroke();
+      } else if (toolSelect.value === "rect") {
+        ctx.strokeRect(startPoint.x, startPoint.y,
+          currentPoint.x - startPoint.x, currentPoint.y - startPoint.y);
+      } else if (toolSelect.value === "circle") {
+        ctx.beginPath();
+        ctx.arc(startPoint.x, startPoint.y, distance(startPoint, currentPoint), 0, Math.PI * 2);
+        ctx.stroke();
+      } else if (toolSelect.value === "freehand" && currentPoint.path) {
+        ctx.beginPath();
+        ctx.moveTo(currentPoint.path[0].x, currentPoint.path[0].y);
+        currentPoint.path.slice(1).forEach(p => ctx.lineTo(p.x, p.y));
+        ctx.stroke();
+      }
+      ctx.restore();
+    }
+
+    shapeStatus.textContent = "Objects: " + objects.length;
+  }
+
+  function createObject() {
+    if (!startPoint || !currentPoint) return;
+    const color = colorPicker.value;
+    const width = Number(widthRange.value);
+    let obj = null;
+
+    if (toolSelect.value === "line") {
+      obj = {type: "line", x1: startPoint.x, y1: startPoint.y, x2: currentPoint.x, y2: currentPoint.y, color, width};
+    } else if (toolSelect.value === "rect") {
+      obj = {type: "rect", x: startPoint.x, y: startPoint.y, w: currentPoint.x - startPoint.x, h: currentPoint.y - startPoint.y, color, width};
+    } else if (toolSelect.value === "circle") {
+      obj = {type: "circle", cx: startPoint.x, cy: startPoint.y, r: distance(startPoint, currentPoint), color, width};
+    } else if (toolSelect.value === "freehand") {
+      obj = {type: "freehand", points: currentPoint.path || [startPoint, currentPoint], color, width};
+    }
+
+    if (obj) objects.push(obj);
+  }
+
+  canvas.addEventListener("pointerdown", event => {
+    const p = pointFromEvent(event);
+    canvas.setPointerCapture(event.pointerId);
+
+    if (toolSelect.value === "select") {
+      activeObject = [...objects].reverse().find(obj => hitTest(obj, p)) || null;
+      if (activeObject) {
+        dragOffset = {x: p.x, y: p.y};
+        interactionStatus.textContent = "Selected â€” drag to move";
+      } else {
+        interactionStatus.textContent = "No object selected";
+      }
+      redraw();
+      return;
+    }
+
+    drawing = true;
+    startPoint = p;
+    currentPoint = toolSelect.value === "freehand" ? { ...p, path: [p] } : p;
+    interactionStatus.textContent = "Drawingâ€¦";
+  });
+
+  canvas.addEventListener("pointermove", event => {
+    const p = pointFromEvent(event);
+    coordinateReadout.textContent = "Pointer: (" + Math.round(p.x) + ", " + Math.round(p.y) + ")";
+
+    if (toolSelect.value === "select" && activeObject && dragOffset) {
+      const dx = p.x - dragOffset.x;
+      const dy = p.y - dragOffset.y;
+      moveObject(activeObject, dx, dy);
+      dragOffset = p;
+      redraw();
+      return;
+    }
+
+    if (!drawing) return;
+
+    if (toolSelect.value === "freehand") {
+      currentPoint.path.push(p);
+    } else {
+      currentPoint = p;
+    }
+    redraw(true);
+  });
+
+  function finishDrawing(event) {
+    if (!drawing) return;
+    if (event) currentPoint = pointFromEvent(event);
+    if (toolSelect.value === "freehand" && currentPoint && currentPoint.path) {
+      currentPoint.path.push(currentPoint);
+    }
+    createObject();
+    drawing = false;
+    startPoint = null;
+    currentPoint = null;
+    interactionStatus.textContent = "Ready";
+    redraw();
+  }
+
+  canvas.addEventListener("pointerup", finishDrawing);
+  canvas.addEventListener("pointercancel", finishDrawing);
+  canvas.addEventListener("pointerleave", event => {
+    if (!drawing) coordinateReadout.textContent = "Pointer: â€”";
+  });
+
+  toolSelect.addEventListener("change", () => {
+    activeObject = null;
+    toolStatus.textContent = "Tool: " + toolSelect.options[toolSelect.selectedIndex].text;
+    redraw();
+  });
+
+  widthRange.addEventListener("input", () => {
+    widthValue.textContent = widthRange.value + " px";
+  });
+
+  gridBtn.addEventListener("click", () => {
+    gridOn = !gridOn;
+    gridBtn.textContent = "Grid: " + (gridOn ? "ON" : "OFF");
+    redraw();
+  });
+
+  undoBtn.addEventListener("click", () => {
+    objects.pop();
+    activeObject = null;
+    interactionStatus.textContent = "Last object removed";
+    redraw();
+  });
+
+  clearBtn.addEventListener("click", () => {
+    objects = [];
+    activeObject = null;
+    interactionStatus.textContent = "Canvas cleared";
+    redraw();
+  });
+
+  redraw();
+
+  const animationCanvas = document.getElementById("animationCanvas");
+  const actx = animationCanvas.getContext("2d");
+  const animationBtn = document.getElementById("animationBtn");
+  const resetAnimationBtn = document.getElementById("resetAnimationBtn");
+  const animationStatus = document.getElementById("animationStatus");
+  let animX = 35;
+  let direction = 1;
+  let paused = false;
+  let lastTime = 0;
+
+  function animationFrame(time) {
+    if (!lastTime) lastTime = time;
+    const delta = Math.min(40, time - lastTime);
+    lastTime = time;
+
+    if (!paused) {
+      animX += direction * delta * 0.12;
+      if (animX > animationCanvas.width - 35) {
+        animX = animationCanvas.width - 35;
+        direction = -1;
+      }
+      if (animX < 35) {
+        animX = 35;
+        direction = 1;
+      }
+    }
+
+    actx.clearRect(0, 0, animationCanvas.width, animationCanvas.height);
+    actx.beginPath();
+    actx.moveTo(25, animationCanvas.height / 2);
+    actx.lineTo(animationCanvas.width - 25, animationCanvas.height / 2);
+    actx.stroke();
+
+    actx.beginPath();
+    actx.arc(animX, animationCanvas.height / 2, 22, 0, Math.PI * 2);
+    actx.fill();
+
+    requestAnimationFrame(animationFrame);
+  }
+
+  animationBtn.addEventListener("click", () => {
+    paused = !paused;
+    animationBtn.textContent = paused ? "Resume Animation" : "Pause Animation";
+    animationStatus.textContent = paused ? "Paused â€” the render loop is still running." : "Running â€” observe the moving object.";
+  });
+
+  resetAnimationBtn.addEventListener("click", () => {
+    animX = 35;
+    direction = 1;
+    paused = false;
+    animationBtn.textContent = "Pause Animation";
+    animationStatus.textContent = "Running â€” animation reset.";
+  });
+
+  requestAnimationFrame(animationFrame);
+
+  function setupProblemViewer(viewer) {
+    const problemCanvas = viewer.querySelector(".problem-canvas");
+    const pctx = problemCanvas.getContext("2d");
+    const button = viewer.querySelector(".problem-action");
+    const type = viewer.dataset.problem;
+    let running = false;
+    let frame = 0;
+
+    function drawProblem() {
+      pctx.clearRect(0, 0, problemCanvas.width, problemCanvas.height);
+      pctx.lineWidth = 2;
+
+      if (type === "paint") {
+        pctx.beginPath();
+        pctx.moveTo(45, 140);
+        for (let x = 45; x <= 370; x += 18) {
+          pctx.lineTo(x, 100 + Math.sin(x * 0.08) * 30);
+        }
+        pctx.stroke();
+        pctx.beginPath();
+        pctx.arc(100, 55, 18, 0, Math.PI * 2);
+        pctx.stroke();
+        pctx.beginPath();
+        pctx.arc(145, 75, 12, 0, Math.PI * 2);
+        pctx.stroke();
+      }
+
+      if (type === "chart") {
+        const values = [60, 110, 80, 145, 95];
+        values.forEach((h, i) => {
+          pctx.fillRect(55 + i * 65, 160 - h, 38, h);
+        });
+        pctx.beginPath();
+        pctx.moveTo(35, 160);
+        pctx.lineTo(390, 160);
+        pctx.stroke();
+      }
+
+      if (type === "game") {
+        const targetX = 300 + Math.sin(frame * 0.05) * 80;
+        pctx.beginPath();
+        pctx.arc(targetX, 65, 15, 0, Math.PI * 2);
+        pctx.stroke();
+        pctx.strokeRect(40, 120, 60, 35);
+        pctx.strokeRect(180, 90, 55, 65);
+        pctx.beginPath();
+        pctx.moveTo(105, 137);
+        pctx.lineTo(180, 137);
+        pctx.stroke();
+        if (running) frame++;
+      }
+    }
+
+    function loop() {
+      drawProblem();
+      if (running) requestAnimationFrame(loop);
+    }
+
+    button.addEventListener("click", () => {
+      running = !running;
+      button.textContent = running ? "Pause Visualization" : "Try Visualization";
+      if (running) requestAnimationFrame(loop);
+    });
+
+    drawProblem();
+  }
+
+  document.querySelectorAll(".mini-viewer").forEach(setupProblemViewer);
+})();
+</script>
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

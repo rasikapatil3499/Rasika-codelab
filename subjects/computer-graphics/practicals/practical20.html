@@ -1,0 +1,801 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>20 â€” 3D Transformation, Lighting &amp; Texture | Rasika CodeLab</title>
+  <link rel="stylesheet" href="../css/cgr_style.css">
+  <link rel="stylesheet" href="../css/cgr_practicals.css">
+<style>body.protected-page:not(.auth-ready){visibility:hidden}</style>
+</head>
+<body class="cgr-practical-body practical-20 protected-page">
+
+<header class="navbar">
+  <div class="logo">
+    <span class="logo-mark">&lt;/&gt;</span>
+    <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+  </div>
+  <nav class="nav-links">
+    <a href="../cgr_index.html">Home</a>
+    <a href="../cgr_foundations.html">Foundations</a>
+        <a href="../cgr_practicals.html" class="active">Practicals</a>
+    <a href="../../../about.html">About</a>
+  </nav>
+  <button class="menu-btn" aria-label="Open Menu">â˜°</button>
+</header>
+
+<main>
+  <section class="practical-hero">
+    <div class="container">
+      <div class="breadcrumb">Practicals / 20</div>
+      <span class="practical-number">P20</span>
+      <h1>3D Transformation, Lighting &amp; Texture</h1>
+      <p>Transform 3D objects and study how lighting, materials and textures change the appearance of a rendered scene.</p>
+      <div class="hero-tags">
+        <span>3D Transformations</span>
+        <span>Lighting</span>
+        <span>Materials</span>
+        <span>Texture Mapping</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">01</span>
+        <h2>Aim &amp; Objectives</h2>
+      </div>
+      <div class="content-card">
+        <p><strong>Aim:</strong> To apply 3D transformations and understand the visual effects of lighting, materials and texture mapping in a 3D graphics scene.</p>
+        <ul>
+          <li>Apply translation, scaling and rotation to 3D objects.</li>
+          <li>Understand homogeneous coordinates and 4Ã—4 transformation matrices.</li>
+          <li>Understand ambient, directional and point lighting.</li>
+          <li>Study material properties such as roughness and metalness.</li>
+          <li>Understand texture coordinates and texture mapping.</li>
+          <li>Compare the appearance of an object under different rendering conditions.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">02</span>
+        <h2>3D Transformation Theory</h2>
+      </div>
+
+      <div class="content-grid">
+        <article class="content-card">
+          <h3>Translation</h3>
+          <p>Translation changes the position of an object without changing its shape or orientation.</p>
+          <div class="formula-box">
+            <p>xâ€² = x + t<sub>x</sub></p>
+            <p>yâ€² = y + t<sub>y</sub></p>
+            <p>zâ€² = z + t<sub>z</sub></p>
+          </div>
+        </article>
+
+        <article class="content-card">
+          <h3>Scaling</h3>
+          <p>Scaling changes the dimensions of an object along the three axes.</p>
+          <div class="formula-box">
+            <p>xâ€² = s<sub>x</sub>x</p>
+            <p>yâ€² = s<sub>y</sub>y</p>
+            <p>zâ€² = s<sub>z</sub>z</p>
+          </div>
+        </article>
+
+        <article class="content-card">
+          <h3>Rotation</h3>
+          <p>An object can rotate around the X, Y or Z axis. In Three.js, rotation values are represented in radians.</p>
+          <div class="formula-box">
+            <p>Î¸<sub>rad</sub> = Î¸<sub>deg</sub> Ã— Ãâ‚¬ / 180</p>
+          </div>
+        </article>
+
+        <article class="content-card">
+          <h3>Homogeneous Coordinates</h3>
+          <p>A 3D point can be represented as <strong>[x y z 1]<sup>T</sup></strong>. A 4Ã—4 matrix allows translation, rotation and scaling to be represented in a common matrix framework.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">03</span>
+        <h2>4Ã—4 Transformation Matrices</h2>
+      </div>
+
+      <div class="content-card">
+        <h3>Translation</h3>
+        <pre><code>| 1  0  0  tx |
+| 0  1  0  ty |
+| 0  0  1  tz |
+| 0  0  0  1  |</code></pre>
+
+        <h3>Scaling</h3>
+        <pre><code>| sx  0   0   0 |
+| 0   sy  0   0 |
+| 0   0   sz  0 |
+| 0   0   0   1 |</code></pre>
+
+        <h3>Rotation about Z-axis</h3>
+        <pre><code>| cosÎ¸  -sinÎ¸  0  0 |
+| sinÎ¸   cosÎ¸  0  0 |
+| 0       0    1  0 |
+| 0       0    0  1 |</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">04</span>
+        <h2>Lighting Fundamentals</h2>
+      </div>
+
+      <div class="content-grid">
+        <article class="content-card">
+          <h3>Ambient Light</h3>
+          <p>Provides general illumination to the scene. It does not strongly depend on a particular light direction.</p>
+        </article>
+
+        <article class="content-card">
+          <h3>Directional Light</h3>
+          <p>Approximates light arriving from a particular direction, similar to sunlight at a large distance.</p>
+        </article>
+
+        <article class="content-card">
+          <h3>Point Light</h3>
+          <p>Emits light from a specific position. Its direction relative to a surface changes across the scene.</p>
+        </article>
+
+        <article class="content-card">
+          <h3>Surface Appearance</h3>
+          <p>Lighting interacts with material properties to produce highlights, shading and perceived depth.</p>
+        </article>
+      </div>
+
+      <div class="content-card">
+        <h3>Simple Lighting Model</h3>
+        <div class="formula-box">
+          <p><strong>I = I<sub>ambient</sub> + I<sub>diffuse</sub> + I<sub>specular</sub></strong></p>
+        </div>
+        <p>The exact rendering equation used by a real-time graphics engine can be much more complex. The expression above is a useful conceptual model for understanding the major lighting components.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">05</span>
+        <h2>Texture Mapping</h2>
+      </div>
+
+      <div class="content-card">
+        <p>Texture mapping places a 2D image or procedural pattern onto the surface of a 3D object. Each surface vertex can contain texture coordinates, commonly called <strong>UV coordinates</strong>.</p>
+        <div class="formula-box">
+          <strong>Texture coordinate</strong>
+          <p>(u, v) â†’ location inside a 2D texture</p>
+        </div>
+
+        <div class="content-grid">
+          <article>
+            <h3>U Coordinate</h3>
+            <p>Usually represents horizontal movement across the texture.</p>
+          </article>
+          <article>
+            <h3>V Coordinate</h3>
+            <p>Usually represents vertical movement across the texture.</p>
+          </article>
+          <article>
+            <h3>Texture Wrapping</h3>
+            <p>Controls what happens when UV coordinates extend beyond the normal texture range.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">06</span>
+        <h2>Worked Calculation</h2>
+      </div>
+
+      <div class="content-card">
+        <p>Consider the point <strong>P(2, 3, 4)</strong>. Apply scaling:</p>
+        <div class="formula-box">
+          <p>s<sub>x</sub> = 2, &nbsp; s<sub>y</sub> = 1, &nbsp; s<sub>z</sub> = 0.5</p>
+        </div>
+
+        <div class="calculation-steps">
+          <p><strong>Step 1:</strong> xâ€² = 2 Ã— 2 = <strong>4</strong></p>
+          <p><strong>Step 2:</strong> yâ€² = 3 Ã— 1 = <strong>3</strong></p>
+          <p><strong>Step 3:</strong> zâ€² = 4 Ã— 0.5 = <strong>2</strong></p>
+          <p><strong>Result:</strong> Pâ€² = <strong>(4, 3, 2)</strong></p>
+        </div>
+
+        <h3>Rotation Conversion Example</h3>
+        <p>For a rotation of 90Â°:</p>
+        <div class="formula-box">
+          <p>Î¸ = 90 Ã— Ãâ‚¬ / 180 = <strong>Ãâ‚¬/2 radians</strong></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">07</span>
+        <h2>Live 3D Transformation &amp; Lighting Lab</h2>
+      </div>
+
+      <div class="interactive-lab content-card">
+        <div class="lab-controls">
+          <label>Object
+            <select id="objectSelect">
+              <option value="cube">Cube</option>
+              <option value="sphere">Sphere</option>
+              <option value="cylinder">Cylinder</option>
+              <option value="torus">Torus</option>
+            </select>
+          </label>
+
+          <label>Rotation X
+            <input type="range" id="rotX" min="-180" max="180" value="20">
+            <span id="rotXValue">20Â°</span>
+          </label>
+
+          <label>Rotation Y
+            <input type="range" id="rotY" min="-180" max="180" value="35">
+            <span id="rotYValue">35Â°</span>
+          </label>
+
+          <label>Scale
+            <input type="range" id="scaleRange" min="0.5" max="2" step="0.1" value="1">
+            <span id="scaleValue">1.0Ã—</span>
+          </label>
+        </div>
+
+        <div class="lab-controls">
+          <label>Lighting
+            <select id="lightMode">
+              <option value="studio">Studio</option>
+              <option value="ambient">Ambient Only</option>
+              <option value="directional">Directional</option>
+              <option value="point">Point</option>
+            </select>
+          </label>
+
+          <label>Material
+            <select id="materialMode">
+              <option value="standard">Standard</option>
+              <option value="metal">Metallic</option>
+              <option value="matte">Matte</option>
+            </select>
+          </label>
+
+          <label>Texture
+            <select id="textureMode">
+              <option value="none">No Texture</option>
+              <option value="checker">Checker Pattern</option>
+              <option value="stripes">Stripes</option>
+            </select>
+          </label>
+
+          <button class="btn" id="animateBtn">Animate</button>
+          <button class="btn" id="resetBtn">Reset</button>
+        </div>
+
+        <div class="canvas-stage" id="sceneStage">
+          <div id="sceneContainer" aria-label="Interactive 3D transformation lighting and texture scene"></div>
+        </div>
+
+        <div class="lab-status">
+          <span id="objectStatus">Object: Cube</span>
+          <span id="lightStatus">Lighting: Studio</span>
+          <span id="textureStatus">Texture: None</span>
+        </div>
+      </div>
+
+      <div class="content-card">
+        <h3>Observe</h3>
+        <ul>
+          <li>Rotation changes the object's orientation but not its dimensions.</li>
+          <li>Scaling changes the object's size relative to its origin.</li>
+          <li>Changing light direction changes visible highlights and shading.</li>
+          <li>Material properties affect the response of a surface to light.</li>
+          <li>Texture changes surface detail without changing the basic geometry.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">08</span>
+        <h2>Transformation â†’ Lighting â†’ Texture â†’ Rendering</h2>
+      </div>
+
+      <div class="process-grid">
+        <div class="process-card"><span>1</span><h3>Geometry</h3><p>Vertices and faces define the 3D object.</p></div>
+        <div class="process-card"><span>2</span><h3>Transform</h3><p>Position, scale and rotation place the object in the scene.</p></div>
+        <div class="process-card"><span>3</span><h3>Material</h3><p>Surface properties determine how the object responds to light.</p></div>
+        <div class="process-card"><span>4</span><h3>Texture</h3><p>UV coordinates map image or procedural detail onto the surface.</p></div>
+        <div class="process-card"><span>5</span><h3>Lighting</h3><p>Lights illuminate surfaces and create shading and highlights.</p></div>
+        <div class="process-card"><span>6</span><h3>Render</h3><p>The renderer produces the final 2D image for the display.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">09</span>
+        <h2>Real-Life Problem Statements</h2>
+      </div>
+
+      <div class="problem-grid">
+        <article class="problem-card">
+          <span class="problem-number">01</span>
+          <h3>3D Product Presentation</h3>
+          <p>Build a product viewer where users rotate, scale and inspect a model under different lighting conditions.</p>
+          <div class="mini-viewer" data-problem="product">
+            <canvas class="problem-canvas" width="420" height="190"></canvas>
+            <button class="btn problem-action">Try Visualization</button>
+          </div>
+        </article>
+
+        <article class="problem-card">
+          <span class="problem-number">02</span>
+          <h3>Textured Game Object</h3>
+          <p>Apply a texture to a 3D game object and combine transformations with lighting to create a more realistic appearance.</p>
+          <div class="mini-viewer" data-problem="game">
+            <canvas class="problem-canvas" width="420" height="190"></canvas>
+            <button class="btn problem-action">Try Visualization</button>
+          </div>
+        </article>
+
+        <article class="problem-card">
+          <span class="problem-number">03</span>
+          <h3>Virtual Interior</h3>
+          <p>Position furniture using 3D transformations and use multiple lights to create different interior lighting conditions.</p>
+          <div class="mini-viewer" data-problem="room">
+            <canvas class="problem-canvas" width="420" height="190"></canvas>
+            <button class="btn problem-action">Try Visualization</button>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">10</span>
+        <h2>Experiments</h2>
+      </div>
+
+      <div class="content-card">
+        <ol>
+          <li>Rotate an object around each of the X, Y and Z axes separately.</li>
+          <li>Apply non-uniform scaling and observe how the object's proportions change.</li>
+          <li>Compare ambient-only lighting with directional and point lighting.</li>
+          <li>Change roughness and metalness and observe changes in highlights.</li>
+          <li>Apply different procedural textures and compare their appearance.</li>
+          <li>Move a light source around the object and record how the illuminated region changes.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">11</span>
+        <h2>Common Mistakes</h2>
+      </div>
+
+      <div class="content-card">
+        <ul>
+          <li>Using degrees directly in APIs that expect radians.</li>
+          <li>Applying transformations in an unintended order.</li>
+          <li>Using a lighting-dependent material without providing useful illumination.</li>
+          <li>Confusing a texture image with the geometry of the 3D object.</li>
+          <li>Ignoring UV coordinates when texture mapping requires controlled placement.</li>
+          <li>Forgetting to update the camera or renderer after changing the viewport.</li>
+          <li>Using very large or very small texture images without considering performance.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="container">
+      <div class="section-heading">
+        <span class="section-label">12</span>
+        <h2>Viva Questions</h2>
+      </div>
+
+      <div class="viva-list">
+        <details><summary>What is a 3D transformation?</summary><p>A mathematical operation that changes an object's position, size or orientation in three-dimensional space.</p></details>
+        <details><summary>Why are 4Ã—4 matrices used in 3D graphics?</summary><p>Homogeneous 4Ã—4 matrices provide a common representation for translation, rotation, scaling and combinations of transformations.</p></details>
+        <details><summary>What is lighting in computer graphics?</summary><p>Lighting models the interaction between light sources and surfaces to determine their visible appearance.</p></details>
+        <details><summary>What is a texture?</summary><p>A texture is image or procedural data mapped onto a surface to provide additional visual detail.</p></details>
+        <details><summary>What are UV coordinates?</summary><p>UV coordinates identify positions in a 2D texture that correspond to locations on a 3D surface.</p></details>
+        <details><summary>What is the difference between geometry and material?</summary><p>Geometry defines the object's shape, while material defines how its surface appears and responds to lighting.</p></details>
+        <details><summary>What is roughness?</summary><p>Roughness is a material property that influences how broadly or sharply reflected light appears on a surface.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-navigation">
+    <div class="container">
+      <a href="practical19.html" class="nav-practical prev">â† Practical 19<span>3D Scene using Three.js</span></a>
+      <a href="practical21.html" class="nav-practical next">Practical 21 â†’<span>Interactive Graphics Application</span></a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer-main">
+    <div class="footer-brand">
+      <div class="logo">
+        <span class="logo-mark">&lt;/&gt;</span>
+        <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+      </div>
+      <p>Interactive Computer Graphics practical learning through concepts, calculations and visualization.</p>
+    </div>
+    <div class="footer-links">
+      <div>
+        <h4>Learn</h4>
+        <a href="../cgr_foundations.html">Foundations</a>
+              </div>
+      <div>
+        <h4>Practice</h4>
+        <a href="../cgr_practicals.html">Practicals</a>
+        <a href="../../../about.html">About</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>Â© 2026 Rasika CodeLab</span>
+    <span>Built for practical learning.</span>
+  </div>
+</footer>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from "three";
+
+const container = document.getElementById("sceneContainer");
+const objectSelect = document.getElementById("objectSelect");
+const rotX = document.getElementById("rotX");
+const rotY = document.getElementById("rotY");
+const scaleRange = document.getElementById("scaleRange");
+const rotXValue = document.getElementById("rotXValue");
+const rotYValue = document.getElementById("rotYValue");
+const scaleValue = document.getElementById("scaleValue");
+const lightMode = document.getElementById("lightMode");
+const materialMode = document.getElementById("materialMode");
+const textureMode = document.getElementById("textureMode");
+const animateBtn = document.getElementById("animateBtn");
+const resetBtn = document.getElementById("resetBtn");
+const objectStatus = document.getElementById("objectStatus");
+const lightStatus = document.getElementById("lightStatus");
+const textureStatus = document.getElementById("textureStatus");
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x10131a);
+
+const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 100);
+camera.position.set(4.2, 3.0, 6.2);
+camera.lookAt(0, 0, 0);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.setSize(900, 500);
+container.appendChild(renderer.domElement);
+
+const grid = new THREE.GridHelper(10, 10, 0x555555, 0x303030);
+grid.position.y = -1.35;
+scene.add(grid);
+
+const ambientLight = new THREE.AmbientLight(0xffffff, 1.4);
+scene.add(ambientLight);
+
+const directionalLight = new THREE.DirectionalLight(0xffffff, 3.0);
+directionalLight.position.set(4, 6, 5);
+scene.add(directionalLight);
+
+const pointLight = new THREE.PointLight(0xff7a18, 55, 14);
+pointLight.position.set(-3.5, 2.5, 3);
+scene.add(pointLight);
+
+let mesh = null;
+let rotating = false;
+let rotationOffset = 0;
+
+function makeTexture(type) {
+  if (type === "none") return null;
+
+  const c = document.createElement("canvas");
+  c.width = 256;
+  c.height = 256;
+  const tctx = c.getContext("2d");
+
+  if (type === "checker") {
+    const size = 32;
+    for (let y = 0; y < 8; y++) {
+      for (let x = 0; x < 8; x++) {
+        tctx.fillStyle = (x + y) % 2 === 0 ? "#f0f0f0" : "#333333";
+        tctx.fillRect(x * size, y * size, size, size);
+      }
+    }
+  }
+
+  if (type === "stripes") {
+    tctx.fillStyle = "#eeeeee";
+    tctx.fillRect(0, 0, 256, 256);
+    tctx.strokeStyle = "#ff7a18";
+    tctx.lineWidth = 22;
+    for (let x = -256; x < 512; x += 55) {
+      tctx.beginPath();
+      tctx.moveTo(x, 0);
+      tctx.lineTo(x + 256, 256);
+      tctx.stroke();
+    }
+  }
+
+  const texture = new THREE.CanvasTexture(c);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  texture.wrapS = THREE.RepeatWrapping;
+  texture.wrapT = THREE.RepeatWrapping;
+  texture.anisotropy = renderer.capabilities.getMaxAnisotropy();
+  return texture;
+}
+
+function makeMaterial() {
+  const texture = makeTexture(textureMode.value);
+
+  const settings = {
+    standard: { roughness: 0.4, metalness: 0.15 },
+    metal: { roughness: 0.18, metalness: 0.9 },
+    matte: { roughness: 0.9, metalness: 0.0 }
+  }[materialMode.value];
+
+  return new THREE.MeshStandardMaterial({
+    color: 0xff7a18,
+    roughness: settings.roughness,
+    metalness: settings.metalness,
+    map: texture
+  });
+}
+
+function makeGeometry(type) {
+  if (type === "sphere") return new THREE.SphereGeometry(1.25, 48, 32);
+  if (type === "cylinder") return new THREE.CylinderGeometry(1.05, 1.05, 2.3, 48);
+  if (type === "torus") return new THREE.TorusGeometry(1.05, 0.34, 24, 64);
+  return new THREE.BoxGeometry(2.2, 2.2, 2.2);
+}
+
+function rebuildMesh() {
+  if (mesh) {
+    if (mesh.material && mesh.material.map) mesh.material.map.dispose();
+    mesh.geometry.dispose();
+    mesh.material.dispose();
+    scene.remove(mesh);
+  }
+
+  mesh = new THREE.Mesh(makeGeometry(objectSelect.value), makeMaterial());
+  mesh.position.y = 0;
+  scene.add(mesh);
+
+  objectStatus.textContent = "Object: " + objectSelect.options[objectSelect.selectedIndex].text;
+  textureStatus.textContent = "Texture: " + textureMode.options[textureMode.selectedIndex].text;
+  updateMaterial();
+}
+
+function updateMaterial() {
+  if (!mesh) return;
+  const material = makeMaterial();
+
+  if (mesh.material.map) mesh.material.map.dispose();
+  mesh.material.dispose();
+  mesh.material = material;
+
+  textureStatus.textContent = "Texture: " + textureMode.options[textureMode.selectedIndex].text;
+}
+
+function updateLights() {
+  ambientLight.visible = lightMode.value === "studio" || lightMode.value === "ambient";
+  directionalLight.visible = lightMode.value === "studio" || lightMode.value === "directional";
+  pointLight.visible = lightMode.value === "studio" || lightMode.value === "point";
+
+  if (lightMode.value === "studio") {
+    ambientLight.intensity = 1.4;
+    directionalLight.intensity = 3.0;
+    pointLight.intensity = 55;
+  } else if (lightMode.value === "ambient") {
+    ambientLight.intensity = 2.0;
+  } else if (lightMode.value === "directional") {
+    directionalLight.intensity = 4.0;
+  } else {
+    pointLight.intensity = 75;
+  }
+
+  lightStatus.textContent = "Lighting: " + lightMode.options[lightMode.selectedIndex].text;
+}
+
+function updateTransform() {
+  if (!mesh) return;
+  mesh.rotation.x = Number(rotX.value) * Math.PI / 180;
+  mesh.rotation.y = Number(rotY.value) * Math.PI / 180 + rotationOffset;
+  mesh.scale.setScalar(Number(scaleRange.value));
+
+  rotXValue.textContent = rotX.value + "Â°";
+  rotYValue.textContent = rotY.value + "Â°";
+  scaleValue.textContent = Number(scaleRange.value).toFixed(1) + "Ã—";
+}
+
+function resize() {
+  const rect = container.getBoundingClientRect();
+  const width = Math.max(320, rect.width || 900);
+  const height = Math.max(240, rect.height || 500);
+  camera.aspect = width / height;
+  camera.updateProjectionMatrix();
+  renderer.setSize(width, height, false);
+}
+
+[objectSelect, lightMode].forEach(el => el.addEventListener("change", () => {
+  if (el === objectSelect) rebuildMesh();
+  else updateLights();
+}));
+
+materialMode.addEventListener("change", updateMaterial);
+textureMode.addEventListener("change", updateMaterial);
+rotX.addEventListener("input", updateTransform);
+rotY.addEventListener("input", updateTransform);
+scaleRange.addEventListener("input", updateTransform);
+
+animateBtn.addEventListener("click", () => {
+  rotating = !rotating;
+  animateBtn.textContent = rotating ? "Stop Animation" : "Animate";
+});
+
+resetBtn.addEventListener("click", () => {
+  objectSelect.value = "cube";
+  rotX.value = "20";
+  rotY.value = "35";
+  scaleRange.value = "1";
+  lightMode.value = "studio";
+  materialMode.value = "standard";
+  textureMode.value = "none";
+  rotating = false;
+  rotationOffset = 0;
+  animateBtn.textContent = "Animate";
+  camera.position.set(4.2, 3.0, 6.2);
+  camera.lookAt(0, 0, 0);
+  rebuildMesh();
+  updateLights();
+  updateTransform();
+});
+
+window.addEventListener("resize", resize);
+
+function animate() {
+  if (rotating && mesh) rotationOffset += 0.012;
+  updateTransform();
+  renderer.render(scene, camera);
+}
+
+rebuildMesh();
+updateLights();
+updateTransform();
+resize();
+renderer.setAnimationLoop(animate);
+
+document.querySelectorAll(".mini-viewer").forEach(viewer => {
+  const canvas = viewer.querySelector(".problem-canvas");
+  const button = viewer.querySelector(".problem-action");
+  const ctx = canvas.getContext("2d");
+  const type = viewer.dataset.problem;
+  let running = false;
+  let frame = 0;
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.lineWidth = 2;
+
+    if (type === "product") {
+      const angle = frame * 0.03;
+      const x = 210;
+      const skew = Math.sin(angle) * 35;
+      ctx.strokeRect(x - 60 + skew, 60, 120, 80);
+      ctx.beginPath();
+      ctx.moveTo(x - 60 + skew, 60);
+      ctx.lineTo(x - 25 + skew, 35);
+      ctx.lineTo(x + 95 + skew, 35);
+      ctx.lineTo(x + 60 + skew, 60);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(x + 95 + skew, 35);
+      ctx.lineTo(x + 95 + skew, 115);
+      ctx.lineTo(x + 60 + skew, 140);
+      ctx.stroke();
+    }
+
+    if (type === "game") {
+      const x = 210 + Math.sin(frame * 0.04) * 70;
+      ctx.strokeRect(x - 45, 55, 90, 90);
+      ctx.beginPath();
+      ctx.moveTo(x - 45, 55);
+      ctx.lineTo(x, 35);
+      ctx.lineTo(x + 45, 55);
+      ctx.stroke();
+      for (let i = 0; i < 5; i++) {
+        ctx.beginPath();
+        ctx.moveTo(x - 30 + i * 15, 70);
+        ctx.lineTo(x - 30 + i * 15, 130);
+        ctx.stroke();
+      }
+    }
+
+    if (type === "room") {
+      ctx.strokeRect(50, 50, 320, 105);
+      ctx.beginPath();
+      ctx.moveTo(50, 50);
+      ctx.lineTo(210, 22);
+      ctx.lineTo(370, 50);
+      ctx.stroke();
+      ctx.strokeRect(100, 105, 85, 50);
+      ctx.strokeRect(235, 90, 65, 65);
+      ctx.beginPath();
+      ctx.arc(325, 70, 15, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(325, 70);
+      ctx.lineTo(300, 120);
+      ctx.stroke();
+    }
+
+    if (running) frame++;
+  }
+
+  function loop() {
+    draw();
+    if (running) requestAnimationFrame(loop);
+  }
+
+  button.addEventListener("click", () => {
+    running = !running;
+    button.textContent = running ? "Pause Visualization" : "Try Visualization";
+    if (running) requestAnimationFrame(loop);
+  });
+
+  draw();
+});
+</script>
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

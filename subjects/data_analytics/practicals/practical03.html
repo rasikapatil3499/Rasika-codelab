@@ -1,0 +1,2379 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Practical 03 | Statistical Analysis & KPI Discovery | Rasika CodeLab</title>
+
+    <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../css/data_analytics_foundation.css">
+
+    <style>
+
+        /* =====================================================
+           PRACTICAL 03
+           STATISTICAL ANALYSIS & KPI DISCOVERY
+        ===================================================== */
+
+        .da-p3-page{
+            --orange:#ff8a2a;
+            --bg:#070a10;
+            --card:#111722;
+            --card2:#151c28;
+            --text:#f5f6f8;
+            --muted:#969daa;
+            --soft:#cdd1d8;
+            --border:rgba(255,255,255,.09);
+
+            background:var(--bg);
+            color:var(--text);
+        }
+
+        .da-p3-page *{
+            box-sizing:border-box;
+        }
+
+        .p3-container{
+            width:min(1180px,calc(100% - 48px));
+            margin:auto;
+        }
+
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .p3-hero{
+            padding:90px 24px 75px;
+            border-bottom:1px solid var(--border);
+
+            background:
+                radial-gradient(
+                    circle at 80% 15%,
+                    rgba(255,138,42,.15),
+                    transparent 30%
+                ),
+                linear-gradient(135deg,#080b12,#151016);
+        }
+
+        .p3-breadcrumb{
+            margin-bottom:25px;
+            color:var(--muted);
+            font-size:10px;
+            letter-spacing:1px;
+        }
+
+        .p3-breadcrumb span{
+            color:var(--orange);
+            margin:0 7px;
+        }
+
+        .p3-label{
+            color:var(--orange);
+            font-size:10px;
+            font-weight:800;
+            letter-spacing:2px;
+        }
+
+        .p3-hero h1{
+            max-width:950px;
+            margin:15px 0;
+            font-size:clamp(42px,6vw,70px);
+            line-height:1;
+            letter-spacing:-3px;
+        }
+
+        .p3-hero h1 span{
+            color:var(--orange);
+        }
+
+        .p3-description{
+            max-width:790px;
+            color:var(--soft);
+            font-size:14px;
+            line-height:1.85;
+        }
+
+        .p3-tags{
+            display:flex;
+            flex-wrap:wrap;
+            gap:8px;
+            margin-top:25px;
+        }
+
+        .p3-tags span{
+            padding:7px 11px;
+            border:1px solid var(--border);
+            border-radius:50px;
+            color:var(--soft);
+            font-size:9px;
+        }
+
+
+        /* =====================================================
+           SECTIONS
+        ===================================================== */
+
+        .p3-section{
+            padding:80px 24px;
+        }
+
+        .p3-section.dark{
+            background:#090c13;
+            border-block:1px solid rgba(255,255,255,.04);
+        }
+
+        .p3-heading{
+            margin-bottom:38px;
+        }
+
+        .p3-section-label{
+            color:var(--orange);
+            font-size:9px;
+            font-weight:800;
+            letter-spacing:2px;
+            text-transform:uppercase;
+        }
+
+        .p3-heading h2{
+            margin:11px 0;
+            font-size:clamp(29px,4vw,45px);
+            line-height:1.1;
+        }
+
+        .p3-heading h2 span{
+            color:var(--orange);
+        }
+
+        .p3-heading p{
+            max-width:720px;
+            margin:0;
+            color:var(--muted);
+            font-size:12px;
+            line-height:1.8;
+        }
+
+
+        /* =====================================================
+           ANALYTICS MINDSET
+        ===================================================== */
+
+        .p3-mindset-grid{
+            display:grid;
+            grid-template-columns:repeat(4,1fr);
+            gap:15px;
+        }
+
+        .p3-mindset-card{
+            min-height:190px;
+            padding:24px;
+
+            background:var(--card);
+            border:1px solid var(--border);
+            border-radius:16px;
+
+            transition:.25s ease;
+        }
+
+        .p3-mindset-card:hover{
+            transform:translateY(-5px);
+            border-color:rgba(255,138,42,.4);
+        }
+
+        .p3-mindset-card strong{
+            color:var(--orange);
+            font-size:9px;
+            letter-spacing:1px;
+        }
+
+        .p3-mindset-card h3{
+            margin:12px 0 8px;
+            font-size:17px;
+        }
+
+        .p3-mindset-card p{
+            margin:0;
+            color:var(--muted);
+            font-size:10px;
+            line-height:1.7;
+        }
+
+
+        /* =====================================================
+           DESCRIPTIVE STATISTICS
+        ===================================================== */
+
+        .p3-stat-grid{
+            display:grid;
+            grid-template-columns:repeat(4,1fr);
+            gap:15px;
+        }
+
+        .p3-stat-card{
+            padding:25px;
+            background:linear-gradient(145deg,#121722,#0d111a);
+            border:1px solid var(--border);
+            border-radius:15px;
+        }
+
+        .p3-stat-card .symbol{
+            color:var(--orange);
+            font-size:22px;
+            font-weight:900;
+        }
+
+        .p3-stat-card h3{
+            margin:12px 0 7px;
+            font-size:16px;
+        }
+
+        .p3-stat-card p{
+            margin:0;
+            color:var(--muted);
+            font-size:10px;
+            line-height:1.7;
+        }
+
+        .p3-formula{
+            margin-top:13px;
+            padding:10px;
+            background:#080b11;
+            border-radius:7px;
+            color:var(--soft);
+            font-size:9px;
+        }
+
+
+        /* =====================================================
+           DATA SUMMARY
+        ===================================================== */
+
+        .p3-summary{
+            display:grid;
+            grid-template-columns:1.2fr .8fr;
+            gap:20px;
+        }
+
+        .p3-table-wrap{
+            overflow:hidden;
+            border:1px solid var(--border);
+            border-radius:14px;
+        }
+
+        .p3-data-row{
+            display:grid;
+            grid-template-columns:1.5fr 1fr 1fr 1fr;
+            border-bottom:1px solid var(--border);
+        }
+
+        .p3-data-row:last-child{
+            border-bottom:0;
+        }
+
+        .p3-data-row span{
+            padding:11px;
+            font-size:9px;
+            color:var(--soft);
+        }
+
+        .p3-data-head{
+            background:rgba(255,138,42,.06);
+        }
+
+        .p3-data-head span{
+            color:var(--orange);
+            font-weight:800;
+        }
+
+        .p3-insight{
+            padding:27px;
+            background:var(--card);
+            border:1px solid var(--border);
+            border-radius:14px;
+        }
+
+        .p3-insight h3{
+            margin:0 0 13px;
+            font-size:18px;
+        }
+
+        .p3-insight p{
+            color:var(--muted);
+            font-size:10px;
+            line-height:1.8;
+        }
+
+
+        /* =====================================================
+           KPI
+        ===================================================== */
+
+        .p3-kpi-grid{
+            display:grid;
+            grid-template-columns:repeat(4,1fr);
+            gap:15px;
+        }
+
+        .p3-kpi{
+            position:relative;
+            padding:24px;
+            overflow:hidden;
+
+            background:var(--card);
+            border:1px solid var(--border);
+            border-radius:16px;
+        }
+
+        .p3-kpi::after{
+            content:"";
+            position:absolute;
+            width:80px;
+            height:80px;
+            right:-35px;
+            bottom:-35px;
+            border-radius:50%;
+            background:rgba(255,138,42,.07);
+        }
+
+        .p3-kpi-label{
+            color:var(--muted);
+            font-size:9px;
+            text-transform:uppercase;
+            letter-spacing:1px;
+        }
+
+        .p3-kpi-value{
+            margin:12px 0 5px;
+            font-size:30px;
+            font-weight:900;
+        }
+
+        .p3-kpi-change{
+            color:#75d89b;
+            font-size:9px;
+        }
+
+        .p3-kpi-description{
+            margin-top:14px;
+            color:var(--muted);
+            font-size:9px;
+            line-height:1.6;
+        }
+
+
+        /* =====================================================
+           DISTRIBUTION
+        ===================================================== */
+
+        .p3-distribution-grid{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:20px;
+        }
+
+        .p3-distribution-card{
+            padding:28px;
+            background:var(--card);
+            border:1px solid var(--border);
+            border-radius:16px;
+        }
+
+        .p3-distribution-card h3{
+            margin:0 0 15px;
+            font-size:17px;
+        }
+
+        .p3-bar-row{
+            display:grid;
+            grid-template-columns:80px 1fr 50px;
+            align-items:center;
+            gap:10px;
+            margin:12px 0;
+        }
+
+        .p3-bar-row label{
+            color:var(--soft);
+            font-size:9px;
+        }
+
+        .p3-bar{
+            height:9px;
+            overflow:hidden;
+            background:#080b11;
+            border-radius:20px;
+        }
+
+        .p3-bar span{
+            display:block;
+            height:100%;
+            background:var(--orange);
+            border-radius:20px;
+        }
+
+        .p3-bar-value{
+            color:var(--muted);
+            font-size:9px;
+            text-align:right;
+        }
+
+
+        /* =====================================================
+           CORRELATION
+        ===================================================== */
+
+        .p3-correlation{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:20px;
+        }
+
+        .p3-correlation-card{
+            padding:28px;
+            background:var(--card);
+            border:1px solid var(--border);
+            border-radius:16px;
+        }
+
+        .p3-correlation-card h3{
+            margin:0 0 10px;
+            font-size:18px;
+        }
+
+        .p3-correlation-card p{
+            color:var(--muted);
+            font-size:10px;
+            line-height:1.7;
+        }
+
+        .p3-corr-number{
+            margin:20px 0;
+            font-size:40px;
+            color:var(--orange);
+            font-weight:900;
+        }
+
+        .p3-corr-scale{
+            display:grid;
+            grid-template-columns:repeat(5,1fr);
+            gap:4px;
+        }
+
+        .p3-corr-scale span{
+            padding:8px 3px;
+            text-align:center;
+            border:1px solid var(--border);
+            color:var(--muted);
+            font-size:7px;
+        }
+
+
+        /* =====================================================
+           REAL WORLD PROBLEMS
+        ===================================================== */
+
+        .p3-problem-grid{
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:18px;
+        }
+
+        .p3-problem{
+            display:flex;
+            flex-direction:column;
+            min-height:610px;
+            padding:26px;
+
+            background:linear-gradient(145deg,#121722,#0d111a);
+            border:1px solid var(--border);
+            border-radius:18px;
+
+            transition:.25s ease;
+        }
+
+        .p3-problem:hover{
+            transform:translateY(-6px);
+            border-color:rgba(255,138,42,.4);
+        }
+
+        .p3-problem-number{
+            color:var(--orange);
+            font-size:9px;
+            font-weight:900;
+            letter-spacing:1.5px;
+        }
+
+        .p3-problem h3{
+            margin:13px 0 10px;
+            font-size:20px;
+        }
+
+        .p3-problem > p{
+            color:var(--muted);
+            font-size:10px;
+            line-height:1.75;
+        }
+
+        .p3-block{
+            margin-top:18px;
+        }
+
+        .p3-block strong{
+            display:block;
+            margin-bottom:8px;
+            color:var(--orange);
+            font-size:9px;
+            letter-spacing:1px;
+            text-transform:uppercase;
+        }
+
+        .p3-block ul{
+            margin:0;
+            padding-left:17px;
+            color:var(--soft);
+        }
+
+        .p3-block li{
+            margin:6px 0;
+            font-size:10px;
+            line-height:1.5;
+        }
+
+        .p3-problem .p3-task-list{
+            margin-top:auto;
+            padding-top:20px;
+        }
+
+
+        /* =====================================================
+           QUESTION â†’ METRIC
+        ===================================================== */
+
+        .p3-question-grid{
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:15px;
+        }
+
+        .p3-question{
+            padding:23px;
+            background:var(--card);
+            border:1px solid var(--border);
+            border-radius:14px;
+        }
+
+        .p3-question .q{
+            color:var(--soft);
+            font-size:11px;
+            line-height:1.6;
+        }
+
+        .p3-question .metric{
+            margin-top:14px;
+            padding-top:13px;
+            border-top:1px solid var(--border);
+            color:var(--orange);
+            font-size:10px;
+            font-weight:800;
+        }
+
+
+        /* =====================================================
+           ANALYTICS OUTPUT
+        ===================================================== */
+
+        .p3-output{
+            display:grid;
+            grid-template-columns:repeat(3,1fr);
+            gap:15px;
+        }
+
+        .p3-output-card{
+            padding:25px;
+            background:var(--card);
+            border:1px solid var(--border);
+            border-radius:15px;
+        }
+
+        .p3-output-card span{
+            color:var(--orange);
+            font-size:9px;
+            font-weight:900;
+        }
+
+        .p3-output-card h3{
+            margin:10px 0 7px;
+            font-size:15px;
+        }
+
+        .p3-output-card p{
+            margin:0;
+            color:var(--muted);
+            font-size:9px;
+            line-height:1.7;
+        }
+
+
+        /* =====================================================
+           CHECKLIST
+        ===================================================== */
+
+        .p3-checklist{
+            display:grid;
+            grid-template-columns:repeat(2,1fr);
+            gap:10px;
+        }
+
+        .p3-check{
+            padding:14px 16px;
+            background:var(--card);
+            border:1px solid var(--border);
+            border-radius:10px;
+            color:var(--soft);
+            font-size:10px;
+        }
+
+        .p3-check::before{
+            content:"âœ“";
+            margin-right:9px;
+            color:var(--orange);
+            font-weight:900;
+        }
+
+
+        /* =====================================================
+           MINI CHALLENGE
+        ===================================================== */
+
+        .p3-challenge{
+            max-width:850px;
+            margin:auto;
+            padding:30px;
+
+            background:var(--card);
+            border:1px solid var(--border);
+            border-radius:20px;
+        }
+
+        .p3-challenge h3{
+            margin:0 0 15px;
+            font-size:19px;
+        }
+
+        .p3-challenge h3 span{
+            color:var(--orange);
+        }
+
+        .p3-challenge p{
+            color:var(--muted);
+            font-size:11px;
+            line-height:1.7;
+        }
+
+        .p3-options{
+            display:grid;
+            gap:8px;
+            margin-top:18px;
+        }
+
+        .p3-options button{
+            padding:13px 15px;
+            text-align:left;
+
+            background:#0c1018;
+            border:1px solid var(--border);
+            border-radius:9px;
+
+            color:var(--soft);
+            cursor:pointer;
+            font-size:10px;
+        }
+
+        .p3-options button:hover{
+            border-color:rgba(255,138,42,.4);
+        }
+
+        .p3-answer{
+            min-height:20px;
+            margin-top:15px;
+            font-size:10px;
+        }
+
+
+        /* =====================================================
+           NAVIGATION
+        ===================================================== */
+
+        .p3-navigation{
+            width:min(1180px,calc(100% - 48px));
+            margin:0 auto 80px;
+
+            display:flex;
+            justify-content:space-between;
+            gap:12px;
+        }
+
+        .p3-nav{
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+
+            min-height:44px;
+            padding:11px 17px;
+
+            border:1px solid var(--border);
+            border-radius:10px;
+
+            color:var(--soft);
+            font-size:10px;
+        }
+
+        .p3-nav.next{
+            background:var(--orange);
+            border-color:var(--orange);
+            color:#111;
+            font-weight:900;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media(max-width:1050px){
+
+            .p3-mindset-grid,
+            .p3-stat-grid,
+            .p3-kpi-grid{
+                grid-template-columns:repeat(2,1fr);
+            }
+
+            .p3-problem-grid{
+                grid-template-columns:1fr;
+            }
+
+            .p3-problem{
+                min-height:auto;
+            }
+        }
+
+
+        @media(max-width:750px){
+
+            .p3-summary,
+            .p3-distribution-grid,
+            .p3-correlation{
+                grid-template-columns:1fr;
+            }
+
+            .p3-question-grid,
+            .p3-output{
+                grid-template-columns:1fr;
+            }
+
+            .p3-checklist{
+                grid-template-columns:1fr;
+            }
+        }
+
+
+        @media(max-width:600px){
+
+            .p3-container,
+            .p3-navigation{
+                width:calc(100% - 32px);
+            }
+
+            .p3-hero,
+            .p3-section{
+                padding-left:16px;
+                padding-right:16px;
+            }
+
+            .p3-hero{
+                padding-top:70px;
+            }
+
+            .p3-hero h1{
+                font-size:40px;
+                letter-spacing:-2px;
+            }
+
+            .p3-mindset-grid,
+            .p3-stat-grid,
+            .p3-kpi-grid{
+                grid-template-columns:1fr;
+            }
+
+            .p3-data-row{
+                grid-template-columns:1.2fr 1fr 1fr 1fr;
+            }
+
+            .p3-navigation{
+                flex-direction:column;
+            }
+
+            .p3-nav{
+                width:100%;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body class="da-p3-page protected-page">
+
+
+<!-- =====================================================
+     NAVBAR
+====================================================== -->
+
+<header class="navbar">
+
+    <div class="nav-container">
+
+        <a href="../../../index.html" class="logo">
+
+            <span class="logo-mark">
+                &lt;/&gt;
+            </span>
+
+            <span>
+                Rasika<span class="logo-highlight">CodeLab</span>
+            </span>
+
+        </a>
+
+
+        <nav class="nav-links">
+
+            <a href="../../../index.html">
+                Home
+            </a>
+
+            <a href="../../../subjects.html" class="active">
+                Subjects
+            </a>
+
+            <a href="../../../about.html">
+                About
+            </a>
+
+            <a href="../../../login.html">
+                Login
+            </a>
+
+        </nav>
+
+
+        <button class="menu-btn" aria-label="Open menu">
+            â˜°
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<main>
+
+
+<!-- =====================================================
+     HERO
+====================================================== -->
+
+<section class="p3-hero">
+
+    <div class="p3-container">
+
+        <div class="p3-breadcrumb">
+
+            DATA ANALYTICS
+            <span>â€º</span>
+            PRACTICALS
+            <span>â€º</span>
+            PRACTICAL 03
+
+        </div>
+
+
+        <div class="p3-label">
+            PRACTICAL 03
+        </div>
+
+
+        <h1>
+            Analyze Data &
+            <span>Discover Insights</span>
+        </h1>
+
+
+        <p class="p3-description">
+
+            Clean data is only the beginning. In this practical,
+            you will calculate descriptive statistics, compare groups,
+            identify trends, measure relationships and define meaningful
+            KPIs that answer real business questions.
+
+        </p>
+
+
+        <div class="p3-tags">
+
+            <span>Descriptive Statistics</span>
+            <span>Mean</span>
+            <span>Median</span>
+            <span>Mode</span>
+            <span>Variance</span>
+            <span>Standard Deviation</span>
+            <span>Correlation</span>
+            <span>KPI</span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ANALYTICS MINDSET
+====================================================== -->
+
+<section class="p3-section">
+
+    <div class="p3-container">
+
+        <div class="p3-heading">
+
+            <div class="p3-section-label">
+                01 â€” ANALYTICS MINDSET
+            </div>
+
+            <h2>
+                Don't just calculate.
+                <span>Ask questions.</span>
+            </h2>
+
+            <p>
+                Data analytics starts with a question. Statistics and
+                metrics are tools used to answer that question.
+            </p>
+
+        </div>
+
+
+        <div class="p3-mindset-grid">
+
+
+            <div class="p3-mindset-card">
+
+                <strong>01 â€” QUESTION</strong>
+
+                <h3>What happened?</h3>
+
+                <p>
+                    Understand the current state of the data using
+                    totals, averages, counts and distributions.
+                </p>
+
+            </div>
+
+
+            <div class="p3-mindset-card">
+
+                <strong>02 â€” COMPARISON</strong>
+
+                <h3>Which is better?</h3>
+
+                <p>
+                    Compare products, departments, cities, months,
+                    customer groups or other categories.
+                </p>
+
+            </div>
+
+
+            <div class="p3-mindset-card">
+
+                <strong>03 â€” RELATIONSHIP</strong>
+
+                <h3>What is connected?</h3>
+
+                <p>
+                    Investigate whether two variables move together
+                    using correlation and other analytical techniques.
+                </p>
+
+            </div>
+
+
+            <div class="p3-mindset-card">
+
+                <strong>04 â€” DECISION</strong>
+
+                <h3>What should we do?</h3>
+
+                <p>
+                    Convert calculations into insights that can support
+                    an actual decision.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     DESCRIPTIVE STATISTICS
+====================================================== -->
+
+<section class="p3-section dark">
+
+    <div class="p3-container">
+
+        <div class="p3-heading">
+
+            <div class="p3-section-label">
+                02 â€” DESCRIPTIVE STATISTICS
+            </div>
+
+            <h2>
+                Understand the
+                <span>distribution</span>
+            </h2>
+
+            <p>
+                Use statistical measures to summarize a dataset before
+                creating advanced visualizations or models.
+            </p>
+
+        </div>
+
+
+        <div class="p3-stat-grid">
+
+
+            <div class="p3-stat-card">
+
+                <div class="symbol">
+                    xÌ„
+                </div>
+
+                <h3>Mean</h3>
+
+                <p>
+                    The arithmetic average of numerical observations.
+                </p>
+
+                <div class="p3-formula">
+                    Mean = Î£x / n
+                </div>
+
+            </div>
+
+
+            <div class="p3-stat-card">
+
+                <div class="symbol">
+                    M
+                </div>
+
+                <h3>Median</h3>
+
+                <p>
+                    The middle value after sorting observations.
+                </p>
+
+                <div class="p3-formula">
+                    Useful when extreme values exist.
+                </div>
+
+            </div>
+
+
+            <div class="p3-stat-card">
+
+                <div class="symbol">
+                    Ïƒ
+                </div>
+
+                <h3>Standard Deviation</h3>
+
+                <p>
+                    Measures how spread out observations are around
+                    the mean.
+                </p>
+
+                <div class="p3-formula">
+                    Higher Ïƒ â†’ greater spread
+                </div>
+
+            </div>
+
+
+            <div class="p3-stat-card">
+
+                <div class="symbol">
+                    r
+                </div>
+
+                <h3>Correlation</h3>
+
+                <p>
+                    Measures the strength and direction of a linear
+                    relationship between variables.
+                </p>
+
+                <div class="p3-formula">
+                    -1 â‰¤ r â‰¤ +1
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     DATA SUMMARY
+====================================================== -->
+
+<section class="p3-section">
+
+    <div class="p3-container">
+
+        <div class="p3-heading">
+
+            <div class="p3-section-label">
+                03 â€” SUMMARY ANALYSIS
+            </div>
+
+            <h2>
+                Convert rows into
+                <span>meaningful numbers</span>
+            </h2>
+
+            <p>
+                Start with a small dataset and calculate summary statistics
+                before moving to large datasets.
+            </p>
+
+        </div>
+
+
+        <div class="p3-summary">
+
+
+            <div class="p3-table-wrap">
+
+                <div class="p3-data-row p3-data-head">
+
+                    <span>Product</span>
+                    <span>Sales</span>
+                    <span>Units</span>
+                    <span>Rating</span>
+
+                </div>
+
+
+                <div class="p3-data-row">
+
+                    <span>Laptop</span>
+                    <span>85000</span>
+                    <span>17</span>
+                    <span>4.5</span>
+
+                </div>
+
+
+                <div class="p3-data-row">
+
+                    <span>Mobile</span>
+                    <span>120000</span>
+                    <span>40</span>
+                    <span>4.2</span>
+
+                </div>
+
+
+                <div class="p3-data-row">
+
+                    <span>Tablet</span>
+                    <span>60000</span>
+                    <span>20</span>
+                    <span>4.0</span>
+
+                </div>
+
+
+                <div class="p3-data-row">
+
+                    <span>Watch</span>
+                    <span>30000</span>
+                    <span>15</span>
+                    <span>4.4</span>
+
+                </div>
+
+            </div>
+
+
+            <div class="p3-insight">
+
+                <h3>
+                    Questions to answer
+                </h3>
+
+                <p>
+                    Which product generated the highest sales?
+                </p>
+
+                <p>
+                    Which product sold the highest number of units?
+                </p>
+
+                <p>
+                    What is the average product rating?
+                </p>
+
+                <p>
+                    Is the product with the highest sales also the product
+                    with the highest unit volume?
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     KPI
+====================================================== -->
+
+<section class="p3-section dark">
+
+    <div class="p3-container">
+
+        <div class="p3-heading">
+
+            <div class="p3-section-label">
+                04 â€” KPI DISCOVERY
+            </div>
+
+            <h2>
+                What should the
+                <span>business measure?</span>
+            </h2>
+
+            <p>
+                A KPI should represent something important enough to
+                support monitoring or decision-making.
+            </p>
+
+        </div>
+
+
+        <div class="p3-kpi-grid">
+
+
+            <div class="p3-kpi">
+
+                <div class="p3-kpi-label">
+                    Total Revenue
+                </div>
+
+                <div class="p3-kpi-value">
+                    â‚¹2.95L
+                </div>
+
+                <div class="p3-kpi-change">
+                    â†‘ 12.4%
+                </div>
+
+                <div class="p3-kpi-description">
+                    Total revenue generated during the selected period.
+                </div>
+
+            </div>
+
+
+            <div class="p3-kpi">
+
+                <div class="p3-kpi-label">
+                    Total Orders
+                </div>
+
+                <div class="p3-kpi-value">
+                    1,248
+                </div>
+
+                <div class="p3-kpi-change">
+                    â†‘ 8.2%
+                </div>
+
+                <div class="p3-kpi-description">
+                    Number of completed customer orders.
+                </div>
+
+            </div>
+
+
+            <div class="p3-kpi">
+
+                <div class="p3-kpi-label">
+                    Average Order Value
+                </div>
+
+                <div class="p3-kpi-value">
+                    â‚¹2,364
+                </div>
+
+                <div class="p3-kpi-change">
+                    â†‘ 4.7%
+                </div>
+
+                <div class="p3-kpi-description">
+                    Average revenue generated per order.
+                </div>
+
+            </div>
+
+
+            <div class="p3-kpi">
+
+                <div class="p3-kpi-label">
+                    Customer Retention
+                </div>
+
+                <div class="p3-kpi-value">
+                    74%
+                </div>
+
+                <div class="p3-kpi-change">
+                    â†‘ 3.1%
+                </div>
+
+                <div class="p3-kpi-description">
+                    Percentage of customers returning during the
+                    selected period.
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     DISTRIBUTION
+====================================================== -->
+
+<section class="p3-section">
+
+    <div class="p3-container">
+
+        <div class="p3-heading">
+
+            <div class="p3-section-label">
+                05 â€” DISTRIBUTION ANALYSIS
+            </div>
+
+            <h2>
+                Look beyond the
+                <span>average</span>
+            </h2>
+
+            <p>
+                Two datasets can have the same average but completely
+                different distributions.
+            </p>
+
+        </div>
+
+
+        <div class="p3-distribution-grid">
+
+
+            <div class="p3-distribution-card">
+
+                <h3>
+                    Customer Age Distribution
+                </h3>
+
+
+                <div class="p3-bar-row">
+
+                    <label>18â€“25</label>
+
+                    <div class="p3-bar">
+                        <span style="width:72%"></span>
+                    </div>
+
+                    <div class="p3-bar-value">
+                        72
+                    </div>
+
+                </div>
+
+
+                <div class="p3-bar-row">
+
+                    <label>26â€“35</label>
+
+                    <div class="p3-bar">
+                        <span style="width:90%"></span>
+                    </div>
+
+                    <div class="p3-bar-value">
+                        90
+                    </div>
+
+                </div>
+
+
+                <div class="p3-bar-row">
+
+                    <label>36â€“45</label>
+
+                    <div class="p3-bar">
+                        <span style="width:55%"></span>
+                    </div>
+
+                    <div class="p3-bar-value">
+                        55
+                    </div>
+
+                </div>
+
+
+                <div class="p3-bar-row">
+
+                    <label>46â€“60</label>
+
+                    <div class="p3-bar">
+                        <span style="width:30%"></span>
+                    </div>
+
+                    <div class="p3-bar-value">
+                        30
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="p3-distribution-card">
+
+                <h3>
+                    Sales Distribution
+                </h3>
+
+
+                <div class="p3-bar-row">
+
+                    <label>Low</label>
+
+                    <div class="p3-bar">
+                        <span style="width:45%"></span>
+                    </div>
+
+                    <div class="p3-bar-value">
+                        45
+                    </div>
+
+                </div>
+
+
+                <div class="p3-bar-row">
+
+                    <label>Medium</label>
+
+                    <div class="p3-bar">
+                        <span style="width:82%"></span>
+                    </div>
+
+                    <div class="p3-bar-value">
+                        82
+                    </div>
+
+                </div>
+
+
+                <div class="p3-bar-row">
+
+                    <label>High</label>
+
+                    <div class="p3-bar">
+                        <span style="width:63%"></span>
+                    </div>
+
+                    <div class="p3-bar-value">
+                        63
+                    </div>
+
+                </div>
+
+
+                <div class="p3-bar-row">
+
+                    <label>Very High</label>
+
+                    <div class="p3-bar">
+                        <span style="width:28%"></span>
+                    </div>
+
+                    <div class="p3-bar-value">
+                        28
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CORRELATION
+====================================================== -->
+
+<section class="p3-section dark">
+
+    <div class="p3-container">
+
+        <div class="p3-heading">
+
+            <div class="p3-section-label">
+                06 â€” RELATIONSHIP ANALYSIS
+            </div>
+
+            <h2>
+                Are two variables
+                <span>connected?</span>
+            </h2>
+
+            <p>
+                Use correlation to investigate relationships between
+                numerical variables. Remember that correlation does not
+                automatically prove causation.
+            </p>
+
+        </div>
+
+
+        <div class="p3-correlation">
+
+
+            <div class="p3-correlation-card">
+
+                <h3>
+                    Study Hours vs Marks
+                </h3>
+
+                <p>
+                    Students who spend more hours studying may show a
+                    relationship with examination performance.
+                </p>
+
+                <div class="p3-corr-number">
+                    r = 0.82
+                </div>
+
+                <div class="p3-corr-scale">
+
+                    <span>-1</span>
+                    <span>-0.5</span>
+                    <span>0</span>
+                    <span>+0.5</span>
+                    <span>+1</span>
+
+                </div>
+
+            </div>
+
+
+            <div class="p3-correlation-card">
+
+                <h3>
+                    Advertising vs Sales
+                </h3>
+
+                <p>
+                    Investigate whether increased advertising expenditure
+                    is associated with increased sales.
+                </p>
+
+                <div class="p3-corr-number">
+                    r = 0.67
+                </div>
+
+                <div class="p3-corr-scale">
+
+                    <span>-1</span>
+                    <span>-0.5</span>
+                    <span>0</span>
+                    <span>+0.5</span>
+                    <span>+1</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     REAL WORLD PROBLEMS
+====================================================== -->
+
+<section class="p3-section">
+
+    <div class="p3-container">
+
+        <div class="p3-heading">
+
+            <div class="p3-section-label">
+                07 â€” REAL-WORLD PROBLEMS
+            </div>
+
+            <h2>
+                From data to
+                <span>business insight</span>
+            </h2>
+
+            <p>
+                Complete all three analytical problems using the cleaned
+                dataset from Practical 02 or an equivalent dataset.
+            </p>
+
+        </div>
+
+
+        <div class="p3-problem-grid">
+
+
+            <!-- PROBLEM 01 -->
+
+            <article class="p3-problem">
+
+                <div class="p3-problem-number">
+                    PROBLEM 01
+                </div>
+
+                <h3>
+                    E-Commerce Sales Analysis
+                </h3>
+
+                <p>
+                    An online store wants to understand its sales
+                    performance and identify the products and customer
+                    segments contributing most to revenue.
+                </p>
+
+
+                <div class="p3-block">
+
+                    <strong>Calculate</strong>
+
+                    <ul>
+                        <li>Total sales</li>
+                        <li>Average order value</li>
+                        <li>Total orders</li>
+                        <li>Maximum order value</li>
+                        <li>Minimum order value</li>
+                        <li>Median order value</li>
+                    </ul>
+
+                </div>
+
+
+                <div class="p3-block">
+
+                    <strong>Compare</strong>
+
+                    <ul>
+                        <li>Sales by product</li>
+                        <li>Sales by city</li>
+                        <li>Sales by customer type</li>
+                        <li>Monthly sales</li>
+                    </ul>
+
+                </div>
+
+
+                <div class="p3-block">
+
+                    <strong>Find insights</strong>
+
+                    <ul>
+                        <li>Best-selling product</li>
+                        <li>Highest-value customer group</li>
+                        <li>Best-performing month</li>
+                    </ul>
+
+                </div>
+
+
+                <div class="p3-task-list">
+
+                    <div class="p3-check">
+                        Define 4 KPIs
+                    </div>
+
+                    <div class="p3-check">
+                        Calculate descriptive statistics
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PROBLEM 02 -->
+
+            <article class="p3-problem">
+
+                <div class="p3-problem-number">
+                    PROBLEM 02
+                </div>
+
+                <h3>
+                    Employee Performance Analysis
+                </h3>
+
+                <p>
+                    An organization wants to understand the relationship
+                    between employee experience, salary and performance.
+                </p>
+
+
+                <div class="p3-block">
+
+                    <strong>Calculate</strong>
+
+                    <ul>
+                        <li>Average salary</li>
+                        <li>Median salary</li>
+                        <li>Salary standard deviation</li>
+                        <li>Average performance score</li>
+                        <li>Average experience</li>
+                    </ul>
+
+                </div>
+
+
+                <div class="p3-block">
+
+                    <strong>Compare</strong>
+
+                    <ul>
+                        <li>Salary by department</li>
+                        <li>Performance by department</li>
+                        <li>Salary by experience group</li>
+                        <li>Performance by experience group</li>
+                    </ul>
+
+                </div>
+
+
+                <div class="p3-block">
+
+                    <strong>Investigate</strong>
+
+                    <ul>
+                        <li>Experience vs salary</li>
+                        <li>Experience vs performance</li>
+                        <li>Salary vs performance</li>
+                    </ul>
+
+                </div>
+
+
+                <div class="p3-task-list">
+
+                    <div class="p3-check">
+                        Calculate correlations
+                    </div>
+
+                    <div class="p3-check">
+                        Identify unusual observations
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PROBLEM 03 -->
+
+            <article class="p3-problem">
+
+                <div class="p3-problem-number">
+                    PROBLEM 03
+                </div>
+
+                <h3>
+                    Student Performance Analysis
+                </h3>
+
+                <p>
+                    A college wants to understand student performance
+                    and determine which factors may be associated with
+                    examination marks.
+                </p>
+
+
+                <div class="p3-block">
+
+                    <strong>Calculate</strong>
+
+                    <ul>
+                        <li>Average marks</li>
+                        <li>Median marks</li>
+                        <li>Highest marks</li>
+                        <li>Lowest marks</li>
+                        <li>Standard deviation</li>
+                    </ul>
+
+                </div>
+
+
+                <div class="p3-block">
+
+                    <strong>Compare</strong>
+
+                    <ul>
+                        <li>Marks by division</li>
+                        <li>Marks by study-hours group</li>
+                        <li>Marks by attendance group</li>
+                    </ul>
+
+                </div>
+
+
+                <div class="p3-block">
+
+                    <strong>Investigate</strong>
+
+                    <ul>
+                        <li>Study hours vs marks</li>
+                        <li>Attendance vs marks</li>
+                        <li>Previous marks vs current marks</li>
+                    </ul>
+
+                </div>
+
+
+                <div class="p3-task-list">
+
+                    <div class="p3-check">
+                        Identify performance KPIs
+                    </div>
+
+                    <div class="p3-check">
+                        Explain findings in words
+                    </div>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     QUESTION TO METRIC
+====================================================== -->
+
+<section class="p3-section dark">
+
+    <div class="p3-container">
+
+        <div class="p3-heading">
+
+            <div class="p3-section-label">
+                08 â€” ANALYTICAL THINKING
+            </div>
+
+            <h2>
+                Question â†’
+                <span>Metric</span>
+            </h2>
+
+            <p>
+                Choose a metric based on the question, rather than
+                calculating statistics without a purpose.
+            </p>
+
+        </div>
+
+
+        <div class="p3-question-grid">
+
+
+            <div class="p3-question">
+
+                <div class="q">
+                    What is the typical customer purchase amount?
+                </div>
+
+                <div class="metric">
+                    â†’ Mean / Median
+                </div>
+
+            </div>
+
+
+            <div class="p3-question">
+
+                <div class="q">
+                    How much does sales vary between customers?
+                </div>
+
+                <div class="metric">
+                    â†’ Standard Deviation
+                </div>
+
+            </div>
+
+
+            <div class="p3-question">
+
+                <div class="q">
+                    Which product generated the most revenue?
+                </div>
+
+                <div class="metric">
+                    â†’ Sum / GroupBy
+                </div>
+
+            </div>
+
+
+            <div class="p3-question">
+
+                <div class="q">
+                    Are sales increasing over time?
+                </div>
+
+                <div class="metric">
+                    â†’ Time-based Trend
+                </div>
+
+            </div>
+
+
+            <div class="p3-question">
+
+                <div class="q">
+                    Are study hours related to marks?
+                </div>
+
+                <div class="metric">
+                    â†’ Correlation
+                </div>
+
+            </div>
+
+
+            <div class="p3-question">
+
+                <div class="q">
+                    Which department performs best?
+                </div>
+
+                <div class="metric">
+                    â†’ Group Comparison
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     EXPECTED OUTPUT
+====================================================== -->
+
+<section class="p3-section">
+
+    <div class="p3-container">
+
+        <div class="p3-heading">
+
+            <div class="p3-section-label">
+                09 â€” EXPECTED OUTPUT
+            </div>
+
+            <h2>
+                Your analysis should produce
+                <span>answers</span>
+            </h2>
+
+        </div>
+
+
+        <div class="p3-output">
+
+
+            <div class="p3-output-card">
+
+                <span>OUTPUT 01</span>
+
+                <h3>
+                    Statistical Summary
+                </h3>
+
+                <p>
+                    Mean, median, mode, minimum, maximum and standard
+                    deviation for relevant numerical variables.
+                </p>
+
+            </div>
+
+
+            <div class="p3-output-card">
+
+                <span>OUTPUT 02</span>
+
+                <h3>
+                    KPI Summary
+                </h3>
+
+                <p>
+                    A minimum of four meaningful KPIs connected to the
+                    selected real-world problem.
+                </p>
+
+            </div>
+
+
+            <div class="p3-output-card">
+
+                <span>OUTPUT 03</span>
+
+                <h3>
+                    Comparison Analysis
+                </h3>
+
+                <p>
+                    Group-wise comparisons explaining which category,
+                    product, department or segment performs better.
+                </p>
+
+            </div>
+
+
+            <div class="p3-output-card">
+
+                <span>OUTPUT 04</span>
+
+                <h3>
+                    Relationship Analysis
+                </h3>
+
+                <p>
+                    Correlation analysis between at least two relevant
+                    numerical variables.
+                </p>
+
+            </div>
+
+
+            <div class="p3-output-card">
+
+                <span>OUTPUT 05</span>
+
+                <h3>
+                    Analytical Visuals
+                </h3>
+
+                <p>
+                    At least three appropriate charts supporting the
+                    numerical analysis.
+                </p>
+
+            </div>
+
+
+            <div class="p3-output-card">
+
+                <span>OUTPUT 06</span>
+
+                <h3>
+                    Written Insights
+                </h3>
+
+                <p>
+                    Explain what the numbers mean and what decision could
+                    be taken from them.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SUBMISSION CHECKLIST
+====================================================== -->
+
+<section class="p3-section dark">
+
+    <div class="p3-container">
+
+        <div class="p3-heading">
+
+            <div class="p3-section-label">
+                10 â€” SUBMISSION CHECKLIST
+            </div>
+
+            <h2>
+                Before submitting,
+                <span>verify your analysis</span>
+            </h2>
+
+        </div>
+
+
+        <div class="p3-checklist">
+
+            <div class="p3-check">
+                Clean dataset used
+            </div>
+
+            <div class="p3-check">
+                Numerical columns identified
+            </div>
+
+            <div class="p3-check">
+                Mean calculated
+            </div>
+
+            <div class="p3-check">
+                Median calculated
+            </div>
+
+            <div class="p3-check">
+                Minimum and maximum calculated
+            </div>
+
+            <div class="p3-check">
+                Standard deviation calculated
+            </div>
+
+            <div class="p3-check">
+                Group-wise analysis performed
+            </div>
+
+            <div class="p3-check">
+                At least four KPIs defined
+            </div>
+
+            <div class="p3-check">
+                Correlation investigated
+            </div>
+
+            <div class="p3-check">
+                Appropriate charts created
+            </div>
+
+            <div class="p3-check">
+                Important findings documented
+            </div>
+
+            <div class="p3-check">
+                Business/real-world recommendation provided
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     MINI CHALLENGE
+====================================================== -->
+
+<section class="p3-section">
+
+    <div class="p3-container">
+
+        <div class="p3-challenge">
+
+            <h3>
+                Quick Challenge:
+                <span>Which metric?</span>
+            </h3>
+
+            <p>
+                A company has salaries of â‚¹25,000, â‚¹28,000, â‚¹30,000,
+                â‚¹32,000 and â‚¹3,00,000. Which measure would usually be
+                more representative of the typical salary in this dataset?
+            </p>
+
+
+            <div class="p3-options">
+
+                <button onclick="p3Answer(this,'wrong')">
+                    A. Mean
+                </button>
+
+                <button onclick="p3Answer(this,'correct')">
+                    B. Median
+                </button>
+
+                <button onclick="p3Answer(this,'wrong')">
+                    C. Maximum
+                </button>
+
+                <button onclick="p3Answer(this,'wrong')">
+                    D. Standard deviation
+                </button>
+
+            </div>
+
+
+            <div class="p3-answer" id="p3Answer"></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     NAVIGATION
+====================================================== -->
+
+<div class="p3-navigation">
+
+    <a href="practical02.html" class="p3-nav">
+        â† Practical 02
+    </a>
+
+    <a href="practical04.html" class="p3-nav next">
+        Practical 04 â†’
+    </a>
+
+</div>
+
+
+</main>
+
+
+
+<script>
+
+function p3Answer(button,result){
+
+    const buttons =
+        document.querySelectorAll(".p3-options button");
+
+    buttons.forEach(btn => {
+
+        btn.style.borderColor = "";
+        btn.style.background = "";
+
+    });
+
+
+    const answer =
+        document.getElementById("p3Answer");
+
+
+    if(result === "correct"){
+
+        button.style.borderColor = "#52c77a";
+
+        button.style.background =
+            "rgba(82,199,122,.10)";
+
+        answer.innerHTML =
+            "âœ“ Correct. The median is less affected by the extreme â‚¹3,00,000 value and therefore better represents the typical salary.";
+
+        answer.style.color =
+            "#76e39b";
+
+    }
+    else{
+
+        button.style.borderColor =
+            "#e65f5f";
+
+        button.style.background =
+            "rgba(230,95,95,.08)";
+
+        answer.innerHTML =
+            "âœ• Not the best choice here. Think about the effect of the extreme salary value.";
+
+        answer.style.color =
+            "#ff8a8a";
+
+    }
+
+}
+
+</script>
+
+
+<script src="../../../js/main.js"></script>
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

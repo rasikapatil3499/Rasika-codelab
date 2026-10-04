@@ -1,0 +1,196 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practical 05 â€” Grouping, Joins & Subqueries | DBMS</title>
+   <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../css/dbms_practical.css">
+</head>
+
+<body class="protected-page">
+
+<header class="navbar">
+    <div class="nav-container">
+
+        <a href="../../../index.html" class="logo">
+            <span class="logo-mark">&lt;/&gt;</span>
+            <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="../../../index.html">Home</a>
+            <a href="../../../subjects.html" class="active">Subjects</a>
+            <a href="../foundations.html">Foundations</a>
+            <a href="../practicals.html">Practicals</a>
+            <a href="../../../about.html">About</a>
+            <a href="../../../login.html">Login</a>
+        </nav>
+
+        <button class="menu-btn" aria-label="Open menu">â˜°</button>
+
+    </div>
+</header>
+<main class="practical-page">
+
+    <section class="practical-hero">
+        <div class="hero-number">P05</div>
+        <div>
+            <div class="eyebrow">DBMS PRACTICAL 05</div>
+            <h1>Grouping, Joins & Subqueries</h1>
+            <p>Combine and analyze related data</p>
+            <div class="tag-row"><span>GROUP BY</span><span>HAVING</span><span>JOIN</span><span>Subqueries</span></div>
+        </div>
+    </section>
+
+    <section class="practical-workspace">
+
+        <aside class="practical-panel learn-panel">
+            <div class="panel-label">LEARN / BUILD</div>
+            <h2>What you'll do</h2>
+            <p>Understand GROUP BY, HAVING, JOIN and nested queries by visually combining related tables.</p>
+            <ul class="learning-list">
+                <li>Group records using GROUP BY.</li><li>Filter groups using HAVING.</li><li>Combine related tables with JOIN.</li><li>Use a query inside another query.</li>
+            </ul>
+
+            <div class="interactive-controls">
+                
+            <div class="control-group">
+                <label for="joinType">JOIN Type</label>
+                <select id="joinType">
+                    <option>INNER JOIN</option>
+                    <option>LEFT JOIN</option>
+                    <option>RIGHT JOIN</option>
+                </select>
+            </div>
+            <div class="button-row">
+                <button class="action-btn" type="button">â–¶ Execute JOIN</button>
+            </div>
+        
+            </div>
+        </aside>
+
+        <section class="practical-panel visual-panel">
+            <div class="panel-header">
+                <div>
+                    <div class="panel-label">LIVE VISUALIZATION</div>
+                    <h2>See the concept</h2>
+                </div>
+                <span class="live-indicator"><i></i> LIVE</span>
+            </div>
+
+            <div class="join-visual">
+                
+            <div class="join-canvas">
+                <div class="join-table">
+                    <div class="table-heading">students</div>
+                    <div>student_id</div><div>name</div><div>course_id</div>
+                </div>
+                <div class="join-connector"><span>course_id = course_id</span> â‡„</div>
+                <div class="join-table">
+                    <div class="table-heading">courses</div>
+                    <div>course_id</div><div>course_name</div><div>credits</div>
+                </div>
+            </div>
+            <div class="join-result">
+                <span class="result-badge">JOIN RESULT</span>
+                <p>Student records matched with their related course records.</p>
+            </div>
+        
+            </div>
+        </section>
+
+    </section>
+
+    <section class="status-bar">
+        <span class="status-dot"></span>
+        <span>Status:</span>
+        <strong>Ready to start</strong>
+        <span class="status-message">Use the controls to explore this practical.</span>
+    </section>
+
+    <nav class="practical-navigation">
+        <a href="practical04.html" class="nav-btn">â† Practical 04</a>
+        <span>Practical 05 / 10</span>
+        <a href="practical06.html" class="nav-btn next">Next Practical â†’</a>
+    </nav>
+
+</main>
+
+<!-- ==================== FOOTER ==================== -->
+
+<footer class="site-footer">
+
+    <div class="footer-main">
+
+        <!-- BRAND -->
+
+        <div class="footer-brand">
+
+            <a href="../../../index.html" class="logo">
+                <span class="logo-mark">&lt;/&gt;</span>
+                <span>
+                    Rasika<span class="logo-highlight">CodeLab</span>
+                </span>
+            </a>
+
+            <p>
+                Interactive database learning through concepts,
+                SQL, design and practical applications.
+            </p>
+
+        </div>
+
+
+        <!-- LEARN -->
+
+        <div class="footer-links">
+
+            <h4>Learn</h4>
+
+            <a href="../foundations.html">
+                Foundations
+            </a>
+
+
+        </div>
+
+
+        <!-- EXPLORE -->
+
+        <div class="footer-links">
+
+            <h4>Explore</h4>
+
+            <a href="../../../about.html">
+                About
+            </a>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- BOTTOM -->
+
+    <div class="footer-bottom">
+
+        <span>
+            Â© 2026 Rasika CodeLab
+        </span>
+
+        <span>
+            Built for practical learning.
+        </span>
+
+    </div>
+
+</footer>
+
+
+<script src="../js/dbms_practical.js"></script>
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

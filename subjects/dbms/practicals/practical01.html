@@ -1,0 +1,198 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practical 01 â€” Database Design & ER Diagram | DBMS</title>
+   <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="../css/dbms_practical.css">
+</head>
+
+<body class="protected-page">
+
+<header class="navbar">
+    <div class="nav-container">
+
+        <a href="../../../index.html" class="logo">
+            <span class="logo-mark">&lt;/&gt;</span>
+            <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+        </a>
+
+        <nav class="nav-links">
+            <a href="../../../index.html">Home</a>
+            <a href="../../../subjects.html" class="active">Subjects</a>
+            <a href="../foundations.html">Foundations</a>
+            <a href="../practicals.html">Practicals</a>
+            <a href="../../../about.html">About</a>
+            <a href="../../../login.html">Login</a>
+        </nav>
+
+        <button class="menu-btn" aria-label="Open menu">â˜°</button>
+
+    </div>
+</header>
+
+<main class="practical-page">
+
+    <section class="practical-hero">
+        <div class="hero-number">P01</div>
+        <div>
+            <div class="eyebrow">DBMS PRACTICAL 01</div>
+            <h1>Database Design & ER Diagram</h1>
+            <p>Problem â†’ Entities â†’ Relationships â†’ ER</p>
+            <div class="tag-row"><span>Entities</span><span>Attributes</span><span>Relationships</span><span>ER Model</span></div>
+        </div>
+    </section>
+
+    <section class="practical-workspace">
+
+        <aside class="practical-panel learn-panel">
+            <div class="panel-label">LEARN / BUILD</div>
+            <h2>What you'll do</h2>
+            <p>Identify entities, attributes and relationships, then build a clear Entityâ€“Relationship model.</p>
+            <ul class="learning-list">
+                <li>Identify entities from a real-world problem.</li><li>Add attributes and mark primary keys.</li><li>Connect entities using relationships.</li><li>Visualize the complete ER diagram.</li>
+            </ul>
+
+            <div class="interactive-controls">
+                
+            <div class="control-group">
+                <label for="entityName">Entity Name</label>
+                <input id="entityName" type="text" placeholder="e.g. Student">
+            </div>
+            <div class="control-group">
+                <label for="attributeName">Attribute</label>
+                <input id="attributeName" type="text" placeholder="e.g. student_id">
+            </div>
+            <div class="button-row">
+                <button class="action-btn" type="button">+ Add Entity</button>
+                <button class="secondary-btn" type="button">+ Add Attribute</button>
+            </div>
+        
+            </div>
+        </aside>
+
+        <section class="practical-panel visual-panel">
+            <div class="panel-header">
+                <div>
+                    <div class="panel-label">LIVE VISUALIZATION</div>
+                    <h2>See the concept</h2>
+                </div>
+                <span class="live-indicator"><i></i> LIVE</span>
+            </div>
+
+            <div class="er-canvas">
+                
+            <div class="er-canvas">
+                <div class="er-entity">
+                    <div class="entity-title">STUDENT</div>
+                    <div class="entity-attribute pk">ðŸ”‘ student_id</div>
+                    <div class="entity-attribute">name</div>
+                    <div class="entity-attribute">email</div>
+                </div>
+                <div class="er-relationship">ENROLLS</div>
+                <div class="er-entity">
+                    <div class="entity-title">COURSE</div>
+                    <div class="entity-attribute pk">ðŸ”‘ course_id</div>
+                    <div class="entity-attribute">course_name</div>
+                    <div class="entity-attribute">credits</div>
+                </div>
+            </div>
+        
+            </div>
+        </section>
+
+    </section>
+
+    <section class="status-bar">
+        <span class="status-dot"></span>
+        <span>Status:</span>
+        <strong>Ready to start</strong>
+        <span class="status-message">Use the controls to explore this practical.</span>
+    </section>
+
+    <nav class="practical-navigation">
+        <a href="../foundations.html" class="nav-btn">â† Foundations</a>
+        <span>Practical 01 / 10</span>
+        <a href="practical02.html" class="nav-btn next">Next Practical â†’</a>
+    </nav>
+
+</main>
+
+<!-- ==================== FOOTER ==================== -->
+
+<footer class="site-footer">
+
+    <div class="footer-main">
+
+        <!-- BRAND -->
+
+        <div class="footer-brand">
+
+            <a href="../../../index.html" class="logo">
+                <span class="logo-mark">&lt;/&gt;</span>
+                <span>
+                    Rasika<span class="logo-highlight">CodeLab</span>
+                </span>
+            </a>
+
+            <p>
+                Interactive database learning through concepts,
+                SQL, design and practical applications.
+            </p>
+
+        </div>
+
+
+        <!-- LEARN -->
+
+        <div class="footer-links">
+
+            <h4>Learn</h4>
+
+            <a href="../foundations.html">
+                Foundations
+            </a>
+
+
+        </div>
+
+
+        <!-- EXPLORE -->
+
+        <div class="footer-links">
+
+            <h4>Explore</h4>
+
+            <a href="../../../about.html">
+                About
+            </a>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- BOTTOM -->
+
+    <div class="footer-bottom">
+
+        <span>
+            Â© 2026 Rasika CodeLab
+        </span>
+
+        <span>
+            Built for practical learning.
+        </span>
+
+    </div>
+
+</footer>
+
+
+<script src="../js/dbms_practical.js"></script>
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

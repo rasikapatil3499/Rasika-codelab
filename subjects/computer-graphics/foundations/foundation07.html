@@ -1,0 +1,870 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Foundation 07 â€” Learn how a computer draws graphics through graphics hardware, rendering, frame buffers, rasterization and display.">
+    <title>Foundation 07 | How Does a Computer Draw? | Rasika CodeLab</title>
+    <link rel="stylesheet" href="../css/cgr_style.css">
+<style>body.protected-page:not(.auth-ready){visibility:hidden}</style>
+</head>
+
+<body class="protected-page">
+
+<header class="site-header">
+    <nav class="navbar">
+        <a href="../cgr_index.html" class="logo">
+            <span class="logo-mark">â—ˆ</span>
+            Rasika<span class="logo-highlight">CodeLab</span>
+        </a>
+
+        <div class="nav-links">
+            <a href="../cgr_index.html">Home</a>
+            <a href="../cgr_foundations.html" class="active">Foundations</a>
+            <a href="../cgr_practicals.html">Practicals</a>
+                        <a href="../../../about.html">About</a>
+        </div>
+
+        <button class="menu-btn" type="button" aria-label="Open menu">â˜°</button>
+    </nav>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero foundation-detail-hero">
+
+    <div class="hero-content">
+
+        <span class="eyebrow">FOUNDATION 07</span>
+
+        <h1>How Does a <span>Computer Draw?</span></h1>
+
+        <p class="hero-description">
+            A graphics program describes what should be drawn, but hardware
+            and rendering systems must turn that description into pixels.
+            Follow the path from graphics commands to the final display.
+        </p>
+
+        <div class="foundation-meta">
+            <span>CPU</span>
+            <span>GPU</span>
+            <span>Rendering</span>
+            <span>Frame Buffer</span>
+            <span>Display</span>
+        </div>
+
+    </div>
+
+    <div class="hero-visual">
+
+        <div class="graphics-window foundation-visual-window">
+
+            <div class="window-header">
+                <div class="window-dots">
+                    <span></span><span></span><span></span>
+                </div>
+                <span class="window-title">render.pipeline</span>
+            </div>
+
+            <div class="draw-hero">
+
+                <div class="draw-node">
+                    <span>01</span>
+                    <strong>OBJECT</strong>
+                    <small>Geometry</small>
+                </div>
+
+                <div class="draw-arrow">â†’</div>
+
+                <div class="draw-node active">
+                    <span>02</span>
+                    <strong>GPU</strong>
+                    <small>Render</small>
+                </div>
+
+                <div class="draw-arrow">â†’</div>
+
+                <div class="draw-node">
+                    <span>03</span>
+                    <strong>PIXELS</strong>
+                    <small>Frame Buffer</small>
+                </div>
+
+                <div class="draw-screen">
+                    <i></i><i></i><i></i>
+                    <i></i><i></i><i></i>
+                    <i></i><i></i><i></i>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- OBJECTIVES -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+        <span class="eyebrow">LEARNING OBJECTIVES</span>
+        <h2>By the end of this foundation, you should be able to...</h2>
+    </div>
+
+    <div class="foundation-objectives">
+
+        <div class="objective-card">
+            <span>01</span>
+            <strong>Explain Rendering</strong>
+            <p>Describe how a graphics scene is converted into a visible image.</p>
+        </div>
+
+        <div class="objective-card">
+            <span>02</span>
+            <strong>Understand GPU & CPU</strong>
+            <p>Explain their different roles in preparing and processing graphics.</p>
+        </div>
+
+        <div class="objective-card">
+            <span>03</span>
+            <strong>Understand Frame Buffer</strong>
+            <p>Explain how pixel information is stored before being displayed.</p>
+        </div>
+
+        <div class="objective-card">
+            <span>04</span>
+            <strong>Follow the Pipeline</strong>
+            <p>Trace the basic path from an object or command to final pixels.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CONCEPT -->
+<section class="section foundation-detail">
+
+    <div class="content-card">
+
+        <span class="eyebrow">01 Â· CONCEPT</span>
+
+        <h2>What does â€œdrawingâ€ mean in computer graphics?</h2>
+
+        <p>
+            A computer does not draw an object in the same way a person
+            draws on paper. A graphics application provides data such as
+            coordinates, shapes, colors, textures and other rendering
+            information.
+        </p>
+
+        <p>
+            A rendering system processes this information and eventually
+            produces pixel values that can be presented on a display.
+        </p>
+
+        <div class="definition-box">
+            <strong>Rendering</strong>
+            <p>
+                Rendering is the process of generating a visual image from
+                graphical data such as geometry, color, lighting and other
+                scene information.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PIPELINE -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+        <span class="eyebrow">02 Â· BASIC RENDERING PIPELINE</span>
+        <h2>Follow the journey from object to image.</h2>
+        <p>
+            The exact pipeline depends on the graphics system, but this
+            simplified model is useful for understanding the fundamentals.
+        </p>
+    </div>
+
+    <div class="content-card">
+
+        <div class="graphics-flow">
+
+            <div class="flow-item">
+                <span>01</span>
+                <strong>Scene / Object</strong>
+                <small>Geometry, coordinates and visual properties are defined.</small>
+            </div>
+
+            <div class="flow-arrow">â†’</div>
+
+            <div class="flow-item">
+                <span>02</span>
+                <strong>Transform</strong>
+                <small>Objects are positioned, scaled and rotated.</small>
+            </div>
+
+            <div class="flow-arrow">â†’</div>
+
+            <div class="flow-item">
+                <span>03</span>
+                <strong>View / Clip</strong>
+                <small>The visible region is selected for rendering.</small>
+            </div>
+
+            <div class="flow-arrow">â†’</div>
+
+            <div class="flow-item">
+                <span>04</span>
+                <strong>Rasterize</strong>
+                <small>Geometry is converted into fragments or pixels.</small>
+            </div>
+
+            <div class="flow-arrow">â†’</div>
+
+            <div class="flow-item">
+                <span>05</span>
+                <strong>Display</strong>
+                <small>Pixel data is presented as the final image.</small>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CPU GPU -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+        <span class="eyebrow">03 Â· CPU & GPU</span>
+        <h2>Who does the graphics work?</h2>
+    </div>
+
+    <div class="comparison-grid">
+
+        <div class="content-card">
+
+            <span class="card-label">CPU</span>
+
+            <h3>General-purpose processing</h3>
+
+            <p>
+                The CPU executes program instructions and can prepare
+                graphics data, application logic and rendering commands.
+            </p>
+
+            <div class="definition-box">
+                <strong>Think: application control</strong>
+                <p>
+                    The CPU is responsible for broad program execution and
+                    coordinating many parts of the application.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="content-card">
+
+            <span class="card-label">GPU</span>
+
+            <h3>Graphics-oriented processing</h3>
+
+            <p>
+                The GPU is designed to process graphics workloads efficiently,
+                especially operations that can be performed in parallel.
+            </p>
+
+            <div class="definition-box">
+                <strong>Think: graphics processing</strong>
+                <p>
+                    Modern GPUs contain many processing resources optimized
+                    for highly parallel workloads.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PRIMITIVE TO PIXEL -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+        <span class="eyebrow">04 Â· GEOMETRY TO PIXELS</span>
+        <h2>A triangle is geometry. The screen needs pixels.</h2>
+        <p>
+            This is the central idea behind raster graphics: continuous
+            geometric descriptions must ultimately be represented on a
+            discrete pixel grid.
+        </p>
+    </div>
+
+    <div class="comparison-grid">
+
+        <div class="content-card">
+
+            <span class="card-label">GEOMETRY</span>
+
+            <h3>Three vertices</h3>
+
+            <div class="formula-box">
+                Pâ‚(xâ‚,yâ‚), Pâ‚‚(xâ‚‚,yâ‚‚), Pâ‚ƒ(xâ‚ƒ,yâ‚ƒ)
+            </div>
+
+            <p>
+                These points define the triangle in the graphics coordinate
+                system.
+            </p>
+
+        </div>
+
+        <div class="content-card">
+
+            <span class="card-label">RASTER IMAGE</span>
+
+            <h3>Pixel coverage</h3>
+
+            <div class="calculation-box">
+                Geometry â†’ rasterization â†’ pixel/fragments<br><br>
+                Each relevant screen location receives resulting
+                pixel information.
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FRAME BUFFER -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+        <span class="eyebrow">05 Â· FRAME BUFFER</span>
+        <h2>Where is the final pixel information kept?</h2>
+    </div>
+
+    <div class="content-card">
+
+        <p>
+            A frame buffer is a region of memory used to hold image data
+            representing a frame for display. It can be thought of as a
+            pixel array containing the information needed for the image.
+        </p>
+
+        <div class="formula-box">
+            Frame Buffer â‰ˆ Width Ã— Height Ã— Bytes per Pixel
+        </div>
+
+        <div class="definition-box">
+            <strong>Worked example</strong>
+            <p>
+                For a 1920 Ã— 1080 image with 4 bytes per pixel:
+                1920 Ã— 1080 Ã— 4 = <strong>8,294,400 bytes</strong>,
+                approximately 7.91 MiB.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- INTERACTIVE PIPELINE -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+        <span class="eyebrow">06 Â· INTERACTIVE VISUALIZATION</span>
+        <h2>Step through a simplified rendering pipeline.</h2>
+        <p>
+            Move through each stage to understand what changes as graphics
+            move toward the display.
+        </p>
+    </div>
+
+    <div class="pipeline-lab">
+
+        <div class="pipeline-stage">
+
+            <div class="pipeline-visual" id="pipelineVisual">
+
+                <div class="pipeline-grid"></div>
+
+                <div class="pipeline-object" id="pipelineObject">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+            </div>
+
+            <div class="pipeline-stage-info">
+
+                <span id="pipelineNumber">01 / 05</span>
+
+                <h3 id="pipelineTitle">Scene / Object</h3>
+
+                <p id="pipelineDescription">
+                    The scene contains geometry, coordinates and visual properties.
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="pipeline-controls">
+
+            <button class="btn btn-primary" id="pipelineNext" type="button">
+                Next Stage â†’
+            </button>
+
+            <button class="btn btn-secondary" id="pipelineReset" type="button">
+                Reset
+            </button>
+
+            <div class="pipeline-progress">
+
+                <div class="pipeline-dot active" data-stage="0">01</div>
+                <div class="pipeline-dot" data-stage="1">02</div>
+                <div class="pipeline-dot" data-stage="2">03</div>
+                <div class="pipeline-dot" data-stage="3">04</div>
+                <div class="pipeline-dot" data-stage="4">05</div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- GRAPHICS API -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+        <span class="eyebrow">07 Â· GRAPHICS APIs</span>
+        <h2>Programs need a way to communicate with graphics systems.</h2>
+    </div>
+
+    <div class="terminology-grid">
+
+        <div class="term-card">
+            <strong>Graphics API</strong>
+            <p>A programming interface through which software can request graphics operations.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>OpenGL</strong>
+            <p>A graphics API historically used for cross-platform graphics programming.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>WebGL</strong>
+            <p>A web graphics API that exposes OpenGL ES-style graphics capabilities in browsers.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Canvas 2D</strong>
+            <p>A browser API for drawing 2D graphics using JavaScript.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Three.js</strong>
+            <p>A JavaScript library commonly used to simplify 3D graphics development on the web.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Rendering Engine</strong>
+            <p>Software components that process graphics instructions and produce visual output.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CALCULATION -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+        <span class="eyebrow">08 Â· CALCULATE</span>
+        <h2>Estimate basic frame-buffer storage.</h2>
+    </div>
+
+    <div class="comparison-grid">
+
+        <div class="content-card">
+
+            <span class="card-label">GIVEN</span>
+
+            <h3>800 Ã— 600, 4 bytes/pixel</h3>
+
+            <div class="calculation-box">
+                Width = 800<br>
+                Height = 600<br>
+                Bytes / Pixel = 4
+            </div>
+
+        </div>
+
+        <div class="content-card">
+
+            <span class="card-label">CALCULATION</span>
+
+            <div class="formula-box">
+                Memory = W Ã— H Ã— B
+            </div>
+
+            <div class="calculation-box">
+                = 800 Ã— 600 Ã— 4<br>
+                = 1,920,000 bytes<br>
+                â‰ˆ 1.83 MiB
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- TERMINOLOGY -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+        <span class="eyebrow">09 Â· TERMINOLOGY</span>
+        <h2>Words you should know.</h2>
+    </div>
+
+    <div class="terminology-grid">
+
+        <div class="term-card">
+            <strong>Rendering</strong>
+            <p>Generating a visual image from graphics data.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Rasterization</strong>
+            <p>Converting geometric primitives into raster-oriented image data.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>GPU</strong>
+            <p>Processor designed for graphics and other highly parallel workloads.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Frame Buffer</strong>
+            <p>Memory used to hold image data for a frame.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Pixel</strong>
+            <p>A discrete picture element in a raster image.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Graphics API</strong>
+            <p>Interface that lets software communicate graphics operations to a graphics system.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- COMMON ERRORS -->
+<section class="section foundation-detail">
+
+    <div class="section-heading">
+        <span class="eyebrow">COMMON ERRORS</span>
+        <h2>Keep these distinctions clear.</h2>
+    </div>
+
+    <div class="terminology-grid">
+
+        <div class="term-card">
+            <strong>CPU â‰  GPU</strong>
+            <p>They can cooperate, but they are designed for different types of processing.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Rendering â‰  Display</strong>
+            <p>Rendering produces image data; the display presents that data visually.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Geometry â‰  Pixels</strong>
+            <p>A geometric object must be rasterized before it becomes a raster image.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>Frame Buffer â‰  File</strong>
+            <p>A frame buffer holds image data for rendering/display; a file stores encoded data for persistence or transfer.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>API â‰  Hardware</strong>
+            <p>An API provides software interfaces; it is not the physical graphics processor.</p>
+        </div>
+
+        <div class="term-card">
+            <strong>More Pixels = More Data</strong>
+            <p>Higher resolution generally requires more pixel storage for an uncompressed frame.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- QUICK CHECK -->
+<section class="section foundation-detail">
+
+    <div class="content-card quick-check">
+
+        <span class="eyebrow">QUICK CHECK</span>
+
+        <h2>Test your understanding.</h2>
+
+        <div class="question-list">
+
+            <div>
+                <span>01</span>
+                <p>What is rendering in computer graphics?</p>
+            </div>
+
+            <div>
+                <span>02</span>
+                <p>What is the role of a GPU?</p>
+            </div>
+
+            <div>
+                <span>03</span>
+                <p>What is rasterization?</p>
+            </div>
+
+            <div>
+                <span>04</span>
+                <p>What is a frame buffer?</p>
+            </div>
+
+            <div>
+                <span>05</span>
+                <p>Calculate the storage for 1024 Ã— 768 pixels at 4 bytes per pixel.</p>
+            </div>
+
+            <div>
+                <span>06</span>
+                <p>Why must geometric graphics eventually be represented as pixels for a raster display?</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SUMMARY -->
+<section class="section foundation-detail">
+
+    <div class="summary-box">
+
+        <span class="eyebrow">QUICK SUMMARY</span>
+
+        <h2>Remember these five ideas.</h2>
+
+        <div class="summary-grid">
+
+            <div>
+                <span>01</span>
+                <strong>Graphics starts as data</strong>
+                <p>Coordinates, geometry, colors and other properties describe the scene.</p>
+            </div>
+
+            <div>
+                <span>02</span>
+                <strong>Rendering creates an image</strong>
+                <p>The rendering process converts graphics information into visual output.</p>
+            </div>
+
+            <div>
+                <span>03</span>
+                <strong>GPU handles graphics workloads</strong>
+                <p>Modern GPUs are designed for highly parallel processing.</p>
+            </div>
+
+            <div>
+                <span>04</span>
+                <strong>Rasterization reaches pixels</strong>
+                <p>Geometric primitives are converted into raster-oriented data.</p>
+            </div>
+
+            <div>
+                <span>05</span>
+                <strong>Frame buffer holds a frame</strong>
+                <p>Pixel information can be stored in memory before being displayed.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- NAVIGATION -->
+<section class="section foundation-navigation">
+
+    <a href="foundation06.html" class="nav-card">
+        <span>â†</span>
+        <small>PREVIOUS FOUNDATION</small>
+        <strong>How are Graphics Stored?</strong>
+    </a>
+
+    <a href="foundation08.html" class="nav-card next">
+        <small>NEXT FOUNDATION</small>
+        <strong>How Does an Object Become Pixels? â†’</strong>
+    </a>
+
+</section>
+
+</main>
+
+
+<footer class="site-footer">
+
+    <div class="footer-content">
+
+        <div class="footer-brand">
+            <strong>Rasika<span class="logo-highlight">CodeLab</span></strong>
+            <p>Computer Graphics Practical Learning</p>
+        </div>
+
+        <div class="footer-links">
+            <a href="../../../index.html">Home</a>
+            <a href="../cgr_foundations.html">Foundations</a>
+            <a href="../cgr_practicals.html">Practicals</a>
+                        <a href="../../../about.html">About</a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        Â© 2026 Rasika CodeLab Â· Learn the concept. See the result.
+    </div>
+
+</footer>
+
+
+<script>
+(function () {
+
+    const stages = [
+        {
+            number: "01 / 05",
+            title: "Scene / Object",
+            description: "The scene contains geometry, coordinates and visual properties.",
+            className: "stage-object"
+        },
+        {
+            number: "02 / 05",
+            title: "Transform",
+            description: "The object is positioned, scaled or rotated in the graphics coordinate system.",
+            className: "stage-transform"
+        },
+        {
+            number: "03 / 05",
+            title: "View / Clip",
+            description: "The graphics system determines which portion of the scene is visible.",
+            className: "stage-clip"
+        },
+        {
+            number: "04 / 05",
+            title: "Rasterize",
+            description: "The geometry is converted into fragments or raster-oriented pixel information.",
+            className: "stage-raster"
+        },
+        {
+            number: "05 / 05",
+            title: "Display",
+            description: "The resulting pixel information forms the frame that is presented on the display.",
+            className: "stage-display"
+        }
+    ];
+
+    const visual = document.getElementById("pipelineVisual");
+    const object = document.getElementById("pipelineObject");
+    const number = document.getElementById("pipelineNumber");
+    const title = document.getElementById("pipelineTitle");
+    const description = document.getElementById("pipelineDescription");
+
+    const next = document.getElementById("pipelineNext");
+    const reset = document.getElementById("pipelineReset");
+    const dots = document.querySelectorAll(".pipeline-dot");
+
+    let current = 0;
+
+    function renderStage(index) {
+
+        current = index;
+
+        visual.className = "pipeline-visual " + stages[index].className;
+
+        number.textContent = stages[index].number;
+        title.textContent = stages[index].title;
+        description.textContent = stages[index].description;
+
+        dots.forEach(function (dot, i) {
+            dot.classList.toggle("active", i === index);
+            dot.classList.toggle("complete", i < index);
+        });
+
+        next.textContent =
+            index === stages.length - 1 ? "Start Again â†»" : "Next Stage â†’";
+    }
+
+    next.addEventListener("click", function () {
+
+        const nextStage =
+            current === stages.length - 1 ? 0 : current + 1;
+
+        renderStage(nextStage);
+
+    });
+
+    reset.addEventListener("click", function () {
+        renderStage(0);
+    });
+
+    dots.forEach(function (dot) {
+
+        dot.addEventListener("click", function () {
+            renderStage(Number(dot.dataset.stage));
+        });
+
+    });
+
+    renderStage(0);
+
+})();
+</script>
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

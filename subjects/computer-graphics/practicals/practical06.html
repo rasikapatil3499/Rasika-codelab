@@ -1,0 +1,639 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Practical 06 | Bresenham Circle Drawing | Rasika CodeLab</title>
+  <link rel="stylesheet" href="../css/cgr_style.css">
+  <link rel="stylesheet" href="../css/cgr_practicals.css">
+<style>body.protected-page:not(.auth-ready){visibility:hidden}</style>
+</head>
+
+<body class="cgr-practical-body practical-06 protected-page">
+
+<header class="navbar">
+  <div class="logo">
+    <span class="logo-mark">&lt;/&gt;</span>
+    <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+  </div>
+  <nav class="nav-links">
+    <a href="../cgr_index.html">Home</a>
+    <a href="../cgr_foundations.html">Foundations</a>
+        <a href="../cgr_practicals.html" class="active">Practicals</a>
+    <a href="../../../about.html">About</a>
+  </nav>
+  <button class="menu-btn" aria-label="Open Menu">â˜°</button>
+</header>
+
+<main class="cgr-practical-page">
+
+  <section class="practical-hero">
+    <div class="practical-hero-content">
+      <span class="practical-badge">06 â€¢ RASTER SCAN</span>
+      <h1>Bresenham Circle Drawing</h1>
+      <p>Generate a circle using a decision parameter and eight-way symmetry.</p>
+      <div class="practical-tags">
+        <span>CircleSymmetryAnimation</span>
+        <span>Decision Parameter</span>
+        <span>Pixel-by-Pixel</span>
+      </div>
+    </div>
+    <div class="circle-hero-visual" aria-hidden="true">
+      <div class="hero-circle-grid"></div>
+      <div class="hero-circle"></div>
+      <i class="hero-dot d1"></i><i class="hero-dot d2"></i>
+      <i class="hero-dot d3"></i><i class="hero-dot d4"></i>
+      <i class="hero-dot d5"></i><i class="hero-dot d6"></i>
+      <i class="hero-dot d7"></i><i class="hero-dot d8"></i>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>01</span>
+      <div><h2>Why Bresenham Circle?</h2><p>Convert a continuous mathematical circle into a clean raster pattern.</p></div>
+    </div>
+    <div class="concept-grid">
+      <article class="concept-card"><div class="concept-icon">â­•</div><h3>Ideal Circle</h3><p>A mathematical circle contains infinitely many points. A raster display can only illuminate discrete pixels.</p></article>
+      <article class="concept-card"><div class="concept-icon">ðŸŽ¯</div><h3>Decision Based</h3><p>The algorithm chooses the next pixel using an integer decision parameter instead of repeatedly evaluating the circle equation.</p></article>
+      <article class="concept-card"><div class="concept-icon">âœ¦</div><h3>Eight-Way Symmetry</h3><p>Only one octant needs to be calculated. Each point can generate up to eight symmetric pixels.</p></article>
+    </div>
+    <div class="circle-flow">
+      <span>Center + Radius</span><b>â†’</b><span>Calculate One Octant</span><b>â†’</b><span>Decision P</span><b>â†’</b><span>8-Way Symmetry</span><b>â†’</b><span>Raster Circle</span>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>02</span>
+      <div><h2>Circle Geometry & Eight-Way Symmetry</h2><p>One calculated point is mirrored across the eight octants.</p></div>
+    </div>
+
+    <div class="formula-layout">
+      <div class="formula-card">
+        <h3>Mathematical Circle</h3>
+        <div class="big-formula">xÂ² + yÂ² = rÂ²</div>
+        <p>For a circle centered at <strong>(x<sub>c</sub>, y<sub>c</sub>)</strong>, a calculated point <strong>(x, y)</strong> produces:</p>
+        <div class="symmetry-list">
+          <code>(xc + x, yc + y)</code>
+          <code>(xc - x, yc + y)</code>
+          <code>(xc + x, yc - y)</code>
+          <code>(xc - x, yc - y)</code>
+          <code>(xc + y, yc + x)</code>
+          <code>(xc - y, yc + x)</code>
+          <code>(xc + y, yc - x)</code>
+          <code>(xc - y, yc - x)</code>
+        </div>
+      </div>
+      <div class="symmetry-visual">
+        <div class="symmetry-axis axis-x"></div>
+        <div class="symmetry-axis axis-y"></div>
+        <div class="symmetry-ring"></div>
+        <div class="symmetry-point sp1"></div><div class="symmetry-point sp2"></div>
+        <div class="symmetry-point sp3"></div><div class="symmetry-point sp4"></div>
+        <div class="symmetry-point sp5"></div><div class="symmetry-point sp6"></div>
+        <div class="symmetry-point sp7"></div><div class="symmetry-point sp8"></div>
+        <span class="symmetry-label">8-WAY SYMMETRY</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>03</span>
+      <div><h2>Bresenham Circle Algorithm</h2><p>Follow the decision parameter and select E or SE at each step.</p></div>
+    </div>
+
+    <div class="algorithm-panel">
+      <div class="algorithm-steps">
+        <div><b>01</b><p>Set the center <code>(xc, yc)</code> and radius <code>r</code>.</p></div>
+        <div><b>02</b><p>Initialize <code>x = 0</code>, <code>y = r</code>.</p></div>
+        <div><b>03</b><p>Initialize the decision parameter <code>p = 3 - 2r</code>.</p></div>
+        <div><b>04</b><p>Plot the eight symmetric points for <code>(x, y)</code>.</p></div>
+        <div><b>05</b><p>If <code>p &lt; 0</code>, choose E and update <code>p = p + 4x + 6</code>.</p></div>
+        <div><b>06</b><p>If <code>p â‰¥ 0</code>, choose SE, decrement <code>y</code>, and update <code>p = p + 4(x-y) + 10</code>.</p></div>
+        <div><b>07</b><p>Increment <code>x</code>.</p></div>
+        <div><b>08</b><p>Repeat while <code>x â‰¤ y</code>.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>04</span>
+      <div><h2>Worked Calculation</h2><p>Example: circle with center (0, 0) and radius 5.</p></div>
+    </div>
+
+    <div class="calculation-layout">
+      <div class="calculation-card">
+        <div class="calc-line"><span>Given</span><strong>xc = 0, yc = 0, r = 5</strong></div>
+        <div class="calc-line"><span>Initial x</span><strong>0</strong></div>
+        <div class="calc-line"><span>Initial y</span><strong>5</strong></div>
+        <div class="calc-line"><span>Initial P</span><strong>3 âˆ’ 2(5) = âˆ’7</strong></div>
+        <div class="calc-highlight">P &lt; 0 â†’ choose E â†’ P = P + 4x + 6</div>
+      </div>
+      <div class="calculation-note">
+        <h3>What matters?</h3>
+        <p>The algorithm calculates only the first octant. The symmetry operation copies every valid point to the other seven octants.</p>
+        <div class="mini-equation">8 symmetric pixels â† 1 calculated pixel</div>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table class="bresenham-circle-table">
+        <thead><tr><th>Step</th><th>x</th><th>y</th><th>P</th><th>Decision</th><th>Next</th></tr></thead>
+        <tbody>
+          <tr><td>0</td><td>0</td><td>5</td><td>-7</td><td>E</td><td>(1,5)</td></tr>
+          <tr><td>1</td><td>1</td><td>5</td><td>-1</td><td>E</td><td>(2,5)</td></tr>
+          <tr><td>2</td><td>2</td><td>5</td><td>9</td><td>SE</td><td>(3,4)</td></tr>
+          <tr><td>3</td><td>3</td><td>4</td><td>5</td><td>SE</td><td>(4,3)</td></tr>
+          <tr><td>4</td><td>4</td><td>3</td><td>7</td><td>SE</td><td>stop after symmetry range</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="practical-section circle-live-section">
+    <div class="section-heading">
+      <span>05</span>
+      <div><h2>Live Bresenham Circle Visualizer</h2><p>Change the center and radius, then watch every calculated pixel and its symmetric copies.</p></div>
+    </div>
+
+    <div class="circle-lab">
+      <div class="circle-controls">
+        <div class="control-row">
+          <label>Center X<input id="circleX" type="number" value="0"></label>
+          <label>Center Y<input id="circleY" type="number" value="0"></label>
+          <label>Radius<input id="circleRadius" type="number" min="1" max="25" value="10"></label>
+        </div>
+        <div class="button-row">
+          <button class="primary-btn" id="circleGenerate">Generate Circle</button>
+          <button class="secondary-btn" id="circleNext">Next Pixel</button>
+          <button class="secondary-btn" id="circlePlay">â–¶ Play Symmetry</button>
+          <button class="ghost-btn" id="circleReset">Reset</button>
+        </div>
+        <label class="speed-control">Animation Speed <input id="circleSpeed" type="range" min="80" max="700" value="300"><span id="circleSpeedValue">300 ms</span></label>
+
+        <div class="decision-live">
+          <div><span>Current Pixel</span><strong id="circleCurrent">(0, 0)</strong></div>
+          <div><span>Decision P</span><strong id="circleDecision">-</strong></div>
+          <div><span>Decision</span><strong id="circleChoice">Ready</strong></div>
+          <div><span>Symmetric Points</span><strong id="circleSymmetryCount">0 / 8</strong></div>
+        </div>
+
+        <div class="symmetry-live-card">
+          <h3>Current Eight-Way Mapping</h3>
+          <div id="symmetryPoints" class="symmetry-points-grid"></div>
+        </div>
+      </div>
+
+      <div class="circle-viewer">
+        <canvas id="circleCanvas" width="680" height="520"></canvas>
+        <div class="viewer-footer">
+          <span id="circleStatus">Ready to generate</span>
+          <span id="circlePixelCount">Pixels: 0</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>06</span>
+      <div><h2>Circle Symmetry Animation</h2><p>See the complete process: calculate one point â†’ mirror it eight ways â†’ plot.</p></div>
+    </div>
+
+    <div class="animation-demo">
+      <div class="animation-stage" id="symmetryAnimationStage">
+        <div class="animation-grid"></div>
+        <div class="animation-circle"></div>
+        <div class="animation-center"></div>
+        <div class="animation-source"></div>
+        <div class="animation-rays"></div>
+        <span class="animation-caption" id="animationCaption">Press Start Animation</span>
+      </div>
+      <div class="animation-actions">
+        <button class="primary-btn" id="startSymmetryAnimation">â–¶ Start Animation</button>
+        <button class="ghost-btn" id="resetSymmetryAnimation">Reset</button>
+      </div>
+      <div class="animation-track">
+        <span class="active">Calculate</span><i>â†’</i><span>Decision</span><i>â†’</i><span>Mirror Ã—8</span><i>â†’</i><span>Plot</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>07</span>
+      <div><h2>Decision Parameter Visualizer</h2><p>Understand why the next circle pixel is E or SE.</p></div>
+    </div>
+
+    <div class="decision-layout">
+      <div class="decision-explain">
+        <div class="decision-option">
+          <span class="decision-letter">E</span>
+          <div><h3>P &lt; 0</h3><p>The midpoint is inside the ideal circle, so move horizontally.</p></div>
+        </div>
+        <div class="decision-option">
+          <span class="decision-letter">SE</span>
+          <div><h3>P â‰¥ 0</h3><p>The midpoint is outside or on the boundary, so move diagonally downward.</p></div>
+        </div>
+      </div>
+      <div class="decision-canvas-wrap">
+        <canvas id="decisionCircleCanvas" width="650" height="300"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>08</span>
+      <div><h2>Real-Life Problem Statements</h2><p>Apply Bresenham Circle Drawing to practical graphics situations.</p></div>
+    </div>
+
+    <div class="problem-tabs circle-problem-tabs">
+      <button class="problem-tab active" data-problem="radar">ðŸŽ® Game Radar</button>
+      <button class="problem-tab" data-problem="signal">ðŸ“¡ Signal Coverage</button>
+      <button class="problem-tab" data-problem="map">ðŸ›°ï¸ Circular Map Region</button>
+    </div>
+
+    <div class="circle-problem-layout">
+      <article class="problem-statement">
+        <span class="problem-label">PROBLEM</span>
+        <h3 id="problemTitle">Game Radar Detection</h3>
+        <p id="problemText">A game needs to draw a circular detection range around a character without floating-point circle calculations.</p>
+        <div class="problem-given" id="problemGiven">Center = (15, 12), Radius = 8</div>
+        <div class="problem-answer" id="problemAnswer">Use Bresenham Circle Drawing. Calculate one octant and generate eight symmetric pixels around the character.</div>
+        <button class="primary-btn" id="problemShow">Show in Live Viewer</button>
+      </article>
+
+      <div class="problem-viewer">
+        <canvas id="problemCircleCanvas" width="560" height="420"></canvas>
+        <div class="viewer-footer"><span id="problemStatus">Bresenham pixels</span><span id="problemPixels">0 pixels</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>09</span>
+      <div><h2>Experiment</h2><p>Change the radius and observe how symmetry and rasterization behave.</p></div>
+    </div>
+
+    <div class="experiment-grid">
+      <button class="experiment-card" data-radius="4"><strong>Small Circle</strong><span>Radius = 4</span></button>
+      <button class="experiment-card" data-radius="8"><strong>Medium Circle</strong><span>Radius = 8</span></button>
+      <button class="experiment-card" data-radius="14"><strong>Large Circle</strong><span>Radius = 14</span></button>
+      <button class="experiment-card" data-radius="20"><strong>Large Raster</strong><span>Radius = 20</span></button>
+    </div>
+    <div class="experiment-result" id="experimentResult">Select an experiment to generate a new circle.</div>
+  </section>
+
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>10</span>
+      <div><h2>Advantages & Limitations</h2><p>Know when Bresenham Circle is useful.</p></div>
+    </div>
+
+    <div class="pros-cons-grid">
+      <div class="pros-card"><h3>âœ“ Advantages</h3><ul><li>Uses integer arithmetic.</li><li>Efficient for raster displays.</li><li>Eight-way symmetry reduces computation.</li><li>Easy to visualize pixel-by-pixel.</li></ul></div>
+      <div class="cons-card"><h3>! Limitations</h3><ul><li>Produces a raster approximation, not a continuous circle.</li><li>Pixel quality depends on resolution.</li><li>Basic teaching form focuses on one octant and symmetry.</li></ul></div>
+    </div>
+  </section>
+
+  <section class="practical-section viva-section">
+    <div class="section-heading">
+      <span>11</span>
+      <div><h2>Viva Questions</h2><p>Check whether you understand the algorithm, not just the output.</p></div>
+    </div>
+
+    <div class="viva-grid">
+      <details><summary>Why is eight-way symmetry used?</summary><p>A circle is symmetric about both axes and the diagonals, so one calculated point can be reflected to eight octants.</p></details>
+      <details><summary>What is the decision parameter?</summary><p>It is an integer value used to decide whether the next raster pixel should move E or SE.</p></details>
+      <details><summary>Why calculate only one octant?</summary><p>The remaining octants can be obtained through symmetry, reducing computation.</p></details>
+      <details><summary>What happens when P &lt; 0?</summary><p>The algorithm selects E and updates the decision parameter accordingly.</p></details>
+      <details><summary>What happens when P â‰¥ 0?</summary><p>The algorithm selects SE, decreases y, and updates P.</p></details>
+      <details><summary>Why is Bresenham suitable for raster graphics?</summary><p>Its decision process can be implemented using efficient integer arithmetic.</p></details>
+    </div>
+  </section>
+
+  <nav class="practical-navigation">
+    <a href="practical05.html"><span>â† Previous</span><strong>05 â€” Bresenham Line</strong></a>
+    <a href="practical07.html"><span>Next â†’</span><strong>07 â€” Flood Fill & Boundary Fill</strong></a>
+  </nav>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-main">
+    <div class="footer-brand">
+      <div class="logo"><span class="logo-mark">&lt;/&gt;</span><span>Rasika<span class="logo-highlight">CodeLab</span></span></div>
+      <p>Interactive Computer Graphics practical learning through concepts, calculations and visualization.</p>
+    </div>
+    <div class="footer-links">
+      <div><h4>Learn</h4><a href="../cgr_foundations.html">Foundations</a></div>
+      <div><h4>Practice</h4><a href="../cgr_practicals.html">Practicals</a><a href="../../../about.html">About</a></div>
+    </div>
+  </div>
+  <div class="footer-bottom"><span>Â© 2026 Rasika CodeLab</span><span>Built for practical learning.</span></div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  const canvas = document.getElementById("circleCanvas");
+  const ctx = canvas.getContext("2d");
+  const xInput = document.getElementById("circleX");
+  const yInput = document.getElementById("circleY");
+  const rInput = document.getElementById("circleRadius");
+  const speedInput = document.getElementById("circleSpeed");
+
+  let state = { xc: 0, yc: 0, r: 10, points: [], index: -1, playing: false, timer: null };
+
+  function circlePoints(xc, yc, r) {
+    let x = 0, y = r, p = 3 - 2 * r, result = [];
+    while (x <= y) {
+      const decision = p < 0 ? "E" : "SE";
+      const sym = [
+        [xc + x, yc + y], [xc - x, yc + y],
+        [xc + x, yc - y], [xc - x, yc - y],
+        [xc + y, yc + x], [xc - y, yc + x],
+        [xc + y, yc - x], [xc - y, yc - x]
+      ];
+      result.push({ x, y, p, decision, sym });
+      if (p < 0) p += 4 * x + 6;
+      else { p += 4 * (x - y) + 10; y--; }
+      x++;
+    }
+    return result;
+  }
+
+  function generate() {
+    stop();
+    state.xc = Number(xInput.value) || 0;
+    state.yc = Number(yInput.value) || 0;
+    state.r = Math.max(1, Math.min(25, Number(rInput.value) || 10));
+    rInput.value = state.r;
+    state.points = circlePoints(state.xc, state.yc, state.r);
+    state.index = -1;
+    render();
+    updateInfo();
+  }
+
+  function drawGrid(c, width, height, scale, ox, oy) {
+    c.clearRect(0, 0, width, height);
+    c.fillStyle = "#0b0d11";
+    c.fillRect(0, 0, width, height);
+
+    c.strokeStyle = "rgba(255,255,255,.07)";
+    c.lineWidth = 1;
+    for (let x = ox % scale; x < width; x += scale) {
+      c.beginPath(); c.moveTo(x, 0); c.lineTo(x, height); c.stroke();
+    }
+    for (let y = oy % scale; y < height; y += scale) {
+      c.beginPath(); c.moveTo(0, y); c.lineTo(width, y); c.stroke();
+    }
+
+    c.strokeStyle = "rgba(255,138,0,.38)";
+    c.lineWidth = 1.5;
+    c.beginPath(); c.moveTo(ox, 0); c.lineTo(ox, height); c.stroke();
+    c.beginPath(); c.moveTo(0, oy); c.lineTo(width, oy); c.stroke();
+  }
+
+  function render() {
+    const scale = Math.min(22, Math.max(12, 230 / state.r));
+    const ox = canvas.width / 2 - state.xc * scale;
+    const oy = canvas.height / 2 + state.yc * scale;
+    drawGrid(ctx, canvas.width, canvas.height, scale, ox, oy);
+
+    ctx.strokeStyle = "rgba(255,138,0,.2)";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.arc(ox, oy, state.r * scale, 0, Math.PI * 2);
+    ctx.stroke();
+
+    const plotted = [];
+    for (let i = 0; i <= state.index; i++) state.points[i].sym.forEach(p => plotted.push(p));
+    const unique = [...new Map(plotted.map(p => [p[0] + "," + p[1], p])).values()];
+
+    unique.forEach(p => {
+      const px = ox + p[0] * scale, py = oy - p[1] * scale;
+      ctx.fillStyle = "#ff8a00";
+      ctx.fillRect(px - Math.max(2, scale * .22), py - Math.max(2, scale * .22), Math.max(4, scale * .44), Math.max(4, scale * .44));
+    });
+
+    if (state.index >= 0) {
+      const cur = state.points[state.index];
+      cur.sym.forEach((p, i) => {
+        const px = ox + p[0] * scale, py = oy - p[1] * scale;
+        ctx.beginPath();
+        ctx.arc(px, py, Math.max(5, scale * .38), 0, Math.PI * 2);
+        ctx.strokeStyle = "#ffd08a";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      });
+      const sx = ox + cur.x * scale, sy = oy - cur.y * scale;
+      ctx.fillStyle = "#fff";
+      ctx.beginPath(); ctx.arc(sx, sy, Math.max(4, scale * .3), 0, Math.PI * 2); ctx.fill();
+    }
+
+    ctx.fillStyle = "#ffb24a";
+    ctx.font = "12px Arial";
+    ctx.fillText("(0,0)", ox + 6, oy - 8);
+  }
+
+  function updateInfo() {
+    const current = document.getElementById("circleCurrent");
+    const decision = document.getElementById("circleDecision");
+    const choice = document.getElementById("circleChoice");
+    const count = document.getElementById("circleSymmetryCount");
+    const status = document.getElementById("circleStatus");
+    const pixels = document.getElementById("circlePixelCount");
+    const grid = document.getElementById("symmetryPoints");
+
+    if (state.index < 0) {
+      current.textContent = "(0, " + state.r + ")";
+      decision.textContent = 3 - 2 * state.r;
+      choice.textContent = "Ready";
+      count.textContent = "0 / 8";
+      status.textContent = "Ready â€” click Generate Circle";
+      pixels.textContent = "Pixels: 0";
+      grid.innerHTML = "";
+      return;
+    }
+
+    const item = state.points[state.index];
+    current.textContent = "(" + item.x + ", " + item.y + ")";
+    decision.textContent = item.p;
+    choice.textContent = item.decision;
+    count.textContent = "8 / 8";
+    status.textContent = "Step " + (state.index + 1) + " / " + state.points.length + " â€” " + item.decision;
+    const all = state.points.slice(0, state.index + 1).flatMap(v => v.sym);
+    const unique = new Set(all.map(p => p.join(",")));
+    pixels.textContent = "Pixels: " + unique.size;
+
+    grid.innerHTML = item.sym.map((p, i) => "<div><span>P" + (i + 1) + "</span><code>(" + p[0] + ", " + p[1] + ")</code></div>").join("");
+  }
+
+  function next() {
+    if (!state.points.length) generate();
+    if (state.index < state.points.length - 1) {
+      state.index++;
+      render(); updateInfo();
+    } else stop();
+  }
+
+  function play() {
+    if (!state.points.length) generate();
+    if (state.index >= state.points.length - 1) state.index = -1;
+    state.playing = true;
+    document.getElementById("circlePlay").textContent = "âšâš Pause";
+    tick();
+  }
+
+  function tick() {
+    if (!state.playing) return;
+    next();
+    if (state.index < state.points.length - 1) {
+      state.timer = setTimeout(tick, Number(speedInput.value));
+    } else {
+      stop();
+    }
+  }
+
+  function stop() {
+    state.playing = false;
+    clearTimeout(state.timer);
+    document.getElementById("circlePlay").textContent = "â–¶ Play Symmetry";
+  }
+
+  document.getElementById("circleGenerate").addEventListener("click", generate);
+  document.getElementById("circleNext").addEventListener("click", next);
+  document.getElementById("circlePlay").addEventListener("click", () => state.playing ? stop() : play());
+  document.getElementById("circleReset").addEventListener("click", () => { stop(); state.index = -1; render(); updateInfo(); });
+  speedInput.addEventListener("input", () => document.getElementById("circleSpeedValue").textContent = speedInput.value + " ms");
+
+  /* Symmetry animation */
+  let animTimer;
+  document.getElementById("startSymmetryAnimation").addEventListener("click", function () {
+    clearInterval(animTimer);
+    const stage = document.getElementById("symmetryAnimationStage");
+    const caption = document.getElementById("animationCaption");
+    stage.classList.remove("animate-symmetry");
+    void stage.offsetWidth;
+    stage.classList.add("animate-symmetry");
+    const captions = ["Calculate one point", "Check decision parameter", "Mirror the point Ã— 8", "Plot the symmetric pixels"];
+    let i = 0;
+    caption.textContent = captions[i];
+    animTimer = setInterval(() => {
+      i++;
+      if (i < captions.length) caption.textContent = captions[i];
+      else { clearInterval(animTimer); caption.textContent = "Eight-way symmetry complete âœ“"; }
+    }, 850);
+  });
+  document.getElementById("resetSymmetryAnimation").addEventListener("click", function () {
+    clearInterval(animTimer);
+    document.getElementById("symmetryAnimationStage").classList.remove("animate-symmetry");
+    document.getElementById("animationCaption").textContent = "Press Start Animation";
+  });
+
+  /* Decision canvas */
+  const dc = document.getElementById("decisionCircleCanvas");
+  const dctx = dc.getContext("2d");
+  function drawDecision() {
+    dctx.clearRect(0,0,dc.width,dc.height);
+    dctx.fillStyle = "#0b0d11"; dctx.fillRect(0,0,dc.width,dc.height);
+    const ox = 160, oy = 225, s = 38;
+    dctx.strokeStyle = "rgba(255,255,255,.08)";
+    for(let x=20;x<dc.width;x+=s){dctx.beginPath();dctx.moveTo(x,0);dctx.lineTo(x,dc.height);dctx.stroke();}
+    for(let y=10;y<dc.height;y+=s){dctx.beginPath();dctx.moveTo(0,y);dctx.lineTo(dc.width,y);dctx.stroke();}
+    dctx.strokeStyle = "rgba(255,138,0,.25)";
+    dctx.beginPath(); dctx.arc(ox,oy,150,0,Math.PI*2); dctx.stroke();
+    const pts = [{x:4,y:3,label:"Current"},{x:5,y:3,label:"E"},{x:5,y:2,label:"SE"}];
+    pts.forEach((p,i)=>{
+      const px=ox+p.x*s, py=oy-p.y*s;
+      dctx.fillStyle=i===0?"#fff":"#ff8a00";
+      dctx.fillRect(px-6,py-6,12,12);
+      dctx.fillStyle="#eee"; dctx.font="13px Arial"; dctx.fillText(p.label,px+9,py-8);
+    });
+    dctx.strokeStyle="#ff8a00"; dctx.lineWidth=2;
+    dctx.beginPath(); dctx.moveTo(330,85); dctx.lineTo(470,85); dctx.stroke();
+    dctx.fillStyle="#ffb24a"; dctx.font="bold 14px Arial"; dctx.fillText("E vs SE candidate pixels",330,62);
+  }
+  drawDecision();
+
+  /* Problems */
+  const problems = {
+    radar: {
+      title:"Game Radar Detection",
+      text:"A game needs to draw a circular detection range around a character without floating-point circle calculations.",
+      given:"Center = (15, 12), Radius = 8",
+      answer:"Calculate one octant with Bresenham, then reflect each point into eight directions."
+    },
+    signal: {
+      title:"Wireless Signal Coverage",
+      text:"A network visualizer needs to show the approximate circular coverage area of a wireless transmitter on a pixel grid.",
+      given:"Center = (18, 15), Radius = 10",
+      answer:"Use the transmitter as the center and generate the raster coverage boundary with eight-way symmetry."
+    },
+    map: {
+      title:"Circular Map Region",
+      text:"A map application highlights a circular search region around a selected location using discrete screen pixels.",
+      given:"Center = (14, 13), Radius = 7",
+      answer:"Use Bresenham Circle Drawing to generate the boundary efficiently, then use the points as the circular region outline."
+    }
+  };
+
+  let selectedProblem = "radar";
+  const pc = document.getElementById("problemCircleCanvas");
+  const pctx = pc.getContext("2d");
+
+  function drawProblem() {
+    const p = problems[selectedProblem];
+    const match = p.given.match(/Center = \(([-\d]+), ([-\d]+)\), Radius = (\d+)/);
+    const xc = Number(match[1]), yc = Number(match[2]), r = Number(match[3]);
+    const pts = circlePoints(xc,yc,r);
+    const all = [...new Set(pts.flatMap(v=>v.sym.map(q=>q.join(","))))].map(s=>s.split(",").map(Number));
+    pctx.clearRect(0,0,pc.width,pc.height); pctx.fillStyle="#0b0d11"; pctx.fillRect(0,0,pc.width,pc.height);
+    const scale=16, ox=pc.width/2-xc*scale, oy=pc.height/2+yc*scale;
+    pctx.strokeStyle="rgba(255,255,255,.06)";
+    for(let x=ox%scale;x<pc.width;x+=scale){pctx.beginPath();pctx.moveTo(x,0);pctx.lineTo(x,pc.height);pctx.stroke();}
+    for(let y=oy%scale;y<pc.height;y+=scale){pctx.beginPath();pctx.moveTo(0,y);pctx.lineTo(pc.width,y);pctx.stroke();}
+    pctx.strokeStyle="rgba(255,138,0,.25)"; pctx.beginPath(); pctx.arc(ox,oy,r*scale,0,Math.PI*2); pctx.stroke();
+    all.forEach(q=>{pctx.fillStyle="#ff8a00";pctx.fillRect(ox+q[0]*scale-3,oy-q[1]*scale-3,6,6);});
+    pctx.fillStyle="#fff"; pctx.beginPath();pctx.arc(ox,oy,5,0,Math.PI*2);pctx.fill();
+    document.getElementById("problemPixels").textContent=all.length+" pixels";
+    document.getElementById("problemStatus").textContent="Center ("+xc+","+yc+") â€¢ Radius "+r;
+  }
+
+  document.querySelectorAll(".problem-tab").forEach(btn => btn.addEventListener("click", () => {
+    document.querySelectorAll(".problem-tab").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    selectedProblem = btn.dataset.problem;
+    const p=problems[selectedProblem];
+    document.getElementById("problemTitle").textContent=p.title;
+    document.getElementById("problemText").textContent=p.text;
+    document.getElementById("problemGiven").textContent=p.given;
+    document.getElementById("problemAnswer").textContent=p.answer;
+    drawProblem();
+  }));
+
+  document.getElementById("problemShow").addEventListener("click", drawProblem);
+
+  document.querySelectorAll(".experiment-card").forEach(card => card.addEventListener("click", () => {
+    const r=Number(card.dataset.radius);
+    rInput.value=r;
+    generate();
+    document.getElementById("experimentResult").textContent="Experiment: radius "+r+" generated. Use Next Pixel or Play Symmetry to inspect the decision parameter.";
+    document.querySelector(".circle-live-section").scrollIntoView({behavior:"smooth",block:"start"});
+  }));
+
+  generate();
+  drawProblem();
+})();
+</script>
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

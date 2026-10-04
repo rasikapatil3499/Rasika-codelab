@@ -1,0 +1,1761 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Practical 03 | OOP & Application Design | RasikaCodeLab</title>
+
+     <!-- Common CSS -->
+    <link rel="stylesheet" href="../css/python_practicals.css">
+
+    <!-- Python Practical CSS -->
+    <link rel="stylesheet" href="../css/python.css">
+<style>body.protected-page:not(.auth-ready){visibility:hidden}</style>
+</head>
+
+<body class="protected-page">
+
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <header class="header">
+
+        <div class="header-inner">
+
+            <a href="../../../index.html" class="logo">
+
+                <span class="logo-mark">&lt;/&gt;</span>
+
+                <span>
+                    Rasika<span class="logo-highlight">CodeLab</span>
+                </span>
+
+            </a>
+
+
+            <nav class="nav">
+
+                <a href="../../../index.html">
+                    Home
+                </a>
+
+                <a href="../../../subjects.html" class="active">
+                    Subjects
+                </a>
+ <a href="../practicals.html">Practicals</a>
+                <a href="../foundations.html">
+                    Foundations
+                </a>
+
+                <a href="../../../about.html">
+                    About
+                </a>
+
+                <a href="../../../login.html">
+                    Login
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <main class="python-page">
+
+
+        <!-- =================================================
+             HERO
+             ================================================= -->
+
+        <section class="python-hero compact">
+
+            <span class="subject-label">
+                PYTHON 2030
+            </span>
+
+            <h1>
+                Practical 03
+            </h1>
+
+            <p>
+                OOP & Application Design
+            </p>
+
+        </section>
+
+
+        <!-- =================================================
+             PRACTICAL CONTENT
+             ================================================= -->
+
+        <div class="practical-container">
+
+
+            <!-- =================================================
+                 PRACTICAL HEADER
+                 ================================================= -->
+
+            <section class="practical-header">
+
+                <span class="practical-number">
+                    03
+                </span>
+
+                <h1>
+                    OOP & Application Design
+                </h1>
+
+                <p>
+                    Build structured Python applications using
+                    classes, objects, constructors, methods,
+                    encapsulation and reusable application logic.
+                </p>
+
+            </section>
+
+
+            <!-- =================================================
+                 AIM
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>01</span>
+                    <h2>Aim</h2>
+                </div>
+
+                <div class="aim-box">
+
+                    <h3>
+                        Practical Aim
+                    </h3>
+
+                    <p>
+                        To develop Python applications using
+                        object-oriented programming concepts such
+                        as classes, objects, constructors, methods,
+                        encapsulation and object interaction.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 LEARNING OBJECTIVES
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>02</span>
+                    <h2>Learning Objectives</h2>
+                </div>
+
+
+                <div class="objectives-grid">
+
+
+                    <div class="objective-card">
+
+                        <span class="objective-number">
+                            LO 01
+                        </span>
+
+                        <p>
+                            Understand the purpose of classes and
+                            objects in Python.
+                        </p>
+
+                    </div>
+
+
+                    <div class="objective-card">
+
+                        <span class="objective-number">
+                            LO 02
+                        </span>
+
+                        <p>
+                            Create constructors and methods for
+                            Python classes.
+                        </p>
+
+                    </div>
+
+
+                    <div class="objective-card">
+
+                        <span class="objective-number">
+                            LO 03
+                        </span>
+
+                        <p>
+                            Apply encapsulation to organize and
+                            protect application data.
+                        </p>
+
+                    </div>
+
+
+                    <div class="objective-card">
+
+                        <span class="objective-number">
+                            LO 04
+                        </span>
+
+                        <p>
+                            Design small real-world applications
+                            using multiple interacting objects.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 FOUNDATION CONCEPTS
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>03</span>
+                    <h2>Foundation Concepts</h2>
+                </div>
+
+
+                <div class="content-card">
+
+                    <div class="concept-list">
+
+                        <span class="concept-tag">
+                            Classes
+                        </span>
+
+                        <span class="concept-tag">
+                            Objects
+                        </span>
+
+                        <span class="concept-tag">
+                            __init__()
+                        </span>
+
+                        <span class="concept-tag">
+                            Instance Variables
+                        </span>
+
+                        <span class="concept-tag">
+                            Methods
+                        </span>
+
+                        <span class="concept-tag">
+                            self
+                        </span>
+
+                        <span class="concept-tag">
+                            Encapsulation
+                        </span>
+
+                        <span class="concept-tag">
+                            Object Interaction
+                        </span>
+
+                        <span class="concept-tag">
+                            Lists of Objects
+                        </span>
+
+                        <span class="concept-tag">
+                            Application Design
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 PROBLEM STATEMENTS
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>04</span>
+                    <h2>Problem Statements</h2>
+                </div>
+
+
+                <div class="problem-grid">
+
+
+                    <!-- =================================================
+                         PROBLEM 01
+                         ================================================= -->
+
+                    <article class="problem-card">
+
+                        <span class="problem-number">
+                            01
+                        </span>
+
+                        <h3>
+                            Student Management System
+                        </h3>
+
+                        <p>
+                            Create a Student class to store and
+                            process student information using
+                            object-oriented programming.
+                        </p>
+
+                        <h4>
+                            Requirements
+                        </h4>
+
+                        <ul class="practical-list">
+
+                            <li>
+                                Store student ID and name.
+                            </li>
+
+                            <li>
+                                Store department and marks.
+                            </li>
+
+                            <li>
+                                Display student information.
+                            </li>
+
+                            <li>
+                                Calculate average marks.
+                            </li>
+
+                            <li>
+                                Determine the student's grade.
+                            </li>
+
+                        </ul>
+
+                        <h4>
+                            Concepts
+                        </h4>
+
+                        <div class="concept-list">
+
+                            <span class="concept-tag">
+                                Class
+                            </span>
+
+                            <span class="concept-tag">
+                                Object
+                            </span>
+
+                            <span class="concept-tag">
+                                Constructor
+                            </span>
+
+                            <span class="concept-tag">
+                                Methods
+                            </span>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- =================================================
+                         PROBLEM 02
+                         ================================================= -->
+
+                    <article class="problem-card">
+
+                        <span class="problem-number">
+                            02
+                        </span>
+
+                        <h3>
+                            Bank Account System
+                        </h3>
+
+                        <p>
+                            Develop a simple bank account application
+                            using a Python class and methods.
+                        </p>
+
+                        <h4>
+                            Requirements
+                        </h4>
+
+                        <ul class="practical-list">
+
+                            <li>
+                                Store account number.
+                            </li>
+
+                            <li>
+                                Store account holder name.
+                            </li>
+
+                            <li>
+                                Maintain account balance.
+                            </li>
+
+                            <li>
+                                Deposit money.
+                            </li>
+
+                            <li>
+                                Withdraw money.
+                            </li>
+
+                            <li>
+                                Display account information.
+                            </li>
+
+                        </ul>
+
+                        <h4>
+                            Concepts
+                        </h4>
+
+                        <div class="concept-list">
+
+                            <span class="concept-tag">
+                                Class
+                            </span>
+
+                            <span class="concept-tag">
+                                Object
+                            </span>
+
+                            <span class="concept-tag">
+                                Methods
+                            </span>
+
+                            <span class="concept-tag">
+                                Encapsulation
+                            </span>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- =================================================
+                         PROBLEM 03
+                         ================================================= -->
+
+                    <article class="problem-card">
+
+                        <span class="problem-number">
+                            03
+                        </span>
+
+                        <h3>
+                            Library Management
+                        </h3>
+
+                        <p>
+                            Design a small library management
+                            application using multiple classes
+                            and object interaction.
+                        </p>
+
+                        <h4>
+                            Requirements
+                        </h4>
+
+                        <ul class="practical-list">
+
+                            <li>
+                                Create a Book class.
+                            </li>
+
+                            <li>
+                                Create a Member class.
+                            </li>
+
+                            <li>
+                                Create a Library class.
+                            </li>
+
+                            <li>
+                                Add and display books.
+                            </li>
+
+                            <li>
+                                Register members.
+                            </li>
+
+                            <li>
+                                Issue and return books.
+                            </li>
+
+                        </ul>
+
+                        <h4>
+                            Concepts
+                        </h4>
+
+                        <div class="concept-list">
+
+                            <span class="concept-tag">
+                                Multiple Classes
+                            </span>
+
+                            <span class="concept-tag">
+                                Objects
+                            </span>
+
+                            <span class="concept-tag">
+                                Methods
+                            </span>
+
+                            <span class="concept-tag">
+                                Object Interaction
+                            </span>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 PROBLEM 01 â€” DETAILED
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>05</span>
+                    <h2>Problem 01 â€” Student Management System</h2>
+                </div>
+
+
+                <div class="problem-detail">
+
+                    <h3>
+                        Problem Description
+                    </h3>
+
+                    <p>
+                        Create a Python class named
+                        <span class="inline-code">Student</span>
+                        that represents a student and provides
+                        methods to store, display and analyze
+                        academic information.
+                    </p>
+
+
+                    <h4>
+                        Class Design
+                    </h4>
+
+                    <div class="table-wrapper">
+
+                        <table class="practical-table">
+
+                            <thead>
+
+                                <tr>
+                                    <th>
+                                        Attribute / Method
+                                    </th>
+
+                                    <th>
+                                        Purpose
+                                    </th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                                <tr>
+
+                                    <td>
+                                        student_id
+                                    </td>
+
+                                    <td>
+                                        Stores the student's ID.
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <td>
+                                        name
+                                    </td>
+
+                                    <td>
+                                        Stores the student's name.
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <td>
+                                        department
+                                    </td>
+
+                                    <td>
+                                        Stores the department.
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <td>
+                                        marks
+                                    </td>
+
+                                    <td>
+                                        Stores the student's marks.
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <td>
+                                        display()
+                                    </td>
+
+                                    <td>
+                                        Displays student information.
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <td>
+                                        calculate_average()
+                                    </td>
+
+                                    <td>
+                                        Calculates average marks.
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <td>
+                                        get_grade()
+                                    </td>
+
+                                    <td>
+                                        Determines the student's grade.
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+
+                    <h4>
+                        Algorithm
+                    </h4>
+
+                    <div class="steps">
+
+
+                        <div class="step">
+
+                            <span class="step-number">
+                                01
+                            </span>
+
+                            <p>
+                                Define a class named Student.
+                            </p>
+
+                        </div>
+
+
+                        <div class="step">
+
+                            <span class="step-number">
+                                02
+                            </span>
+
+                            <p>
+                                Create a constructor to initialize
+                                student information.
+                            </p>
+
+                        </div>
+
+
+                        <div class="step">
+
+                            <span class="step-number">
+                                03
+                            </span>
+
+                            <p>
+                                Create a method to display student
+                                details.
+                            </p>
+
+                        </div>
+
+
+                        <div class="step">
+
+                            <span class="step-number">
+                                04
+                            </span>
+
+                            <p>
+                                Create a method to calculate the
+                                average marks.
+                            </p>
+
+                        </div>
+
+
+                        <div class="step">
+
+                            <span class="step-number">
+                                05
+                            </span>
+
+                            <p>
+                                Create a method to determine the
+                                student's grade.
+                            </p>
+
+                        </div>
+
+
+                        <div class="step">
+
+                            <span class="step-number">
+                                06
+                            </span>
+
+                            <p>
+                                Create a Student object and call
+                                the methods.
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 CODE
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>06</span>
+                    <h2>Python Code</h2>
+                </div>
+
+
+                <div class="code-container">
+
+                    <div class="code-header">
+
+                        <span>
+                            student.py
+                        </span>
+
+                        <button
+                            class="copy-btn"
+                            onclick="copyCode(this)">
+                            Copy
+                        </button>
+
+                    </div>
+
+<pre><code>
+class Student:
+
+    def __init__(
+        self,
+        student_id,
+        name,
+        department,
+        marks
+    ):
+
+        self.student_id = student_id
+        self.name = name
+        self.department = department
+        self.marks = marks
+
+
+    def display(self):
+
+        print("\n--- Student Details ---")
+
+        print("ID         :", self.student_id)
+        print("Name       :", self.name)
+        print("Department :", self.department)
+        print("Marks      :", self.marks)
+
+
+    def calculate_average(self):
+
+        return sum(self.marks) / len(self.marks)
+
+
+    def get_grade(self):
+
+        average = self.calculate_average()
+
+        if average >= 75:
+            return "Distinction"
+
+        elif average >= 60:
+            return "First Class"
+
+        elif average >= 50:
+            return "Second Class"
+
+        elif average >= 40:
+            return "Pass"
+
+        else:
+            return "Fail"
+
+
+student = Student(
+    "ST101",
+    "Riya",
+    "Computer",
+    [78, 82, 75, 88, 81]
+)
+
+
+student.display()
+
+print(
+    "Average    :",
+    student.calculate_average()
+)
+
+print(
+    "Grade      :",
+    student.get_grade()
+)
+</code></pre>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 OUTPUT
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>07</span>
+                    <h2>Expected Output</h2>
+                </div>
+
+
+                <div class="terminal">
+
+                    <div class="terminal-header">
+
+                        <span class="terminal-dot"></span>
+                        <span class="terminal-dot"></span>
+                        <span class="terminal-dot"></span>
+
+                        <span class="terminal-title">
+                            Python Output
+                        </span>
+
+                    </div>
+
+<pre>
+--- Student Details ---
+ID         : ST101
+Name       : Riya
+Department : Computer
+Marks      : [78, 82, 75, 88, 81]
+
+Average    : 80.8
+Grade      : Distinction
+</pre>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 TRY IT
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>08</span>
+                    <h2>Try It Yourself</h2>
+                </div>
+
+
+                <div class="try-it">
+
+                    <h3>
+                        Challenge
+                    </h3>
+
+                    <p>
+                        Modify the Student class so that the program
+                        accepts student information from the user
+                        and creates multiple Student objects.
+                    </p>
+
+
+                    <div class="callout">
+
+                        <div class="callout-icon">
+                            ðŸ’¡
+                        </div>
+
+                        <div class="callout-content">
+
+                            <h4>
+                                Think Before You Code
+                            </h4>
+
+                            <p>
+                                Think of a class as a blueprint and
+                                each Student object as an individual
+                                student created from that blueprint.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 PROBLEM 02 â€” BANK ACCOUNT
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>09</span>
+                    <h2>Problem 02 â€” Bank Account System</h2>
+                </div>
+
+
+                <div class="problem-detail">
+
+                    <h3>
+                        Problem Description
+                    </h3>
+
+                    <p>
+                        Create a BankAccount class that allows a
+                        user to manage basic banking operations
+                        such as deposit, withdrawal and balance
+                        checking.
+                    </p>
+
+
+                    <h4>
+                        Required Attributes
+                    </h4>
+
+                    <ul class="practical-list">
+
+                        <li>
+                            Account number
+                        </li>
+
+                        <li>
+                            Account holder name
+                        </li>
+
+                        <li>
+                            Account balance
+                        </li>
+
+                    </ul>
+
+
+                    <h4>
+                        Required Methods
+                    </h4>
+
+                    <ul class="practical-list">
+
+                        <li>
+                            <span class="inline-code">
+                                deposit()
+                            </span>
+                        </li>
+
+                        <li>
+                            <span class="inline-code">
+                                withdraw()
+                            </span>
+                        </li>
+
+                        <li>
+                            <span class="inline-code">
+                                check_balance()
+                            </span>
+                        </li>
+
+                        <li>
+                            <span class="inline-code">
+                                display_account()
+                            </span>
+                        </li>
+
+                    </ul>
+
+
+                    <h4>
+                        Example Code
+                    </h4>
+
+
+                    <div class="code-container">
+
+                        <div class="code-header">
+
+                            <span>
+                                bank_account.py
+                            </span>
+
+                            <button
+                                class="copy-btn"
+                                onclick="copyCode(this)">
+                                Copy
+                            </button>
+
+                        </div>
+
+<pre><code>
+class BankAccount:
+
+    def __init__(
+        self,
+        account_number,
+        holder_name,
+        balance=0
+    ):
+
+        self.account_number = account_number
+        self.holder_name = holder_name
+        self.balance = balance
+
+
+    def deposit(self, amount):
+
+        if amount > 0:
+
+            self.balance += amount
+
+            print(
+                "Amount deposited successfully."
+            )
+
+
+    def withdraw(self, amount):
+
+        if amount <= self.balance:
+
+            self.balance -= amount
+
+            print(
+                "Amount withdrawn successfully."
+            )
+
+        else:
+
+            print(
+                "Insufficient balance."
+            )
+
+
+    def check_balance(self):
+
+        print(
+            "Current Balance:",
+            self.balance
+        )
+
+
+account = BankAccount(
+    "ACC101",
+    "Riya",
+    5000
+)
+
+account.deposit(1500)
+
+account.withdraw(2000)
+
+account.check_balance()
+</code></pre>
+
+                    </div>
+
+
+                    <h4>
+                        Expected Output
+                    </h4>
+
+<pre>
+Amount deposited successfully.
+Amount withdrawn successfully.
+Current Balance: 4500
+</pre>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 PROBLEM 03 â€” LIBRARY
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>10</span>
+                    <h2>Problem 03 â€” Library Management</h2>
+                </div>
+
+
+                <div class="problem-detail">
+
+                    <h3>
+                        Problem Description
+                    </h3>
+
+                    <p>
+                        Design a basic library management application
+                        using multiple classes. The system should
+                        maintain books and members and support book
+                        issue and return operations.
+                    </p>
+
+
+                    <h4>
+                        Classes
+                    </h4>
+
+                    <div class="concept-list">
+
+                        <span class="concept-tag">
+                            Book
+                        </span>
+
+                        <span class="concept-tag">
+                            Member
+                        </span>
+
+                        <span class="concept-tag">
+                            Library
+                        </span>
+
+                    </div>
+
+
+                    <h4>
+                        Required Operations
+                    </h4>
+
+                    <ul class="practical-list">
+
+                        <li>
+                            Add a new book.
+                        </li>
+
+                        <li>
+                            Display available books.
+                        </li>
+
+                        <li>
+                            Register a library member.
+                        </li>
+
+                        <li>
+                            Issue a book to a member.
+                        </li>
+
+                        <li>
+                            Return a book.
+                        </li>
+
+                    </ul>
+
+
+                    <h4>
+                        Example Structure
+                    </h4>
+
+
+                    <div class="code-container">
+
+                        <div class="code-header">
+
+                            <span>
+                                library.py
+                            </span>
+
+                            <button
+                                class="copy-btn"
+                                onclick="copyCode(this)">
+                                Copy
+                            </button>
+
+                        </div>
+
+<pre><code>
+class Book:
+
+    def __init__(self, title, author):
+
+        self.title = title
+        self.author = author
+        self.available = True
+
+
+class Member:
+
+    def __init__(self, member_id, name):
+
+        self.member_id = member_id
+        self.name = name
+
+
+class Library:
+
+    def __init__(self):
+
+        self.books = []
+        self.members = []
+
+
+    def add_book(self, book):
+
+        self.books.append(book)
+
+
+    def register_member(self, member):
+
+        self.members.append(member)
+
+
+    def display_books(self):
+
+        for book in self.books:
+
+            status = (
+                "Available"
+                if book.available
+                else "Issued"
+            )
+
+            print(
+                book.title,
+                "-",
+                status
+            )
+
+
+library = Library()
+
+book1 = Book(
+    "Python Basics",
+    "R. Sharma"
+)
+
+book2 = Book(
+    "Data Science",
+    "A. Patil"
+)
+
+member1 = Member(
+    "M001",
+    "Riya"
+)
+
+library.add_book(book1)
+library.add_book(book2)
+
+library.register_member(member1)
+
+library.display_books()
+</code></pre>
+
+                    </div>
+
+
+                    <h4>
+                        Expected Output
+                    </h4>
+
+<pre>
+Python Basics - Available
+Data Science - Available
+</pre>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 APPLICATION DESIGN CHALLENGE
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>11</span>
+                    <h2>Application Design Challenge</h2>
+                </div>
+
+
+                <div class="try-it">
+
+                    <h3>
+                        Build Your Own Application
+                    </h3>
+
+                    <p>
+                        Choose one real-world problem and design
+                        an object-oriented Python application.
+                    </p>
+
+
+                    <div class="concept-list">
+
+                        <span class="concept-tag">
+                            Attendance System
+                        </span>
+
+                        <span class="concept-tag">
+                            Inventory System
+                        </span>
+
+                        <span class="concept-tag">
+                            Hospital System
+                        </span>
+
+                        <span class="concept-tag">
+                            Quiz Application
+                        </span>
+
+                        <span class="concept-tag">
+                            Expense Tracker
+                        </span>
+
+                        <span class="concept-tag">
+                            Course Management
+                        </span>
+
+                    </div>
+
+
+                    <div class="callout">
+
+                        <div class="callout-icon">
+                            ðŸ’¡
+                        </div>
+
+                        <div class="callout-content">
+
+                            <h4>
+                                Design First
+                            </h4>
+
+                            <p>
+                                Before writing code, identify the
+                                entities, their attributes and the
+                                operations that each entity should
+                                perform.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 LEARNING OUTCOME
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>12</span>
+                    <h2>Learning Outcome</h2>
+                </div>
+
+
+                <div class="outcome-box">
+
+                    <h3>
+                        After completing this practical
+                    </h3>
+
+                    <p>
+                        Students will be able to design Python
+                        programs using classes and objects and
+                        apply object-oriented concepts to develop
+                        small real-world applications.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 VIVA QUESTIONS
+                 ================================================= -->
+
+            <section class="practical-section">
+
+                <div class="section-title">
+                    <span>13</span>
+                    <h2>Viva Questions</h2>
+                </div>
+
+
+                <div class="viva-list">
+
+
+                    <div class="viva-item">
+
+                        <div class="viva-question">
+                            1. What is a class in Python?
+                        </div>
+
+                        <div class="viva-answer">
+                            A class is a blueprint used to create
+                            objects containing data and behavior.
+                        </div>
+
+                    </div>
+
+
+                    <div class="viva-item">
+
+                        <div class="viva-question">
+                            2. What is an object?
+                        </div>
+
+                        <div class="viva-answer">
+                            An object is an instance of a class.
+                        </div>
+
+                    </div>
+
+
+                    <div class="viva-item">
+
+                        <div class="viva-question">
+                            3. What is the purpose of __init__()?
+                        </div>
+
+                        <div class="viva-answer">
+                            It is commonly used as a constructor
+                            to initialize an object's attributes.
+                        </div>
+
+                    </div>
+
+
+                    <div class="viva-item">
+
+                        <div class="viva-question">
+                            4. What is self in Python?
+                        </div>
+
+                        <div class="viva-answer">
+                            self refers to the current instance
+                            of a class.
+                        </div>
+
+                    </div>
+
+
+                    <div class="viva-item">
+
+                        <div class="viva-question">
+                            5. What is encapsulation?
+                        </div>
+
+                        <div class="viva-answer">
+                            Encapsulation is the organization of
+                            data and related methods within a class,
+                            with controlled access to the data.
+                        </div>
+
+                    </div>
+
+
+                    <div class="viva-item">
+
+                        <div class="viva-question">
+                            6. Can a Python class have multiple objects?
+                        </div>
+
+                        <div class="viva-answer">
+                            Yes. Multiple independent objects can
+                            be created from the same class.
+                        </div>
+
+                    </div>
+
+
+                    <div class="viva-item">
+
+                        <div class="viva-question">
+                            7. Why are classes useful in application
+                            development?
+                        </div>
+
+                        <div class="viva-answer">
+                            Classes help organize related data and
+                            behavior into reusable structures.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 NAVIGATION
+                 ================================================= -->
+
+            <div class="practical-navigation">
+
+
+                <a
+                    href="practical02.html"
+                    class="practical-nav-btn">
+
+                    <small>
+                        Previous Practical
+                    </small>
+
+                    <strong>
+                        â† Data & Functions
+                    </strong>
+
+                </a>
+
+
+                <a
+                    href="practical04.html"
+                    class="practical-nav-btn next">
+
+                    <small>
+                        Next Practical
+                    </small>
+
+                    <strong>
+                        APIs, Files & Databases â†’
+                    </strong>
+
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="footer">
+
+        <div class="footer-main">
+
+
+            <div class="footer-brand">
+
+                <div class="logo">
+
+                    <span class="logo-mark">
+                        &lt;/&gt;
+                    </span>
+
+                    <span>
+                        Rasika<span class="logo-highlight">
+                            CodeLab
+                        </span>
+                    </span>
+
+                </div>
+
+                <p>
+                    Interactive practical learning through
+                    concepts, code and visualization.
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <div>
+
+                    <h4>
+                        Learn
+                    </h4>
+
+                    <a href="../../../subjects.html">
+                        Subjects
+                    </a>
+
+                    <a href="../../../about.html">
+                        About
+                    </a>
+
+                </div>
+
+
+                <div>
+
+                    <h4>
+                        Subjects
+                    </h4>
+
+                    <a href="../../cpp/index.html">
+                        C++
+                    </a>
+
+                    <a href="../../computer-graphics/cgr_index.html">
+                        Computer Graphics
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <span>
+                Â© 2026 Rasika CodeLab
+            </span>
+
+            <span>
+                Built for practical learning.
+            </span>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
+
+   <script src="../../../js/main.js"></script>
+
+
+    <script>
+
+        function copyCode(button) {
+
+            const container =
+                button.closest(".code-container");
+
+            const code =
+                container.querySelector("code").innerText;
+
+            navigator.clipboard
+                .writeText(code)
+                .then(() => {
+
+                    const original =
+                        button.innerText;
+
+                    button.innerText = "Copied!";
+
+                    setTimeout(() => {
+
+                        button.innerText =
+                            original;
+
+                    }, 1500);
+
+                });
+
+        }
+
+    </script>
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+
+</html>

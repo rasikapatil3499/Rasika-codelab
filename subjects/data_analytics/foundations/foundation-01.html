@@ -1,0 +1,1812 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Foundation 01 | Understanding Data | Rasika CodeLab</title>
+
+    <!-- GLOBAL CSS -->
+    <link rel="stylesheet" href="../../../css/style.css">
+
+    <style>
+        /* =====================================================
+           DATA ANALYTICS FOUNDATION 01
+           RASIKA CODELAB
+           ===================================================== */
+
+        :root {
+            --orange: #ff8a2a;
+            --orange-light: #ffb067;
+            --orange-soft: rgba(255, 138, 42, 0.09);
+
+            --bg: #07090d;
+            --bg2: #0b0f15;
+            --card: #111720;
+            --card2: #151c25;
+
+            --text: #f5f6f8;
+            --soft: #cbd0d8;
+            --muted: #929aa7;
+
+            --border: rgba(255,255,255,0.08);
+            --border-orange: rgba(255,138,42,0.28);
+
+            --radius: 18px;
+            --max: 1180px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background:
+                radial-gradient(
+                    circle at 85% 5%,
+                    rgba(255,138,42,0.08),
+                    transparent 28%
+                ),
+                var(--bg);
+
+            color: var(--text);
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* =====================================================
+           PAGE CONTAINER
+           ===================================================== */
+
+        .foundation-page {
+            width: min(var(--max), calc(100% - 40px));
+            margin: auto;
+        }
+
+        /* =====================================================
+           BREADCRUMB
+           ===================================================== */
+
+        .breadcrumb {
+            padding-top: 95px;
+            margin-bottom: 30px;
+
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .breadcrumb a {
+            color: var(--muted);
+            transition: 0.2s ease;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--orange);
+        }
+
+        .breadcrumb span {
+            color: var(--orange);
+        }
+
+        /* =====================================================
+           HERO
+           ===================================================== */
+
+        .foundation-hero {
+            position: relative;
+
+            padding: 55px 45px;
+
+            overflow: hidden;
+
+            border: 1px solid var(--border);
+            border-radius: 24px;
+
+            background:
+                radial-gradient(
+                    circle at 90% 10%,
+                    rgba(255,138,42,0.13),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    135deg,
+                    #11151d,
+                    #0b0f15
+                );
+        }
+
+        .foundation-hero::after {
+            content: "01";
+
+            position: absolute;
+
+            right: 35px;
+            bottom: -40px;
+
+            color: rgba(255,138,42,0.045);
+
+            font-size: 190px;
+            font-weight: 900;
+
+            line-height: 1;
+        }
+
+        .hero-label {
+            position: relative;
+            z-index: 2;
+
+            display: inline-block;
+
+            padding: 7px 12px;
+
+            border: 1px solid var(--border-orange);
+            border-radius: 50px;
+
+            color: var(--orange);
+
+            background: var(--orange-soft);
+
+            font-size: 9px;
+            font-weight: 800;
+
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .foundation-hero h1 {
+            position: relative;
+            z-index: 2;
+
+            max-width: 800px;
+
+            margin: 20px 0 15px;
+
+            font-size: clamp(40px, 6vw, 68px);
+            line-height: 1.02;
+
+            letter-spacing: -3px;
+        }
+
+        .foundation-hero h1 span {
+            color: var(--orange);
+        }
+
+        .hero-description {
+            position: relative;
+            z-index: 2;
+
+            max-width: 700px;
+
+            margin: 0;
+
+            color: var(--soft);
+
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .hero-meta {
+            position: relative;
+            z-index: 2;
+
+            display: flex;
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+            margin-top: 28px;
+        }
+
+        .hero-meta span {
+            padding: 8px 12px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 8px;
+
+            background: rgba(255,255,255,0.025);
+
+            color: var(--muted);
+
+            font-size: 9px;
+        }
+
+        /* =====================================================
+           LEARNING NAV
+           ===================================================== */
+
+        .learning-nav {
+            position: sticky;
+            top: 0;
+
+            z-index: 50;
+
+            margin-top: 18px;
+
+            padding: 12px;
+
+            display: flex;
+            flex-wrap: wrap;
+
+            justify-content: center;
+
+            gap: 7px;
+
+            background: rgba(7,9,13,0.92);
+
+            border: 1px solid var(--border);
+
+            border-radius: 14px;
+
+            backdrop-filter: blur(14px);
+        }
+
+        .learning-nav a {
+            padding: 8px 13px;
+
+            border-radius: 8px;
+
+            color: var(--muted);
+
+            font-size: 9px;
+            font-weight: 700;
+
+            transition: 0.2s ease;
+        }
+
+        .learning-nav a:hover {
+            color: var(--orange);
+            background: var(--orange-soft);
+        }
+
+        /* =====================================================
+           COMMON SECTION
+           ===================================================== */
+
+        .learning-section {
+            padding: 75px 0 0;
+        }
+
+        .section-kicker {
+            margin-bottom: 8px;
+
+            color: var(--orange);
+
+            font-size: 9px;
+            font-weight: 900;
+
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .learning-section h2 {
+            margin: 0 0 13px;
+
+            font-size: clamp(28px, 4vw, 42px);
+
+            line-height: 1.15;
+            letter-spacing: -1px;
+        }
+
+        .section-intro {
+            max-width: 720px;
+
+            margin-bottom: 32px;
+
+            color: var(--muted);
+
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        /* =====================================================
+           WHAT IS DATA
+           ===================================================== */
+
+        .concept-grid {
+            display: grid;
+
+            grid-template-columns: 1.15fr 0.85fr;
+
+            gap: 18px;
+        }
+
+        .concept-card {
+            padding: 30px;
+
+            background: var(--card);
+
+            border: 1px solid var(--border);
+
+            border-radius: var(--radius);
+
+            transition: 0.25s ease;
+        }
+
+        .concept-card:hover {
+            transform: translateY(-4px);
+
+            border-color: var(--border-orange);
+        }
+
+        .concept-card h3 {
+            margin: 0 0 12px;
+
+            font-size: 19px;
+        }
+
+        .concept-card p {
+            margin: 0;
+
+            color: var(--muted);
+
+            font-size: 11px;
+            line-height: 1.8;
+        }
+
+        .definition {
+            border-left: 3px solid var(--orange);
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(255,138,42,0.07),
+                    transparent
+                );
+        }
+
+        .definition strong {
+            color: var(--orange);
+        }
+
+        /* =====================================================
+           DATA TYPES
+           ===================================================== */
+
+        .data-types-grid {
+            display: grid;
+
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 14px;
+        }
+
+        .type-card {
+            min-height: 170px;
+
+            padding: 23px;
+
+            background: var(--card);
+
+            border: 1px solid var(--border);
+
+            border-radius: 15px;
+
+            transition: 0.25s ease;
+        }
+
+        .type-card:hover {
+            transform: translateY(-5px);
+
+            border-color: var(--border-orange);
+
+            background: var(--card2);
+        }
+
+        .type-icon {
+            width: 42px;
+            height: 42px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 11px;
+
+            background: var(--orange-soft);
+
+            border: 1px solid var(--border-orange);
+
+            color: var(--orange);
+
+            font-weight: 900;
+            font-size: 11px;
+        }
+
+        .type-card h3 {
+            margin: 15px 0 5px;
+
+            font-size: 15px;
+        }
+
+        .type-card p {
+            margin: 0;
+
+            color: var(--muted);
+
+            font-size: 10px;
+        }
+
+        /* =====================================================
+           DATA EXAMPLE
+           ===================================================== */
+
+        .data-example {
+            overflow-x: auto;
+
+            border: 1px solid var(--border);
+
+            border-radius: 16px;
+
+            background: var(--card);
+        }
+
+        .data-table {
+            width: 100%;
+
+            border-collapse: collapse;
+
+            min-width: 650px;
+        }
+
+        .data-table th {
+            padding: 15px;
+
+            background: rgba(255,138,42,0.07);
+
+            color: var(--orange);
+
+            text-align: left;
+
+            font-size: 10px;
+        }
+
+        .data-table td {
+            padding: 14px 15px;
+
+            border-top: 1px solid var(--border);
+
+            color: var(--soft);
+
+            font-size: 10px;
+        }
+
+        .data-table tr:hover td {
+            background: rgba(255,255,255,0.02);
+        }
+
+        /* =====================================================
+           ANALYTICS FLOW
+           ===================================================== */
+
+        .analytics-flow {
+            display: grid;
+
+            grid-template-columns:
+                1fr auto
+                1fr auto
+                1fr auto
+                1fr auto
+                1fr;
+
+            gap: 9px;
+
+            align-items: center;
+        }
+
+        .flow-card {
+            min-height: 150px;
+
+            padding: 20px 12px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            align-items: center;
+
+            text-align: center;
+
+            background: var(--card);
+
+            border: 1px solid var(--border);
+
+            border-radius: 14px;
+        }
+
+        .flow-number {
+            width: 34px;
+            height: 34px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 50%;
+
+            background: var(--orange-soft);
+
+            color: var(--orange);
+
+            font-size: 10px;
+            font-weight: 900;
+        }
+
+        .flow-card h3 {
+            margin: 12px 0 5px;
+
+            font-size: 13px;
+        }
+
+        .flow-card p {
+            margin: 0;
+
+            color: var(--muted);
+
+            font-size: 9px;
+        }
+
+        .flow-arrow {
+            color: var(--orange);
+
+            font-size: 18px;
+        }
+
+        /* =====================================================
+           REAL WORLD PROBLEM
+           ===================================================== */
+
+        .problem-box {
+            padding: 35px;
+
+            background:
+                radial-gradient(
+                    circle at 100% 0,
+                    rgba(255,138,42,0.08),
+                    transparent 35%
+                ),
+                var(--card);
+
+            border: 1px solid var(--border);
+
+            border-radius: 20px;
+        }
+
+        .problem-header {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin-bottom: 18px;
+        }
+
+        .problem-header span {
+            padding: 6px 9px;
+
+            border-radius: 6px;
+
+            background: var(--orange);
+
+            color: #111;
+
+            font-size: 8px;
+            font-weight: 900;
+        }
+
+        .problem-header h3 {
+            margin: 0;
+
+            font-size: 18px;
+        }
+
+        .problem-box > p {
+            max-width: 850px;
+
+            color: var(--soft);
+
+            font-size: 12px;
+
+            line-height: 1.8;
+        }
+
+        .problem-grid {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 12px;
+
+            margin-top: 25px;
+        }
+
+        .problem-item {
+            padding: 18px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 12px;
+
+            background: rgba(255,255,255,0.02);
+        }
+
+        .problem-item strong {
+            display: block;
+
+            margin-bottom: 6px;
+
+            color: var(--orange);
+
+            font-size: 10px;
+        }
+
+        .problem-item span {
+            color: var(--muted);
+
+            font-size: 10px;
+        }
+
+        /* =====================================================
+           VISUALIZATION
+           ===================================================== */
+
+        .visualization-box {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 20px;
+        }
+
+        .chart-card {
+            min-height: 320px;
+
+            padding: 28px;
+
+            background: var(--card);
+
+            border: 1px solid var(--border);
+
+            border-radius: 18px;
+        }
+
+        .chart-card h3 {
+            margin: 0 0 5px;
+
+            font-size: 16px;
+        }
+
+        .chart-card p {
+            margin: 0 0 25px;
+
+            color: var(--muted);
+
+            font-size: 10px;
+        }
+
+        /* fake bar chart */
+
+        .bar-chart {
+            height: 190px;
+
+            display: flex;
+
+            align-items: flex-end;
+
+            justify-content: space-around;
+
+            gap: 10px;
+
+            padding: 15px 5px 0;
+
+            border-bottom: 1px solid var(--border);
+
+            border-left: 1px solid var(--border);
+        }
+
+        .bar {
+            width: 12%;
+
+            min-height: 20px;
+
+            border-radius: 5px 5px 0 0;
+
+            background:
+                linear-gradient(
+                    to top,
+                    var(--orange),
+                    var(--orange-light)
+                );
+
+            transition: 0.3s ease;
+        }
+
+        .bar:hover {
+            filter: brightness(1.2);
+
+            transform: scaleY(1.04);
+        }
+
+        .bar:nth-child(1) {
+            height: 45%;
+        }
+
+        .bar:nth-child(2) {
+            height: 72%;
+        }
+
+        .bar:nth-child(3) {
+            height: 58%;
+        }
+
+        .bar:nth-child(4) {
+            height: 88%;
+        }
+
+        .bar:nth-child(5) {
+            height: 68%;
+        }
+
+        .bar:nth-child(6) {
+            height: 95%;
+        }
+
+        /* =====================================================
+           LEARNING CHECKLIST
+           ===================================================== */
+
+        .checklist {
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 12px;
+        }
+
+        .check-item {
+            padding: 17px 20px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            background: var(--card);
+
+            border: 1px solid var(--border);
+
+            border-radius: 12px;
+        }
+
+        .check {
+            width: 25px;
+            height: 25px;
+
+            flex: 0 0 25px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 50%;
+
+            background: var(--orange-soft);
+
+            color: var(--orange);
+
+            font-size: 11px;
+        }
+
+        .check-item span {
+            color: var(--soft);
+
+            font-size: 10px;
+        }
+
+        /* =====================================================
+           NAVIGATION FOOTER
+           ===================================================== */
+
+        .foundation-navigation {
+            margin: 75px 0;
+
+            padding: 25px;
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 15px;
+
+            border-top: 1px solid var(--border);
+        }
+
+        .nav-box {
+            padding: 20px;
+
+            background: var(--card);
+
+            border: 1px solid var(--border);
+
+            border-radius: 14px;
+
+            transition: 0.25s ease;
+        }
+
+        .nav-box:hover {
+            border-color: var(--border-orange);
+
+            transform: translateY(-3px);
+        }
+
+        .nav-box.next {
+            text-align: right;
+        }
+
+        .nav-box small {
+            color: var(--muted);
+
+            font-size: 8px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+        }
+
+        .nav-box strong {
+            display: block;
+
+            margin-top: 5px;
+
+            color: var(--orange);
+
+            font-size: 12px;
+        }
+
+        /* =====================================================
+           RESPONSIVE
+           ===================================================== */
+
+        @media (max-width: 950px) {
+
+            .data-types-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .analytics-flow {
+                grid-template-columns: repeat(5, 1fr);
+            }
+
+            .flow-arrow {
+                display: none;
+            }
+
+            .visualization-box {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 700px) {
+
+            .foundation-page {
+                width: calc(100% - 28px);
+            }
+
+            .breadcrumb {
+                padding-top: 80px;
+            }
+
+            .foundation-hero {
+                padding: 35px 23px;
+            }
+
+            .foundation-hero h1 {
+                font-size: 40px;
+                letter-spacing: -2px;
+            }
+
+            .concept-grid,
+            .problem-grid,
+            .checklist,
+            .foundation-navigation {
+                grid-template-columns: 1fr;
+            }
+
+            .data-types-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .analytics-flow {
+                grid-template-columns: 1fr;
+            }
+
+            .flow-arrow {
+                display: block;
+
+                transform: rotate(90deg);
+            }
+
+            .flow-card {
+                min-height: 120px;
+            }
+
+            .nav-box.next {
+                text-align: left;
+            }
+        }
+
+        @media (max-width: 450px) {
+
+            .data-types-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-meta {
+                flex-direction: column;
+            }
+
+            .hero-meta span {
+                width: max-content;
+            }
+
+            .problem-box {
+                padding: 22px;
+            }
+
+            .chart-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body class="protected-page">
+
+    <!-- =====================================================
+         NAVBAR
+         ===================================================== -->
+
+    <header class="navbar">
+        <div class="nav-container">
+
+            <a href="../../../index.html" class="logo">
+                <span class="logo-mark">&lt;/&gt;</span>
+                <span>
+                    Rasika<span class="logo-highlight">CodeLab</span>
+                </span>
+            </a>
+
+            <nav class="nav-links">
+
+                <a href="../../../index.html">
+                    Home
+                </a>
+
+                <a href="../../../subjects.html" class="active">
+                    Subjects
+                </a>
+
+                <a href="../../../about.html">
+                    About
+                </a>
+
+                <a href="../../../login.html">
+                    Login
+                </a>
+
+            </nav>
+
+            <button class="menu-btn" aria-label="Open menu">
+                â˜°
+            </button>
+
+        </div>
+    </header>
+
+
+    <main class="foundation-page">
+
+        <!-- =================================================
+             BREADCRUMB
+             ================================================= -->
+
+        <div class="breadcrumb">
+
+            <a href="../index.html">
+                Data Analytics
+            </a>
+
+            <span>â†’</span>
+
+            <a href="data_analytics_foundations.html">
+                Foundations
+            </a>
+
+            <span>â†’</span>
+
+            <span>Foundation 01</span>
+
+        </div>
+
+
+        <!-- =================================================
+             HERO
+             ================================================= -->
+
+        <section class="foundation-hero">
+
+            <div class="hero-label">
+                Foundation 01 Â· Beginner
+            </div>
+
+            <h1>
+                Understanding
+                <span>Data</span>
+            </h1>
+
+            <p class="hero-description">
+                Before analyzing data, you need to understand what
+                data actually represents, where it comes from, how
+                it is structured, and why the right question matters.
+            </p>
+
+            <div class="hero-meta">
+
+                <span>Data Fundamentals</span>
+                <span>Structured Data</span>
+                <span>Variables</span>
+                <span>Real-world Thinking</span>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             LEARNING NAVIGATION
+             ================================================= -->
+
+        <nav class="learning-nav">
+
+            <a href="#concept">
+                What is Data?
+            </a>
+
+            <a href="#types">
+                Data Types
+            </a>
+
+            <a href="#example">
+                Example
+            </a>
+
+            <a href="#flow">
+                Analytics Flow
+            </a>
+
+            <a href="#problem">
+                Real Problem
+            </a>
+
+            <a href="#visualization">
+                Visualization
+            </a>
+
+            <a href="#check">
+                Check Your Learning
+            </a>
+
+        </nav>
+
+
+        <!-- =================================================
+             WHAT IS DATA
+             ================================================= -->
+
+        <section class="learning-section" id="concept">
+
+            <div class="section-kicker">
+                01 Â· Core Concept
+            </div>
+
+            <h2>
+                What exactly is
+                <span>Data?</span>
+            </h2>
+
+            <p class="section-intro">
+                Data is not just numbers stored in an Excel sheet.
+                It is a collection of observations, measurements,
+                records, events, or facts that describe something
+                about the real world.
+            </p>
+
+
+            <div class="concept-grid">
+
+                <article class="concept-card definition">
+
+                    <h3>
+                        Simple Definition
+                    </h3>
+
+                    <p>
+                        <strong>Data</strong> is raw information
+                        collected about people, objects, events,
+                        transactions, systems, or processes.
+                    </p>
+
+                    <br>
+
+                    <p>
+                        Analytics starts when we convert this raw
+                        information into meaningful insights.
+                    </p>
+
+                </article>
+
+
+                <article class="concept-card">
+
+                    <h3>
+                        Real-world examples
+                    </h3>
+
+                    <p>
+                        Student marks, hospital records,
+                        electricity consumption, online purchases,
+                        temperature readings, customer reviews,
+                        traffic counts and banking transactions
+                        are all examples of data.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             DATA TYPES
+             ================================================= -->
+
+        <section class="learning-section" id="types">
+
+            <div class="section-kicker">
+                02 Â· Data Structure
+            </div>
+
+            <h2>
+                Know the
+                <span>Data</span>
+            </h2>
+
+            <p class="section-intro">
+                Understanding the type of data is important because
+                different types require different analysis and
+                visualization techniques.
+            </p>
+
+
+            <div class="data-types-grid">
+
+                <article class="type-card">
+
+                    <div class="type-icon">
+                        TXT
+                    </div>
+
+                    <h3>
+                        Categorical
+                    </h3>
+
+                    <p>
+                        Gender, department, city,
+                        product category.
+                    </p>
+
+                </article>
+
+
+                <article class="type-card">
+
+                    <div class="type-icon">
+                        #
+                    </div>
+
+                    <h3>
+                        Numerical
+                    </h3>
+
+                    <p>
+                        Marks, salary, age,
+                        temperature, revenue.
+                    </p>
+
+                </article>
+
+
+                <article class="type-card">
+
+                    <div class="type-icon">
+                        DATE
+                    </div>
+
+                    <h3>
+                        Date & Time
+                    </h3>
+
+                    <p>
+                        Purchase date, login time,
+                        monthly sales.
+                    </p>
+
+                </article>
+
+
+                <article class="type-card">
+
+                    <div class="type-icon">
+                        YES
+                    </div>
+
+                    <h3>
+                        Boolean
+                    </h3>
+
+                    <p>
+                        Yes/No, active/inactive,
+                        pass/fail.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             DATASET EXAMPLE
+             ================================================= -->
+
+        <section class="learning-section" id="example">
+
+            <div class="section-kicker">
+                03 Â· Think Like an Analyst
+            </div>
+
+            <h2>
+                A Dataset is a
+                <span>Story</span>
+            </h2>
+
+            <p class="section-intro">
+                A table may look like simple rows and columns.
+                But every row represents something that happened
+                in the real world.
+            </p>
+
+
+            <div class="data-example">
+
+                <table class="data-table">
+
+                    <thead>
+
+                        <tr>
+                            <th>Student</th>
+                            <th>Department</th>
+                            <th>Attendance</th>
+                            <th>Marks</th>
+                            <th>Result</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td>Student 01</td>
+                            <td>Computer</td>
+                            <td>92%</td>
+                            <td>86</td>
+                            <td>Pass</td>
+                        </tr>
+
+                        <tr>
+                            <td>Student 02</td>
+                            <td>Computer</td>
+                            <td>68%</td>
+                            <td>58</td>
+                            <td>Pass</td>
+                        </tr>
+
+                        <tr>
+                            <td>Student 03</td>
+                            <td>IT</td>
+                            <td>91%</td>
+                            <td>88</td>
+                            <td>Pass</td>
+                        </tr>
+
+                        <tr>
+                            <td>Student 04</td>
+                            <td>IT</td>
+                            <td>52%</td>
+                            <td>39</td>
+                            <td>Fail</td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             ANALYTICS FLOW
+             ================================================= -->
+
+        <section class="learning-section" id="flow">
+
+            <div class="section-kicker">
+                04 Â· Analytics Mindset
+            </div>
+
+            <h2>
+                From Raw Data to
+                <span>Decision</span>
+            </h2>
+
+            <p class="section-intro">
+                Data analytics is not simply creating charts.
+                An analyst follows a process to transform raw
+                observations into useful decisions.
+            </p>
+
+
+            <div class="analytics-flow">
+
+                <div class="flow-card">
+
+                    <div class="flow-number">01</div>
+
+                    <h3>Question</h3>
+
+                    <p>
+                        What do we want to know?
+                    </p>
+
+                </div>
+
+
+                <div class="flow-arrow">â†’</div>
+
+
+                <div class="flow-card">
+
+                    <div class="flow-number">02</div>
+
+                    <h3>Collect</h3>
+
+                    <p>
+                        Gather relevant data.
+                    </p>
+
+                </div>
+
+
+                <div class="flow-arrow">â†’</div>
+
+
+                <div class="flow-card">
+
+                    <div class="flow-number">03</div>
+
+                    <h3>Understand</h3>
+
+                    <p>
+                        Identify patterns.
+                    </p>
+
+                </div>
+
+
+                <div class="flow-arrow">â†’</div>
+
+
+                <div class="flow-card">
+
+                    <div class="flow-number">04</div>
+
+                    <h3>Visualize</h3>
+
+                    <p>
+                        Communicate patterns.
+                    </p>
+
+                </div>
+
+
+                <div class="flow-arrow">â†’</div>
+
+
+                <div class="flow-card">
+
+                    <div class="flow-number">05</div>
+
+                    <h3>Decide</h3>
+
+                    <p>
+                        Take action.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             REAL WORLD PROBLEM
+             ================================================= -->
+
+        <section class="learning-section" id="problem">
+
+            <div class="section-kicker">
+                05 Â· Real-world Thinking
+            </div>
+
+            <h2>
+                Start With a
+                <span>Question</span>
+            </h2>
+
+            <p class="section-intro">
+                A good analyst does not begin by randomly creating
+                charts. The analysis begins with a real problem.
+            </p>
+
+
+            <div class="problem-box">
+
+                <div class="problem-header">
+
+                    <span>PROBLEM</span>
+
+                    <h3>
+                        Why are students performing poorly?
+                    </h3>
+
+                </div>
+
+                <p>
+                    A college wants to understand why some students
+                    are getting low marks. The college has attendance,
+                    internal marks, practical marks and final exam
+                    marks.
+                </p>
+
+
+                <div class="problem-grid">
+
+                    <div class="problem-item">
+
+                        <strong>
+                            DATA NEEDED
+                        </strong>
+
+                        <span>
+                            Attendance, marks, department,
+                            practical performance.
+                        </span>
+
+                    </div>
+
+
+                    <div class="problem-item">
+
+                        <strong>
+                            QUESTION
+                        </strong>
+
+                        <span>
+                            Is attendance related to academic
+                            performance?
+                        </span>
+
+                    </div>
+
+
+                    <div class="problem-item">
+
+                        <strong>
+                            POSSIBLE INSIGHT
+                        </strong>
+
+                        <span>
+                            Students with low attendance may
+                            require academic support.
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             VISUALIZATION
+             ================================================= -->
+
+        <section class="learning-section" id="visualization">
+
+            <div class="section-kicker">
+                06 Â· Visualization
+            </div>
+
+            <h2>
+                Make the Data
+                <span>Visible</span>
+            </h2>
+
+            <p class="section-intro">
+                Visualization helps us identify patterns that may
+                not be obvious when looking at raw rows of data.
+            </p>
+
+
+            <div class="visualization-box">
+
+                <article class="chart-card">
+
+                    <h3>
+                        Marks Distribution
+                    </h3>
+
+                    <p>
+                        Example of comparing student performance.
+                    </p>
+
+                    <div class="bar-chart">
+
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+
+                    </div>
+
+                </article>
+
+
+                <article class="chart-card">
+
+                    <h3>
+                        Why Visualize?
+                    </h3>
+
+                    <p>
+                        A visualization allows an analyst to quickly
+                        identify trends, comparisons and unusual
+                        observations.
+                    </p>
+
+                    <div class="concept-card">
+
+                        <p>
+                            Instead of asking:
+                            <strong>
+                                "What does this table contain?"
+                            </strong>
+                        </p>
+
+                        <br>
+
+                        <p>
+                            We can ask:
+                            <strong>
+                                "What pattern can I see?"
+                            </strong>
+                        </p>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             CHECK YOUR LEARNING
+             ================================================= -->
+
+        <section class="learning-section" id="check">
+
+            <div class="section-kicker">
+                07 Â· Learning Check
+            </div>
+
+            <h2>
+                After This Foundation,
+                <span>You Should Know...</span>
+            </h2>
+
+
+            <div class="checklist">
+
+                <div class="check-item">
+
+                    <div class="check">âœ“</div>
+
+                    <span>
+                        What data means in a real-world context.
+                    </span>
+
+                </div>
+
+
+                <div class="check-item">
+
+                    <div class="check">âœ“</div>
+
+                    <span>
+                        Difference between major data types.
+                    </span>
+
+                </div>
+
+
+                <div class="check-item">
+
+                    <div class="check">âœ“</div>
+
+                    <span>
+                        How rows and columns represent real events.
+                    </span>
+
+                </div>
+
+
+                <div class="check-item">
+
+                    <div class="check">âœ“</div>
+
+                    <span>
+                        Why analytics starts with a question.
+                    </span>
+
+                </div>
+
+
+                <div class="check-item">
+
+                    <div class="check">âœ“</div>
+
+                    <span>
+                        Why visualization is important.
+                    </span>
+
+                </div>
+
+
+                <div class="check-item">
+
+                    <div class="check">âœ“</div>
+
+                    <span>
+                        How raw data can support decisions.
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             FOUNDATION NAVIGATION
+             ================================================= -->
+
+        <section class="foundation-navigation">
+
+            <a
+                href="data_analytics_foundations.html"
+                class="nav-box"
+            >
+
+                <small>
+                    â† Back
+                </small>
+
+                <strong>
+                    All Foundations
+                </strong>
+
+            </a>
+
+
+            <a
+                href="foundation-02.html"
+                class="nav-box next"
+            >
+
+                <small>
+                    Next Foundation â†’
+                </small>
+
+                <strong>
+                    Foundation 02 Â· Collecting Data
+                </strong>
+
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="footer">
+
+        <div class="footer-content">
+
+            <p>
+                Â© 2026 Rasika CodeLab Â· Data Analytics
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
+
+    <script src="../../../js/main.js"></script>
+
+    <!-- IMPORTANT:
+         auth-nav.js is located in /js,
+         so from foundations/ we need ../../../
+    -->
+
+    <script
+        type="module"
+        src="../../../js/auth-nav.js">
+    </script>
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

@@ -1,0 +1,2001 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Foundation 02 | Data Sources & Structure | Rasika CodeLab</title>
+
+    <!-- Global CodeLab CSS -->
+    <link rel="stylesheet" href="../../../css/style.css">
+
+    <style>
+        /* =========================================================
+           RASIKA CODELAB
+           DATA ANALYTICS â€” FOUNDATION 02
+           DATA SOURCES & STRUCTURE
+           ========================================================= */
+
+        :root {
+            --da-orange: #ff8a2a;
+            --da-orange-light: #ffb067;
+            --da-orange-soft: rgba(255, 138, 42, 0.10);
+
+            --da-bg: #07090d;
+            --da-bg-2: #0b0f15;
+            --da-card: #111720;
+            --da-card-2: #151c25;
+
+            --da-text: #f5f6f8;
+            --da-soft: #cbd0d8;
+            --da-muted: #929aa7;
+
+            --da-border: rgba(255, 255, 255, 0.08);
+            --da-border-orange: rgba(255, 138, 42, 0.28);
+
+            --da-radius: 18px;
+            --da-max: 1180px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background:
+                radial-gradient(
+                    circle at 85% 4%,
+                    rgba(255, 138, 42, 0.08),
+                    transparent 28%
+                ),
+                var(--da-bg);
+
+            color: var(--da-text);
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* =========================================================
+           MAIN CONTAINER
+           ========================================================= */
+
+        .da-page {
+            width: min(var(--da-max), calc(100% - 40px));
+            margin: auto;
+        }
+
+        /* =========================================================
+           BREADCRUMB
+           ========================================================= */
+
+        .da-breadcrumb {
+            padding-top: 95px;
+            margin-bottom: 25px;
+
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+
+            color: var(--da-muted);
+            font-size: 10px;
+        }
+
+        .da-breadcrumb a {
+            color: var(--da-muted);
+            transition: 0.2s ease;
+        }
+
+        .da-breadcrumb a:hover {
+            color: var(--da-orange);
+        }
+
+        .da-breadcrumb .arrow {
+            color: var(--da-orange);
+        }
+
+        .da-breadcrumb .current {
+            color: var(--da-soft);
+        }
+
+        /* =========================================================
+           HERO
+           ========================================================= */
+
+        .da-hero {
+            position: relative;
+
+            padding: 55px 45px;
+
+            overflow: hidden;
+
+            border: 1px solid var(--da-border);
+            border-radius: 24px;
+
+            background:
+                radial-gradient(
+                    circle at 90% 5%,
+                    rgba(255, 138, 42, 0.14),
+                    transparent 34%
+                ),
+                linear-gradient(
+                    135deg,
+                    #11151d,
+                    #0b0f15
+                );
+        }
+
+        .da-hero::after {
+            content: "02";
+
+            position: absolute;
+            right: 25px;
+            bottom: -42px;
+
+            color: rgba(255, 138, 42, 0.045);
+
+            font-size: 190px;
+            font-weight: 900;
+
+            line-height: 1;
+        }
+
+        .da-hero-label {
+            position: relative;
+            z-index: 2;
+
+            display: inline-block;
+
+            padding: 7px 12px;
+
+            border: 1px solid var(--da-border-orange);
+            border-radius: 50px;
+
+            background: var(--da-orange-soft);
+
+            color: var(--da-orange);
+
+            font-size: 9px;
+            font-weight: 800;
+
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .da-hero h1 {
+            position: relative;
+            z-index: 2;
+
+            max-width: 820px;
+
+            margin: 20px 0 14px;
+
+            font-size: clamp(38px, 6vw, 66px);
+
+            line-height: 1.02;
+
+            letter-spacing: -3px;
+        }
+
+        .da-hero h1 span {
+            color: var(--da-orange);
+        }
+
+        .da-hero-description {
+            position: relative;
+            z-index: 2;
+
+            max-width: 760px;
+
+            margin: 0;
+
+            color: var(--da-soft);
+
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .da-hero-meta {
+            position: relative;
+            z-index: 2;
+
+            display: flex;
+            flex-wrap: wrap;
+
+            gap: 9px;
+
+            margin-top: 27px;
+        }
+
+        .da-hero-meta span {
+            padding: 8px 12px;
+
+            border: 1px solid var(--da-border);
+            border-radius: 8px;
+
+            background: rgba(255, 255, 255, 0.025);
+
+            color: var(--da-muted);
+
+            font-size: 9px;
+        }
+
+        /* =========================================================
+           STICKY NAVIGATION
+           ========================================================= */
+
+        .da-learning-nav {
+            position: sticky;
+            top: 0;
+
+            z-index: 50;
+
+            margin-top: 18px;
+            padding: 11px;
+
+            display: flex;
+            flex-wrap: wrap;
+
+            justify-content: center;
+            gap: 6px;
+
+            background: rgba(7, 9, 13, 0.93);
+
+            border: 1px solid var(--da-border);
+            border-radius: 14px;
+
+            backdrop-filter: blur(14px);
+        }
+
+        .da-learning-nav a {
+            padding: 8px 12px;
+
+            border-radius: 8px;
+
+            color: var(--da-muted);
+
+            font-size: 9px;
+            font-weight: 700;
+
+            transition: 0.2s ease;
+        }
+
+        .da-learning-nav a:hover {
+            color: var(--da-orange);
+            background: var(--da-orange-soft);
+        }
+
+        /* =========================================================
+           SECTION
+           ========================================================= */
+
+        .da-section {
+            padding-top: 72px;
+        }
+
+        .da-kicker {
+            margin-bottom: 8px;
+
+            color: var(--da-orange);
+
+            font-size: 9px;
+            font-weight: 900;
+
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .da-section h2 {
+            margin: 0 0 12px;
+
+            font-size: clamp(27px, 4vw, 42px);
+
+            line-height: 1.15;
+            letter-spacing: -1px;
+        }
+
+        .da-section h2 span {
+            color: var(--da-orange);
+        }
+
+        .da-intro {
+            max-width: 780px;
+
+            margin: 0 0 30px;
+
+            color: var(--da-muted);
+
+            font-size: 12px;
+            line-height: 1.85;
+        }
+
+        /* =========================================================
+           CONCEPT GRID
+           ========================================================= */
+
+        .da-concept-grid {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 17px;
+        }
+
+        .da-card {
+            padding: 28px;
+
+            background: var(--da-card);
+
+            border: 1px solid var(--da-border);
+            border-radius: var(--da-radius);
+
+            transition: 0.25s ease;
+        }
+
+        .da-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--da-border-orange);
+        }
+
+        .da-card h3 {
+            margin: 0 0 10px;
+
+            font-size: 17px;
+        }
+
+        .da-card p {
+            margin: 0;
+
+            color: var(--da-muted);
+
+            font-size: 11px;
+            line-height: 1.8;
+        }
+
+        /* =========================================================
+           SOURCE CARDS
+           ========================================================= */
+
+        .da-source-grid {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 14px;
+        }
+
+        .da-source-card {
+            position: relative;
+
+            min-height: 190px;
+
+            padding: 23px;
+
+            background: var(--da-card);
+
+            border: 1px solid var(--da-border);
+            border-radius: 16px;
+
+            overflow: hidden;
+
+            transition: 0.25s ease;
+        }
+
+        .da-source-card:hover {
+            transform: translateY(-5px);
+
+            border-color: var(--da-border-orange);
+
+            background: var(--da-card-2);
+        }
+
+        .da-source-number {
+            color: rgba(255, 138, 42, 0.20);
+
+            font-size: 30px;
+            font-weight: 900;
+        }
+
+        .da-source-card h3 {
+            margin: 10px 0 7px;
+
+            font-size: 15px;
+        }
+
+        .da-source-card p {
+            margin: 0;
+
+            color: var(--da-muted);
+
+            font-size: 10px;
+            line-height: 1.7;
+        }
+
+        .da-source-tag {
+            display: inline-block;
+
+            margin-top: 16px;
+
+            padding: 5px 8px;
+
+            border: 1px solid var(--da-border-orange);
+            border-radius: 6px;
+
+            background: var(--da-orange-soft);
+
+            color: var(--da-orange);
+
+            font-size: 8px;
+            font-weight: 800;
+        }
+
+        /* =========================================================
+           STRUCTURE FLOW
+           ========================================================= */
+
+        .da-structure-flow {
+            display: grid;
+
+            grid-template-columns:
+                1fr auto
+                1fr auto
+                1fr;
+
+            gap: 10px;
+
+            align-items: center;
+        }
+
+        .da-flow-card {
+            min-height: 145px;
+
+            padding: 23px;
+
+            background: var(--da-card);
+
+            border: 1px solid var(--da-border);
+            border-radius: 15px;
+
+            text-align: center;
+        }
+
+        .da-flow-icon {
+            width: 42px;
+            height: 42px;
+
+            margin: auto;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 11px;
+
+            background: var(--da-orange-soft);
+            border: 1px solid var(--da-border-orange);
+
+            color: var(--da-orange);
+
+            font-size: 11px;
+            font-weight: 900;
+        }
+
+        .da-flow-card h3 {
+            margin: 12px 0 5px;
+
+            font-size: 14px;
+        }
+
+        .da-flow-card p {
+            margin: 0;
+
+            color: var(--da-muted);
+
+            font-size: 9px;
+        }
+
+        .da-flow-arrow {
+            color: var(--da-orange);
+            font-size: 20px;
+        }
+
+        /* =========================================================
+           TABLE
+           ========================================================= */
+
+        .da-table-wrapper {
+            overflow-x: auto;
+
+            border: 1px solid var(--da-border);
+            border-radius: 16px;
+
+            background: var(--da-card);
+        }
+
+        .da-table {
+            width: 100%;
+            min-width: 700px;
+
+            border-collapse: collapse;
+        }
+
+        .da-table th {
+            padding: 15px;
+
+            background: rgba(255, 138, 42, 0.07);
+
+            color: var(--da-orange);
+
+            font-size: 10px;
+            text-align: left;
+        }
+
+        .da-table td {
+            padding: 14px 15px;
+
+            border-top: 1px solid var(--da-border);
+
+            color: var(--da-soft);
+
+            font-size: 10px;
+        }
+
+        .da-table tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        /* =========================================================
+           DATA TYPE GRID
+           ========================================================= */
+
+        .da-type-grid {
+            display: grid;
+
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 13px;
+        }
+
+        .da-type-card {
+            min-height: 170px;
+
+            padding: 22px;
+
+            background: var(--da-card);
+
+            border: 1px solid var(--da-border);
+            border-radius: 15px;
+
+            transition: 0.25s ease;
+        }
+
+        .da-type-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--da-border-orange);
+        }
+
+        .da-type-icon {
+            width: 40px;
+            height: 40px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 10px;
+
+            background: var(--da-orange-soft);
+
+            color: var(--da-orange);
+
+            font-size: 9px;
+            font-weight: 900;
+        }
+
+        .da-type-card h3 {
+            margin: 14px 0 5px;
+
+            font-size: 14px;
+        }
+
+        .da-type-card p {
+            margin: 0;
+
+            color: var(--da-muted);
+
+            font-size: 10px;
+        }
+
+        /* =========================================================
+           FORMAT COMPARISON
+           ========================================================= */
+
+        .da-format-grid {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 15px;
+        }
+
+        .da-format-card {
+            padding: 24px;
+
+            background: var(--da-card);
+
+            border: 1px solid var(--da-border);
+            border-radius: 16px;
+        }
+
+        .da-format-card h3 {
+            margin: 0 0 12px;
+
+            color: var(--da-orange);
+
+            font-size: 17px;
+        }
+
+        .da-format-code {
+            padding: 15px;
+
+            overflow-x: auto;
+
+            border-radius: 10px;
+
+            background: #090c11;
+
+            border: 1px solid var(--da-border);
+
+            color: var(--da-soft);
+
+            font-family: Consolas, monospace;
+
+            font-size: 9px;
+
+            white-space: pre;
+        }
+
+        .da-format-card p {
+            margin: 12px 0 0;
+
+            color: var(--da-muted);
+
+            font-size: 10px;
+        }
+
+        /* =========================================================
+           PRIMARY KEY
+           ========================================================= */
+
+        .da-key-box {
+            padding: 30px;
+
+            background:
+                radial-gradient(
+                    circle at 100% 0,
+                    rgba(255, 138, 42, 0.09),
+                    transparent 35%
+                ),
+                var(--da-card);
+
+            border: 1px solid var(--da-border);
+            border-radius: 20px;
+        }
+
+        .da-key-grid {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 12px;
+
+            margin-top: 22px;
+        }
+
+        .da-key-item {
+            padding: 18px;
+
+            background: rgba(255, 255, 255, 0.025);
+
+            border: 1px solid var(--da-border);
+            border-radius: 12px;
+        }
+
+        .da-key-item strong {
+            display: block;
+
+            margin-bottom: 5px;
+
+            color: var(--da-orange);
+
+            font-size: 10px;
+        }
+
+        .da-key-item span {
+            color: var(--da-muted);
+
+            font-size: 10px;
+        }
+
+        /* =========================================================
+           CHECKLIST
+           ========================================================= */
+
+        .da-checklist {
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 12px;
+        }
+
+        .da-check {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 17px 19px;
+
+            background: var(--da-card);
+
+            border: 1px solid var(--da-border);
+            border-radius: 12px;
+        }
+
+        .da-check-icon {
+            width: 26px;
+            height: 26px;
+
+            flex: 0 0 26px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 50%;
+
+            background: var(--da-orange-soft);
+
+            color: var(--da-orange);
+
+            font-size: 11px;
+        }
+
+        .da-check span {
+            color: var(--da-soft);
+
+            font-size: 10px;
+        }
+
+        /* =========================================================
+           MINI CHALLENGE
+           ========================================================= */
+
+        .da-challenge {
+            padding: 34px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255, 138, 42, 0.10),
+                    rgba(255, 255, 255, 0.015)
+                );
+
+            border: 1px solid var(--da-border-orange);
+            border-radius: 20px;
+        }
+
+        .da-challenge-label {
+            display: inline-block;
+
+            padding: 6px 9px;
+
+            border-radius: 6px;
+
+            background: var(--da-orange);
+
+            color: #111;
+
+            font-size: 8px;
+            font-weight: 900;
+        }
+
+        .da-challenge h3 {
+            margin: 15px 0 8px;
+
+            font-size: 20px;
+        }
+
+        .da-challenge p {
+            max-width: 800px;
+
+            margin: 0;
+
+            color: var(--da-muted);
+
+            font-size: 11px;
+            line-height: 1.8;
+        }
+
+        /* =========================================================
+           NAVIGATION
+           ========================================================= */
+
+        .da-page-navigation {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 15px;
+
+            margin: 75px 0;
+
+            padding-top: 25px;
+
+            border-top: 1px solid var(--da-border);
+        }
+
+        .da-nav-box {
+            padding: 21px;
+
+            background: var(--da-card);
+
+            border: 1px solid var(--da-border);
+            border-radius: 14px;
+
+            transition: 0.25s ease;
+        }
+
+        .da-nav-box:hover {
+            transform: translateY(-3px);
+
+            border-color: var(--da-border-orange);
+        }
+
+        .da-nav-box.next {
+            text-align: right;
+        }
+
+        .da-nav-box small {
+            color: var(--da-muted);
+
+            font-size: 8px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1px;
+        }
+
+        .da-nav-box strong {
+            display: block;
+
+            margin-top: 5px;
+
+            color: var(--da-orange);
+
+            font-size: 12px;
+        }
+
+        /* =========================================================
+           RESPONSIVE
+           ========================================================= */
+
+        @media (max-width: 950px) {
+
+            .da-source-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .da-type-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .da-format-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 750px) {
+
+            .da-concept-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .da-source-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .da-structure-flow {
+                grid-template-columns: 1fr;
+            }
+
+            .da-flow-arrow {
+                transform: rotate(90deg);
+                text-align: center;
+            }
+
+            .da-key-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .da-checklist {
+                grid-template-columns: 1fr;
+            }
+
+            .da-page-navigation {
+                grid-template-columns: 1fr;
+            }
+
+            .da-nav-box.next {
+                text-align: left;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .da-page {
+                width: calc(100% - 26px);
+            }
+
+            .da-breadcrumb {
+                padding-top: 82px;
+            }
+
+            .da-hero {
+                padding: 35px 23px;
+            }
+
+            .da-hero h1 {
+                font-size: 40px;
+                letter-spacing: -2px;
+            }
+
+            .da-type-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .da-learning-nav {
+                justify-content: flex-start;
+            }
+
+            .da-learning-nav a {
+                font-size: 8px;
+            }
+
+            .da-challenge,
+            .da-key-box {
+                padding: 23px;
+            }
+        }
+    </style>
+</head>
+
+<body class="protected-page">
+
+    <!-- =====================================================
+         NAVBAR
+         ===================================================== -->
+
+    <header class="navbar">
+
+        <div class="nav-container">
+
+            <a href="../../../index.html" class="logo">
+                <span class="logo-mark">&lt;/&gt;</span>
+                <span>
+                    Rasika<span class="logo-highlight">CodeLab</span>
+                </span>
+            </a>
+
+            <nav class="nav-links">
+
+                <a href="../../../index.html">
+                    Home
+                </a>
+
+                <a href="../../../subjects.html" class="active">
+                    Subjects
+                </a>
+
+                <a href="../../../about.html">
+                    About
+                </a>
+
+                <a href="../../../login.html">
+                    Login
+                </a>
+
+            </nav>
+
+            <button class="menu-btn" aria-label="Open menu">
+                â˜°
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <main class="da-page">
+
+        <!-- =====================================================
+             BREADCRUMB
+             ===================================================== -->
+
+        <div class="da-breadcrumb">
+
+            <a href="../index.html">
+                Data Analytics
+            </a>
+
+            <span class="arrow">â†’</span>
+
+            <a href="data_analytics_foundations.html">
+                Foundations
+            </a>
+
+            <span class="arrow">â†’</span>
+
+            <span class="current">
+                Foundation 02
+            </span>
+
+        </div>
+
+
+        <!-- =====================================================
+             HERO
+             ===================================================== -->
+
+        <section class="da-hero">
+
+            <div class="da-hero-label">
+                Foundation 02 Â· Beginner
+            </div>
+
+            <h1>
+                Data Sources
+                <span>& Structure</span>
+            </h1>
+
+            <p class="da-hero-description">
+                Learn where analytical data comes from, how datasets
+                are structured, how data types affect analysis, and
+                why good data structure matters before visualization
+                or decision making.
+            </p>
+
+            <div class="da-hero-meta">
+
+                <span>Data Sources</span>
+                <span>Dataset Structure</span>
+                <span>Data Types</span>
+                <span>Primary Keys</span>
+                <span>Formats</span>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             LEARNING NAVIGATION
+             ===================================================== -->
+
+        <nav class="da-learning-nav">
+
+            <a href="#sources">
+                Data Sources
+            </a>
+
+            <a href="#structure">
+                Structure
+            </a>
+
+            <a href="#types">
+                Data Types
+            </a>
+
+            <a href="#primary-key">
+                Primary Key
+            </a>
+
+            <a href="#formats">
+                Formats
+            </a>
+
+            <a href="#checklist">
+                Checklist
+            </a>
+
+            <a href="#challenge">
+                Challenge
+            </a>
+
+        </nav>
+
+
+        <!-- =====================================================
+             INTRODUCTION
+             ===================================================== -->
+
+        <section class="da-section">
+
+            <div class="da-kicker">
+                01 Â· Foundation
+            </div>
+
+            <h2>
+                Before Analysis,
+                <span>Understand the Data</span>
+            </h2>
+
+            <p class="da-intro">
+                Before creating a chart, calculating an average,
+                or building a dashboard, an analyst must understand
+                where the data came from and how it is organized.
+                Data source and structure influence what questions
+                can be answered reliably.
+            </p>
+
+
+            <div class="da-concept-grid">
+
+                <article class="da-card">
+
+                    <h3>
+                        Where does data come from?
+                    </h3>
+
+                    <p>
+                        Data can be collected from many different
+                        sources such as databases, spreadsheets,
+                        websites, applications, sensors, APIs,
+                        surveys, business systems and public datasets.
+                    </p>
+
+                </article>
+
+
+                <article class="da-card">
+
+                    <h3>
+                        Why does structure matter?
+                    </h3>
+
+                    <p>
+                        A well-structured dataset makes it easier to
+                        filter, calculate, compare, visualize and
+                        communicate information. Poor structure can
+                        produce incorrect or misleading analysis.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             DATA SOURCES
+             ===================================================== -->
+
+        <section class="da-section" id="sources">
+
+            <div class="da-kicker">
+                02 Â· Data Sources
+            </div>
+
+            <h2>
+                Where Can We
+                <span>Get Data?</span>
+            </h2>
+
+            <p class="da-intro">
+                Different analytical problems require different
+                sources. The source determines the nature,
+                availability and reliability of the data.
+            </p>
+
+
+            <div class="da-source-grid">
+
+                <article class="da-source-card">
+
+                    <div class="da-source-number">
+                        01
+                    </div>
+
+                    <h3>
+                        Databases
+                    </h3>
+
+                    <p>
+                        Structured information stored in systems
+                        such as MySQL, PostgreSQL or other database
+                        platforms.
+                    </p>
+
+                    <span class="da-source-tag">
+                        Structured
+                    </span>
+
+                </article>
+
+
+                <article class="da-source-card">
+
+                    <div class="da-source-number">
+                        02
+                    </div>
+
+                    <h3>
+                        Spreadsheets
+                    </h3>
+
+                    <p>
+                        Excel and CSV files are commonly used for
+                        business reports, surveys, marks and
+                        operational records.
+                    </p>
+
+                    <span class="da-source-tag">
+                        Tabular
+                    </span>
+
+                </article>
+
+
+                <article class="da-source-card">
+
+                    <div class="da-source-number">
+                        03
+                    </div>
+
+                    <h3>
+                        APIs
+                    </h3>
+
+                    <p>
+                        Applications can provide data through
+                        APIs, allowing analytical systems to
+                        retrieve information programmatically.
+                    </p>
+
+                    <span class="da-source-tag">
+                        Dynamic
+                    </span>
+
+                </article>
+
+
+                <article class="da-source-card">
+
+                    <div class="da-source-number">
+                        04
+                    </div>
+
+                    <h3>
+                        Web & Online Data
+                    </h3>
+
+                    <p>
+                        Websites and online platforms can provide
+                        information that may be collected for
+                        analytical purposes.
+                    </p>
+
+                    <span class="da-source-tag">
+                        External
+                    </span>
+
+                </article>
+
+
+                <article class="da-source-card">
+
+                    <div class="da-source-number">
+                        05
+                    </div>
+
+                    <h3>
+                        Sensors & Devices
+                    </h3>
+
+                    <p>
+                        IoT devices, machines and sensors generate
+                        measurements such as temperature,
+                        location and energy usage.
+                    </p>
+
+                    <span class="da-source-tag">
+                        Real-time
+                    </span>
+
+                </article>
+
+
+                <article class="da-source-card">
+
+                    <div class="da-source-number">
+                        06
+                    </div>
+
+                    <h3>
+                        Surveys & Forms
+                    </h3>
+
+                    <p>
+                        Information can be collected directly from
+                        people through questionnaires, forms and
+                        feedback systems.
+                    </p>
+
+                    <span class="da-source-tag">
+                        Primary
+                    </span>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             DATASET STRUCTURE
+             ===================================================== -->
+
+        <section class="da-section" id="structure">
+
+            <div class="da-kicker">
+                03 Â· Dataset Structure
+            </div>
+
+            <h2>
+                Understand
+                <span>Rows & Columns</span>
+            </h2>
+
+            <p class="da-intro">
+                A typical tabular dataset is organized into rows
+                and columns. Understanding what each row and column
+                represents is one of the first tasks of a data analyst.
+            </p>
+
+
+            <div class="da-structure-flow">
+
+                <article class="da-flow-card">
+
+                    <div class="da-flow-icon">
+                        ROW
+                    </div>
+
+                    <h3>
+                        Observation
+                    </h3>
+
+                    <p>
+                        One record or observation in the dataset.
+                    </p>
+
+                </article>
+
+
+                <div class="da-flow-arrow">
+                    â†’
+                </div>
+
+
+                <article class="da-flow-card">
+
+                    <div class="da-flow-icon">
+                        COL
+                    </div>
+
+                    <h3>
+                        Variable
+                    </h3>
+
+                    <p>
+                        A characteristic or attribute being measured.
+                    </p>
+
+                </article>
+
+
+                <div class="da-flow-arrow">
+                    â†’
+                </div>
+
+
+                <article class="da-flow-card">
+
+                    <div class="da-flow-icon">
+                        DATA
+                    </div>
+
+                    <h3>
+                        Dataset
+                    </h3>
+
+                    <p>
+                        A collection of related observations and variables.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             EXAMPLE DATASET
+             ===================================================== -->
+
+        <section class="da-section">
+
+            <div class="da-kicker">
+                04 Â· Practical Example
+            </div>
+
+            <h2>
+                Read a Dataset Like an
+                <span>Analyst</span>
+            </h2>
+
+            <p class="da-intro">
+                Consider a student-performance dataset. Before
+                calculating anything, first identify what one row
+                represents and what each column means.
+            </p>
+
+
+            <div class="da-table-wrapper">
+
+                <table class="da-table">
+
+                    <thead>
+
+                        <tr>
+                            <th>Student_ID</th>
+                            <th>Department</th>
+                            <th>Attendance</th>
+                            <th>Marks</th>
+                            <th>Result</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td>ST001</td>
+                            <td>Computer</td>
+                            <td>92%</td>
+                            <td>86</td>
+                            <td>Pass</td>
+                        </tr>
+
+                        <tr>
+                            <td>ST002</td>
+                            <td>Computer</td>
+                            <td>68%</td>
+                            <td>58</td>
+                            <td>Pass</td>
+                        </tr>
+
+                        <tr>
+                            <td>ST003</td>
+                            <td>IT</td>
+                            <td>91%</td>
+                            <td>88</td>
+                            <td>Pass</td>
+                        </tr>
+
+                        <tr>
+                            <td>ST004</td>
+                            <td>IT</td>
+                            <td>52%</td>
+                            <td>39</td>
+                            <td>Fail</td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             DATA TYPES
+             ===================================================== -->
+
+        <section class="da-section" id="types">
+
+            <div class="da-kicker">
+                05 Â· Data Types
+            </div>
+
+            <h2>
+                Different Data Needs
+                <span>Different Analysis</span>
+            </h2>
+
+            <p class="da-intro">
+                The type of a variable affects which calculations,
+                comparisons and visualizations are appropriate.
+            </p>
+
+
+            <div class="da-type-grid">
+
+                <article class="da-type-card">
+
+                    <div class="da-type-icon">
+                        TEXT
+                    </div>
+
+                    <h3>
+                        Categorical
+                    </h3>
+
+                    <p>
+                        Department, city, product category,
+                        gender or other labels.
+                    </p>
+
+                </article>
+
+
+                <article class="da-type-card">
+
+                    <div class="da-type-icon">
+                        #
+                    </div>
+
+                    <h3>
+                        Numerical
+                    </h3>
+
+                    <p>
+                        Marks, salary, revenue, age,
+                        temperature and measurements.
+                    </p>
+
+                </article>
+
+
+                <article class="da-type-card">
+
+                    <div class="da-type-icon">
+                        DATE
+                    </div>
+
+                    <h3>
+                        Date & Time
+                    </h3>
+
+                    <p>
+                        Purchase date, login time,
+                        month, year or timestamp.
+                    </p>
+
+                </article>
+
+
+                <article class="da-type-card">
+
+                    <div class="da-type-icon">
+                        Y/N
+                    </div>
+
+                    <h3>
+                        Boolean
+                    </h3>
+
+                    <p>
+                        Yes/No, active/inactive,
+                        pass/fail and similar states.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             PRIMARY KEY
+             ===================================================== -->
+
+        <section class="da-section" id="primary-key">
+
+            <div class="da-kicker">
+                06 Â· Data Identification
+            </div>
+
+            <h2>
+                Why Does a
+                <span>Primary Key</span> Matter?
+            </h2>
+
+            <p class="da-intro">
+                A unique identifier helps distinguish one record
+                from another. This becomes particularly important
+                when working with databases and combining datasets.
+            </p>
+
+
+            <div class="da-key-box">
+
+                <h3>
+                    Example: Student_ID
+                </h3>
+
+                <p class="da-intro">
+                    If every student has a unique Student_ID,
+                    the analyst can identify individual records
+                    reliably.
+                </p>
+
+
+                <div class="da-key-grid">
+
+                    <div class="da-key-item">
+
+                        <strong>
+                            UNIQUE
+                        </strong>
+
+                        <span>
+                            Each record should have a distinct
+                            identifier.
+                        </span>
+
+                    </div>
+
+
+                    <div class="da-key-item">
+
+                        <strong>
+                            IDENTIFIABLE
+                        </strong>
+
+                        <span>
+                            The record can be located and referenced
+                            clearly.
+                        </span>
+
+                    </div>
+
+
+                    <div class="da-key-item">
+
+                        <strong>
+                            USEFUL FOR COMBINING
+                        </strong>
+
+                        <span>
+                            Identifiers can help connect related
+                            datasets.
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             DATA FORMATS
+             ===================================================== -->
+
+        <section class="da-section" id="formats">
+
+            <div class="da-kicker">
+                07 Â· Data Formats
+            </div>
+
+            <h2>
+                CSV vs JSON vs
+                <span>Database</span>
+            </h2>
+
+            <p class="da-intro">
+                Data can be represented in different formats.
+                The appropriate format depends on the application,
+                structure and workflow.
+            </p>
+
+
+            <div class="da-format-grid">
+
+                <article class="da-format-card">
+
+                    <h3>
+                        CSV
+                    </h3>
+
+                    <div class="da-format-code">Student_ID,Marks
+ST001,86
+ST002,58
+ST003,88</div>
+
+                    <p>
+                        Simple tabular representation suitable
+                        for spreadsheets and many analytical tools.
+                    </p>
+
+                </article>
+
+
+                <article class="da-format-card">
+
+                    <h3>
+                        JSON
+                    </h3>
+
+                    <div class="da-format-code">{
+  "student": "ST001",
+  "marks": 86
+}</div>
+
+                    <p>
+                        Frequently used for exchanging structured
+                        information between applications and APIs.
+                    </p>
+
+                </article>
+
+
+                <article class="da-format-card">
+
+                    <h3>
+                        Database
+                    </h3>
+
+                    <div class="da-format-code">STUDENT
+----------------
+ID
+NAME
+MARKS</div>
+
+                    <p>
+                        Suitable for structured information that
+                        needs persistent storage and querying.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             ANALYST CHECKLIST
+             ===================================================== -->
+
+        <section class="da-section" id="checklist">
+
+            <div class="da-kicker">
+                08 Â· Analyst Checklist
+            </div>
+
+            <h2>
+                Before You Analyze,
+                <span>Ask These Questions</span>
+            </h2>
+
+            <div class="da-checklist">
+
+                <div class="da-check">
+
+                    <div class="da-check-icon">
+                        âœ“
+                    </div>
+
+                    <span>
+                        Where did this data come from?
+                    </span>
+
+                </div>
+
+
+                <div class="da-check">
+
+                    <div class="da-check-icon">
+                        âœ“
+                    </div>
+
+                    <span>
+                        What does one row represent?
+                    </span>
+
+                </div>
+
+
+                <div class="da-check">
+
+                    <div class="da-check-icon">
+                        âœ“
+                    </div>
+
+                    <span>
+                        What does each column represent?
+                    </span>
+
+                </div>
+
+
+                <div class="da-check">
+
+                    <div class="da-check-icon">
+                        âœ“
+                    </div>
+
+                    <span>
+                        What type of data is each variable?
+                    </span>
+
+                </div>
+
+
+                <div class="da-check">
+
+                    <div class="da-check-icon">
+                        âœ“
+                    </div>
+
+                    <span>
+                        Are there unique identifiers?
+                    </span>
+
+                </div>
+
+
+                <div class="da-check">
+
+                    <div class="da-check-icon">
+                        âœ“
+                    </div>
+
+                    <span>
+                        Which format is being used?
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             MINI CHALLENGE
+             ===================================================== -->
+
+        <section class="da-section" id="challenge">
+
+            <div class="da-kicker">
+                09 Â· Mini Challenge
+            </div>
+
+            <div class="da-challenge">
+
+                <span class="da-challenge-label">
+                    THINK LIKE AN ANALYST
+                </span>
+
+                <h3>
+                    You receive a college attendance dataset.
+                </h3>
+
+                <p>
+                    Identify the data source, determine what one
+                    row represents, classify the variables by type,
+                    identify a possible unique identifier, and decide
+                    which columns could help investigate student
+                    performance.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             PAGE NAVIGATION
+             ===================================================== -->
+
+        <section class="da-page-navigation">
+
+            <a
+                href="foundation-01.html"
+                class="da-nav-box"
+            >
+
+                <small>
+                    â† Previous Foundation
+                </small>
+
+                <strong>
+                    Foundation 01 Â· Understanding Data
+                </strong>
+
+            </a>
+
+
+            <a
+                href="foundation-03.html"
+                class="da-nav-box next"
+            >
+
+                <small>
+                    Next Foundation â†’
+                </small>
+
+                <strong>
+                    Foundation 03 Â· Data Cleaning & Preparation
+                </strong>
+
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="footer">
+
+        <div class="footer-content">
+
+            <p>
+                Â© 2026 Rasika CodeLab Â· Data Analytics
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
+
+    <script src="../../../js/main.js"></script>
+
+    <!-- Central authentication navigation -->
+    <script
+        type="module"
+        src="../../../js/auth-nav.js">
+    </script>
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+
+</html>

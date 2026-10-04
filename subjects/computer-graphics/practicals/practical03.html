@@ -1,0 +1,825 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Practical 03 | Graphics Primitives & Geometry</title>
+<meta name="description" content="Interactive Computer Graphics practical on points, lines, circles, rectangles, triangles and polygons.">
+<link rel="stylesheet" href="../css/cgr_style.css">
+<link rel="stylesheet" href="../css/cgr_practicals.css">
+<style>body.protected-page:not(.auth-ready){visibility:hidden}</style>
+</head>
+
+<body class="cgr-practical-body practical-03 protected-page">
+
+<header class="navbar">
+  <div class="logo">
+    <span class="logo-mark">&lt;/&gt;</span>
+    <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+  </div>
+  <nav class="nav-links">
+    <a href="../cgr_index.html">Home</a>
+    <a href="../cgr_foundations.html">Foundations</a>
+        <a href="../cgr_practicals.html" class="active">Practicals</a>
+    <a href="../../../about.html">About</a>
+  </nav>
+  <button class="menu-btn" aria-label="Open Menu">â˜°</button>
+</header>
+
+<main class="cgr-practical-page">
+
+<section class="cgr-practical-hero">
+  <div>
+    <div class="section-label">COMPUTER GRAPHICS Â· PRACTICAL 03</div>
+    <div class="practical-kicker">FOUNDATION PRACTICAL</div>
+    <h1>Graphics Primitives <span>&amp; Geometry</span></h1>
+    <p>Work with points, lines, circles, rectangles, triangles and polygons through syntax, geometry calculations and live visualization.</p>
+    <div class="practical-flow">
+      <span>Understand</span><b>â†’</b><span>Calculate</span><b>â†’</b><span>Visualize</span><b>â†’</b><span>Experiment</span>
+    </div>
+  </div>
+  <div class="cgr-hero-mini geometry-hero-mini">
+    <div class="hero-geometry-scene">
+      <span class="hero-point"></span>
+      <span class="hero-line"></span>
+      <span class="hero-circle"></span>
+      <span class="hero-triangle"></span>
+    </div>
+    <div class="mini-readout">
+      <span>LIVE GEOMETRY</span>
+      <strong id="heroShape">Rectangle</strong>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section">
+  <div class="section-heading">
+    <div>
+      <div class="section-label">01 Â· OBJECTIVES</div>
+      <h2>What will you learn?</h2>
+      <p>Understand how graphical objects are represented using coordinates and geometric primitives.</p>
+    </div>
+  </div>
+  <div class="experiment-grid">
+    <div><strong>Points &amp; Lines</strong><span>Represent points using coordinates and calculate line length.</span></div>
+    <div><strong>Basic Shapes</strong><span>Create circles, rectangles and triangles from geometric parameters.</span></div>
+    <div><strong>Polygons</strong><span>Work with vertices, edges and polygon geometry.</span></div>
+    <div><strong>Visualization</strong><span>Change coordinates and dimensions and observe the result live.</span></div>
+  </div>
+</section>
+
+<section class="practical-section">
+  <div class="section-heading">
+    <div>
+      <div class="section-label">02 Â· PRIMITIVE SYNTAX</div>
+      <h2>How are graphics primitives created?</h2>
+      <p>Select a primitive to see its C/C++ graphics syntax, mathematical representation and formula.</p>
+    </div>
+  </div>
+
+  <div class="primitive-tabs" id="primitiveTabs">
+    <button class="primitive-tab active" data-shape="point">â— <span>Point</span></button>
+    <button class="primitive-tab" data-shape="line">â•± <span>Line</span></button>
+    <button class="primitive-tab" data-shape="circle">â—‹ <span>Circle</span></button>
+    <button class="primitive-tab" data-shape="rectangle">â–¡ <span>Rectangle</span></button>
+    <button class="primitive-tab" data-shape="triangle">â–³ <span>Triangle</span></button>
+    <button class="primitive-tab" data-shape="polygon">â¬¡ <span>Polygon</span></button>
+  </div>
+
+  <div class="primitive-info" id="primitiveInfo"></div>
+</section>
+
+<section class="practical-section">
+  <div class="section-heading">
+    <div>
+      <div class="section-label">03 Â· INTERACTIVE GEOMETRY LAB</div>
+      <h2>Live Geometry Viewer</h2>
+      <p>Select a primitive, change its parameters, drag vertices and observe the calculations in real time.</p>
+    </div>
+    <button class="lab-reset" id="resetGeometry">Reset Lab</button>
+  </div>
+
+  <div class="geometry-live-lab">
+    <aside class="geometry-controls">
+      <div class="control-title">SELECT PRIMITIVE</div>
+      <div class="shape-selector" id="shapeSelector">
+        <button class="shape-option active" data-shape="point">â— <span>Point</span></button>
+        <button class="shape-option" data-shape="line">â” <span>Line</span></button>
+        <button class="shape-option" data-shape="circle">â—‹ <span>Circle</span></button>
+        <button class="shape-option" data-shape="rectangle">â–¡ <span>Rectangle</span></button>
+        <button class="shape-option" data-shape="triangle">â–³ <span>Triangle</span></button>
+        <button class="shape-option" data-shape="polygon">â¬¡ <span>Polygon</span></button>
+      </div>
+
+      <div class="control-title">PARAMETERS</div>
+      <div id="shapeInputs" class="shape-inputs"></div>
+
+      <button class="draw-btn" id="animateShape">â–¶ Play Construction</button>
+
+      <div class="control-hint">
+        <strong>Tip:</strong>
+        <span>For line, triangle and polygon, drag the visible vertices directly in the viewer.</span>
+      </div>
+
+      <div class="geometry-stats" id="geometryStats"></div>
+    </aside>
+
+    <div class="geometry-viewer-panel">
+      <div class="canvas-toolbar">
+        <span class="live-dot"></span>
+        <strong>LIVE GEOMETRY VIEWER</strong>
+        <span id="viewerStatus">Rectangle Â· W 200 Â· H 120</span>
+      </div>
+
+      <div class="geometry-canvas-wrap">
+        <canvas id="geometryCanvas" width="760" height="460"></canvas>
+        <div class="mouse-readout" id="mouseReadout">X: â€” &nbsp; Y: â€”</div>
+      </div>
+
+      <div class="viewer-legend">
+        <span><i class="legend-point"></i> Vertex / Point</span>
+        <span><i class="legend-line"></i> Geometry</span>
+        <span><i class="legend-dimension"></i> Dimension</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section">
+  <div class="section-heading">
+    <div>
+      <div class="section-label">04 Â· GEOMETRY CALCULATIONS</div>
+      <h2>Calculate what you see</h2>
+      <p>The formulas below update according to the selected primitive.</p>
+    </div>
+  </div>
+  <div class="calculation-card geometry-calculation-card" id="calculationCard"></div>
+</section>
+
+<section class="practical-section">
+  <div class="section-heading">
+    <div>
+      <div class="section-label">05 Â· CONSTRUCTION ANIMATION</div>
+      <h2>How does the computer build a shape?</h2>
+      <p>Watch the primitive appear step by step from coordinates and geometric elements.</p>
+    </div>
+  </div>
+  <div class="construction-panel">
+    <div class="construction-stage" id="constructionStage">
+      <div class="construction-grid"></div>
+      <canvas id="constructionCanvas" width="760" height="220"></canvas>
+      <div class="construction-message" id="constructionMessage">Select a primitive and press Play Construction.</div>
+    </div>
+    <div class="construction-progress" id="constructionProgress"></div>
+  </div>
+</section>
+
+<section class="practical-section">
+  <div class="section-heading">
+    <div>
+      <div class="section-label">06 Â· REAL-LIFE CHALLENGES</div>
+      <h2>Apply graphics primitives</h2>
+      <p>Click a problem to display its complete problem statement, answer and visualization.</p>
+    </div>
+  </div>
+
+  <div class="scenario-grid geometry-scenario-grid">
+    <button class="scenario-card active" data-problem="mobile">
+      <span class="scenario-number">P1</span><span class="scenario-icon">ðŸ“±</span>
+      <strong>Mobile UI Button Design</strong>
+      <small>Rectangle â†’ vertices, area and perimeter</small>
+    </button>
+    <button class="scenario-card" data-problem="game">
+      <span class="scenario-number">P2</span><span class="scenario-icon">ðŸŽ®</span>
+      <strong>Game Character Collision</strong>
+      <small>Circle â†’ radius, diameter and area</small>
+    </button>
+    <button class="scenario-card" data-problem="map">
+      <span class="scenario-number">P3</span><span class="scenario-icon">ðŸ—ºï¸</span>
+      <strong>Map / GPS Road</strong>
+      <small>Line â†’ distance between two coordinates</small>
+    </button>
+    <button class="scenario-card" data-problem="floor">
+      <span class="scenario-number">P4</span><span class="scenario-icon">ðŸ </span>
+      <strong>Floor Plan</strong>
+      <small>Rectangle â†’ room area and boundary</small>
+    </button>
+    <button class="scenario-card" data-problem="gis">
+      <span class="scenario-number">P5</span><span class="scenario-icon">ðŸ›°ï¸</span>
+      <strong>GIS Land Region</strong>
+      <small>Polygon â†’ vertices, edges and area</small>
+    </button>
+  </div>
+
+  <div class="problem-split">
+    <div class="problem-box geometry-problem-box">
+      <div class="problem-icon" id="problemIcon">ðŸ“±</div>
+      <div>
+        <div class="section-label">PROBLEM STATEMENT</div>
+        <h3 id="problemTitle">Mobile UI Button Design</h3>
+        <p id="problemText"></p>
+
+        <div class="answer-box">
+          <div class="section-label">ANSWER / SOLUTION</div>
+          <pre id="problemAnswer"></pre>
+          <div class="answer-result" id="problemResult"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem-live-viewer">
+      <div class="canvas-toolbar">
+        <span class="live-dot"></span>
+        <strong>LIVE PROBLEM VIEWER</strong>
+        <span id="problemViewerStatus">P1 Â· Rectangle</span>
+      </div>
+      <div class="problem-viewer-canvas-wrap">
+        <canvas id="problemCanvas" width="560" height="340"></canvas>
+      </div>
+      <div class="problem-viewer-caption" id="problemViewerCaption">The selected problem is visualized here.</div>
+      <button class="problem-view-btn" id="viewProblem">Load this problem in Main Viewer â†’</button>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section">
+  <div class="section-heading">
+    <div>
+      <div class="section-label">07 Â· EXPERIMENT</div>
+      <h2>Change the geometry</h2>
+    </div>
+  </div>
+  <div class="experiment-grid">
+    <div><strong>Experiment 01</strong><span>Move the endpoints of a line and observe how its length changes.</span></div>
+    <div><strong>Experiment 02</strong><span>Increase a circle radius and observe its circumference and area.</span></div>
+    <div><strong>Experiment 03</strong><span>Change rectangle width and height and compare area with perimeter.</span></div>
+    <div><strong>Experiment 04</strong><span>Create polygons with 3, 4, 5 and 6 vertices.</span></div>
+  </div>
+</section>
+
+<section class="practical-section">
+  <div class="section-heading">
+    <div>
+      <div class="section-label">08 Â· VIVA QUICK CHECK</div>
+      <h2>Can you explain the primitives?</h2>
+    </div>
+  </div>
+  <div class="viva-grid">
+    <details><summary>What is a graphics primitive?</summary><p>A basic geometric element used to construct graphical objects, such as a point, line, circle or polygon.</p></details>
+    <details><summary>How is a point represented?</summary><p>A point is represented by a coordinate pair (x, y).</p></details>
+    <details><summary>How is line length calculated?</summary><p>Length = âˆš[(xâ‚‚âˆ’xâ‚)Â² + (yâ‚‚âˆ’yâ‚)Â²].</p></details>
+    <details><summary>What is a polygon?</summary><p>A polygon is a closed geometric figure made by connecting a sequence of vertices with straight edges.</p></details>
+    <details><summary>What is the area of a circle?</summary><p>Area = Ï€rÂ².</p></details>
+    <details><summary>Why are coordinates important in computer graphics?</summary><p>Coordinates define the position and geometry of graphical objects in a coordinate system.</p></details>
+  </div>
+</section>
+
+<nav class="practical-next">
+  <a href="practical02.html">â† Previous<br><strong>RGB &amp; CMYK Color Visualizer</strong></a>
+  <div><span>COMPUTER GRAPHICS</span><strong>PRACTICAL 03 / 21</strong></div>
+  <a href="practical04.html">Next â†’<br><strong>DDA Line Drawing Algorithm</strong></a>
+</nav>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-main">
+    <div class="footer-brand">
+      <div class="logo"><span class="logo-mark">&lt;/&gt;</span><span>Rasika<span class="logo-highlight">CodeLab</span></span></div>
+      <p>Interactive Computer Graphics practical learning through concepts, calculations and visualization.</p>
+    </div>
+    <div class="footer-links">
+      <div><h4>Learn</h4><a href="../cgr_foundations.html">Foundations</a></div>
+      <div><h4>Practice</h4><a href="../cgr_practicals.html">Practicals</a><a href="../../../about.html">About</a></div>
+    </div>
+  </div>
+  <div class="footer-bottom"><span>Â© 2026 Rasika CodeLab</span><span>Built for practical learning.</span></div>
+</footer>
+
+<script>
+const canvas = document.getElementById("geometryCanvas");
+const ctx = canvas.getContext("2d");
+
+const defaults = {
+  point: {x: 280, y: 190},
+  line: {x1: 110, y1: 110, x2: 430, y2: 290},
+  circle: {x: 300, y: 220, r: 85},
+  rectangle: {x: 180, y: 120, w: 220, h: 140},
+  triangle: {x1: 300, y1: 75, x2: 150, y2: 330, x3: 450, y3: 330},
+  polygon: {points: [[150,170],[290,85],[455,145],[405,315],[220,350]]}
+};
+
+let currentShape = "point";
+let data = structuredClone(defaults);
+let dragVertex = null;
+let animationTimer = null;
+
+const primitiveData = {
+  point: {
+    title: "Point",
+    syntax: "putpixel(x, y, color);",
+    representation: "P = (x, y)",
+    formula: "A point has a position but no length or area.",
+    use: "Pixel location, control point, marker"
+  },
+  line: {
+    title: "Line",
+    syntax: "line(x1, y1, x2, y2);",
+    representation: "Pâ‚(xâ‚,yâ‚) â†’ Pâ‚‚(xâ‚‚,yâ‚‚)",
+    formula: "Length = âˆš[(xâ‚‚âˆ’xâ‚)Â² + (yâ‚‚âˆ’yâ‚)Â²]",
+    use: "Roads, edges, boundaries, drawings"
+  },
+  circle: {
+    title: "Circle",
+    syntax: "circle(x, y, radius);",
+    representation: "Center C = (x,y), radius = r",
+    formula: "Diameter = 2r Â· Circumference = 2Ï€r Â· Area = Ï€rÂ²",
+    use: "Buttons, wheels, collision boundaries"
+  },
+  rectangle: {
+    title: "Rectangle",
+    syntax: "rectangle(left, top, right, bottom);",
+    representation: "Four vertices connected by four edges",
+    formula: "Width = rightâˆ’left Â· Height = bottomâˆ’top Â· Area = WÃ—H",
+    use: "Windows, UI cards, rooms, screens"
+  },
+  triangle: {
+    title: "Triangle",
+    syntax: "line(x1,y1,x2,y2); line(x2,y2,x3,y3); line(x3,y3,x1,y1);",
+    representation: "T = {Pâ‚, Pâ‚‚, Pâ‚ƒ}",
+    formula: "Area = Â½ Ã— base Ã— height",
+    use: "Arrows, 3D meshes, icons"
+  },
+  polygon: {
+    title: "Polygon",
+    syntax: "drawpoly(n, points);",
+    representation: "P = {Pâ‚, Pâ‚‚, â€¦, Pâ‚™}",
+    formula: "Area = Â½ |Î£(xáµ¢yáµ¢â‚Šâ‚ âˆ’ yáµ¢xáµ¢â‚Šâ‚)|",
+    use: "Maps, regions, models, irregular objects"
+  }
+};
+
+function renderPrimitiveInfo() {
+  const d = primitiveData[currentShape];
+  document.getElementById("primitiveInfo").innerHTML = `
+    <div class="primitive-info-main">
+      <div class="primitive-symbol">${symbolFor(currentShape)}</div>
+      <div>
+        <div class="section-label">SELECTED PRIMITIVE</div>
+        <h3>${d.title}</h3>
+        <p>${d.use}</p>
+      </div>
+    </div>
+    <div class="syntax-block"><span>SYNTAX</span><code>${d.syntax}</code></div>
+    <div class="representation-block"><span>MATHEMATICAL REPRESENTATION</span><strong>${d.representation}</strong></div>
+    <div class="formula-block"><span>FORMULA</span><strong>${d.formula}</strong></div>`;
+}
+
+function symbolFor(shape) {
+  return {point:"â—",line:"â•±",circle:"â—‹",rectangle:"â–¡",triangle:"â–³",polygon:"â¬¡"}[shape];
+}
+
+function selectShape(shape) {
+  currentShape = shape;
+  data = structuredClone(defaults);
+  document.querySelectorAll(".primitive-tab,.shape-option").forEach(b => b.classList.toggle("active", b.dataset.shape === shape));
+  document.getElementById("heroShape").textContent = primitiveData[shape].title;
+  renderPrimitiveInfo();
+  renderInputs();
+  updateAll();
+}
+
+function inputRow(label, key, value) {
+  return `<label class="geometry-input"><span>${label}</span><input type="number" data-key="${key}" value="${value}" step="1"></label>`;
+}
+
+function renderInputs() {
+  let s = "";
+  if (currentShape === "point") s = inputRow("X","x",data.point.x) + inputRow("Y","y",data.point.y);
+  if (currentShape === "line") s = inputRow("X1","x1",data.line.x1)+inputRow("Y1","y1",data.line.y1)+inputRow("X2","x2",data.line.x2)+inputRow("Y2","y2",data.line.y2);
+  if (currentShape === "circle") s = inputRow("Center X","x",data.circle.x)+inputRow("Center Y","y",data.circle.y)+inputRow("Radius","r",data.circle.r);
+  if (currentShape === "rectangle") s = inputRow("X","x",data.rectangle.x)+inputRow("Y","y",data.rectangle.y)+inputRow("Width","w",data.rectangle.w)+inputRow("Height","h",data.rectangle.h);
+  if (currentShape === "triangle") s = inputRow("A X","x1",data.triangle.x1)+inputRow("A Y","y1",data.triangle.y1)+inputRow("B X","x2",data.triangle.x2)+inputRow("B Y","y2",data.triangle.y2)+inputRow("C X","x3",data.triangle.x3)+inputRow("C Y","y3",data.triangle.y3);
+  if (currentShape === "polygon") {
+    s = data.polygon.points.map((p,i)=>inputRow(`P${i+1} X`,`px${i}`,p[0])+inputRow(`P${i+1} Y`,`py${i}`,p[1])).join("");
+    s += `<button class="small-action" id="addVertex">+ Add Vertex</button><button class="small-action danger" id="removeVertex">âˆ’ Remove Vertex</button>`;
+  }
+  document.getElementById("shapeInputs").innerHTML = s;
+  document.querySelectorAll(".geometry-input input").forEach(input => {
+    input.addEventListener("input", () => {
+      const key = input.dataset.key;
+      const value = Number(input.value);
+      if (currentShape === "point") data.point[key] = value;
+      else if (currentShape === "line") data.line[key] = value;
+      else if (currentShape === "circle") data.circle[key] = value;
+      else if (currentShape === "rectangle") data.rectangle[key] = value;
+      else if (currentShape === "triangle") data.triangle[key] = value;
+      else if (currentShape === "polygon") {
+        const m = key.match(/p([xy])(\d+)/);
+        if (m) data.polygon.points[Number(m[2])][m[1] === "x" ? 0 : 1] = value;
+      }
+      updateAll();
+    });
+  });
+  document.getElementById("addVertex")?.addEventListener("click", () => {
+    const pts = data.polygon.points;
+    const last = pts[pts.length-1];
+    pts.push([Math.min(650,last[0]+45), Math.min(390,last[1]+20)]);
+    renderInputs(); updateAll();
+  });
+  document.getElementById("removeVertex")?.addEventListener("click", () => {
+    if (data.polygon.points.length > 3) data.polygon.points.pop();
+    renderInputs(); updateAll();
+  });
+}
+
+function polygonArea(points) {
+  let sum = 0;
+  for (let i=0;i<points.length;i++) {
+    const a=points[i], b=points[(i+1)%points.length];
+    sum += a[0]*b[1]-a[1]*b[0];
+  }
+  return Math.abs(sum)/2;
+}
+
+function triangleArea(t) {
+  return Math.abs((t.x1*(t.y2-t.y3)+t.x2*(t.y3-t.y1)+t.x3*(t.y1-t.y2))/2);
+}
+
+function updateAll() {
+  drawCanvas();
+  renderStats();
+  renderCalculation();
+  updateViewerStatus();
+}
+
+function drawGrid() {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle="#080808";
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+
+  ctx.strokeStyle="rgba(255,255,255,.045)";
+  ctx.lineWidth=1;
+  for(let x=0;x<=canvas.width;x+=40){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,canvas.height);ctx.stroke();}
+  for(let y=0;y<=canvas.height;y+=40){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(canvas.width,y);ctx.stroke();}
+
+  ctx.strokeStyle="rgba(255,138,0,.5)";
+  ctx.lineWidth=1.2;
+  ctx.beginPath();ctx.moveTo(0,canvas.height-25);ctx.lineTo(canvas.width,canvas.height-25);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(25,0);ctx.lineTo(25,canvas.height);ctx.stroke();
+
+  ctx.fillStyle="#ff9b1a";
+  ctx.font="12px Arial";
+  ctx.fillText("X â†’",canvas.width-38,canvas.height-8);
+  ctx.fillText("Y â†“",8,16);
+  ctx.fillStyle="#777";
+  ctx.fillText("(0,0)",29,canvas.height-30);
+}
+
+function point(x,y,letter="") {
+  ctx.fillStyle="#ff8a00";
+  ctx.shadowBlur=12;ctx.shadowColor="#ff8a00";
+  ctx.beginPath();ctx.arc(x,y,6,0,Math.PI*2);ctx.fill();
+  ctx.shadowBlur=0;
+  if(letter){ctx.fillStyle="#ffd08a";ctx.font="bold 12px Arial";ctx.fillText(letter,x+9,y-9);}
+}
+
+function dimension(x1,y1,x2,y2,label) {
+  ctx.save();
+  ctx.strokeStyle="rgba(255,170,80,.85)";
+  ctx.setLineDash([5,4]);
+  ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle="#ffb15a";ctx.font="11px Arial";
+  ctx.fillText(label,(x1+x2)/2+5,(y1+y2)/2-5);
+  ctx.restore();
+}
+
+function drawCanvas() {
+  drawGrid();
+  ctx.lineWidth=3;
+  ctx.strokeStyle="#ff8a00";
+  ctx.fillStyle="rgba(255,138,0,.09)";
+
+  if(currentShape==="point"){
+    point(data.point.x,data.point.y,"P");
+    ctx.fillStyle="#c9b7a6";ctx.font="12px Arial";
+    ctx.fillText(`(${data.point.x}, ${data.point.y})`,data.point.x+10,data.point.y+20);
+  }
+
+  if(currentShape==="line"){
+    const d=data.line;
+    ctx.beginPath();ctx.moveTo(d.x1,d.y1);ctx.lineTo(d.x2,d.y2);ctx.stroke();
+    point(d.x1,d.y1,"P1");point(d.x2,d.y2,"P2");
+    dimension(d.x1,d.y1,d.x2,d.y2,`L = ${lineLength(d).toFixed(2)}`);
+  }
+
+  if(currentShape==="circle"){
+    const d=data.circle;
+    ctx.beginPath();ctx.arc(d.x,d.y,Math.max(1,d.r),0,Math.PI*2);ctx.fill();ctx.stroke();
+    point(d.x,d.y,"C");
+    ctx.strokeStyle="#ffb45b";ctx.setLineDash([5,4]);
+    ctx.beginPath();ctx.moveTo(d.x,d.y);ctx.lineTo(d.x+d.r,d.y);ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle="#ffb45b";ctx.font="12px Arial";ctx.fillText(`r = ${d.r}`,d.x+d.r/2,d.y-8);
+  }
+
+  if(currentShape==="rectangle"){
+    const d=data.rectangle;
+    ctx.fillRect(d.x,d.y,d.w,d.h);ctx.strokeRect(d.x,d.y,d.w,d.h);
+    point(d.x,d.y,"P1");point(d.x+d.w,d.y,"P2");point(d.x+d.w,d.y+d.h,"P3");point(d.x,d.y+d.h,"P4");
+    dimension(d.x,d.y,d.x+d.w,d.y,`W = ${d.w}`);
+    dimension(d.x+d.w,d.y,d.x+d.w,d.y+d.h,`H = ${d.h}`);
+  }
+
+  if(currentShape==="triangle"){
+    const d=data.triangle;
+    ctx.beginPath();ctx.moveTo(d.x1,d.y1);ctx.lineTo(d.x2,d.y2);ctx.lineTo(d.x3,d.y3);ctx.closePath();ctx.fill();ctx.stroke();
+    point(d.x1,d.y1,"A");point(d.x2,d.y2,"B");point(d.x3,d.y3,"C");
+  }
+
+  if(currentShape==="polygon"){
+    const pts=data.polygon.points;
+    ctx.beginPath();ctx.moveTo(pts[0][0],pts[0][1]);
+    pts.slice(1).forEach(p=>ctx.lineTo(p[0],p[1]));ctx.closePath();ctx.fill();ctx.stroke();
+    pts.forEach((p,i)=>point(p[0],p[1],`P${i+1}`));
+  }
+}
+
+function lineLength(d){return Math.hypot(d.x2-d.x1,d.y2-d.y1);}
+function perimeterPolygon(pts){return pts.reduce((s,p,i)=>s+Math.hypot(pts[(i+1)%pts.length][0]-p[0],pts[(i+1)%pts.length][1]-p[1]),0);}
+
+function renderStats(){
+  let html="";
+  if(currentShape==="point") html=`<div><span>POSITION</span><strong>(${data.point.x}, ${data.point.y})</strong></div>`;
+  if(currentShape==="line") html=`<div><span>Î”X</span><strong>${data.line.x2-data.line.x1}</strong></div><div><span>Î”Y</span><strong>${data.line.y2-data.line.y1}</strong></div><div><span>LENGTH</span><strong>${lineLength(data.line).toFixed(2)}</strong></div>`;
+  if(currentShape==="circle") html=`<div><span>DIAMETER</span><strong>${(2*data.circle.r).toFixed(2)}</strong></div><div><span>AREA</span><strong>${(Math.PI*data.circle.r**2).toFixed(2)}</strong></div>`;
+  if(currentShape==="rectangle") html=`<div><span>AREA</span><strong>${(data.rectangle.w*data.rectangle.h).toFixed(2)}</strong></div><div><span>PERIMETER</span><strong>${(2*(data.rectangle.w+data.rectangle.h)).toFixed(2)}</strong></div>`;
+  if(currentShape==="triangle") html=`<div><span>AREA</span><strong>${triangleArea(data.triangle).toFixed(2)}</strong></div>`;
+  if(currentShape==="polygon") html=`<div><span>VERTICES</span><strong>${data.polygon.points.length}</strong></div><div><span>EDGES</span><strong>${data.polygon.points.length}</strong></div><div><span>AREA</span><strong>${polygonArea(data.polygon.points).toFixed(2)}</strong></div>`;
+  document.getElementById("geometryStats").innerHTML=html;
+}
+
+function renderCalculation(){
+  const d=primitiveData[currentShape];
+  let body="";
+  if(currentShape==="point") body=`<div class="calc-highlight">P = (${data.point.x}, ${data.point.y})</div><div class="calc-grid"><div><span>Coordinates</span><strong>X = ${data.point.x}, Y = ${data.point.y}</strong></div><div><span>Geometry</span><strong>Position only</strong></div></div>`;
+  if(currentShape==="line"){const l=lineLength(data.line);body=`<div class="formula-line">Length = âˆš[(xâ‚‚âˆ’xâ‚)Â² + (yâ‚‚âˆ’yâ‚)Â²]</div><div class="calc-steps">Î”X = ${data.line.x2} âˆ’ ${data.line.x1} = ${data.line.x2-data.line.x1}<br>Î”Y = ${data.line.y2} âˆ’ ${data.line.y1} = ${data.line.y2-data.line.y1}<br>Length = âˆš[${(data.line.x2-data.line.x1)**2} + ${(data.line.y2-data.line.y1)**2}] = <strong>${l.toFixed(2)}</strong></div>`;}
+  if(currentShape==="circle"){const r=data.circle.r;body=`<div class="formula-line">Diameter = 2r &nbsp; | &nbsp; Circumference = 2Ï€r &nbsp; | &nbsp; Area = Ï€rÂ²</div><div class="calc-grid"><div><span>Diameter</span><strong>${(2*r).toFixed(2)}</strong></div><div><span>Circumference</span><strong>${(2*Math.PI*r).toFixed(2)}</strong></div><div><span>Area</span><strong>${(Math.PI*r*r).toFixed(2)}</strong></div></div>`;}
+  if(currentShape==="rectangle"){const {w,h}=data.rectangle;body=`<div class="formula-line">Area = W Ã— H &nbsp; | &nbsp; Perimeter = 2(W + H)</div><div class="calc-grid"><div><span>Area</span><strong>${(w*h).toFixed(2)}</strong></div><div><span>Perimeter</span><strong>${(2*(w+h)).toFixed(2)}</strong></div></div>`;}
+  if(currentShape==="triangle"){const a=triangleArea(data.triangle);body=`<div class="formula-line">Area = Â½ Ã— base Ã— height</div><div class="calc-highlight">Coordinate-based triangle area = ${a.toFixed(2)} square units</div>`;}
+  if(currentShape==="polygon"){const a=polygonArea(data.polygon.points);body=`<div class="formula-line">Area = Â½ |Î£(xáµ¢yáµ¢â‚Šâ‚ âˆ’ yáµ¢xáµ¢â‚Šâ‚)|</div><div class="calc-grid"><div><span>Vertices</span><strong>${data.polygon.points.length}</strong></div><div><span>Edges</span><strong>${data.polygon.points.length}</strong></div><div><span>Area</span><strong>${a.toFixed(2)}</strong></div></div>`;}
+  document.getElementById("calculationCard").innerHTML=`<div class="calculation-heading"><div class="primitive-symbol">${symbolFor(currentShape)}</div><div><span class="section-label">LIVE CALCULATION</span><h3>${d.title}</h3></div></div>${body}`;
+}
+
+function updateViewerStatus(){
+  let text=primitiveData[currentShape].title;
+  if(currentShape==="point") text+=` Â· (${data.point.x},${data.point.y})`;
+  if(currentShape==="line") text+=` Â· L ${lineLength(data.line).toFixed(1)}`;
+  if(currentShape==="circle") text+=` Â· r ${data.circle.r}`;
+  if(currentShape==="rectangle") text+=` Â· W ${data.rectangle.w} Â· H ${data.rectangle.h}`;
+  if(currentShape==="triangle") text+=` Â· 3 vertices`;
+  if(currentShape==="polygon") text+=` Â· ${data.polygon.points.length} vertices`;
+  document.getElementById("viewerStatus").textContent=text;
+}
+
+canvas.addEventListener("mousemove",e=>{
+  const r=canvas.getBoundingClientRect();
+  const x=Math.round((e.clientX-r.left)*(canvas.width/r.width));
+  const y=Math.round((e.clientY-r.top)*(canvas.height/r.height));
+  document.getElementById("mouseReadout").textContent=`X: ${x}   Y: ${y}`;
+});
+
+canvas.addEventListener("pointerdown",e=>{
+  const r=canvas.getBoundingClientRect();
+  const x=(e.clientX-r.left)*(canvas.width/r.width), y=(e.clientY-r.top)*(canvas.height/r.height);
+  const candidates=[];
+  if(currentShape==="point") candidates.push([data.point.x,data.point.y,"point"]);
+  if(currentShape==="line") candidates.push([data.line.x1,data.line.y1,"x1"],[data.line.x2,data.line.y2,"x2"]);
+  if(currentShape==="circle") candidates.push([data.circle.x,data.circle.y,"center"]);
+  if(currentShape==="rectangle") candidates.push([data.rectangle.x,data.rectangle.y,"r1"],[data.rectangle.x+data.rectangle.w,data.rectangle.y,"r2"],[data.rectangle.x+data.rectangle.w,data.rectangle.y+data.rectangle.h,"r3"],[data.rectangle.x,data.rectangle.y+data.rectangle.h,"r4"]);
+  if(currentShape==="triangle") candidates.push([data.triangle.x1,data.triangle.y1,"x1"],[data.triangle.x2,data.triangle.y2,"x2"],[data.triangle.x3,data.triangle.y3,"x3"]);
+  if(currentShape==="polygon") data.polygon.points.forEach((p,i)=>candidates.push([p[0],p[1],i]));
+  let best=null, dist=Infinity;
+  candidates.forEach(c=>{const q=Math.hypot(c[0]-x,c[1]-y);if(q<dist&&q<18){dist=q;best=c;}});
+  if(best){dragVertex=best[2];canvas.setPointerCapture(e.pointerId);}
+});
+
+canvas.addEventListener("pointermove",e=>{
+  if(dragVertex===null)return;
+  const r=canvas.getBoundingClientRect();
+  const x=Math.round((e.clientX-r.left)*(canvas.width/r.width));
+  const y=Math.round((e.clientY-r.top)*(canvas.height/r.height));
+  if(currentShape==="point"){data.point.x=x;data.point.y=y;}
+  else if(currentShape==="line"){if(dragVertex==="x1"){data.line.x1=x;data.line.y1=y;}else{data.line.x2=x;data.line.y2=y;}}
+  else if(currentShape==="circle"){data.circle.x=x;data.circle.y=y;}
+  else if(currentShape==="rectangle"){const ox=data.rectangle.x,oy=data.rectangle.y,ow=data.rectangle.w,oh=data.rectangle.h;if(dragVertex==="r1"){data.rectangle.x=x;data.rectangle.y=y;data.rectangle.w=Math.max(10,ox+ow-x);data.rectangle.h=Math.max(10,oy+oh-y);}else if(dragVertex==="r2"){data.rectangle.y=y;data.rectangle.w=Math.max(10,x-ox);data.rectangle.h=Math.max(10,oy+oh-y);}else if(dragVertex==="r3"){data.rectangle.w=Math.max(10,x-ox);data.rectangle.h=Math.max(10,y-oy);}else{data.rectangle.x=x;data.rectangle.w=Math.max(10,ox+ow-x);data.rectangle.h=Math.max(10,y-oy);}}
+  else if(currentShape==="triangle"){data.triangle[dragVertex]=x;data.triangle[dragVertex.replace("x","y")]=y;}
+  else if(currentShape==="polygon"){data.polygon.points[Number(dragVertex)]=[x,y];}
+  renderInputs();updateAll();
+});
+canvas.addEventListener("pointerup",()=>dragVertex=null);
+canvas.addEventListener("pointercancel",()=>dragVertex=null);
+
+document.querySelectorAll(".primitive-tab").forEach(b=>b.addEventListener("click",()=>selectShape(b.dataset.shape)));
+document.querySelectorAll(".shape-option").forEach(b=>b.addEventListener("click",()=>selectShape(b.dataset.shape)));
+
+document.getElementById("resetGeometry").addEventListener("click",()=>selectShape("point"));
+
+const problems = {
+  mobile:{
+    icon:"ðŸ“±", title:"Mobile UI Button Design",
+    text:"A mobile application needs a rectangular Login button starting at (100,80) with width 220 units and height 60 units. Find its four vertices, area and perimeter.",
+    answer:`Vertices:\nP1 = (100,80)\nP2 = (320,80)\nP3 = (320,140)\nP4 = (100,140)\n\nArea = W Ã— H\n     = 220 Ã— 60\n     = 13,200 square units\n\nPerimeter = 2(W + H)\n          = 2(220 + 60)\n          = 560 units`,
+    result:"Rectangle â†’ Area = 13,200 Â· Perimeter = 560",
+    apply(){currentShape="rectangle";data=structuredClone(defaults);data.rectangle={x:100,y:80,w:220,h:60};syncSelection();updateAll();}
+  },
+  game:{
+    icon:"ðŸŽ®", title:"Game Character Collision",
+    text:"A game character uses a circular collision boundary with centre (250,200) and radius 50 units. Find the diameter, circumference and area.",
+    answer:`Diameter = 2r\n         = 2 Ã— 50\n         = 100 units\n\nCircumference = 2Ï€r\n              = 2Ï€ Ã— 50\n              â‰ˆ 314.16 units\n\nArea = Ï€rÂ²\n     = Ï€ Ã— 50Â²\n     â‰ˆ 7853.98 square units`,
+    result:"Circle â†’ Diameter = 100 Â· Circumference â‰ˆ 314.16 Â· Area â‰ˆ 7853.98",
+    apply(){currentShape="circle";data=structuredClone(defaults);data.circle={x:250,y:200,r:50};syncSelection();updateAll();}
+  },
+  map:{
+    icon:"ðŸ—ºï¸", title:"Map / GPS Road",
+    text:"A map application represents a road between A=(80,100) and B=(300,220). Calculate the length of the road segment.",
+    answer:`Î”X = 300 âˆ’ 80 = 220\nÎ”Y = 220 âˆ’ 100 = 120\n\nLength = âˆš(Î”XÂ² + Î”YÂ²)\n       = âˆš(220Â² + 120Â²)\n       â‰ˆ 250.60 units`,
+    result:"Line â†’ Road length â‰ˆ 250.60 units",
+    apply(){currentShape="line";data=structuredClone(defaults);data.line={x1:80,y1:100,x2:300,y2:220};syncSelection();updateAll();}
+  },
+  floor:{
+    icon:"ðŸ ", title:"Floor Plan",
+    text:"A floor-plan application represents a room as a rectangle with width 400 units and height 250 units. Find its area and boundary length.",
+    answer:`Area = W Ã— H\n     = 400 Ã— 250\n     = 100,000 square units\n\nPerimeter = 2(W + H)\n          = 2(400 + 250)\n          = 1,300 units`,
+    result:"Rectangle â†’ Area = 100,000 Â· Perimeter = 1,300",
+    apply(){currentShape="rectangle";data=structuredClone(defaults);data.rectangle={x:140,y:90,w:400,h:250};syncSelection();updateAll();}
+  },
+  gis:{
+    icon:"ðŸ›°ï¸", title:"GIS Land Region",
+    text:"A GIS application represents a land region using five vertices: (100,100), (250,70), (350,160), (280,280), (130,240). Find the number of vertices, edges and area.",
+    answer:`Vertices = 5\nEdges = 5\n\nUsing the Shoelace Formula:\nArea = Â½ |Î£(xáµ¢yáµ¢â‚Šâ‚ âˆ’ yáµ¢xáµ¢â‚Šâ‚)|\n\nArea = 57,500 square units`,
+    result:"Polygon â†’ 5 vertices Â· 5 edges Â· Area = 57,500",
+    apply(){currentShape="polygon";data=structuredClone(defaults);data.polygon={points:[[100,100],[250,70],[350,160],[280,280],[130,240]]};syncSelection();updateAll();}
+  }
+};
+
+function syncSelection(){
+  document.querySelectorAll(".shape-option,.primitive-tab").forEach(b=>b.classList.toggle("active",b.dataset.shape===currentShape));
+  document.getElementById("heroShape").textContent=primitiveData[currentShape].title;
+  renderPrimitiveInfo();renderInputs();
+}
+
+function drawProblemViewer(key){
+  const c=document.getElementById("problemCanvas"), x=c.getContext("2d");
+  x.clearRect(0,0,c.width,c.height);
+  x.fillStyle="#070707"; x.fillRect(0,0,c.width,c.height);
+  x.strokeStyle="rgba(255,255,255,.05)"; x.lineWidth=1;
+  for(let gx=0;gx<c.width;gx+=28){x.beginPath();x.moveTo(gx,0);x.lineTo(gx,c.height);x.stroke();}
+  for(let gy=0;gy<c.height;gy+=28){x.beginPath();x.moveTo(0,gy);x.lineTo(c.width,gy);x.stroke();}
+  x.strokeStyle="rgba(255,138,0,.35)";
+  x.beginPath();x.moveTo(0,c.height-25);x.lineTo(c.width,c.height-25);x.stroke();
+  x.beginPath();x.moveTo(25,0);x.lineTo(25,c.height);x.stroke();
+  x.fillStyle="#ff9a19";x.font="11px Arial";x.fillText("X â†’",c.width-35,c.height-8);x.fillText("Y â†“",7,15);
+  const dot=(px,py,label)=>{x.fillStyle="#ff8a00";x.beginPath();x.arc(px,py,5,0,Math.PI*2);x.fill();x.fillStyle="#ffd09a";x.font="bold 11px Arial";x.fillText(label,px+8,py-7);};
+  const line=(a,b)=>{x.strokeStyle="#ff8a00";x.lineWidth=3;x.beginPath();x.moveTo(a[0],a[1]);x.lineTo(b[0],b[1]);x.stroke();};
+  if(key==="mobile"){
+    const d=problems.mobile.viewer={x:100,y:80,w:220,h:60};
+    x.fillStyle="rgba(255,138,0,.12)";x.strokeStyle="#ff8a00";x.lineWidth=3;x.fillRect(d.x,d.y,d.w,d.h);x.strokeRect(d.x,d.y,d.w,d.h);
+    [[d.x,d.y],[d.x+d.w,d.y],[d.x+d.w,d.y+d.h],[d.x,d.y+d.h]].forEach((q,i)=>dot(q[0],q[1],"P"+(i+1)));
+    x.fillStyle="#ffb45c";x.font="12px Arial";x.fillText("220 Ã— 60",d.x+75,d.y+35);
+    document.getElementById("problemViewerCaption").textContent="Rectangle: four vertices, width 220 and height 60.";
+    document.getElementById("problemViewerStatus").textContent="P1 Â· Rectangle";
+  }
+  if(key==="game"){
+    const d={x:280,y:170,r:50};x.fillStyle="rgba(255,138,0,.10)";x.strokeStyle="#ff8a00";x.lineWidth=3;x.beginPath();x.arc(d.x,d.y,d.r,0,Math.PI*2);x.fill();x.stroke();dot(d.x,d.y,"C");
+    line([d.x,d.y],[d.x+d.r,d.y]);x.fillStyle="#ffb45c";x.font="12px Arial";x.fillText("r = 50",d.x+20,d.y-8);
+    document.getElementById("problemViewerCaption").textContent="Circular collision boundary: centre (250,200), radius 50.";
+    document.getElementById("problemViewerStatus").textContent="P2 Â· Circle";
+  }
+  if(key==="map"){
+    const a=[100,110],b=[390,250];line(a,b);dot(a[0],a[1],"A");dot(b[0],b[1],"B");x.fillStyle="#ffb45c";x.font="12px Arial";x.fillText("Length â‰ˆ 250.60",205,165);
+    document.getElementById("problemViewerCaption").textContent="Road segment between A(80,100) and B(300,220).";
+    document.getElementById("problemViewerStatus").textContent="P3 Â· Line";
+  }
+  if(key==="floor"){
+    const d={x:90,y:45,w:400,h:250};x.fillStyle="rgba(255,138,0,.10)";x.strokeStyle="#ff8a00";x.lineWidth=3;x.fillRect(d.x,d.y,d.w,d.h);x.strokeRect(d.x,d.y,d.w,d.h);dot(d.x,d.y,"P1");dot(d.x+d.w,d.y,"P2");dot(d.x+d.w,d.y+d.h,"P3");dot(d.x,d.y+d.h,"P4");x.fillStyle="#ffb45c";x.font="12px Arial";x.fillText("400 Ã— 250",250,180);
+    document.getElementById("problemViewerCaption").textContent="Room rectangle: width 400 and height 250.";
+    document.getElementById("problemViewerStatus").textContent="P4 Â· Rectangle";
+  }
+  if(key==="gis"){
+    const pts=[[90,90],[240,60],[390,150],[320,270],[120,230]];x.fillStyle="rgba(255,138,0,.10)";x.strokeStyle="#ff8a00";x.lineWidth=3;x.beginPath();x.moveTo(pts[0][0],pts[0][1]);pts.slice(1).forEach(q=>x.lineTo(q[0],q[1]));x.closePath();x.fill();x.stroke();pts.forEach((q,i)=>dot(q[0],q[1],"P"+(i+1)));x.fillStyle="#ffb45c";x.font="12px Arial";x.fillText("Area = 57,500",225,170);
+    document.getElementById("problemViewerCaption").textContent="GIS polygon with 5 vertices. Shoelace area = 57,500 square units.";
+    document.getElementById("problemViewerStatus").textContent="P5 Â· Polygon";
+  }
+}
+
+function showProblem(key){
+  document.querySelectorAll(".geometry-scenario-grid .scenario-card").forEach(c=>c.classList.toggle("active",c.dataset.problem===key));
+  const p=problems[key];
+  document.getElementById("problemIcon").textContent=p.icon;
+  document.getElementById("problemTitle").textContent=p.title;
+  document.getElementById("problemText").textContent=p.text;
+  document.getElementById("problemAnswer").textContent=p.answer;
+  document.getElementById("problemResult").textContent=p.result;
+  document.getElementById("viewProblem").onclick=()=>p.apply();
+  drawProblemViewer(key);
+}
+
+document.querySelectorAll(".geometry-scenario-grid .scenario-card").forEach(card=>{
+  card.addEventListener("click",()=>showProblem(card.dataset.problem));
+});
+
+function constructionSteps(){
+  return {
+    point:["Place coordinate","Mark the point","Point created"],
+    line:["Place P1","Place P2","Connect P1 â†’ P2","Line created"],
+    circle:["Place centre","Set radius","Draw circumference","Circle created"],
+    rectangle:["Place P1","Create width","Create height","Connect final edge","Rectangle created"],
+    triangle:["Place A","Place B","Place C","Connect vertices","Triangle created"],
+    polygon:["Place vertices","Connect consecutive vertices","Close final edge","Polygon created"]
+  }[currentShape];
+}
+
+function drawConstructionFrame(step){
+  const c=document.getElementById("constructionCanvas"), x=c.getContext("2d");
+  x.clearRect(0,0,c.width,c.height);
+  x.fillStyle="#050505";x.fillRect(0,0,c.width,c.height);
+  const pts=[];
+  const d=currentShape;
+  x.strokeStyle="#ff8a00";x.fillStyle="rgba(255,138,0,.10)";x.lineWidth=3;
+  const dot=(px,py,label)=>{
+    x.fillStyle="#ff8a00";
+    x.beginPath();
+    x.arc(px,py,5,0,Math.PI*2);
+    x.fill();
+    x.fillStyle="#ffd09a";
+    x.font="bold 11px Arial";
+    x.fillText(label,px+8,py-7);
+  };
+
+  const line=(a,b)=>{
+    x.strokeStyle="#ff8a00";
+    x.lineWidth=3;
+    x.beginPath();
+    x.moveTo(a[0],a[1]);
+    x.lineTo(b[0],b[1]);
+    x.stroke();
+  };
+  if(d==="point"){dot(data.point.x,data.point.y,"P");}
+  if(d==="line"){
+    const a=[data.line.x1,data.line.y1],b=[data.line.x2,data.line.y2];
+    if(step>=0)dot(a[0],a[1],"P1"); if(step>=1)dot(b[0],b[1],"P2"); if(step>=2){x.beginPath();x.moveTo(...a);x.lineTo(...b);x.stroke();}
+  }
+  if(d==="circle"){
+    const q=[data.circle.x,data.circle.y],r=data.circle.r;
+    dot(q[0],q[1],"C"); if(step>=1){x.strokeStyle="#ffb45c";x.beginPath();x.moveTo(q[0],q[1]);x.lineTo(q[0]+r,q[1]);x.stroke();}
+    if(step>=2){x.strokeStyle="#ff8a00";x.beginPath();x.arc(q[0],q[1],r,0,Math.PI*2);x.stroke();}
+  }
+  if(d==="rectangle"){
+    const q=[[data.rectangle.x,data.rectangle.y],[data.rectangle.x+data.rectangle.w,data.rectangle.y],[data.rectangle.x+data.rectangle.w,data.rectangle.y+data.rectangle.h],[data.rectangle.x,data.rectangle.y+data.rectangle.h]];
+    if(step>=0)dot(...q[0],"P1");if(step>=1){line(q[0],q[1]);dot(...q[1],"P2");}if(step>=2){line(q[1],q[2]);dot(...q[2],"P3");}if(step>=3){line(q[2],q[3]);dot(...q[3],"P4");}if(step>=4){line(q[3],q[0]);x.fillStyle="rgba(255,138,0,.08)";x.fillRect(data.rectangle.x,data.rectangle.y,data.rectangle.w,data.rectangle.h);}
+  }
+  if(d==="triangle"){
+    const q=[[data.triangle.x1,data.triangle.y1],[data.triangle.x2,data.triangle.y2],[data.triangle.x3,data.triangle.y3]];
+    q.slice(0,Math.min(step+1,3)).forEach((z,i)=>dot(...z,String.fromCharCode(65+i)));
+    if(step>=2)line(q[0],q[1]); if(step>=3){line(q[1],q[2]);line(q[2],q[0]);x.fillStyle="rgba(255,138,0,.08)";x.beginPath();q.forEach((z,i)=>i?x.lineTo(...z):x.moveTo(...z));x.closePath();x.fill();}
+  }
+  if(d==="polygon"){
+    const q=data.polygon.points;
+    q.slice(0,Math.min(step+1,q.length)).forEach((z,i)=>dot(...z,"P"+(i+1)));
+    if(step>=1){x.beginPath();x.moveTo(q[0][0],q[0][1]);q.slice(1,Math.min(step+1,q.length)).forEach(z=>x.lineTo(...z));x.stroke();}
+    if(step>=2 && q.length>2){x.lineTo(q[0][0],q[0][1]);x.stroke();}
+  }
+}
+
+function playConstruction(){
+  if(animationTimer)clearInterval(animationTimer);
+  const panel=document.getElementById("constructionStage");
+  panel.classList.add("is-playing");
+  panel.scrollIntoView({behavior:"smooth",block:"center"});
+  const steps=constructionSteps(), box=document.getElementById("constructionProgress");
+  box.innerHTML=steps.map((s,i)=>`<span data-step="${i}">${i+1}</span>`).join("");
+  let i=0;
+  drawConstructionFrame(0);
+  document.querySelectorAll("#constructionProgress span")[0]?.classList.add("active");
+  document.getElementById("constructionMessage").textContent=steps[0];
+  animationTimer=setInterval(()=>{
+    drawConstructionFrame(i);
+    document.querySelectorAll("#constructionProgress span").forEach((el,n)=>el.classList.toggle("active",n<=i));
+    document.getElementById("constructionMessage").textContent=steps[i];
+    i++;
+    if(i>=steps.length){clearInterval(animationTimer);animationTimer=null;}
+  },700);
+}
+
+document.getElementById("animateShape").addEventListener("click",playConstruction);
+
+showProblem("mobile");
+selectShape("point");
+selectShape("point");
+</script>
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

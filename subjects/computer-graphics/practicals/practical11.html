@@ -1,0 +1,1673 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Practical 10 | Reflection &amp; Shearing | Rasika CodeLab</title>
+  <link rel="stylesheet" href="../css/cgr_style.css">
+  <link rel="stylesheet" href="../css/cgr_practicals.css">
+<style>body.protected-page:not(.auth-ready){visibility:hidden}</style>
+</head>
+
+<body class="cgr-practical-body practical-10 protected-page">
+
+<header class="navbar">
+  <div class="logo">
+    <span class="logo-mark">&lt;/&gt;</span>
+    <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+  </div>
+
+  <nav class="nav-links">
+    <a href="../cgr_index.html">Home</a>
+    <a href="../cgr_foundations.html">Foundations</a>
+        <a href="../cgr_practicals.html" class="active">Practicals</a>
+    <a href="../../../about.html">About</a>
+  </nav>
+
+  <button class="menu-btn" aria-label="Open Menu">â˜°</button>
+</header>
+
+
+<main class="cgr-practical-page practical-10-page">
+
+  <!-- HERO -->
+  <section class="practical-hero">
+    <div class="practical-hero-content">
+      <span class="practical-badge">10 â€¢ 2D TRANSFORMATION</span>
+      <h1>Reflection &amp; Shearing</h1>
+      <p>Study reflection about axes and shearing along the X and Y directions.</p>
+
+      <div class="practical-tags">
+        <span>Reflection</span>
+        <span>Shearing</span>
+        <span>Matrix</span>
+        <span>2D Transform</span>
+      </div>
+    </div>
+
+    <div class="reflection-shear-hero" aria-hidden="true">
+      <div class="rs-axis rs-axis-x"></div>
+      <div class="rs-axis rs-axis-y"></div>
+      <div class="rs-original-shape"></div>
+      <div class="rs-reflected-shape"></div>
+      <div class="rs-shear-shape"></div>
+      <span class="rs-label-x">X</span>
+      <span class="rs-label-y">Y</span>
+    </div>
+  </section>
+
+
+  <!-- OBJECTIVES -->
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>01</span>
+      <div>
+        <h2>What Will You Learn?</h2>
+        <p>Understand how reflection changes orientation and how shearing changes the position of coordinates.</p>
+      </div>
+    </div>
+
+    <div class="concept-grid">
+
+      <article class="concept-card">
+        <div class="concept-icon">â†”</div>
+        <h3>Reflection</h3>
+        <p>Create a mirror image of an object about an axis or the origin.</p>
+      </article>
+
+      <article class="concept-card">
+        <div class="concept-icon">X</div>
+        <h3>X-Axis Reflection</h3>
+        <p>The x-coordinate remains unchanged while the sign of y changes.</p>
+      </article>
+
+      <article class="concept-card">
+        <div class="concept-icon">Y</div>
+        <h3>Y-Axis Reflection</h3>
+        <p>The y-coordinate remains unchanged while the sign of x changes.</p>
+      </article>
+
+      <article class="concept-card">
+        <div class="concept-icon">âŒ</div>
+        <h3>Shearing</h3>
+        <p>Shift one coordinate in proportion to another while creating a slanted form.</p>
+      </article>
+
+    </div>
+
+    <div class="transform-flow">
+      <span>Original</span>
+      <b>â†’</b>
+      <span>Choose Transformation</span>
+      <b>â†’</b>
+      <span>Apply Matrix</span>
+      <b>â†’</b>
+      <span>Observe Coordinates</span>
+    </div>
+  </section>
+
+
+  <!-- REFLECTION -->
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>02</span>
+      <div>
+        <h2>Reflection</h2>
+        <p>Reflection produces a mirror image while preserving distances and size.</p>
+      </div>
+    </div>
+
+    <div class="formula-layout">
+
+      <article class="formula-card">
+        <h3>Reflection About X-Axis</h3>
+
+        <div class="big-formula">
+          xâ€² = x<br>
+          yâ€² = âˆ’y
+        </div>
+
+        <p>
+          A point above the X-axis moves the same distance below it, and vice versa.
+        </p>
+      </article>
+
+
+      <article class="matrix-card">
+        <h3>X-Axis Matrix</h3>
+
+        <div class="matrix-equation">
+          <span>[ xâ€² &nbsp; yâ€² &nbsp; 1 ]<sup>T</sup></span>
+          <b>=</b>
+
+          <span class="matrix-box">
+            <i>1</i><i>0</i><i>0</i>
+            <i>0</i><i>âˆ’1</i><i>0</i>
+            <i>0</i><i>0</i><i>1</i>
+          </span>
+
+          <span>[ x &nbsp; y &nbsp; 1 ]<sup>T</sup></span>
+        </div>
+      </article>
+
+    </div>
+
+
+    <div class="reflection-matrix-grid">
+
+      <article class="small-matrix-card">
+        <h3>Y-Axis</h3>
+
+        <div class="matrix-box compact">
+          <i>âˆ’1</i><i>0</i><i>0</i>
+          <i>0</i><i>1</i><i>0</i>
+          <i>0</i><i>0</i><i>1</i>
+        </div>
+
+        <code>(x, y) â†’ (âˆ’x, y)</code>
+      </article>
+
+
+      <article class="small-matrix-card">
+        <h3>Origin</h3>
+
+        <div class="matrix-box compact">
+          <i>âˆ’1</i><i>0</i><i>0</i>
+          <i>0</i><i>âˆ’1</i><i>0</i>
+          <i>0</i><i>0</i><i>1</i>
+        </div>
+
+        <code>(x, y) â†’ (âˆ’x, âˆ’y)</code>
+      </article>
+
+
+      <article class="small-matrix-card">
+        <h3>Y = X</h3>
+
+        <div class="matrix-box compact">
+          <i>0</i><i>1</i><i>0</i>
+          <i>1</i><i>0</i><i>0</i>
+          <i>0</i><i>0</i><i>1</i>
+        </div>
+
+        <code>(x, y) â†’ (y, x)</code>
+      </article>
+
+    </div>
+  </section>
+
+
+  <!-- SHEARING -->
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>03</span>
+      <div>
+        <h2>Shearing</h2>
+        <p>Shearing shifts coordinates parallel to one axis according to the position on the other axis.</p>
+      </div>
+    </div>
+
+    <div class="formula-layout">
+
+      <article class="formula-card">
+        <h3>X-Shear</h3>
+
+        <div class="big-formula">
+          xâ€² = x + Sh<sub>x</sub>y<br>
+          yâ€² = y
+        </div>
+
+        <p>
+          X-shear changes X while keeping Y unchanged. Horizontal lines remain horizontal.
+        </p>
+      </article>
+
+
+      <article class="matrix-card">
+        <h3>X-Shear Matrix</h3>
+
+        <div class="matrix-equation">
+          <span>[ xâ€² &nbsp; yâ€² &nbsp; 1 ]<sup>T</sup></span>
+          <b>=</b>
+
+          <span class="matrix-box">
+            <i>1</i><i>Sh<sub>x</sub></i><i>0</i>
+            <i>0</i><i>1</i><i>0</i>
+            <i>0</i><i>0</i><i>1</i>
+          </span>
+
+          <span>[ x &nbsp; y &nbsp; 1 ]<sup>T</sup></span>
+        </div>
+      </article>
+
+    </div>
+
+
+    <div class="shear-direction-grid">
+
+      <article class="shear-card">
+        <h3>Y-Shear</h3>
+
+        <div class="shear-formula">
+          xâ€² = x<br>
+          yâ€² = y + Sh<sub>y</sub>x
+        </div>
+
+        <div class="matrix-box compact">
+          <i>1</i><i>0</i><i>0</i>
+          <i>Sh<sub>y</sub></i><i>1</i><i>0</i>
+          <i>0</i><i>0</i><i>1</i>
+        </div>
+      </article>
+
+
+      <article class="shear-card">
+        <h3>X-Shear Effect</h3>
+        <p>Positive X-shear shifts points to the right as Y increases.</p>
+        <code>Sh<sub>x</sub> &gt; 0</code>
+      </article>
+
+
+      <article class="shear-card">
+        <h3>Y-Shear Effect</h3>
+        <p>Positive Y-shear shifts points upward as X increases.</p>
+        <code>Sh<sub>y</sub> &gt; 0</code>
+      </article>
+
+    </div>
+  </section>
+
+
+  <!-- WORKED CALCULATION -->
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>04</span>
+      <div>
+        <h2>Worked Calculations</h2>
+        <p>Calculate transformed coordinates before visualizing the complete object.</p>
+      </div>
+    </div>
+
+    <div class="calculation-tabs">
+      <button class="calculation-tab active" data-calc="reflection">Reflection</button>
+      <button class="calculation-tab" data-calc="xshear">X-Shear</button>
+      <button class="calculation-tab" data-calc="yshear">Y-Shear</button>
+    </div>
+
+
+    <div class="calculation-panel" id="calculationPanel">
+
+      <div class="given-card">
+        <h3>Given</h3>
+
+        <div class="given-line">
+          <span>Point</span>
+          <strong id="calcPoint">(4, 3)</strong>
+        </div>
+
+        <div class="given-line">
+          <span>Transformation</span>
+          <strong id="calcTransform">X-Axis Reflection</strong>
+        </div>
+
+        <div class="given-line">
+          <span>Parameter</span>
+          <strong id="calcParameter">â€”</strong>
+        </div>
+      </div>
+
+
+      <div class="calculation-steps">
+
+        <div class="calc-step">
+          <span>01</span>
+          <code id="calcEquation1">xâ€² = x = 4</code>
+          <strong id="calcResult1">xâ€² = 4</strong>
+        </div>
+
+        <div class="calc-step">
+          <span>02</span>
+          <code id="calcEquation2">yâ€² = âˆ’y = âˆ’3</code>
+          <strong id="calcResult2">yâ€² = âˆ’3</strong>
+        </div>
+
+        <div class="calc-step result-step">
+          <span>03</span>
+          <code>Pâ€² = (xâ€², yâ€²)</code>
+          <strong id="calcFinal">(4, âˆ’3)</strong>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="calculation-note" id="calculationNote">
+      Reflection about the X-axis changes the sign of Y while keeping X unchanged.
+    </div>
+  </section>
+
+
+  <!-- LIVE LAB -->
+  <section class="practical-section reflection-shear-live-section">
+    <div class="section-heading">
+      <span>05</span>
+      <div>
+        <h2>Live Reflection &amp; Shearing Visualizer</h2>
+        <p>Choose a transformation, change its parameters and compare the original and transformed objects.</p>
+      </div>
+    </div>
+
+
+    <div class="reflection-shear-lab">
+
+      <div class="rs-controls">
+
+        <div class="control-block">
+          <h3>Transformation</h3>
+
+          <div class="transformation-choice">
+            <button class="transformation-btn active" data-transform="xreflection">
+              X Reflection
+            </button>
+
+            <button class="transformation-btn" data-transform="yreflection">
+              Y Reflection
+            </button>
+
+            <button class="transformation-btn" data-transform="originreflection">
+              Origin
+            </button>
+
+            <button class="transformation-btn" data-transform="diagonalreflection">
+              Y = X
+            </button>
+
+            <button class="transformation-btn" data-transform="xshear">
+              X Shear
+            </button>
+
+            <button class="transformation-btn" data-transform="yshear">
+              Y Shear
+            </button>
+          </div>
+        </div>
+
+
+        <div class="control-block">
+          <h3>Shear Parameter</h3>
+
+          <label>
+            Value
+            <input id="shearValue" type="range" min="-2" max="2" step="0.1" value="0.5">
+            <output id="shearValueDisplay">0.5</output>
+          </label>
+
+          <p class="control-hint">
+            Used for X-Shear and Y-Shear.
+          </p>
+        </div>
+
+
+        <div class="control-block">
+          <h3>Object</h3>
+
+          <div class="object-choice">
+            <button class="object-btn active" data-object="triangle">Triangle</button>
+            <button class="object-btn" data-object="square">Square</button>
+            <button class="object-btn" data-object="arrow">Arrow</button>
+          </div>
+        </div>
+
+
+        <div class="button-row">
+          <button class="primary-btn" id="applyTransform">Apply Transformation</button>
+          <button class="secondary-btn" id="animateTransform">â–¶ Animate</button>
+          <button class="ghost-btn" id="resetTransform">Reset</button>
+        </div>
+
+
+        <div class="rs-readout">
+
+          <div>
+            <span>Operation</span>
+            <strong id="operationReadout">X Reflection</strong>
+          </div>
+
+          <div>
+            <span>Parameter</span>
+            <strong id="parameterReadout">â€”</strong>
+          </div>
+
+          <div>
+            <span>Matrix</span>
+            <code id="matrixReadout">[ 1 0 ; 0 âˆ’1 ]</code>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="rs-viewer">
+
+        <canvas id="rsCanvas" width="700" height="520"></canvas>
+
+        <div class="rs-legend">
+          <span><i class="legend-original"></i> Original</span>
+          <span><i class="legend-transformed"></i> Transformed</span>
+          <span><i class="legend-axis"></i> Axis</span>
+        </div>
+
+        <div class="viewer-footer">
+          <span id="rsStatus">Transformation ready</span>
+          <span id="rsVertices">Vertices: 3</span>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- GEOMETRIC EFFECT -->
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>06</span>
+      <div>
+        <h2>What Changes?</h2>
+        <p>Reflection and shearing produce visually different geometric effects.</p>
+      </div>
+    </div>
+
+    <div class="effect-grid">
+
+      <article class="effect-card">
+        <div class="effect-symbol">â†”</div>
+        <h3>Reflection</h3>
+        <p>Produces a mirror image. Lengths and angles are preserved, but orientation may reverse.</p>
+      </article>
+
+      <article class="effect-card">
+        <div class="effect-symbol">âŒ</div>
+        <h3>Shearing</h3>
+        <p>Slants the object. Coordinates change according to a shear factor.</p>
+      </article>
+
+      <article class="effect-card">
+        <div class="effect-symbol">â–±</div>
+        <h3>Shape Distortion</h3>
+        <p>Shearing changes angles and can turn a rectangle into a parallelogram-like shape.</p>
+      </article>
+
+      <article class="effect-card">
+        <div class="effect-symbol">âŠ™</div>
+        <h3>Fixed Axis</h3>
+        <p>Reflection keeps points on the reflection axis fixed.</p>
+      </article>
+
+    </div>
+  </section>
+
+
+  <!-- REAL LIFE PROBLEMS -->
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>07</span>
+      <div>
+        <h2>Real-Life Problem Statements</h2>
+        <p>Use reflection and shearing in practical graphics situations.</p>
+      </div>
+    </div>
+
+    <div class="problem-tabs">
+
+      <button class="problem-tab active" data-problem="mirror">
+        ðŸªž Mirror Image
+      </button>
+
+      <button class="problem-tab" data-problem="skew">
+        ðŸ“ UI Skew
+      </button>
+
+      <button class="problem-tab" data-problem="map">
+        ðŸ—ºï¸ Map Reflection
+      </button>
+
+    </div>
+
+
+    <div class="rs-problem-layout">
+
+      <article class="problem-statement">
+
+        <span class="problem-label">PROBLEM</span>
+
+        <h3 id="problemTitle">Mirror Image of a Logo</h3>
+
+        <p id="problemDescription">
+          A graphics editor must create a horizontal mirror image of a logo.
+          The logo coordinates should be reflected about the Y-axis.
+        </p>
+
+        <div class="problem-given" id="problemGiven">
+          Transformation = Y-axis reflection â€¢ Point P(4, 2)
+        </div>
+
+        <div class="problem-answer" id="problemAnswer">
+          Apply (x, y) â†’ (âˆ’x, y). Therefore P(4, 2) becomes Pâ€²(âˆ’4, 2).
+        </div>
+
+        <button class="primary-btn" id="showProblem">
+          Show in Live Viewer
+        </button>
+
+      </article>
+
+
+      <div class="problem-mini-viewer">
+        <canvas id="problemCanvas" width="600" height="390"></canvas>
+
+        <div class="viewer-footer">
+          <span id="problemStatus">Y reflection</span>
+          <span id="problemReadout">P â†’ Pâ€²</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- EXPERIMENTS -->
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>08</span>
+      <div>
+        <h2>Experiments</h2>
+        <p>Try different transformations and compare their geometric behaviour.</p>
+      </div>
+    </div>
+
+    <div class="experiment-grid">
+
+      <button class="experiment-card" data-experiment="xreflection">
+        <strong>X Reflection</strong>
+        <span>(x, y) â†’ (x, âˆ’y)</span>
+      </button>
+
+      <button class="experiment-card" data-experiment="yreflection">
+        <strong>Y Reflection</strong>
+        <span>(x, y) â†’ (âˆ’x, y)</span>
+      </button>
+
+      <button class="experiment-card" data-experiment="xshear">
+        <strong>X Shear</strong>
+        <span>Sh<sub>x</sub> = 1</span>
+      </button>
+
+      <button class="experiment-card" data-experiment="yshear">
+        <strong>Y Shear</strong>
+        <span>Sh<sub>y</sub> = âˆ’1</span>
+      </button>
+
+    </div>
+
+    <div class="experiment-result" id="experimentResult">
+      Select an experiment to load its transformation.
+    </div>
+  </section>
+
+
+  <!-- COMMON MISTAKES -->
+  <section class="practical-section">
+    <div class="section-heading">
+      <span>09</span>
+      <div>
+        <h2>Common Mistakes</h2>
+        <p>Check the transformation matrix and coordinate equation carefully.</p>
+      </div>
+    </div>
+
+    <div class="mistake-grid">
+
+      <article class="mistake-card">
+        <span>01</span>
+        <h3>Wrong Sign</h3>
+        <p>For X reflection, Y changes sign. For Y reflection, X changes sign.</p>
+      </article>
+
+      <article class="mistake-card">
+        <span>02</span>
+        <h3>Wrong Shear Coordinate</h3>
+        <p>X-shear changes X using Y. Y-shear changes Y using X.</p>
+      </article>
+
+      <article class="mistake-card">
+        <span>03</span>
+        <h3>Ignoring Homogeneous Coordinates</h3>
+        <p>Use the 3Ã—3 homogeneous form when combining transformations with translation.</p>
+      </article>
+
+      <article class="mistake-card">
+        <span>04</span>
+        <h3>Confusing Reflection &amp; Rotation</h3>
+        <p>Reflection creates a mirror image; rotation changes orientation around a pivot.</p>
+      </article>
+
+    </div>
+  </section>
+
+
+  <!-- VIVA -->
+  <section class="practical-section viva-section">
+    <div class="section-heading">
+      <span>10</span>
+      <div>
+        <h2>Viva Questions</h2>
+        <p>Test your understanding of reflection and shearing.</p>
+      </div>
+    </div>
+
+    <div class="viva-grid">
+
+      <details>
+        <summary>What is reflection in computer graphics?</summary>
+        <p>Reflection creates a mirror image of an object about a specified axis, line or point.</p>
+      </details>
+
+      <details>
+        <summary>What happens during X-axis reflection?</summary>
+        <p>The X coordinate remains unchanged and the Y coordinate changes sign: (x, y) â†’ (x, âˆ’y).</p>
+      </details>
+
+      <details>
+        <summary>What happens during Y-axis reflection?</summary>
+        <p>The Y coordinate remains unchanged and the X coordinate changes sign: (x, y) â†’ (âˆ’x, y).</p>
+      </details>
+
+      <details>
+        <summary>What is shearing?</summary>
+        <p>Shearing shifts points in one coordinate direction according to the value of another coordinate.</p>
+      </details>
+
+      <details>
+        <summary>What is X-shear?</summary>
+        <p>X-shear changes X according to Y: xâ€² = x + ShxÂ·y, while yâ€² = y.</p>
+      </details>
+
+      <details>
+        <summary>What is Y-shear?</summary>
+        <p>Y-shear changes Y according to X: yâ€² = y + ShyÂ·x, while xâ€² = x.</p>
+      </details>
+
+      <details>
+        <summary>Does reflection change the size of an object?</summary>
+        <p>No. Reflection preserves distances and size, although the object's orientation is reversed.</p>
+      </details>
+
+      <details>
+        <summary>Does shearing preserve angles?</summary>
+        <p>In general, no. Shearing changes angles and can distort the shape.</p>
+      </details>
+
+    </div>
+  </section>
+
+
+  <nav class="practical-navigation">
+    <a href="practical09.html">
+      <span>â† Previous</span>
+      <strong>09 â€” 2D Rotation</strong>
+    </a>
+
+    <a href="practical11.html">
+      <span>Next â†’</span>
+      <strong>11 â€” Composite 2D Transformation</strong>
+    </a>
+  </nav>
+
+</main>
+
+
+<footer class="footer">
+
+  <div class="footer-main">
+
+    <div class="footer-brand">
+
+      <div class="logo">
+        <span class="logo-mark">&lt;/&gt;</span>
+        <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+      </div>
+
+      <p>
+        Interactive Computer Graphics practical learning through concepts,
+        calculations and visualization.
+      </p>
+
+    </div>
+
+
+    <div class="footer-links">
+
+      <div>
+        <h4>Learn</h4>
+        <a href="../cgr_foundations.html">Foundations</a>
+              </div>
+
+      <div>
+        <h4>Practice</h4>
+        <a href="../cgr_practicals.html">Practicals</a>
+        <a href="../../../about.html">About</a>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="footer-bottom">
+    <span>Â© 2026 Rasika CodeLab</span>
+    <span>Built for practical learning.</span>
+  </div>
+
+</footer>
+
+
+<script>
+(function () {
+  "use strict";
+
+  const canvas = document.getElementById("rsCanvas");
+  const ctx = canvas.getContext("2d");
+
+  let selectedTransform = "xreflection";
+  let selectedObject = "triangle";
+  let animationTimer = null;
+  let animationRunning = false;
+
+
+  const objects = {
+
+    triangle: [
+      { x: -4, y: -3 },
+      { x: 2, y: -3 },
+      { x: -1, y: 3 }
+    ],
+
+    square: [
+      { x: -3, y: -3 },
+      { x: 3, y: -3 },
+      { x: 3, y: 3 },
+      { x: -3, y: 3 }
+    ],
+
+    arrow: [
+      { x: -4, y: -1 },
+      { x: 1, y: -1 },
+      { x: 1, y: -3 },
+      { x: 5, y: 0 },
+      { x: 1, y: 3 },
+      { x: 1, y: 1 },
+      { x: -4, y: 1 }
+    ]
+
+  };
+
+
+  function getShear() {
+    return Number(document.getElementById("shearValue").value);
+  }
+
+
+  function transformPoint(point, type, shear) {
+
+    if (type === "xreflection") {
+      return { x: point.x, y: -point.y };
+    }
+
+    if (type === "yreflection") {
+      return { x: -point.x, y: point.y };
+    }
+
+    if (type === "originreflection") {
+      return { x: -point.x, y: -point.y };
+    }
+
+    if (type === "diagonalreflection") {
+      return { x: point.y, y: point.x };
+    }
+
+    if (type === "xshear") {
+      return { x: point.x + shear * point.y, y: point.y };
+    }
+
+    if (type === "yshear") {
+      return { x: point.x, y: point.y + shear * point.x };
+    }
+
+    return { x: point.x, y: point.y };
+
+  }
+
+
+  function transformName(type) {
+
+    const names = {
+      xreflection: "X Reflection",
+      yreflection: "Y Reflection",
+      originreflection: "Origin Reflection",
+      diagonalreflection: "Y = X Reflection",
+      xshear: "X Shear",
+      yshear: "Y Shear"
+    };
+
+    return names[type] || "Transformation";
+
+  }
+
+
+  function matrixText(type, shear) {
+
+    if (type === "xreflection") {
+      return "[ 1  0 ; 0  âˆ’1 ]";
+    }
+
+    if (type === "yreflection") {
+      return "[ âˆ’1  0 ; 0  1 ]";
+    }
+
+    if (type === "originreflection") {
+      return "[ âˆ’1  0 ; 0  âˆ’1 ]";
+    }
+
+    if (type === "diagonalreflection") {
+      return "[ 0  1 ; 1  0 ]";
+    }
+
+    if (type === "xshear") {
+      return "[ 1  " + shear.toFixed(1) + " ; 0  1 ]";
+    }
+
+    if (type === "yshear") {
+      return "[ 1  0 ; " + shear.toFixed(1) + "  1 ]";
+    }
+
+    return "[ 1  0 ; 0  1 ]";
+
+  }
+
+
+  function parameterText(type, shear) {
+
+    if (type === "xshear") {
+      return "Shx = " + shear.toFixed(1);
+    }
+
+    if (type === "yshear") {
+      return "Shy = " + shear.toFixed(1);
+    }
+
+    return "â€”";
+
+  }
+
+
+  function worldToCanvas(point) {
+
+    const scale = 25;
+
+    return {
+      x: canvas.width / 2 + point.x * scale,
+      y: canvas.height / 2 - point.y * scale
+    };
+
+  }
+
+
+  function drawGrid() {
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "#080b0f";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    const scale = 25;
+    const ox = canvas.width / 2;
+    const oy = canvas.height / 2;
+
+    ctx.strokeStyle = "rgba(255,255,255,.055)";
+    ctx.lineWidth = 1;
+
+    for (let x = ox % scale; x < canvas.width; x += scale) {
+      ctx.beginPath();
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, canvas.height);
+      ctx.stroke();
+    }
+
+    for (let y = oy % scale; y < canvas.height; y += scale) {
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      ctx.lineTo(canvas.width, y);
+      ctx.stroke();
+    }
+
+    ctx.strokeStyle = "rgba(255,138,0,.4)";
+    ctx.lineWidth = 1.5;
+
+    ctx.beginPath();
+    ctx.moveTo(0, oy);
+    ctx.lineTo(canvas.width, oy);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(ox, 0);
+    ctx.lineTo(ox, canvas.height);
+    ctx.stroke();
+
+    ctx.fillStyle = "#aeb6c2";
+    ctx.font = "12px Arial";
+
+    ctx.fillText("X", canvas.width - 18, oy - 8);
+    ctx.fillText("Y", ox + 8, 16);
+    ctx.fillText("(0,0)", ox + 8, oy + 16);
+
+  }
+
+
+  function drawAxis(type) {
+
+    const ox = canvas.width / 2;
+    const oy = canvas.height / 2;
+
+    ctx.strokeStyle = "rgba(255,255,255,.2)";
+    ctx.lineWidth = 2;
+
+    if (type === "diagonalreflection") {
+
+      ctx.setLineDash([7, 6]);
+
+      ctx.beginPath();
+      ctx.moveTo(0, canvas.height);
+      ctx.lineTo(canvas.width, 0);
+      ctx.stroke();
+
+      ctx.setLineDash([]);
+
+    }
+
+  }
+
+
+  function drawPolygon(points, kind) {
+
+    if (!points.length) return;
+
+    ctx.beginPath();
+
+    points.forEach((point, index) => {
+
+      const p = worldToCanvas(point);
+
+      if (index === 0) {
+        ctx.moveTo(p.x, p.y);
+      } else {
+        ctx.lineTo(p.x, p.y);
+      }
+
+    });
+
+    ctx.closePath();
+
+    if (kind === "original") {
+
+      ctx.strokeStyle = "rgba(150,160,175,.85)";
+      ctx.lineWidth = 2;
+      ctx.setLineDash([7, 6]);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+    } else {
+
+      ctx.fillStyle = "rgba(255,138,0,.13)";
+      ctx.fill();
+
+      ctx.strokeStyle = "#ff8a00";
+      ctx.lineWidth = 3;
+      ctx.stroke();
+
+    }
+
+
+    points.forEach((point, index) => {
+
+      const p = worldToCanvas(point);
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 4, 0, Math.PI * 2);
+
+      ctx.fillStyle =
+        kind === "original"
+          ? "#aeb6c2"
+          : "#ffb24a";
+
+      ctx.fill();
+
+      ctx.fillStyle = "#dfe4eb";
+      ctx.font = "11px Arial";
+
+      ctx.fillText(
+        String.fromCharCode(65 + index),
+        p.x + 7,
+        p.y - 7
+      );
+
+    });
+
+  }
+
+
+  function drawTransform() {
+
+    drawGrid();
+    drawAxis(selectedTransform);
+
+    const shear = getShear();
+    const original = objects[selectedObject];
+
+    const transformed = original.map(point =>
+      transformPoint(point, selectedTransform, shear)
+    );
+
+    drawPolygon(original, "original");
+    drawPolygon(transformed, "transformed");
+
+    updateReadout(transformed, shear);
+
+  }
+
+
+  function updateReadout(transformed, shear) {
+
+    document.getElementById("shearValueDisplay").textContent =
+      shear.toFixed(1);
+
+    document.getElementById("operationReadout").textContent =
+      transformName(selectedTransform);
+
+    document.getElementById("parameterReadout").textContent =
+      parameterText(selectedTransform, shear);
+
+    document.getElementById("matrixReadout").textContent =
+      matrixText(selectedTransform, shear);
+
+    document.getElementById("rsStatus").textContent =
+      transformName(selectedTransform) + " applied";
+
+    document.getElementById("rsVertices").textContent =
+      "Vertices: " + transformed.length;
+
+  }
+
+
+  document.querySelectorAll(".transformation-btn").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      document
+        .querySelectorAll(".transformation-btn")
+        .forEach(item => item.classList.remove("active"));
+
+      button.classList.add("active");
+
+      selectedTransform = button.dataset.transform;
+
+      drawTransform();
+
+    });
+
+  });
+
+
+  document.getElementById("shearValue").addEventListener(
+    "input",
+    drawTransform
+  );
+
+
+  document.querySelectorAll(".object-btn").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      document
+        .querySelectorAll(".object-btn")
+        .forEach(item => item.classList.remove("active"));
+
+      button.classList.add("active");
+
+      selectedObject = button.dataset.object;
+
+      drawTransform();
+
+    });
+
+  });
+
+
+  document.getElementById("applyTransform").addEventListener(
+    "click",
+    () => {
+
+      drawTransform();
+
+      document.getElementById("rsStatus").textContent =
+        transformName(selectedTransform) + " applied âœ“";
+
+    }
+  );
+
+
+  document.getElementById("resetTransform").addEventListener(
+    "click",
+    () => {
+
+      clearInterval(animationTimer);
+      animationRunning = false;
+
+      document.getElementById("shearValue").value = 0.5;
+
+      selectedTransform = "xreflection";
+      selectedObject = "triangle";
+
+      document
+        .querySelectorAll(".transformation-btn")
+        .forEach(button => {
+          button.classList.toggle(
+            "active",
+            button.dataset.transform === "xreflection"
+          );
+        });
+
+      document
+        .querySelectorAll(".object-btn")
+        .forEach(button => {
+          button.classList.toggle(
+            "active",
+            button.dataset.object === "triangle"
+          );
+        });
+
+      document.getElementById("animateTransform").textContent =
+        "â–¶ Animate";
+
+      drawTransform();
+
+    }
+  );
+
+
+  document.getElementById("animateTransform").addEventListener(
+    "click",
+    () => {
+
+      if (
+        selectedTransform !== "xshear" &&
+        selectedTransform !== "yshear"
+      ) {
+
+        document.getElementById("rsStatus").textContent =
+          "Animation is available for shearing parameters.";
+
+        return;
+
+      }
+
+
+      if (animationRunning) {
+
+        clearInterval(animationTimer);
+        animationRunning = false;
+
+        document.getElementById("animateTransform").textContent =
+          "â–¶ Animate";
+
+        return;
+
+      }
+
+
+      animationRunning = true;
+
+      document.getElementById("animateTransform").textContent =
+        "âšâš Pause";
+
+      let value = 0;
+
+      document.getElementById("shearValue").value = 0;
+
+      animationTimer = setInterval(() => {
+
+        value += 0.1;
+
+        if (value > 1.5) {
+          value = 1.5;
+        }
+
+        document.getElementById("shearValue").value =
+          value.toFixed(1);
+
+        drawTransform();
+
+        if (value >= 1.5) {
+
+          clearInterval(animationTimer);
+          animationRunning = false;
+
+          document.getElementById("animateTransform").textContent =
+            "â–¶ Animate";
+
+          document.getElementById("rsStatus").textContent =
+            "Shearing animation complete âœ“";
+
+        }
+
+      }, 90);
+
+    }
+  );
+
+
+  /* Calculation tabs */
+
+  const calculations = {
+
+    reflection: {
+      point: "(4, 3)",
+      transform: "X-Axis Reflection",
+      parameter: "â€”",
+      eq1: "xâ€² = x = 4",
+      eq2: "yâ€² = âˆ’y = âˆ’3",
+      result1: "xâ€² = 4",
+      result2: "yâ€² = âˆ’3",
+      final: "(4, âˆ’3)",
+      note:
+        "Reflection about the X-axis changes the sign of Y while keeping X unchanged."
+    },
+
+    xshear: {
+      point: "(2, 3)",
+      transform: "X-Shear",
+      parameter: "Shx = 1",
+      eq1: "xâ€² = x + ShxÂ·y = 2 + 1(3)",
+      eq2: "yâ€² = y = 3",
+      result1: "xâ€² = 5",
+      result2: "yâ€² = 3",
+      final: "(5, 3)",
+      note:
+        "For X-shear, X changes according to Y while Y remains unchanged."
+    },
+
+    yshear: {
+      point: "(3, 2)",
+      transform: "Y-Shear",
+      parameter: "Shy = 1",
+      eq1: "xâ€² = x = 3",
+      eq2: "yâ€² = y + ShyÂ·x = 2 + 1(3)",
+      result1: "xâ€² = 3",
+      result2: "yâ€² = 5",
+      final: "(3, 5)",
+      note:
+        "For Y-shear, Y changes according to X while X remains unchanged."
+    }
+
+  };
+
+
+  function loadCalculation(name) {
+
+    const item = calculations[name];
+
+    document.getElementById("calcPoint").textContent =
+      item.point;
+
+    document.getElementById("calcTransform").textContent =
+      item.transform;
+
+    document.getElementById("calcParameter").textContent =
+      item.parameter;
+
+    document.getElementById("calcEquation1").textContent =
+      item.eq1;
+
+    document.getElementById("calcEquation2").textContent =
+      item.eq2;
+
+    document.getElementById("calcResult1").textContent =
+      item.result1;
+
+    document.getElementById("calcResult2").textContent =
+      item.result2;
+
+    document.getElementById("calcFinal").textContent =
+      item.final;
+
+    document.getElementById("calculationNote").textContent =
+      item.note;
+
+  }
+
+
+  document.querySelectorAll(".calculation-tab").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      document
+        .querySelectorAll(".calculation-tab")
+        .forEach(item => item.classList.remove("active"));
+
+      button.classList.add("active");
+
+      loadCalculation(button.dataset.calc);
+
+    });
+
+  });
+
+
+  /* Problem visualizer */
+
+  const problems = {
+
+    mirror: {
+      title: "Mirror Image of a Logo",
+      description:
+        "A graphics editor must create a horizontal mirror image of a logo. The logo coordinates should be reflected about the Y-axis.",
+      given:
+        "Transformation = Y-axis reflection â€¢ Point P(4, 2)",
+      answer:
+        "Apply (x, y) â†’ (âˆ’x, y). Therefore P(4, 2) becomes Pâ€²(âˆ’4, 2).",
+      type: "yreflection"
+    },
+
+    skew: {
+      title: "Skewed User Interface Panel",
+      description:
+        "A designer wants to create a slanted interface panel without changing its height coordinates.",
+      given:
+        "Transformation = X-shear â€¢ Shx = 1",
+      answer:
+        "Apply xâ€² = x + ShxÂ·y while keeping yâ€² = y.",
+      type: "xshear"
+    },
+
+    map: {
+      title: "Map Region Reflection",
+      description:
+        "A mapping application needs a mirrored coordinate view of a selected region.",
+      given:
+        "Transformation = Origin reflection â€¢ P(3, 2)",
+      answer:
+        "Apply (x, y) â†’ (âˆ’x, âˆ’y). Therefore P(3, 2) becomes Pâ€²(âˆ’3, âˆ’2).",
+      type: "originreflection"
+    }
+
+  };
+
+
+  let selectedProblem = "mirror";
+
+
+  function drawProblem() {
+
+    const problem = problems[selectedProblem];
+    const pc = document.getElementById("problemCanvas");
+    const pctx = pc.getContext("2d");
+
+    pctx.clearRect(0, 0, pc.width, pc.height);
+
+    pctx.fillStyle = "#080b0f";
+    pctx.fillRect(0, 0, pc.width, pc.height);
+
+    const ox = pc.width / 2;
+    const oy = pc.height / 2;
+    const scale = 27;
+
+    pctx.strokeStyle = "rgba(255,255,255,.06)";
+    pctx.lineWidth = 1;
+
+    for (let x = 20; x < pc.width; x += 27) {
+      pctx.beginPath();
+      pctx.moveTo(x, 0);
+      pctx.lineTo(x, pc.height);
+      pctx.stroke();
+    }
+
+    for (let y = 20; y < pc.height; y += 27) {
+      pctx.beginPath();
+      pctx.moveTo(0, y);
+      pctx.lineTo(pc.width, y);
+      pctx.stroke();
+    }
+
+    pctx.strokeStyle = "rgba(255,138,0,.4)";
+    pctx.lineWidth = 1.5;
+
+    pctx.beginPath();
+    pctx.moveTo(0, oy);
+    pctx.lineTo(pc.width, oy);
+    pctx.stroke();
+
+    pctx.beginPath();
+    pctx.moveTo(ox, 0);
+    pctx.lineTo(ox, pc.height);
+    pctx.stroke();
+
+
+    const original = [
+      { x: -4, y: -2 },
+      { x: 0, y: -2 },
+      { x: 2, y: 0 },
+      { x: 0, y: 2 },
+      { x: -4, y: 2 }
+    ];
+
+    const transformed = original.map(point =>
+      transformPoint(
+        point,
+        problem.type,
+        problem.type === "xshear" ? 1 : 0
+      )
+    );
+
+
+    function map(point) {
+
+      return {
+        x: ox + point.x * scale,
+        y: oy - point.y * scale
+      };
+
+    }
+
+
+    function polygon(points, transformedObject) {
+
+      pctx.beginPath();
+
+      points.forEach((point, index) => {
+
+        const q = map(point);
+
+        if (index === 0) {
+          pctx.moveTo(q.x, q.y);
+        } else {
+          pctx.lineTo(q.x, q.y);
+        }
+
+      });
+
+      pctx.closePath();
+
+      if (transformedObject) {
+
+        pctx.fillStyle = "rgba(255,138,0,.15)";
+        pctx.fill();
+
+        pctx.strokeStyle = "#ff8a00";
+        pctx.lineWidth = 3;
+
+      } else {
+
+        pctx.strokeStyle = "#858f9e";
+        pctx.lineWidth = 2;
+        pctx.setLineDash([6, 5]);
+
+      }
+
+      pctx.stroke();
+      pctx.setLineDash([]);
+
+    }
+
+
+    polygon(original, false);
+    polygon(transformed, true);
+
+    pctx.fillStyle = "#cbd2dc";
+    pctx.font = "12px Arial";
+    pctx.fillText("Original", 18, 24);
+
+    pctx.fillStyle = "#ffb24a";
+    pctx.fillText("Transformed", 18, 44);
+
+    document.getElementById("problemStatus").textContent =
+      transformName(problem.type);
+
+    document.getElementById("problemReadout").textContent =
+      "Original â†’ Transformed";
+
+  }
+
+
+  document.querySelectorAll(".problem-tab").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      document
+        .querySelectorAll(".problem-tab")
+        .forEach(item => item.classList.remove("active"));
+
+      button.classList.add("active");
+
+      selectedProblem = button.dataset.problem;
+
+      const problem = problems[selectedProblem];
+
+      document.getElementById("problemTitle").textContent =
+        problem.title;
+
+      document.getElementById("problemDescription").textContent =
+        problem.description;
+
+      document.getElementById("problemGiven").textContent =
+        problem.given;
+
+      document.getElementById("problemAnswer").textContent =
+        problem.answer;
+
+      drawProblem();
+
+    });
+
+  });
+
+
+  document.getElementById("showProblem").addEventListener(
+    "click",
+    () => {
+
+      const problem = problems[selectedProblem];
+
+      selectedTransform = problem.type;
+
+      document
+        .querySelectorAll(".transformation-btn")
+        .forEach(button => {
+          button.classList.toggle(
+            "active",
+            button.dataset.transform === problem.type
+          );
+        });
+
+      if (problem.type === "xshear") {
+        document.getElementById("shearValue").value = 1;
+      }
+
+      drawTransform();
+
+      document
+        .querySelector(".reflection-shear-live-section")
+        .scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+    }
+  );
+
+
+  /* Experiments */
+
+  document.querySelectorAll(".experiment-card").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      const type = button.dataset.experiment;
+
+      selectedTransform = type;
+
+      if (type === "xshear") {
+        document.getElementById("shearValue").value = 1;
+      }
+
+      if (type === "yshear") {
+        document.getElementById("shearValue").value = -1;
+      }
+
+      document
+        .querySelectorAll(".transformation-btn")
+        .forEach(item => {
+          item.classList.toggle(
+            "active",
+            item.dataset.transform === type
+          );
+        });
+
+      drawTransform();
+
+      document.getElementById("experimentResult").textContent =
+        "Loaded: " + transformName(type) +
+        ". Compare the original outline with the transformed outline.";
+
+      document
+        .querySelector(".reflection-shear-live-section")
+        .scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+    });
+
+  });
+
+
+  loadCalculation("reflection");
+  drawTransform();
+  drawProblem();
+
+})();
+</script>
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>

@@ -1,0 +1,907 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>17 â€” B-Spline Curve Visualizer | Rasika CodeLab</title>
+  <link rel="stylesheet" href="../css/cgr_style.css">
+  <link rel="stylesheet" href="../css/cgr_practicals.css">
+<style>body.protected-page:not(.auth-ready){visibility:hidden}</style>
+</head>
+
+<body class="cgr-practical-body practical-17 protected-page">
+
+<header class="navbar">
+  <div class="logo">
+    <span class="logo-mark">&lt;/&gt;</span>
+    <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+  </div>
+  <nav class="nav-links">
+    <a href="../cgr_index.html">Home</a>
+    <a href="../cgr_foundations.html">Foundations</a>
+        <a href="../cgr_practicals.html" class="active">Practicals</a>
+    <a href="../../../about.html">About</a>
+  </nav>
+  <button class="menu-btn" aria-label="Open Menu">â˜°</button>
+</header>
+
+<main>
+
+<section class="practical-hero">
+  <div class="container">
+    <span class="eyebrow">PRACTICAL 17 Â· CURVES</span>
+    <h1>B-Spline Curve Visualizer</h1>
+    <p>Generate smooth piecewise polynomial curves using control points, degree and knot vectors.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#live-lab">Open Interactive Lab</a>
+      <a class="btn btn-secondary" href="#worked-example">Study Worked Example</a>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">01</span>
+      <div>
+        <h2>What You Will Learn</h2>
+        <p>B-Splines extend the idea of curve control by using multiple polynomial pieces joined through a knot vector.</p>
+      </div>
+    </div>
+
+    <div class="objective-grid">
+      <article class="info-card">
+        <h3>Understand</h3>
+        <p>Learn control points, degree, knots, basis functions and local control.</p>
+      </article>
+      <article class="info-card">
+        <h3>Calculate</h3>
+        <p>Evaluate B-Spline basis functions and construct a curve point.</p>
+      </article>
+      <article class="info-card">
+        <h3>Implement</h3>
+        <p>Generate a B-Spline using the Cox-de Boor recursive definition.</p>
+      </article>
+      <article class="info-card">
+        <h3>Visualize</h3>
+        <p>Move control points and observe how local portions of the curve respond.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section alt-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">02</span>
+      <div>
+        <h2>What Is a B-Spline?</h2>
+        <p>B-Spline means Basis Spline. It represents a curve as a weighted combination of control points and basis functions.</p>
+      </div>
+    </div>
+
+    <div class="concept-grid">
+      <article class="theory-card">
+        <h3>Key Components</h3>
+        <ul class="clean-list">
+          <li><strong>Control points:</strong> define the shape.</li>
+          <li><strong>Degree p:</strong> defines the polynomial degree.</li>
+          <li><strong>Knot vector:</strong> controls parameter intervals.</li>
+          <li><strong>Basis functions:</strong> determine point weights.</li>
+        </ul>
+      </article>
+
+      <article class="theory-card">
+        <h3>Why Use B-Splines?</h3>
+        <p>A high-degree Bezier curve can make every control point influence the entire curve. B-Splines provide local control: changing a control point generally affects only a portion of the curve.</p>
+        <div class="formula-box">
+          <strong>C(u) = Î£ Náµ¢,â‚š(u) Páµ¢</strong>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">03</span>
+      <div>
+        <h2>Degree and Knot Vector</h2>
+        <p>The relationship between the number of control points, degree and knots is fundamental to B-Spline construction.</p>
+      </div>
+    </div>
+
+    <div class="formula-grid">
+      <div class="formula-box">
+        <span>Degree</span>
+        <strong>p</strong>
+        <p>Polynomial degree of each piece.</p>
+      </div>
+      <div class="formula-box">
+        <span>Control Points</span>
+        <strong>n + 1</strong>
+        <p>Indexed Pâ‚€ through Pâ‚™.</p>
+      </div>
+      <div class="formula-box">
+        <span>Knot Count</span>
+        <strong>m + 1 = n + p + 2</strong>
+        <p>For the standard B-Spline notation.</p>
+      </div>
+    </div>
+
+    <div class="table-card">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Term</th>
+            <th>Meaning</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>p</td><td>Degree</td><td>2 = quadratic</td></tr>
+          <tr><td>Páµ¢</td><td>Control point</td><td>Pâ‚€, Pâ‚, Pâ‚‚...</td></tr>
+          <tr><td>U</td><td>Knot vector</td><td>[0,0,0,1,2,2,2]</td></tr>
+          <tr><td>Náµ¢,â‚š(u)</td><td>Basis function</td><td>Weight for Páµ¢</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section alt-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">04</span>
+      <div>
+        <h2>Cox-de Boor Basis Functions</h2>
+        <p>The recursive Cox-de Boor definition is the standard way to construct B-Spline basis functions.</p>
+      </div>
+    </div>
+
+    <div class="formula-box large-formula">
+      <h3>Degree 0</h3>
+      <p>Náµ¢,â‚€(u) = 1 when uáµ¢ â‰¤ u &lt; uáµ¢â‚Šâ‚, otherwise 0.</p>
+    </div>
+
+    <div class="formula-box large-formula">
+      <h3>Degree p</h3>
+      <p>Náµ¢,â‚š(u) = ((u âˆ’ uáµ¢)/(uáµ¢â‚Šâ‚š âˆ’ uáµ¢))Náµ¢,â‚šâ‚‹â‚(u)</p>
+      <p>+ ((uáµ¢â‚Šâ‚šâ‚Šâ‚ âˆ’ u)/(uáµ¢â‚Šâ‚šâ‚Šâ‚ âˆ’ uáµ¢â‚Šâ‚))Náµ¢â‚Šâ‚,â‚šâ‚‹â‚(u)</p>
+    </div>
+
+    <div class="note-card">
+      <strong>Zero denominators:</strong> In implementation, a term with a zero denominator is treated as zero. This is important when repeated knots are present.
+    </div>
+  </div>
+</section>
+
+<section class="practical-section" id="worked-example">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">05</span>
+      <div>
+        <h2>Worked Calculation</h2>
+        <p>Use a small quadratic B-Spline to understand the basis-function idea.</p>
+      </div>
+    </div>
+
+    <div class="calculation-card">
+      <h3>Control Points and Knots</h3>
+      <p>Let Pâ‚€(0,0), Pâ‚(2,4), Pâ‚‚(5,4), Pâ‚ƒ(7,0), degree p = 2 and knot vector U = [0,0,0,1,2,2,2].</p>
+
+      <div class="calculation-flow">
+        <div class="calc-step">
+          <span>01</span>
+          <p>There are 4 control points, so n = 3. With p = 2, the knot count is n + p + 2 = <strong>7</strong>.</p>
+        </div>
+        <div class="calc-step">
+          <span>02</span>
+          <p>Choose a parameter inside the curve domain, for example <strong>u = 0.5</strong>.</p>
+        </div>
+        <div class="calc-step">
+          <span>03</span>
+          <p>Evaluate the quadratic basis functions Nâ‚€,â‚‚(0.5), Nâ‚,â‚‚(0.5), Nâ‚‚,â‚‚(0.5) and Nâ‚ƒ,â‚‚(0.5) using Cox-de Boor recursion.</p>
+        </div>
+        <div class="calc-step">
+          <span>04</span>
+          <p>Multiply every control point by its basis weight.</p>
+        </div>
+        <div class="calc-step">
+          <span>05</span>
+          <p>Add the weighted coordinates to obtain C(0.5).</p>
+        </div>
+        <div class="calc-step">
+          <span>06</span>
+          <p>The same process is repeated for different u values to generate the complete curve.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-card">
+      <strong>Study tip:</strong> Unlike a Bezier curve, a B-Spline's basis functions are local. This is why adding or moving control points does not necessarily reshape the entire curve.
+    </div>
+  </div>
+</section>
+
+<section class="practical-section alt-section" id="live-lab">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">06</span>
+      <div>
+        <h2>Interactive B-Spline Lab</h2>
+        <p>Move control points, change the degree and inspect the active parameter u.</p>
+      </div>
+    </div>
+
+    <div class="interactive-layout">
+      <div class="control-panel">
+        <div class="control-group">
+          <h3>Curve</h3>
+          <label>Control Points
+            <select id="pointCount">
+              <option value="4">4 Points</option>
+              <option value="5" selected>5 Points</option>
+              <option value="6">6 Points</option>
+              <option value="7">7 Points</option>
+            </select>
+          </label>
+          <label>Degree
+            <select id="degree">
+              <option value="1">1 â€” Linear</option>
+              <option value="2" selected>2 â€” Quadratic</option>
+              <option value="3">3 â€” Cubic</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="control-group">
+          <h3>Parameter</h3>
+          <label>u
+            <input id="u" type="range" min="0" max="1" step="0.005" value="0.50">
+          </label>
+          <output id="uValue">0.50</output>
+        </div>
+
+        <div class="control-group">
+          <h3>Knot Vector</h3>
+          <select id="knotType">
+            <option value="clamped" selected>Clamped Uniform</option>
+            <option value="uniform">Uniform</option>
+          </select>
+        </div>
+
+        <div class="button-row">
+          <button class="btn btn-primary" id="animateBtn">Animate u</button>
+          <button class="btn btn-secondary" id="presetBtn">Try Preset</button>
+          <button class="btn btn-secondary" id="resetBtn">Reset</button>
+        </div>
+      </div>
+
+      <div class="visualizer-panel">
+        <canvas id="splineCanvas" width="760" height="500" aria-label="B-Spline curve visualizer"></canvas>
+
+        <div class="status-grid">
+          <div class="status-card">
+            <span>Current u</span>
+            <strong id="currentU">0.50</strong>
+            <small>Curve parameter</small>
+          </div>
+          <div class="status-card">
+            <span>Curve Point</span>
+            <strong id="curvePoint">(â€”)</strong>
+            <small>C(u)</small>
+          </div>
+          <div class="status-card">
+            <span>Degree</span>
+            <strong id="degreeStatus">2</strong>
+            <small id="degreeName">Quadratic</small>
+          </div>
+        </div>
+
+        <div class="lab-message" id="labMessage">Drag a control point to observe local curve control.</div>
+      </div>
+    </div>
+
+    <div class="table-card">
+      <h3>Control Points</h3>
+      <table class="data-table" id="pointTable">
+        <thead>
+          <tr><th>Point</th><th>X</th><th>Y</th><th>Basis at u</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div class="formula-box">
+      <h3>Current Knot Vector</h3>
+      <strong id="knotDisplay">â€”</strong>
+      <p>The active knot vector is regenerated when the number of points or degree changes.</p>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">07</span>
+      <div>
+        <h2>B-Spline vs Bezier</h2>
+        <p>Both use control points and basis functions, but their control behavior is different.</p>
+      </div>
+    </div>
+
+    <div class="table-card">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Bezier</th>
+            <th>B-Spline</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Basis</td><td>Bernstein polynomials</td><td>B-Spline basis functions</td></tr>
+          <tr><td>Control</td><td>Generally global</td><td>Local</td></tr>
+          <tr><td>Degree</td><td>Usually tied to point count</td><td>Can be selected independently within valid limits</td></tr>
+          <tr><td>Knot vector</td><td>Not required</td><td>Required</td></tr>
+          <tr><td>Long curves</td><td>Higher point count raises degree</td><td>Piecewise polynomial representation</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section alt-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">08</span>
+      <div>
+        <h2>Important Properties</h2>
+      </div>
+    </div>
+
+    <div class="concept-grid">
+      <article class="theory-card">
+        <h3>Local Control</h3>
+        <p>A control point influences only a limited portion of the curve, depending on the degree and knot vector.</p>
+      </article>
+      <article class="theory-card">
+        <h3>Piecewise Polynomial</h3>
+        <p>A B-Spline is made from polynomial curve pieces joined across knot intervals.</p>
+      </article>
+      <article class="theory-card">
+        <h3>Partition of Unity</h3>
+        <p>Within the valid parameter domain, the active B-Spline basis functions sum to 1.</p>
+      </article>
+      <article class="theory-card">
+        <h3>Knot Multiplicity</h3>
+        <p>Repeated knots influence continuity and endpoint behavior. Clamped vectors repeat endpoint knots to make the curve reach the end control points.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">09</span>
+      <div>
+        <h2>Real-Life Problem Statements</h2>
+        <p>B-Splines are useful when smooth shapes require precise local editing.</p>
+      </div>
+    </div>
+
+    <div class="problem-grid">
+      <article class="problem-card">
+        <span class="problem-tag">01 Â· CAD</span>
+        <h3>Vehicle Body Profile</h3>
+        <p>Create a smooth vehicle profile where modifying one section should not drastically change the complete outline.</p>
+        <button class="btn btn-secondary problem-load" data-preset="vehicle">Show in Live Viewer</button>
+      </article>
+
+      <article class="problem-card">
+        <span class="problem-tag">02 Â· FONT</span>
+        <h3>Letterform Design</h3>
+        <p>Model a smooth section of a digital character or font outline using local control points.</p>
+        <button class="btn btn-secondary problem-load" data-preset="font">Show in Live Viewer</button>
+      </article>
+
+      <article class="problem-card">
+        <span class="problem-tag">03 Â· ANIMATION</span>
+        <h3>Camera Path</h3>
+        <p>Create a smooth camera or object path and adjust one region without rebuilding the complete path.</p>
+        <button class="btn btn-secondary problem-load" data-preset="camera">Show in Live Viewer</button>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section alt-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">10</span>
+      <div>
+        <h2>Experiments</h2>
+        <p>Use the visualizer to understand local control and knot behavior.</p>
+      </div>
+    </div>
+
+    <div class="experiment-list">
+      <div class="experiment-item"><span>01</span><p>Move one middle control point and compare the affected portion with the rest of the curve.</p></div>
+      <div class="experiment-item"><span>02</span><p>Change degree from 1 to 2 to 3 and observe smoothness and local influence.</p></div>
+      <div class="experiment-item"><span>03</span><p>Change the number of control points while keeping the degree fixed.</p></div>
+      <div class="experiment-item"><span>04</span><p>Move u from 0 to 1 and observe the point C(u) travel along the curve.</p></div>
+      <div class="experiment-item"><span>05</span><p>Compare the clamped and uniform knot-vector options.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">11</span>
+      <div>
+        <h2>Common Mistakes</h2>
+      </div>
+    </div>
+
+    <div class="mistake-grid">
+      <article class="mistake-card"><h3>Invalid degree</h3><p>The degree must be less than the number of control points.</p></article>
+      <article class="mistake-card"><h3>Wrong knot count</h3><p>For n + 1 control points and degree p, use n + p + 2 knots.</p></article>
+      <article class="mistake-card"><h3>Ignoring parameter domain</h3><p>The valid curve domain depends on the knot vector. Do not assume every knot value is a valid curve parameter.</p></article>
+      <article class="mistake-card"><h3>Zero denominator errors</h3><p>Repeated knots can create zero denominators in Cox-de Boor recursion; those terms contribute zero.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section alt-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="section-number">12</span>
+      <div>
+        <h2>Viva Questions</h2>
+        <p>Check your understanding before moving to interactive HTML Canvas graphics.</p>
+      </div>
+    </div>
+
+    <div class="viva-list">
+      <details><summary>What does B-Spline stand for?</summary><p>Basis Spline.</p></details>
+      <details><summary>What are the main components of a B-Spline?</summary><p>Control points, degree, knot vector and B-Spline basis functions.</p></details>
+      <details><summary>What is the Cox-de Boor formula?</summary><p>It is the recursive definition used to calculate B-Spline basis functions.</p></details>
+      <details><summary>What is a knot vector?</summary><p>An ordered sequence of parameter values that divides the curve domain into knot spans.</p></details>
+      <details><summary>Why is local control important?</summary><p>Moving one control point can modify only a portion of the curve instead of changing the entire curve.</p></details>
+      <details><summary>How many knots are needed?</summary><p>With n + 1 control points and degree p, the standard relation is m + 1 = n + p + 2.</p></details>
+      <details><summary>What is a clamped knot vector?</summary><p>A knot vector with repeated endpoint knots, commonly used so the curve reaches the first and last control points.</p></details>
+      <details><summary>Where are B-Splines used?</summary><p>They are widely used in CAD, computer graphics, animation, font design and geometric modeling.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="practical-navigation">
+  <div class="container">
+    <a class="nav-practical prev" href="practical16.html">
+      <span>Previous Practical</span>
+      <strong>16 â€” Bezier Curve Generator</strong>
+    </a>
+    <a class="nav-practical next" href="practical18.html">
+      <span>Next Practical</span>
+      <strong>18 â€” Interactive Graphics using HTML Canvas</strong>
+    </a>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-main">
+    <div class="footer-brand">
+      <div class="logo">
+        <span class="logo-mark">&lt;/&gt;</span>
+        <span>Rasika<span class="logo-highlight">CodeLab</span></span>
+      </div>
+      <p>Interactive Computer Graphics practical learning through concepts, calculations and visualization.</p>
+    </div>
+    <div class="footer-links">
+      <div>
+        <h4>Learn</h4>
+        <a href="../cgr_foundations.html">Foundations</a>
+              </div>
+      <div>
+        <h4>Practice</h4>
+        <a href="../cgr_practicals.html">Practicals</a>
+        <a href="../../../about.html">About</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>Â© 2026 Rasika CodeLab</span>
+    <span>Built for practical learning.</span>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const canvas = document.getElementById("splineCanvas");
+  const ctx = canvas.getContext("2d");
+
+  const pointCountSelect = document.getElementById("pointCount");
+  const degreeSelect = document.getElementById("degree");
+  const knotTypeSelect = document.getElementById("knotType");
+  const uInput = document.getElementById("u");
+  const uValue = document.getElementById("uValue");
+  const currentU = document.getElementById("currentU");
+  const curvePointText = document.getElementById("curvePoint");
+  const degreeStatus = document.getElementById("degreeStatus");
+  const degreeName = document.getElementById("degreeName");
+  const knotDisplay = document.getElementById("knotDisplay");
+  const tableBody = document.querySelector("#pointTable tbody");
+  const message = document.getElementById("labMessage");
+
+  const W = canvas.width;
+  const H = canvas.height;
+  const padding = 50;
+  const world = { min: 0, max: 12 };
+
+  const presets = {
+    default: [
+      { x: 1, y: 2.5 },
+      { x: 2.8, y: 7.2 },
+      { x: 4.7, y: 3.0 },
+      { x: 6.7, y: 8.2 },
+      { x: 9.2, y: 4.0 },
+      { x: 11, y: 7 }
+    ],
+    vehicle: [
+      { x: 0.8, y: 3.0 },
+      { x: 2.4, y: 6.5 },
+      { x: 4.2, y: 7.4 },
+      { x: 6.0, y: 7.8 },
+      { x: 8.1, y: 7.0 },
+      { x: 10.8, y: 4.1 }
+    ],
+    font: [
+      { x: 1.0, y: 1.5 },
+      { x: 1.5, y: 8.7 },
+      { x: 4.0, y: 9.3 },
+      { x: 6.1, y: 5.2 },
+      { x: 7.5, y: 8.5 },
+      { x: 10.8, y: 8.0 }
+    ],
+    camera: [
+      { x: 0.7, y: 2.0 },
+      { x: 2.3, y: 8.5 },
+      { x: 4.8, y: 2.0 },
+      { x: 7.0, y: 7.8 },
+      { x: 9.0, y: 2.5 },
+      { x: 11.0, y: 7.0 }
+    ]
+  };
+
+  let points = presets.default.map(p => ({ ...p }));
+  let dragIndex = -1;
+  let timer = null;
+  let direction = 1;
+
+  function sx(x) {
+    return padding + (x - world.min) * (W - 2 * padding) / (world.max - world.min);
+  }
+
+  function sy(y) {
+    return H - padding - (y - world.min) * (H - 2 * padding) / (world.max - world.min);
+  }
+
+  function drawGrid() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.globalAlpha = 0.25;
+
+    for (let x = world.min; x <= world.max; x++) {
+      ctx.beginPath();
+      ctx.moveTo(sx(x), padding);
+      ctx.lineTo(sx(x), H - padding);
+      ctx.stroke();
+    }
+
+    for (let y = world.min; y <= world.max; y++) {
+      ctx.beginPath();
+      ctx.moveTo(padding, sy(y));
+      ctx.lineTo(W - padding, sy(y));
+      ctx.stroke();
+    }
+
+    ctx.globalAlpha = 1;
+  }
+
+  function makeKnots(count, degree, type) {
+    const knotCount = count + degree + 1;
+    const knots = [];
+
+    if (type === "uniform") {
+      for (let i = 0; i < knotCount; i++) knots.push(i);
+      return knots;
+    }
+
+    const domainEnd = count - degree;
+    for (let i = 0; i < degree + 1; i++) knots.push(0);
+
+    for (let i = 1; i < domainEnd; i++) knots.push(i);
+
+    for (let i = 0; i < degree + 1; i++) knots.push(domainEnd);
+
+    return knots;
+  }
+
+  function normalizeParameter(u, knots, degree) {
+    const start = knots[degree];
+    const end = knots[knots.length - degree - 1];
+    return start + u * (end - start);
+  }
+
+  function basis(i, degree, u, knots) {
+    if (degree === 0) {
+      const last = knots[knots.length - 1];
+      if ((knots[i] <= u && u < knots[i + 1]) ||
+          (u === last && i + 1 === knots.length - 1)) return 1;
+      return 0;
+    }
+
+    const leftDen = knots[i + degree] - knots[i];
+    const rightDen = knots[i + degree + 1] - knots[i + 1];
+
+    const left = leftDen === 0 ? 0 : ((u - knots[i]) / leftDen) * basis(i, degree - 1, u, knots);
+    const right = rightDen === 0 ? 0 : ((knots[i + degree + 1] - u) / rightDen) * basis(i + 1, degree - 1, u, knots);
+
+    return left + right;
+  }
+
+  function evaluate(uNormalized, control, degree, knots) {
+    const u = normalizeParameter(uNormalized, knots, degree);
+    let x = 0;
+    let y = 0;
+
+    for (let i = 0; i < control.length; i++) {
+      const w = basis(i, degree, u, knots);
+      x += w * control[i].x;
+      y += w * control[i].y;
+    }
+
+    return { x, y, parameter: u };
+  }
+
+  function validDomain(knots, degree) {
+    const start = knots[degree];
+    const end = knots[knots.length - degree - 1];
+    return { start, end };
+  }
+
+  function controlPoints() {
+    const count = Number(pointCountSelect.value);
+
+    if (points.length !== count) {
+      const base = presets.default;
+      const next = [];
+      for (let i = 0; i < count; i++) {
+        next.push(points[i] ? { ...points[i] } : { ...base[i % base.length] });
+      }
+      points = next;
+    }
+
+    return points;
+  }
+
+  function drawControlPolygon(control) {
+    ctx.save();
+    ctx.setLineDash([7, 6]);
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(sx(control[0].x), sy(control[0].y));
+    for (let i = 1; i < control.length; i++) {
+      ctx.lineTo(sx(control[i].x), sy(control[i].y));
+    }
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  function drawCurve(control, degree, knots) {
+    const d = validDomain(knots, degree);
+    const samples = 240;
+
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+
+    for (let i = 0; i <= samples; i++) {
+      const u = i / samples;
+      const p = evaluate(u, control, degree, knots);
+
+      if (i === 0) ctx.moveTo(sx(p.x), sy(p.y));
+      else ctx.lineTo(sx(p.x), sy(p.y));
+    }
+
+    ctx.stroke();
+    return d;
+  }
+
+  function drawPoint(p, label, radius = 7) {
+    ctx.beginPath();
+    ctx.arc(sx(p.x), sy(p.y), radius, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.font = "bold 13px sans-serif";
+    ctx.fillText(label, sx(p.x) + 10, sy(p.y) - 9);
+  }
+
+  function renderTable(control, degree, knots, uNormalized) {
+    tableBody.innerHTML = "";
+
+    const u = normalizeParameter(uNormalized, knots, degree);
+
+    control.forEach((p, i) => {
+      const tr = document.createElement("tr");
+      const w = basis(i, degree, u, knots);
+
+      tr.innerHTML = `
+        <td>P${i}</td>
+        <td>${p.x.toFixed(2)}</td>
+        <td>${p.y.toFixed(2)}</td>
+        <td>${w.toFixed(4)}</td>
+      `;
+
+      tableBody.appendChild(tr);
+    });
+  }
+
+  function render() {
+    const control = controlPoints();
+    const degree = Math.min(Number(degreeSelect.value), control.length - 1);
+    degreeSelect.value = String(degree);
+
+    const knots = makeKnots(control.length, degree, knotTypeSelect.value);
+    const uNormalized = Number(uInput.value);
+    const curvePoint = evaluate(uNormalized, control, degree, knots);
+
+    drawGrid();
+    drawControlPolygon(control);
+    drawCurve(control, degree, knots);
+
+    control.forEach((p, i) => drawPoint(p, `P${i}`));
+
+    ctx.beginPath();
+    ctx.arc(sx(curvePoint.x), sy(curvePoint.y), 10, 0, Math.PI * 2);
+    ctx.stroke();
+
+    ctx.font = "bold 13px sans-serif";
+    ctx.fillText("C(u)", sx(curvePoint.x) + 12, sy(curvePoint.y) + 17);
+
+    currentU.textContent = uNormalized.toFixed(2);
+    uValue.textContent = uNormalized.toFixed(2);
+    curvePointText.textContent = `(${curvePoint.x.toFixed(2)}, ${curvePoint.y.toFixed(2)})`;
+    degreeStatus.textContent = degree;
+
+    const names = ["", "Linear", "Quadratic", "Cubic"];
+    degreeName.textContent = names[degree] || `${degree}th degree`;
+
+    knotDisplay.textContent = `[${knots.map(v => Number.isInteger(v) ? v : v.toFixed(2)).join(", ")}]`;
+
+    renderTable(control, degree, knots, uNormalized);
+
+    message.textContent = `C(u) = (${curvePoint.x.toFixed(2)}, ${curvePoint.y.toFixed(2)}). Move a control point to see local control.`;
+  }
+
+  function stopAnimation() {
+    if (timer) clearInterval(timer);
+    timer = null;
+    document.getElementById("animateBtn").textContent = "Animate u";
+  }
+
+  function animate() {
+    if (timer) {
+      stopAnimation();
+      return;
+    }
+
+    direction = 1;
+    document.getElementById("animateBtn").textContent = "Pause";
+
+    timer = setInterval(() => {
+      let u = Number(uInput.value) + direction * 0.005;
+
+      if (u >= 1) {
+        u = 1;
+        direction = -1;
+      }
+
+      if (u <= 0) {
+        u = 0;
+        direction = 1;
+      }
+
+      uInput.value = u.toFixed(3);
+      render();
+    }, 55);
+  }
+
+  function reset() {
+    stopAnimation();
+    points = presets.default.map(p => ({ ...p }));
+    pointCountSelect.value = "6";
+    degreeSelect.value = "2";
+    knotTypeSelect.value = "clamped";
+    uInput.value = "0.50";
+    render();
+  }
+
+  function loadPreset(name) {
+    stopAnimation();
+    points = presets[name].map(p => ({ ...p }));
+    pointCountSelect.value = String(points.length);
+    degreeSelect.value = "2";
+    knotTypeSelect.value = "clamped";
+    uInput.value = "0.50";
+    render();
+  }
+
+  function canvasToWorld(clientX, clientY) {
+    const rect = canvas.getBoundingClientRect();
+    const px = (clientX - rect.left) * canvas.width / rect.width;
+    const py = (clientY - rect.top) * canvas.height / rect.height;
+
+    return {
+      x: world.min + (px - padding) * (world.max - world.min) / (W - 2 * padding),
+      y: world.min + (H - padding - py) * (world.max - world.min) / (H - 2 * padding)
+    };
+  }
+
+  function near(a, b) {
+    return Math.hypot(sx(a.x) - sx(b.x), sy(a.y) - sy(b.y)) < 18;
+  }
+
+  canvas.addEventListener("pointerdown", e => {
+    const control = controlPoints();
+    const p = canvasToWorld(e.clientX, e.clientY);
+    dragIndex = control.findIndex(v => near(v, p));
+
+    if (dragIndex >= 0) canvas.setPointerCapture(e.pointerId);
+  });
+
+  canvas.addEventListener("pointermove", e => {
+    if (dragIndex < 0) return;
+
+    const p = canvasToWorld(e.clientX, e.clientY);
+    points[dragIndex] = p;
+    render();
+  });
+
+  canvas.addEventListener("pointerup", () => dragIndex = -1);
+
+  pointCountSelect.addEventListener("change", () => {
+    stopAnimation();
+    render();
+  });
+
+  degreeSelect.addEventListener("change", () => {
+    stopAnimation();
+    render();
+  });
+
+  knotTypeSelect.addEventListener("change", render);
+  uInput.addEventListener("input", render);
+
+  document.getElementById("animateBtn").addEventListener("click", animate);
+  document.getElementById("presetBtn").addEventListener("click", () => loadPreset("vehicle"));
+  document.getElementById("resetBtn").addEventListener("click", reset);
+
+  document.querySelectorAll(".problem-load").forEach(button => {
+    button.addEventListener("click", () => {
+      loadPreset(button.dataset.preset);
+      document.getElementById("live-lab").scrollIntoView({ behavior: "smooth" });
+    });
+  });
+
+  render();
+})();
+</script>
+
+<script type="module" src="../../../js/auth-guard.js"></script>
+</body>
+</html>
